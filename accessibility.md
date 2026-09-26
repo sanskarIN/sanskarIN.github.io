@@ -11,6 +11,8 @@ policy: accessibility
   When you change this page, update `accessibility` in _data/legal.yml.
   Only describe practices the website actually follows.
 {%- endcomment %}
+{%- assign form_key = site.data.contact.form.access_key | strip -%}
+{%- assign contact_form = site.data.contact.form %}
 
 ## Commitment
 
@@ -30,7 +32,8 @@ The website is designed and built with the Web Content Accessibility Guidelines 
 - **Not relying on color alone:** links within text are underlined, and the current page in the navigation is marked with an underline and identified to screen readers.
 - **Text alternatives:** icons are decorative and hidden from assistive technology. Icon-only buttons have text labels, and links that open in a new tab say so.
 - **Accessible controls:** the menu button and the theme switch are real buttons that announce their state — expanded or collapsed, on or off.
-- **Reduced motion:** the website uses very little animation and respects your device's "reduce motion" setting.
+{% if form_key != "" %}- **Forms:** every field in the contact form has a visible label, required fields are marked in text, and the result of sending a message is announced to screen readers.
+{% endif %}- **Reduced motion:** the website uses very little animation and respects your device's "reduce motion" setting.
 - **Responsive design:** layouts adapt from small phones to large screens without horizontal scrolling, and text can be zoomed to 200% and beyond.
 - **Mobile accessibility:** buttons and menu links are sized for touch, and the website works in both portrait and landscape orientation.
 - **Light and dark themes:** the website follows your device's color setting, and you can switch themes manually.
