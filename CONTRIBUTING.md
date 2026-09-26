@@ -8,6 +8,7 @@ This repository is the personal website of Sanskar. It is not a community projec
 - **Small fixes** (typos, broken links, clear bugs) can go straight to a pull request.
 - **Larger changes** — new pages, design changes, new dependencies — should start as an issue so the idea can be discussed first.
 - **Security issues** must not be reported publicly. Follow [SECURITY.md](SECURITY.md) instead.
+- **Blog posts** are not pull requests: write them with the "Write a blog post" issue form, linked from the [blog](https://sanskarin.github.io/blog/). The [Terms](https://sanskarin.github.io/terms/#blog-posts) explain what can be posted.
 
 There is no guaranteed response time, and the site owner decides what is merged. The website's content is not licensed for reuse (see [LICENSE_DECISION.md](LICENSE_DECISION.md)); contributions are accepted only for use on this website.
 
@@ -43,6 +44,7 @@ Every change should keep the site as correct, accessible, fast, and maintainable
 - Templates must stay compatible with GitHub Pages: Jekyll 3.10 and no custom plugins.
 - Do not add frameworks, CDNs, analytics, trackers, or other third-party scripts. Any new dependency needs a clear reason, an acceptable license, and an entry on the Credits page.
 - Never commit secrets: passwords, API keys, tokens, or private keys.
+- The blog workflow in `.github/` handles text and images from anyone: never pass issue content to a shell command or a template, keep the HTML allowlist in `publish_post.py` strict, and keep actions pinned to commits and packages to exact versions.
 
 ## Before opening a pull request
 
@@ -54,3 +56,4 @@ Every change should keep the site as correct, accessible, fast, and maintainable
    - with JavaScript turned off.
 3. Make sure the browser console shows no errors, including Content Security Policy errors.
 4. If you changed a policy page, update its date in `_data/legal.yml`. Note notable changes in `CHANGELOG.md`.
+5. If you changed the blog workflow or `publish_post.py`, publish a test post and check the result before relying on it.
