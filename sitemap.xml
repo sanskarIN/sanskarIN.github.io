@@ -1,0 +1,33 @@
+---
+layout: none
+permalink: /sitemap.xml
+sitemap: false
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- comment -%}
+  Lists every HTML page, plus documents from any output collection (for
+  example future project pages in _projects/), except those with
+  `sitemap: false` in their front matter. New pages are added
+  automatically. Policy pages include their "Last updated" date.
+{%- endcomment -%}
+{%- assign sitemap_pages = site.html_pages | where_exp: "item", "item.sitemap != false" | sort: "url" -%}
+{%- for item in sitemap_pages %}
+  <url>
+    <loc>{{ item.url | absolute_url | xml_escape }}</loc>
+    {%- if item.policy %}
+    <lastmod>{{ site.data.legal[item.policy] | date: "%Y-%m-%d" }}</lastmod>
+    {%- endif %}
+  </url>
+{%- endfor %}
+{%- for collection in site.collections %}
+  {%- if collection.output and collection.label != "posts" %}
+    {%- assign collection_docs = collection.docs | where_exp: "item", "item.sitemap != false" %}
+    {%- for item in collection_docs %}
+  <url>
+    <loc>{{ item.url | absolute_url | xml_escape }}</loc>
+  </url>
+    {%- endfor %}
+  {%- endif %}
+{%- endfor %}
+</urlset>
