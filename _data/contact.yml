@@ -48,19 +48,23 @@ groups:
 #  Contact form (optional), delivered by Web3Forms — https://web3forms.com
 #
 #  GitHub Pages cannot send email by itself, so a form service forwards the
-#  messages to your inbox. The form stays hidden until an access key is set.
+#  messages to your inbox. The form is shown only while an access key is set;
+#  clear the key to hide it again.
 #
-#  FORM_ACCESS_KEY — to turn the form on:
-#   1. Open https://web3forms.com, enter the email address that should
-#      receive the messages, and copy the access key they email to you.
-#   2. Paste it between the quotes of `access_key` below and commit.
+#  FORM_ACCESS_KEY — to set or replace the key:
+#   1. Sign in at https://app.web3forms.com with the email address that
+#      should receive the messages, and create a form (for example, name
+#      "sanskarIN.github.io contact form", website sanskarin.github.io/contact).
+#   2. Copy its Form Access Key and paste it between the quotes below.
 #   3. Update the `privacy`, `terms`, and `cookies` dates in _data/legal.yml:
-#      those pages describe the form automatically once it is on.
+#      those pages describe the form automatically while it is on.
 #  The access key is public by design (it only lets people send messages to
 #  that address), so it is safe to commit. It is not a password.
+#  The receiving address and other settings are managed in the Web3Forms
+#  dashboard.
 # =============================================================================
 form:
-  access_key: ""
+  access_key: "3c6bd381-7d2b-461b-9b86-c43f92f6597e"
   endpoint: https://api.web3forms.com/submit
   service: Web3Forms
   service_url: https://web3forms.com/
