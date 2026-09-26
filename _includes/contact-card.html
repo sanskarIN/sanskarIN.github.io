@@ -1,0 +1,36 @@
+{%- comment -%}
+  One group of email addresses from _data/contact.yml.
+  Parameters
+    group     "business" or "support" (required)
+    heading   heading element for the card title (default h3)
+    purposes  true: list what the addresses are for
+    copy      true: add "Copy" buttons (shown only when the browser
+              supports copying; requires a [data-copy-status] live region
+              on the page)
+{%- endcomment -%}
+{%- assign contact_group = site.data.contact.groups[include.group] -%}
+{%- assign heading_tag = include.heading | default: "h3" %}
+<div class="contact-card">
+  <{{ heading_tag }} class="contact-card__title">{% include icon.html name="mail" %}{{ contact_group.title }}</{{ heading_tag }}>
+  <p class="contact-card__summary">{{ contact_group.summary }}</p>
+  <ul class="email-list" role="list">
+    {%- for entry in contact_group.addresses %}
+      {%- assign address = site.data.contact.email[entry.key] %}
+    <li class="email-list__item">
+      <span class="email-list__label">{{ entry.label }}</span>
+      <a class="email-list__link" href="mailto:{{ address }}">{{ address }}</a>
+      {%- if include.copy %}
+      <button class="copy-button" type="button" data-copy="{{ address }}">{% include icon.html name="copy" %}<span data-copy-label>Copy</span><span class="visually-hidden"> {{ address }}</span></button>
+      {%- endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- if include.purposes %}
+  <p class="contact-card__purposes-title">Use it for</p>
+  <ul class="check-list" role="list">
+    {%- for purpose in contact_group.purposes %}
+    <li>{% include icon.html name="check" %}{{ purpose }}</li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</div>
