@@ -6,6 +6,7 @@
  *    localStorage under the key "theme" (only after the switch is used).
  *  - Mobile menu: a disclosure button; its aria-expanded state drives the CSS.
  *  - Copy buttons: copy an email address to the clipboard.
+ *  - Contact form (when enabled): sends the message without leaving the page.
  */
 (function () {
   "use strict";
@@ -135,5 +136,65 @@
         });
       });
     }
+  }
+
+  /* Contact form ---------------------------------------------------------- */
+
+  // Without JavaScript the form posts normally and the form service redirects
+  // to /contact/sent/. Here it is sent in the background instead, so the
+  // visitor stays on the page and hears the result in the status line.
+  var contactForm = document.querySelector("[data-contact-form]");
+  if (contactForm && window.fetch) {
+    var formStatus = contactForm.querySelector("[data-form-status]");
+    var sendButton = contactForm.querySelector('button[type="submit"]');
+    var sending = false;
+
+    var showStatus = function (message, state) {
+      formStatus.textContent = message;
+      formStatus.setAttribute("data-state", state);
+    };
+
+    contactForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (sending) return;
+      sending = true;
+      sendButton.setAttribute("aria-disabled", "true");
+      showStatus("Sending your message…", "pending");
+
+      var fields = {};
+      new FormData(contactForm).forEach(function (value, key) {
+        if (key !== "redirect") fields[key] = value;
+      });
+
+      window
+        .fetch(contactForm.action, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify(fields)
+        })
+        .then(function (response) {
+          return response
+            .json()
+            .catch(function () {
+              return {};
+            })
+            .then(function (result) {
+              if (!response.ok || result.success === false) throw new Error("Message not sent");
+            });
+        })
+        .then(
+          function () {
+            contactForm.reset();
+            showStatus("Thank you — your message has been sent.", "success");
+          },
+          function () {
+            showStatus("Sorry, your message could not be sent. Please try again, or email me at one of the addresses above.", "error");
+          }
+        )
+        .then(function () {
+          sending = false;
+          sendButton.removeAttribute("aria-disabled");
+        });
+    });
   }
 })();
