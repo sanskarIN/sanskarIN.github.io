@@ -14,6 +14,7 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 - [Configuration](#configuration)
 - [Adding the Projects page](#adding-the-projects-page)
 - [Adding PayPal](#adding-paypal)
+- [Contact form](#contact-form)
 - [Legal pages](#legal-pages)
 - [Design system](#design-system)
 - [Accessibility, performance, and security](#accessibility-performance-and-security)
@@ -32,6 +33,7 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 | `/cookies/` | `cookies.md` | Cookie Policy |
 | `/accessibility/` | `accessibility.md` | Accessibility |
 | `/credits/` | `credits.md` | Credits and website information |
+| `/contact/sent/` | `contact-sent.html` | Contact form confirmation (not indexed; shown after sending without JavaScript) |
 | any missing URL | `404.html` | Page not found |
 | `/projects/` | — | Reserved for the Projects page, added manually later ([details](#adding-the-projects-page)) |
 
@@ -85,6 +87,7 @@ That is the only dependency. Nothing is loaded from a CDN or a third-party domai
 │   ├── resolve-projects-url.html  Decides where "Projects" links point
 │   ├── profile-list.html     Lists of profile links (cards or compact list)
 │   ├── contact-card.html     Email address cards
+│   ├── contact-form.html     Contact form (shown once it is turned on)
 │   ├── email-link.html       A single mailto: link
 │   ├── icon.html             A single icon from the sprite
 │   ├── brand-mark.html       The "S" logo mark
@@ -102,7 +105,7 @@ That is the only dependency. Nothing is loaded from a CDN or a third-party domai
 │       ├── brand/            SVG favicon, Apple touch icon, app icons
 │       └── social/           Social preview image (1200 × 630)
 ├── .well-known/security.txt  Security contact (RFC 9116)
-├── index.html  about.html  developer.html  contact.html  404.html
+├── index.html  about.html  developer.html  contact.html  contact-sent.html  404.html
 ├── terms.md  privacy.md  cookies.md  accessibility.md  credits.md
 ├── sitemap.xml  robots.txt  manifest.webmanifest  favicon.ico
 ├── Gemfile                   Local development dependencies
@@ -166,7 +169,7 @@ Most changes need no template edits. After editing, commit to `main` (or preview
 | `projects_url` | Address of the future Projects page |
 | `social_image` | Social preview image path, size, and alt text |
 | `copyright_start_year` | First year in the copyright notice |
-| `content_security_policy` | Allowed sources for scripts, styles, fonts, and more |
+| `content_security_policy` | Allowed sources for scripts, styles, fonts, and more (one entry per directive) |
 
 ### Social and professional links — `_data/social.yml`
 
@@ -203,7 +206,7 @@ Each address is written exactly once, under `email:`. Every other place refers t
 | `business_secondary` | sanskarin.business@gmail.com | Business contact |
 | `support` | supportramsandesh@gmail.com | Support, accessibility feedback, security reports, `security.txt` |
 
-`groups` describes the Business and Support groups shown on the Home and Contact pages and in the footer (title, summary, purposes, and which addresses belong to each).
+`groups` describes the Business and Support groups shown on the Home and Contact pages and in the footer (title, summary, purposes, and which addresses belong to each). `form` holds the optional [contact form](#contact-form) settings.
 
 ### Navigation — `_data/navigation.yml`
 
@@ -247,7 +250,7 @@ The current logo is a simple "S" mark designed for this site. To use your own ar
 
 ### Content Security Policy
 
-The policy in `_config.yml` only allows files from the site itself. If you later embed third-party content — a video player, analytics, a form service, or external images — add that service's origin to the matching directive (for example `frame-src` for embeds, `script-src` for scripts, `form-action` for forms), or the browser will block it. Also update the Privacy and Cookie policies ([see below](#legal-pages)).
+The policy in `_config.yml` lists each directive on its own line and only allows files from the site itself. When the [contact form](#contact-form) is turned on, its service is added to `connect-src` and `form-action` automatically. If you embed any other third-party content — a video player, analytics, or external images — add that service's origin to the matching directive (for example `frame-src` for embeds, `script-src` for scripts, `img-src` for images), or the browser will block it. Also update the Privacy and Cookie policies ([see below](#legal-pages)).
 
 ## Adding the Projects page
 
@@ -320,6 +323,45 @@ That single edit enables the PayPal link in the footer's Support & Products grou
 
 Then keep the policies accurate: add PayPal to the lists of third-party services in `privacy.md` and `terms.md`, and update their dates in `_data/legal.yml`.
 
+## Contact form
+
+GitHub Pages only serves static files, so it cannot send email by itself. The website therefore includes an optional contact form that is delivered by **[Web3Forms](https://web3forms.com/)**, a form-to-email service. The form is built and tested but **stays hidden until you turn it on**, so the site never shows a form that cannot send.
+
+**Turning it on (about two minutes):**
+
+1. Open https://web3forms.com, enter the email address that should receive the messages (for example `sanskarin@outlook.in`), and copy the **access key** they email to you.
+2. Open `_data/contact.yml`, find the `form` block (search for `FORM_ACCESS_KEY`), and paste the key between the quotes of `access_key`.
+3. Update the `privacy`, `terms`, and `cookies` dates in `_data/legal.yml`, then commit.
+
+On the next build, everything else happens automatically:
+
+- a "Send a message" section appears on the Contact page, and the "no contact form" note changes;
+- the Content Security Policy allows `https://api.web3forms.com` in `connect-src` and `form-action`;
+- the Privacy Policy, Terms, Cookie Policy, Accessibility page, and Credits page describe the form.
+
+**How it works:**
+
+- **With JavaScript**, the message is sent in the background; the visitor stays on the page and the result is shown (and announced to screen readers) next to the button.
+- **Without JavaScript**, it is a normal form post; Web3Forms then redirects to `/contact/sent/` on this site.
+- **Spam protection:** a hidden `botcheck` field that people never see; bots that fill it in are rejected by Web3Forms. No captcha script is loaded, so the site stays free of third-party scripts and cookies.
+- **Fields:** name, email (used as the reply address), topic, and message. The topics, email subject, and service details are set in the same `form` block.
+- **No secrets:** the access key is public by design — it only lets people send messages to your address — so it is safe to keep in the repository. It is not a password.
+- **Privacy:** per its documentation, Web3Forms does not store form submissions; it forwards them to your email.
+
+To turn the form off again, clear the `access_key`; the policies switch back automatically on the next build.
+
+**Other ways to receive messages**, if you prefer a different approach:
+
+| Option | How it works | Trade-offs |
+|---|---|---|
+| Email links only | What the site does while the form is off | Nothing third-party is involved; visitors need an email app |
+| [Formspree](https://formspree.io/) | Hosted form backend with a dashboard | Free plan is meant for testing; a custom thank-you page and higher limits need a paid plan |
+| Google Forms or Tally | Link to a form hosted on their site | No code, but visitors leave the site; embedding one would add third-party scripts and cookies |
+| Serverless function | e.g. a Cloudflare Worker that sends mail through an email API | Most control, but the API key must be stored as a secret outside this repository, and it needs maintenance |
+| Netlify Forms | Built into Netlify hosting | Requires moving the site from GitHub Pages to Netlify |
+
+Switching to another form service means changing the form markup in `_includes/contact-form.html` (field names differ between services), the `endpoint` in `_data/contact.yml`, and the service descriptions in the policy pages.
+
 ## Legal pages
 
 The Terms, Privacy, Cookie, and Accessibility pages describe this website as it is actually built: static, no analytics, no cookies, no forms, no embedded third-party content, and hosted on GitHub Pages (which logs visitors' IP addresses for security, as GitHub documents). They are general-purpose documents, not individualized legal advice.
@@ -340,7 +382,8 @@ Keep the policies in step with the website:
 |---|---|
 | Analytics | `privacy.md` (Analytics, Third-party services), `cookies.md` (Analytics cookies, Future services), the CSP; ask for consent where the law requires it |
 | Embedded content (videos, posts, maps) | `privacy.md`, `cookies.md`, the CSP |
-| A contact form service | `privacy.md` (Information you provide, Third-party services), the CSP `form-action` directive, and the "no contact form" note on `contact.html` |
+| The built-in contact form | Nothing in the text — the policies update automatically; just update the dates in `_data/legal.yml` |
+| A different form service | `_includes/contact-form.html`, the `form` settings, and the form passages in `privacy.md`, `terms.md`, and `cookies.md` |
 | A new linked platform (e.g. PayPal) | the platform lists in `privacy.md` and `terms.md` |
 | Anything else stored in the browser | `cookies.md` |
 
@@ -351,7 +394,7 @@ After any change, update the page's date in `_data/legal.yml`.
 - **Tokens** — `_includes/css/tokens.css`: type scale (fluid `clamp()` sizes), spacing scale, content widths, radius, and motion; colors come from `_data/theme.yml`.
 - **Typography** — IBM Plex Sans for text and headings; IBM Plex Mono for labels, handles, and technical details.
 - **Layout** — a 72rem container with fluid side gutters; long-form text is limited to about 42rem per line.
-- **Components** — `_includes/css/components.css`: eyebrow labels, buttons, spec card, feature grid, spec lists and tags, link cards, contact cards, callout, note, table of contents, and prose.
+- **Components** — `_includes/css/components.css`: eyebrow labels, buttons, spec card, feature grid, spec lists and tags, link cards, contact cards, contact form fields, callout, note, table of contents, and prose.
 - **Themes** — light and dark palettes, following the device setting until the visitor chooses one with the theme switch.
 - **Motion** — only small hover transitions, all disabled when the device asks for reduced motion.
 
