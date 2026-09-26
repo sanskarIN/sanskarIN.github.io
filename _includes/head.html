@@ -1,9 +1,31 @@
 {%- assign asset_version = site.time | date: "%s" -%}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{%- comment -%} The CSP is skipped only while `jekyll serve --livereload` runs, because live reload injects an inline script. {%- endcomment -%}
+{%- comment -%}
+  Content Security Policy from _config.yml. When the contact form is on, its
+  service is allowed in connect-src (sending with JavaScript) and form-action
+  (sending without JavaScript). The CSP is skipped only while
+  `jekyll serve --livereload` runs, because live reload injects an inline
+  script.
+{%- endcomment -%}
+{%- assign form_key = site.data.contact.form.access_key | strip -%}
+{%- assign form_origin = nil -%}
+{%- if form_key != "" -%}
+  {%- assign form_origin = site.data.contact.form.endpoint | split: "/" | slice: 0, 3 | join: "/" -%}
+{%- endif -%}
+{%- capture csp -%}
+  {%- for directive in site.content_security_policy -%}
+    {%- assign csp_sources = directive[1] -%}
+    {%- if form_origin -%}
+      {%- if directive[0] == "connect-src" or directive[0] == "form-action" -%}
+        {%- assign csp_sources = csp_sources | replace: "'none'", "'self'" | append: " " | append: form_origin -%}
+      {%- endif -%}
+    {%- endif -%}
+    {{ directive[0] }} {{ csp_sources }}{% unless forloop.last %}; {% endunless %}
+  {%- endfor -%}
+{%- endcapture -%}
 {%- unless site.livereload %}
-<meta http-equiv="Content-Security-Policy" content="{{ site.content_security_policy | normalize_whitespace }}">
+<meta http-equiv="Content-Security-Policy" content="{{ csp }}">
 {%- endunless %}
 {% include seo.html %}
 <meta name="color-scheme" content="light dark">
