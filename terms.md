@@ -14,7 +14,9 @@ policy: terms
   see README.md → "Legal pages" before adding them.
 {%- endcomment %}
 {%- assign form_key = site.data.contact.form.access_key | strip -%}
-{%- assign contact_form = site.data.contact.form %}
+{%- assign contact_form = site.data.contact.form -%}
+{%- assign blog = site.data.blog -%}
+{%- capture blog_form_url -%}{{ site.repository_url }}/issues/new?template={{ blog.form }}{%- endcapture %}
 
 ## Introduction
 
@@ -26,11 +28,11 @@ By accessing or using the website, you agree to these Terms. If you do not agree
 
 ## Using the website
 
-The website is free to access and does not require an account. You may browse it, read its content, and link to it. Its content is provided for general information about me and my work.
+The website is free to access and does not require an account. You may browse it, read its content, and link to it. Its content is provided for general information about me and my work. Writing a post for the [blog]({{ '/blog/' | relative_url }}) requires a GitHub account, as described in [Blog posts](#blog-posts).
 
 ## Intellectual property
 
-Unless stated otherwise, the website's content — including its text, design, graphics, logo, and code — is owned by me and protected by applicable intellectual-property laws. You may not copy, reproduce, modify, or redistribute it without my permission, except where the law allows.
+Unless stated otherwise, the website's content — including its text, design, graphics, logo, and code — is owned by me and protected by applicable intellectual-property laws. You may not copy, reproduce, modify, or redistribute it without my permission, except where the law allows. Blog posts written by visitors belong to their authors, as described in [Blog posts](#blog-posts).
 
 Third-party material used by the website, such as fonts, icons, and the names and logos of other services, belongs to its respective owners and is used under their licenses or terms. The [Credits]({{ '/credits/' | relative_url }}) page lists these materials and their licenses.
 
@@ -43,9 +45,22 @@ When using the website, you agree not to:
 - use it in a way that breaks any applicable law or regulation;
 - attempt to gain unauthorized access to the website, its hosting infrastructure, or related accounts;
 - interfere with or disrupt the website, for example by sending malicious code or excessive automated traffic;
-- misrepresent your identity or suggest an affiliation with me that does not exist;{% if form_key == "" %} or{% endif %}
-- use the website's content in a way that infringes the rights of others{% if form_key != "" %}; or
-- send spam, malicious content, or unlawful material through the contact form{% endif %}.
+- misrepresent your identity or suggest an affiliation with me that does not exist;
+- use the website's content in a way that infringes the rights of others;{% if form_key == "" %} or{% endif %}
+{% if form_key != "" %}- send spam, malicious content, or unlawful material through the contact form; or
+{% endif %}- submit blog posts that break the rules in [Blog posts](#blog-posts).
+
+## Blog posts
+
+Anyone with a GitHub account can write a post for the blog using the {% include link.html url=blog_form_url label="blog post form" %} on GitHub. These terms apply to every post you submit:
+
+- **Your post, your rights:** you confirm that you wrote the post and that you have the right to publish its text and images. You keep ownership of your post.
+- **Permission to publish:** by submitting a post, you give me a free, non-exclusive, worldwide permission to publish, display, and store it — including its images — on this website, in the blog's feed, and in the website's public repository on GitHub, and to make the changes needed to publish it, such as converting its formatting and resizing or re-encoding its images.
+- **Review:** {% if blog.review_visitor_posts %}posts from visitors are published only after I review them, and edits to a published post are reviewed again. {% endif %}I may decline, remove, or stop showing any post at any time, without giving a reason.
+- **What's not allowed:** posts must not contain unlawful content; material that infringes someone else's copyright, trademark, or other rights; spam or advertising; malicious code or links; hateful, harassing, or sexually explicit content; or another person's personal information without their permission.
+- **Views:** posts by visitors express their authors' own views, not mine, and I am not responsible for them.
+- **Removing your post:** to have your post taken down, comment on its GitHub issue or email {% include email-link.html key="business_primary" %}. It is then removed from the website, although earlier versions remain in the repository's public history on GitHub.
+- **GitHub's terms:** posts are written and stored on GitHub, so GitHub's own terms of service and policies also apply.
 
 ## External links
 
@@ -54,6 +69,7 @@ The website links to other websites and services, including GitHub, LinkedIn, De
 ## Third-party services
 
 - **Hosting:** the website is hosted on GitHub Pages, a service provided by GitHub, Inc.
+- **Blog:** blog posts are written in GitHub Issues, stored in the website's repository on GitHub, and published by GitHub Actions.
 - **Email:** messages you send to the addresses on this website are handled by the email providers that host those addresses (Microsoft Outlook and Google Gmail).
 {% if form_key != "" %}- **Contact form:** messages sent with the contact form are delivered by {{ contact_form.service }} and handled as described in the [Privacy Policy]({{ '/privacy/' | relative_url }}).
 {% endif %}- **Support and purchases:** any support given through Buy Me a Coffee, and any purchase made through Gumroad, takes place on those platforms and is governed by their terms, including their payment, refund, and privacy terms.
