@@ -4,6 +4,23 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.2.0] — 2026-09-26
+
+### Added
+
+- Blog at `/blog/`: every post, newest first and grouped by year, with its cover image, summary, published and updated dates, author, reading time, and tags; a Tags page at `/blog/tags/`; and an Atom feed at `/blog/feed.xml`.
+- Post pages with an "About this post" panel (published and last-updated dates, author, reading time, tags), links to discuss the post on GitHub and to view its history, a copy-link button, and links to the newer and older posts. Posts are marked up as articles (Open Graph, X cards, and `BlogPosting` structured data) and listed in the sitemap with the date they last changed.
+- "Write a blog post" issue form and a GitHub Actions workflow that publishes posts: it checks the form, copies attached images (PNG, JPEG, GIF, or WebP, up to 10 MB each) without their metadata, converts the Markdown to safe HTML, commits the post, and asks GitHub Pages to rebuild. Posts from visitors wait for the owner's approval; the `unpublish` label removes a post.
+- Blog settings in `_data/blog.yml`, and "Blog" in the main navigation.
+- Icons for writing, tags, the feed, links, history, and discussion.
+
+### Changed
+
+- The Terms, Privacy Policy, Accessibility page, and Credits page describe the blog: permission to publish, content rules, review and removal, what becomes public, and the packages the workflow uses.
+- Dates are shown in UTC (`timezone` in `_config.yml`).
+- Structured data escapes `</`, so text from a post can never end its script element.
+- SECURITY.md and CONTRIBUTING.md cover the blog workflow.
+
 ## [1.1.1] — 2026-09-26
 
 ### Changed
