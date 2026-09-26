@@ -1,0 +1,46 @@
+{%- comment -%}
+  Renders one link and applies the site's link rules:
+    - site-relative URLs get the baseurl, plus aria-current="page" when they
+      point to the current page
+    - external URLs open in a new tab with rel="noopener noreferrer" and
+      announce that to screen-reader users
+    - site.projects_url resolves through resolve-projects-url.html
+
+  Parameters
+    url    (required) site-relative path, absolute URL, or mailto: link
+    label  (required) visible link text
+    class  CSS classes for the <a>
+    icon   sprite icon shown before the label
+    arrow  true: arrow after the label (→ internal, ↗ external)
+    hint   true: ↗ after the label, only when the link is external
+{%- endcomment -%}
+{%- assign link_url = include.url -%}
+{%- if link_url == site.projects_url -%}
+  {%- include resolve-projects-url.html -%}
+  {%- assign link_url = projects_url_resolved -%}
+{%- endif -%}
+{%- assign link_scheme = link_url | split: ":" | first -%}
+{%- assign link_external = false -%}
+{%- if link_scheme == "https" or link_scheme == "http" -%}
+  {%- assign link_external = true -%}
+{%- endif -%}
+{%- if link_external or link_scheme == "mailto" -%}
+  {%- assign link_href = link_url -%}
+{%- else -%}
+  {%- assign link_href = link_url | relative_url -%}
+{%- endif -%}
+<a href="{{ link_href }}"
+  {%- if include.class %} class="{{ include.class }}"{% endif -%}
+  {%- if link_external %} target="_blank" rel="noopener noreferrer"{% endif -%}
+  {%- if page.url == link_url %} aria-current="page"{% endif -%}
+>
+  {%- if include.icon %}{% include icon.html name=include.icon %}{% endif -%}
+  {{ include.label }}
+  {%- if link_external %}<span class="visually-hidden"> (opens in a new tab)</span>{% endif -%}
+  {%- if include.arrow -%}
+    {%- if link_external %}{% include icon.html name="arrow-up-right" %}{% else %}{% include icon.html name="arrow-right" %}{% endif -%}
+  {%- elsif include.hint and link_external -%}
+    {%- include icon.html name="arrow-up-right" -%}
+  {%- endif -%}
+</a>
+{%- comment -%} Ends without a trailing newline, so no stray space appears inside links. {%- endcomment -%}
