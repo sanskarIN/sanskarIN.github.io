@@ -43,3 +43,35 @@ groups:
     addresses:
       - key: support
         label: Support
+
+# =============================================================================
+#  Contact form (optional), delivered by Web3Forms — https://web3forms.com
+#
+#  GitHub Pages cannot send email by itself, so a form service forwards the
+#  messages to your inbox. The form stays hidden until an access key is set.
+#
+#  FORM_ACCESS_KEY — to turn the form on:
+#   1. Open https://web3forms.com, enter the email address that should
+#      receive the messages, and copy the access key they email to you.
+#   2. Paste it between the quotes of `access_key` below and commit.
+#   3. Update the `privacy`, `terms`, and `cookies` dates in _data/legal.yml:
+#      those pages describe the form automatically once it is on.
+#  The access key is public by design (it only lets people send messages to
+#  that address), so it is safe to commit. It is not a password.
+# =============================================================================
+form:
+  access_key: ""
+  endpoint: https://api.web3forms.com/submit
+  service: Web3Forms
+  service_url: https://web3forms.com/
+  service_privacy_url: https://docs.web3forms.com/getting-started/faq
+  subject: New message from sanskarIN.github.io
+  topics:
+    - Business inquiry
+    - Professional collaboration
+    - Development services
+    - Partnership
+    - Source-code inquiry
+    - Digital-product inquiry
+    - Support request
+    - Other
