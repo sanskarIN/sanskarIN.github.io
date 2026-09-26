@@ -1,0 +1,89 @@
+# Publishes blog posts written with the "Write a blog post" issue form
+# (.github/ISSUE_TEMPLATE/blog-post.yml). See README.md → "Blog".
+#
+#  - labels:  creates the labels the blog uses. Runs when this workflow or
+#             the script changes on main, or from the Actions tab.
+#  - publish: runs .github/scripts/publish_post.py when a post's issue is
+#             opened, edited, deleted, or given the "approved" or
+#             "unpublish" label. The script commits the post to main and
+#             asks GitHub Pages to rebuild the site.
+#
+# Anyone can open an issue, so the issue is treated as untrusted data: it is
+# never inserted into a command below, and the script only reads it.
+
+name: Publish blog post
+
+on:
+  issues:
+    types: [opened, edited, deleted, labeled, unlabeled]
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-blog-post.yml
+      - .github/scripts/publish_post.py
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  labels:
+    if: github.event_name != 'issues'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: .github/scripts/requirements.txt
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r .github/scripts/requirements.txt
+      - name: Create labels
+        run: python .github/scripts/publish_post.py labels
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  publish:
+    # Blog post issues only, and of the label changes only "approved" and
+    # "unpublish" (other labels, including the ones the script sets, are ignored).
+    if: >-
+      github.event_name == 'issues' &&
+      (contains(github.event.issue.labels.*.name, 'blog-post') || startsWith(github.event.issue.title, '[Post]')) &&
+      ((github.event.action != 'labeled' && github.event.action != 'unlabeled') ||
+       (github.event.action == 'labeled' && (github.event.label.name == 'approved' || github.event.label.name == 'unpublish')) ||
+       (github.event.action == 'unlabeled' && github.event.label.name == 'unpublish'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # One run per issue at a time; runs for different issues can overlap and
+    # the script rebases before pushing.
+    concurrency:
+      group: blog-post-${{ github.event.issue.number }}
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      issues: write
+      pages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: .github/scripts/requirements.txt
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r .github/scripts/requirements.txt
+      - name: Publish the post
+        run: python .github/scripts/publish_post.py publish
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          # Commits made for posts use the site owner's name and email.
+          COMMIT_NAME: sanskarIN
+          COMMIT_EMAIL: sanskarin@outlook.in
