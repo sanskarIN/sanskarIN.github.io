@@ -9,21 +9,34 @@ permalink: /contact/
 schema_type: ContactPage
 ---
 {%- assign security_policy_url = site.repository_url | append: "/security/policy" -%}
+{%- assign form_key = site.data.contact.form.access_key | strip -%}
 <section class="page-section">
   <h2>Email</h2>
   <div class="contact-grid">
     {% include contact-card.html group="business" purposes=true copy=true %}
     {% include contact-card.html group="support" purposes=true copy=true %}
   </div>
+  {%- if form_key != "" %}
+  <p class="note">{% include icon.html name="mail" %}<span>Email links open your own email app. Prefer not to? <a href="#send-a-message">Send a message with the form</a> instead.</span></p>
+  {%- else %}
   <p class="note">{% include icon.html name="mail" %}<span>There is no contact form on this website. Email links open your own email app, and nothing is sent through this site.</span></p>
+  {%- endif %}
 </section>
+{%- if form_key != "" %}
+
+<section class="page-section">
+  <h2 id="send-a-message">Send a message</h2>
+  <p>Write to me here without opening your email app. Messages arrive in my inbox, and replies come by email.</p>
+  {% include contact-form.html %}
+</section>
+{%- endif %}
 
 <section class="page-section">
   <h2>Before you write</h2>
   <ul class="bullet-list">
     <li><strong>Business inquiries:</strong> a short description of what you have in mind, plus any timelines or links that help.</li>
     <li><strong>Support requests:</strong> what you were trying to do, what happened instead, and the steps to reproduce it. For problems with this website, include your device and browser.</li>
-    <li><strong>Never send secrets:</strong> please don't include passwords, API keys, access tokens, or other credentials in an email.</li>
+    <li><strong>Never send secrets:</strong> please don't include passwords, API keys, access tokens, or other credentials in any message.</li>
   </ul>
 </section>
 
