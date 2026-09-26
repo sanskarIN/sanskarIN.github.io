@@ -1,0 +1,18 @@
+{%- comment -%}
+  "On this page" navigation built from the rendered content's
+  <h2 id="…"> headings (Markdown headings get ids automatically; in HTML,
+  write the id as the first attribute). Usage: {% include toc.html html=content %}
+{%- endcomment -%}
+{%- assign toc_sections = include.html | split: '<h2 id="' -%}
+{%- if toc_sections.size > 1 %}
+<nav class="toc" aria-labelledby="toc-title">
+  <h2 class="toc__title" id="toc-title">On this page</h2>
+  <ol class="toc__list">
+    {%- for toc_section in toc_sections offset: 1 %}
+      {%- assign toc_id = toc_section | split: '"' | first %}
+      {%- assign toc_label = toc_section | split: "</h2>" | first | split: ">" | shift | join: ">" | strip_html | strip %}
+    <li><a href="#{{ toc_id }}">{{ toc_label }}</a></li>
+    {%- endfor %}
+  </ol>
+</nav>
+{%- endif -%}
