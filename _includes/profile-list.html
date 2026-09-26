@@ -1,0 +1,39 @@
+{%- comment -%}
+  A list of profile links from _data/social.yml. Profiles with a blank URL
+  (such as PayPal until its link is added) are skipped.
+
+  Parameters
+    group    key in social.yml `groups` (developer, social, products), or
+    items    an array of profile keys, e.g. site.data.social.community
+    variant  "card" for bordered cards with handle and description;
+             otherwise a compact icon + name list (used in the footer)
+    class    CSS classes for the <ul>
+{%- endcomment -%}
+{%- assign profile_ids = include.items | default: site.data.social.groups[include.group].items -%}
+<ul class="{{ include.class }}"{% if include.variant == "card" %} role="list"{% endif %}>
+{%- for profile_id in profile_ids -%}
+  {%- assign profile = site.data.social.profiles[profile_id] -%}
+  {%- if profile.url and profile.url != "" -%}
+    {%- if include.variant == "card" %}
+  <li>
+    <a class="link-card" href="{{ profile.url }}" target="_blank" rel="noopener noreferrer">
+      {% include icon.html name=profile.icon class="link-card__icon" %}
+      <span class="link-card__body">
+        <span class="link-card__name">{{ profile.name }}</span>
+        {%- if profile.handle %}
+        <span class="link-card__handle">{{ profile.handle }}</span>
+        {%- endif %}
+        {%- if profile.note %}
+        <span class="link-card__note">{{ profile.note }}</span>
+        {%- endif %}
+      </span>
+      <span class="visually-hidden">(opens in a new tab)</span>
+      {% include icon.html name="arrow-up-right" class="link-card__arrow" %}
+    </a>
+  </li>
+    {%- else %}
+  <li><a href="{{ profile.url }}" target="_blank" rel="noopener noreferrer">{% include icon.html name=profile.icon %}{{ profile.name }}<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor %}
+</ul>

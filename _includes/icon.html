@@ -1,0 +1,7 @@
+{%- comment -%}
+  Decorative icon from assets/icons/sprite.svg. Icons are hidden from
+  assistive technology, so always pair them with visible or visually hidden
+  text. Parameters: name (required), class.
+{%- endcomment -%}
+<svg class="icon{% if include.class %} {{ include.class }}{% endif %}" width="24" height="24" aria-hidden="true"><use href="{{ '/assets/icons/sprite.svg' | relative_url }}?v={{ site.time | date: '%s' }}#{{ include.name }}"></use></svg>
+{%- comment -%} Ends without a trailing newline, so no stray space appears inside links. {%- endcomment -%}

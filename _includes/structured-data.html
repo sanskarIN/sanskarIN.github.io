@@ -1,0 +1,71 @@
+{%- comment -%}
+  JSON-LD structured data: a Person, the WebSite, and the current page.
+  Uses only information already on the site. Relies on `seo_title` and
+  `seo_description` from seo.html. Per page: `schema_type` (e.g.
+  ProfilePage, ContactPage; default WebPage).
+{%- endcomment -%}
+{%- unless page.noindex -%}
+{%- assign person_id = "/#person" | absolute_url -%}
+{%- assign website_id = "/#website" | absolute_url -%}
+{%- assign home_url = "/" | absolute_url -%}
+{%- assign page_url = page.url | absolute_url -%}
+{%- assign page_type = page.schema_type | default: "WebPage" -%}
+{%- capture alternate_names -%}{{ site.author.username }},{{ site.author.community_username }}{%- endcapture -%}
+{%- assign alternate_names = alternate_names | split: "," -%}
+{%- assign same_as = "" | split: "" -%}
+{%- for entry in site.data.social.profiles -%}
+  {%- assign profile = entry[1] -%}
+  {%- if profile.url != "" and profile.same_as != false -%}
+    {%- assign same_as = same_as | push: profile.url -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign knows_about = "" | split: "" -%}
+{%- for group in site.data.technologies -%}
+  {%- for item in group.items -%}
+    {%- assign knows_about = knows_about | push: item -%}
+  {%- endfor -%}
+{%- endfor %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": {{ person_id | jsonify }},
+      "name": {{ site.author.name | jsonify }},
+      "alternateName": {{ alternate_names | jsonify }},
+      "url": {{ home_url | jsonify }},
+      "description": {{ site.description | jsonify }},
+      "sameAs": {{ same_as | jsonify }},
+      "knowsAbout": {{ knows_about | jsonify }}
+    },
+    {
+      "@type": "WebSite",
+      "@id": {{ website_id | jsonify }},
+      "url": {{ home_url | jsonify }},
+      "name": {{ site.title | jsonify }},
+      "description": {{ site.description | jsonify }},
+      "inLanguage": {{ site.lang | jsonify }},
+      "publisher": { "@id": {{ person_id | jsonify }} }
+    },
+    {
+      "@type": {{ page_type | jsonify }},
+      "@id": {{ page_url | append: "#webpage" | jsonify }},
+      "url": {{ page_url | jsonify }},
+      "name": {{ seo_title | jsonify }},
+      "description": {{ seo_description | jsonify }},
+      "inLanguage": {{ site.lang | jsonify }},
+      "isPartOf": { "@id": {{ website_id | jsonify }} }
+      {%- if page_type == "ProfilePage" -%},
+      "mainEntity": { "@id": {{ person_id | jsonify }} }
+      {%- elsif page.url == "/" -%},
+      "about": { "@id": {{ person_id | jsonify }} }
+      {%- endif -%}
+      {%- if page.policy -%},
+      "dateModified": {{ site.data.legal[page.policy] | date: "%Y-%m-%d" | jsonify }}
+      {%- endif %}
+    }
+  ]
+}
+</script>
+{%- endunless -%}

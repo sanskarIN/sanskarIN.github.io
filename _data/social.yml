@@ -1,0 +1,134 @@
+# =============================================================================
+#  Social, professional, and support links — the single source of truth.
+#
+#  The header, footer, Home, About, Contact, and Developer pages and the
+#  structured data (JSON-LD) are all generated from this file. Change a URL
+#  here and it changes everywhere.
+#
+#  Fields
+#    name      display name of the service
+#    url       full profile URL (a blank url hides the link everywhere)
+#    handle    how the username is written on that service
+#    username  which of the two usernames the profile uses
+#    icon      symbol id in assets/icons/sprite.svg
+#    note      short description, shown on the Contact and Home pages
+#    same_as   false = leave out of structured data (not a personal profile)
+# =============================================================================
+
+profiles:
+  github:
+    name: GitHub
+    url: https://www.github.com/sanskarIN
+    handle: sanskarIN
+    username: sanskarIN
+    icon: github
+    note: Code, repositories, and open source
+
+  linkedin:
+    name: LinkedIn
+    url: https://www.linkedin.com/in/sanskarIN
+    handle: sanskarIN
+    username: sanskarIN
+    icon: linkedin
+    note: Professional profile
+
+  devto:
+    name: Dev.to
+    url: https://www.dev.to/sanskarIN
+    handle: sanskarIN
+    username: sanskarIN
+    icon: devdotto
+    note: Articles and developer discussion
+
+  discord:
+    name: Discord
+    url: https://discord.com/channels/1547184919455989760/1547187031057113098
+    handle: "@dev_sanskarIN"
+    username: dev_sanskarIN
+    icon: discord
+    note: Developer channel
+    same_as: false
+
+  x:
+    name: X
+    url: https://www.x.com/dev_sanskarIN
+    handle: "@dev_sanskarIN"
+    username: dev_sanskarIN
+    icon: x
+    note: Posts and updates
+
+  instagram:
+    name: Instagram
+    url: https://www.instagram.com/dev_sanskarIN
+    handle: "@dev_sanskarIN"
+    username: dev_sanskarIN
+    icon: instagram
+    note: Photos and updates
+
+  threads:
+    name: Threads
+    url: https://threads.com/dev_sanskarIN
+    handle: "@dev_sanskarIN"
+    username: dev_sanskarIN
+    icon: threads
+    note: Posts and conversations
+
+  pinterest:
+    name: Pinterest
+    url: https://www.pinterest.com/dev_sanskarIN
+    handle: dev_sanskarIN
+    username: dev_sanskarIN
+    icon: pinterest
+    note: Pins and boards
+
+  bluesky:
+    name: Bluesky
+    url: https://sanskarIN.bsky.social
+    handle: "@sanskarIN.bsky.social"
+    username: sanskarIN
+    icon: bluesky
+    note: Posts and updates
+
+  buymeacoffee:
+    name: Buy Me a Coffee
+    url: https://www.buymeacoffee.com/sanskarIN
+    handle: sanskarIN
+    username: sanskarIN
+    icon: buymeacoffee
+    note: Support my work
+
+  gumroad:
+    name: Gumroad
+    url: https://sanskarIN.gumroad.com
+    handle: sanskarIN
+    username: sanskarIN
+    icon: gumroad
+    note: Digital products
+
+  # ---------------------------------------------------------------------------
+  # PAYPAL_URL — PayPal is intentionally not enabled yet.
+  # When you have the real PayPal link, paste it between the quotes below.
+  # That's the only step: the PayPal link then appears automatically in the
+  # footer, on the Contact page, and in the Home page support section.
+  # ---------------------------------------------------------------------------
+  paypal:
+    name: PayPal
+    url: ""
+    icon: paypal
+    note: Support my work
+    same_as: false
+
+# How profiles are grouped on the site, in display order.
+groups:
+  developer:
+    title: Developer
+    items: [github, linkedin, devto, discord]
+  social:
+    title: Social
+    items: [x, instagram, threads, pinterest, bluesky]
+  products:
+    title: Support & Products
+    items: [buymeacoffee, gumroad, paypal]
+
+# Profiles featured in the Home page "Developer community" section.
+community: [devto, discord, x, bluesky, linkedin]

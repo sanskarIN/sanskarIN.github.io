@@ -1,0 +1,43 @@
+---
+layout: default
+---
+{%- comment -%}
+  Standard page: a page header followed by the content.
+
+  Front matter options
+    title        page title (browser tab, search results, and <h1>)
+    heading      optional <h1> text, if it should differ from the title
+    eyebrow      small label above the <h1>
+    lead         introductory paragraph under the <h1>
+    toc: true    adds an "On this page" list built from the <h2 id="…"> headings
+    prose: true  long-form text styling (on by default for Markdown pages;
+                 set prose: false to turn it off)
+{%- endcomment -%}
+{%- assign page_extension = page.path | split: "." | last -%}
+{%- assign use_prose = false -%}
+{%- if page.prose == false -%}
+  {%- assign use_prose = false -%}
+{%- elsif page.prose or layout.prose or page_extension == "md" or page_extension == "markdown" -%}
+  {%- assign use_prose = true -%}
+{%- endif -%}
+{% include page-header.html %}
+{%- if page.toc or layout.toc %}
+<div class="container with-toc">
+  <aside class="with-toc__aside">
+    {% include toc.html html=content %}
+  </aside>
+  <div class="with-toc__main{% if use_prose %} prose{% endif %}">
+{{ content }}
+  </div>
+</div>
+{%- else %}
+<div class="container page-body">
+{%- if use_prose %}
+  <div class="prose">
+{{ content }}
+  </div>
+{%- else %}
+{{ content }}
+{%- endif %}
+</div>
+{%- endif %}

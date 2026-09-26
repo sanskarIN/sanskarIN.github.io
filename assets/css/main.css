@@ -1,0 +1,10 @@
+---
+# Jekyll combines the stylesheets in _includes/css/ into this one file, so
+# the site loads a single stylesheet. Edit the partials, not this file.
+---
+{% include css/tokens.css %}
+{% include css/fonts.css %}
+{% include css/base.css %}
+{% include css/layout.css %}
+{% include css/components.css %}
+{% include css/pages.css %}

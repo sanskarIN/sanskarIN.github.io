@@ -1,0 +1,13 @@
+---
+layout: none
+permalink: /.well-known/security.txt
+sitemap: false
+---
+# Security contact for {{ site.display_url }} (RFC 9116).
+# Please report vulnerabilities privately; do not open public issues.
+# "Expires" is renewed automatically, one year ahead, on every site build.
+Contact: mailto:{{ site.data.contact.email.support }}
+Expires: {{ site.time | date: "%s" | plus: 31449600 | date_to_xmlschema }}
+Preferred-Languages: en
+Canonical: {{ "/.well-known/security.txt" | absolute_url }}
+Policy: {{ site.repository_url }}/security/policy

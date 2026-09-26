@@ -1,0 +1,47 @@
+---
+layout: page
+title: Contact
+heading: Get in touch
+eyebrow: Contact
+lead: Email is the best way to reach me. Choose the address that fits your message so it reaches the right inbox.
+description: "Contact Sanskar: business email for collaborations, development services, and partnerships; a support email for technical help; plus GitHub, LinkedIn, Discord, and more."
+permalink: /contact/
+schema_type: ContactPage
+---
+{%- assign security_policy_url = site.repository_url | append: "/security/policy" -%}
+<section class="page-section">
+  <h2>Email</h2>
+  <div class="contact-grid">
+    {% include contact-card.html group="business" purposes=true copy=true %}
+    {% include contact-card.html group="support" purposes=true copy=true %}
+  </div>
+  <p class="note">{% include icon.html name="mail" %}<span>There is no contact form on this website. Email links open your own email app, and nothing is sent through this site.</span></p>
+</section>
+
+<section class="page-section">
+  <h2>Before you write</h2>
+  <ul class="bullet-list">
+    <li><strong>Business inquiries:</strong> a short description of what you have in mind, plus any timelines or links that help.</li>
+    <li><strong>Support requests:</strong> what you were trying to do, what happened instead, and the steps to reproduce it. For problems with this website, include your device and browser.</li>
+    <li><strong>Never send secrets:</strong> please don't include passwords, API keys, access tokens, or other credentials in an email.</li>
+  </ul>
+</section>
+
+<section class="page-section">
+  <h2>Find me online</h2>
+  {%- for group_entry in site.data.social.groups %}
+    {%- assign group_key = group_entry[0] %}
+    {%- assign group = group_entry[1] %}
+  <div class="link-group">
+    <h3 class="link-group__title">{{ group.title }}</h3>
+    {% include profile-list.html group=group_key variant="card" class="link-grid" %}
+  </div>
+  {%- endfor %}
+</section>
+
+<section class="page-section">
+  <h2>Security issues</h2>
+  <p>If you find a security issue with this website, please report it privately to {% include email-link.html key="support" %} instead of opening a public issue. The {% include link.html url=security_policy_url label="security policy" %} explains what to include.</p>
+</section>
+
+<p class="visually-hidden" role="status" data-copy-status></p>

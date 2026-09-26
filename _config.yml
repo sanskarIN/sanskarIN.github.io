@@ -1,0 +1,120 @@
+# =============================================================================
+#  sanskarIN.github.io — site configuration
+#
+#  Jekyll reads this file once at startup. After editing it locally, stop and
+#  restart `bundle exec jekyll serve` to see the change. (Files in _data/ are
+#  reloaded automatically.)
+#
+#  Where everything lives:
+#    _config.yml             site identity, URLs, SEO defaults, security, build
+#    _data/social.yml        social, professional, and support links (+ PayPal)
+#    _data/contact.yml       the official email addresses and what each is for
+#    _data/navigation.yml    header and footer navigation
+#    _data/legal.yml         "Last updated" dates for the policy pages
+#    _data/theme.yml         light and dark color palettes
+#    _data/focus.yml         development focus areas (Home + Developer pages)
+#    _data/technologies.yml  technologies (Home + Developer pages)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Identity
+# -----------------------------------------------------------------------------
+title: Sanskar
+tagline: Software developer building in the open
+description: >-
+  Sanskar (sanskarIN) is a software developer building software, developer
+  tools, and digital products in the open, with interests in open source,
+  Android, the web, games, and AI/machine learning.
+lang: en
+
+author:
+  name: Sanskar
+  # GitHub and professional profiles use this username.
+  username: sanskarIN
+  # Developer-community and social profiles use this username.
+  community_username: dev_sanskarIN
+
+# First year shown in the footer copyright notice ("© 2026" or "© 2026–2027").
+copyright_start_year: 2026
+
+# -----------------------------------------------------------------------------
+# URLs
+# -----------------------------------------------------------------------------
+# Hostnames are case-insensitive: https://sanskarIN.github.io and
+# https://sanskarin.github.io are the same site. Jekyll normalizes absolute
+# URLs to lowercase, so the lowercase form is used for canonical URLs.
+url: "https://sanskarin.github.io"
+baseurl: ""
+# How the address is written in visible text.
+display_url: sanskarIN.github.io
+
+repository: sanskarIN/sanskarIN.github.io
+repository_url: https://github.com/sanskarIN/sanskarIN.github.io
+
+# The Projects page is intentionally not part of this build (see README →
+# "Adding the Projects page"). Until a page exists at this URL, every
+# "Projects" link points to the GitHub profile instead, so visitors never
+# land on a 404. Once you add the page, all links switch to it on the next
+# build — there is nothing to toggle.
+projects_url: /projects/
+
+# -----------------------------------------------------------------------------
+# Social preview image (Open Graph / X cards), 1200 × 630 PNG
+# -----------------------------------------------------------------------------
+social_image:
+  path: /assets/images/social/og-default.png
+  width: 1200
+  height: 630
+  alt: "Sanskar — software developer building in the open. sanskarIN.github.io"
+
+# -----------------------------------------------------------------------------
+# Security
+# -----------------------------------------------------------------------------
+# Content Security Policy, sent as a <meta> tag in production builds (GitHub
+# Pages cannot send custom HTTP headers). Everything on this site is
+# self-hosted, so only same-origin resources are allowed. If you later embed
+# third-party content (video, analytics, a form service, external images),
+# add its origin to the matching directive, or the browser will block it.
+content_security_policy: >-
+  default-src 'self';
+  script-src 'self';
+  style-src 'self';
+  img-src 'self';
+  font-src 'self';
+  connect-src 'self';
+  manifest-src 'self';
+  object-src 'none';
+  base-uri 'none';
+  form-action 'none'
+
+# -----------------------------------------------------------------------------
+# Build settings — compatible with the GitHub Pages build (Jekyll 3.10)
+# -----------------------------------------------------------------------------
+permalink: pretty
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+liquid:
+  error_mode: strict
+  strict_filters: true
+
+# No theme: all layouts, styles, and scripts live in this repository.
+theme: null
+
+# Published as /.well-known/security.txt
+include:
+  - .well-known
+
+# Repository files that are not part of the website.
+exclude:
+  - README.md
+  - CONTRIBUTING.md
+  - SECURITY.md
+  - LICENSE_DECISION.md
+  - CHANGELOG.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - node_modules/

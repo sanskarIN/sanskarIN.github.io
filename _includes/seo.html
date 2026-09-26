@@ -1,0 +1,39 @@
+{%- comment -%}
+  Title, description, canonical URL, Open Graph, and X (Twitter) card tags.
+  Per page: `title`, `description`, optional `seo_title` (replaces the whole
+  <title>), and `noindex: true` to keep a page out of search results.
+{%- endcomment -%}
+{%- if page.seo_title -%}
+  {%- assign seo_title = page.seo_title -%}
+{%- else -%}
+  {%- capture seo_title -%}{{ page.title }} · {{ site.title }}{%- endcapture -%}
+{%- endif -%}
+{%- assign seo_description = page.description | default: site.description | strip_html | normalize_whitespace -%}
+{%- assign seo_url = page.url | absolute_url -%}
+{%- assign seo_image = site.social_image.path | absolute_url -%}
+{%- assign x_handle = site.data.social.profiles.x.handle %}
+<title>{{ seo_title | escape }}</title>
+<meta name="description" content="{{ seo_description | escape }}">
+{%- if page.noindex %}
+<meta name="robots" content="noindex">
+{%- else %}
+<link rel="canonical" href="{{ seo_url }}">
+{%- endif %}
+<meta name="author" content="{{ site.author.name | escape }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site.title | escape }}">
+<meta property="og:title" content="{{ seo_title | escape }}">
+<meta property="og:description" content="{{ seo_description | escape }}">
+<meta property="og:url" content="{{ seo_url }}">
+<meta property="og:image" content="{{ seo_image }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="{{ site.social_image.width }}">
+<meta property="og:image:height" content="{{ site.social_image.height }}">
+<meta property="og:image:alt" content="{{ site.social_image.alt | escape }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="{{ x_handle }}">
+<meta name="twitter:creator" content="{{ x_handle }}">
+<meta name="twitter:title" content="{{ seo_title | escape }}">
+<meta name="twitter:description" content="{{ seo_description | escape }}">
+<meta name="twitter:image" content="{{ seo_image }}">
+<meta name="twitter:image:alt" content="{{ site.social_image.alt | escape }}">

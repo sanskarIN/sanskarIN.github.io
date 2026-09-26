@@ -1,0 +1,25 @@
+---
+layout: default
+title: Page not found
+description: The page you were looking for could not be found on sanskarIN.github.io.
+permalink: /404.html
+noindex: true
+sitemap: false
+---
+{%- comment -%}
+  GitHub Pages serves this page for any address that does not exist, at any
+  depth, so every link and asset here must use site-root URLs.
+{%- endcomment %}
+<section class="error-page">
+  <div class="container">
+    <p class="error-page__code" aria-hidden="true">404</p>
+    <h1 class="error-page__title">Page not found</h1>
+    <p class="error-page__text">The page you're looking for doesn't exist or may have moved. Check the address for typos, or continue from one of these:</p>
+    <div class="button-row">
+      {% include link.html url="/" label="Home" class="button button--primary" %}
+      {% include link.html url=site.projects_url label="Projects" class="button button--secondary" hint=true %}
+      {% include link.html url=site.data.social.profiles.github.url label="GitHub" icon="github" class="button button--secondary" %}
+      {% include link.html url="/contact/" label="Contact" class="button button--ghost" %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+# =============================================================================
+#  Technologies, shown on the Home and Developer pages.
+#  Presented as areas of work and interest: no skill ratings or years.
+# =============================================================================
+
+- group: Languages
+  items: [Rust, C, "C++", "C#", Java, Kotlin, Python, JavaScript, TypeScript]
+
+- group: Frameworks & runtimes
+  items: [".NET", React]
+
+- group: Development areas
+  items: [Android Development, Web Development, AI / Machine Learning]
+
+- group: Tools & collaboration
+  items: [Git, GitHub]

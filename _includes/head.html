@@ -1,0 +1,20 @@
+{%- assign asset_version = site.time | date: "%s" -%}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{%- comment -%} The CSP is skipped only while `jekyll serve --livereload` runs, because live reload injects an inline script. {%- endcomment -%}
+{%- unless site.livereload %}
+<meta http-equiv="Content-Security-Policy" content="{{ site.content_security_policy | normalize_whitespace }}">
+{%- endunless %}
+{% include seo.html %}
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="{{ site.data.theme.light.bg }}" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="{{ site.data.theme.dark.bg }}" media="(prefers-color-scheme: dark)">
+<script src="{{ '/assets/js/theme-init.js' | relative_url }}?v={{ asset_version }}"></script>
+<link rel="preload" href="{{ '/assets/fonts/ibm-plex-sans-latin-variable.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ asset_version }}">
+<script src="{{ '/assets/js/main.js' | relative_url }}?v={{ asset_version }}" defer></script>
+<link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="32x32">
+<link rel="icon" href="{{ '/assets/images/brand/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ '/assets/images/brand/apple-touch-icon.png' | relative_url }}">
+<link rel="manifest" href="{{ '/manifest.webmanifest' | relative_url }}">
+{% include structured-data.html %}

@@ -1,0 +1,45 @@
+# =============================================================================
+#  Development focus areas.
+#  `summary` appears on the Home page; `detail` on the Developer page.
+#  `icon` is a symbol id in assets/icons/sprite.svg.
+# =============================================================================
+
+- title: Software Development
+  icon: code
+  summary: Designing, writing, and maintaining software, from small utilities to complete applications.
+  detail: The foundation of everything else — turning ideas into working software with clear structure, readable code, and careful iteration.
+
+- title: Open Source
+  icon: git-branch
+  summary: Building in the open on GitHub, where code can be read, discussed, and improved.
+  detail: Publishing work on GitHub as sanskarIN, where code can be read, discussed through issues, and improved through pull requests.
+
+- title: Developer Tools
+  icon: terminal
+  summary: Tools and workflows that make building software faster, clearer, and more reliable.
+  detail: The everyday tools of the trade — command-line utilities, automation, and workflows that remove friction from building software.
+
+- title: AI / Machine Learning
+  icon: network
+  summary: Exploring machine learning and practical ways to apply AI in software.
+  detail: Exploring how machine-learning models work and how AI can be applied inside practical, everyday software.
+
+- title: Android
+  icon: smartphone
+  summary: Native Android development with Kotlin and Java.
+  detail: Building for Android with Kotlin and Java, the platform's primary languages.
+
+- title: Web
+  icon: globe
+  summary: Web development with JavaScript, TypeScript, and React.
+  detail: Web development with JavaScript, TypeScript, and React, from static websites to interactive applications.
+
+- title: Games
+  icon: gamepad
+  summary: Game development and interactive software.
+  detail: Game development — gameplay, game systems, and interactive experiences.
+
+- title: Digital Products
+  icon: package
+  summary: Building digital products, distributed through Gumroad.
+  detail: Building digital products and distributing them through Gumroad, alongside the software itself.

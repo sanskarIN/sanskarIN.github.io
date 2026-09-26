@@ -1,0 +1,39 @@
+# =============================================================================
+#  Color palettes for the light and dark themes.
+#
+#  Each entry becomes a CSS custom property (`bg` → --color-bg) in
+#  assets/css/main.css. `bg` also sets the browser UI color (theme-color) and
+#  the web app manifest colors.
+#
+#  Contrast: every text color below meets WCAG AA (at least 4.5:1) against
+#  bg, surface, and surface-muted, and white text meets 4.5:1 on the light
+#  accent. Re-check contrast if you change any value.
+# =============================================================================
+
+light:
+  bg: "#F7F6F3"
+  surface: "#FFFFFF"
+  surface-muted: "#EFEDE8"
+  text: "#16171B"
+  text-muted: "#555A64"
+  border: "#E0DDD6"
+  border-strong: "#B3AEA3"
+  accent: "#B93C0B"
+  accent-hover: "#9A3412"
+  accent-soft: "#FCEEE6"
+  on-accent: "#FFFFFF"
+  grid: "rgb(22 23 27 / 5%)"
+
+dark:
+  bg: "#111214"
+  surface: "#18191C"
+  surface-muted: "#202226"
+  text: "#EDEBE6"
+  text-muted: "#A5A8AF"
+  border: "#2B2D32"
+  border-strong: "#4A4D55"
+  accent: "#FF8F57"
+  accent-hover: "#FFAD85"
+  accent-soft: "#2A1B13"
+  on-accent: "#16171B"
+  grid: "rgb(237 235 230 / 5%)"

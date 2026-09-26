@@ -1,0 +1,31 @@
+{%- comment -%}
+  Site header. Without JavaScript the navigation is always visible and the
+  two buttons stay hidden. With JavaScript, small screens get a disclosure
+  menu (the button's aria-expanded state drives the CSS) and every screen
+  gets the theme switch.
+{%- endcomment %}
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      {% include brand-mark.html %}
+      <span class="brand__name">{{ site.title }}</span>
+    </a>
+    <button class="header-button nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      {% include icon.html name="menu" class="nav-toggle__open" %}
+      {% include icon.html name="close" class="nav-toggle__close" %}
+      <span>Menu</span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul class="site-nav__list">
+        {%- for item in site.data.navigation.main %}
+        <li>{% include link.html url=item.url label=item.title class="site-nav__link" hint=true %}</li>
+        {%- endfor %}
+      </ul>
+    </nav>
+    <button class="header-button theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
+      {% include icon.html name="moon" class="theme-toggle__moon" %}
+      {% include icon.html name="sun" class="theme-toggle__sun" %}
+      <span class="visually-hidden">Dark theme</span>
+    </button>
+  </div>
+</header>
