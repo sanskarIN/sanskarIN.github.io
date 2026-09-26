@@ -208,6 +208,7 @@
 .page-section > ul + p,
 .page-section > p + .button-row,
 .page-section > p + .link-grid,
+.page-section > p + .contact-form,
 .page-section > .feature-grid + p,
 .page-section > .spec-list + p {
   margin-top: var(--space-4);
