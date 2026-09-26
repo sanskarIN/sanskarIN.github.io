@@ -33,7 +33,8 @@ The website is designed and built with the Web Content Accessibility Guidelines 
 - **Text alternatives:** icons are decorative and hidden from assistive technology. Icon-only buttons have text labels, and links that open in a new tab say so.
 - **Accessible controls:** the menu button and the theme switch are real buttons that announce their state — expanded or collapsed, on or off.
 {% if form_key != "" %}- **Forms:** every field in the contact form has a visible label, required fields are marked in text, and the result of sending a message is announced to screen readers.
-{% endif %}- **Reduced motion:** the website uses very little animation and respects your device's "reduce motion" setting.
+{% endif %}- **Blog posts:** the post form asks authors to describe every image, a cover image can't be published without a description, and wide tables and code blocks in posts can be scrolled with the keyboard.
+- **Reduced motion:** the website uses very little animation and respects your device's "reduce motion" setting.
 - **Responsive design:** layouts adapt from small phones to large screens without horizontal scrolling, and text can be zoomed to 200% and beyond.
 - **Mobile accessibility:** buttons and menu links are sized for touch, and the website works in both portrait and landscape orientation.
 - **Light and dark themes:** the website follows your device's color setting, and you can switch themes manually.
@@ -41,7 +42,9 @@ The website is designed and built with the Web Content Accessibility Guidelines 
 
 ## Known limitations
 
-Linked third-party services, such as GitHub, LinkedIn, and Discord, are outside my control and may have accessibility issues of their own.
+Linked third-party services, such as GitHub, LinkedIn, and Discord, are outside my control and may have accessibility issues of their own. Writing a blog post happens on GitHub, so it depends on the accessibility of GitHub's issue form.
+
+Blog posts are written by their authors, including visitors. Their structure is checked automatically, but their text and image descriptions are not, so some posts may not fully meet accessibility guidelines. Please tell me about any post that causes you problems.
 
 ## Feedback
 
