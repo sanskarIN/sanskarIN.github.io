@@ -1,0 +1,33 @@
+{%- comment -%}
+  A post in the list on the blog page. Parameters: post (required),
+  heading (heading level for the title, default 3).
+{%- endcomment -%}
+{%- assign card = include.post -%}
+{%- assign card_heading = include.heading | default: 3 -%}
+{%- assign card_author = card.author | default: site.author.name -%}
+{%- assign card_minutes = card.content | strip_html | number_of_words | divided_by: 200 -%}
+{%- if card_minutes < 1 %}{% assign card_minutes = 1 %}{% endif %}
+<article class="post-card{% if card.image %} post-card--with-image{% endif %}">
+  {%- if card.image %}
+  <div class="post-card__media">
+    <img class="post-card__image" src="{{ card.image | relative_url }}" alt=""
+      {%- if card.image_width and card.image_height %} width="{{ card.image_width }}" height="{{ card.image_height }}"{% endif %} loading="lazy" decoding="async">
+  </div>
+  {%- endif %}
+  <div class="post-card__body">
+    <h{{ card_heading }} class="post-card__title"><a href="{{ card.url | relative_url }}">{{ card.title | escape }}</a></h{{ card_heading }}>
+    {%- if card.description %}
+    <p class="post-card__summary">{{ card.description | escape }}</p>
+    {%- endif %}
+    <p class="post-card__meta">
+      <span><time datetime="{{ card.date | date_to_xmlschema }}">{{ card.date | date: "%-d %b %Y" }}</time>
+        {%- if card.last_modified_at %}, updated <time datetime="{{ card.last_modified_at | date_to_xmlschema }}">{{ card.last_modified_at | date: "%-d %b %Y" }}</time>{% endif -%}
+      </span>
+      <span>by {{ card_author | escape }}</span>
+      <span>{{ card_minutes }} min read</span>
+    </p>
+    {%- if card.tags.size > 0 %}
+    {% include post-tags.html tags=card.tags %}
+    {%- endif %}
+  </div>
+</article>
