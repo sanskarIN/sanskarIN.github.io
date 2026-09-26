@@ -52,7 +52,7 @@ The website relies on, or links to, the following services. Each has its own pri
 
 - **GitHub Pages** (hosting): see the {% include link.html url="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" label="GitHub General Privacy Statement" %} and GitHub's {% include link.html url="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection" label="note on GitHub Pages data collection" %}.
 - **Email providers:** the published addresses are hosted by Microsoft (Outlook) and Google (Gmail), which process the emails you send under their own privacy policies.
-{% if form_key != "" %}- **{{ contact_form.service }}** (contact form delivery): see {{ contact_form.service }}'s {% include link.html url=contact_form.service_privacy_url label="privacy and data-handling information" %}.
+{% if form_key != "" %}- **{{ contact_form.service }}** (contact form delivery): see the {{ contact_form.service }} {% include link.html url=contact_form.service_privacy_url label="privacy and data-handling information" %}.
 {% endif %}- **Linked platforms:** GitHub, LinkedIn, Dev.to, Discord, X, Instagram, Threads, Pinterest, Bluesky, Buy Me a Coffee, and Gumroad.
 
 The website does not embed content, scripts, fonts, or images from any of these services. They receive information about you only if you follow a link to them{% if form_key != "" %}, send an email, or submit the contact form{% else %} or send an email{% endif %}.
@@ -67,7 +67,7 @@ I keep emails for as long as they are needed to reply and to handle any ongoing 
 
 ## Data security
 
-The website is served over HTTPS. Because it is a static website with no databases, accounts, or server-side code of its own, it does not store personal information. Emails are protected by the security measures of the email providers.{% if form_key != "" %} Contact form messages are sent to {{ contact_form.service }} over an encrypted (HTTPS) connection.{% endif %} No method of transmission or storage is completely secure, so please do not send sensitive information such as passwords by email.
+The website is served over HTTPS. Because it is a static website with no databases, accounts, or server-side code of its own, it does not store personal information. Emails are protected by the security measures of the email providers.{% if form_key != "" %} Contact form messages are sent to {{ contact_form.service }} over an encrypted (HTTPS) connection.{% endif %} No method of transmission or storage is completely secure, so please do not send sensitive information such as passwords by email{% if form_key != "" %} or through the contact form{% endif %}.
 
 ## Children's privacy
 
