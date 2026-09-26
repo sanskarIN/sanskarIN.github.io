@@ -7,7 +7,8 @@
 #
 #  Contrast: every text color below meets WCAG AA (at least 4.5:1) against
 #  bg, surface, and surface-muted, and white text meets 4.5:1 on the light
-#  accent. Re-check contrast if you change any value.
+#  accent. `border-input` (form field outlines) meets 3:1 against bg and
+#  surface. Re-check contrast if you change any value.
 # =============================================================================
 
 light:
@@ -18,6 +19,7 @@ light:
   text-muted: "#555A64"
   border: "#E0DDD6"
   border-strong: "#B3AEA3"
+  border-input: "#8A857B"
   accent: "#B93C0B"
   accent-hover: "#9A3412"
   accent-soft: "#FCEEE6"
@@ -32,6 +34,7 @@ dark:
   text-muted: "#A5A8AF"
   border: "#2B2D32"
   border-strong: "#4A4D55"
+  border-input: "#6A6E76"
   accent: "#FF8F57"
   accent-hover: "#FFAD85"
   accent-soft: "#2A1B13"
