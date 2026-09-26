@@ -1,0 +1,60 @@
+---
+layout: none
+permalink: /blog/feed.xml
+sitemap: false
+---
+{%- comment -%}
+  Atom feed of the 20 newest posts, with their full text. Links and images
+  in posts use site-root addresses, so they are made absolute here.
+{%- endcomment -%}
+{%- assign blog_page = site.pages | where: "url", "/blog/" | first -%}
+{%- assign site_root = "/" | absolute_url -%}
+{%- capture absolute_src -%}src="{{ site_root }}{%- endcapture -%}
+{%- capture absolute_href -%}href="{{ site_root }}{%- endcapture -%}
+{%- assign feed_updated = site.time -%}
+{%- assign feed_seconds = 0 -%}
+{%- for post in site.posts -%}
+  {%- assign post_time = post.last_modified_at | default: post.date -%}
+  {%- assign post_seconds = post_time | date: "%s" | plus: 0 -%}
+  {%- if post_seconds > feed_seconds -%}
+    {%- assign feed_seconds = post_seconds -%}
+    {%- assign feed_updated = post_time -%}
+  {%- endif -%}
+{%- endfor -%}
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ site.lang }}">
+  <title>{{ blog_page.title | append: " · " | append: site.title | xml_escape }}</title>
+  <subtitle>{{ blog_page.lead | xml_escape }}</subtitle>
+  <link href="{{ '/blog/feed.xml' | absolute_url }}" rel="self" type="application/atom+xml"/>
+  <link href="{{ '/blog/' | absolute_url }}" rel="alternate" type="text/html"/>
+  <id>{{ '/blog/' | absolute_url }}</id>
+  <updated>{{ feed_updated | date_to_xmlschema }}</updated>
+  <author>
+    <name>{{ site.author.name | xml_escape }}</name>
+    <uri>{{ site_root }}</uri>
+  </author>
+  <icon>{{ '/assets/images/brand/apple-touch-icon.png' | absolute_url }}</icon>
+  {%- for post in site.posts limit: 20 %}
+    {%- assign author_url = post.author_url | default: "/about/" -%}
+    {%- assign author_scheme = author_url | slice: 0, 4 -%}
+    {%- unless author_scheme == "http" %}{% assign author_url = author_url | absolute_url %}{% endunless %}
+  <entry>
+    <title type="text">{{ post.title | xml_escape }}</title>
+    <link href="{{ post.url | absolute_url }}" rel="alternate" type="text/html"/>
+    <id>{{ post.url | absolute_url }}</id>
+    <published>{{ post.date | date_to_xmlschema }}</published>
+    <updated>{{ post.last_modified_at | default: post.date | date_to_xmlschema }}</updated>
+    <author>
+      <name>{{ post.author | default: site.author.name | xml_escape }}</name>
+      <uri>{{ author_url | xml_escape }}</uri>
+    </author>
+    {%- for tag in post.tags %}
+    <category term="{{ tag | xml_escape }}"/>
+    {%- endfor %}
+    {%- if post.description %}
+    <summary type="text">{{ post.description | xml_escape }}</summary>
+    {%- endif %}
+    <content type="html">{{ post.content | replace: 'src="//', 'src="https://' | replace: 'href="//', 'href="https://' | replace: 'src="/', absolute_src | replace: 'href="/', absolute_href | xml_escape }}</content>
+  </entry>
+  {%- endfor %}
+</feed>
