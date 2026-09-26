@@ -10,6 +10,10 @@ _site/
 vendor/
 Gemfile.lock
 
+# Python caches (from running the blog script locally)
+__pycache__/
+*.pyc
+
 # Editors and operating systems
 .DS_Store
 Thumbs.db
