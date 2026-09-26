@@ -13,6 +13,8 @@ policy: terms
   name, jurisdiction, or governing law are intentionally not included —
   see README.md → "Legal pages" before adding them.
 {%- endcomment %}
+{%- assign form_key = site.data.contact.form.access_key | strip -%}
+{%- assign contact_form = site.data.contact.form %}
 
 ## Introduction
 
@@ -41,8 +43,9 @@ When using the website, you agree not to:
 - use it in a way that breaks any applicable law or regulation;
 - attempt to gain unauthorized access to the website, its hosting infrastructure, or related accounts;
 - interfere with or disrupt the website, for example by sending malicious code or excessive automated traffic;
-- misrepresent your identity or suggest an affiliation with me that does not exist; or
-- use the website's content in a way that infringes the rights of others.
+- misrepresent your identity or suggest an affiliation with me that does not exist;{% if form_key == "" %} or{% endif %}
+- use the website's content in a way that infringes the rights of others{% if form_key != "" %}; or
+- send spam, malicious content, or unlawful material through the contact form{% endif %}.
 
 ## External links
 
@@ -52,7 +55,8 @@ The website links to other websites and services, including GitHub, LinkedIn, De
 
 - **Hosting:** the website is hosted on GitHub Pages, a service provided by GitHub, Inc.
 - **Email:** messages you send to the addresses on this website are handled by the email providers that host those addresses (Microsoft Outlook and Google Gmail).
-- **Support and purchases:** any support given through Buy Me a Coffee, and any purchase made through Gumroad, takes place on those platforms and is governed by their terms, including their payment, refund, and privacy terms.
+{% if form_key != "" %}- **Contact form:** messages sent with the contact form are delivered by {{ contact_form.service }} and handled as described in the [Privacy Policy]({{ '/privacy/' | relative_url }}).
+{% endif %}- **Support and purchases:** any support given through Buy Me a Coffee, and any purchase made through Gumroad, takes place on those platforms and is governed by their terms, including their payment, refund, and privacy terms.
 
 ## Availability
 
