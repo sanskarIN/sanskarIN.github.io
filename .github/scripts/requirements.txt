@@ -1,0 +1,10 @@
+# Python packages used by publish_post.py, pinned to exact versions.
+# Update them from time to time (Pillow in particular), then check that a
+# test post still publishes.
+markdown-it-py[linkify]==4.2.0
+linkify-it-py==2.2.0
+mdurl==0.1.2
+uc-micro-py==2.0.0
+nh3==0.3.7
+Pillow==12.3.0
+PyYAML==6.0.3
