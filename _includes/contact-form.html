@@ -1,0 +1,52 @@
+{%- comment -%}
+  Contact form, delivered by the service set in _data/contact.yml (Web3Forms).
+  Only rendered by contact.html when an access key is set.
+
+  Without JavaScript it is a normal form post; the service then redirects to
+  /contact/sent/. With JavaScript, assets/js/main.js sends it in the
+  background and reports the result in the status line.
+{%- endcomment -%}
+{%- assign contact_form = site.data.contact.form -%}
+<form class="contact-form" action="{{ contact_form.endpoint }}" method="post" data-contact-form>
+  <input type="hidden" name="access_key" value="{{ contact_form.access_key | strip }}">
+  <input type="hidden" name="subject" value="{{ contact_form.subject }}">
+  <input type="hidden" name="from_name" value="{{ site.display_url }}">
+  <input type="hidden" name="redirect" value="{{ '/contact/sent/' | absolute_url }}">
+
+  <div class="contact-form__trap">
+    <label>Leave this box unchecked <input type="checkbox" name="botcheck" tabindex="-1"></label>
+  </div>
+
+  <div class="form-field">
+    <label class="form-field__label" for="contact-name">Name <span class="form-field__required">(required)</span></label>
+    <input class="form-field__input" id="contact-name" name="name" type="text" autocomplete="name" maxlength="100" required>
+  </div>
+
+  <div class="form-field">
+    <label class="form-field__label" for="contact-email">Email <span class="form-field__required">(required)</span></label>
+    <input class="form-field__input" id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" aria-describedby="contact-email-hint" required>
+    <p class="form-field__hint" id="contact-email-hint">Used only to reply to you.</p>
+  </div>
+
+  <div class="form-field form-field--wide">
+    <label class="form-field__label" for="contact-topic">Topic</label>
+    <select class="form-field__input" id="contact-topic" name="topic">
+      {%- for topic in contact_form.topics %}
+      <option>{{ topic }}</option>
+      {%- endfor %}
+    </select>
+  </div>
+
+  <div class="form-field form-field--wide">
+    <label class="form-field__label" for="contact-message">Message <span class="form-field__required">(required)</span></label>
+    <textarea class="form-field__input" id="contact-message" name="message" rows="7" maxlength="5000" aria-describedby="contact-message-hint" required></textarea>
+    <p class="form-field__hint" id="contact-message-hint">Please don't include passwords, API keys, or other secrets.</p>
+  </div>
+
+  <p class="contact-form__notice">Messages are delivered to my inbox by {% include link.html url=contact_form.service_url label=contact_form.service %}. The <a href="{{ '/privacy/' | relative_url }}">Privacy Policy</a> explains how your message is handled.</p>
+
+  <div class="contact-form__actions">
+    <button class="button button--primary" type="submit">Send message</button>
+    <p class="contact-form__status" aria-live="polite" data-form-status></p>
+  </div>
+</form>
