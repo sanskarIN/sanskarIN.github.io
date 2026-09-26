@@ -1,0 +1,45 @@
+# =============================================================================
+#  Email addresses — the single source of truth.
+#
+#  Each address is written exactly once, in `email` below. Everything else
+#  (Contact page, footer, Home page, policy pages, security.txt) refers to
+#  these keys, so changing an address here updates the whole site.
+#
+#  Using an address in a page:  {% include email-link.html key="support" %}
+# =============================================================================
+
+email:
+  business_primary: sanskarin@outlook.in
+  business_secondary: sanskarin.business@gmail.com
+  support: supportramsandesh@gmail.com
+
+# What each group of addresses is for, as shown on the site.
+groups:
+  business:
+    title: Business
+    summary: For business and professional communication.
+    purposes:
+      - Business inquiries
+      - Professional collaborations
+      - Development services
+      - Partnerships
+      - Source-code inquiries
+      - Digital-product inquiries
+      - General professional communication
+    addresses:
+      - key: business_primary
+        label: Primary
+      - key: business_secondary
+        label: Secondary
+
+  support:
+    title: Support
+    summary: For help with a project, this website, or anything support-related.
+    purposes:
+      - Technical support
+      - Project support
+      - Website support
+      - Assistance and support-related questions
+    addresses:
+      - key: support
+        label: Support
