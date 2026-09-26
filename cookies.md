@@ -11,6 +11,8 @@ policy: cookies
   When you change this page, update `cookies` in _data/legal.yml.
   The storage details below must match assets/js/main.js (the "theme" storage key).
 {%- endcomment %}
+{%- assign form_key = site.data.contact.form.access_key | strip -%}
+{%- assign contact_form = site.data.contact.form %}
 
 <div class="summary" markdown="1">
 **In short:** no cookies of any kind — essential, analytics, advertising, or third-party. The only thing the website stores is your light or dark theme choice, in your browser's local storage, and only if you use the theme switch.
@@ -48,7 +50,7 @@ None. The website does not use analytics or measurement tools of any kind.
 
 ## Third-party cookies
 
-None are set through this website. It does not embed content, scripts, fonts, or advertising from other services, and at the time of writing its host, GitHub Pages, does not set cookies either. If you follow a link to another website, such as GitHub, LinkedIn, or Discord, that website may set its own cookies under its own policy.
+None are set through this website. It does not embed content, scripts, fonts, or advertising from other services, and at the time of writing its host, GitHub Pages, does not set cookies either. If you follow a link to another website, such as GitHub, LinkedIn, or Discord, that website may set its own cookies under its own policy.{% if form_key != "" %} If you send the contact form with JavaScript turned off, your browser briefly visits {{ contact_form.service }} before returning to this website, and that service may set its own cookies under its own policy.{% endif %}
 
 ## Managing cookies
 
