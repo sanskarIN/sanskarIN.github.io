@@ -1,0 +1,132 @@
+---
+layout: default
+title: Home
+seo_title: "Sanskar (sanskarIN) · Software developer & open source"
+description: "Sanskar (sanskarIN) builds software, developer tools, and digital products in the open, with interests in open source, Android, web, games, and AI/ML."
+permalink: /
+body_class: page-home
+---
+{%- assign languages = site.data.technologies | where: "group", "Languages" | first -%}
+<section class="hero">
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <p class="eyebrow">Software developer · Open source</p>
+      <h1 class="hero__title">Sanskar</h1>
+      <p class="hero__tagline">Building software, developer tools, and digital products in the open.</p>
+      <p class="hero__intro">My work and interests span Rust and C++, Android, the web, game development, and AI/machine&nbsp;learning — built in public on GitHub and shared with the developer community.</p>
+      <div class="button-row">
+        {% include link.html url=site.projects_url label="View Projects" class="button button--primary" arrow=true %}
+        {% include link.html url=site.data.social.profiles.github.url label="GitHub" icon="github" class="button button--secondary" %}
+        {% include link.html url="/contact/" label="Contact Me" class="button button--ghost" %}
+      </div>
+    </div>
+
+    <div class="hero__aside">
+      <div class="spec-card">
+        <p class="spec-card__header"><span>profile</span><span>{{ site.display_url }}</span></p>
+        <dl class="spec-card__list">
+          <div class="spec-card__row"><dt>name</dt><dd>{{ site.author.name }}</dd></div>
+          <div class="spec-card__row"><dt>github</dt><dd>{{ site.author.username }}</dd></div>
+          <div class="spec-card__row"><dt>community</dt><dd>@{{ site.author.community_username }}</dd></div>
+          <div class="spec-card__row"><dt>focus</dt><dd>software · open source · developer tools</dd></div>
+          <div class="spec-card__row"><dt>areas</dt><dd>android · web · games · ai/ml</dd></div>
+          <div class="spec-card__row"><dt>languages</dt><dd>{{ languages.items | join: " · " | downcase }}</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">01</span>About</h2>
+      <p class="section-header__lead">Software developer, open-source builder, and part of the developer community.</p>
+    </div>
+    <div class="split">
+      <p>I'm Sanskar, a software developer. My interests cover a wide range of software: systems languages such as Rust, C, and C++; Android development with Kotlin and Java; web development with JavaScript, TypeScript, and React; C#, .NET, and Python; game development; and AI and machine learning.</p>
+      <p>I build in the open on GitHub, take part in the developer community, and create digital products along the way. This website brings all of that together in one place.</p>
+    </div>
+    <p class="section-footer">{% include link.html url="/about/" label="More about me" class="text-link" arrow=true %}</p>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">02</span>Developer focus</h2>
+      <p class="section-header__lead">The areas I build in and keep exploring.</p>
+    </div>
+    <ul class="feature-grid feature-grid--4" role="list">
+      {%- for area in site.data.focus %}
+      <li class="feature">
+        {% include icon.html name=area.icon class="feature__icon" %}
+        <h3 class="feature__title">{{ area.title }}</h3>
+        <p class="feature__text">{{ area.summary }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+    <p class="section-footer">{% include link.html url="/developer/" label="View the developer profile" class="text-link" arrow=true %}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">03</span>Technologies</h2>
+      <p class="section-header__lead">Languages, frameworks, and tools across my work and interests.</p>
+    </div>
+    {% include tech-list.html %}
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">04</span>Open source</h2>
+      <p class="section-header__lead">I publish code on GitHub, where it can be read, discussed, and improved in the open.</p>
+    </div>
+    <div class="callout">
+      {% include icon.html name="github" class="callout__icon" %}
+      <div>
+        <h3 class="callout__title">github.com/{{ site.author.username }}</h3>
+        <p class="callout__text">Browse repositories, follow development, open issues, and suggest improvements. GitHub is the best place to see what I'm working on.</p>
+      </div>
+      {% include link.html url=site.data.social.profiles.github.url label="Visit GitHub" class="button button--primary" arrow=true %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">05</span>Developer community</h2>
+      <p class="section-header__lead">Places to follow along, read, and talk about software.</p>
+    </div>
+    {% include profile-list.html items=site.data.social.community variant="card" class="link-grid" %}
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">06</span>Support &amp; digital products</h2>
+      <p class="section-header__lead">If my work is useful to you, you can support it directly or browse my digital products.</p>
+    </div>
+    {% include profile-list.html group="products" variant="card" class="link-grid" %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">07</span>Contact</h2>
+      <p class="section-header__lead">Email is the best way to reach me: business addresses for professional inquiries, and the support address for help.</p>
+    </div>
+    <div class="contact-grid">
+      {% include contact-card.html group="business" %}
+      {% include contact-card.html group="support" %}
+    </div>
+    <p class="section-footer">{% include link.html url="/contact/" label="All contact options" class="text-link" arrow=true %}</p>
+  </div>
+</section>
