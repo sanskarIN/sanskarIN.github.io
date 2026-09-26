@@ -2,7 +2,7 @@
 
 Source for https://sanskarIN.github.io — the personal developer website of **Sanskar** (GitHub: [sanskarIN](https://www.github.com/sanskarIN), developer community: [@dev_sanskarIN](https://www.x.com/dev_sanskarIN)).
 
-The website is a static site built with [Jekyll](https://jekyllrb.com/) and published by [GitHub Pages](https://pages.github.com/). There is no backend, database, analytics, tracking, or third-party script: visitors receive plain HTML, one stylesheet, and two small optional scripts.
+The website is a static site built with [Jekyll](https://jekyllrb.com/) and published by [GitHub Pages](https://pages.github.com/). There is no backend, database, analytics, tracking, or third-party script: visitors receive plain HTML, one stylesheet, and two small optional scripts. Blog posts are written with a GitHub issue form and published by a GitHub Actions workflow ([details](#blog)).
 
 ## Contents
 
@@ -15,6 +15,7 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 - [Adding the Projects page](#adding-the-projects-page)
 - [Adding PayPal](#adding-paypal)
 - [Contact form](#contact-form)
+- [Blog](#blog)
 - [Legal pages](#legal-pages)
 - [Design system](#design-system)
 - [Accessibility, performance, and security](#accessibility-performance-and-security)
@@ -33,11 +34,14 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 | `/cookies/` | `cookies.md` | Cookie Policy |
 | `/accessibility/` | `accessibility.md` | Accessibility |
 | `/credits/` | `credits.md` | Credits and website information |
+| `/blog/` | `blog/index.html` | Blog: every post, newest first, grouped by year |
+| `/blog/tags/` | `blog/tags.html` | Blog posts grouped by tag |
+| `/blog/<post>/` | `_posts/` | One page per blog post ([details](#blog)) |
 | `/contact/sent/` | `contact-sent.html` | Contact form confirmation (not indexed; shown after sending without JavaScript) |
 | any missing URL | `404.html` | Page not found |
 | `/projects/` | — | Reserved for the Projects page, added manually later ([details](#adding-the-projects-page)) |
 
-Generated files: `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, and `/.well-known/security.txt`.
+Generated files: `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, `/.well-known/security.txt`, and the blog's Atom feed at `/blog/feed.xml`.
 
 URLs end with a slash. GitHub Pages redirects `/about` to `/about/`, so both forms work.
 
@@ -50,15 +54,17 @@ URLs end with a slash. GitHub Pages redirects `/about` to `/about/`, so both for
 - **Fonts:** IBM Plex Sans and IBM Plex Mono, self-hosted WOFF2 (SIL Open Font License 1.1).
 - **Icons:** one SVG sprite — brand icons from Simple Icons (CC0), the LinkedIn icon from Bootstrap Icons (MIT), and interface icons drawn for this site.
 
-**Why Jekyll?** GitHub Pages builds it natively, so there is no build pipeline or workflow to maintain. Shared layouts and data files mean the header, footer, and every link and email address are defined once. The output is plain static HTML, so navigation never depends on JavaScript.
+**Why Jekyll?** GitHub Pages builds it natively, so there is no build pipeline to maintain; the only workflow in the repository is the one that publishes blog posts. Shared layouts and data files mean the header, footer, and every link and email address are defined once. The output is plain static HTML, so navigation never depends on JavaScript.
 
 ### Dependencies
 
 | Dependency | Used for | Runs on the live site? |
 |---|---|---|
 | `github-pages` gem (MIT) | Local builds with the same Jekyll and plugin versions as GitHub Pages | No — build time only |
+| Python packages in `.github/scripts/requirements.txt` (MIT; Pillow: MIT-CMU) | Publishing blog posts: Markdown to HTML (markdown-it-py), removing unsafe HTML (nh3), checking and resizing images (Pillow), reading settings (PyYAML) | No — GitHub Actions only |
+| `actions/checkout`, `actions/setup-python` | The blog workflow; pinned to exact commits | No — GitHub Actions only |
 
-That is the only dependency. Nothing is loaded from a CDN or a third-party domain.
+Nothing is loaded from a CDN or a third-party domain.
 
 ## Directory structure
 
@@ -70,13 +76,15 @@ That is the only dependency. Nothing is loaded from a CDN or a third-party domai
 │   ├── contact.yml           The three email addresses and what each is for
 │   ├── navigation.yml        Header and footer navigation
 │   ├── legal.yml             "Last updated" dates of the policy pages
+│   ├── blog.yml              Blog settings: review of visitors' posts, image and text limits
 │   ├── theme.yml             Light and dark color palettes
 │   ├── focus.yml             Development focus areas (Home + Developer pages)
 │   └── technologies.yml      Technologies (Home + Developer pages)
 ├── _layouts/
 │   ├── default.html          Page skeleton: <head>, header, main content, footer
 │   ├── page.html             Inner pages: title block + content (+ optional "On this page")
-│   └── legal.html            Policy pages: page layout with table of contents
+│   ├── legal.html            Policy pages: page layout with table of contents
+│   └── post.html             Blog posts: title, details (dates, author, tags), cover, content
 ├── _includes/
 │   ├── head.html             Meta tags, security policy, stylesheet, scripts, icons
 │   ├── seo.html              Title, description, canonical URL, Open Graph, X cards
@@ -94,6 +102,8 @@ That is the only dependency. Nothing is loaded from a CDN or a third-party domai
 │   ├── page-header.html      Title block of inner pages
 │   ├── tech-list.html        Technologies list
 │   ├── toc.html              "On this page" navigation
+│   ├── post-card.html        A post in the blog's list
+│   ├── post-tags.html        A post's tags, linking to the Tags page
 │   └── css/                  Stylesheet partials (combined into assets/css/main.css)
 ├── assets/
 │   ├── css/main.css          Combines the partials into one stylesheet
@@ -103,7 +113,14 @@ That is the only dependency. Nothing is loaded from a CDN or a third-party domai
 │   ├── icons/sprite.svg      Every icon on the site
 │   └── images/
 │       ├── brand/            SVG favicon, Apple touch icon, app icons
-│       └── social/           Social preview image (1200 × 630)
+│       ├── social/           Social preview image (1200 × 630)
+│       └── blog/             Images of blog posts, one folder per post (added by the workflow)
+├── _posts/                   Blog posts (added by the workflow, or written by hand)
+├── blog/                     Blog pages: index.html, tags.html, feed.xml
+├── .github/
+│   ├── ISSUE_TEMPLATE/blog-post.yml       The "Write a blog post" form
+│   ├── workflows/publish-blog-post.yml    Publishes posts from the form
+│   └── scripts/publish_post.py            What the workflow runs (+ requirements.txt)
 ├── .well-known/security.txt  Security contact (RFC 9116)
 ├── index.html  about.html  developer.html  contact.html  contact-sent.html  404.html
 ├── terms.md  privacy.md  cookies.md  accessibility.md  credits.md
@@ -142,7 +159,7 @@ Notes:
 
 ## Deployment to GitHub Pages
 
-The repository is a GitHub Pages *user site*, built by GitHub Pages' built-in Jekyll support. No workflow file is required.
+The repository is a GitHub Pages *user site*, built by GitHub Pages' built-in Jekyll support. The site itself needs no workflow file; the blog's workflow only adds posts to `main` and then asks GitHub Pages to rebuild ([details](#blog)).
 
 One-time setup:
 
@@ -170,6 +187,8 @@ Most changes need no template edits. After editing, commit to `main` (or preview
 | `social_image` | Social preview image path, size, and alt text |
 | `copyright_start_year` | First year in the copyright notice |
 | `content_security_policy` | Allowed sources for scripts, styles, fonts, and more (one entry per directive) |
+| `timezone` | Time zone for dates on the site, such as blog post dates (`UTC`; any IANA name works, e.g. `Europe/London`) |
+| `defaults` | Gives blog posts the `post` layout and `/blog/<post>/` addresses |
 
 ### Social and professional links — `_data/social.yml`
 
@@ -211,6 +230,10 @@ Each address is written exactly once, under `email:`. Every other place refers t
 ### Navigation — `_data/navigation.yml`
 
 `main` is the header navigation (also the footer's Navigation group); `legal` and `information` are footer groups.
+
+### Blog settings — `_data/blog.yml`
+
+Whether visitors' posts wait for review (`review_visitor_posts`, on by default), the issue form's file name, and the limits checked when a post is published: image size (10 MB), images per post (20), the longest side an image is scaled down to (2,000 px), and the length of titles, summaries, and tags. The [Blog](#blog) section explains how posting works.
 
 ### Theme colors — `_data/theme.yml`
 
@@ -364,9 +387,68 @@ To turn the form off, clear the `access_key` (and update the policy dates); the 
 
 Switching to another form service means changing the form markup in `_includes/contact-form.html` (field names differ between services), the `endpoint` in `_data/contact.yml`, and the service descriptions in the policy pages.
 
+## Blog
+
+The blog at `/blog/` has no server of its own: posts are written in **GitHub issues**, stored in this repository, and published by a **GitHub Actions** workflow. Anyone with a GitHub account can write one; posts from anyone other than you wait for your approval.
+
+### How a post is published
+
+1. A visitor (or you) selects **Write a post** on the blog page. It opens the "Write a blog post" issue form (`.github/ISSUE_TEMPLATE/blog-post.yml`), with fields for the title, summary, tags, a cover image and its description, the post in Markdown, and a confirmation box.
+2. Submitting the form opens an issue with the `blog-post` label. The workflow `.github/workflows/publish-blog-post.yml` runs `.github/scripts/publish_post.py`, which:
+   - checks the form and, if something needs fixing, says what in a comment on the issue (`needs-changes` label);
+   - for your own posts (and collaborators'), publishes straight away; for anyone else's, adds the `awaiting-review` label and waits for you;
+   - downloads the images attached to the issue, checks that each is a real PNG, JPEG, GIF, or WebP image of at most 10 MB, turns photos the right way up, scales images larger than 2,000 px down, and saves them without metadata (location, camera details, comments) in `assets/images/blog/<post>/`;
+   - converts the Markdown to HTML the same way GitHub previews it, then removes anything unsafe (scripts, styles, forms, embeds, event handlers, `javascript:` links) with an allowlist, and turns images from other websites into links;
+   - writes `_posts/<date>-<post>.html`, commits it as `sanskarIN <sanskarin@outlook.in>`, pushes to `main`, and asks GitHub Pages to rebuild the site (pushes made by a workflow don't trigger a build on their own);
+   - comments on the issue with the post's address, adds the `published` label, and closes the issue.
+3. The post appears at `https://sanskarin.github.io/blog/<post>/` a minute or two later, and in the list, the Tags page, the Atom feed, and the sitemap.
+
+### Reviewing and managing posts
+
+| To… | Do this on the post's issue |
+|---|---|
+| Publish a visitor's post | Add the `approved` label |
+| Decline a visitor's post | Close the issue |
+| Change a post | Edit the issue — the post updates. If a visitor edits their published post, the `approved` label is removed and the changes wait for you; the published version stays until you approve again |
+| Remove a post | Add the `unpublish` label (remove it again to republish), or delete the issue |
+
+Every run is listed in the **Actions** tab as "Publish blog post"; the rebuild appears as "pages build and deployment". The labels are created automatically the first time the workflow runs, or with **Actions → Publish blog post → Run workflow**.
+
+### What each post shows
+
+The title and summary; the date it was **published** and, after any change, the date it was **last updated**; the author (your name, or the visitor's GitHub username linking to their profile); an estimated reading time; tags; the cover image; links to discuss the post on its GitHub issue and to view its history; a copy-link button; and links to the newer and older posts. Posts are marked up as articles for search engines and link previews (Open Graph, X cards, and `BlogPosting` structured data).
+
+The workflow writes this front matter, which you can also use for posts written by hand:
+
+| Key | Meaning |
+|---|---|
+| `title`, `description` | Title and summary |
+| `date` | When the post was first published (it also starts the file name) |
+| `last_modified_at` | When the post last changed (added on updates) |
+| `author`, `author_url`, `author_login` | Author's name, link, and GitHub username (default: you and the About page) |
+| `image`, `image_alt`, `image_width`, `image_height` | Cover image, its description, and its size |
+| `tags` | List of topics |
+| `source_issue` | The issue the post comes from; the workflow uses it to find the post again |
+
+### Writing a post by hand
+
+You can also add a Markdown file to `_posts/`, named like `2026-10-01-my-post.md`, with at least `title`, `description`, and `date` in its front matter. It uses the same layout and appears in the list, feed, and sitemap automatically. Leave out `source_issue`: the workflow only manages posts that have one, and it rewrites them whenever their issue is edited — so change those through their issue, not in the file.
+
+### Safety
+
+- Anyone can open an issue, so the workflow treats issues as untrusted data: the text is never placed in a shell command, only GitHub's own image addresses are downloaded, images are fully decoded only once a post is approved, and the HTML is cleaned before it is saved. Braces in posts are written as character references, so Liquid tags in a post are shown as text instead of running.
+- The site's Content Security Policy still applies on top: posts can't load scripts or images from other websites.
+- The workflow's token can write only to this repository's contents, issues, and Pages builds. The actions it uses are pinned to exact commits, and the Python packages to exact versions — update `.github/scripts/requirements.txt` from time to time (especially Pillow), then publish a test post.
+
+### Limits of this approach
+
+- Writing a post needs a GitHub account, and the issue (including its first version) is public on GitHub. Accepting posts without an account would need a server holding a secret key, which GitHub Pages can't provide.
+- Removing a post takes it off the website, but earlier versions stay in the repository's Git history.
+- Changing the limits in `_data/blog.yml` doesn't change the text of the issue form: update `.github/ISSUE_TEMPLATE/blog-post.yml` too.
+
 ## Legal pages
 
-The Terms, Privacy, Cookie, and Accessibility pages describe this website as it is actually built: static, no analytics, no cookies, no forms, no embedded third-party content, and hosted on GitHub Pages (which logs visitors' IP addresses for security, as GitHub documents). They are general-purpose documents, not individualized legal advice.
+The Terms, Privacy, Cookie, and Accessibility pages describe this website as it is actually built: static, no analytics, no cookies, no embedded third-party content, an optional contact form, a blog whose posts are written on GitHub, and hosted on GitHub Pages (which logs visitors' IP addresses for security, as GitHub documents). They are general-purpose documents, not individualized legal advice.
 
 Details that were not provided are intentionally left out, and may need adding later:
 
@@ -387,6 +469,7 @@ Keep the policies in step with the website:
 | The built-in contact form | Nothing in the text — the policies update automatically; just update the dates in `_data/legal.yml` |
 | A different form service | `_includes/contact-form.html`, the `form` settings, and the form passages in `privacy.md`, `terms.md`, and `cookies.md` |
 | A new linked platform (e.g. PayPal) | the platform lists in `privacy.md` and `terms.md` |
+| Changes to how blog posts are accepted, reviewed, or removed | the "Blog posts" sections of `terms.md` and `privacy.md` |
 | Anything else stored in the browser | `cookies.md` |
 
 After any change, update the page's date in `_data/legal.yml`.
@@ -396,7 +479,7 @@ After any change, update the page's date in `_data/legal.yml`.
 - **Tokens** — `_includes/css/tokens.css`: type scale (fluid `clamp()` sizes), spacing scale, content widths, radius, and motion; colors come from `_data/theme.yml`.
 - **Typography** — IBM Plex Sans for text and headings; IBM Plex Mono for labels, handles, and technical details.
 - **Layout** — a 72rem container with fluid side gutters; long-form text is limited to about 42rem per line.
-- **Components** — `_includes/css/components.css`: eyebrow labels, buttons, spec card, feature grid, spec lists and tags, link cards, contact cards, contact form fields, callout, note, table of contents, and prose.
+- **Components** — `_includes/css/components.css`: eyebrow labels, buttons, spec card, feature grid, spec lists and tags, link cards, contact cards, contact form fields, callout, note, table of contents, and prose. Blog components (post list, post details, newer/older links, and styles for post content such as code, tables, and quotes) are in `_includes/css/blog.css`.
 - **Themes** — light and dark palettes, following the device setting until the visitor chooses one with the theme switch.
 - **Motion** — only small hover transitions, all disabled when the device asks for reduced motion.
 
@@ -404,10 +487,10 @@ After any change, update the page's date in `_data/legal.yml`.
 
 - **Accessibility:** semantic landmarks, a skip link, one `<h1>` per page with ordered headings, visible focus outlines, WCAG AA text contrast in both themes, labelled controls that announce their state, reduced-motion support, and navigation that works without JavaScript. See the [Accessibility page](https://sanskarin.github.io/accessibility/).
 - **Performance:** one stylesheet (≈7 KB gzipped), about 2.5 KB of optional JavaScript, about 75 KB of self-hosted fonts (Latin subset; the main font is preloaded), inline SVG icons, and no third-party requests. CSS, JavaScript, and icon URLs carry a build-time `?v=` parameter because GitHub Pages lets browsers cache files for 10 minutes.
-- **Security:** a Content Security Policy that allows only same-origin resources, no inline scripts or styles, no secrets in the repository, `rel="noopener noreferrer"` on external links, `/.well-known/security.txt`, and a [security policy](SECURITY.md).
+- **Security:** a Content Security Policy that allows only same-origin resources, no inline scripts or styles, no secrets in the repository, `rel="noopener noreferrer"` on external links, `/.well-known/security.txt`, a blog workflow that treats issues as untrusted input ([details](#safety)), and a [security policy](SECURITY.md).
 
 ## Copyright and licensing
 
 © 2026 Sanskar. All rights reserved.
 
-No open-source license has been chosen for this repository, so its content and code are not licensed for reuse — see [LICENSE_DECISION.md](LICENSE_DECISION.md). Third-party assets keep their own licenses: IBM Plex fonts (SIL Open Font License 1.1, [`assets/fonts/OFL.txt`](assets/fonts/OFL.txt)), Simple Icons (CC0 1.0), and Bootstrap Icons (MIT, license text in [`assets/icons/sprite.svg`](assets/icons/sprite.svg)). The [Credits page](https://sanskarin.github.io/credits/) lists them.
+No open-source license has been chosen for this repository, so its content and code are not licensed for reuse — see [LICENSE_DECISION.md](LICENSE_DECISION.md). Blog posts written by visitors belong to their authors, who give permission to publish them here (see the Terms). Third-party assets keep their own licenses: IBM Plex fonts (SIL Open Font License 1.1, [`assets/fonts/OFL.txt`](assets/fonts/OFL.txt)), Simple Icons (CC0 1.0), and Bootstrap Icons (MIT, license text in [`assets/icons/sprite.svg`](assets/icons/sprite.svg)). The [Credits page](https://sanskarin.github.io/credits/) lists them.
