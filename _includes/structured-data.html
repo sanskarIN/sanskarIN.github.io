@@ -1,8 +1,10 @@
 {%- comment -%}
-  JSON-LD structured data: a Person, the WebSite, and the current page.
-  Uses only information already on the site. Relies on `seo_title` and
-  `seo_description` from seo.html. Per page: `schema_type` (e.g.
-  ProfilePage, ContactPage; default WebPage).
+  JSON-LD structured data: a Person, the WebSite, and the current page, plus
+  the Blog and a BlogPosting on blog pages. Uses only information already on
+  the site. Relies on `seo_title`, `seo_description`, `seo_image`,
+  `seo_author`, and `is_post` from seo.html. Per page: `schema_type` (e.g.
+  ProfilePage, ContactPage; default WebPage). "</" is escaped so text from a
+  post can never end the script element.
 {%- endcomment -%}
 {%- unless page.noindex -%}
 {%- assign person_id = "/#person" | absolute_url -%}
@@ -24,8 +26,12 @@
   {%- for item in group.items -%}
     {%- assign knows_about = knows_about | push: item -%}
   {%- endfor -%}
-{%- endfor %}
-<script type="application/ld+json">
+{%- endfor -%}
+{%- assign blog_url = "/blog/" | absolute_url -%}
+{%- assign blog_id = "/blog/#blog" | absolute_url -%}
+{%- assign in_blog = false -%}
+{%- if is_post or page.url == "/blog/" %}{% assign in_blog = true %}{% endif -%}
+{%- capture json_ld %}
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -65,7 +71,47 @@
       "dateModified": {{ site.data.legal[page.policy] | date: "%Y-%m-%d" | jsonify }}
       {%- endif %}
     }
+    {%- if in_blog -%},
+    {
+      "@type": "Blog",
+      "@id": {{ blog_id | jsonify }},
+      "url": {{ blog_url | jsonify }},
+      "name": {{ "Blog · " | append: site.title | jsonify }},
+      "inLanguage": {{ site.lang | jsonify }},
+      "publisher": { "@id": {{ person_id | jsonify }} }
+    }
+    {%- endif -%}
+    {%- if is_post -%}
+      {%- assign post_author_url = page.author_url | default: "/about/" -%}
+      {%- assign author_scheme = post_author_url | slice: 0, 4 -%}
+      {%- unless author_scheme == "http" %}{% assign post_author_url = post_author_url | absolute_url %}{% endunless -%},
+    {
+      "@type": "BlogPosting",
+      "@id": {{ page_url | append: "#article" | jsonify }},
+      "headline": {{ page.title | jsonify }},
+      "description": {{ seo_description | jsonify }},
+      "url": {{ page_url | jsonify }},
+      "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+      "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
+      {%- if page.author_login and page.author_login != site.author.username %}
+      "author": { "@type": "Person", "name": {{ seo_author | jsonify }}, "url": {{ post_author_url | jsonify }} },
+      {%- else %}
+      "author": { "@id": {{ person_id | jsonify }} },
+      {%- endif %}
+      "publisher": { "@id": {{ person_id | jsonify }} },
+      "image": {{ seo_image | jsonify }},
+      {%- if page.tags.size > 0 %}
+      "keywords": {{ page.tags | jsonify }},
+      {%- endif %}
+      "inLanguage": {{ site.lang | jsonify }},
+      "isPartOf": { "@id": {{ blog_id | jsonify }} },
+      "mainEntityOfPage": { "@id": {{ page_url | append: "#webpage" | jsonify }} }
+    }
+    {%- endif %}
   ]
 }
+{%- endcapture %}
+<script type="application/ld+json">
+{{- json_ld | replace: "</", "<\/" }}
 </script>
 {%- endunless -%}
