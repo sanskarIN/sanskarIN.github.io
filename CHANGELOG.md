@@ -4,6 +4,19 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.1.0] — 2026-09-26
+
+### Added
+
+- Optional contact form on the Contact page, delivered by Web3Forms. It stays hidden until an access key is set in `_data/contact.yml`, works with and without JavaScript, uses a hidden spam trap instead of a captcha, and has a confirmation page at `/contact/sent/`.
+- Policy text for the contact form (Privacy Policy, Terms, Cookie Policy, Accessibility, Credits) that appears automatically once the form is turned on.
+- Input border color token (`border-input`) that meets 3:1 contrast in both themes.
+
+### Changed
+
+- The Content Security Policy in `_config.yml` is now listed one directive per line; the contact form service is added to it automatically when the form is on.
+- Contact page: the "never send secrets" advice now covers any message, not only email.
+
 ## [1.0.0] — 2026-09-26
 
 Initial foundation of the website.
