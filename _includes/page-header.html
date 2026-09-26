@@ -1,0 +1,20 @@
+{%- comment -%}
+  Header block for inner pages: eyebrow, <h1>, lead, and — for policy pages
+  (front matter `policy: <key>`) — the "Last updated" date from
+  _data/legal.yml.
+{%- endcomment %}
+<header class="page-header">
+  <div class="container">
+    {%- if page.eyebrow %}
+    <p class="eyebrow">{{ page.eyebrow }}</p>
+    {%- endif %}
+    <h1 class="page-header__title">{{ page.heading | default: page.title }}</h1>
+    {%- if page.lead %}
+    <p class="page-header__lead">{{ page.lead }}</p>
+    {%- endif %}
+    {%- if page.policy %}
+      {%- assign last_updated = site.data.legal[page.policy] %}
+    <p class="page-header__meta">Last updated <time datetime="{{ last_updated | date: '%Y-%m-%d' }}">{{ last_updated | date: "%-d %B %Y" }}</time></p>
+    {%- endif %}
+  </div>
+</header>
