@@ -1,0 +1,18 @@
+{%- comment -%}
+  Sets `projects_url_resolved` for "Projects" links.
+
+  Once a page exists at site.projects_url (for example projects/index.html
+  or projects.md with front matter), links point to it. Until then they
+  point to the GitHub profile, so no visitor lands on a 404. Nothing needs
+  to be switched on: adding the page is enough.
+{%- endcomment -%}
+{%- assign projects_page = site.pages | where: "url", site.projects_url | first -%}
+{%- unless projects_page -%}
+  {%- assign projects_static_path = site.projects_url | append: "index.html" -%}
+  {%- assign projects_page = site.static_files | where: "path", projects_static_path | first -%}
+{%- endunless -%}
+{%- if projects_page -%}
+  {%- assign projects_url_resolved = site.projects_url -%}
+{%- else -%}
+  {%- assign projects_url_resolved = site.data.social.profiles.github.url -%}
+{%- endif -%}
