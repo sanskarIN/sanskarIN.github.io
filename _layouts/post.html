@@ -1,0 +1,108 @@
+---
+layout: default
+---
+{%- comment -%}
+  A blog post (_posts/). Posts written with the issue form are added by the
+  publishing workflow; they can also be written by hand in Markdown.
+
+  Front matter
+    title, description   title and summary (the summary is also the lead)
+    date                 when the post was first published
+    last_modified_at     when it last changed (optional)
+    author, author_url   the author's name and page (default: the site owner)
+    image, image_alt     cover image and its description (optional), with
+    image_width/height   its size in pixels
+    tags                 list of topics (optional)
+    source_issue         the GitHub issue the post was written in (optional)
+
+  Values from the front matter are escaped: posts can come from visitors.
+{%- endcomment -%}
+{%- assign author_name = page.author | default: site.author.name -%}
+{%- assign author_url = page.author_url | default: "/about/" -%}
+{%- assign author_label = author_name | escape -%}
+{%- assign word_count = content | strip_html | number_of_words -%}
+{%- assign reading_minutes = word_count | divided_by: 200 -%}
+{%- if reading_minutes < 1 %}{% assign reading_minutes = 1 %}{% endif -%}
+{%- if page.source_issue -%}
+  {%- capture discussion_url -%}{{ site.repository_url }}/issues/{{ page.source_issue }}{%- endcapture -%}
+{%- else -%}
+  {%- capture discussion_url -%}{{ site.repository_url }}/blob/main/{{ page.path }}{%- endcapture -%}
+{%- endif -%}
+{%- capture history_url -%}{{ site.repository_url }}/commits/main/{{ page.path }}{%- endcapture %}
+<article class="post">
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow"><a class="eyebrow__link" href="{{ '/blog/' | relative_url }}">Blog</a></p>
+      <h1 class="page-header__title post__title">{{ page.title | escape }}</h1>
+      {%- if page.description %}
+      <p class="page-header__lead">{{ page.description | escape }}</p>
+      {%- endif %}
+    </div>
+  </header>
+
+  <div class="container with-toc post__layout">
+    <aside class="with-toc__aside post-details" aria-labelledby="post-details-title">
+      <h2 class="toc__title" id="post-details-title">About this post</h2>
+      <dl class="post-details__list">
+        <div class="post-details__row">
+          <dt>Published</dt>
+          <dd><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time></dd>
+        </div>
+        {%- if page.last_modified_at %}
+        <div class="post-details__row">
+          <dt>Updated</dt>
+          <dd><time datetime="{{ page.last_modified_at | date_to_xmlschema }}">{{ page.last_modified_at | date: "%-d %B %Y" }}</time></dd>
+        </div>
+        {%- endif %}
+        <div class="post-details__row">
+          <dt>Author</dt>
+          <dd>{% include link.html url=author_url label=author_label %}</dd>
+        </div>
+        <div class="post-details__row">
+          <dt>Reading time</dt>
+          <dd>{{ reading_minutes }} min read</dd>
+        </div>
+        {%- if page.tags.size > 0 %}
+        <div class="post-details__row post-details__row--wide">
+          <dt>Tags</dt>
+          <dd>{% include post-tags.html tags=page.tags %}</dd>
+        </div>
+        {%- endif %}
+      </dl>
+      <ul class="post-details__actions">
+        <li>{% include link.html url=discussion_url label="Discuss on GitHub" icon="message" %}</li>
+        <li>{% include link.html url=history_url label="View history" icon="history" %}</li>
+        <li><button class="copy-button" type="button" data-copy="{{ page.url | absolute_url }}">{% include icon.html name="link" %}<span data-copy-label>Copy link</span></button></li>
+      </ul>
+    </aside>
+
+    <div class="with-toc__main">
+      {%- if page.image %}
+      <figure class="post__cover">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.image_alt | escape }}"
+          {%- if page.image_width and page.image_height %} width="{{ page.image_width }}" height="{{ page.image_height }}"{% endif %}>
+      </figure>
+      {%- endif %}
+      <div class="prose post__content">
+{{ content }}
+      </div>
+
+      <nav class="post-nav" aria-label="More posts">
+        {%- if page.next %}
+        <a class="post-nav__link" href="{{ page.next.url | relative_url }}" rel="next">
+          <span class="post-nav__label">{% include icon.html name="arrow-left" %}Newer post</span>
+          <span class="post-nav__title">{{ page.next.title | escape }}</span>
+        </a>
+        {%- endif %}
+        {%- if page.previous %}
+        <a class="post-nav__link post-nav__link--older" href="{{ page.previous.url | relative_url }}" rel="prev">
+          <span class="post-nav__label">Older post{% include icon.html name="arrow-right" %}</span>
+          <span class="post-nav__title">{{ page.previous.title | escape }}</span>
+        </a>
+        {%- endif %}
+        <a class="text-link post-nav__all" href="{{ '/blog/' | relative_url }}">{% include icon.html name="arrow-left" %}All posts</a>
+      </nav>
+    </div>
+  </div>
+</article>
+<p class="visually-hidden" role="status" data-copy-status></p>
