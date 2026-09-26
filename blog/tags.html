@@ -1,0 +1,42 @@
+---
+layout: page
+title: Blog tags
+heading: Tags
+eyebrow: Blog
+lead: Browse the blog's posts by topic.
+description: "Blog posts on sanskarIN.github.io, grouped by topic."
+permalink: /blog/tags/
+schema_type: CollectionPage
+---
+{%- comment -%}
+  Every tag used by a post, with the posts that use it. Section ids
+  ("tag-" + the tag) match the links in _includes/post-tags.html.
+{%- endcomment -%}
+{%- assign tags = site.tags | sort -%}
+{%- if tags.size > 0 %}
+<nav aria-label="Tags">
+  <ul class="tag-list">
+    {%- for tag in tags %}
+    <li><a class="tag tag--link" href="#tag-{{ tag[0] | slugify: 'pretty' }}">{{ tag[0] | escape }} <span class="tag__count"><span class="visually-hidden">(</span>{{ tag[1].size }}<span class="visually-hidden"> post{% if tag[1].size != 1 %}s{% endif %})</span></span></a></li>
+    {%- endfor %}
+  </ul>
+</nav>
+  {%- for tag in tags %}
+
+<section class="page-section" aria-labelledby="tag-{{ tag[0] | slugify: 'pretty' }}">
+  <h2 id="tag-{{ tag[0] | slugify: 'pretty' }}">{{ tag[0] | escape }}</h2>
+  <ul class="post-links">
+    {%- for post in tag[1] %}
+    <li>
+      <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+  {%- endfor %}
+{%- else %}
+<p>No posts have tags yet.</p>
+{%- endif %}
+
+<p class="page-section">{% include link.html url="/blog/" label="All posts" class="text-link" arrow=true %}</p>
