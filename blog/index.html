@@ -1,0 +1,79 @@
+---
+layout: page
+title: Blog
+eyebrow: Blog
+lead: Posts and images from Sanskar and from visitors. Anyone with a GitHub account can write one.
+description: "The blog on sanskarIN.github.io: posts and images from Sanskar and visitors, with the date each post was published and last updated."
+permalink: /blog/
+schema_type: CollectionPage
+---
+{%- comment -%}
+  Lists every post in _posts/, newest first, grouped by year. Posts are
+  written with the issue form in .github/ISSUE_TEMPLATE/blog-post.yml and
+  published by .github/workflows/publish-blog-post.yml (see README.md → "Blog").
+  Settings and limits: _data/blog.yml.
+{%- endcomment -%}
+{%- assign blog = site.data.blog -%}
+{%- capture form_url -%}{{ site.repository_url }}/issues/new?template={{ blog.form }}{%- endcapture -%}
+{%- assign post_count = site.posts | size %}
+<div class="button-row">
+  {% include link.html url=form_url label="Write a post" icon="pencil" class="button button--primary" %}
+  {%- if site.tags.size > 0 %}
+  {% include link.html url="/blog/tags/" label="Browse tags" icon="tag" class="button button--secondary" %}
+  {%- endif %}
+  <a class="button button--ghost" href="{{ '/blog/feed.xml' | relative_url }}" type="application/atom+xml">{% include icon.html name="rss" %}Atom feed</a>
+</div>
+{%- if post_count > 0 %}
+  {%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+  {%- for year in years %}
+
+<section class="page-section post-year" aria-labelledby="posts-{{ year.name }}">
+  <h2 id="posts-{{ year.name }}">{{ year.name }} <span class="post-year__count">· {{ year.items.size }} post{% if year.items.size != 1 %}s{% endif %}</span></h2>
+  <ul class="post-list">
+    {%- for post in year.items %}
+    <li>{% include post-card.html post=post %}</li>
+    {%- endfor %}
+  </ul>
+</section>
+  {%- endfor %}
+{%- else %}
+
+<section class="page-section">
+  <h2>No posts yet</h2>
+  <p>The blog is ready for its first post. Write it with the form on GitHub, and it appears here once it's published.</p>
+  <div class="button-row">
+    {% include link.html url=form_url label="Write the first post" class="button button--secondary" arrow=true %}
+  </div>
+</section>
+{%- endif %}
+
+<section class="page-section">
+  <h2 id="how-posting-works">How posting works</h2>
+  <ol class="principles">
+    <li>
+      <div>
+        <h3>Open the form</h3>
+        <p>Select "Write a post". The form opens on GitHub, where the blog's posts are stored, so you need a free GitHub account.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Write your post</h3>
+        <p>Add a title, your text (Markdown works), tags, and images: PNG, JPEG, GIF, or WebP, up to {{ blog.limits.image_size_mb }} MB each and {{ blog.limits.images_per_post }} per post, with a short description of each one.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Submit it</h3>
+        <p>{% if blog.review_visitor_posts %}Your post is checked automatically and published after I review it.{% else %}Your post is checked and published automatically.{% endif %} A comment on your GitHub issue tells you when it's live, or what to change first.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Update it any time</h3>
+        <p>Edit the issue and the post changes too{% if blog.review_visitor_posts %}, after another review{% endif %}. Every post shows when it was published and when it was last updated.</p>
+      </div>
+    </li>
+  </ol>
+  <p class="note">{% include icon.html name="github" %}<span><strong>Posts are public.</strong> The issue, the post, and your GitHub username (shown as the author) can be seen by anyone. Images are copied to this website with location and camera details removed. The <a href="{{ '/privacy/' | relative_url }}">Privacy Policy</a> and <a href="{{ '/terms/#blog-posts' | relative_url }}">Terms</a> explain the details.</span></p>
+</section>
