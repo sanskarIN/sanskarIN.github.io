@@ -325,15 +325,17 @@ Then keep the policies accurate: add PayPal to the lists of third-party services
 
 ## Contact form
 
-GitHub Pages only serves static files, so it cannot send email by itself. The website therefore includes an optional contact form that is delivered by **[Web3Forms](https://web3forms.com/)**, a form-to-email service. The form is built and tested but **stays hidden until you turn it on**, so the site never shows a form that cannot send.
+GitHub Pages only serves static files, so it cannot send email by itself. The website therefore includes a contact form that is delivered by **[Web3Forms](https://web3forms.com/)**, a form-to-email service. The form is shown only while an access key is set in `_data/contact.yml`, so the site never shows a form that cannot send.
 
-**Turning it on (about two minutes):**
+**Status: on.** The access key is set, and messages go to the address of the Web3Forms account that owns the form. Settings such as the receiving address are managed in the [Web3Forms dashboard](https://app.web3forms.com/).
 
-1. Open https://web3forms.com, enter the email address that should receive the messages (for example `sanskarin@outlook.in`), and copy the **access key** they email to you.
-2. Open `_data/contact.yml`, find the `form` block (search for `FORM_ACCESS_KEY`), and paste the key between the quotes of `access_key`.
+**Setting or replacing the access key:**
+
+1. Sign in at https://app.web3forms.com with the email address that should receive the messages, and create a form — for example, name `sanskarIN.github.io contact form` and website `sanskarin.github.io/contact`.
+2. Copy its **Form Access Key**, open `_data/contact.yml`, find the `form` block (search for `FORM_ACCESS_KEY`), and paste the key between the quotes of `access_key`.
 3. Update the `privacy`, `terms`, and `cookies` dates in `_data/legal.yml`, then commit.
 
-On the next build, everything else happens automatically:
+While a key is set, the following happens automatically on every build:
 
 - a "Send a message" section appears on the Contact page, and the "no contact form" note changes;
 - the Content Security Policy allows `https://api.web3forms.com` in `connect-src` and `form-action`;
@@ -348,7 +350,7 @@ On the next build, everything else happens automatically:
 - **No secrets:** the access key is public by design — it only lets people send messages to your address — so it is safe to keep in the repository. It is not a password.
 - **Privacy:** per its documentation, Web3Forms does not store form submissions; it forwards them to your email.
 
-To turn the form off again, clear the `access_key`; the policies switch back automatically on the next build.
+To turn the form off, clear the `access_key` (and update the policy dates); the Contact page and policies switch back automatically on the next build.
 
 **Other ways to receive messages**, if you prefer a different approach:
 
