@@ -498,6 +498,104 @@
   color: var(--color-accent);
 }
 
+/* Contact form ----------------------------------------------------------- */
+
+.contact-form {
+  display: grid;
+  gap: var(--space-5);
+  max-width: var(--width-prose);
+  padding: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+}
+
+@media (min-width: 40em) {
+  .contact-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .form-field--wide,
+  .contact-form__notice,
+  .contact-form__actions {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Spam trap: hidden from everyone, filled in only by bots. */
+.contact-form__trap {
+  display: none !important;
+}
+
+.form-field {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+}
+
+.form-field__label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.form-field__required {
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.form-field__input {
+  width: 100%;
+  min-height: 2.875rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  line-height: 1.5;
+}
+
+.form-field__input:hover {
+  border-color: var(--color-text-muted);
+}
+
+.form-field__input:focus-visible {
+  border-color: var(--color-accent);
+  outline-offset: 1px;
+}
+
+textarea.form-field__input {
+  min-height: 10rem;
+  resize: vertical;
+}
+
+.form-field__hint,
+.contact-form__notice {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.contact-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+}
+
+.contact-form__status {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.contact-form__status[data-state="pending"] {
+  color: var(--color-text-muted);
+}
+
+.button[aria-disabled="true"] {
+  opacity: 0.7;
+  cursor: progress;
+}
+
 /* Callout: a wide highlighted panel -------------------------------------- */
 
 .callout {
