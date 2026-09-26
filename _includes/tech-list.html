@@ -1,0 +1,15 @@
+{%- comment -%} Technologies from _data/technologies.yml, grouped. {%- endcomment %}
+<dl class="spec-list">
+  {%- for group in site.data.technologies %}
+  <div class="spec-list__row">
+    <dt class="spec-list__term">{{ group.group }}</dt>
+    <dd class="spec-list__value">
+      <ul class="tag-list" role="list">
+        {%- for item in group.items %}
+        <li class="tag">{{ item }}</li>
+        {%- endfor %}
+      </ul>
+    </dd>
+  </div>
+  {%- endfor %}
+</dl>
