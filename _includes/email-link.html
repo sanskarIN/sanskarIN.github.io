@@ -1,0 +1,7 @@
+{%- comment -%}
+  A mailto: link for one of the addresses in _data/contact.yml.
+  Parameters: key (business_primary, business_secondary, or support), class.
+{%- endcomment -%}
+{%- assign email_address = site.data.contact.email[include.key] -%}
+<a href="mailto:{{ email_address }}"{% if include.class %} class="{{ include.class }}"{% endif %}>{{ email_address }}</a>
+{%- comment -%} Ends without a trailing newline, so no stray space appears inside links. {%- endcomment -%}
