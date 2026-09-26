@@ -1,0 +1,25 @@
+# =============================================================================
+#  Blog settings, read by the blog pages and by the publishing workflow
+#  (.github/scripts/publish_post.py). See README.md → "Blog".
+# =============================================================================
+
+# The blog page's title and description are in blog/index.html.
+
+# The GitHub issue form used to write a post (.github/ISSUE_TEMPLATE/).
+form: blog-post.yml
+
+# Posts by anyone other than the repository owner (and collaborators) wait
+# until the owner adds the "approved" label to their issue. Setting this to
+# false publishes everyone's posts straight away — only do that if you are
+# ready to remove spam and unwanted posts quickly.
+review_visitor_posts: true
+
+# Checked when a post is published. The issue form mentions the image limits
+# too, so update .github/ISSUE_TEMPLATE/blog-post.yml if you change them.
+limits:
+  image_size_mb: 10       # per image, as uploaded
+  images_per_post: 20     # including the cover image
+  image_max_side: 2000    # pixels; larger images are scaled down
+  title_length: 100       # characters
+  summary_length: 200     # characters
+  tags: 5
