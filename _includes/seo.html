@@ -2,6 +2,8 @@
   Title, description, canonical URL, Open Graph, and X (Twitter) card tags.
   Per page: `title`, `description`, optional `seo_title` (replaces the whole
   <title>), and `noindex: true` to keep a page out of search results.
+  Blog posts are marked as articles, with their dates, tags, and cover image
+  (`image`, `image_alt`, `image_width`, `image_height`).
 {%- endcomment -%}
 {%- if page.seo_title -%}
   {%- assign seo_title = page.seo_title -%}
@@ -10,7 +12,22 @@
 {%- endif -%}
 {%- assign seo_description = page.description | default: site.description | strip_html | normalize_whitespace -%}
 {%- assign seo_url = page.url | absolute_url -%}
-{%- assign seo_image = site.social_image.path | absolute_url -%}
+{%- assign seo_author = page.author | default: site.author.name -%}
+{%- assign is_post = false -%}
+{%- if page.collection == "posts" %}{% assign is_post = true %}{% endif -%}
+{%- if page.image -%}
+  {%- assign seo_image = page.image | absolute_url -%}
+  {%- assign seo_image_alt = page.image_alt -%}
+  {%- assign seo_image_width = page.image_width -%}
+  {%- assign seo_image_height = page.image_height -%}
+  {%- assign seo_image_type = nil -%}
+{%- else -%}
+  {%- assign seo_image = site.social_image.path | absolute_url -%}
+  {%- assign seo_image_alt = site.social_image.alt -%}
+  {%- assign seo_image_width = site.social_image.width -%}
+  {%- assign seo_image_height = site.social_image.height -%}
+  {%- assign seo_image_type = "image/png" -%}
+{%- endif -%}
 {%- assign x_handle = site.data.social.profiles.x.handle %}
 <title>{{ seo_title | escape }}</title>
 <meta name="description" content="{{ seo_description | escape }}">
@@ -19,21 +36,42 @@
 {%- else %}
 <link rel="canonical" href="{{ seo_url }}">
 {%- endif %}
-<meta name="author" content="{{ site.author.name | escape }}">
-<meta property="og:type" content="website">
+<meta name="author" content="{{ seo_author | escape }}">
+<meta property="og:type" content="{% if is_post %}article{% else %}website{% endif %}">
 <meta property="og:site_name" content="{{ site.title | escape }}">
 <meta property="og:title" content="{{ seo_title | escape }}">
 <meta property="og:description" content="{{ seo_description | escape }}">
 <meta property="og:url" content="{{ seo_url }}">
 <meta property="og:image" content="{{ seo_image }}">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="{{ site.social_image.width }}">
-<meta property="og:image:height" content="{{ site.social_image.height }}">
-<meta property="og:image:alt" content="{{ site.social_image.alt | escape }}">
+{%- if seo_image_type %}
+<meta property="og:image:type" content="{{ seo_image_type }}">
+{%- endif %}
+{%- if seo_image_width and seo_image_height %}
+<meta property="og:image:width" content="{{ seo_image_width }}">
+<meta property="og:image:height" content="{{ seo_image_height }}">
+{%- endif %}
+{%- if seo_image_alt %}
+<meta property="og:image:alt" content="{{ seo_image_alt | escape }}">
+{%- endif %}
+{%- if is_post %}
+  {%- assign article_author = page.author_url | default: "/about/" -%}
+  {%- assign author_scheme = article_author | slice: 0, 4 -%}
+  {%- unless author_scheme == "http" %}{% assign article_author = article_author | absolute_url %}{% endunless %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+<meta property="article:modified_time" content="{{ page.last_modified_at | default: page.date | date_to_xmlschema }}">
+<meta property="article:author" content="{{ article_author | escape }}">
+  {%- for tag in page.tags %}
+<meta property="article:tag" content="{{ tag | escape }}">
+  {%- endfor %}
+{%- endif %}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="{{ x_handle }}">
+{%- unless is_post and page.author_login and page.author_login != site.author.username %}
 <meta name="twitter:creator" content="{{ x_handle }}">
+{%- endunless %}
 <meta name="twitter:title" content="{{ seo_title | escape }}">
 <meta name="twitter:description" content="{{ seo_description | escape }}">
 <meta name="twitter:image" content="{{ seo_image }}">
-<meta name="twitter:image:alt" content="{{ site.social_image.alt | escape }}">
+{%- if seo_image_alt %}
+<meta name="twitter:image:alt" content="{{ seo_image_alt | escape }}">
+{%- endif %}
