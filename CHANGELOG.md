@@ -4,6 +4,13 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.1.1] — 2026-09-26
+
+### Changed
+
+- Turned on the contact form: the Web3Forms access key is set, the Contact page shows "Send a message", and the Privacy Policy, Terms, Cookie Policy, Accessibility, and Credits pages now describe the form.
+- Updated the contact form setup notes for the Web3Forms dashboard.
+
 ## [1.1.0] — 2026-09-26
 
 ### Added
