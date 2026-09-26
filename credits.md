@@ -8,6 +8,8 @@ description: "Credits and website information for sanskarIN.github.io: technolog
 permalink: /credits/
 ---
 {%- assign current_year = site.time | date: "%Y" | plus: 0 -%}
+{%- assign form_key = site.data.contact.form.access_key | strip -%}
+{%- assign contact_form = site.data.contact.form -%}
 {%- capture license_decision_url -%}{{ site.repository_url }}/blob/main/LICENSE_DECISION.md{%- endcapture %}
 
 ## Website
@@ -52,7 +54,7 @@ The site icons and the social preview image were created for this website from t
 
 ## External resources
 
-None are loaded while you browse. Every file — fonts, icons, styles, and scripts — is served from this website. There are no content delivery networks, analytics, advertising, or embedded third-party content.
+None are loaded while you browse. Every file — fonts, icons, styles, and scripts — is served from this website. There are no content delivery networks, analytics, advertising, or embedded third-party content.{% if form_key != "" %} The contact form sends messages to {% include link.html url=contact_form.service_url label=contact_form.service %} only when you submit it.{% endif %}
 
 ## Copyright
 
