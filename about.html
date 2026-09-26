@@ -1,0 +1,95 @@
+---
+layout: page
+title: About
+heading: About Sanskar
+eyebrow: About
+lead: Software developer, open-source builder, and part of the developer community.
+description: "About Sanskar (sanskarIN): a software developer interested in open source, developer tools, Rust and C++, Android, the web, games, and AI/machine learning."
+permalink: /about/
+schema_type: ProfilePage
+---
+{%- assign professional_profiles = site.data.social.profiles | where: "username", site.author.username | map: "name" -%}
+{%- assign community_profiles = site.data.social.profiles | where: "username", site.author.community_username | map: "name" -%}
+<div class="intro-grid">
+  <div class="intro-grid__text">
+    <p>I'm Sanskar, a software developer building software, developer tools, and digital products in the open.</p>
+    <p>My interests span a broad range of software. I work with systems languages such as Rust, C, and C++; build for Android with Kotlin and Java; develop for the web with JavaScript, TypeScript, and React; and also use C#, .NET, and Python. Beyond applications, I'm interested in game development and in AI and machine learning.</p>
+    <p>I publish code on GitHub, take part in the developer community, and create digital products. This website brings all of it together in one place.</p>
+  </div>
+
+  <aside class="identity" aria-labelledby="identity-title">
+    <h2 class="identity__title" id="identity-title">Names and handles</h2>
+    <dl class="identity__list">
+      <div class="identity__row">
+        <dt>Name</dt>
+        <dd><span class="identity__value">{{ site.author.name }}</span></dd>
+      </div>
+      <div class="identity__row">
+        <dt>Code and professional</dt>
+        <dd><span class="identity__value">{{ site.author.username }}</span> on {{ professional_profiles | array_to_sentence_string }}</dd>
+      </div>
+      <div class="identity__row">
+        <dt>Community and social</dt>
+        <dd><span class="identity__value">{{ site.author.community_username }}</span> on {{ community_profiles | array_to_sentence_string }}</dd>
+      </div>
+    </dl>
+  </aside>
+</div>
+
+<section class="page-section">
+  <h2>What I build</h2>
+  <p>Software development is the common thread. Whether it's a command-line tool, an Android app, a website, or a game, the goal is the same: a clear structure, readable code, and a result that works well for the people using it.</p>
+  <p>I'm interested in how software works at every level, from performance-sensitive code in Rust and C++ to the interfaces people use every day. My main areas are:</p>
+  <ul class="bullet-list">
+    {%- for area in site.data.focus %}
+    <li><strong>{{ area.title }}</strong> — {{ area.summary }}</li>
+    {%- endfor %}
+  </ul>
+  <p>{% include link.html url="/developer/" label="See the full developer profile" class="text-link" arrow=true %}</p>
+</section>
+
+<section class="page-section">
+  <h2>Open source</h2>
+  <p>I build in the open. Publishing code on GitHub makes it easier to share what I learn, get feedback, and let others build on the work within the terms of each project's license.</p>
+  <div class="button-row">
+    {% include link.html url=site.data.social.profiles.github.url label="GitHub profile" icon="github" class="button button--secondary" %}
+  </div>
+</section>
+
+<section class="page-section">
+  <h2>Technology interests</h2>
+  <p>I choose tools to fit the problem: Rust, C, and C++ where control and performance matter; Kotlin and Java for Android; JavaScript, TypeScript, and React for the web; C# and .NET; and Python. Git and GitHub hold everything together.</p>
+  <p>{% include link.html url="/developer/#technologies" label="All technologies" class="text-link" arrow=true %}</p>
+</section>
+
+<section class="page-section">
+  <h2>Digital products</h2>
+  <p>Alongside software, I create digital products and publish them on Gumroad. If my work is useful to you, you can also support it through Buy Me a Coffee.</p>
+  {% include profile-list.html group="products" variant="card" class="link-grid" %}
+</section>
+
+<section class="page-section">
+  <h2>Developer community</h2>
+  <p>Follow along, read, or start a conversation:</p>
+  {% include profile-list.html items=site.data.social.community variant="card" class="link-grid" %}
+</section>
+
+<section class="page-section">
+  <h2>How I approach software</h2>
+  <p>I value clarity over cleverness, choose tools to fit the problem rather than habit, and treat accessibility, performance, and security as part of the job rather than extras. The developer profile describes these principles in more detail.</p>
+  <p>{% include link.html url="/developer/#development-philosophy" label="Development philosophy" class="text-link" arrow=true %}</p>
+</section>
+
+<section class="page-section">
+  <h2>Always learning</h2>
+  <p>Software changes quickly, and there is always more to understand. I learn by building: taking a new language, tool, or idea, applying it to a real problem, and refining the result.</p>
+</section>
+
+<div class="cta-panel">
+  <h2 class="cta-panel__title">Let's talk</h2>
+  <p>Have a project, a collaboration idea, or a question? Email is the best way to reach me.</p>
+  <div class="button-row">
+    {% include link.html url="/contact/" label="Contact me" class="button button--primary" arrow=true %}
+    {% include link.html url=site.data.social.profiles.github.url label="GitHub" icon="github" class="button button--secondary" %}
+  </div>
+</div>
