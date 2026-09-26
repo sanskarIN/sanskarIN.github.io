@@ -1,0 +1,79 @@
+{%- assign current_year = site.time | date: "%Y" | plus: 0 -%}
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <div class="site-footer__intro">
+        <a class="brand" href="{{ '/' | relative_url }}">
+          {% include brand-mark.html %}
+          <span class="brand__name">{{ site.title }}</span>
+        </a>
+        <p>{{ site.tagline }}.</p>
+        <p class="site-footer__handles">
+          <span>GitHub <strong>{{ site.author.username }}</strong></span>
+          <span>Community <strong>@{{ site.author.community_username }}</strong></span>
+        </p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Footer">
+        <div class="footer-group">
+          <h2 class="footer-group__title">Navigation</h2>
+          <ul class="footer-group__list">
+            {%- for item in site.data.navigation.main %}
+            <li>{% include link.html url=item.url label=item.title hint=true %}</li>
+            {%- endfor %}
+          </ul>
+        </div>
+
+        <div class="footer-group">
+          <h2 class="footer-group__title">Legal</h2>
+          <ul class="footer-group__list">
+            {%- for item in site.data.navigation.legal %}
+            <li>{% include link.html url=item.url label=item.title %}</li>
+            {%- endfor %}
+          </ul>
+        </div>
+
+        <div class="footer-group">
+          <h2 class="footer-group__title">Information</h2>
+          <ul class="footer-group__list">
+            {%- for item in site.data.navigation.information %}
+            <li>{% include link.html url=item.url label=item.title %}</li>
+            {%- endfor %}
+          </ul>
+        </div>
+
+        <div class="footer-group">
+          <h2 class="footer-group__title">{{ site.data.social.groups.developer.title }}</h2>
+          {% include profile-list.html group="developer" class="footer-group__list" %}
+        </div>
+
+        <div class="footer-group">
+          <h2 class="footer-group__title">{{ site.data.social.groups.social.title }}</h2>
+          {% include profile-list.html group="social" class="footer-group__list" %}
+        </div>
+
+        {%- for group_key in site.data.contact.groups %}
+          {%- assign group = group_key[1] %}
+        <div class="footer-group footer-group--email">
+          <h2 class="footer-group__title">{{ group.title }}</h2>
+          <ul class="footer-group__list">
+            {%- for entry in group.addresses %}
+            <li>{% include email-link.html key=entry.key %}</li>
+            {%- endfor %}
+          </ul>
+        </div>
+        {%- endfor %}
+
+        <div class="footer-group">
+          <h2 class="footer-group__title">{{ site.data.social.groups.products.title }}</h2>
+          {% include profile-list.html group="products" class="footer-group__list" %}
+        </div>
+      </nav>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p>&copy; {{ site.copyright_start_year }}{% if current_year > site.copyright_start_year %}–{{ current_year }}{% endif %} {{ site.author.name }}. All rights reserved.</p>
+      <p>Built with Jekyll and hosted on GitHub Pages. <a href="{{ '/credits/' | relative_url }}">Website information</a></p>
+    </div>
+  </div>
+</footer>
