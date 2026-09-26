@@ -70,22 +70,24 @@ social_image:
 # -----------------------------------------------------------------------------
 # Security
 # -----------------------------------------------------------------------------
-# Content Security Policy, sent as a <meta> tag in production builds (GitHub
-# Pages cannot send custom HTTP headers). Everything on this site is
-# self-hosted, so only same-origin resources are allowed. If you later embed
-# third-party content (video, analytics, a form service, external images),
-# add its origin to the matching directive, or the browser will block it.
-content_security_policy: >-
-  default-src 'self';
-  script-src 'self';
-  style-src 'self';
-  img-src 'self';
-  font-src 'self';
-  connect-src 'self';
-  manifest-src 'self';
-  object-src 'none';
-  base-uri 'none';
-  form-action 'none'
+# Content Security Policy, sent as a <meta> tag (GitHub Pages cannot send
+# custom HTTP headers). Everything on this site is self-hosted, so only
+# same-origin resources are allowed. When the contact form is turned on in
+# _data/contact.yml, its service is added to connect-src and form-action
+# automatically. If you embed any other third-party content (video,
+# analytics, external images), add its origin to the matching directive, or
+# the browser will block it.
+content_security_policy:
+  default-src: "'self'"
+  script-src: "'self'"
+  style-src: "'self'"
+  img-src: "'self'"
+  font-src: "'self'"
+  connect-src: "'self'"
+  manifest-src: "'self'"
+  object-src: "'none'"
+  base-uri: "'none'"
+  form-action: "'none'"
 
 # -----------------------------------------------------------------------------
 # Build settings — compatible with the GitHub Pages build (Jekyll 3.10)
