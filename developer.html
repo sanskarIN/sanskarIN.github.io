@@ -1,0 +1,135 @@
+---
+layout: page
+title: Developer profile
+eyebrow: Developer
+lead: A technical overview — focus areas, technologies, interests, and how I approach building software.
+description: "Sanskar's developer profile: development focus, languages and technologies, engineering interests, platforms, tools, open source, community, and development philosophy."
+permalink: /developer/
+toc: true
+---
+<section class="page-section">
+  <h2 id="development-focus">Development focus</h2>
+  <ul class="feature-grid" role="list">
+    {%- for area in site.data.focus %}
+    <li class="feature">
+      {% include icon.html name=area.icon class="feature__icon" %}
+      <h3 class="feature__title">{{ area.title }}</h3>
+      <p class="feature__text">{{ area.detail }}</p>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+
+<section class="page-section">
+  <h2 id="technologies">Technologies</h2>
+  <p>Languages, frameworks, and tools across my work and interests — listed without skill ratings.</p>
+  {% include tech-list.html %}
+</section>
+
+<section class="page-section">
+  <h2 id="engineering-interests">Engineering interests</h2>
+  <ul class="bullet-list">
+    <li>Performance-aware systems code in Rust, C, and C++</li>
+    <li>Native Android development with Kotlin and Java</li>
+    <li>Modern web development with TypeScript and React</li>
+    <li>Developer experience: tooling, automation, and clear workflows</li>
+    <li>Applying AI and machine learning inside practical software</li>
+    <li>Game development and interactive systems</li>
+    <li>Software that is accessible, fast, and maintainable</li>
+  </ul>
+</section>
+
+<section class="page-section">
+  <h2 id="platforms">Platforms</h2>
+  <dl class="spec-list">
+    <div class="spec-list__row">
+      <dt class="spec-list__term">Android</dt>
+      <dd>Native development with Kotlin and Java.</dd>
+    </div>
+    <div class="spec-list__row">
+      <dt class="spec-list__term">Web</dt>
+      <dd>The browser and the open web, with JavaScript, TypeScript, and React.</dd>
+    </div>
+    <div class="spec-list__row">
+      <dt class="spec-list__term">.NET</dt>
+      <dd>Development with C# on the .NET platform.</dd>
+    </div>
+  </dl>
+</section>
+
+<section class="page-section">
+  <h2 id="tools">Tools</h2>
+  <dl class="spec-list">
+    <div class="spec-list__row">
+      <dt class="spec-list__term">Git</dt>
+      <dd>Version control and project history.</dd>
+    </div>
+    <div class="spec-list__row">
+      <dt class="spec-list__term">GitHub</dt>
+      <dd>Code hosting, collaboration, and issue tracking — and, through GitHub Pages, the host of this website.</dd>
+    </div>
+  </dl>
+</section>
+
+<section class="page-section">
+  <h2 id="open-source">Open source</h2>
+  <p>I publish code on GitHub as {{ site.author.username }}, where it can be read, discussed through issues, and improved through pull requests. How code in a repository may be reused depends on that repository's license.</p>
+  <p>The source code of this website is on GitHub as well.</p>
+  <div class="button-row">
+    {% include link.html url=site.data.social.profiles.github.url label="GitHub profile" icon="github" class="button button--secondary" %}
+    {% include link.html url=site.repository_url label="Website repository" class="button button--ghost" arrow=true %}
+  </div>
+</section>
+
+<section class="page-section">
+  <h2 id="developer-community">Developer community</h2>
+  <p>I take part in the developer community as {{ site.author.community_username }} and {{ site.author.username }}. Find me here:</p>
+  {% include profile-list.html items=site.data.social.community variant="card" class="link-grid" %}
+</section>
+
+<section class="page-section">
+  <h2 id="learning-and-exploration">Learning and exploration</h2>
+  <p>Software moves quickly, so learning is part of the work. I learn by building: trying a language, tool, or technique on a real problem, then refining the result. AI and machine learning and game development are areas I keep exploring.</p>
+</section>
+
+<section class="page-section">
+  <h2 id="development-philosophy">Development philosophy</h2>
+  <ol class="principles">
+    <li>
+      <div>
+        <h3>Readable, maintainable code</h3>
+        <p>Code is read far more often than it is written. Clear names, simple structure, and honest comments make it easier to change later.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>The right tool for the problem</h3>
+        <p>Languages, frameworks, and dependencies are chosen deliberately, based on the problem rather than habit or trend.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Small, reviewable changes</h3>
+        <p>Work moves forward in small steps with a clear history in version control, which makes problems easier to find and fix.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Accessible and fast by default</h3>
+        <p>Accessibility and performance are built in from the start instead of being added at the end.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Security as a habit</h3>
+        <p>Secrets stay out of code, dependencies stay minimal and current, and access is limited to what is actually needed.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Documentation that explains why</h3>
+        <p>Good documentation records decisions and trade-offs, not just usage.</p>
+      </div>
+    </li>
+  </ol>
+</section>
