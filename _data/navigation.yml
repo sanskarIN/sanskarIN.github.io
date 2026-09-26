@@ -1,0 +1,33 @@
+# =============================================================================
+#  Navigation. URLs are site-relative and end with a slash.
+#  The footer also lists the profile groups from _data/social.yml and the
+#  email groups from _data/contact.yml.
+# =============================================================================
+
+# Header navigation, in display order (also the footer "Navigation" group).
+main:
+  - title: Home
+    url: /
+  - title: About
+    url: /about/
+  - title: Developer
+    url: /developer/
+  # Resolves automatically: see `projects_url` in _config.yml.
+  - title: Projects
+    url: /projects/
+  - title: Contact
+    url: /contact/
+
+legal:
+  - title: Terms
+    url: /terms/
+  - title: Privacy
+    url: /privacy/
+  - title: Cookies
+    url: /cookies/
+  - title: Accessibility
+    url: /accessibility/
+
+information:
+  - title: Credits
+    url: /credits/
