@@ -11,6 +11,7 @@
 #    _data/contact.yml       the official email addresses and what each is for
 #    _data/navigation.yml    header and footer navigation
 #    _data/legal.yml         "Last updated" dates for the policy pages
+#    _data/blog.yml          blog settings: review of visitors' posts, limits
 #    _data/theme.yml         light and dark color palettes
 #    _data/focus.yml         development focus areas (Home + Developer pages)
 #    _data/technologies.yml  technologies (Home + Developer pages)
@@ -88,6 +89,22 @@ content_security_policy:
   object-src: "'none'"
   base-uri: "'none'"
   form-action: "'none'"
+
+# -----------------------------------------------------------------------------
+# Blog
+# -----------------------------------------------------------------------------
+# Posts live in _posts/ and are published at /blog/<post-name>/. Most are
+# written with the issue form and added by the publishing workflow (see
+# README.md → "Blog"). Dates are shown in this time zone.
+timezone: UTC
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      permalink: /blog/:title/
 
 # -----------------------------------------------------------------------------
 # Build settings — compatible with the GitHub Pages build (Jekyll 3.10)
