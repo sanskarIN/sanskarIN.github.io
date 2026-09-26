@@ -1,0 +1,57 @@
+# "Write a blog post" form. Submitting it opens an issue, which
+# .github/workflows/publish-blog-post.yml turns into a post on
+# https://sanskarin.github.io/blog/. The field labels are read by
+# .github/scripts/publish_post.py, so rename them there too if you change
+# them here. The image limits below match _data/blog.yml.
+name: Write a blog post
+description: Write a post for the blog on sanskarIN.github.io, with images if you like.
+title: "[Post]: "
+labels: ["blog-post"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Write your post below and submit it. It becomes a page on https://sanskarin.github.io/blog/, and a comment on this issue tells you when it's live.
+
+        - **Title:** replace the issue title above with the title of your post. The `[Post]:` part isn't shown.
+        - **Images:** drag and drop or paste PNG, JPEG, GIF, or WebP images, up to 10 MB each. They are copied to the website with location and camera details removed.
+        - **Review:** posts from anyone other than the site owner are published after the owner approves them. You can keep editing this issue until then.
+        - **Public:** this issue, your post, and your GitHub username (shown as the author) are public.
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: One or two sentences for the blog page and search results, up to 200 characters. Leave it empty to use the start of your post.
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Up to 5 topics, separated by commas.
+      placeholder: open source, android, web
+  - type: upload
+    id: cover
+    attributes:
+      label: Cover image
+      description: Optional. One image shown at the top of your post and on the blog page (PNG, JPEG, GIF, or WebP, up to 10 MB).
+    validations:
+      required: false
+      accept: ".png,.jpg,.jpeg,.gif,.webp"
+  - type: input
+    id: cover-description
+    attributes:
+      label: Cover image description
+      description: Needed if you add a cover image. Describe what it shows for people who can't see it.
+  - type: textarea
+    id: post
+    attributes:
+      label: Post
+      description: Write in Markdown (headings, lists, links, quotes, code, and tables all work) and use Preview to check it. Add images anywhere, then replace the placeholder text GitHub adds for each one (such as "Image") with a short description.
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I wrote this post, I have the right to publish its text and images, and I agree to the website's [Terms](https://sanskarin.github.io/terms/).
+          required: true
