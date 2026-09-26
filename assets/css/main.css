@@ -7,4 +7,5 @@
 {% include css/base.css %}
 {% include css/layout.css %}
 {% include css/components.css %}
+{% include css/blog.css %}
 {% include css/pages.css %}
