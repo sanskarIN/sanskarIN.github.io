@@ -4,6 +4,12 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.2.1] — 2026-09-27
+
+### Fixed
+
+- Headings in posts written with the blog form keep their level: a post's top headings become sections of the page (a `##` heading no longer turns into a smaller one).
+
 ## [1.2.0] — 2026-09-26
 
 ### Added
