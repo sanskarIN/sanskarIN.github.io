@@ -413,8 +413,12 @@ def render_markdown(markdown, link_rel):
     )
     # Links whose address was removed (for example "javascript:") become text.
     markup = re.sub(r'<a(?: title="[^"]*")? rel="[^"]*">(.*?)</a>', r"\1", markup, flags=re.S)
-    # The post title is the page's only <h1>, so headings move down one level.
-    return re.sub(r"<(/?)h([1-6])>", lambda m: f"<{m.group(1)}h{min(int(m.group(2)) + 1, 6)}>", markup)
+    # The post title is the page's only <h1>. The post's own top heading level
+    # becomes <h2> (sections of the page), and the levels below it follow.
+    levels = [int(level) for level in re.findall(r"<h([1-6])>", markup)]
+    offset = 2 - min(levels) if levels else 0
+    return re.sub(r"<(/?)h([1-6])>",
+                  lambda m: f"<{m.group(1)}h{min(max(int(m.group(2)) + offset, 2), 6)}>", markup)
 
 
 def tag_attributes(token):
