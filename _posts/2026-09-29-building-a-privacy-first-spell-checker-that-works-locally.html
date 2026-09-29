@@ -1,0 +1,660 @@
+---
+title: "Building a Privacy-First Spell Checker That Works Locally: Inside SpellChecker"
+description: "SpellChecker is an open-source Flutter project focused on local, privacy-first spelling and writing assistance across multiple platforms."
+date: 2026-09-29T07:10:22+00:00
+author: "Sanskar"
+author_url: "/about/"
+author_login: "sanskarIN"
+image: "/assets/images/blog/building-a-privacy-first-spell-checker-that-works-locally/8637a76e2962399b.png"
+image_alt: "SpellChecker privacy-first open-source Flutter writing assistant processing text locally."
+image_width: 1672
+image_height: 941
+tags: ["opensource", "flutter", "dart", "privacy", "developertools"]
+source_issue: 4
+---
+<h2>Building a Privacy-First Spell Checker That Works Locally: Inside SpellChecker</h2>
+<p>Modern software increasingly depends on cloud services.</p>
+<p>That can be extremely useful. Cloud infrastructure can provide powerful models, centralized processing, synchronization, analytics, and continuously updated services. But there are also applications where sending information to a remote server is not necessarily the best architecture.</p>
+<p>Writing assistance is one of those areas.</p>
+<p>When someone writes a private document, drafts source code, prepares notes, writes a personal journal, creates a business document, or simply types something they do not want leaving their device, privacy becomes an important engineering consideration.</p>
+<p>That is one of the ideas behind <strong>SpellChecker</strong>, an open-source Flutter project focused on privacy-first, local spelling and writing assistance.</p>
+<p>SpellChecker is designed around a straightforward principle:</p>
+<blockquote>
+<p><strong>Useful writing assistance does not always need a remote service.</strong></p>
+</blockquote>
+<p>Instead of treating local processing as merely a fallback, the project explores what happens when local processing is part of the product architecture itself.</p>
+<p>The current project provides spelling analysis, correction suggestions, writing-rule analysis, personal vocabulary, offline language packs, keyboard-oriented review, reusable Dart APIs, and support for Android, iOS, Linux, macOS, Windows, and Web. The repository currently documents thirteen explicit offline language packs and ten built-in writing rules.</p>
+<p>This article takes a closer look at the project, the problems it tries to solve, the engineering decisions behind it, and why privacy-first developer tools are worth building.</p>
+<hr>
+<h3>Why Build Another Spell Checker?</h3>
+<p>At first glance, spelling correction looks like a simple problem.</p>
+<p>Take some text.</p>
+<p>Find words.</p>
+<p>Check them against a dictionary.</p>
+<p>Offer alternatives.</p>
+<p>Fix mistakes.</p>
+<p>But a serious writing assistant becomes much more complicated once real-world requirements enter the picture.</p>
+<p>A useful system has to think about:</p>
+<ul>
+<li>different languages</li>
+<li>Unicode text</li>
+<li>punctuation</li>
+<li>capitalization</li>
+<li>repeated words</li>
+<li>whitespace</li>
+<li>personal vocabulary</li>
+<li>correction safety</li>
+<li>editing ranges</li>
+<li>long documents</li>
+<li>deterministic behavior</li>
+<li>platform differences</li>
+<li>offline operation</li>
+<li>reusable APIs</li>
+<li>accessibility and keyboard workflows</li>
+</ul>
+<p>The engineering challenge is therefore not simply “find misspelled words.”</p>
+<p>It is building a text-processing system that behaves predictably while preserving the user's control over their content.</p>
+<p>That is where SpellChecker becomes interesting.</p>
+<hr>
+<h2>Privacy as an Architecture Decision</h2>
+<p>Privacy is often discussed as a policy statement.</p>
+<p>A product might say that it respects privacy, encrypts information, or minimizes data collection.</p>
+<p>Those things can matter, but software architecture can also influence how much information needs to leave the device in the first place.</p>
+<p>SpellChecker takes a local-first approach.</p>
+<p>According to the current project documentation, the bundled application does not send editor text to a remote spelling or grammar service and does not require accounts, telemetry, cloud writing, or document uploads for its local writing workflow.</p>
+<p>That changes the architecture considerably.</p>
+<p>Instead of building the core experience around:</p>
+<pre tabindex="0"><code>User text
+   ↓
+Network request
+   ↓
+Remote service
+   ↓
+Response
+   ↓
+Editor
+</code></pre>
+<p>the local processing model is conceptually closer to:</p>
+<pre tabindex="0"><code>User text
+   ↓
+Local analysis engine
+   ↓
+Spelling / writing findings
+   ↓
+Suggestions and corrections
+   ↓
+Editor
+</code></pre>
+<p>The difference is important.</p>
+<p>The application does not have to assume that the network is available in order for the basic writing workflow to function.</p>
+<p>That provides another benefit beyond privacy:</p>
+<p><strong>predictability.</strong></p>
+<p>When analysis happens locally, network latency is no longer part of the core spelling-checking loop.</p>
+<hr>
+<h2>Offline Does Not Mean Basic</h2>
+<p>“Offline” is sometimes interpreted as meaning that a product provides only a very small feature set.</p>
+<p>SpellChecker takes a different direction.</p>
+<p>Its current documentation describes thirteen explicit offline language packs:</p>
+<ul>
+<li>English (US)</li>
+<li>English (UK)</li>
+<li>Hindi</li>
+<li>Spanish</li>
+<li>French</li>
+<li>German</li>
+<li>Portuguese (Brazil)</li>
+<li>Italian</li>
+<li>Bengali</li>
+<li>Marathi</li>
+<li>Tamil</li>
+<li>Telugu</li>
+<li>Russian</li>
+</ul>
+<p>The project also keeps personal vocabulary separate by language.</p>
+<p>This matters because multilingual text processing is not simply a matter of changing a dictionary.</p>
+<p>Different languages introduce different assumptions about:</p>
+<ul>
+<li>word boundaries</li>
+<li>capitalization</li>
+<li>punctuation</li>
+<li>morphology</li>
+<li>vocabulary</li>
+<li>Unicode characters</li>
+<li>user expectations</li>
+</ul>
+<p>A local multilingual architecture therefore requires clear boundaries between language-specific resources and the core analysis engine.</p>
+<hr>
+<h2>The Writing Assistant Goes Beyond Spelling</h2>
+<p>Spell checking is only one part of writing quality.</p>
+<p>A sentence can contain correctly spelled words and still contain obvious writing problems.</p>
+<p>For example:</p>
+<pre tabindex="0"><code>This  sentence has  too many spaces.
+</code></pre>
+<p>Or:</p>
+<pre tabindex="0"><code>Hello  world!!
+</code></pre>
+<p>Or:</p>
+<pre tabindex="0"><code>this sentence does not start correctly.
+</code></pre>
+<p>Those are not necessarily spelling errors.</p>
+<p>They are writing-quality issues.</p>
+<p>SpellChecker includes built-in local writing rules covering areas such as repeated words, capitalization, spacing, punctuation, trailing whitespace, repeated punctuation, and advisory unmatched delimiters.</p>
+<p>That creates a more useful model:</p>
+<pre tabindex="0"><code>                 ┌─────────────────────┐
+                 │       Editor        │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+              ┌──────────────────────────┐
+              │       Text Analyzer      │
+              └─────────────┬────────────┘
+                            │
+             ┌──────────────┼──────────────┐
+             ▼              ▼              ▼
+        Spelling       Writing Rules    Diagnostics
+             │              │              │
+             └──────────────┼──────────────┘
+                            ▼
+                     Review Interface
+</code></pre>
+<p>This separation is useful because it allows spelling and writing analysis to evolve independently.</p>
+<hr>
+<h2>Deterministic Corrections Matter</h2>
+<p>One of the most important concepts in a text editor is that a correction should not unexpectedly modify the wrong part of the document.</p>
+<p>Suppose a user has ten findings in a paragraph.</p>
+<p>The application identifies ranges for those findings.</p>
+<p>The user then edits the document.</p>
+<p>Those original ranges may no longer point to the same characters.</p>
+<p>An unsafe correction system could potentially apply stale changes.</p>
+<p>SpellChecker therefore places emphasis on deterministic and source-range-safe corrections. Its documentation describes verification of current source ranges before mutation and a conservative overlap policy for batch writing fixes.</p>
+<p>That leads to a broader software-engineering principle:</p>
+<blockquote>
+<p><strong>A correction engine should verify the text it is about to modify.</strong></p>
+</blockquote>
+<p>This is especially important when multiple corrections are applied together.</p>
+<hr>
+<h2>Why Unicode Support Is a Serious Engineering Problem</h2>
+<p>Text is much more complicated than ASCII.</p>
+<p>Modern applications regularly handle:</p>
+<ul>
+<li>accented characters</li>
+<li>multiple writing systems</li>
+<li>combining marks</li>
+<li>emoji</li>
+<li>multilingual text</li>
+<li>zero-width characters</li>
+<li>different representations of visually similar text</li>
+</ul>
+<p>A system that assumes every character occupies one simple byte or one simple code unit can quickly run into indexing problems.</p>
+<p>SpellChecker explicitly documents Unicode-aware tokenization and edit-distance processing, while also accounting for Dart and Flutter UTF-16 text-editing offsets.</p>
+<p>This is an important technical detail because analysis and editing operate at different layers.</p>
+<p>A conceptual model looks like this:</p>
+<pre tabindex="0"><code>User-visible text
+       ↓
+Unicode-aware tokenization
+       ↓
+Analysis representation
+       ↓
+Matching / ranking
+       ↓
+Source ranges
+       ↓
+Flutter text editing offsets
+</code></pre>
+<p>Each stage has to remain consistent.</p>
+<p>Otherwise a visually correct suggestion could produce an incorrect edit location.</p>
+<hr>
+<h2>Suggestion Ranking</h2>
+<p>Finding a misspelled word is only the first step.</p>
+<p>The next question is:</p>
+<blockquote>
+<p>What should the user replace it with?</p>
+</blockquote>
+<p>Imagine the user types:</p>
+<pre tabindex="0"><code>enviroment
+</code></pre>
+<p>A useful writing assistant should do more than say:</p>
+<pre tabindex="0"><code>Unknown word
+</code></pre>
+<p>It should ideally suggest plausible corrections.</p>
+<p>That means the system has to reason about candidate words and rank them.</p>
+<p>A simplified concept might look like:</p>
+<pre tabindex="0"><code>Input:
+enviroment
+
+Candidates:
+environment
+environments
+environmental
+</code></pre>
+<p>Then the engine can rank candidates according to an appropriate similarity strategy.</p>
+<p>Distance-based algorithms can be useful here, but real applications also need practical limits.</p>
+<p>Generating enormous candidate lists is unnecessary if the interface only needs a handful of useful suggestions.</p>
+<p>That is why bounded analysis can be valuable.</p>
+<p>SpellChecker documents explicit result limits for the bundled interface, including the first 200 spelling issues and first 200 writing findings, while allowing writing analysis to report exact totals.</p>
+<p>This is an example of engineering for real interfaces rather than purely theoretical processing.</p>
+<hr>
+<h2>Large Documents Change the Problem</h2>
+<p>A text editor might contain a few sentences.</p>
+<p>Or it might contain thousands of paragraphs.</p>
+<p>The algorithm cannot simply assume that every document is tiny.</p>
+<p>Large inputs introduce questions such as:</p>
+<ul>
+<li>How much work should happen immediately?</li>
+<li>How many issues should be displayed?</li>
+<li>How should the UI communicate that results are limited?</li>
+<li>Can the user continue editing while analysis is happening?</li>
+<li>How should repeated analysis be controlled?</li>
+<li>What happens when a document changes during analysis?</li>
+</ul>
+<p>These are product and engineering questions at the same time.</p>
+<p>Bounded result semantics provide one useful strategy.</p>
+<p>Rather than pretending that the interface will display an unlimited number of findings, a system can explicitly communicate that it has captured a bounded set.</p>
+<p>That makes the behavior easier to reason about.</p>
+<hr>
+<h2>Keyboard-First Writing</h2>
+<p>A writing assistant is often used while someone is already typing.</p>
+<p>That makes keyboard interaction especially important on desktop environments.</p>
+<p>SpellChecker includes keyboard-oriented review workflows, with shortcuts for checking text, opening writing insights, moving between spelling issues, searching the writing-insights interface, and clearing or closing transient review state.</p>
+<p>A good keyboard workflow can reduce the friction between:</p>
+<pre tabindex="0"><code>Notice issue
+      ↓
+Review issue
+      ↓
+Choose suggestion
+      ↓
+Apply correction
+</code></pre>
+<p>Instead of forcing users to constantly switch between keyboard and mouse interactions, keyboard-first review makes the assistant fit more naturally into an editing workflow.</p>
+<hr>
+<h2>Cross-Platform Development With Flutter</h2>
+<p>SpellChecker is built with Flutter.</p>
+<p>That choice is significant because the project is not limited to one desktop or mobile environment.</p>
+<p>The repository currently documents committed targets covering:</p>
+<ul>
+<li>Android</li>
+<li>iOS</li>
+<li>Linux</li>
+<li>macOS</li>
+<li>Windows</li>
+<li>Web</li>
+</ul>
+<p>The project also documents release-mode validation across all six native/platform targets.</p>
+<p>Flutter provides an interesting foundation for a project like this because the same application architecture can target multiple operating systems.</p>
+<p>The underlying challenge is then to separate:</p>
+<pre tabindex="0"><code>Core text logic
+</code></pre>
+<p>from:</p>
+<pre tabindex="0"><code>Platform-specific UI and integration
+</code></pre>
+<p>This separation makes the system easier to maintain.</p>
+<hr>
+<h2>Reusable Dart APIs</h2>
+<p>Another important part of an open-source developer tool is reuse.</p>
+<p>A project becomes substantially more useful when its logic is available not only through its graphical application but also through libraries.</p>
+<p>SpellChecker exposes reusable Dart APIs covering areas such as spelling, language packs, corrections, suggestion ranking, writing rules, diagnostics, and transfer codecs.</p>
+<p>That opens several potential use cases.</p>
+<p>For example, another Flutter developer could potentially integrate the underlying functionality into:</p>
+<ul>
+<li>note-taking software</li>
+<li>writing applications</li>
+<li>document tools</li>
+<li>educational applications</li>
+<li>developer utilities</li>
+<li>offline editors</li>
+<li>productivity applications</li>
+<li>desktop writing workflows</li>
+</ul>
+<p>The reusable-library approach transforms the project from a single application into a toolkit.</p>
+<hr>
+<h2>Why Open Source Matters Here</h2>
+<p>Open source changes how people can understand and extend software.</p>
+<p>For a privacy-focused writing assistant, this matters especially.</p>
+<p>Users and developers may reasonably want to know:</p>
+<ul>
+<li>What happens to my text?</li>
+<li>Does the application send data somewhere?</li>
+<li>How are corrections generated?</li>
+<li>Where do language resources live?</li>
+<li>What rules are applied?</li>
+<li>How are edits performed?</li>
+<li>How are edge cases handled?</li>
+</ul>
+<p>A closed black-box system may provide answers through documentation, but an open-source project can expose the implementation itself.</p>
+<p>That does not automatically make every implementation perfect.</p>
+<p>It does, however, create an opportunity for inspection, discussion, testing, contribution, and independent review.</p>
+<p>That is one of the strongest reasons to publish developer tools openly.</p>
+<hr>
+<h2>Building for Developers and End Users</h2>
+<p>SpellChecker has two audiences.</p>
+<p>The first is the person using the writing assistant.</p>
+<p>They care about:</p>
+<ul>
+<li>correct suggestions</li>
+<li>simple interaction</li>
+<li>fast feedback</li>
+<li>privacy</li>
+<li>language support</li>
+<li>reliable corrections</li>
+</ul>
+<p>The second is the developer.</p>
+<p>They care about:</p>
+<ul>
+<li>architecture</li>
+<li>APIs</li>
+<li>extensibility</li>
+<li>testing</li>
+<li>documentation</li>
+<li>predictable behavior</li>
+<li>integration</li>
+</ul>
+<p>A good open-source project should serve both audiences.</p>
+<p>The user should see a straightforward writing experience.</p>
+<p>The developer should be able to understand how that experience is constructed.</p>
+<hr>
+<h2>Testing Is Part of the Product</h2>
+<p>Text-processing systems can break in subtle ways.</p>
+<p>An implementation can work perfectly for simple English sentences and then fail with:</p>
+<ul>
+<li>Unicode text</li>
+<li>mixed languages</li>
+<li>repeated corrections</li>
+<li>overlapping edits</li>
+<li>punctuation</li>
+<li>large documents</li>
+<li>unusual whitespace</li>
+<li>empty input</li>
+<li>extremely long input</li>
+</ul>
+<p>That is why automated testing is critical.</p>
+<p>The current SpellChecker project documents CI checks including formatting, <code>flutter analyze</code>, the complete Flutter test suite, and deterministic benchmark smoke testing.</p>
+<p>This is important because correctness is not only about whether the application starts.</p>
+<p>For a text-processing tool, correctness means the system continues to behave predictably as the input becomes more complicated.</p>
+<hr>
+<h2>A More Local Software Ecosystem</h2>
+<p>There is a larger idea behind this project.</p>
+<p>Software does not always need to choose between:</p>
+<pre tabindex="0"><code>Completely local
+</code></pre>
+<p>and:</p>
+<pre tabindex="0"><code>Completely cloud-based
+</code></pre>
+<p>There are many possible architectures.</p>
+<p>For some tasks, local processing can provide:</p>
+<ul>
+<li>lower latency</li>
+<li>offline availability</li>
+<li>reduced network dependency</li>
+<li>stronger privacy boundaries</li>
+<li>predictable behavior</li>
+</ul>
+<p>For other tasks, cloud services can provide capabilities that may not be practical locally.</p>
+<p>The interesting engineering work happens when developers decide which operations belong where.</p>
+<p>SpellChecker is one example of a project exploring the local side of that design space.</p>
+<hr>
+<h2>Local-First Does Not Mean Anti-Cloud</h2>
+<p>The goal of local-first software does not have to be “never use cloud services.”</p>
+<p>Instead, it can mean:</p>
+<blockquote>
+<p><strong>The application should have a useful core experience without requiring the cloud.</strong></p>
+</blockquote>
+<p>That is a different philosophy.</p>
+<p>A local-first architecture can potentially give users control over when additional online functionality is appropriate.</p>
+<p>The application can remain useful offline while optional network-powered features exist elsewhere.</p>
+<p>This makes the boundary between local and cloud processing a design decision rather than an accident.</p>
+<hr>
+<h2>Why Multilingual Support Is Especially Interesting</h2>
+<p>A multilingual writing assistant is not just a larger English dictionary.</p>
+<p>Every additional language introduces engineering questions.</p>
+<p>For example:</p>
+<pre tabindex="0"><code>Language
+   ↓
+Lexical resources
+   ↓
+Tokenization
+   ↓
+Matching
+   ↓
+Suggestions
+   ↓
+Writing rules
+</code></pre>
+<p>The architecture must answer which parts are language-independent and which parts are language-specific.</p>
+<p>SpellChecker currently separates language packs and also keeps personal vocabulary associated with language context.</p>
+<p>That is an important foundation for expanding the system without turning the core engine into a collection of tightly coupled language-specific assumptions.</p>
+<hr>
+<h2>Personal Vocabulary Is More Important Than It Looks</h2>
+<p>A dictionary cannot contain every legitimate word.</p>
+<p>Real users write:</p>
+<ul>
+<li>names</li>
+<li>project names</li>
+<li>usernames</li>
+<li>technical terms</li>
+<li>product names</li>
+<li>abbreviations</li>
+<li>specialized terminology</li>
+</ul>
+<p>A useful writing assistant therefore needs to distinguish between:</p>
+<pre tabindex="0"><code>Unknown
+</code></pre>
+<p>and:</p>
+<pre tabindex="0"><code>Unknown but intentionally accepted by the user
+</code></pre>
+<p>Personal vocabulary helps solve that problem.</p>
+<p>It allows the user to tell the system:</p>
+<blockquote>
+<p>“I know this word. Please stop treating it as an error.”</p>
+</blockquote>
+<p>That creates an important relationship between automation and user control.</p>
+<p>The software suggests.</p>
+<p>The user decides.</p>
+<hr>
+<h2>Explainable Writing Review</h2>
+<p>Another useful property of a writing assistant is explainability.</p>
+<p>Consider two different notifications.</p>
+<h4>Notification A</h4>
+<blockquote>
+<p>Something is wrong.</p>
+</blockquote>
+<h4>Notification B</h4>
+<blockquote>
+<p>Repeated word detected.</p>
+</blockquote>
+<p>The second is more useful.</p>
+<p>It tells the user what the system actually detected.</p>
+<p>SpellChecker's writing-review system uses explicit rule categories for issues such as repeated words, capitalization, spacing, punctuation, and other structural problems.</p>
+<p>That means the writing assistant can behave more like an inspection tool than an unexplained automatic editor.</p>
+<p>This distinction becomes especially important when users want to understand why a suggestion appears.</p>
+<hr>
+<h2>The Project as a Learning Resource</h2>
+<p>There is another reason open-source projects like SpellChecker are valuable.</p>
+<p>They provide practical examples of software engineering.</p>
+<p>A developer studying the project can explore topics including:</p>
+<ul>
+<li>Flutter application architecture</li>
+<li>Dart APIs</li>
+<li>text processing</li>
+<li>Unicode handling</li>
+<li>language-pack design</li>
+<li>correction algorithms</li>
+<li>deterministic mutation</li>
+<li>local data storage</li>
+<li>automated testing</li>
+<li>cross-platform builds</li>
+<li>documentation</li>
+<li>developer tooling</li>
+<li>open-source contribution workflows</li>
+</ul>
+<p>That makes the repository useful not only as software, but also as a practical engineering case study.</p>
+<hr>
+<h2>What Developers Can Learn From the Architecture</h2>
+<p>The most interesting lesson is not necessarily one specific algorithm.</p>
+<p>It is the combination of constraints.</p>
+<p>A serious project often becomes valuable because several requirements have to coexist.</p>
+<p>In this case:</p>
+<pre tabindex="0"><code>Privacy
+   +
+Offline operation
+   +
+Multilingual text
+   +
+Unicode correctness
+   +
+Safe editing
+   +
+Cross-platform UI
+   +
+Reusable APIs
+   +
+Automated testing
+</code></pre>
+<p>Each individual problem is manageable.</p>
+<p>The challenge is making them work together without creating unnecessary complexity.</p>
+<p>That is where architecture matters.</p>
+<hr>
+<h2>Potential Future Directions</h2>
+<p>An open-source project is never truly finished.</p>
+<p>There is always room to improve the experience.</p>
+<p>Potential areas for future work could include:</p>
+<h4>More Language Resources</h4>
+<p>Additional offline language packs could expand the project's usefulness for more communities.</p>
+<h4>Smarter Suggestions</h4>
+<p>Suggestion ranking could continue evolving to improve candidate ordering for difficult misspellings.</p>
+<h4>Richer Writing Rules</h4>
+<p>More local rules could address additional writing patterns while keeping results understandable.</p>
+<h4>Better Editor Integrations</h4>
+<p>The underlying APIs could make it easier for other applications to adopt SpellChecker's analysis engine.</p>
+<h4>Performance Improvements</h4>
+<p>Large documents provide opportunities for profiling, caching, incremental analysis, and other optimizations.</p>
+<h4>Accessibility Improvements</h4>
+<p>Writing tools can benefit from carefully designed keyboard navigation and assistive-technology support.</p>
+<h4>Developer Tooling</h4>
+<p>More examples, integrations, benchmarks, and diagnostics could make the project easier to adopt.</p>
+<p>The important part is that the architecture should continue to make these improvements possible without compromising the project's core principles.</p>
+<hr>
+<h2>Why I Think Local Software Is Worth Exploring</h2>
+<p>One of the most interesting directions in modern software development is the return of local computation.</p>
+<p>For years, developers often moved functionality into centralized servers because centralized infrastructure made many problems easier.</p>
+<p>Today, consumer devices and developer machines are capable of doing substantially more work themselves.</p>
+<p>That creates another design opportunity.</p>
+<p>Instead of automatically asking:</p>
+<blockquote>
+<p>“Which API should I call?”</p>
+</blockquote>
+<p>developers can also ask:</p>
+<blockquote>
+<p>“Do I actually need an API for this feature?”</p>
+</blockquote>
+<p>For spelling and writing assistance, a meaningful amount of useful work can happen locally.</p>
+<p>That is exactly the kind of engineering question that makes projects like SpellChecker worth exploring.</p>
+<hr>
+<h2>Open Source Is More Than Publishing Code</h2>
+<p>Putting a repository on GitHub is only the beginning.</p>
+<p>A healthy open-source project benefits from:</p>
+<ul>
+<li>documentation</li>
+<li>contribution guidelines</li>
+<li>issue tracking</li>
+<li>testing</li>
+<li>clear architecture</li>
+<li>transparent limitations</li>
+<li>examples</li>
+<li>changelogs</li>
+<li>community feedback</li>
+</ul>
+<p>The current repository includes project documentation, contribution guidance, governance material, security documentation, and a changelog alongside the application source.</p>
+<p>Those surrounding materials matter because successful open-source software needs an ecosystem around its code.</p>
+<hr>
+<h2>How You Can Explore SpellChecker</h2>
+<p>A developer approaching the project for the first time can start by examining the repository structure and documentation.</p>
+<p>Useful areas include:</p>
+<pre tabindex="0"><code>lib/
+test/
+docs/
+android/
+ios/
+linux/
+macos/
+windows/
+web/
+</code></pre>
+<p>The repository also includes configuration, contribution, security, governance, changelog, and change-tracking files.</p>
+<p>A good first exploration path is:</p>
+<pre tabindex="0"><code>README
+  ↓
+Documentation
+  ↓
+Core APIs
+  ↓
+Language system
+  ↓
+Writing rules
+  ↓
+Correction logic
+  ↓
+Tests
+</code></pre>
+<p>This approach makes the codebase easier to understand than opening random source files.</p>
+<hr>
+<h2>Who Might Find This Project Interesting?</h2>
+<p>SpellChecker can be especially interesting to developers working on:</p>
+<ul>
+<li>Flutter applications</li>
+<li>offline-first software</li>
+<li>writing tools</li>
+<li>note-taking applications</li>
+<li>education software</li>
+<li>productivity tools</li>
+<li>multilingual applications</li>
+<li>privacy-focused applications</li>
+<li>developer utilities</li>
+<li>desktop editors</li>
+</ul>
+<p>It can also be interesting to anyone studying how a relatively focused software feature can evolve into a complete cross-platform engineering project.</p>
+<hr>
+<h2>The Broader Lesson</h2>
+<p>The deeper lesson behind SpellChecker is not simply how to find spelling mistakes.</p>
+<p>It is about designing software around clear technical principles.</p>
+<p>A good developer tool should answer several questions.</p>
+<p><strong>Where does processing happen?</strong></p>
+<p><strong>How much data leaves the device?</strong></p>
+<p><strong>Can the behavior be reproduced?</strong></p>
+<p><strong>Can users understand why something happened?</strong></p>
+<p><strong>Can corrections be applied safely?</strong></p>
+<p><strong>Can developers reuse the core engine?</strong></p>
+<p><strong>Can the system work without an internet connection?</strong></p>
+<p><strong>Can it operate across different platforms and languages?</strong></p>
+<p>These are architecture questions, not marketing slogans.</p>
+<p>And open-source projects give developers an opportunity to explore those questions in actual code.</p>
+<hr>
+<h2>Final Thoughts</h2>
+<p>SpellChecker started from a familiar problem: helping people write better text.</p>
+<p>But the project demonstrates how even a familiar feature can become a meaningful engineering challenge.</p>
+<p>Once privacy, offline operation, multilingual support, Unicode correctness, deterministic editing, reusable APIs, cross-platform compatibility, testing, and developer experience become requirements, the problem becomes much richer.</p>
+<p>That is what makes open-source development exciting.</p>
+<p>You are not simply implementing a feature.</p>
+<p>You are deciding how the feature should behave, where computation should happen, what assumptions the software makes, how users remain in control, and how other developers can build on your work.</p>
+<p>SpellChecker is an exploration of those ideas through Flutter and Dart.</p>
+<p>It is also an invitation to contribute.</p>
+<p>Whether you are interested in text processing, Flutter development, Unicode, language resources, testing, performance, accessibility, documentation, or open-source engineering, there are many directions in which a project like this can grow.</p>
+<p>The future of writing software does not necessarily have to mean sending every piece of text to a remote service.</p>
+<p>Sometimes the most useful computation is the computation that can happen right on the device.</p>
+<p>And sometimes the best way to explore that idea is to build it in public.</p>
+<hr>
+<h3>Explore the Project</h3>
+<p>SpellChecker is available as an open-source project on GitHub.</p>
+<p>The repository contains the application, reusable Dart APIs, tests, documentation, platform targets, and project-development materials.</p>
+<p>For developers interested in privacy-first software, Flutter engineering, multilingual text processing, or offline tooling, it provides a practical project to explore.</p>
+<p><strong>Built openly. Built locally. Built for developers and users who want more control over their text.</strong></p>
+<h4>What would you improve first?</h4>
+<p>A new language pack?</p>
+<p>More writing rules?</p>
+<p>Better suggestion ranking?</p>
+<p>New integrations?</p>
+<p>Performance improvements?</p>
+<p>Accessibility?</p>
+<p>Documentation?</p>
+<p>Open source grows through ideas, experiments, issues, pull requests, testing, and collaboration.</p>
+<p>The project is there to be explored, learned from, tested, and improved.</p>
+<p><strong>Made by the Sanskar.</strong></p>
