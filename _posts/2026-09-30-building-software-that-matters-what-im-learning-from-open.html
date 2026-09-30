@@ -1,0 +1,757 @@
+---
+title: "Building Software That Matters: What I’m Learning From Open Source, AI, and Real-World Development"
+description: "personal look at building meaningful software through open source, AI, local-first development, developer tools, and continuous learning."
+date: 2026-09-30T14:14:45+00:00
+author: "Sanskar"
+author_url: "/about/"
+author_login: "sanskarIN"
+image: "/assets/images/blog/building-software-that-matters-what-im-learning-from-open/175ea0332a5fd163.png"
+image_alt: "A modern developer workspace featuring AI, open-source code, and software engineering concepts."
+image_width: 1672
+image_height: 941
+tags: ["softwaredevelopment", "opensource", "artificialintelligence", "localfirst", "programming"]
+source_issue: 5
+---
+<h2>Building Software That Matters: What I’m Learning From Open Source, AI, and Real-World Development</h2>
+<p>Software development is often presented as a race.</p>
+<p>Learn the newest framework.<br>
+Try the newest AI model.<br>
+Build something in a weekend.<br>
+Collect more technologies.<br>
+Get more GitHub stars.<br>
+Publish more projects.<br>
+Move on to the next thing.</p>
+<p>But after spending time actually building software, I have started to think about development differently.</p>
+<p>The most interesting part of programming is not simply writing code.</p>
+<p>It is turning an idea into something real.</p>
+<p>It is taking a problem that exists in someone's daily life, breaking it into smaller problems, designing a solution, writing the code, testing it, fixing what breaks, improving the experience, documenting the project, and eventually sharing the result with other people.</p>
+<p>That process is much more difficult than creating a small demo.</p>
+<p>And that is exactly why I enjoy it.</p>
+<p>I want to build software that is not only interesting to create, but also useful to understand, test, improve, reuse, and maintain.</p>
+<p>My journey across open-source projects, web development, programming languages, automation, artificial intelligence, local-first software, and developer tooling has taught me something important:</p>
+<blockquote>
+<p>A project does not become valuable because it is complicated. It becomes valuable when it solves a clear problem well.</p>
+</blockquote>
+<h3>Why I Keep Building Projects</h3>
+<p>One of the best ways to learn software development is to build.</p>
+<p>Tutorials are useful.</p>
+<p>Courses are useful.</p>
+<p>Documentation is essential.</p>
+<p>Books can teach you concepts that are difficult to discover on your own.</p>
+<p>But eventually, you have to build something where nobody has given you the exact answer.</p>
+<p>That is where programming becomes different.</p>
+<p>Suppose you learn how arrays work.</p>
+<p>You may understand the syntax.</p>
+<p>You may understand indexing.</p>
+<p>You may know how loops work.</p>
+<p>But when you create a real application, suddenly you have other questions:</p>
+<p>How should the data be structured?</p>
+<p>What happens when the input is invalid?</p>
+<p>What happens when a file does not exist?</p>
+<p>What happens when a user clicks a button twice?</p>
+<p>How should errors be displayed?</p>
+<p>How should the application behave when the network disappears?</p>
+<p>How do you test the code?</p>
+<p>How do you organize the project so that another developer can understand it?</p>
+<p>How do you upgrade dependencies without breaking everything?</p>
+<p>Those questions are where real engineering begins.</p>
+<p>This is one reason I continue experimenting with different kinds of projects.</p>
+<p>A calculator teaches different lessons from a note-taking application.</p>
+<p>A game teaches different lessons from a database application.</p>
+<p>A developer tool teaches different lessons from a website.</p>
+<p>An AI application introduces another entire layer of challenges.</p>
+<p>Every project gives me another opportunity to understand software from a different angle.</p>
+<hr>
+<h2>The Difference Between a Demo and a Product</h2>
+<p>A demo can prove that an idea is technically possible.</p>
+<p>A product has to survive reality.</p>
+<p>That difference is enormous.</p>
+<p>A simple demo might say:</p>
+<p>"Look, the feature works."</p>
+<p>A real application has to answer:</p>
+<p>"What happens tomorrow?"</p>
+<p>What happens when thousands of users interact with it?</p>
+<p>What happens with malformed input?</p>
+<p>What happens when the storage becomes large?</p>
+<p>What happens when the device has limited resources?</p>
+<p>What happens when the user makes a mistake?</p>
+<p>What happens when the software is updated six months later?</p>
+<p>What happens when the original developer is no longer the only person working on it?</p>
+<p>These questions are not always exciting.</p>
+<p>They do not produce flashy screenshots.</p>
+<p>They rarely appear in a five-minute coding video.</p>
+<p>But they are extremely important.</p>
+<p>Good software is often defined by the problems that users never notice.</p>
+<p>A user may never know that the application has graceful error handling.</p>
+<p>They may never know that the developer carefully handled corrupted data.</p>
+<p>They may never notice that the application was designed to work without a network connection.</p>
+<p>They may never see the tests.</p>
+<p>They may never read the architecture documentation.</p>
+<p>But those decisions still affect their experience.</p>
+<p>That is why I increasingly care about the engineering behind a project, not just the feature list.</p>
+<hr>
+<h2>Open Source Is More Than Publishing Code</h2>
+<p>Open source is sometimes misunderstood as simply putting a repository on GitHub.</p>
+<p>But publishing code is only the beginning.</p>
+<p>A useful open-source project needs more than source files.</p>
+<p>It needs a clear README.</p>
+<p>It needs setup instructions.</p>
+<p>It needs understandable structure.</p>
+<p>It needs meaningful commits.</p>
+<p>It needs documentation.</p>
+<p>It needs issue tracking.</p>
+<p>It needs versioning.</p>
+<p>It needs releases.</p>
+<p>It needs examples.</p>
+<p>And ideally, it needs a reason for someone else to care.</p>
+<p>A project becomes much more valuable when another developer can discover it and quickly understand:</p>
+<ul>
+<li>What problem does this solve?</li>
+<li>Who is it for?</li>
+<li>How do I install it?</li>
+<li>How do I run it?</li>
+<li>How do I use it?</li>
+<li>What technologies does it use?</li>
+<li>How can I contribute?</li>
+<li>What is planned next?</li>
+</ul>
+<p>That is the difference between a code dump and a real project.</p>
+<p>Open source also creates a strange but valuable feedback loop.</p>
+<p>Once your code is public, someone else can inspect it.</p>
+<p>They can ask questions.</p>
+<p>They can report bugs.</p>
+<p>They can suggest improvements.</p>
+<p>They can build on top of it.</p>
+<p>They can discover design decisions you did not notice yourself.</p>
+<p>Sometimes that feedback is uncomfortable.</p>
+<p>But it is useful.</p>
+<p>Software improves when it is exposed to real users and real developers.</p>
+<hr>
+<h2>What I Have Learned From Building Many Small Projects</h2>
+<p>There is a temptation to think every new project should be bigger than the last.</p>
+<p>But I have learned that small projects can teach very deep lessons.</p>
+<p>A focused application forces you to think about scope.</p>
+<p>A utility teaches precision.</p>
+<p>A text-processing tool teaches edge cases.</p>
+<p>A game teaches state management.</p>
+<p>A database-backed app teaches persistence.</p>
+<p>A search tool teaches indexing and retrieval.</p>
+<p>A CLI tool teaches developer experience.</p>
+<p>An AI application teaches the difference between model capability and product reliability.</p>
+<p>This is why I do not think every project needs to become a startup.</p>
+<p>Sometimes a project exists because you wanted to learn a difficult concept.</p>
+<p>Sometimes it exists because you encountered an annoying problem and wanted a better tool.</p>
+<p>Sometimes it exists because you wanted to experiment with a new language.</p>
+<p>Sometimes it exists because you wanted to understand how a system works internally.</p>
+<p>And sometimes a small experiment unexpectedly becomes something useful.</p>
+<p>That is one of the great things about building software.</p>
+<p>You do not always know the destination when you write the first line of code.</p>
+<hr>
+<h2>Learning Multiple Programming Languages</h2>
+<p>Learning multiple programming languages can look unnecessary from the outside.</p>
+<p>Someone might ask:</p>
+<p>"Why learn another language when you already know one?"</p>
+<p>For me, the answer is simple.</p>
+<p>Different languages encourage different ways of thinking.</p>
+<p>A language with strong static typing teaches you to think carefully about data and interfaces.</p>
+<p>A scripting language can make experimentation extremely fast.</p>
+<p>A systems language forces you to pay closer attention to performance, ownership, memory, and resource management.</p>
+<p>A language designed around functional concepts can change how you think about transformations and state.</p>
+<p>A language focused on application development can teach you different patterns for user interfaces and platform integration.</p>
+<p>The goal is not to collect languages like trophies.</p>
+<p>The goal is to become a better problem solver.</p>
+<p>If learning another language makes you approach problems differently, then the learning has value even before you use that language professionally.</p>
+<hr>
+<h2>Why Rust Is Interesting to Me</h2>
+<p>Rust is especially interesting because it sits close to the boundary between performance and safety.</p>
+<p>It encourages developers to reason carefully about ownership, borrowing, lifetimes, mutability, and resource management.</p>
+<p>At first, these concepts can feel restrictive.</p>
+<p>But that difficulty is also the lesson.</p>
+<p>When a compiler forces you to think about how data moves through a program, you begin to understand software behavior at a deeper level.</p>
+<p>The important lesson is not simply:</p>
+<p>"I learned Rust."</p>
+<p>It is:</p>
+<p>"I learned to reason more carefully about the software I am writing."</p>
+<p>That lesson carries over into other languages too.</p>
+<p>Good programming is not about memorizing syntax.</p>
+<p>It is about understanding what your program is actually doing.</p>
+<hr>
+<h2>AI Is Changing Development, But It Does Not Remove Engineering</h2>
+<p>Artificial intelligence has changed the way software can be developed.</p>
+<p>Code assistants can generate functions.</p>
+<p>Models can explain errors.</p>
+<p>AI can help with documentation.</p>
+<p>AI can summarize large codebases.</p>
+<p>AI can generate test cases.</p>
+<p>AI can help explore unfamiliar technologies.</p>
+<p>AI can accelerate prototyping.</p>
+<p>All of these capabilities are useful.</p>
+<p>But there is a major distinction between generating code and engineering software.</p>
+<p>A model can produce code that looks convincing.</p>
+<p>That does not automatically mean the code is correct.</p>
+<p>It can contain subtle bugs.</p>
+<p>It can make assumptions that are not valid for the application.</p>
+<p>It can introduce unnecessary dependencies.</p>
+<p>It can misunderstand the architecture.</p>
+<p>It can create security problems.</p>
+<p>It can produce outdated APIs.</p>
+<p>It can solve the wrong problem very efficiently.</p>
+<p>Therefore, I believe the future developer workflow will not simply be:</p>
+<p>"AI writes everything."</p>
+<p>Instead, a much more interesting workflow is:</p>
+<p><strong>Human defines the problem → AI accelerates implementation → Human verifies the result → tests validate behavior → users provide feedback → the system improves.</strong></p>
+<p>The ability to evaluate generated code becomes just as important as the ability to generate it.</p>
+<hr>
+<h2>Local-First Software and Why It Matters</h2>
+<p>One area of software development that I find particularly interesting is local-first computing.</p>
+<p>The basic idea is simple:</p>
+<p>Software should be able to do as much as reasonably possible on the user's own device.</p>
+<p>Instead of treating the cloud as the default location for every piece of data and every operation, the application can keep important information locally and synchronize or back up when appropriate.</p>
+<p>This approach can improve several areas of software design.</p>
+<h3>Privacy</h3>
+<p>When information remains on a user's device, fewer external systems necessarily need access to it.</p>
+<p>That can simplify some privacy concerns.</p>
+<p>But local-first does not automatically mean private.</p>
+<p>Developers still need to think carefully about backups, analytics, authentication, synchronization, encryption, logs, and third-party services.</p>
+<p>Privacy is an engineering property that has to be designed intentionally.</p>
+<h3>Offline Reliability</h3>
+<p>A local-first application can continue to work in environments where internet access is slow or unavailable.</p>
+<p>That matters more than many cloud-first products assume.</p>
+<p>A user may be traveling.</p>
+<p>They may be in a building with weak connectivity.</p>
+<p>Their network may simply fail.</p>
+<p>Good software should degrade gracefully.</p>
+<h3>Speed</h3>
+<p>Local processing can reduce network latency.</p>
+<p>The application can sometimes respond immediately instead of waiting for a server.</p>
+<p>This can make the interface feel significantly better.</p>
+<h3>Control</h3>
+<p>Users can have greater control over their own data.</p>
+<p>That can be particularly important for notes, documents, personal records, creative work, development projects, and other information that people expect to access reliably.</p>
+<hr>
+<h2>Building AI on the Device</h2>
+<p>Local-first ideas become even more interesting when combined with artificial intelligence.</p>
+<p>Instead of sending every request to a remote server, an application can potentially perform some AI tasks directly on the device.</p>
+<p>That creates a different engineering model.</p>
+<p>The developer has to care about:</p>
+<p>Model size.</p>
+<p>Memory consumption.</p>
+<p>Battery usage.</p>
+<p>Inference speed.</p>
+<p>Device capabilities.</p>
+<p>Quantization.</p>
+<p>Storage requirements.</p>
+<p>Hardware acceleration.</p>
+<p>Privacy.</p>
+<p>Fallback behavior.</p>
+<p>Model updates.</p>
+<p>These constraints can make the problem harder.</p>
+<p>But they also make the application more interesting.</p>
+<p>A powerful cloud model with unlimited infrastructure is not the only possible future.</p>
+<p>Another future is a collection of smaller, efficient systems running directly on phones, laptops, tablets, and other devices.</p>
+<p>The right architecture will depend on the task.</p>
+<p>Some operations may work entirely offline.</p>
+<p>Some may require a larger remote model.</p>
+<p>Some may use a hybrid approach.</p>
+<p>The important thing is to make the boundary understandable.</p>
+<p>Users should not have to guess whether their data is processed locally or sent elsewhere.</p>
+<p>Clear software design includes clear communication.</p>
+<hr>
+<h2>The Most Important Feature Is Sometimes Trust</h2>
+<p>A software application can have hundreds of features and still fail to earn trust.</p>
+<p>Trust often comes from much smaller details.</p>
+<p>The application does what it says.</p>
+<p>It does not unexpectedly lose data.</p>
+<p>Errors are handled clearly.</p>
+<p>Privacy choices are understandable.</p>
+<p>Updates do not randomly break existing workflows.</p>
+<p>The interface does not hide important behavior.</p>
+<p>Documentation is accurate.</p>
+<p>The project is transparent about limitations.</p>
+<p>The source code is understandable.</p>
+<p>These are not glamorous features.</p>
+<p>But trust is cumulative.</p>
+<p>Every good experience adds to it.</p>
+<p>Every unexplained failure removes some of it.</p>
+<p>When I think about the software I want to build, I increasingly think about this idea:</p>
+<p><strong>Make the system understandable.</strong></p>
+<p>Understandable software is easier to debug.</p>
+<p>Understandable software is easier to maintain.</p>
+<p>Understandable software is easier to contribute to.</p>
+<p>Understandable software is easier for users to trust.</p>
+<hr>
+<h2>Why Documentation Matters So Much</h2>
+<p>Many developers treat documentation as something to write after the project is finished.</p>
+<p>I see documentation differently.</p>
+<p>Documentation is part of the product.</p>
+<p>Imagine discovering an interesting repository but finding:</p>
+<p>No README.</p>
+<p>No installation instructions.</p>
+<p>No screenshots.</p>
+<p>No examples.</p>
+<p>No explanation of why the project exists.</p>
+<p>No information about the current release.</p>
+<p>The code might be excellent.</p>
+<p>But the barrier to entry is high.</p>
+<p>Now imagine the opposite.</p>
+<p>You open the repository and immediately understand the purpose.</p>
+<p>You see how to install it.</p>
+<p>You see a working example.</p>
+<p>You understand the architecture.</p>
+<p>You know what is planned.</p>
+<p>You can run it within minutes.</p>
+<p>That project feels welcoming.</p>
+<p>This is especially important for open-source software because the first user is often another developer.</p>
+<p>Documentation is therefore part of developer experience.</p>
+<hr>
+<h2>Projects Should Tell a Story</h2>
+<p>A repository is not only a collection of files.</p>
+<p>It is also a story.</p>
+<p>There is the original problem.</p>
+<p>Then the first experiment.</p>
+<p>Then the first version.</p>
+<p>Then the bugs.</p>
+<p>Then the redesign.</p>
+<p>Then the improvements.</p>
+<p>Then the release.</p>
+<p>Then the feedback.</p>
+<p>Then the next version.</p>
+<p>Version control systems preserve part of this history.</p>
+<p>A useful commit history can make the project easier to understand.</p>
+<p>Instead of:</p>
+<p><code>update</code></p>
+<p><code>fix</code></p>
+<p><code>changes</code></p>
+<p><code>more changes</code></p>
+<p>meaningful commits can communicate intent.</p>
+<p>For example:</p>
+<p><code>Add offline cache for recent notes</code></p>
+<p><code>Handle invalid configuration values</code></p>
+<p><code>Improve search indexing for large datasets</code></p>
+<p><code>Add integration tests for synchronization</code></p>
+<p>These messages create a technical narrative.</p>
+<p>Someone exploring the repository can learn not only what the code looks like today, but how it evolved.</p>
+<p>That is valuable.</p>
+<hr>
+<h2>Why I Like Developer Tools</h2>
+<p>Developer tools are especially interesting because developers themselves become the users.</p>
+<p>That means usability matters at a different level.</p>
+<p>A tool can be technically sophisticated but still frustrating to use.</p>
+<p>A command-line utility might have powerful internals, but poor argument handling.</p>
+<p>A code analysis tool might produce valuable results, but present them in a confusing format.</p>
+<p>A project intelligence tool might understand a repository deeply, but make the results difficult to navigate.</p>
+<p>The lesson is universal:</p>
+<p><strong>Technology is only part of the product.</strong></p>
+<p>The interface between the system and the user matters just as much.</p>
+<p>That interface may be a graphical UI.</p>
+<p>It may be a command-line interface.</p>
+<p>It may be an API.</p>
+<p>It may be a configuration file.</p>
+<p>It may be a generated report.</p>
+<p>Every one of these is part of the user experience.</p>
+<hr>
+<h2>Building Project Intelligence</h2>
+<p>As repositories become larger, understanding a codebase can become difficult.</p>
+<p>There may be thousands of files.</p>
+<p>Multiple languages.</p>
+<p>Different build systems.</p>
+<p>Dependencies with different versions.</p>
+<p>Historical architectural changes.</p>
+<p>Deprecated components.</p>
+<p>Generated files.</p>
+<p>Tests.</p>
+<p>Documentation.</p>
+<p>Scripts.</p>
+<p>Configuration.</p>
+<p>Infrastructure.</p>
+<p>A developer entering such a repository needs answers.</p>
+<p>What is this project?</p>
+<p>What are the major components?</p>
+<p>How do they communicate?</p>
+<p>Which files are important?</p>
+<p>How has the architecture evolved?</p>
+<p>Where is complexity concentrated?</p>
+<p>Which dependencies matter?</p>
+<p>Which areas changed most frequently?</p>
+<p>This is where repository intelligence becomes interesting.</p>
+<p>Instead of treating GitHub repositories as collections of files, we can think of them as evolving systems.</p>
+<p>The repository has a kind of identity.</p>
+<p>Its architecture changes.</p>
+<p>Its dependencies change.</p>
+<p>Its complexity changes.</p>
+<p>Its development patterns change.</p>
+<p>Its history contains useful information.</p>
+<p>Tools that expose this information can reduce the time developers spend performing codebase archaeology manually.</p>
+<p>That idea is one of the reasons I find projects such as RepoDNA interesting.</p>
+<p>The goal is not merely to display more code.</p>
+<p>The goal is to help developers understand the system behind the code.</p>
+<hr>
+<h2>The Hidden Work Behind Every "Simple" App</h2>
+<p>A user sees a button.</p>
+<p>A developer sees a chain of systems.</p>
+<p>Consider a simple note-taking application.</p>
+<p>The user thinks:</p>
+<p>"I typed a note and pressed Save."</p>
+<p>But the software may need to:</p>
+<p>Validate the input.</p>
+<p>Update the UI.</p>
+<p>Serialize the content.</p>
+<p>Write it to storage.</p>
+<p>Handle storage errors.</p>
+<p>Update search indexes.</p>
+<p>Record timestamps.</p>
+<p>Maintain ordering.</p>
+<p>Trigger synchronization.</p>
+<p>Update metadata.</p>
+<p>Refresh the UI.</p>
+<p>Handle crashes.</p>
+<p>Protect data integrity.</p>
+<p>Now imagine doing that for every feature in a larger application.</p>
+<p>This is why software engineering becomes difficult at scale.</p>
+<p>The complexity is not always visible.</p>
+<p>It lives underneath the interface.</p>
+<hr>
+<h2>My Approach to Building Projects</h2>
+<p>I am increasingly interested in a development process that looks like this:</p>
+<h3>1. Start With the Problem</h3>
+<p>Before asking:</p>
+<p>"What technology should I use?"</p>
+<p>I try to ask:</p>
+<p>"What problem am I solving?"</p>
+<p>That question keeps the project grounded.</p>
+<h3>2. Define a Small First Version</h3>
+<p>The first version does not need to contain everything.</p>
+<p>It needs to prove that the core idea works.</p>
+<p>A small working system teaches more than a huge unfinished architecture.</p>
+<h3>3. Build the Core</h3>
+<p>The most important behavior should work reliably before secondary features are added.</p>
+<h3>4. Test the Edges</h3>
+<p>Normal input is easy.</p>
+<p>The difficult cases are usually:</p>
+<p>Empty input.</p>
+<p>Huge input.</p>
+<p>Invalid input.</p>
+<p>Missing files.</p>
+<p>Unexpected state.</p>
+<p>Interrupted operations.</p>
+<p>Repeated actions.</p>
+<p>Network failures.</p>
+<p>Storage failures.</p>
+<p>Unsupported configurations.</p>
+<h3>5. Improve the Interface</h3>
+<p>Once the underlying behavior works, the experience needs attention.</p>
+<p>Clear messages.</p>
+<p>Useful defaults.</p>
+<p>Good navigation.</p>
+<p>Readable output.</p>
+<p>Helpful errors.</p>
+<h3>6. Document It</h3>
+<p>Explain the purpose.</p>
+<p>Explain installation.</p>
+<p>Explain usage.</p>
+<p>Explain architecture.</p>
+<p>Explain limitations.</p>
+<p>Explain future plans.</p>
+<h3>7. Release It</h3>
+<p>A release gives the project a meaningful checkpoint.</p>
+<p>It turns "something I built" into "something people can try."</p>
+<h3>8. Listen</h3>
+<p>A project becomes more valuable when feedback changes it.</p>
+<hr>
+<h2>Why Finishing Matters</h2>
+<p>Developers often have many ideas.</p>
+<p>I certainly do.</p>
+<p>A new idea can feel more exciting than an unfinished project.</p>
+<p>But there is a lesson in finishing.</p>
+<p>Finishing teaches you what the middle of a project feels like.</p>
+<p>Finishing teaches you how to debug old code.</p>
+<p>Finishing teaches you how to clean up technical debt.</p>
+<p>Finishing teaches you how to write documentation.</p>
+<p>Finishing teaches you how to prepare releases.</p>
+<p>Finishing teaches you how to handle the boring parts.</p>
+<p>And the boring parts are often where professional engineering lives.</p>
+<p>Starting is exciting.</p>
+<p>Finishing is educational.</p>
+<hr>
+<h2>The Reality of Bugs</h2>
+<p>No serious software project is completely free of bugs.</p>
+<p>That does not mean quality is unimportant.</p>
+<p>It means software quality is a process.</p>
+<p>Developers need mechanisms that catch failures.</p>
+<p>Tests.</p>
+<p>Logging.</p>
+<p>Validation.</p>
+<p>Monitoring.</p>
+<p>Assertions.</p>
+<p>Static analysis.</p>
+<p>Code review.</p>
+<p>User feedback.</p>
+<p>Error reporting.</p>
+<p>Automated builds.</p>
+<p>Good architecture.</p>
+<p>A good development process does not assume:</p>
+<p>"There will be no bugs."</p>
+<p>It assumes:</p>
+<p>"Bugs will happen, and the system should help us find and fix them."</p>
+<p>That mindset changes everything.</p>
+<hr>
+<h2>Security Should Be Part of Design</h2>
+<p>Security should not be a final checkbox.</p>
+<p>It should influence architecture from the beginning.</p>
+<p>Developers should ask:</p>
+<p>What data does the application store?</p>
+<p>Who should be able to access it?</p>
+<p>What permissions are required?</p>
+<p>What happens when credentials are compromised?</p>
+<p>Can sensitive information leak through logs?</p>
+<p>Are external services trusted?</p>
+<p>What happens if input is malicious?</p>
+<p>Are dependencies maintained?</p>
+<p>Are secrets stored safely?</p>
+<p>What happens if the user loses their device?</p>
+<p>There is no universal answer to every security question.</p>
+<p>But asking the questions early is valuable.</p>
+<p>Security is not only about adding encryption at the end.</p>
+<p>It is about reducing unnecessary exposure throughout the system.</p>
+<hr>
+<h2>The Importance of Performance</h2>
+<p>Performance is another area where engineering decisions matter.</p>
+<p>A feature may work perfectly on a powerful development machine but behave differently on a slower device.</p>
+<p>An application might be fast with a small dataset but slow with a large one.</p>
+<p>An algorithm that works for a thousand records may become impractical for millions.</p>
+<p>This is why performance should be considered in context.</p>
+<p>Not every application needs extreme optimization.</p>
+<p>Premature optimization can create unnecessary complexity.</p>
+<p>But developers should understand the costs of their decisions.</p>
+<p>How much memory does this operation use?</p>
+<p>How many times does this loop execute?</p>
+<p>What happens when the input grows?</p>
+<p>Are repeated computations necessary?</p>
+<p>Can data be cached?</p>
+<p>Can work happen asynchronously?</p>
+<p>Can the workload be moved closer to the user?</p>
+<p>The objective is not simply "make everything fast."</p>
+<p>It is:</p>
+<p><strong>Understand where time and resources are being spent.</strong></p>
+<hr>
+<h2>Open Source and Learning in Public</h2>
+<p>One of the most powerful aspects of public development is that the learning becomes visible.</p>
+<p>When I publish a project, I am not claiming to have solved every problem.</p>
+<p>I am showing what I currently understand.</p>
+<p>That creates an opportunity.</p>
+<p>Someone else can read it.</p>
+<p>They can suggest improvements.</p>
+<p>They can point out a flaw.</p>
+<p>They can offer a different approach.</p>
+<p>They can fork the project.</p>
+<p>They can build something completely different from the same idea.</p>
+<p>This makes software development feel less like a solitary activity.</p>
+<p>Even a personal repository can become part of a larger ecosystem of ideas.</p>
+<hr>
+<h2>Building a Developer Identity</h2>
+<p>A developer profile is more than a list of technologies.</p>
+<p>"Python, JavaScript, Java, Rust, SQL..."</p>
+<p>That list says what tools you have encountered.</p>
+<p>It does not necessarily tell people how you think.</p>
+<p>A project portfolio can communicate much more.</p>
+<p>It can show how you approach problems.</p>
+<p>It can show how you structure software.</p>
+<p>It can show whether you care about testing.</p>
+<p>It can show whether you document your work.</p>
+<p>It can show how you respond to feedback.</p>
+<p>It can show whether you finish projects.</p>
+<p>This is why I want my projects to speak for themselves.</p>
+<p>A good portfolio is not just:</p>
+<p>"Here are the languages I know."</p>
+<p>It is:</p>
+<p>"Here is what I built, why I built it, what I learned, and what I am improving."</p>
+<hr>
+<h2>What I Want to Build Next</h2>
+<p>My long-term interests sit at the intersection of several areas.</p>
+<p>Software engineering.</p>
+<p>Artificial intelligence.</p>
+<p>Developer tools.</p>
+<p>Local-first applications.</p>
+<p>Search.</p>
+<p>Operating systems.</p>
+<p>Automation.</p>
+<p>Mobile development.</p>
+<p>Open source.</p>
+<p>These fields are changing rapidly.</p>
+<p>That makes the learning process exciting.</p>
+<p>One year from now, the tools will likely look different.</p>
+<p>Some libraries will disappear.</p>
+<p>New architectures will become popular.</p>
+<p>AI capabilities will improve.</p>
+<p>Hardware will change.</p>
+<p>Development workflows will evolve.</p>
+<p>The fundamentals will still matter.</p>
+<p>Algorithms.</p>
+<p>Data structures.</p>
+<p>Operating systems.</p>
+<p>Networking.</p>
+<p>Databases.</p>
+<p>Security.</p>
+<p>Architecture.</p>
+<p>Testing.</p>
+<p>Product thinking.</p>
+<p>Human-computer interaction.</p>
+<p>These concepts remain valuable because technologies change faster than engineering principles.</p>
+<hr>
+<h2>Technology Should Serve People</h2>
+<p>It is easy to become obsessed with technology itself.</p>
+<p>A new framework arrives.</p>
+<p>Everyone talks about it.</p>
+<p>Developers start using it.</p>
+<p>Then another framework appears.</p>
+<p>The cycle repeats.</p>
+<p>But the user usually does not care.</p>
+<p>Users care that the application works.</p>
+<p>They care that it is fast enough.</p>
+<p>They care that it does not lose their data.</p>
+<p>They care that they can understand it.</p>
+<p>They care that it solves their problem.</p>
+<p>That is why I try to keep returning to a simple principle:</p>
+<p><strong>Technology should serve the problem, not replace the problem.</strong></p>
+<p>The best technology choice is not always the newest one.</p>
+<p>It is often the one that creates the right balance between maintainability, performance, reliability, developer experience, and user needs.</p>
+<hr>
+<h2>From Projects to Products</h2>
+<p>There is an interesting transition that happens when a project gets serious.</p>
+<p>At first, you ask:</p>
+<p>"Can I build this?"</p>
+<p>Later, you ask:</p>
+<p>"Can somebody else use this?"</p>
+<p>Then:</p>
+<p>"Can somebody else install this?"</p>
+<p>Then:</p>
+<p>"Can somebody understand this?"</p>
+<p>Then:</p>
+<p>"Can this survive real usage?"</p>
+<p>Then:</p>
+<p>"Can I maintain this long term?"</p>
+<p>And eventually:</p>
+<p>"Can this become a product?"</p>
+<p>That progression is important.</p>
+<p>A product is not just a project with a payment button.</p>
+<p>It is a system designed around ongoing value.</p>
+<p>There may be:</p>
+<p>User onboarding.</p>
+<p>Support.</p>
+<p>Updates.</p>
+<p>Documentation.</p>
+<p>Pricing.</p>
+<p>Licensing.</p>
+<p>Privacy.</p>
+<p>Analytics.</p>
+<p>Bug reports.</p>
+<p>Feedback.</p>
+<p>Backups.</p>
+<p>Infrastructure.</p>
+<p>Distribution.</p>
+<p>A project can be an excellent learning experience.</p>
+<p>A product introduces a different set of responsibilities.</p>
+<p>Understanding that distinction has changed how I think about software.</p>
+<hr>
+<h2>What Success Means to Me</h2>
+<p>Success in software development is often measured using numbers.</p>
+<p>GitHub stars.</p>
+<p>Downloads.</p>
+<p>Users.</p>
+<p>Revenue.</p>
+<p>Followers.</p>
+<p>Commits.</p>
+<p>Those measurements can be useful.</p>
+<p>But they do not capture everything.</p>
+<p>Sometimes success means finally understanding a difficult concept.</p>
+<p>Sometimes success means fixing a bug that was extremely difficult to reproduce.</p>
+<p>Sometimes success means writing documentation that allows another developer to use your project.</p>
+<p>Sometimes success means someone discovers your work and builds something from it.</p>
+<p>Sometimes success means finishing something you almost abandoned.</p>
+<p>Numbers matter.</p>
+<p>But learning matters too.</p>
+<p>And impact matters even when it is difficult to measure.</p>
+<hr>
+<h2>The Long Game</h2>
+<p>Software development rewards persistence.</p>
+<p>There are days when everything works.</p>
+<p>There are days when nothing works.</p>
+<p>There are days when one bug consumes hours.</p>
+<p>There are days when a new idea completely changes your architecture.</p>
+<p>There are days when you learn something in fifteen minutes that you had been struggling with for weeks.</p>
+<p>The important thing is to continue.</p>
+<p>Not blindly.</p>
+<p>Not by repeating the same mistake.</p>
+<p>But by improving the process.</p>
+<p>Read.</p>
+<p>Build.</p>
+<p>Break things.</p>
+<p>Test.</p>
+<p>Debug.</p>
+<p>Document.</p>
+<p>Release.</p>
+<p>Listen.</p>
+<p>Improve.</p>
+<p>Repeat.</p>
+<p>That cycle is the real journey.</p>
+<hr>
+<h2>Final Thoughts</h2>
+<p>I do not want to build software simply because building software looks impressive.</p>
+<p>I want to build things that are useful.</p>
+<p>Things that solve problems.</p>
+<p>Things that teach me something.</p>
+<p>Things that other developers can understand.</p>
+<p>Things that can evolve.</p>
+<p>Things that can be tested.</p>
+<p>Things that can be improved.</p>
+<p>Things that can survive beyond the first demo.</p>
+<p>Artificial intelligence will continue changing software development.</p>
+<p>New languages will appear.</p>
+<p>New frameworks will become popular.</p>
+<p>New platforms will emerge.</p>
+<p>But the fundamentals will remain.</p>
+<p>Find a real problem.</p>
+<p>Understand it.</p>
+<p>Design carefully.</p>
+<p>Build deliberately.</p>
+<p>Test aggressively.</p>
+<p>Document clearly.</p>
+<p>Listen to users.</p>
+<p>Improve continuously.</p>
+<p>Share what you learn.</p>
+<p>That is the kind of developer I am trying to become.</p>
+<p>Not someone who simply knows the most technologies.</p>
+<p>Not someone who creates the most demos.</p>
+<p>But someone who can take an idea, understand the problem behind it, build a reliable system, and keep improving it.</p>
+<p>That is the kind of software worth building.</p>
+<hr>
+<h3>Explore My Work</h3>
+<p>I publish my development work, experiments, open-source projects, technical writing, and new ideas online.</p>
+<p><strong>GitHub:</strong><br>
+<a href="https://github.com/sanskarIN" rel="noopener noreferrer">https://github.com/sanskarIN</a></p>
+<p><strong>Personal Website:</strong><br>
+<a href="https://sanskarin.github.io/" rel="noopener noreferrer">https://sanskarin.github.io/</a></p>
+<p>If you are interested in open source, AI, developer tools, local-first software, programming, or building practical applications, you can follow along as I continue experimenting, learning, and shipping.</p>
+<h3>A Note to Fellow Developers</h3>
+<p>You do not need to build the biggest project.</p>
+<p>You do not need to know every framework.</p>
+<p>You do not need to wait until you are an expert.</p>
+<p>Start with a problem.</p>
+<p>Build a small solution.</p>
+<p>Make it work.</p>
+<p>Then make it better.</p>
+<p>And when you learn something useful, share it.</p>
+<p>Someone else may be struggling with the exact problem you just solved.</p>
+<p>That is one of the best things about software development:</p>
+<p><strong>what you learn today can become someone else's starting point tomorrow.</strong></p>
+<hr>
+<h4>Built in Public</h4>
+<p>This website is part of my ongoing effort to document ideas, projects, experiments, lessons, and the realities of becoming a stronger software developer.</p>
+<p>Some projects will succeed.</p>
+<p>Some will change direction.</p>
+<p>Some will remain experiments.</p>
+<p>Some may eventually become products.</p>
+<p>That is okay.</p>
+<p>The goal is not perfection.</p>
+<p>The goal is progress that compounds.</p>
+<p><strong>Build. Learn. Share. Improve. Repeat.</strong></p>
