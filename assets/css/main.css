@@ -9,4 +9,6 @@
 {% include css/components.css %}
 {% include css/blog.css %}
 {% include css/account.css %}
+{% include css/projects.css %}
+{% include css/search.css %}
 {% include css/pages.css %}
