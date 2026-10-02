@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T05:31:40Z",
+  "generated_at": "2026-10-02T05:45:25Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -76,7 +76,7 @@
       "name": "rps-arena",
       "url": "https://github.com/sanskarIN/rps-arena",
       "description": "",
-      "homepage": "https://www.github.com/sanskarIN",
+      "homepage": null,
       "language": "Kotlin",
       "language_color": "#A97BFF",
       "stars": 0,
@@ -144,7 +144,7 @@
       "name": "2048",
       "url": "https://github.com/sanskarIN/2048",
       "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
-      "homepage": "https://www.github.com/sanskarIN",
+      "homepage": null,
       "language": "Dart",
       "language_color": "#00B4AB",
       "stars": 1,
@@ -1112,7 +1112,7 @@
     }
   ],
   "activity": {
-    "total": 22928,
+    "total": 22936,
     "start": "2025-09-28",
     "end": "2026-10-02",
     "first_weekday": 0,
@@ -1487,7 +1487,7 @@
       16,
       7,
       10,
-      157
+      165
     ],
     "levels": [
       0,
