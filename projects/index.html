@@ -1,0 +1,129 @@
+---
+layout: page
+title: Projects
+eyebrow: Open source
+lead: Software I build and share in the open on GitHub, from developer tools to apps and experiments.
+description: "Sanskar's open-source projects on GitHub: featured repositories, languages, recent activity, and every public repository, updated every day."
+permalink: /projects/
+schema_type: CollectionPage
+scripts: [projects]
+---
+{%- comment -%}
+  The public GitHub repositories, from _data/github.json. That file is
+  written by the "Update GitHub data" workflow every day, using the settings
+  in _data/projects.yml (see README.md → "Projects"). Until it exists, the
+  page links to the GitHub profile instead. With JavaScript, the list can be
+  searched, filtered by language, and sorted (assets/js/projects.js).
+{%- endcomment -%}
+{%- assign gh = site.data.github -%}
+{%- assign github_profile = site.data.social.profiles.github.url -%}
+{%- if gh and gh.repositories.size > 0 %}
+<dl class="stats">
+  <div class="stats__item">
+    <dt class="stats__label">Public repositories</dt>
+    <dd class="stats__value">{{ gh.totals.repositories }}</dd>
+  </div>
+  <div class="stats__item">
+    <dt class="stats__label">Stars</dt>
+    <dd class="stats__value">{{ gh.totals.stars }}</dd>
+  </div>
+  <div class="stats__item">
+    <dt class="stats__label">Languages</dt>
+    <dd class="stats__value">{{ gh.totals.languages }}</dd>
+  </div>
+  {%- if gh.activity %}
+  <div class="stats__item">
+    <dt class="stats__label">Contributions this year</dt>
+    <dd class="stats__value">{{ gh.activity.total }}</dd>
+  </div>
+  {%- endif %}
+</dl>
+
+  {%- if gh.featured.size > 0 %}
+
+<section class="page-section" aria-labelledby="featured-title">
+  <h2 id="featured-title">Featured</h2>
+  <ul class="repo-grid repo-grid--featured">
+    {%- for name in gh.featured %}
+      {%- assign repo = gh.repositories | where: "name", name | first %}
+      {%- if repo %}
+    <li>{% include repo-card.html repo=repo %}</li>
+      {%- endif %}
+    {%- endfor %}
+  </ul>
+</section>
+  {%- endif %}
+
+  {%- if gh.languages.size > 0 or gh.activity %}
+
+<section class="page-section" aria-labelledby="glance-title">
+  <h2 id="glance-title">At a glance</h2>
+  <div class="glance">
+    {%- if gh.languages.size > 0 %}
+    <div class="glance__panel">
+      <h3 class="glance__title">Languages</h3>
+      <p class="glance__note">Share of the code in my repositories, as measured by GitHub (forks not included).</p>
+      {% include language-bar.html languages=gh.languages %}
+    </div>
+    {%- endif %}
+    {%- if gh.activity %}
+    <div class="glance__panel">
+      <h3 class="glance__title">Activity</h3>
+      <p class="glance__note">Contributions to public repositories on GitHub over the last 12 months.</p>
+      {% include activity-calendar.html activity=gh.activity %}
+    </div>
+    {%- endif %}
+  </div>
+</section>
+  {%- endif %}
+
+<section class="page-section" aria-labelledby="all-title">
+  <h2 id="all-title">All repositories <span class="post-year__count">· {{ gh.repositories.size }}</span></h2>
+  {%- assign repo_languages = gh.repositories | map: "language" | compact | uniq | sort %}
+  <form class="repo-filters" role="search" aria-label="Repositories" data-repo-filters hidden>
+    <div class="repo-filters__field repo-filters__field--search">
+      <label class="form-field__label" for="repo-search">Search</label>
+      <input class="form-field__input" id="repo-search" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Name, description, or topic" data-repo-search>
+    </div>
+    <div class="repo-filters__field">
+      <label class="form-field__label" for="repo-language">Language</label>
+      <select class="form-field__input" id="repo-language" name="language" data-repo-language>
+        <option value="">All languages</option>
+        {%- for language in repo_languages %}
+        <option>{{ language | escape }}</option>
+        {%- endfor %}
+      </select>
+    </div>
+    <div class="repo-filters__field">
+      <label class="form-field__label" for="repo-sort">Sort by</label>
+      <select class="form-field__input" id="repo-sort" name="sort" data-repo-sort>
+        <option value="updated">Recently updated</option>
+        <option value="stars">Most stars</option>
+        <option value="name">Name</option>
+      </select>
+    </div>
+  </form>
+  <p class="repo-filters__status" role="status" data-repo-status></p>
+  <ul class="repo-grid" data-repo-list>
+    {%- for repo in gh.repositories %}
+      {%- capture repo_text %}{{ repo.name }} {{ repo.description }} {{ repo.topics | join: " " }} {{ repo.language }}{% endcapture %}
+    <li data-name="{{ repo.name | downcase | escape }}" data-language="{{ repo.language | escape }}" data-stars="{{ repo.stars }}" data-updated="{{ repo.pushed }}" data-text="{{ repo_text | downcase | escape }}">{% include repo-card.html repo=repo %}</li>
+    {%- endfor %}
+  </ul>
+  <div class="repo-empty" data-repo-empty hidden>
+    <p>No repositories match your search.</p>
+    <button class="button button--secondary" type="button" data-repo-reset>Show all repositories</button>
+  </div>
+</section>
+
+<p class="page-section data-note">{% include icon.html name="github" %}<span>Repositories and activity come from {% include link.html url=github_profile label="my GitHub profile" %} and are updated every day; last updated <time datetime="{{ gh.generated_at }}">{{ gh.generated_at | date: "%-d %B %Y" }}</time>.</span></p>
+{%- else %}
+<div class="callout">
+  {% include icon.html name="github" class="callout__icon" %}
+  <div>
+    <h2 class="callout__title">github.com/{{ site.author.username }}</h2>
+    <p class="callout__text">My repositories appear here once they have been loaded from GitHub, which happens every day. Until then, you can browse them on GitHub.</p>
+  </div>
+  {% include link.html url=github_profile label="Visit GitHub" class="button button--primary" arrow=true %}
+</div>
+{%- endif %}
