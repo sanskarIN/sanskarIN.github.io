@@ -245,6 +245,32 @@
   }
 }
 
+/* Very narrow screens: the menu button shows only its icon (the label is
+   still read out), so the logo and all three buttons fit on one row. */
+@media (max-width: 22.49em) {
+  .nav-toggle {
+    padding: 0;
+  }
+
+  .nav-toggle__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* Medium screens: tighter links, so the navigation and both buttons fit. */
+@media (min-width: 48em) and (max-width: 63.99em) {
+  .site-nav__link {
+    padding: 0 var(--space-2);
+  }
+}
+
 /* --------------------------------------------------------------------------
    Footer
    -------------------------------------------------------------------------- */
