@@ -1,6 +1,6 @@
 # Security Policy
 
-This repository contains the source of https://sanskarIN.github.io, a static website hosted on GitHub Pages. The website has no server of its own: its contact form is delivered by Web3Forms, blog posts are published from GitHub issues by a GitHub Actions workflow, and the optional accounts (sign-in, author profiles, and the post editor) are provided by a Supabase project, with the database schema and Edge Function kept in `supabase/`. Reports of security problems are welcome and taken seriously.
+This repository contains the source of https://sanskarIN.github.io, a static website hosted on GitHub Pages. The website has no server of its own: its contact form is delivered by Web3Forms, blog posts are published from GitHub issues by a GitHub Actions workflow, another workflow copies public information about the owner's repositories from the GitHub API for the Projects page, and the optional accounts (sign-in, author profiles, and the post editor) are provided by a Supabase project, with the database schema and Edge Function kept in `supabase/`. Reports of security problems are welcome and taken seriously.
 
 ## Reporting a vulnerability
 
@@ -31,6 +31,6 @@ Reports are reviewed as soon as reasonably possible; there is no guaranteed resp
 
 ## Scope
 
-**In scope:** this repository and the website it publishes, including its HTML, CSS, JavaScript, configuration, `/.well-known/security.txt`, the blog's issue form, publishing workflow, and script in `.github/`, and the accounts' database rules and Edge Function in `supabase/`.
+**In scope:** this repository and the website it publishes, including its HTML, CSS, JavaScript, configuration, `/.well-known/security.txt`, the blog's issue form, the workflows and scripts in `.github/`, and the accounts' database rules and Edge Function in `supabase/`.
 
 **Out of scope:** GitHub and the GitHub Pages infrastructure (report those through [GitHub's Security Bug Bounty](https://bounty.github.com/)), the Supabase platform itself (report it to Supabase), and third-party services linked from the website, which should be reported to their providers.
