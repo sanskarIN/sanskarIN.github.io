@@ -81,18 +81,24 @@ The website does not set cookies. If you use the theme switch, your choice of li
 
 The website does not use analytics, tracking pixels, or similar measurement tools. If that ever changes, this policy and the Cookie Policy will be updated to describe the tools used.
 
+## Search
+
+Searching the website happens entirely in your browser. When you open the search, your browser downloads a list of the website's pages, blog posts, and projects from the website itself and looks for matches in it. What you type is never sent anywhere, and it is not saved. The filters on the Projects page also work in your browser; they are added to the page's address so that you can bookmark or share the filtered list.
+
 ## Third-party services
 
 The website relies on, or links to, the following services. Each has its own privacy policy:
 
-- **GitHub** (hosting with GitHub Pages, and blog posts with GitHub Issues and GitHub Actions): see the {% include link.html url="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" label="GitHub General Privacy Statement" %} and GitHub's {% include link.html url="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection" label="note on GitHub Pages data collection" %}.
+- **GitHub** (hosting with GitHub Pages, blog posts with GitHub Issues and GitHub Actions, and the details of my public repositories on the Projects page): see the {% include link.html url="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" label="GitHub General Privacy Statement" %} and GitHub's {% include link.html url="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection" label="note on GitHub Pages data collection" %}.
 - **Email providers:** the published addresses are hosted by Microsoft (Outlook) and Google (Gmail), which process the emails you send under their own privacy policies.
 {% if form_key != "" %}- **{{ contact_form.service }}** (contact form delivery): see the {{ contact_form.service }} {% include link.html url=contact_form.service_privacy_url label="privacy and data-handling information" %}.
 {% endif %}{% if accounts_on %}- **Supabase** (accounts, author profiles, and image uploads): see the {% include link.html url="https://supabase.com/privacy" label="Supabase Privacy Policy" %}.
 {% if email_service != "" %}- **{{ email_service }}** (sending sign-in codes){% if email_service_privacy_url != "" %}: see its {% include link.html url=email_service_privacy_url label="privacy policy" %}{% endif %}.
-{% endif %}{% endif %}- **Linked platforms:** GitHub, LinkedIn, Dev.to, Discord, X, Instagram, Threads, Pinterest, Bluesky, Buy Me a Coffee, and Gumroad.
+{% endif %}{% endif %}- **Linked platforms:** GitHub, LinkedIn, Dev.to, Discord, X, Reddit, Instagram, Threads, Pinterest, Bluesky, Buy Me a Coffee, and Gumroad.
 
 The website does not embed content, scripts, fonts, or images from any of these services{% if accounts_on %}; only its account and author pages connect to Supabase{% endif %}. They receive information about you only if you follow a link to them, send an email{% if form_key != "" %}, submit the contact form{% endif %}{% if accounts_on %}, use an account or author page{% endif %}, or write a blog post.
+
+The [Projects page]({{ '/projects/' | relative_url }}) shows public information about my GitHub repositories, such as their descriptions, languages, and stars, and the contribution activity shown on my GitHub profile. A scheduled GitHub Actions workflow copies this information from GitHub's API and saves it with the website, so your browser does not contact GitHub to show it.
 
 ## External links
 
