@@ -1,0 +1,27 @@
+# =============================================================================
+#  Projects page settings (/projects/ and the Home page's "Open source"
+#  section). See README.md → "Projects".
+#
+#  The repositories themselves come from GitHub: the "Update GitHub data"
+#  workflow (.github/workflows/update-github-data.yml) reads this file,
+#  fetches the account's public repositories, and writes _data/github.json.
+#  It runs every day and whenever this file changes — don't edit
+#  _data/github.json by hand.
+# =============================================================================
+
+# The GitHub account whose public repositories are shown.
+github_user: sanskarIN
+
+# Repositories to feature, in this order (repository names). When empty, the
+# repositories pinned on the GitHub profile are featured, or else the ones
+# with the most stars. Up to six are shown.
+featured: []
+
+# Repositories to leave out (repository names). The profile README
+# repository (github.com/sanskarIN/sanskarIN) is always left out.
+hidden: []
+
+# Whether to include forks of other people's repositories, and archived
+# (read-only) repositories.
+show_forks: false
+show_archived: true
