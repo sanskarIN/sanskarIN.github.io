@@ -1,0 +1,47 @@
+{%- comment -%}
+  The contribution calendar from the GitHub profile (last 12 months), from
+  _data/github.json. Parameter: activity (required). Each square is one day;
+  hovering over it shows the count. The chart is decorative for screen
+  readers: the caption summarizes it.
+{%- endcomment -%}
+{%- assign calendar = include.activity -%}
+{%- assign cell_size = 11 -%}
+{%- assign cell_step = 14 -%}
+{%- assign label_width = 30 -%}
+{%- assign label_height = 18 -%}
+{%- assign chart_width = calendar.weeks | times: cell_step | plus: label_width -%}
+{%- assign chart_height = 7 | times: cell_step | plus: label_height -%}
+{%- assign start_seconds = calendar.start | date: "%s" | plus: 0 -%}
+<figure class="activity">
+  <svg class="activity__chart" viewBox="0 0 {{ chart_width }} {{ chart_height }}" aria-hidden="true" focusable="false">
+    {%- for month in calendar.months %}
+    <text class="activity__label" x="{{ month.week | times: cell_step | plus: label_width }}" y="11">{{ month.label }}</text>
+    {%- endfor %}
+    {%- for weekday in (1..5) %}
+      {%- assign weekday_odd = weekday | modulo: 2 -%}
+      {%- if weekday_odd == 1 %}
+    <text class="activity__label" x="0" y="{{ weekday | times: cell_step | plus: label_height | plus: 9 }}">{% case weekday %}{% when 1 %}Mon{% when 3 %}Wed{% else %}Fri{% endcase %}</text>
+      {%- endif %}
+    {%- endfor %}
+    {%- for count in calendar.counts %}
+      {%- assign slot = forloop.index0 | plus: calendar.first_weekday -%}
+      {%- assign week = slot | divided_by: 7 -%}
+      {%- assign weekday = slot | modulo: 7 -%}
+      {%- assign day_seconds = forloop.index0 | times: 86400 | plus: start_seconds %}
+    <rect class="activity__day activity__day--{{ calendar.levels[forloop.index0] }}" x="{{ week | times: cell_step | plus: label_width }}" y="{{ weekday | times: cell_step | plus: label_height }}" width="{{ cell_size }}" height="{{ cell_size }}" rx="2"><title>{% if count == 0 %}No contributions{% elsif count == 1 %}1 contribution{% else %}{{ count }} contributions{% endif %} on {{ day_seconds | date: "%-d %B %Y" }}</title></rect>
+    {%- endfor %}
+  </svg>
+  <p class="activity__legend" aria-hidden="true">
+    <span>Less</span>
+    {%- for level in (0..4) %}
+    <svg class="activity__swatch" viewBox="0 0 11 11" width="11" height="11" focusable="false"><rect class="activity__day activity__day--{{ level }}" width="11" height="11" rx="2"/></svg>
+    {%- endfor %}
+    <span>More</span>
+  </p>
+  <figcaption class="activity__caption">
+    <strong>{{ calendar.total }} contribution{% if calendar.total != 1 %}s{% endif %}</strong> on GitHub in the last year, on {{ calendar.active_days }} day{% if calendar.active_days != 1 %}s{% endif %}.
+    {%- if calendar.longest_streak > 1 %} Longest streak: {{ calendar.longest_streak }} days in a row.{% endif %}
+    {%- if calendar.busiest %} Busiest day: {{ calendar.busiest.date | date: "%-d %B %Y" }}, with {{ calendar.busiest.count }} contribution{% if calendar.busiest.count != 1 %}s{% endif %}.{% endif %}
+  </figcaption>
+</figure>
+{%- comment -%} Ends without a trailing newline. {%- endcomment -%}
