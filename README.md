@@ -1,8 +1,8 @@
 # sanskarIN.github.io
 
-Source for https://sanskarIN.github.io — the personal developer website of **Sanskar** (GitHub: [sanskarIN](https://www.github.com/sanskarIN), developer community: [@dev_sanskarIN](https://www.x.com/dev_sanskarIN)).
+Source for https://sanskarIN.github.io — the personal developer website of **Sanskar** (GitHub: [sanskarIN](https://www.github.com/sanskarIN), X: [@SanskarCodes](https://x.com/SanskarCodes), Reddit: [u/sanskarIN](https://reddit.com/user/sanskarIN)).
 
-The website is a static site built with [Jekyll](https://jekyllrb.com/) and published by [GitHub Pages](https://pages.github.com/). There is no backend of its own, no analytics or tracking, and no third-party script: visitors receive plain HTML, one stylesheet, and two small optional scripts. Blog posts are written with a GitHub issue form and published by a GitHub Actions workflow ([details](#blog)). Optional [accounts](#accounts) — sign-in with an emailed code, author profiles, and an editor on the site — use Supabase and stay off until they are set up.
+The website is a static site built with [Jekyll](https://jekyllrb.com/) and published by [GitHub Pages](https://pages.github.com/). There is no backend of its own, no analytics or tracking, and no third-party script: visitors receive plain HTML, one stylesheet, and two small optional scripts. Blog posts are written with a GitHub issue form and published by a GitHub Actions workflow ([details](#blog)), and the [Projects](#projects) page lists the public GitHub repositories, refreshed daily by another workflow. A [site search](#site-search) runs in the browser. Optional [accounts](#accounts) — sign-in with an emailed code, author profiles, and an editor on the site — use Supabase and stay off until they are set up.
 
 ## Contents
 
@@ -12,7 +12,8 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 - [Local development](#local-development)
 - [Deployment to GitHub Pages](#deployment-to-github-pages)
 - [Configuration](#configuration)
-- [Adding the Projects page](#adding-the-projects-page)
+- [Projects](#projects)
+- [Site search](#site-search)
 - [Adding PayPal](#adding-paypal)
 - [Contact form](#contact-form)
 - [Blog](#blog)
@@ -37,15 +38,15 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 | `/credits/` | `credits.md` | Credits and website information |
 | `/blog/` | `blog/index.html` | Blog: every post, newest first, grouped by year |
 | `/blog/tags/` | `blog/tags.html` | Blog posts grouped by tag |
+| `/projects/` | `projects/index.html` | Projects: the public GitHub repositories, updated daily ([details](#projects)) |
 | `/blog/<post>/` | `_posts/` | One page per blog post ([details](#blog)) |
 | `/blog/authors/?u=<username>` | `blog/authors.html` | Author page of a website account (not indexed; [accounts](#accounts)) |
 | `/account/` | `account/index.html` | Sign in or sign up, author profile, your posts (not indexed; [accounts](#accounts)) |
 | `/account/write/` | `account/write.html` | Post editor for accounts (not indexed; [accounts](#accounts)) |
 | `/contact/sent/` | `contact-sent.html` | Contact form confirmation (not indexed; shown after sending without JavaScript) |
 | any missing URL | `404.html` | Page not found |
-| `/projects/` | — | Reserved for the Projects page, added manually later ([details](#adding-the-projects-page)) |
 
-Generated files: `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, `/.well-known/security.txt`, the blog's Atom feed at `/blog/feed.xml`, and `/blog/posts.json` (a list of posts for author pages).
+Generated files: `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, `/.well-known/security.txt`, the blog's Atom feed at `/blog/feed.xml`, `/blog/posts.json` (a list of posts for author pages), and `/search.json` (the [site search](#site-search) index).
 
 URLs end with a slash. GitHub Pages redirects `/about` to `/about/`, so both forms work.
 
@@ -54,7 +55,7 @@ URLs end with a slash. GitHub Pages redirects `/about` to `/about/`, so both for
 - **Jekyll 3.10** with **Liquid** templates and **kramdown** Markdown — exactly the versions GitHub Pages runs, pinned locally by the `github-pages` gem.
 - **HTML, CSS, and JavaScript** written for this site. No CSS or JavaScript framework.
   - CSS: custom properties (design tokens), mobile-first, split into partials that Jekyll combines into one file.
-  - JavaScript: progressive enhancement only — `theme-init.js` (≈0.8 KB) and `main.js` (≈1.6 KB gzipped). Every page works without it. `account.js` loads only on the account pages, and only once [accounts](#accounts) are turned on.
+  - JavaScript: progressive enhancement only — `theme-init.js` (≈0.8 KB) and `main.js` (≈3 KB gzipped). Every page works without it. `search.js` loads the first time search is opened, `projects.js` only on the Projects page, and `account.js` only on the account pages once [accounts](#accounts) are turned on.
 - **Fonts:** IBM Plex Sans and IBM Plex Mono, self-hosted WOFF2 (SIL Open Font License 1.1).
 - **Icons:** one SVG sprite — brand icons from Simple Icons (CC0), the LinkedIn icon from Bootstrap Icons (MIT), and interface icons drawn for this site.
 
@@ -66,6 +67,7 @@ URLs end with a slash. GitHub Pages redirects `/about` to `/about/`, so both for
 |---|---|---|
 | `github-pages` gem (MIT) | Local builds with the same Jekyll and plugin versions as GitHub Pages | No — build time only |
 | Python packages in `.github/scripts/requirements.txt` (MIT; Pillow: MIT-CMU) | Publishing blog posts: Markdown to HTML (markdown-it-py), removing unsafe HTML (nh3), checking and resizing images (Pillow), reading settings (PyYAML) | No — GitHub Actions only |
+| GitHub REST and GraphQL APIs | The [Projects](#projects) data: public repositories, languages, pinned repositories, contribution calendar | No — GitHub Actions only; visitors' browsers never contact GitHub for it |
 | `actions/checkout`, `actions/setup-python` | The blog workflow; pinned to exact commits | No — GitHub Actions only |
 | [Supabase](https://supabase.com/) (optional) | [Accounts](#accounts): sign-in codes, profiles, image uploads, and the `blog` Edge Function | Only on the account and author pages, once accounts are turned on |
 
@@ -83,6 +85,8 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 │   ├── legal.yml             "Last updated" dates of the policy pages
 │   ├── blog.yml              Blog settings: review of visitors' posts, image and text limits
 │   ├── accounts.yml          Accounts: Supabase address and publishable key (off while empty)
+│   ├── projects.yml          Projects page settings: GitHub account, featured and hidden repositories
+│   ├── github.json           Projects data, written by the "Update GitHub data" workflow — don't edit
 │   ├── theme.yml             Light and dark color palettes
 │   ├── focus.yml             Development focus areas (Home + Developer pages)
 │   └── technologies.yml      Technologies (Home + Developer pages)
@@ -111,6 +115,11 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 │   ├── post-card.html        A post in the blog's list
 │   ├── post-tags.html        A post's tags, linking to the Tags page
 │   ├── tag-id.html           The anchor of a tag on the Tags page
+│   ├── repo-card.html        A GitHub repository card (Projects and Home pages)
+│   ├── language-bar.html     Languages of the repositories, as a bar and a list
+│   ├── language-dot.html     A language's color dot
+│   ├── activity-calendar.html  The GitHub contribution calendar
+│   ├── search-attributes.html  Attributes of buttons that open the site search
 │   ├── accounts-config.html  Reads _data/accounts.yml for the templates
 │   └── css/                  Stylesheet partials (combined into assets/css/main.css)
 ├── assets/
@@ -118,6 +127,8 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 │   ├── js/theme-init.js      Runs first: enables JS features, applies a saved theme
 │   ├── js/main.js            Theme switch, mobile menu, copy buttons
 │   ├── js/account.js         Account pages: sign-in, profile, editor, author pages
+│   ├── js/projects.js        Projects page: search, filter, and sort the repositories
+│   ├── js/search.js          Site search dialog (loaded when first opened)
 │   ├── fonts/                IBM Plex WOFF2 files and their license (OFL.txt)
 │   ├── icons/sprite.svg      Every icon on the site
 │   └── images/
@@ -127,11 +138,15 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 ├── _posts/                   Blog posts (added by the workflow, or written by hand)
 ├── blog/                     Blog pages: index.html, tags.html, feed.xml, authors.html, posts.json
 ├── account/                  Account pages: index.html (sign-in, profile, posts), write.html (editor)
+├── projects/index.html       The Projects page
+├── search.json               The site search index
 ├── supabase/                 Accounts backend: schema.sql and functions/blog/index.ts (not part of the site)
 ├── .github/
 │   ├── ISSUE_TEMPLATE/blog-post.yml       The "Write a blog post" form
 │   ├── workflows/publish-blog-post.yml    Publishes posts from the form
-│   └── scripts/publish_post.py            What the workflow runs (+ requirements.txt)
+│   ├── workflows/update-github-data.yml   Refreshes the Projects data every day
+│   ├── scripts/publish_post.py            What the blog workflow runs (+ requirements.txt)
+│   └── scripts/update_github_data.py      What the Projects workflow runs
 ├── .well-known/security.txt  Security contact (RFC 9116)
 ├── index.html  about.html  developer.html  contact.html  contact-sent.html  404.html
 ├── terms.md  privacy.md  cookies.md  accessibility.md  credits.md
@@ -211,7 +226,8 @@ Every profile link on the site (header, footer, Home, About, Developer, Contact,
 | LinkedIn | https://www.linkedin.com/in/sanskarIN | `sanskarIN` |
 | Dev.to | https://www.dev.to/sanskarIN | `sanskarIN` |
 | Discord (developer channel) | https://discord.com/channels/1547184919455989760/1547187031057113098 | `@dev_sanskarIN` |
-| X | https://www.x.com/dev_sanskarIN | `@dev_sanskarIN` |
+| X | https://x.com/SanskarCodes | `@SanskarCodes` |
+| Reddit | https://reddit.com/user/sanskarIN | `u/sanskarIN` |
 | Instagram | https://www.instagram.com/dev_sanskarIN | `@dev_sanskarIN` |
 | Threads | https://threads.com/dev_sanskarIN | `@dev_sanskarIN` |
 | Pinterest | https://www.pinterest.com/dev_sanskarIN | `dev_sanskarIN` |
@@ -245,6 +261,10 @@ Each address is written exactly once, under `email:`. Every other place refers t
 ### Blog settings — `_data/blog.yml`
 
 Whether visitors' posts wait for review (`review_visitor_posts`, on by default), the issue form's file name, and the limits checked when a post is published: image size (10 MB), images per post (20), the longest side an image is scaled down to (2,000 px), and the length of titles, summaries, and tags. The [Blog](#blog) section explains how posting works.
+
+### Projects — `_data/projects.yml`
+
+Which GitHub account's repositories the [Projects](#projects) page shows, which ones to feature or hide, and whether to include forks and archived repositories.
 
 ### Accounts — `_data/accounts.yml`
 
@@ -290,64 +310,44 @@ The current logo is a simple "S" mark designed for this site. To use your own ar
 
 The policy in `_config.yml` lists each directive on its own line and only allows files from the site itself. When the [contact form](#contact-form) is turned on, its service is added to `connect-src` and `form-action` automatically, and when [accounts](#accounts) are turned on, the Supabase address is added to `connect-src` and `img-src`. If you embed any other third-party content — a video player, analytics, or external images — add that service's origin to the matching directive (for example `frame-src` for embeds, `script-src` for scripts, `img-src` for images), or the browser will block it. Also update the Privacy and Cookie policies ([see below](#legal-pages)).
 
-## Adding the Projects page
+## Projects
 
-The Projects page is intentionally not included in the initial website generation. It will be created manually later under `/projects/` and should reuse the existing site's design system, navigation, footer, typography, spacing, cards, buttons, and components.
+The Projects page at `/projects/` shows the public GitHub repositories of [sanskarIN](https://github.com/sanskarIN), and the Home page's "Open source" section features three of them. Everything on the page comes from GitHub — nothing about the projects is written by hand — and it's refreshed every day.
 
-**How the "Projects" links behave until then.** The header, footer, the Home page's "View Projects" button, and the 404 page all link to Projects. While no page exists at `/projects/`, these links point to the GitHub profile (opening in a new tab), so no visitor lands on a 404. As soon as the page exists, every Projects link switches to `/projects/` on the next build — there is no setting to change. The new page is also added to `sitemap.xml` automatically.
+### How the data is kept up to date
 
-**Creating the page on GitHub.com:** choose **Add file → Create new file**, name it `projects/index.html` (or `projects/index.md` to write in Markdown), and start it with this front matter:
+1. The workflow `.github/workflows/update-github-data.yml` runs `.github/scripts/update_github_data.py` every day at 04:23 UTC, whenever `_data/projects.yml` (or the script or workflow) changes, and from **Actions → Update GitHub data → Run workflow**.
+2. The script reads public information only, with the workflow's own token (no secrets to set up): the account's public repositories (name, description, website, main language, stars, forks, topics, license, and last push), the languages in each one, the repositories pinned on the profile, and the contribution calendar shown on the profile.
+3. It writes `_data/github.json`. If anything changed — apart from the timestamp, and this website's own last push — it commits the file as `sanskarIN <sanskarin@outlook.in>`, pushes it, and asks GitHub Pages to rebuild the site, as the blog workflow does. On days when nothing changed, there's no commit.
+4. The site builds the page from that file: totals, featured repositories, a language breakdown, the activity calendar, and the full list, which visitors can search, filter by language, and sort. The choices are kept in the address (for example `/projects/?language=Rust&sort=stars`), so a filtered list can be shared. Without JavaScript, the full list is shown.
 
-```yaml
----
-layout: page
-title: Projects
-eyebrow: Projects
-lead: One sentence that introduces your projects.
-description: A short summary for search results and social previews.
-permalink: /projects/
----
-```
+Until the workflow has run for the first time, the page links to the GitHub profile instead. The "Projects" links in the header, footer, Home page, and 404 page point to `/projects/` because the page exists (see `_includes/resolve-projects-url.html`).
 
-Then write the content below the front matter. The `page` layout supplies the header, footer, title block, spacing, and fonts. Keep the front matter: without it, Jekyll publishes the file as-is, without the site's header, footer, or styles, and leaves it out of the sitemap. These existing components are available (styles in `_includes/css/`):
+### Settings — `_data/projects.yml`
 
-| Component | Classes |
+| Setting | Effect |
 |---|---|
-| Card grid | `ul.link-grid` containing `a.link-card` with `.link-card__body`, `.link-card__name`, `.link-card__handle`, `.link-card__note` |
-| Bordered feature cells | `ul.feature-grid` (add `.feature-grid--4` for four columns) containing `li.feature` with `.feature__title` and `.feature__text` |
-| Technology labels | `ul.tag-list` containing `li.tag` |
-| Buttons | `.button-row` containing `a.button` plus `.button--primary`, `.button--secondary`, or `.button--ghost` |
-| Sections | `section.page-section` (spaced, with a divider); `.prose` for long-form text |
-| Icons and links | `{% include icon.html name="github" %}` · `{% include link.html url="…" label="…" class="button button--secondary" arrow=true %}` |
+| `github_user` | The account whose public repositories are shown (`sanskarIN`) |
+| `featured` | Repositories to feature, in order (up to six). When empty, the repositories pinned on the GitHub profile are featured, or else the ones with the most stars |
+| `hidden` | Repositories to leave out. The profile README repository (`sanskarIN/sanskarIN`) is always left out |
+| `show_forks` | Include forks of other people's repositories (off) |
+| `show_archived` | Include archived repositories, marked "Archived" (on) |
 
-A starting skeleton for a card (replace the placeholder text):
+Commit a change and the workflow runs straight away; the page updates a minute or two later. To show a brand-new repository or description before the next daily run, run the workflow from the Actions tab.
 
-```html
-<ul class="link-grid" role="list">
-  <li>
-    <a class="link-card" href="/projects/project-slug/">
-      <span class="link-card__body">
-        <span class="link-card__name">Project name</span>
-        <span class="link-card__note">One-line description of the project.</span>
-      </span>
-    </a>
-  </li>
-</ul>
-```
+### Good to know
 
-**Individual project pages** can be added later without redesigning anything:
+- Descriptions, topics, and website links are the ones set on each repository on GitHub — edit them there (the ⚙ next to "About" on the repository page).
+- Language percentages are GitHub's own measurements, and forks aren't counted. The colors are GitHub's language colors.
+- The activity calendar shows the same contributions as your GitHub profile. If GitHub's GraphQL API isn't available to the workflow, the page leaves out the calendar and pinned repositories, and features the most-starred repositories instead.
+- If a run fails (for example, GitHub is down), the page keeps the previous data, and the run shows as failed in the Actions tab.
+- To write the Projects page by hand instead, edit `projects/index.html` (keep `permalink: /projects/` in its front matter). The components are in `_includes/` (`repo-card.html`, `language-bar.html`, `activity-calendar.html`) and their styles in `_includes/css/projects.css`.
 
-- **A few projects:** create one file per project, e.g. `projects/project-slug/index.md`, with `layout: page` and `permalink: /projects/project-slug/`.
-- **Many projects:** use a Jekyll collection. Add this to `_config.yml`:
+## Site search
 
-  ```yaml
-  collections:
-    projects:
-      output: true
-      permalink: /projects/:name/
-  ```
+The search button in the header (or **Ctrl+K**, **⌘K**, or **/**) opens a search of the pages, blog posts, and projects. It runs entirely in the browser: `search.js` is loaded the first time search is opened, and it reads `/search.json`, which Jekyll builds from the pages (except those kept out of search engines), every post (title, summary, tags, and the start of the text), and the repositories in `_data/github.json`. Nothing that's typed is sent anywhere.
 
-  Then add one Markdown file per project in a `_projects/` folder (for example `_projects/project-slug.md` with `layout: page`, `title`, `description`, and any fields you like, such as `repository` or `tags`), and list them on the Projects page with `{% for project in site.projects %}…{% endfor %}`. Collection pages are included in the sitemap automatically.
+Results follow the ARIA combobox pattern — the arrow keys move through them, Enter opens one, Escape closes the dialog — and each result is a real link, so it can be opened in a new tab. The 404 page has a search button too.
 
 ## Adding PayPal
 
@@ -431,7 +431,7 @@ Every run is listed in the **Actions** tab as "Publish blog post"; the rebuild a
 
 ### What each post shows
 
-The title and summary; the date it was **published** and, after any change, the date it was **last updated**; the author (your name, or the visitor's GitHub username linking to their profile); an estimated reading time; tags; the cover image; links to discuss the post on its GitHub issue and to view its history; a copy-link button; and links to the newer and older posts. Posts are marked up as articles for search engines and link previews (Open Graph, X cards, and `BlogPosting` structured data).
+The title and summary; the date it was **published** and, after any change, the date it was **last updated**; for posts with three or more headings, an **On this page** list that stays beside the post and marks the section being read (headings get anchors automatically, and a heading never skips a level); copy buttons on code examples; a reading-progress bar along the top; up to three **related posts** that share tags; the author (your name, or the visitor's GitHub username linking to their profile); an estimated reading time; tags; the cover image; links to discuss the post on its GitHub issue and to view its history; a copy-link button; and links to the newer and older posts. Posts are marked up as articles for search engines and link previews (Open Graph, X cards, and `BlogPosting` structured data).
 
 The workflow writes this front matter, which you can also use for posts written by hand:
 
@@ -614,9 +614,10 @@ After any change, update the page's date in `_data/legal.yml`.
 - **Tokens** — `_includes/css/tokens.css`: type scale (fluid `clamp()` sizes), spacing scale, content widths, radius, and motion; colors come from `_data/theme.yml`.
 - **Typography** — IBM Plex Sans for text and headings; IBM Plex Mono for labels, handles, and technical details.
 - **Layout** — a 72rem container with fluid side gutters; long-form text is limited to about 42rem per line.
+- **Projects and search** — `_includes/css/projects.css` (stats, repository cards, language bar, activity calendar, filters) and `_includes/css/search.css` (the search button and dialog).
 - **Components** — `_includes/css/components.css`: eyebrow labels, buttons, spec card, feature grid, spec lists and tags, link cards, contact cards, contact form fields, callout, note, table of contents, and prose. Blog components (post list, post details, newer/older links, and styles for post content such as code, tables, and quotes) are in `_includes/css/blog.css`, and the account pages' forms, status messages, and author profiles in `_includes/css/account.css`.
 - **Themes** — light and dark palettes, following the device setting until the visitor chooses one with the theme switch.
-- **Motion** — only small hover transitions, all disabled when the device asks for reduced motion.
+- **Motion** — small hover transitions, a short fade when the search dialog opens, and smooth page-to-page transitions in browsers that support them (cross-document view transitions); all of it is off when the device asks for reduced motion.
 
 ## Accessibility, performance, and security
 
