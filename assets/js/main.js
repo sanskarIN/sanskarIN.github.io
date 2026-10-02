@@ -7,6 +7,10 @@
  *  - Mobile menu: a disclosure button; its aria-expanded state drives the CSS.
  *  - Copy buttons: copy an email address to the clipboard.
  *  - Contact form (when enabled): sends the message without leaving the page.
+ *  - Site search: the header button, Ctrl+K or Cmd+K, or "/" opens it; the
+ *    search itself (search.js) is loaded the first time it's used.
+ *  - Blog posts: copy buttons on code blocks, and "On this page" shows the
+ *    section being read.
  */
 (function () {
   "use strict";
@@ -14,6 +18,16 @@
   var root = document.documentElement;
   var THEME_KEY = "theme";
   var systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+  var copyStatus = document.querySelector("[data-copy-status]");
+
+  // Reads a message out to screen readers through the page's status line.
+  function announce(message) {
+    if (!copyStatus) return;
+    copyStatus.textContent = "";
+    window.setTimeout(function () {
+      copyStatus.textContent = message;
+    }, 50);
+  }
 
   function onMediaChange(query, handler) {
     if (query.addEventListener) {
@@ -104,15 +118,6 @@
         button.hidden = true;
       });
     } else {
-      var copyStatus = document.querySelector("[data-copy-status]");
-      var announce = function (message) {
-        if (!copyStatus) return;
-        copyStatus.textContent = "";
-        window.setTimeout(function () {
-          copyStatus.textContent = message;
-        }, 50);
-      };
-
       copyButtons.forEach(function (button) {
         var label = button.querySelector("[data-copy-label]");
         var defaultLabel = label ? label.textContent : "";
@@ -135,6 +140,123 @@
           );
         });
       });
+    }
+  }
+
+  /* Site search ------------------------------------------------------------ */
+
+  var searchButtons = document.querySelectorAll("[data-search-open]");
+  if (searchButtons.length && window.HTMLDialogElement && window.fetch) {
+    var searchScript = null;
+    var openSearch = function (trigger) {
+      if (window.siteSearch) {
+        window.siteSearch.open(trigger);
+        return;
+      }
+      if (searchScript) return;
+      searchScript = document.createElement("script");
+      searchScript.src = trigger.getAttribute("data-search-script");
+      searchScript.onload = function () {
+        if (window.siteSearch) window.siteSearch.open(trigger);
+      };
+      searchScript.onerror = function () {
+        searchScript.remove();
+        searchScript = null;
+      };
+      document.head.appendChild(searchScript);
+    };
+
+    searchButtons.forEach(function (button) {
+      button.hidden = false;
+      button.addEventListener("click", function () {
+        openSearch(button);
+      });
+    });
+
+    document.addEventListener("keydown", function (event) {
+      var target = event.target;
+      var typing = target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName));
+      if (event.altKey || event.defaultPrevented) return;
+      if ((event.key === "k" || event.key === "K") && (event.ctrlKey || event.metaKey)) {
+        event.preventDefault();
+        openSearch(searchButtons[0]);
+      } else if (event.key === "/" && !typing && !event.ctrlKey && !event.metaKey) {
+        event.preventDefault();
+        openSearch(searchButtons[0]);
+      }
+    });
+  }
+
+  /* Blog posts: copy buttons on code blocks ------------------------------------ */
+
+  var codeBlocks = document.querySelectorAll(".post__content pre");
+  if (codeBlocks.length && navigator.clipboard && window.isSecureContext) {
+    codeBlocks.forEach(function (pre, index) {
+      var wrapper = document.createElement("div");
+      wrapper.className = "code-block";
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "code-block__copy";
+      button.textContent = "Copy";
+      button.setAttribute("aria-label", "Copy code example " + (index + 1));
+      wrapper.appendChild(button);
+
+      var resetTimer;
+      button.addEventListener("click", function () {
+        navigator.clipboard.writeText(pre.innerText.replace(/\n$/, "")).then(
+          function () {
+            button.textContent = "Copied";
+            announce("Code example " + (index + 1) + " copied to the clipboard.");
+            window.clearTimeout(resetTimer);
+            resetTimer = window.setTimeout(function () {
+              button.textContent = "Copy";
+            }, 2000);
+          },
+          function () {
+            announce("Copying failed. Select the code and copy it manually.");
+          }
+        );
+      });
+    });
+  }
+
+  /* Blog posts: "On this page" -------------------------------------------------- */
+
+  var postToc = document.querySelector("[data-post-toc]");
+  if (postToc) {
+    // Open on wide screens, where it sits beside the post; closed on small
+    // screens, where it comes before the post.
+    if (window.matchMedia("(min-width: 64em)").matches) postToc.open = true;
+
+    var tocLinks = Array.prototype.slice.call(postToc.querySelectorAll('a[href^="#"]'));
+    var tocTargets = tocLinks.map(function (link) {
+      return document.getElementById(decodeURIComponent(link.getAttribute("href").slice(1)));
+    });
+    if (tocTargets.every(Boolean)) {
+      var tocTicking = false;
+      var markCurrent = function () {
+        tocTicking = false;
+        var offset = parseFloat(getComputedStyle(root).scrollPaddingTop) || 80;
+        var current = -1;
+        for (var i = 0; i < tocTargets.length; i++) {
+          if (tocTargets[i].getBoundingClientRect().top - offset <= 1) current = i;
+          else break;
+        }
+        tocLinks.forEach(function (link, i) {
+          if (i === current) link.setAttribute("aria-current", "true");
+          else link.removeAttribute("aria-current");
+        });
+      };
+      window.addEventListener("scroll", function () {
+        if (!tocTicking) {
+          tocTicking = true;
+          window.requestAnimationFrame(markCurrent);
+        }
+      }, { passive: true });
+      markCurrent();
     }
   }
 
