@@ -16,6 +16,8 @@
 #    _data/theme.yml         light and dark color palettes
 #    _data/focus.yml         development focus areas (Home + Developer pages)
 #    _data/technologies.yml  technologies (Home + Developer pages)
+#    _data/projects.yml      Projects page: featured and hidden repositories
+#    _data/github.json       Projects data, written by a workflow (don't edit)
 # =============================================================================
 
 # -----------------------------------------------------------------------------
