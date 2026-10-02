@@ -28,7 +28,7 @@
       {%- assign week = slot | divided_by: 7 -%}
       {%- assign weekday = slot | modulo: 7 -%}
       {%- assign day_seconds = forloop.index0 | times: 86400 | plus: start_seconds %}
-    <rect class="activity__day activity__day--{{ calendar.levels[forloop.index0] }}" x="{{ week | times: cell_step | plus: label_width }}" y="{{ weekday | times: cell_step | plus: label_height }}" width="{{ cell_size }}" height="{{ cell_size }}" rx="2"><title>{% if count == 0 %}No contributions{% elsif count == 1 %}1 contribution{% else %}{{ count }} contributions{% endif %} on {{ day_seconds | date: "%-d %B %Y" }}</title></rect>
+    <rect class="activity__day activity__day--{{ calendar.levels[forloop.index0] }}" x="{{ week | times: cell_step | plus: label_width }}" y="{{ weekday | times: cell_step | plus: label_height }}" width="{{ cell_size }}" height="{{ cell_size }}" rx="2"><title>{% if count == 0 %}No contributions{% elsif count == 1 %}1 contribution{% elsif count < 1000 %}{{ count }} contributions{% else %}{% include number.html value=count %} contributions{% endif %} on {{ day_seconds | date: "%-d %B %Y" }}</title></rect>
     {%- endfor %}
   </svg>
   <p class="activity__legend" aria-hidden="true">
@@ -39,9 +39,9 @@
     <span>More</span>
   </p>
   <figcaption class="activity__caption">
-    <strong>{{ calendar.total }} contribution{% if calendar.total != 1 %}s{% endif %}</strong> on GitHub in the last year, on {{ calendar.active_days }} day{% if calendar.active_days != 1 %}s{% endif %}.
-    {%- if calendar.longest_streak > 1 %} Longest streak: {{ calendar.longest_streak }} days in a row.{% endif %}
-    {%- if calendar.busiest %} Busiest day: {{ calendar.busiest.date | date: "%-d %B %Y" }}, with {{ calendar.busiest.count }} contribution{% if calendar.busiest.count != 1 %}s{% endif %}.{% endif %}
+    <strong>{% include number.html value=calendar.total %} contribution{% if calendar.total != 1 %}s{% endif %}</strong> on GitHub in the last year, on {% include number.html value=calendar.active_days %} day{% if calendar.active_days != 1 %}s{% endif %}.
+    {%- if calendar.longest_streak > 1 %} Longest streak: {% include number.html value=calendar.longest_streak %} days in a row.{% endif %}
+    {%- if calendar.busiest %} Busiest day: {{ calendar.busiest.date | date: "%-d %B %Y" }}, with {% include number.html value=calendar.busiest.count %} contribution{% if calendar.busiest.count != 1 %}s{% endif %}.{% endif %}
   </figcaption>
 </figure>
 {%- comment -%} Ends without a trailing newline. {%- endcomment -%}
