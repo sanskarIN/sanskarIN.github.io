@@ -27,6 +27,7 @@ import subprocess
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -224,8 +225,16 @@ def day(timestamp):
 
 
 def homepage_of(repo):
+    """The repository's website. A link to GitHub itself (the repository or a
+    profile) is left out: every card already links to the repository."""
     url = str(repo.get("homepage") or "").strip()
-    if not WEB_URL.fullmatch(url) or url.rstrip("/").lower() == repo["html_url"].rstrip("/").lower():
+    if not WEB_URL.fullmatch(url):
+        return None
+    try:
+        host = (urllib.parse.urlsplit(url).hostname or "").lower()
+    except ValueError:
+        return None
+    if not host or host in ("github.com", "www.github.com"):
         return None
     return url
 
