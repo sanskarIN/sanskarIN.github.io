@@ -100,27 +100,46 @@ body_class: page-home
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">05</span>Developer community</h2>
-      <p class="section-header__lead">Places to follow along, read, and talk about software.</p>
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">05</span>Blog</h2>
+      <p class="section-header__lead">Posts and images from me and from visitors. Anyone can write one.</p>
     </div>
-    {% include profile-list.html items=site.data.social.community variant="card" class="link-grid" %}
+    {%- if site.posts.size > 0 %}
+    <ul class="post-list">
+      {%- for post in site.posts limit: 3 %}
+      <li>{% include post-card.html post=post %}</li>
+      {%- endfor %}
+    </ul>
+    {%- else %}
+    <p>The blog is ready for its first post.</p>
+    {%- endif %}
+    <p class="section-footer">{% include link.html url="/blog/" label="Read the blog" class="text-link" arrow=true %}</p>
   </div>
 </section>
 
 <section class="section section--surface">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">06</span>Support &amp; digital products</h2>
-      <p class="section-header__lead">If my work is useful to you, you can support it directly or browse my digital products.</p>
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">06</span>Developer community</h2>
+      <p class="section-header__lead">Places to follow along, read, and talk about software.</p>
     </div>
-    {% include profile-list.html group="products" variant="card" class="link-grid" %}
+    {% include profile-list.html items=site.data.social.community variant="card" class="link-grid" %}
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">07</span>Contact</h2>
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">07</span>Support &amp; digital products</h2>
+      <p class="section-header__lead">If my work is useful to you, you can support it directly or browse my digital products.</p>
+    </div>
+    {% include profile-list.html group="products" variant="card" class="link-grid" %}
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">08</span>Contact</h2>
       <p class="section-header__lead">Email is the best way to reach me: business addresses for professional inquiries, and the support address for help.</p>
     </div>
     <div class="contact-grid">
