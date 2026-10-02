@@ -1,4 +1,5 @@
-# Python packages used by publish_post.py, pinned to exact versions.
+# Python packages used by publish_post.py and update_github_data.py, pinned
+# to exact versions.
 # Update them from time to time (Pillow in particular), then check that a
 # test post still publishes.
 markdown-it-py[linkify]==4.2.0
