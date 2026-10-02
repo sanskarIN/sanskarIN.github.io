@@ -33,18 +33,22 @@ Hosting
 - **Liquid** templates and **kramdown** Markdown, as provided by GitHub Pages.
 - **HTML, CSS, and JavaScript** written for this website, with no CSS or JavaScript framework.
 - **Blog:** posts are written with a GitHub issue form{% if accounts_on %} or with an account on this website{% endif %} and published by a GitHub Actions workflow, which converts them to HTML and prepares their images.
+- **Projects:** a GitHub Actions workflow reads my public repositories and contribution activity from the {% include link.html url="https://docs.github.com/en/rest" label="GitHub API" %} once a day and saves them with the website, so the Projects page needs no requests to GitHub while you browse.
+- **Search:** a small script searches an index of the website's pages, posts, and projects, generated when the site is built, in your browser.
 {% if accounts_on %}- **Accounts:** {% include link.html url="https://supabase.com/" label="Supabase" %} provides sign-in with emailed codes, author profiles, and image uploads (its Auth, Postgres database, Storage, and Edge Functions services). The website talks to it with its own small script, without a client library.
 {% endif %}
 ## Third-party libraries
 
 No third-party JavaScript or CSS libraries are loaded by the website. When the site is built, the `github-pages` Ruby gem (MIT License) provides Jekyll and its plugins at the same versions GitHub Pages uses.
 
-The workflow that publishes blog posts uses these Python packages, which are never loaded by the website:
+The workflows that publish blog posts and update the Projects page use these Python packages, which are never loaded by the website:
 
 - {% include link.html url="https://github.com/executablebooks/markdown-it-py" label="markdown-it-py" %}, with linkify-it-py, mdurl, and uc-micro-py (MIT License), to convert Markdown to HTML;
 - {% include link.html url="https://github.com/messense/nh3" label="nh3" %} (MIT License), to remove unsafe HTML;
 - {% include link.html url="https://python-pillow.github.io/" label="Pillow" %} (MIT-CMU License), to check and resize images; and
 - {% include link.html url="https://pyyaml.org/" label="PyYAML" %} (MIT License), to read the site's settings.
+
+The colors that identify programming languages on the Projects page are GitHub's, from {% include link.html url="https://github.com/github-linguist/linguist" label="GitHub Linguist" %} (MIT License).
 
 ## Fonts
 
@@ -54,7 +58,7 @@ The workflow that publishes blog posts uses these Python packages, which are nev
 
 - **Brand icons** come from {% include link.html url="https://simpleicons.org/" label="Simple Icons" %}, released under CC0 1.0 (public domain dedication).
 - **The LinkedIn icon** comes from {% include link.html url="https://icons.getbootstrap.com/" label="Bootstrap Icons" %}, MIT License, © The Bootstrap Authors. The license text is included in the icon file.
-- **Interface icons** — menu, theme switch, arrows, email, and the focus-area icons — were drawn for this website.
+- **Interface icons** — menu, theme switch, search, arrows, email, the focus-area icons, and the repository, star, fork, license, and activity icons — were drawn for this website.
 
 Brand names and logos are trademarks of their respective owners. They are used only to identify links to those services and do not imply endorsement.
 
@@ -73,5 +77,5 @@ None are loaded while you browse. Every file — fonts, icons, styles, and scrip
 ## Licensing
 
 - The website's source code and content are not published under an open-source license. Being able to read the code on GitHub does not grant permission to reuse it. The repository's {% include link.html url=license_decision_url label="license decision" %} explains this.
-- Third-party components keep their own licenses: IBM Plex (SIL Open Font License 1.1), Simple Icons (CC0 1.0), Bootstrap Icons (MIT), Jekyll (MIT), and the blog workflow's Python packages (MIT, and MIT-CMU for Pillow).
+- Third-party components keep their own licenses: IBM Plex (SIL Open Font License 1.1), Simple Icons (CC0 1.0), Bootstrap Icons (MIT), Jekyll (MIT), GitHub Linguist's language colors (MIT), and the workflows' Python packages (MIT, and MIT-CMU for Pillow).
 - My other projects on GitHub are licensed individually. Check each repository for its license.
