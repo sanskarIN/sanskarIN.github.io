@@ -1,0 +1,299 @@
+/* ==========================================================================
+   Site search: the header button and the search dialog (assets/js/search.js)
+   ========================================================================== */
+
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+.search-toggle {
+  order: 1;
+}
+
+/* Small screens: an icon button; the label is still read out. */
+.search-toggle__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.search-toggle__key {
+  display: none;
+}
+
+@media (min-width: 48em) {
+  .search-toggle {
+    order: 2;
+    margin-left: var(--space-2);
+  }
+
+  .theme-toggle {
+    order: 3;
+  }
+}
+
+@media (min-width: 64em) {
+  .search-toggle {
+    justify-content: flex-start;
+    min-width: 9.5rem;
+    color: var(--color-text-muted);
+  }
+
+  .search-toggle__label {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    clip-path: none;
+    white-space: nowrap;
+  }
+
+  .search-toggle__key {
+    display: inline-block;
+    margin-left: auto;
+  }
+}
+
+.search-toggle__key,
+.search-dialog__hint kbd,
+.search-dialog__close kbd {
+  min-width: 1.5em;
+  padding: 0 0.375em;
+  border: var(--border);
+  border-bottom-width: 2px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface-muted);
+  color: var(--color-text);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* While the dialog is open, the page behind it doesn't scroll. */
+:root.search-open {
+  overflow: hidden;
+}
+
+.search-dialog {
+  width: min(42rem, calc(100% - 2 * var(--gutter)));
+  max-width: none;
+  max-height: none;
+  margin: max(4rem, 10vh) auto auto;
+  padding: 0;
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 24px 64px -24px rgb(0 0 0 / 55%);
+}
+
+.search-dialog::backdrop {
+  background-color: rgb(17 18 20 / 55%);
+}
+
+.search-dialog__panel {
+  display: flex;
+  flex-direction: column;
+  max-height: min(38rem, calc(100vh - 8rem));
+  max-height: min(38rem, calc(100dvh - 8rem));
+}
+
+.search-dialog__form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-4);
+  border-bottom: var(--border);
+}
+
+/* The input has no outline of its own; the line under the form shows focus. */
+.search-dialog__form:focus-within {
+  box-shadow: inset 0 -2px 0 var(--color-accent);
+}
+
+.search-dialog__form .icon {
+  color: var(--color-text-muted);
+}
+
+.search-dialog__input {
+  flex: 1;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--text-lg);
+}
+
+.search-dialog__input:focus-visible {
+  outline: none;
+}
+
+.search-dialog__input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+.search-dialog__close {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.search-dialog__close:hover kbd {
+  border-color: var(--color-border-strong);
+}
+
+.search-dialog__status {
+  padding: var(--space-3) var(--space-4) 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.search-dialog__status:empty {
+  padding: 0;
+}
+
+.search-dialog__results {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: var(--space-2);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+}
+
+.search-dialog__results:empty {
+  padding: 0;
+}
+
+.search-result__link {
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.search-result__link:hover {
+  color: var(--color-text);
+}
+
+.search-result__link[aria-selected="true"] {
+  background-color: var(--color-accent-soft);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+}
+
+.search-result__heading {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.search-result__type {
+  flex: none;
+  padding: 0 0.375rem;
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.search-result__title {
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  overflow-wrap: anywhere;
+}
+
+.search-result__text {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* Matches are underlined as well as colored. */
+.search-result mark {
+  background: none;
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+.search-dialog__hint {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  border-top: var(--border);
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.search-dialog__hint span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Phones: the dialog sits at the top, and keyboard hints are left out. */
+@media (max-width: 39.99em) {
+  .search-dialog {
+    margin-top: var(--space-3);
+  }
+
+  .search-dialog__hint {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .search-dialog[open] {
+    animation: search-dialog-in 160ms var(--ease);
+  }
+
+  .search-dialog[open]::backdrop {
+    animation: search-backdrop-in 160ms var(--ease);
+  }
+}
+
+@keyframes search-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem) scale(0.98);
+  }
+}
+
+@keyframes search-backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
