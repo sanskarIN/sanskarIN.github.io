@@ -21,20 +21,20 @@ scripts: [projects]
 <dl class="stats">
   <div class="stats__item">
     <dt class="stats__label">Public repositories</dt>
-    <dd class="stats__value">{{ gh.totals.repositories }}</dd>
+    <dd class="stats__value">{% include number.html value=gh.totals.repositories %}</dd>
   </div>
   <div class="stats__item">
     <dt class="stats__label">Stars</dt>
-    <dd class="stats__value">{{ gh.totals.stars }}</dd>
+    <dd class="stats__value">{% include number.html value=gh.totals.stars %}</dd>
   </div>
   <div class="stats__item">
     <dt class="stats__label">Languages</dt>
-    <dd class="stats__value">{{ gh.totals.languages }}</dd>
+    <dd class="stats__value">{% include number.html value=gh.totals.languages %}</dd>
   </div>
   {%- if gh.activity %}
   <div class="stats__item">
-    <dt class="stats__label">Contributions this year</dt>
-    <dd class="stats__value">{{ gh.activity.total }}</dd>
+    <dt class="stats__label">Contributions in the last year</dt>
+    <dd class="stats__value">{% include number.html value=gh.activity.total %}</dd>
   </div>
   {%- endif %}
 </dl>
@@ -69,7 +69,7 @@ scripts: [projects]
     {%- if gh.activity %}
     <div class="glance__panel">
       <h3 class="glance__title">Activity</h3>
-      <p class="glance__note">Contributions to public repositories on GitHub over the last 12 months.</p>
+      <p class="glance__note">Contributions shown on my GitHub profile over the last 12 months.</p>
       {% include activity-calendar.html activity=gh.activity %}
     </div>
     {%- endif %}
@@ -97,7 +97,7 @@ scripts: [projects]
     <div class="repo-filters__field">
       <label class="form-field__label" for="repo-sort">Sort by</label>
       <select class="form-field__input" id="repo-sort" name="sort" data-repo-sort>
-        <option value="updated">Recently updated</option>
+        <option value="updated">Last updated</option>
         <option value="stars">Most stars</option>
         <option value="name">Name</option>
       </select>
