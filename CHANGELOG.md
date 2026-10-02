@@ -4,6 +4,24 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.3.0] — 2026-10-02
+
+### Added
+
+- Accounts, off until a Supabase project is connected in `_data/accounts.yml`: sign-up and sign-in with a 6-digit code sent by email (no password), author profiles (username, display name, bio, website), an account page that lists your posts and where each one is in the review, signing out, and deleting your account.
+- A post editor at `/account/write/` with image uploads (cover and images in the text, up to 10 MB each) and an automatically saved draft. Location, camera, and other metadata are removed from images in the browser before they are uploaded. Posts become GitHub issues and are checked, reviewed, and published by the same workflow as posts written on GitHub.
+- Author pages at `/blog/authors/?u=<username>`, and `/blog/posts.json`, the list of posts they read.
+- `supabase/schema.sql` (tables, storage bucket, and row-level security rules) and the `blog` Edge Function in `supabase/functions/blog/`, with a step-by-step setup guide in the README.
+- The publishing workflow accepts posts sent by accounts: it trusts the account's note only on issues opened by the owner, shows the account's display name as the author, and accepts images only from that account's own folder.
+- A "Blog" section on the Home page with the latest posts.
+
+### Changed
+
+- When accounts are on, "Write a post" opens the editor (the GitHub form stays available), the footer links to "Your account", the Content Security Policy allows the Supabase address, and the Privacy Policy, Terms, Cookie Policy, Accessibility page, and Credits page describe accounts.
+- Posts by website accounts are treated as visitors' posts in social previews and structured data.
+- Tags on the Tags page get distinct anchors even when they differ only by "#", such as "c" and "c#".
+- Secondary text-style buttons have a transparent background, so they keep their contrast in the dark theme.
+
 ## [1.2.1] — 2026-09-27
 
 ### Fixed
