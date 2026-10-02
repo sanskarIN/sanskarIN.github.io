@@ -4,10 +4,12 @@
 {%- comment -%}
   Content Security Policy from _config.yml. When the contact form is on, its
   service is allowed in connect-src (sending with JavaScript) and form-action
-  (sending without JavaScript). The CSP is skipped only while
-  `jekyll serve --livereload` runs, because live reload injects an inline
-  script.
+  (sending without JavaScript). When accounts are on, the Supabase project is
+  allowed in connect-src (sign-in and saving) and img-src (previews of
+  uploaded images). The CSP is skipped only while `jekyll serve --livereload`
+  runs, because live reload injects an inline script.
 {%- endcomment -%}
+{%- include accounts-config.html -%}
 {%- assign form_key = site.data.contact.form.access_key | strip -%}
 {%- assign form_origin = nil -%}
 {%- if form_key != "" -%}
@@ -19,6 +21,11 @@
     {%- if form_origin -%}
       {%- if directive[0] == "connect-src" or directive[0] == "form-action" -%}
         {%- assign csp_sources = csp_sources | replace: "'none'", "'self'" | append: " " | append: form_origin -%}
+      {%- endif -%}
+    {%- endif -%}
+    {%- if accounts_on -%}
+      {%- if directive[0] == "connect-src" or directive[0] == "img-src" -%}
+        {%- assign csp_sources = csp_sources | append: " " | append: accounts_origin -%}
       {%- endif -%}
     {%- endif -%}
     {{ directive[0] }} {{ csp_sources }}{% unless forloop.last %}; {% endunless %}
@@ -35,6 +42,9 @@
 <link rel="preload" href="{{ '/assets/fonts/ibm-plex-sans-latin-variable.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ asset_version }}">
 <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ asset_version }}" defer></script>
+{%- if page.account_app and accounts_on %}
+<script src="{{ '/assets/js/account.js' | relative_url }}?v={{ asset_version }}" defer></script>
+{%- endif %}
 <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="32x32">
 <link rel="icon" href="{{ '/assets/images/brand/favicon.svg' | relative_url }}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{{ '/assets/images/brand/apple-touch-icon.png' | relative_url }}">
