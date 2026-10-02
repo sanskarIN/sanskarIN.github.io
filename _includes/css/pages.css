@@ -96,6 +96,17 @@
   margin-top: var(--space-6);
 }
 
+.link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+}
+
+.subsection-title {
+  margin-top: var(--space-6);
+  font-size: var(--text-lg);
+}
+
 /* About: introduction with the identity panel --------------------------- */
 
 .intro-grid {
@@ -207,6 +218,7 @@
 .page-section > p + ul,
 .page-section > ul + p,
 .page-section > p + .button-row,
+.page-section > .languages + .button-row,
 .page-section > p + .link-grid,
 .page-section > p + .contact-form,
 .page-section > .feature-grid + p,
