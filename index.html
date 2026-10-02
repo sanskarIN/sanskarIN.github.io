@@ -86,6 +86,21 @@ body_class: page-home
       <h2 class="section-title"><span class="section-title__index" aria-hidden="true">04</span>Open source</h2>
       <p class="section-header__lead">I publish code on GitHub, where it can be read, discussed, and improved in the open.</p>
     </div>
+    {%- assign gh = site.data.github %}
+    {%- if gh and gh.featured.size > 0 %}
+    <ul class="repo-grid">
+      {%- for name in gh.featured limit: 3 %}
+        {%- assign repo = gh.repositories | where: "name", name | first %}
+        {%- if repo %}
+      <li>{% include repo-card.html repo=repo %}</li>
+        {%- endif %}
+      {%- endfor %}
+    </ul>
+    <p class="section-footer link-row">
+      {% include link.html url=site.projects_url label="All projects" class="text-link" arrow=true %}
+      {% include link.html url=site.data.social.profiles.github.url label="GitHub profile" icon="github" class="text-link" %}
+    </p>
+    {%- else %}
     <div class="callout">
       {% include icon.html name="github" class="callout__icon" %}
       <div>
@@ -94,6 +109,7 @@ body_class: page-home
       </div>
       {% include link.html url=site.data.social.profiles.github.url label="Visit GitHub" class="button button--primary" arrow=true %}
     </div>
+    {%- endif %}
   </div>
 </section>
 
