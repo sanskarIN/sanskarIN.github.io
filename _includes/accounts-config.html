@@ -1,0 +1,23 @@
+{%- comment -%}
+  Reads _data/accounts.yml and sets:
+    accounts_on       true when the Supabase address and publishable key are set
+    accounts_url      the Supabase project address, without a trailing slash
+    accounts_origin   scheme and host of that address (for the security policy)
+    accounts_key      the publishable key
+  A secret key (sb_secret_…) is never used, even if it is pasted by mistake.
+{%- endcomment -%}
+{%- assign accounts_url = site.data.accounts.supabase_url | default: "" | strip -%}
+{%- assign accounts_last = accounts_url | slice: -1, 1 -%}
+{%- if accounts_last == "/" -%}
+  {%- assign accounts_size = accounts_url | size | minus: 1 -%}
+  {%- assign accounts_url = accounts_url | slice: 0, accounts_size -%}
+{%- endif -%}
+{%- assign accounts_key = site.data.accounts.supabase_publishable_key | default: "" | strip -%}
+{%- assign accounts_scheme = accounts_url | slice: 0, 8 -%}
+{%- assign accounts_key_start = accounts_key | slice: 0, 10 -%}
+{%- assign accounts_on = false -%}
+{%- if accounts_scheme == "https://" and accounts_key != "" and accounts_key_start != "sb_secret_" -%}
+  {%- assign accounts_on = true -%}
+{%- endif -%}
+{%- assign accounts_origin = accounts_url | split: "/" | slice: 0, 3 | join: "/" -%}
+{%- comment -%} Ends without a trailing newline. {%- endcomment -%}
