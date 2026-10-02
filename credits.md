@@ -7,6 +7,7 @@ lead: How this website is built, what it uses, and who made the parts that are n
 description: "Credits and website information for sanskarIN.github.io: technology stack, fonts, icons, hosting, copyright, and licensing."
 permalink: /credits/
 ---
+{%- include accounts-config.html -%}
 {%- assign current_year = site.time | date: "%Y" | plus: 0 -%}
 {%- assign form_key = site.data.contact.form.access_key | strip -%}
 {%- assign contact_form = site.data.contact.form -%}
@@ -31,8 +32,9 @@ Hosting
 - **{% include link.html url="https://jekyllrb.com/" label="Jekyll" %}**, a static site generator, builds the pages when changes are published; visitors receive plain HTML files.
 - **Liquid** templates and **kramdown** Markdown, as provided by GitHub Pages.
 - **HTML, CSS, and JavaScript** written for this website, with no CSS or JavaScript framework.
-- **Blog:** posts are written with a GitHub issue form and published by a GitHub Actions workflow, which converts them to HTML and prepares their images.
-
+- **Blog:** posts are written with a GitHub issue form{% if accounts_on %} or with an account on this website{% endif %} and published by a GitHub Actions workflow, which converts them to HTML and prepares their images.
+{% if accounts_on %}- **Accounts:** {% include link.html url="https://supabase.com/" label="Supabase" %} provides sign-in with emailed codes, author profiles, and image uploads (its Auth, Postgres database, Storage, and Edge Functions services). The website talks to it with its own small script, without a client library.
+{% endif %}
 ## Third-party libraries
 
 No third-party JavaScript or CSS libraries are loaded by the website. When the site is built, the `github-pages` Ruby gem (MIT License) provides Jekyll and its plugins at the same versions GitHub Pages uses.
@@ -62,7 +64,7 @@ The site icons and the social preview image were created for this website from t
 
 ## External resources
 
-None are loaded while you browse. Every file — fonts, icons, styles, and scripts — is served from this website. There are no content delivery networks, analytics, advertising, or embedded third-party content.{% if form_key != "" %} The contact form sends messages to {% include link.html url=contact_form.service_url label=contact_form.service %} only when you submit it.{% endif %}
+None are loaded while you browse. Every file — fonts, icons, styles, and scripts — is served from this website. There are no content delivery networks, analytics, advertising, or embedded third-party content.{% if form_key != "" %} The contact form sends messages to {% include link.html url=contact_form.service_url label=contact_form.service %} only when you submit it.{% endif %}{% if accounts_on %} The account and author pages connect to Supabase, which provides the accounts.{% endif %}
 
 ## Copyright
 
