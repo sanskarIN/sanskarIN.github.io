@@ -26,11 +26,18 @@ the website in line with it:
 
 The "unpublish" label, or deleting the issue, removes the post again.
 
+Posts written with an account on the website arrive the same way: the "blog"
+Edge Function (supabase/functions/blog/) opens the issue with the owner's
+token and marks which account wrote it. Those posts always wait for review,
+and may only use images from that account's own upload folder.
+
 Limits and the review setting come from _data/blog.yml; the site address and
 the owner's name from _config.yml. The issue is only ever handled as data: it
 is never run, and never inserted into a shell command.
 """
 
+import base64
+import binascii
 import hashlib
 import html
 import io
@@ -69,6 +76,7 @@ LABELS = {
     "needs-changes": ("D93F0B", "Blog post needs changes before it can be published"),
     "published": ("0969DA", "This post is on the blog"),
     "unpublish": ("6E7781", "Removes this post from the blog (owner only)"),
+    "from-website": ("5319E7", "Blog post sent from an account on the website"),
 }
 STATUS_LABELS = ("awaiting-review", "needs-changes", "published")
 
@@ -80,6 +88,12 @@ NO_RESPONSE = "_No response_"
 
 # Authors whose posts are published without review.
 TRUSTED_AUTHORS = {"OWNER", "MEMBER", "COLLABORATOR"}
+
+# Marks a post sent from a website account (see supabase/functions/blog/).
+ACCOUNT_MARKER = re.compile(r"\A<!-- blog-account: ([A-Za-z0-9_-]+) -->")
+ACCOUNT_USERNAME = re.compile(r"[a-z0-9][a-z0-9-]{1,28}[a-z0-9]")
+UUID = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+ACCOUNT_IMAGE_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,99}")
 
 # Addresses already used by blog pages: /blog/tags/ and /blog/feed.xml.
 RESERVED_SLUGS = {"tags", "feed", "index", "page"}
@@ -147,7 +161,13 @@ def load_settings():
     blog = yaml.safe_load((ROOT / "_data" / "blog.yml").read_text(encoding="utf-8")) or {}
     limits = blog.get("limits") or {}
     site_url = str(config["url"]).rstrip("/") + str(config.get("baseurl") or "").rstrip("/")
+    accounts_file = ROOT / "_data" / "accounts.yml"
+    accounts = (yaml.safe_load(accounts_file.read_text(encoding="utf-8")) or {}) if accounts_file.exists() else {}
+    supabase_url = str(accounts.get("supabase_url") or "").strip().rstrip("/")
+    bucket = str(accounts.get("images_bucket") or "blog-images")
     return {
+        # Where images uploaded with website accounts live (None: accounts are off).
+        "account_images": f"{supabase_url}/storage/v1/object/public/{bucket}/" if supabase_url else None,
         "site_url": site_url,
         "owner_name": str(config["author"]["name"]),
         "form": str(blog.get("form") or "blog-post.yml"),
@@ -321,6 +341,45 @@ def parse_tags(text, limit, problems):
     return tags[:limit]
 
 
+def site_account(issue):
+    """The website account that wrote a post sent from the website, or None.
+    Only issues opened with the repository owner's token (as the "blog" Edge
+    Function does) can carry the account marker."""
+    owner = os.environ["GITHUB_REPOSITORY"].split("/")[0].lower()
+    if str((issue.get("user") or {}).get("login", "")).lower() != owner:
+        return None
+    match = ACCOUNT_MARKER.match(issue.get("body") or "")
+    if not match:
+        return None
+    encoded = match.group(1)
+    try:
+        data = json.loads(base64.urlsafe_b64decode(encoded + "=" * (-len(encoded) % 4)).decode("utf-8"))
+    except (ValueError, binascii.Error, UnicodeDecodeError):
+        return None
+    if not isinstance(data, dict):
+        return None
+    username, account_id = data.get("username"), data.get("id")
+    name = clean_line(str(data.get("name") or ""))[:60]
+    if not (isinstance(username, str) and ACCOUNT_USERNAME.fullmatch(username) and "--" not in username
+            and isinstance(account_id, str) and UUID.fullmatch(account_id) and name):
+        return None
+    return {"id": account_id, "username": username, "name": name}
+
+
+def image_check(account, settings):
+    """Which image addresses a post may use: images attached on GitHub, and
+    for website accounts, images in that account's own upload folder."""
+    prefix = settings.get("account_images")
+    own = f"{prefix}{account['id']}/" if account and prefix else None
+
+    def allowed(url):
+        if is_attachment(url):
+            return True
+        return bool(own) and url.startswith(own) and ACCOUNT_IMAGE_NAME.fullmatch(url[len(own):]) is not None
+
+    return allowed
+
+
 def is_attachment(url):
     """True for images uploaded to GitHub issues and comments."""
     try:
@@ -334,8 +393,9 @@ def is_attachment(url):
     return parts.hostname == "user-images.githubusercontent.com"
 
 
-def read_form(issue, settings):
+def read_form(issue, settings, is_image=None):
     """Returns the post's fields, or raises PostProblem with everything to fix."""
+    is_image = is_image or is_attachment
     problems, notes = [], []
     form_url = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/issues/new?template={settings['form']}"
 
@@ -361,7 +421,7 @@ def read_form(issue, settings):
     tags = parse_tags(sections.get("Tags", ""), settings["tags"], problems)
 
     cover_text = sections.get("Cover image", "")
-    cover_urls = [url for url in URL_IN_TEXT.findall(cover_text) if is_attachment(url)]
+    cover_urls = [url for url in URL_IN_TEXT.findall(cover_text) if is_image(url)]
     cover_url = cover_urls[0] if cover_urls else None
     if cover_text and not cover_url:
         problems.append("Upload the cover image to this issue (drag it into the Cover image box). "
@@ -656,17 +716,18 @@ def without_modified_date(text):
     return re.sub(r"^last_modified_at: .*\n", "", text, count=1, flags=re.M)
 
 
-def build_post(issue, form, settings, existing, trusted):
+def build_post(issue, form, settings, existing, trusted, account=None, is_image=None):
     """Downloads and prepares everything for the post. Nothing is written yet."""
+    is_image = is_image or is_attachment
     number = issue["number"]
     login = issue["user"]["login"]
-    is_owner = login.lower() == os.environ["GITHUB_REPOSITORY"].split("/")[0].lower()
+    is_owner = account is None and login.lower() == os.environ["GITHUB_REPOSITORY"].split("/")[0].lower()
     link_rel = "noopener noreferrer" if trusted else "noopener noreferrer nofollow ugc"
     slug = existing["slug"] if existing else new_slug(form["title"], number)
     notes = list(form["notes"])
 
     markup = render_markdown(form["markdown"], link_rel)
-    sources = [src for src in image_sources(markup) if is_attachment(src)]
+    sources = [src for src in image_sources(markup) if is_image(src)]
     wanted = list(dict.fromkeys(([form["cover_url"]] if form["cover_url"] else []) + sources))
     if len(wanted) > settings["images_per_post"]:
         raise PostProblem([f"Use at most {settings['images_per_post']} images (there are {len(wanted)})."])
@@ -726,8 +787,12 @@ def build_post(issue, form, settings, existing, trusted):
                      "with location and camera details removed.")
 
     cover = images.get(form["cover_url"]) if form["cover_url"] else None
-    author = settings["owner_name"] if is_owner else login
-    author_url = "/about/" if is_owner else f"https://github.com/{login}"
+    if account:
+        author, author_url = account["name"], f"/blog/authors/?u={account['username']}"
+    elif is_owner:
+        author, author_url = settings["owner_name"], "/about/"
+    else:
+        author, author_url = login, f"https://github.com/{login}"
     fields = {
         "title": form["title"],
         "description": form["summary"] or shorten(clean_line(text), 160),
@@ -735,7 +800,8 @@ def build_post(issue, form, settings, existing, trusted):
         "last_modified_at": None,
         "author": author,
         "author_url": author_url,
-        "author_login": login,
+        "author_login": None if account else login,
+        "author_username": account["username"] if account else None,
         "image": cover["src"] if cover else None,
         "image_alt": form["cover_alt"] if cover else None,
         "image_width": cover["width"] if cover else None,
@@ -880,7 +946,18 @@ def handle_issue_event(gh, settings, event):
         labels.add("blog-post")
 
     author = issue["user"]["login"]
-    trusted = issue.get("author_association") in TRUSTED_AUTHORS
+    account = site_account(issue)
+    if account is None and (issue.get("body") or "").startswith("<!-- blog-account:") \
+            and author.lower() == os.environ["GITHUB_REPOSITORY"].split("/")[0].lower():
+        # Never treat a damaged website post as the owner's own post.
+        gh.set_status(number, "error", "**This post couldn't be read.** It was sent from the website, "
+                                       "but its account details are missing or damaged, so it wasn't published.")
+        return
+    is_image = image_check(account, settings)
+    # Posts from website accounts are opened with the owner's token, but they
+    # are visitors' posts: they always wait for review.
+    trusted = issue.get("author_association") in TRUSTED_AUTHORS and account is None
+    where = "it from your account on the website" if account else "this issue"
     is_open = issue.get("state") == "open"
     existing = find_post(number)
     live_url = post_url(settings, existing["slug"]) if existing else None
@@ -896,7 +973,9 @@ def handle_issue_event(gh, settings, event):
         for name in (set(STATUS_LABELS) & labels) - wanted:
             gh.remove_label(number, name)
 
-    edited_after_approval = (action == "edited" and settings["review"] and not trusted
+    # (For website accounts, the Edge Function takes back the approval itself
+    # when the author changes a post.)
+    edited_after_approval = (action == "edited" and settings["review"] and not trusted and account is None
                              and "approved" in labels and event["sender"]["login"] == author)
     if edited_after_approval:
         gh.remove_label(number, "approved")
@@ -917,14 +996,14 @@ def handle_issue_event(gh, settings, event):
 
     allowed = trusted or "approved" in labels or not settings["review"]
     try:
-        form = read_form(issue, settings)
+        form = read_form(issue, settings, is_image)
         if allowed:
-            post = build_post(issue, form, settings, existing, trusted)
+            post = build_post(issue, form, settings, existing, trusted, account, is_image)
         else:
-            precheck_images(form, settings)
+            precheck_images(form, settings, is_image)
     except PostProblem as problem:
         update_labels(published=bool(existing), changes=True)
-        text = ("**This post can't be published yet.** Please edit this issue to fix the following. "
+        text = (f"**This post can't be published yet.** Please edit {where} to fix the following. "
                 "It's checked again after every edit.\n\n" + bullet_list(problem.messages))
         if existing:
             text += f"\n\nThe version published earlier stays on the blog: {live_url}"
@@ -938,7 +1017,7 @@ def handle_issue_event(gh, settings, event):
                     f"them. Until then, the blog shows the version approved earlier: {live_url}")
         else:
             text = ("**Thanks for your post!** It will be published after the site owner reviews it. "
-                    "You can keep editing this issue until then.")
+                    f"You can keep editing {where} until then.")
         gh.set_status(number, "waiting", with_notes(text, form["notes"]) + owner_help(settings["review"]))
         if not is_open and existing:
             gh.set_state(number, "open")
@@ -957,21 +1036,23 @@ def handle_issue_event(gh, settings, event):
         text = (f"**{'Published' if result == 'created' else 'Updated'}!** "
                 f"{'Your post is on the blog' if result == 'created' else 'The post now shows your changes'}: "
                 f"{url}\n\nIt can take a minute or two to appear.")
-    text += ("\n\nTo change the post, edit this issue" +
+    text += (f"\n\nTo change the post, edit {where}" +
              (" — the changes are published after the site owner reviews them." if settings["review"] and not trusted
               else "; the post updates automatically.") +
-             " To have it removed, comment on this issue.")
+             (" To have it removed, delete it from your account or email the site owner." if account
+              else " To have it removed, comment on this issue."))
     gh.set_status(number, "published", with_notes(text, post["notes"]))
     if is_open:
         gh.set_state(number, "closed", "completed")
 
 
-def precheck_images(form, settings):
+def precheck_images(form, settings, is_image=None):
     """For posts waiting for review: checks the images' size and type without
     decoding them. They are fully checked when the post is approved."""
+    is_image = is_image or is_attachment
     markup = render_markdown(form["markdown"], "noopener noreferrer")
     wanted = list(dict.fromkeys(([form["cover_url"]] if form["cover_url"] else [])
-                                + [src for src in image_sources(markup) if is_attachment(src)]))
+                                + [src for src in image_sources(markup) if is_image(src)]))
     if len(wanted) > settings["images_per_post"]:
         raise PostProblem([f"Use at most {settings['images_per_post']} images (there are {len(wanted)})."])
     problems = []
