@@ -1,0 +1,16 @@
+{%- comment -%}
+  Writes a whole number with thousands separators: 22928 becomes 22,928.
+  Parameter: value (required).
+{%- endcomment -%}
+{%- assign number_digits = include.value | plus: 0 | append: "" -%}
+{%- assign number_size = number_digits | size -%}
+{%- assign number_head = number_size | modulo: 3 -%}
+{%- if number_head == 0 %}{% assign number_head = 3 %}{% endif -%}
+{%- assign number_text = number_digits | slice: 0, number_head -%}
+{%- assign number_groups = number_size | minus: number_head | divided_by: 3 -%}
+{%- for number_index in (1..number_groups) -%}
+  {%- assign number_start = number_index | times: 3 | minus: 3 | plus: number_head -%}
+  {%- assign number_group = number_digits | slice: number_start, 3 -%}
+  {%- assign number_text = number_text | append: "," | append: number_group -%}
+{%- endfor -%}
+{{- number_text -}}
