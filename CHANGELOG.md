@@ -4,6 +4,16 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.4.1] — 2026-10-02
+
+### Changed
+
+- Numbers on the Projects page have thousands separators (such as 22,928), and the contributions total is labeled "in the last year", like the calendar it summarizes.
+- Repository cards without a description say "No description provided."
+- A repository's "Website" link is left out when it points back to GitHub, and on this website's own card.
+- The "Sort by" choices are shorter, so they fit on small phones.
+- The Activity panel describes the calendar as the contributions shown on my GitHub profile.
+
 ## [1.4.0] — 2026-10-02
 
 ### Added
