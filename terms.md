@@ -77,12 +77,13 @@ You can create a free account with your email address to write for the blog. If 
 
 ## External links
 
-The website links to other websites and services, including GitHub, LinkedIn, Dev.to, Discord, X, Instagram, Threads, Pinterest, Bluesky, Buy Me a Coffee, and Gumroad. These links are provided for convenience. I do not control those services and am not responsible for their content, availability, or practices. Your use of them is governed by their own terms and policies.
+The website links to other websites and services, including GitHub, LinkedIn, Dev.to, Discord, X, Reddit, Instagram, Threads, Pinterest, Bluesky, Buy Me a Coffee, and Gumroad. These links are provided for convenience. I do not control those services and am not responsible for their content, availability, or practices. Your use of them is governed by their own terms and policies.
 
 ## Third-party services
 
 - **Hosting:** the website is hosted on GitHub Pages, a service provided by GitHub, Inc.
 - **Blog:** blog posts are written in GitHub Issues{% if accounts_on %} or with an account on this website{% endif %}, stored in the website's repository on GitHub, and published by GitHub Actions.
+- **Projects:** the [Projects page]({{ '/projects/' | relative_url }}) shows public information about my GitHub repositories, which GitHub Actions copies from GitHub's API once a day, so it may be up to a day out of date.
 {% if accounts_on %}- **Accounts:** accounts, author profiles, and uploaded images are stored by Supabase and handled as described in the [Privacy Policy]({{ '/privacy/' | relative_url }}).
 {% endif %}- **Email:** messages you send to the addresses on this website are handled by the email providers that host those addresses (Microsoft Outlook and Google Gmail).
 {% if form_key != "" %}- **Contact form:** messages sent with the contact form are delivered by {{ contact_form.service }} and handled as described in the [Privacy Policy]({{ '/privacy/' | relative_url }}).
