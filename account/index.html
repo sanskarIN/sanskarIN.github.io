@@ -1,0 +1,163 @@
+---
+layout: page
+title: Your account
+eyebrow: Account
+lead: Sign in with your email address to write for the blog and keep an author profile.
+description: "Sign in to sanskarIN.github.io with an emailed code to write blog posts and manage your author profile."
+permalink: /account/
+noindex: true
+sitemap: false
+account_app: account
+---
+{%- comment -%}
+  Account page: sign-up and sign-in with an emailed 6-digit code, the author
+  profile, the person's posts, signing out, and deleting the account. The
+  views below are switched by assets/js/account.js; only one is shown at a
+  time. Accounts are turned on in _data/accounts.yml (see README.md →
+  "Accounts").
+{%- endcomment -%}
+{%- include accounts-config.html -%}
+{%- capture github_form_url -%}{{ site.repository_url }}/issues/new?template={{ site.data.blog.form }}{%- endcapture -%}
+{%- if accounts_on %}
+<div class="account" data-account-app="account" data-supabase-url="{{ accounts_url }}" data-supabase-key="{{ accounts_key }}" data-function="{{ site.data.accounts.function }}" data-bucket="{{ site.data.accounts.images_bucket }}">
+  <p class="account__loading" data-account-view="loading">Loading your account…</p>
+
+  <section class="account-view" data-account-view="signin" aria-labelledby="signin-title" hidden>
+    <h2 id="signin-title" tabindex="-1">Sign in or create an account</h2>
+    <p>Enter your email address and we'll email you a 6-digit code. There's no password to remember, and if you're new, your account is created when you enter the code.</p>
+    <form class="form-panel" data-form="email" novalidate>
+      <div class="form-field">
+        <label class="form-field__label" for="account-email">Email address</label>
+        <input class="form-field__input" id="account-email" name="email" type="email" autocomplete="email" maxlength="254" aria-describedby="account-email-hint" required>
+        <p class="form-field__hint" id="account-email-hint">Used only to sign you in. It's never shown on the website.</p>
+      </div>
+      <div class="form-panel__actions">
+        <button class="button button--primary" type="submit">Email me a code</button>
+      </div>
+      <div class="form-status" role="status" data-status></div>
+    </form>
+  </section>
+
+  <section class="account-view" data-account-view="code" aria-labelledby="code-title" hidden>
+    <h2 id="code-title" tabindex="-1">Check your email</h2>
+    <p>We sent a 6-digit code to <strong data-email></strong>. It can take a minute to arrive, so check your spam folder too. The code works once and expires after a short time.</p>
+    <form class="form-panel" data-form="code" novalidate>
+      <div class="form-field">
+        <label class="form-field__label" for="account-code">6-digit code</label>
+        <input class="form-field__input form-field__input--code" id="account-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" spellcheck="false" required>
+      </div>
+      <div class="form-panel__actions">
+        <button class="button button--primary" type="submit">Sign in</button>
+        <button class="button button--secondary" type="button" data-action="resend">Send a new code</button>
+        <button class="button button--ghost" type="button" data-action="change-email">Use a different email</button>
+      </div>
+      <div class="form-status" role="status" data-status></div>
+    </form>
+  </section>
+
+  <section class="account-view" data-account-view="create-profile" aria-labelledby="create-title" hidden>
+    <h2 id="create-title" tabindex="-1">Create your author profile</h2>
+    <p>Your profile is public: it appears on your posts and on your author page. Your email address is never shown.</p>
+    <form class="form-panel form-panel--columns" data-form="create-profile" novalidate>
+      <div class="form-field">
+        <label class="form-field__label" for="profile-username">Username <span class="form-field__required">(required)</span></label>
+        <input class="form-field__input" id="profile-username" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="3" maxlength="30" aria-describedby="profile-username-hint" required>
+        <p class="form-field__hint" id="profile-username-hint">3–30 lowercase letters, numbers, and single hyphens. It's part of your author page's address and can't be changed later.</p>
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="profile-name">Display name <span class="form-field__required">(required)</span></label>
+        <input class="form-field__input" id="profile-name" name="display_name" type="text" autocomplete="name" maxlength="60" required>
+      </div>
+      <div class="form-field form-field--wide">
+        <label class="form-field__label" for="profile-bio">About you</label>
+        <textarea class="form-field__input form-field__input--short" id="profile-bio" name="bio" rows="3" maxlength="300" aria-describedby="profile-bio-hint"></textarea>
+        <p class="form-field__hint" id="profile-bio-hint">Optional. One or two sentences, up to 300 characters.</p>
+      </div>
+      <div class="form-field form-field--wide">
+        <label class="form-field__label" for="profile-website">Website</label>
+        <input class="form-field__input" id="profile-website" name="website" type="url" inputmode="url" autocomplete="url" maxlength="200" placeholder="https://" aria-describedby="profile-website-hint">
+        <p class="form-field__hint" id="profile-website-hint">Optional. An address starting with https://.</p>
+      </div>
+      <div class="form-check form-field--wide">
+        <input id="profile-terms" name="terms" type="checkbox" required>
+        <label for="profile-terms">I agree to the <a href="{{ '/terms/' | relative_url }}">Terms</a> and have read the <a href="{{ '/privacy/' | relative_url }}">Privacy Policy</a>.</label>
+      </div>
+      <div class="form-panel__actions">
+        <button class="button button--primary" type="submit">Create profile</button>
+        <button class="button button--ghost" type="button" data-action="sign-out">Sign out</button>
+      </div>
+      <div class="form-status" role="status" data-status></div>
+    </form>
+  </section>
+
+  <div class="account-view account-dashboard" data-account-view="dashboard" hidden>
+    <section class="page-section" aria-labelledby="profile-title">
+      <h2 id="profile-title" tabindex="-1">Your profile</h2>
+      <dl class="spec-list account-summary">
+        <div class="spec-list__row"><dt class="spec-list__term">Display name</dt><dd data-profile="display_name"></dd></div>
+        <div class="spec-list__row"><dt class="spec-list__term">Username</dt><dd><span data-profile="username"></span> · <a data-profile-link href="{{ '/blog/authors/' | relative_url }}">Your author page</a></dd></div>
+        <div class="spec-list__row"><dt class="spec-list__term">About you</dt><dd data-profile="bio"></dd></div>
+        <div class="spec-list__row"><dt class="spec-list__term">Website</dt><dd data-profile="website"></dd></div>
+      </dl>
+      <details class="account-details">
+        <summary>Edit profile</summary>
+        <form class="form-panel form-panel--columns" data-form="edit-profile" novalidate>
+          <div class="form-field">
+            <label class="form-field__label" for="edit-name">Display name <span class="form-field__required">(required)</span></label>
+            <input class="form-field__input" id="edit-name" name="display_name" type="text" autocomplete="name" maxlength="60" required>
+          </div>
+          <div class="form-field">
+            <label class="form-field__label" for="edit-website">Website</label>
+            <input class="form-field__input" id="edit-website" name="website" type="url" inputmode="url" autocomplete="url" maxlength="200" placeholder="https://">
+          </div>
+          <div class="form-field form-field--wide">
+            <label class="form-field__label" for="edit-bio">About you</label>
+            <textarea class="form-field__input form-field__input--short" id="edit-bio" name="bio" rows="3" maxlength="300"></textarea>
+          </div>
+          <div class="form-panel__actions">
+            <button class="button button--primary" type="submit">Save profile</button>
+          </div>
+          <div class="form-status" role="status" data-status></div>
+        </form>
+      </details>
+    </section>
+
+    <section class="page-section" aria-labelledby="posts-title">
+      <h2 id="posts-title">Your posts</h2>
+      <p>Every post is reviewed before it appears on the blog, and changes are reviewed again. This list shows where each post is.</p>
+      <div class="button-row">
+        <a class="button button--primary" href="{{ '/account/write/' | relative_url }}">{% include icon.html name="pencil" %}Write a post</a>
+      </div>
+      <div class="form-status" role="status" data-posts-status tabindex="-1"></div>
+      <ul class="account-posts" data-posts></ul>
+    </section>
+
+    <section class="page-section" aria-labelledby="settings-title">
+      <h2 id="settings-title">Account</h2>
+      <p>Signed in as <strong data-email></strong>.</p>
+      <div class="button-row">
+        <button class="button button--secondary" type="button" data-action="sign-out">Sign out</button>
+      </div>
+      <details class="account-details account-details--danger">
+        <summary>Delete your account</summary>
+        <form class="form-panel" data-form="delete-account">
+          <p class="form-field--wide">This deletes your account, your profile, and the images you uploaded, and withdraws posts that are still waiting for review. It can't be undone.</p>
+          <div class="form-check form-field--wide">
+            <input id="delete-posts" name="remove_posts" type="checkbox">
+            <label for="delete-posts">Also remove my published posts from the blog</label>
+          </div>
+          <div class="form-panel__actions">
+            <button class="button button--primary" type="submit">Delete my account</button>
+          </div>
+          <div class="form-status" role="status" data-status></div>
+        </form>
+      </details>
+    </section>
+  </div>
+</div>
+<noscript>
+  <p class="note">Signing in needs JavaScript. You can still {% include link.html url=github_form_url label="write a post with GitHub" %}.</p>
+</noscript>
+{%- else %}
+<p>Accounts aren't available on this website at the moment. You can still {% include link.html url=github_form_url label="write a post with GitHub" %}.</p>
+{%- endif %}
