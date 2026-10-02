@@ -2,9 +2,9 @@
   JSON-LD structured data: a Person, the WebSite, and the current page, plus
   the Blog and a BlogPosting on blog pages. Uses only information already on
   the site. Relies on `seo_title`, `seo_description`, `seo_image`,
-  `seo_author`, and `is_post` from seo.html. Per page: `schema_type` (e.g.
-  ProfilePage, ContactPage; default WebPage). "</" is escaped so text from a
-  post can never end the script element.
+  `seo_author`, `is_post`, and `post_by_visitor` from seo.html. Per page:
+  `schema_type` (e.g. ProfilePage, ContactPage; default WebPage). "</" is
+  escaped so text from a post can never end the script element.
 {%- endcomment -%}
 {%- unless page.noindex -%}
 {%- assign person_id = "/#person" | absolute_url -%}
@@ -93,7 +93,7 @@
       "url": {{ page_url | jsonify }},
       "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
       "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
-      {%- if page.author_login and page.author_login != site.author.username %}
+      {%- if post_by_visitor %}
       "author": { "@type": "Person", "name": {{ seo_author | jsonify }}, "url": {{ post_author_url | jsonify }} },
       {%- else %}
       "author": { "@id": {{ person_id | jsonify }} },
