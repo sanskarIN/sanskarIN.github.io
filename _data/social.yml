@@ -9,7 +9,8 @@
 #    name      display name of the service
 #    url       full profile URL (a blank url hides the link everywhere)
 #    handle    how the username is written on that service
-#    username  which of the two usernames the profile uses
+#    username  the username used on that service (most use sanskarIN or
+#              dev_sanskarIN; the About page groups profiles by username)
 #    icon      symbol id in assets/icons/sprite.svg
 #    note      short description, shown on the Contact and Home pages
 #    same_as   false = leave out of structured data (not a personal profile)
@@ -51,11 +52,19 @@ profiles:
 
   x:
     name: X
-    url: https://www.x.com/dev_sanskarIN
-    handle: "@dev_sanskarIN"
-    username: dev_sanskarIN
+    url: https://x.com/SanskarCodes
+    handle: "@SanskarCodes"
+    username: SanskarCodes
     icon: x
     note: Posts and updates
+
+  reddit:
+    name: Reddit
+    url: https://reddit.com/user/sanskarIN
+    handle: u/sanskarIN
+    username: sanskarIN
+    icon: reddit
+    note: Posts and discussions
 
   instagram:
     name: Instagram
@@ -125,10 +134,10 @@ groups:
     items: [github, linkedin, devto, discord]
   social:
     title: Social
-    items: [x, instagram, threads, pinterest, bluesky]
+    items: [x, reddit, instagram, threads, pinterest, bluesky]
   products:
     title: Support & Products
     items: [buymeacoffee, gumroad, paypal]
 
 # Profiles featured in the Home page "Developer community" section.
-community: [devto, discord, x, bluesky, linkedin]
+community: [devto, discord, x, reddit, bluesky, linkedin]
