@@ -1,8 +1,9 @@
 {%- comment -%}
   One GitHub repository, from _data/github.json (see README.md → "Projects").
   Parameters: repo (required), heading (heading level, default 3).
-  The whole card is clickable through its title link. Text from GitHub is
-  always escaped; language colors are drawn with SVG, because the security
+  The whole card is clickable through its title link, and its "Website"
+  link is left out on this website's own card. Text from GitHub is always
+  escaped; language colors are drawn with SVG, because the security
   policy doesn't allow inline styles.
 {%- endcomment -%}
 {%- assign repo = include.repo -%}
@@ -21,8 +22,10 @@
     {%- if repo.fork %}<span class="repo-badge">Fork</span>{% endif -%}
   </p>
   {%- endif %}
-  {%- if repo.description != "" %}
+  {%- if repo.description and repo.description != "" %}
   <p class="repo-card__description">{{ repo.description | escape }}</p>
+  {%- else %}
+  <p class="repo-card__description">No description provided.</p>
   {%- endif %}
   {%- if repo.topics.size > 0 %}
   <ul class="repo-card__topics" aria-label="Topics">
@@ -36,10 +39,10 @@
     <li>{% include language-dot.html color=repo.language_color %}{{ repo.language | escape }}</li>
     {%- endif %}
     {%- if repo.stars > 0 %}
-    <li>{% include icon.html name="star" %}{{ repo.stars }}<span class="visually-hidden"> star{% if repo.stars != 1 %}s{% endif %}</span></li>
+    <li>{% include icon.html name="star" %}{% include number.html value=repo.stars %}<span class="visually-hidden"> star{% if repo.stars != 1 %}s{% endif %}</span></li>
     {%- endif %}
     {%- if repo.forks > 0 %}
-    <li>{% include icon.html name="fork" %}{{ repo.forks }}<span class="visually-hidden"> fork{% if repo.forks != 1 %}s{% endif %}</span></li>
+    <li>{% include icon.html name="fork" %}{% include number.html value=repo.forks %}<span class="visually-hidden"> fork{% if repo.forks != 1 %}s{% endif %}</span></li>
     {%- endif %}
     {%- if repo.license %}
     <li>{% include icon.html name="scale" %}<span class="visually-hidden">License: </span>{{ repo.license | escape }}</li>
@@ -48,7 +51,7 @@
     <li>Updated <time datetime="{{ repo.pushed }}">{{ repo.pushed | date: "%-d %b %Y" }}</time></li>
     {%- endif %}
   </ul>
-  {%- if repo.homepage %}
+  {%- if repo.homepage and repo.name != site_repo_name %}
   <p class="repo-card__more">{% include link.html url=repo.homepage label="Website" class="repo-card__homepage" hint=true %}</p>
   {%- endif %}
 </article>
