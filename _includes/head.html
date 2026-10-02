@@ -45,6 +45,11 @@
 {%- if page.account_app and accounts_on %}
 <script src="{{ '/assets/js/account.js' | relative_url }}?v={{ asset_version }}" defer></script>
 {%- endif %}
+{%- comment -%} Page-specific scripts: `scripts: [name]` in the front matter loads assets/js/<name>.js. {%- endcomment -%}
+{%- for script_name in page.scripts %}
+{%- capture script_path %}/assets/js/{{ script_name }}.js{% endcapture %}
+<script src="{{ script_path | relative_url }}?v={{ asset_version }}" defer></script>
+{%- endfor %}
 <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" sizes="32x32">
 <link rel="icon" href="{{ '/assets/images/brand/favicon.svg' | relative_url }}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{{ '/assets/images/brand/apple-touch-icon.png' | relative_url }}">
