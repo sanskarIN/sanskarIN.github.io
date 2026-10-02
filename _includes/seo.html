@@ -15,6 +15,10 @@
 {%- assign seo_author = page.author | default: site.author.name -%}
 {%- assign is_post = false -%}
 {%- if page.collection == "posts" %}{% assign is_post = true %}{% endif -%}
+{%- comment -%} A post written by someone else: with GitHub, or with an account on this website. {%- endcomment -%}
+{%- assign post_by_visitor = false -%}
+{%- if is_post and page.author_username %}{% assign post_by_visitor = true %}{% endif -%}
+{%- if is_post and page.author_login and page.author_login != site.author.username %}{% assign post_by_visitor = true %}{% endif -%}
 {%- if page.image -%}
   {%- assign seo_image = page.image | absolute_url -%}
   {%- assign seo_image_alt = page.image_alt -%}
@@ -66,7 +70,7 @@
 {%- endif %}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="{{ x_handle }}">
-{%- unless is_post and page.author_login and page.author_login != site.author.username %}
+{%- unless post_by_visitor %}
 <meta name="twitter:creator" content="{{ x_handle }}">
 {%- endunless %}
 <meta name="twitter:title" content="{{ seo_title | escape }}">
