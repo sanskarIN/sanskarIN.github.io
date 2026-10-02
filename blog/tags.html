@@ -9,22 +9,25 @@ permalink: /blog/tags/
 schema_type: CollectionPage
 ---
 {%- comment -%}
-  Every tag used by a post, with the posts that use it. Section ids
-  ("tag-" + the tag) match the links in _includes/post-tags.html.
+  Every tag used by a post, with the posts that use it. Section ids come
+  from _includes/tag-id.html, like the links to them.
 {%- endcomment -%}
 {%- assign tags = site.tags | sort -%}
 {%- if tags.size > 0 %}
 <nav aria-label="Tags">
   <ul class="tag-list">
     {%- for tag in tags %}
-    <li><a class="tag tag--link" href="#tag-{{ tag[0] | slugify: 'pretty' }}">{{ tag[0] | escape }} <span class="tag__count"><span class="visually-hidden">(</span>{{ tag[1].size }}<span class="visually-hidden"> post{% if tag[1].size != 1 %}s{% endif %})</span></span></a></li>
+      {%- assign tag_name = tag[0] %}
+    <li><a class="tag tag--link" href="#tag-{% include tag-id.html tag=tag_name %}">{{ tag[0] | escape }} <span class="tag__count"><span class="visually-hidden">(</span>{{ tag[1].size }}<span class="visually-hidden"> post{% if tag[1].size != 1 %}s{% endif %})</span></span></a></li>
     {%- endfor %}
   </ul>
 </nav>
   {%- for tag in tags %}
+    {%- assign tag_name = tag[0] %}
+    {%- capture tag_id %}tag-{% include tag-id.html tag=tag_name %}{% endcapture %}
 
-<section class="page-section" aria-labelledby="tag-{{ tag[0] | slugify: 'pretty' }}">
-  <h2 id="tag-{{ tag[0] | slugify: 'pretty' }}">{{ tag[0] | escape }}</h2>
+<section class="page-section" aria-labelledby="{{ tag_id }}">
+  <h2 id="{{ tag_id }}">{{ tag_name | escape }}</h2>
   <ul class="post-links">
     {%- for post in tag[1] %}
     <li>
