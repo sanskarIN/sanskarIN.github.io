@@ -1,0 +1,32 @@
+---
+layout: none
+permalink: /search.json
+sitemap: false
+---
+{%- comment -%}
+  The index for the site search (assets/js/search.js): the pages, every blog
+  post, and the GitHub repositories from _data/github.json. Pages kept out
+  of search engines (noindex) are left out here too. Searching happens in
+  the visitor's browser; nothing typed is sent anywhere.
+{%- endcomment -%}
+{%- assign search_pages = site.pages | where_exp: "item", "item.title" | sort: "title" -%}
+[
+{%- assign separator = "" -%}
+{%- for item in search_pages -%}
+  {%- if item.noindex or item.sitemap == false -%}{%- continue -%}{%- endif -%}
+  {%- assign item_extension = item.url | split: "." | last -%}
+  {%- if item_extension == "json" or item_extension == "xml" or item_extension == "txt" -%}{%- continue -%}{%- endif %}
+  {{ separator }}{"type": "Page", "title": {{ item.title | jsonify }}, "url": {{ item.url | relative_url | jsonify }}, "text": {{ item.description | default: item.lead | default: "" | strip_html | jsonify }}}
+  {%- assign separator = "," -%}
+{%- endfor -%}
+{%- for post in site.posts -%}
+  {%- capture post_text %}{{ post.description }} {{ post.content | strip_html | normalize_whitespace | truncatewords: 80, "" }}{% endcapture %}
+  {{ separator }}{"type": "Post", "title": {{ post.title | jsonify }}, "url": {{ post.url | relative_url | jsonify }}, "date": {{ post.date | date: "%-d %b %Y" | jsonify }}, "tags": {{ post.tags | jsonify }}, "text": {{ post_text | strip | jsonify }}}
+  {%- assign separator = "," -%}
+{%- endfor -%}
+{%- for repo in site.data.github.repositories -%}
+  {%- capture repo_text %}{{ repo.description }} {{ repo.language }}{% endcapture %}
+  {{ separator }}{"type": "Project", "title": {{ repo.name | jsonify }}, "url": {{ repo.url | jsonify }}, "tags": {{ repo.topics | jsonify }}, "text": {{ repo_text | strip | jsonify }}}
+  {%- assign separator = "," -%}
+{%- endfor %}
+]
