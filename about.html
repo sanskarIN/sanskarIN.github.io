@@ -10,6 +10,13 @@ schema_type: ProfilePage
 ---
 {%- assign professional_profiles = site.data.social.profiles | where: "username", site.author.username | map: "name" -%}
 {%- assign community_profiles = site.data.social.profiles | where: "username", site.author.community_username | map: "name" -%}
+{%- assign other_profiles = "" | split: "" -%}
+{%- for entry in site.data.social.profiles -%}
+  {%- assign profile = entry[1] -%}
+  {%- if profile.url != "" and profile.username and profile.username != site.author.username and profile.username != site.author.community_username -%}
+    {%- assign other_profiles = other_profiles | push: profile -%}
+  {%- endif -%}
+{%- endfor -%}
 <div class="intro-grid">
   <div class="intro-grid__text">
     <p>I'm Sanskar, a software developer building software, developer tools, and digital products in the open.</p>
@@ -32,6 +39,12 @@ schema_type: ProfilePage
         <dt>Community and social</dt>
         <dd><span class="identity__value">{{ site.author.community_username }}</span> on {{ community_profiles | array_to_sentence_string }}</dd>
       </div>
+      {%- for profile in other_profiles %}
+      <div class="identity__row">
+        <dt>{{ profile.name }}</dt>
+        <dd><span class="identity__value">{{ profile.username }}</span></dd>
+      </div>
+      {%- endfor %}
     </dl>
   </aside>
 </div>
