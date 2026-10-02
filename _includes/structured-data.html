@@ -14,6 +14,14 @@
 {%- assign page_type = page.schema_type | default: "WebPage" -%}
 {%- capture alternate_names -%}{{ site.author.username }},{{ site.author.community_username }}{%- endcapture -%}
 {%- assign alternate_names = alternate_names | split: "," -%}
+{%- for entry in site.data.social.profiles -%}
+  {%- assign profile = entry[1] -%}
+  {%- if profile.url != "" and profile.username and profile.same_as != false -%}
+    {%- unless alternate_names contains profile.username -%}
+      {%- assign alternate_names = alternate_names | push: profile.username -%}
+    {%- endunless -%}
+  {%- endif -%}
+{%- endfor -%}
 {%- assign same_as = "" | split: "" -%}
 {%- for entry in site.data.social.profiles -%}
   {%- assign profile = entry[1] -%}
