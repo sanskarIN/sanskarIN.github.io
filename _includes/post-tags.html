@@ -1,11 +1,11 @@
 {%- comment -%}
   A post's tags, each linking to its section on the Tags page.
   Parameters: tags (required), class (extra classes for the list).
-  Tag anchors use the same "tag-" id as blog/tags.html.
+  Tag anchors come from _includes/tag-id.html, like the ids on blog/tags.html.
 {%- endcomment -%}
 <ul class="tag-list tag-list--small{% if include.class %} {{ include.class }}{% endif %}">
   {%- for tag in include.tags %}
-  <li><a class="tag tag--link" href="{{ '/blog/tags/' | relative_url }}#tag-{{ tag | slugify: 'pretty' }}">{{ tag | escape }}</a></li>
+  <li><a class="tag tag--link" href="{{ '/blog/tags/' | relative_url }}#tag-{% include tag-id.html tag=tag %}">{{ tag | escape }}</a></li>
   {%- endfor %}
 </ul>
 {%- comment -%} Ends without a trailing newline. {%- endcomment -%}
