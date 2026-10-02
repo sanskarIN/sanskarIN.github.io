@@ -1,0 +1,27 @@
+# =============================================================================
+#  Accounts: sign-up and sign-in with an emailed 6-digit code, author
+#  profiles, and writing posts on the website. Provided by Supabase
+#  (https://supabase.com); see README.md → "Accounts" for the setup.
+#
+#  Everything account-related stays hidden until both values below are set.
+#
+#  SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY: copy them from your Supabase
+#  project (Connect dialog, or Settings → API Keys). Both are public by
+#  design — the publishable key (sb_publishable_…) only allows what the
+#  database policies in supabase/schema.sql allow. Never put a secret key
+#  (sb_secret_…) here: the site refuses to use one.
+# =============================================================================
+
+supabase_url: ""
+supabase_publishable_key: ""
+
+# The service that sends the sign-in emails: the SMTP provider connected in
+# Supabase (Authentication → Emails → SMTP Settings), such as Brevo or Gmail.
+# The Privacy Policy names it and links to its privacy policy.
+email_service: ""
+email_service_privacy_url: ""
+
+# Names of the Supabase storage bucket and Edge Function the site uses. They
+# match supabase/schema.sql and supabase/functions/blog/.
+images_bucket: blog-images
+function: blog
