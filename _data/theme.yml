@@ -25,6 +25,14 @@ light:
   accent-soft: "#FCEEE6"
   on-accent: "#FFFFFF"
   grid: "rgb(22 23 27 / 5%)"
+  # The five shades of the GitHub activity calendar on the Projects page,
+  # from no contributions to the most (decorative; a caption gives the
+  # numbers).
+  activity-0: "#EAE7E1"
+  activity-1: "#F7CDB8"
+  activity-2: "#EC9B74"
+  activity-3: "#D3602B"
+  activity-4: "#9A3412"
 
 dark:
   bg: "#111214"
@@ -40,3 +48,8 @@ dark:
   accent-soft: "#2A1B13"
   on-accent: "#16171B"
   grid: "rgb(237 235 230 / 5%)"
+  activity-0: "#25272C"
+  activity-1: "#4D2A18"
+  activity-2: "#83401E"
+  activity-3: "#C45A24"
+  activity-4: "#FF8F57"
