@@ -19,7 +19,7 @@ Every change should keep the site as correct, accessible, fast, and maintainable
 ### Truthful content
 
 - Never add invented information: statistics, follower or repository counts, stars, downloads, employers, clients, customers, revenue, testimonials, awards, certifications, partnerships, or legal and company details.
-- Do not add project content. The Projects page is maintained by the site owner.
+- Do not add project content. The Projects page is generated from the site owner's public GitHub repositories: `_data/github.json` is written by the "Update GitHub data" workflow and must never be edited by hand, and `_data/projects.yml` only chooses what is shown.
 - Use the official links and email addresses exactly as they appear in `_data/social.yml` and `_data/contact.yml`.
 - Keep the Privacy, Cookie, and Accessibility pages accurate: if a change affects what the website collects, stores, loads, or supports, update those pages in the same pull request (see README → "Legal pages").
 
@@ -45,6 +45,7 @@ Every change should keep the site as correct, accessible, fast, and maintainable
 - Do not add frameworks, CDNs, analytics, trackers, or other third-party scripts. Any new dependency needs a clear reason, an acceptable license, and an entry on the Credits page.
 - Never commit secrets: passwords, API keys, tokens, or private keys.
 - The blog workflow in `.github/` handles text and images from anyone: never pass issue content to a shell command or a template, keep the HTML allowlist in `publish_post.py` strict, and keep actions pinned to commits and packages to exact versions.
+- The GitHub data workflow reads public information only, with the workflow's own `GITHUB_TOKEN`. Don't give it a personal access token or more permissions, and keep repository text out of HTML: templates must escape it.
 - The account pages show what people type: in `assets/js/account.js`, put it on the page with `textContent` only, never `innerHTML`. Any change to who can read or write what belongs in `supabase/schema.sql` (row-level security), and the function in `supabase/functions/blog/` must keep checking every request itself. Never commit a Supabase secret key or a GitHub token.
 
 ## Before opening a pull request
@@ -58,4 +59,5 @@ Every change should keep the site as correct, accessible, fast, and maintainable
 3. Make sure the browser console shows no errors, including Content Security Policy errors.
 4. If you changed a policy page, update its date in `_data/legal.yml`. Note notable changes in `CHANGELOG.md`.
 5. If you changed the blog workflow or `publish_post.py`, publish a test post and check the result before relying on it.
-6. If you changed the account pages, `supabase/schema.sql`, or the Edge Function, update the Supabase project too (re-run the SQL, or paste the new function into its editor) and try signing in, writing a post, and deleting a test account.
+6. If you changed `update_github_data.py`, run `python .github/scripts/update_github_data.py --dry-run` and check the Projects page, then restore `_data/github.json` before committing.
+7. If you changed the account pages, `supabase/schema.sql`, or the Edge Function, update the Supabase project too (re-run the SQL, or paste the new function into its editor) and try signing in, writing a post, and deleting a test account.
