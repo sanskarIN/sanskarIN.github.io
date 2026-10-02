@@ -4,6 +4,27 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.4.0] — 2026-10-02
+
+### Added
+
+- A Projects page at `/projects/` with my public GitHub repositories: each one's description, topics, main language, stars, forks, license, and when it was last updated. The repositories pinned on my GitHub profile are shown first as featured projects, followed by totals, the languages used across the repositories, and the contribution calendar from my GitHub profile with a written summary. The full list can be searched, filtered by language, and sorted; the choices are kept in the page's address.
+- The "Update GitHub data" workflow (`.github/workflows/update-github-data.yml` and `.github/scripts/update_github_data.py`). Every day, it reads this public information from the GitHub API with the workflow's own token and saves it in `_data/github.json`, so visitors' browsers never contact GitHub. It commits only when something changed, then asks GitHub Pages to rebuild. `_data/projects.yml` chooses the featured and hidden repositories and whether forks and archived repositories are listed.
+- Featured projects in the Home page's "Open source" section, and the languages used in my public repositories on the Developer page.
+- Site search across the pages, blog posts, and projects. It opens from the header, or with `/`, Ctrl+K, or ⌘K. Results are chosen with the arrow keys or the pointer, and the number of results is announced. The index is `/search.json`, and searching happens in the browser. The 404 page offers it too.
+- Reading aids on post pages: an "On this page" list of sections that marks the one being read; a reading-progress bar in browsers that support scroll-driven animations; copy buttons on code examples; and up to three related posts that share tags.
+- Smooth transitions between pages in browsers that support them, unless reduced motion is requested.
+- Reddit ([u/sanskarIN](https://reddit.com/user/sanskarIN)) in the social and community links, on the About page, and in the structured data.
+- Icons for Reddit, search, repositories, stars, forks, licenses, activity, and the list of sections.
+
+### Changed
+
+- The X profile is now [@SanskarCodes](https://x.com/SanskarCodes) everywhere, including the social preview tags.
+- Headings in posts that skip a level are shown one level below the previous heading, and the sections of posts get anchors that can be linked to.
+- The header has a search button. On very narrow screens, the menu button shows only its icon.
+- The sitemap lists `/projects/`, dated by the last data update.
+- The Privacy Policy, Terms, Accessibility page, and Credits page describe the Projects page, the search, and Reddit.
+
 ## [1.3.0] — 2026-10-02
 
 ### Added
