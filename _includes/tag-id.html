@@ -1,0 +1,7 @@
+{%- comment -%}
+  The id of a tag's section on the Tags page, after "tag-". "#" is spelled
+  out, so tags such as "c" and "c#" get different ids. Parameter: tag.
+  Used by blog/tags.html, _includes/post-tags.html, and blog/posts.json.
+{%- endcomment -%}
+{{- include.tag | replace: "#", "-sharp" | slugify: "pretty" -}}
+{%- comment -%} Ends without a trailing newline. {%- endcomment -%}
