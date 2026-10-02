@@ -1,0 +1,109 @@
+---
+layout: page
+title: Write a post
+eyebrow: Account
+lead: Write in Markdown, add images, and send your post for review.
+description: "Write a post for the blog on sanskarIN.github.io, add images, and send it for review."
+permalink: /account/write/
+noindex: true
+sitemap: false
+account_app: write
+---
+{%- comment -%}
+  The post editor for signed-in accounts (assets/js/account.js). Sending a
+  post hands it to the "blog" Edge Function, which opens a GitHub issue for
+  review; the publishing workflow does the rest. Limits match _data/blog.yml.
+{%- endcomment -%}
+{%- include accounts-config.html -%}
+{%- assign limits = site.data.blog.limits -%}
+{%- capture github_form_url -%}{{ site.repository_url }}/issues/new?template={{ site.data.blog.form }}{%- endcapture -%}
+{%- if accounts_on %}
+<div class="account" data-account-app="write" data-supabase-url="{{ accounts_url }}" data-supabase-key="{{ accounts_key }}" data-function="{{ site.data.accounts.function }}" data-bucket="{{ site.data.accounts.images_bucket }}" data-max-mb="{{ limits.image_size_mb }}">
+  <p class="account__loading" data-account-view="loading">Loading the editor…</p>
+
+  <div class="account-view" data-account-view="signin-needed" hidden>
+    <h2 tabindex="-1">Sign in to write a post</h2>
+    <p>Posts are written with an account, so readers know who wrote them. Signing in takes a minute: you only need your email address.</p>
+    <div class="button-row">
+      <a class="button button--primary" href="{{ '/account/' | relative_url }}">Sign in or create an account</a>
+      {% include link.html url=github_form_url label="Write with GitHub instead" class="button button--ghost" %}
+    </div>
+  </div>
+
+  <div class="account-view" data-account-view="profile-needed" hidden>
+    <h2 tabindex="-1">Create your profile first</h2>
+    <p>Your posts show your display name and link to your author page, so you need a profile before you write.</p>
+    <div class="button-row">
+      <a class="button button--primary" href="{{ '/account/' | relative_url }}">Create your profile</a>
+    </div>
+  </div>
+
+  <form class="account-view form-panel form-panel--wide" data-account-view="editor" data-form="post" novalidate hidden>
+    <h2 class="form-field--wide" tabindex="-1" data-editor-title>New post</h2>
+    <div class="form-field form-field--wide">
+      <label class="form-field__label" for="post-title">Title <span class="form-field__required">(required)</span></label>
+      <input class="form-field__input" id="post-title" name="title" type="text" maxlength="{{ limits.title_length }}" required>
+    </div>
+    <div class="form-field form-field--wide">
+      <label class="form-field__label" for="post-summary">Summary</label>
+      <input class="form-field__input" id="post-summary" name="summary" type="text" maxlength="{{ limits.summary_length }}" aria-describedby="post-summary-hint">
+      <p class="form-field__hint" id="post-summary-hint">Optional. One or two sentences for the blog page and search results, up to {{ limits.summary_length }} characters.</p>
+    </div>
+    <div class="form-field form-field--wide">
+      <label class="form-field__label" for="post-tags">Tags</label>
+      <input class="form-field__input" id="post-tags" name="tags" type="text" maxlength="200" placeholder="open source, android, web" aria-describedby="post-tags-hint">
+      <p class="form-field__hint" id="post-tags-hint">Up to {{ limits.tags }} topics, separated by commas.</p>
+    </div>
+
+    <fieldset class="form-group form-field--wide">
+      <legend class="form-field__label">Cover image</legend>
+      <p class="form-field__hint">Optional. Shown at the top of your post and on the blog page. PNG, JPEG, GIF, or WebP, up to {{ limits.image_size_mb }} MB.</p>
+      <div class="cover-preview" data-cover-preview hidden></div>
+      <div class="button-row">
+        <button class="button button--secondary" type="button" data-action="choose-cover">Choose a cover image</button>
+        <button class="button button--ghost" type="button" data-action="remove-cover" hidden>Remove the cover image</button>
+      </div>
+      <input type="file" accept="image/png,image/jpeg,image/gif,image/webp" data-file="cover" hidden>
+      <div class="form-field">
+        <label class="form-field__label" for="post-cover-alt">Cover image description</label>
+        <input class="form-field__input" id="post-cover-alt" name="coverAlt" type="text" maxlength="250" aria-describedby="post-cover-alt-hint">
+        <p class="form-field__hint" id="post-cover-alt-hint">Needed if you add a cover image. Describe what it shows for people who can't see it.</p>
+      </div>
+    </fieldset>
+
+    <div class="form-field form-field--wide">
+      <label class="form-field__label" for="post-body">Post <span class="form-field__required">(required)</span></label>
+      <p class="form-field__hint" id="post-body-hint">Write in Markdown: headings (<code>##</code>), lists, links, quotes, code, and tables all work. Images appear where you add them; replace “Describe the image” with a short description of each one.</p>
+      <textarea class="form-field__input form-field__input--tall" id="post-body" name="body" rows="18" maxlength="50000" aria-describedby="post-body-hint" required></textarea>
+      <div class="button-row">
+        <button class="button button--secondary" type="button" data-action="add-image">Add an image</button>
+      </div>
+      <input type="file" accept="image/png,image/jpeg,image/gif,image/webp" data-file="body" hidden>
+    </div>
+
+    <div class="form-check form-field--wide">
+      <input id="post-confirm" name="confirm" type="checkbox" required>
+      <label for="post-confirm">I wrote this post, I have the right to publish its text and images, and I agree to the <a href="{{ '/terms/#blog-posts' | relative_url }}">Terms</a>.</label>
+    </div>
+    <div class="form-panel__actions">
+      <button class="button button--primary" type="submit">Send for review</button>
+      <a class="button button--ghost" href="{{ '/account/' | relative_url }}">Back to your account</a>
+    </div>
+    <div class="form-status" role="status" data-status tabindex="-1"></div>
+  </form>
+
+  <div class="account-view" data-account-view="sent" hidden>
+    <h2 tabindex="-1">Sent for review</h2>
+    <p>Thank you! Your post is checked automatically and published after the site owner reviews it. Your account page shows where it is, and any changes it needs.</p>
+    <div class="button-row">
+      <a class="button button--primary" href="{{ '/account/' | relative_url }}">Go to your account</a>
+      <a class="button button--ghost" href="{{ '/account/write/' | relative_url }}">Write another post</a>
+    </div>
+  </div>
+</div>
+<noscript>
+  <p class="note">The editor needs JavaScript. You can still {% include link.html url=github_form_url label="write a post with GitHub" %}.</p>
+</noscript>
+{%- else %}
+<p>Accounts aren't available on this website at the moment. You can still {% include link.html url=github_form_url label="write a post with GitHub" %}.</p>
+{%- endif %}
