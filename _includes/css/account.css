@@ -1,0 +1,304 @@
+/* ==========================================================================
+   Accounts: sign-in, profile, the post editor, and author pages
+   ========================================================================== */
+
+.account__loading {
+  color: var(--color-text-muted);
+}
+
+.account-view > h2 {
+  font-size: var(--text-xl);
+}
+
+.account-view > h2 + p {
+  margin-top: var(--space-4);
+}
+
+.account-view > p {
+  max-width: var(--width-prose);
+}
+
+.account-view > p + * {
+  margin-top: var(--space-5);
+}
+
+/* Form panels ---------------------------------------------------------------- */
+
+.form-panel {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 32rem;
+  padding: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+}
+
+.form-panel--columns {
+  max-width: var(--width-prose);
+}
+
+.form-panel--wide {
+  max-width: 60rem;
+}
+
+@media (min-width: 40em) {
+  .form-panel--columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .form-panel__actions,
+  .form-panel > .form-status {
+    grid-column: 1 / -1;
+  }
+}
+
+.form-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.form-group {
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.form-group > legend {
+  margin-bottom: var(--space-2);
+  padding: 0;
+}
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.form-check input {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0.1em 0 0;
+  accent-color: var(--color-accent);
+}
+
+textarea.form-field__input--short {
+  min-height: 6rem;
+}
+
+textarea.form-field__input--tall {
+  min-height: 24rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.form-field__input--code {
+  max-width: 11rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  letter-spacing: 0.3em;
+}
+
+.cover-preview {
+  overflow: hidden;
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface-muted);
+}
+
+.cover-preview img {
+  display: block;
+  width: 100%;
+  max-height: 20rem;
+  object-fit: contain;
+}
+
+/* Status messages ------------------------------------------------------------ */
+
+.form-status {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+/* An empty message takes no room, but stays on the page for screen readers. */
+.form-panel > .form-status:empty {
+  position: absolute;
+}
+
+.form-status[data-state="pending"] {
+  color: var(--color-text-muted);
+}
+
+.form-status[data-state="error"],
+.form-status[data-state="success"] {
+  padding: var(--space-3) var(--space-4);
+  border: var(--border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-accent-soft);
+}
+
+.form-status[data-state="success"] {
+  border-left-color: var(--color-border-strong);
+  background-color: var(--color-surface-muted);
+}
+
+.form-status__list {
+  margin: var(--space-2) 0 0;
+  padding-left: 1.25rem;
+  font-weight: 400;
+}
+
+/* The account page ------------------------------------------------------------ */
+
+.account-details {
+  max-width: var(--width-prose);
+  margin-top: var(--space-5);
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+}
+
+.account-details > summary {
+  padding: var(--space-4) var(--space-5);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.account-details[open] > summary {
+  border-bottom: var(--border);
+}
+
+.account-details > .form-panel {
+  max-width: none;
+  border: 0;
+  background-color: transparent;
+}
+
+.account-details--danger > summary {
+  color: var(--color-accent);
+}
+
+.page-section > .button-row + .form-status {
+  margin-top: var(--space-4);
+}
+
+.account-posts {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 60rem;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.account-post {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+}
+
+@media (min-width: 40em) {
+  .account-post {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+}
+
+.account-post__title {
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  overflow-wrap: anywhere;
+}
+
+.account-post__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.account-post__note {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.account-post__problems {
+  margin: var(--space-2) 0 0;
+  padding-left: 1.25rem;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.account-post__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  padding: 0.125rem 0.5rem;
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface-muted);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.3;
+}
+
+.status-badge--published,
+.status-badge--update-waiting {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent-soft);
+}
+
+.status-badge--changes,
+.status-badge--error {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Author pages --------------------------------------------------------------- */
+
+.author-profile {
+  display: grid;
+  gap: var(--space-3);
+  max-width: var(--width-prose);
+}
+
+.author-profile__bio {
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  overflow-wrap: anywhere;
+}
+
+.author-profile__website a {
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.author-profile__meta {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
