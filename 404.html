@@ -14,9 +14,10 @@ sitemap: false
   <div class="container">
     <p class="error-page__code" aria-hidden="true">404</p>
     <h1 class="error-page__title">Page not found</h1>
-    <p class="error-page__text">The page you're looking for doesn't exist or may have moved. Check the address for typos, or continue from one of these:</p>
+    <p class="error-page__text">The page you're looking for doesn't exist or may have moved. Check the address for typos, search the website, or continue from one of these:</p>
     <div class="button-row">
-      {% include link.html url="/" label="Home" class="button button--primary" %}
+      <button class="button button--primary" type="button" {% include search-attributes.html %} hidden>{% include icon.html name="search" %}Search the website</button>
+      {% include link.html url="/" label="Home" class="button button--secondary" %}
       {% include link.html url=site.projects_url label="Projects" class="button button--secondary" hint=true %}
       {% include link.html url=site.data.social.profiles.github.url label="GitHub" icon="github" class="button button--secondary" %}
       {% include link.html url="/contact/" label="Contact" class="button button--ghost" %}
