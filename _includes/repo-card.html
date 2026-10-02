@@ -1,0 +1,55 @@
+{%- comment -%}
+  One GitHub repository, from _data/github.json (see README.md → "Projects").
+  Parameters: repo (required), heading (heading level, default 3).
+  The whole card is clickable through its title link. Text from GitHub is
+  always escaped; language colors are drawn with SVG, because the security
+  policy doesn't allow inline styles.
+{%- endcomment -%}
+{%- assign repo = include.repo -%}
+{%- assign repo_heading = include.heading | default: 3 -%}
+{%- assign repo_label = repo.name | escape -%}
+{%- assign site_repo_name = site.repository_url | split: "/" | last -%}
+<article class="repo-card">
+  <h{{ repo_heading }} class="repo-card__title">
+    {%- include icon.html name="repo" class="repo-card__icon" %}
+    {% include link.html url=repo.url label=repo_label class="repo-card__link" %}
+  </h{{ repo_heading }}>
+  {%- if repo.archived or repo.fork or repo.name == site_repo_name %}
+  <p class="repo-card__badges">
+    {%- if repo.name == site_repo_name %}<span class="repo-badge">This website</span>{% endif -%}
+    {%- if repo.archived %}<span class="repo-badge">Archived</span>{% endif -%}
+    {%- if repo.fork %}<span class="repo-badge">Fork</span>{% endif -%}
+  </p>
+  {%- endif %}
+  {%- if repo.description != "" %}
+  <p class="repo-card__description">{{ repo.description | escape }}</p>
+  {%- endif %}
+  {%- if repo.topics.size > 0 %}
+  <ul class="repo-card__topics" aria-label="Topics">
+    {%- for topic in repo.topics %}
+    <li>{{ topic | escape }}</li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+  <ul class="repo-card__meta">
+    {%- if repo.language %}
+    <li>{% include language-dot.html color=repo.language_color %}{{ repo.language | escape }}</li>
+    {%- endif %}
+    {%- if repo.stars > 0 %}
+    <li>{% include icon.html name="star" %}{{ repo.stars }}<span class="visually-hidden"> star{% if repo.stars != 1 %}s{% endif %}</span></li>
+    {%- endif %}
+    {%- if repo.forks > 0 %}
+    <li>{% include icon.html name="fork" %}{{ repo.forks }}<span class="visually-hidden"> fork{% if repo.forks != 1 %}s{% endif %}</span></li>
+    {%- endif %}
+    {%- if repo.license %}
+    <li>{% include icon.html name="scale" %}<span class="visually-hidden">License: </span>{{ repo.license | escape }}</li>
+    {%- endif %}
+    {%- if repo.pushed %}
+    <li>Updated <time datetime="{{ repo.pushed }}">{{ repo.pushed | date: "%-d %b %Y" }}</time></li>
+    {%- endif %}
+  </ul>
+  {%- if repo.homepage %}
+  <p class="repo-card__more">{% include link.html url=repo.homepage label="Website" class="repo-card__homepage" hint=true %}</p>
+  {%- endif %}
+</article>
+{%- comment -%} Ends without a trailing newline. {%- endcomment -%}
