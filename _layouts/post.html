@@ -16,6 +16,12 @@ layout: default
     source_issue         the GitHub issue the post was written in (optional)
 
   Values from the front matter are escaped: posts can come from visitors.
+
+  Headings without attributes (as the publishing workflow writes them) are
+  tidied here: a heading never skips a level (an <h4> straight after an <h2>
+  becomes an <h3>), <h2> and <h3> headings get ids made from their text, and
+  posts with three or more of them get an "On this page" list. Related
+  posts share tags with this one.
 {%- endcomment -%}
 {%- assign author_name = page.author | default: site.author.name -%}
 {%- assign author_url = page.author_url | default: "/about/" -%}
@@ -28,7 +34,61 @@ layout: default
 {%- else -%}
   {%- capture discussion_url -%}{{ site.repository_url }}/blob/main/{{ page.path }}{%- endcapture -%}
 {%- endif -%}
-{%- capture history_url -%}{{ site.repository_url }}/commits/main/{{ page.path }}{%- endcapture %}
+{%- capture history_url -%}{{ site.repository_url }}/commits/main/{{ page.path }}{%- endcapture -%}
+{%- comment -%} Give the headings ids, and list them for "On this page". {%- endcomment -%}
+{%- assign toc_ids = "" | split: "" -%}
+{%- assign toc_levels = "" | split: "" -%}
+{%- assign toc_texts = "" | split: "" -%}
+{%- assign heading_pieces = content | split: "<h" -%}
+{%- assign last_level = 1 -%}
+{%- capture post_html -%}
+  {%- for piece in heading_pieces -%}
+    {%- if forloop.first -%}{{ piece }}{%- continue -%}{%- endif -%}
+    {%- assign piece_digit = piece | slice: 0, 1 -%}
+    {%- assign piece_close = piece | slice: 1, 1 -%}
+    {%- if piece_close == ">" and piece_digit >= "2" and piece_digit <= "6" -%}
+      {%- assign original_level = piece_digit | plus: 0 -%}
+      {%- assign deepest_level = last_level | plus: 1 -%}
+      {%- if original_level > deepest_level %}{% assign heading_level = deepest_level %}{% else %}{% assign heading_level = original_level %}{% endif -%}
+      {%- assign last_level = heading_level -%}
+      {%- capture original_end %}</h{{ original_level }}>{% endcapture -%}
+      {%- capture heading_end %}</h{{ heading_level }}>{% endcapture -%}
+      {%- assign heading_rest = piece | slice: 2, piece.size | replace_first: original_end, heading_end -%}
+      {%- if heading_level > 3 -%}<h{{ heading_level }}>{{ heading_rest }}{%- continue -%}{%- endif -%}
+      {%- comment -%} Already escaped HTML text, with the tags removed. {%- endcomment -%}
+      {%- assign heading_text = heading_rest | split: heading_end | first | strip_html | strip -%}
+      {%- assign heading_id = heading_text | replace: "&amp;", " " | replace: "&lt;", " " | replace: "&gt;", " " | replace: "&quot;", " " | replace: "&#39;", "" | slugify -%}
+      {%- if heading_id == "" -%}{%- capture heading_id %}section-{{ forloop.index }}{% endcapture -%}{%- endif -%}
+      {%- if toc_ids contains heading_id -%}
+        {%- for number in (2..99) -%}
+          {%- capture numbered_id %}{{ heading_id }}-{{ number }}{% endcapture -%}
+          {%- unless toc_ids contains numbered_id -%}{%- assign heading_id = numbered_id -%}{%- break -%}{%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+      {%- assign toc_ids = toc_ids | push: heading_id -%}
+      {%- assign toc_levels = toc_levels | push: heading_level -%}
+      {%- assign toc_texts = toc_texts | push: heading_text -%}
+      <h{{ heading_level }} id="{{ heading_id }}">{{ heading_rest }}
+    {%- else -%}<h{{ piece }}{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- comment -%} Up to three related posts: most tags in common first, then the newest. {%- endcomment -%}
+{%- assign related_posts = "" | split: "" -%}
+{%- assign related_urls = "" | split: "" -%}
+{%- for wanted in (1..3) reversed -%}
+  {%- for other in site.posts -%}
+    {%- if other.url == page.url or related_urls contains other.url -%}{%- continue -%}{%- endif -%}
+    {%- assign shared_tags = 0 -%}
+    {%- for tag in other.tags -%}
+      {%- if page.tags contains tag %}{% assign shared_tags = shared_tags | plus: 1 %}{% endif -%}
+    {%- endfor -%}
+    {%- if shared_tags >= wanted and related_posts.size < 3 -%}
+      {%- assign related_posts = related_posts | push: other -%}
+      {%- assign related_urls = related_urls | push: other.url -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+<div class="reading-progress" aria-hidden="true"></div>
 <article class="post">
   <header class="page-header">
     <div class="container">
@@ -74,6 +134,18 @@ layout: default
         <li>{% include link.html url=history_url label="View history" icon="history" %}</li>
         <li><button class="copy-button" type="button" data-copy="{{ page.url | absolute_url }}">{% include icon.html name="link" %}<span data-copy-label>Copy link</span></button></li>
       </ul>
+      {%- if toc_ids.size >= 3 %}
+      <details class="post-toc" data-post-toc>
+        <summary class="post-toc__summary">{% include icon.html name="list" %}On this page <span class="post-toc__count">({{ toc_ids.size }})</span></summary>
+        <nav class="post-toc__nav" aria-label="On this page">
+          <ol class="post-toc__list">
+            {%- for toc_id in toc_ids %}
+            <li class="post-toc__item post-toc__item--{{ toc_levels[forloop.index0] }}"><a href="#{{ toc_id }}">{{ toc_texts[forloop.index0] }}</a></li>
+            {%- endfor %}
+          </ol>
+        </nav>
+      </details>
+      {%- endif %}
     </aside>
 
     <div class="with-toc__main">
@@ -84,8 +156,26 @@ layout: default
       </figure>
       {%- endif %}
       <div class="prose post__content">
-{{ content }}
+{{ post_html }}
       </div>
+      {%- if related_posts.size > 0 %}
+
+      <section class="related-posts" aria-labelledby="related-title">
+        <h2 class="related-posts__title" id="related-title">Related posts</h2>
+        <ul class="related-posts__list">
+          {%- for related in related_posts %}
+            {%- assign related_minutes = related.content | strip_html | number_of_words | divided_by: 200 %}
+            {%- if related_minutes < 1 %}{% assign related_minutes = 1 %}{% endif %}
+          <li>
+            <a class="related-posts__link" href="{{ related.url | relative_url }}">
+              <span class="related-posts__name">{{ related.title | escape }}</span>
+              <span class="related-posts__meta"><time datetime="{{ related.date | date_to_xmlschema }}">{{ related.date | date: "%-d %b %Y" }}</time> · {{ related_minutes }} min read</span>
+            </a>
+          </li>
+          {%- endfor %}
+        </ul>
+      </section>
+      {%- endif %}
 
       <nav class="post-nav" aria-label="More posts">
         {%- if page.next %}
