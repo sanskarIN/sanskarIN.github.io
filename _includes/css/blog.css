@@ -436,3 +436,212 @@
     display: none !important;
   }
 }
+
+/* Reading a post: code blocks, "On this page", progress, related posts --------- */
+
+.code-block {
+  position: relative;
+}
+
+.code-block__copy {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  min-height: 2rem;
+  padding: 0.25rem 0.625rem;
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+
+.code-block__copy:hover {
+  border-color: var(--color-border-strong);
+}
+
+/* With a mouse, the button appears when the code block is pointed at. */
+@media (hover: hover) {
+  .code-block__copy {
+    opacity: 0;
+    transition: opacity var(--duration) var(--ease);
+  }
+
+  .code-block:hover .code-block__copy,
+  .code-block__copy:focus-visible {
+    opacity: 1;
+  }
+}
+
+.post-toc {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: var(--border);
+}
+
+.post-toc__summary {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.post-toc__summary .icon {
+  width: 1rem;
+  height: 1rem;
+  margin: 0 var(--space-2) 0 var(--space-1);
+  vertical-align: -0.2em;
+}
+
+.post-toc__count {
+  font-weight: 400;
+}
+
+.post-toc__list {
+  display: grid;
+  gap: 0.125rem;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-sm);
+}
+
+.post-toc__item a {
+  display: block;
+  padding: 0.3125rem 0 0.3125rem var(--space-3);
+  border-left: 2px solid var(--color-border);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.post-toc__item--3 a {
+  padding-left: var(--space-5);
+  font-size: var(--text-xs);
+}
+
+.post-toc__item a:hover {
+  border-left-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+.post-toc__item a[aria-current="true"] {
+  border-left-color: var(--color-accent);
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+/* A bar along the top edge that fills as the post is read, in browsers that
+   support scroll-driven animations (CSS only; no motion of its own). */
+.reading-progress {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 60;
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    animation: reading-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+
+  @keyframes reading-progress {
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.related-posts {
+  max-width: var(--width-prose);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: var(--border);
+}
+
+.related-posts__title {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-xl);
+}
+
+.related-posts__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.related-posts__link {
+  display: grid;
+  align-content: space-between;
+  gap: var(--space-3);
+  height: 100%;
+  padding: var(--space-4);
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.related-posts__link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.related-posts__name {
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  overflow-wrap: anywhere;
+}
+
+.related-posts__meta {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+@media print {
+  .reading-progress,
+  .code-block__copy,
+  .post-toc,
+  .related-posts {
+    display: none !important;
+  }
+}
+
+/* Wide screens: the post details scroll away with the page, and "On this
+   page" stays in view beside the post. */
+@media (min-width: 64em) {
+  .post__layout .with-toc__aside {
+    position: static;
+    align-self: stretch;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .post__layout .post-toc {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-5));
+    max-height: calc(100vh - var(--header-height) - var(--space-7));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
