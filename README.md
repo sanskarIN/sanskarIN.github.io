@@ -2,7 +2,7 @@
 
 Source for https://sanskarIN.github.io — the personal developer website of **Sanskar** (GitHub: [sanskarIN](https://www.github.com/sanskarIN), developer community: [@dev_sanskarIN](https://www.x.com/dev_sanskarIN)).
 
-The website is a static site built with [Jekyll](https://jekyllrb.com/) and published by [GitHub Pages](https://pages.github.com/). There is no backend, database, analytics, tracking, or third-party script: visitors receive plain HTML, one stylesheet, and two small optional scripts. Blog posts are written with a GitHub issue form and published by a GitHub Actions workflow ([details](#blog)).
+The website is a static site built with [Jekyll](https://jekyllrb.com/) and published by [GitHub Pages](https://pages.github.com/). There is no backend of its own, no analytics or tracking, and no third-party script: visitors receive plain HTML, one stylesheet, and two small optional scripts. Blog posts are written with a GitHub issue form and published by a GitHub Actions workflow ([details](#blog)). Optional [accounts](#accounts) — sign-in with an emailed code, author profiles, and an editor on the site — use Supabase and stay off until they are set up.
 
 ## Contents
 
@@ -16,6 +16,7 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 - [Adding PayPal](#adding-paypal)
 - [Contact form](#contact-form)
 - [Blog](#blog)
+- [Accounts](#accounts)
 - [Legal pages](#legal-pages)
 - [Design system](#design-system)
 - [Accessibility, performance, and security](#accessibility-performance-and-security)
@@ -37,11 +38,14 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 | `/blog/` | `blog/index.html` | Blog: every post, newest first, grouped by year |
 | `/blog/tags/` | `blog/tags.html` | Blog posts grouped by tag |
 | `/blog/<post>/` | `_posts/` | One page per blog post ([details](#blog)) |
+| `/blog/authors/?u=<username>` | `blog/authors.html` | Author page of a website account (not indexed; [accounts](#accounts)) |
+| `/account/` | `account/index.html` | Sign in or sign up, author profile, your posts (not indexed; [accounts](#accounts)) |
+| `/account/write/` | `account/write.html` | Post editor for accounts (not indexed; [accounts](#accounts)) |
 | `/contact/sent/` | `contact-sent.html` | Contact form confirmation (not indexed; shown after sending without JavaScript) |
 | any missing URL | `404.html` | Page not found |
 | `/projects/` | — | Reserved for the Projects page, added manually later ([details](#adding-the-projects-page)) |
 
-Generated files: `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, `/.well-known/security.txt`, and the blog's Atom feed at `/blog/feed.xml`.
+Generated files: `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, `/.well-known/security.txt`, the blog's Atom feed at `/blog/feed.xml`, and `/blog/posts.json` (a list of posts for author pages).
 
 URLs end with a slash. GitHub Pages redirects `/about` to `/about/`, so both forms work.
 
@@ -50,7 +54,7 @@ URLs end with a slash. GitHub Pages redirects `/about` to `/about/`, so both for
 - **Jekyll 3.10** with **Liquid** templates and **kramdown** Markdown — exactly the versions GitHub Pages runs, pinned locally by the `github-pages` gem.
 - **HTML, CSS, and JavaScript** written for this site. No CSS or JavaScript framework.
   - CSS: custom properties (design tokens), mobile-first, split into partials that Jekyll combines into one file.
-  - JavaScript: progressive enhancement only — `theme-init.js` (≈0.8 KB) and `main.js` (≈1.6 KB gzipped). Every page works without it.
+  - JavaScript: progressive enhancement only — `theme-init.js` (≈0.8 KB) and `main.js` (≈1.6 KB gzipped). Every page works without it. `account.js` loads only on the account pages, and only once [accounts](#accounts) are turned on.
 - **Fonts:** IBM Plex Sans and IBM Plex Mono, self-hosted WOFF2 (SIL Open Font License 1.1).
 - **Icons:** one SVG sprite — brand icons from Simple Icons (CC0), the LinkedIn icon from Bootstrap Icons (MIT), and interface icons drawn for this site.
 
@@ -63,8 +67,9 @@ URLs end with a slash. GitHub Pages redirects `/about` to `/about/`, so both for
 | `github-pages` gem (MIT) | Local builds with the same Jekyll and plugin versions as GitHub Pages | No — build time only |
 | Python packages in `.github/scripts/requirements.txt` (MIT; Pillow: MIT-CMU) | Publishing blog posts: Markdown to HTML (markdown-it-py), removing unsafe HTML (nh3), checking and resizing images (Pillow), reading settings (PyYAML) | No — GitHub Actions only |
 | `actions/checkout`, `actions/setup-python` | The blog workflow; pinned to exact commits | No — GitHub Actions only |
+| [Supabase](https://supabase.com/) (optional) | [Accounts](#accounts): sign-in codes, profiles, image uploads, and the `blog` Edge Function | Only on the account and author pages, once accounts are turned on |
 
-Nothing is loaded from a CDN or a third-party domain.
+Nothing is loaded from a CDN or a third-party domain. The account pages talk to Supabase's API, without a client library.
 
 ## Directory structure
 
@@ -77,6 +82,7 @@ Nothing is loaded from a CDN or a third-party domain.
 │   ├── navigation.yml        Header and footer navigation
 │   ├── legal.yml             "Last updated" dates of the policy pages
 │   ├── blog.yml              Blog settings: review of visitors' posts, image and text limits
+│   ├── accounts.yml          Accounts: Supabase address and publishable key (off while empty)
 │   ├── theme.yml             Light and dark color palettes
 │   ├── focus.yml             Development focus areas (Home + Developer pages)
 │   └── technologies.yml      Technologies (Home + Developer pages)
@@ -104,11 +110,14 @@ Nothing is loaded from a CDN or a third-party domain.
 │   ├── toc.html              "On this page" navigation
 │   ├── post-card.html        A post in the blog's list
 │   ├── post-tags.html        A post's tags, linking to the Tags page
+│   ├── tag-id.html           The anchor of a tag on the Tags page
+│   ├── accounts-config.html  Reads _data/accounts.yml for the templates
 │   └── css/                  Stylesheet partials (combined into assets/css/main.css)
 ├── assets/
 │   ├── css/main.css          Combines the partials into one stylesheet
 │   ├── js/theme-init.js      Runs first: enables JS features, applies a saved theme
 │   ├── js/main.js            Theme switch, mobile menu, copy buttons
+│   ├── js/account.js         Account pages: sign-in, profile, editor, author pages
 │   ├── fonts/                IBM Plex WOFF2 files and their license (OFL.txt)
 │   ├── icons/sprite.svg      Every icon on the site
 │   └── images/
@@ -116,7 +125,9 @@ Nothing is loaded from a CDN or a third-party domain.
 │       ├── social/           Social preview image (1200 × 630)
 │       └── blog/             Images of blog posts, one folder per post (added by the workflow)
 ├── _posts/                   Blog posts (added by the workflow, or written by hand)
-├── blog/                     Blog pages: index.html, tags.html, feed.xml
+├── blog/                     Blog pages: index.html, tags.html, feed.xml, authors.html, posts.json
+├── account/                  Account pages: index.html (sign-in, profile, posts), write.html (editor)
+├── supabase/                 Accounts backend: schema.sql and functions/blog/index.ts (not part of the site)
 ├── .github/
 │   ├── ISSUE_TEMPLATE/blog-post.yml       The "Write a blog post" form
 │   ├── workflows/publish-blog-post.yml    Publishes posts from the form
@@ -235,6 +246,10 @@ Each address is written exactly once, under `email:`. Every other place refers t
 
 Whether visitors' posts wait for review (`review_visitor_posts`, on by default), the issue form's file name, and the limits checked when a post is published: image size (10 MB), images per post (20), the longest side an image is scaled down to (2,000 px), and the length of titles, summaries, and tags. The [Blog](#blog) section explains how posting works.
 
+### Accounts — `_data/accounts.yml`
+
+The Supabase project address and publishable key that turn [accounts](#accounts) on, and the name of the service that sends sign-in emails (for the Privacy Policy). While the address or key is empty, everything account-related stays hidden.
+
 ### Theme colors — `_data/theme.yml`
 
 The light and dark palettes. Each value becomes a CSS custom property (`bg` → `--color-bg`), and `bg` also sets the browser UI color and the web app manifest colors. All text colors currently meet WCAG AA contrast (4.5:1) in both themes — check contrast again after changing them.
@@ -273,7 +288,7 @@ The current logo is a simple "S" mark designed for this site. To use your own ar
 
 ### Content Security Policy
 
-The policy in `_config.yml` lists each directive on its own line and only allows files from the site itself. When the [contact form](#contact-form) is turned on, its service is added to `connect-src` and `form-action` automatically. If you embed any other third-party content — a video player, analytics, or external images — add that service's origin to the matching directive (for example `frame-src` for embeds, `script-src` for scripts, `img-src` for images), or the browser will block it. Also update the Privacy and Cookie policies ([see below](#legal-pages)).
+The policy in `_config.yml` lists each directive on its own line and only allows files from the site itself. When the [contact form](#contact-form) is turned on, its service is added to `connect-src` and `form-action` automatically, and when [accounts](#accounts) are turned on, the Supabase address is added to `connect-src` and `img-src`. If you embed any other third-party content — a video player, analytics, or external images — add that service's origin to the matching directive (for example `frame-src` for embeds, `script-src` for scripts, `img-src` for images), or the browser will block it. Also update the Privacy and Cookie policies ([see below](#legal-pages)).
 
 ## Adding the Projects page
 
@@ -389,7 +404,7 @@ Switching to another form service means changing the form markup in `_includes/c
 
 ## Blog
 
-The blog at `/blog/` has no server of its own: posts are written in **GitHub issues**, stored in this repository, and published by a **GitHub Actions** workflow. Anyone with a GitHub account can write one; posts from anyone other than you wait for your approval.
+The blog at `/blog/` has no server of its own: posts are written in **GitHub issues**, stored in this repository, and published by a **GitHub Actions** workflow. Anyone with a GitHub account can write one — or, once [accounts](#accounts) are turned on, anyone with an email address, in an editor on the site. Posts from anyone other than you wait for your approval.
 
 ### How a post is published
 
@@ -426,6 +441,7 @@ The workflow writes this front matter, which you can also use for posts written 
 | `date` | When the post was first published (it also starts the file name) |
 | `last_modified_at` | When the post last changed (added on updates) |
 | `author`, `author_url`, `author_login` | Author's name, link, and GitHub username (default: you and the About page) |
+| `author_username` | The username of a website account, for posts written with an [account](#accounts) |
 | `image`, `image_alt`, `image_width`, `image_height` | Cover image, its description, and its size |
 | `tags` | List of topics |
 | `source_issue` | The issue the post comes from; the workflow uses it to find the post again |
@@ -442,13 +458,131 @@ You can also add a Markdown file to `_posts/`, named like `2026-10-01-my-post.md
 
 ### Limits of this approach
 
-- Writing a post needs a GitHub account, and the issue (including its first version) is public on GitHub. Accepting posts without an account would need a server holding a secret key, which GitHub Pages can't provide.
+- Without [accounts](#accounts), writing a post needs a GitHub account. Accepting posts from anyone else needs a server holding a secret key, which GitHub Pages can't provide — the accounts feature uses Supabase for that.
+- Every post's issue, including its first version, is public on GitHub.
 - Removing a post takes it off the website, but earlier versions stay in the repository's Git history.
 - Changing the limits in `_data/blog.yml` doesn't change the text of the issue form: update `.github/ISSUE_TEMPLATE/blog-post.yml` too.
 
+## Accounts
+
+Visitors can create an account on the website with only their email address — they get a **6-digit code by email**, with no password — then set up an **author profile** and write posts in an **editor on the site**, with image uploads. Posts written this way go through exactly the same checks, review, and publishing as posts written on GitHub, and the GitHub form stays available.
+
+GitHub Pages can't run a server or keep a secret, so accounts use **[Supabase](https://supabase.com/)** (its free plan is enough): Supabase Auth sends the codes, a Postgres database holds the profiles, Storage holds the images, and an Edge Function holds the GitHub token and turns posts into issues.
+
+**Status: off.** Everything account-related stays hidden — no links, no scripts, no extra security-policy entries — until `_data/accounts.yml` has a Supabase address and publishable key. Follow [Setting up accounts](#setting-up-accounts) to turn them on.
+
+### How accounts work
+
+```text
+Account pages (assets/js/account.js, in the browser)
+ ├── Supabase Auth ─────── emailed 6-digit code → a session
+ ├── Supabase database ─── profiles (public) and submissions (own only)   supabase/schema.sql
+ ├── Supabase Storage ──── blog-images/<account id>/…  (public, images only, 10 MB each)
+ └── "blog" Edge Function ─ checks the post → GitHub issue (labels blog-post, from-website)
+                              │                                supabase/functions/blog/index.ts
+                              ▼
+     The publishing workflow, as for any post: checks → your review → /blog/<post>/
+```
+
+- **Pages:** `/account/` (sign in or sign up, profile, your posts and where each one is, sign out, delete account), `/account/write/` (the editor), and `/blog/authors/?u=<username>` (author pages, shown once the author has a published post). None of them is indexed by search engines.
+- **Posts become issues** opened with your GitHub token, starting with a hidden note that names the account. The workflow trusts that note only on issues opened by you, shows the account's display name as the author with a link to its author page, accepts images only from that account's own folder in Storage, and treats the post like any visitor's: it waits for your `approved` label, and every change is reviewed again.
+- **Statuses** on the account page come from the issue's labels and the workflow's comments: Being checked, Waiting for review, Needs changes (with the list of problems), Published, Removed, and Declined.
+- **Images** are cleaned in the browser before they are uploaded (location, camera details, and comments removed; the picture itself is kept as it is), and copied into this repository when the post is published, like images from GitHub.
+- **Deleting an account** (on `/account/`) deletes the account, its profile, and its images, withdraws posts still waiting for review, and — if the person asks — removes their published posts.
+
+### Setting up accounts
+
+Steps 1–6 happen on Supabase and GitHub; only step 7 changes this repository. Nothing secret is ever committed.
+
+1. **Create a project** at https://supabase.com/dashboard (the free plan is enough). Choose a region near your readers.
+
+2. **Create the tables and storage.** Open **SQL Editor**, paste the whole of [`supabase/schema.sql`](supabase/schema.sql), and run it. It creates the `profiles` and `submissions` tables with row-level security, the public `blog-images` bucket (PNG, JPEG, GIF, and WebP up to 10 MB), and the rules that let each account read and change only its own data. Running it again later is safe.
+
+3. **Set up the sign-in emails.**
+   - **Authentication → URL Configuration:** set **Site URL** to `https://sanskarin.github.io`.
+   - **Authentication → Sign In / Providers → Email:** keep it enabled, keep **Email OTP Length** at 6, and set **Email OTP Expiration** to something short, such as 600 seconds (10 minutes).
+   - **Authentication → Emails → Templates:** in both **Confirm sign up** (sent to new accounts) and **Magic link or OTP** (sent to existing ones), replace the link with the code, for example with the subject "Your sign-in code for sanskarIN.github.io" and this message:
+
+     ```html
+     <h2>Your sign-in code</h2>
+     <p>Enter this code on sanskarIN.github.io to sign in: <strong>{{ .Token }}</strong></p>
+     <p>It works once and expires soon. If you didn't ask for it, you can ignore this email.</p>
+     ```
+
+   - **Authentication → Emails → SMTP Settings:** turn on custom SMTP. Without it, Supabase only sends emails to members of your Supabase team (and only 2 an hour), so visitors would never get their codes. Any SMTP service works — for example Brevo's free plan, or a Gmail address with an app password. Then fill in `email_service` and `email_service_privacy_url` in `_data/accounts.yml` (step 7), so the Privacy Policy names it.
+   - **Authentication → Rate Limits:** with custom SMTP, Supabase starts at 30 emails an hour; raise it if you need to.
+
+4. **Create a GitHub token for the function.** On GitHub, open **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**:
+   - **Repository access:** Only select repositories → `sanskarIN/sanskarIN.github.io`;
+   - **Permissions:** Repository permissions → **Issues: Read and write** — nothing else;
+   - **Expiration:** pick a date and set yourself a reminder. Once the token expires, accounts can't send posts until you create a new one and update the secret in step 5.
+
+   Copy the token. It goes only into Supabase, never into this repository.
+
+5. **Deploy the Edge Function.** In Supabase, open **Edge Functions → Deploy a new function → Via Editor**, name it `blog`, replace the example code with the whole of [`supabase/functions/blog/index.ts`](supabase/functions/blog/index.ts), and deploy it. Then:
+   - open **Edge Functions → Secrets** and add `GITHUB_TOKEN` with the token from step 4. Supabase gives the function its own address and keys automatically;
+   - leave JWT verification on (the default), so only signed-in people reach the function. The function also checks every request itself; if the project later moves to new JWT signing keys and the function starts answering 401, turning the setting off is safe;
+   - optional secrets: `SITE_ORIGIN` (default `https://sanskarin.github.io`), `GITHUB_REPOSITORY` (default `sanskarIN/sanskarIN.github.io`), and `EXTRA_ORIGINS` (other addresses allowed to call the function, comma-separated — for example `http://localhost:4000` while testing locally).
+
+   To update the function later, open it, paste the new code, and select **Deploy updates**.
+
+6. **Copy the two public values** from the project's **Connect** dialog, or **Project Settings → API Keys**: the **project URL** (`https://<project>.supabase.co`) and the **publishable key** (`sb_publishable_…`). Never use the secret key (`sb_secret_…`): it bypasses every security rule. The site refuses to use one anyway.
+
+7. **Turn accounts on.** In `_data/accounts.yml`, fill in `supabase_url`, `supabase_publishable_key`, `email_service`, and `email_service_privacy_url`. In `_data/legal.yml`, update the dates of `terms`, `privacy`, `cookies`, and `accessibility` — those pages gain their account passages automatically. Commit to `main`.
+
+Then try it yourself: sign up on `/account/` with your own email address, create a profile, write a test post with an image, check that its issue appears with the `from-website` label, add `approved`, and watch the account page change to "Published". You can remove the test post and delete the test account on `/account/` afterwards.
+
+### What changes when accounts are on
+
+When `supabase_url` (starting with `https://`) and `supabase_publishable_key` are both set:
+
+- the account, editor, and author pages work; "Write a post" on the blog opens the editor, the GitHub form is offered as an alternative, and the "How posting works" steps describe accounts;
+- the footer gets a "Your account" link;
+- the Content Security Policy allows the Supabase address in `connect-src` and `img-src`;
+- `assets/js/account.js` loads on the account and author pages only;
+- the Privacy Policy, Terms, Cookie Policy, Accessibility page, and Credits page describe accounts.
+
+To turn accounts off again, clear `supabase_publishable_key`. Existing posts stay published.
+
+### Managing accounts
+
+| To… | Do this |
+|---|---|
+| Publish, decline, or remove a post from an account | The same as any post: on its issue, add `approved`, close the issue, or add `unpublish`. Authors can also remove their own posts on `/account/` |
+| See accounts and profiles | Supabase → **Authentication → Users**, and **Table Editor → profiles** |
+| Change a profile (for example, an offensive display name) | **Table Editor → profiles** |
+| Remove an account | Delete the user in **Authentication → Users** — their profile and post records go with it. Their images don't: delete the folder named after their account ID in **Storage → blog-images** |
+| Replace the GitHub token | Create a new one (step 4) and update the `GITHUB_TOKEN` secret |
+
+### Limits and costs
+
+- Each account can send 5 new posts a day (the function), upload 200 images (a database rule), and upload images of up to 10 MB each (the bucket). A sign-in code can be requested once a minute per address, and Supabase limits requests per IP address too.
+- Uploaded images stay in Storage after their post is published (the website has its own copy); deleting an account deletes its images. Keep an eye on the free plan's storage and bandwidth quotas in the Supabase dashboard.
+- Supabase may pause free projects that see little activity. It emails you before it does; while a project is paused, signing in fails with an error message and the GitHub form keeps working. Restore the project from the dashboard.
+
+### Security notes
+
+- The project URL and publishable key are public by design: what they allow is decided by the row-level security rules in `supabase/schema.sql`. The secret key and the GitHub token exist only in Supabase.
+- The browser never talks to GitHub: only the function does, with a token that can do nothing but manage this repository's issues.
+- The function checks every request itself — a valid session, the person's own profile and images, sizes and limits — and answers only the website's own address (CORS).
+- The publishing workflow trusts an account's note only on issues you opened, so nobody can post as an account by copying the note into an issue of their own.
+- Profiles and posts are only ever shown as text or as cleaned HTML; author websites must start with `https://` and are marked `nofollow ugc`.
+
+### Files
+
+| File | Purpose |
+|---|---|
+| `_data/accounts.yml` | Turns accounts on: Supabase address, publishable key, email service |
+| `_includes/accounts-config.html` | Reads those settings for the templates and the security policy |
+| `account/index.html`, `account/write.html`, `blog/authors.html` | The account, editor, and author pages |
+| `blog/posts.json` | The list of posts that author pages read |
+| `assets/js/account.js`, `_includes/css/account.css` | Everything the account pages do in the browser, and their styles |
+| `supabase/schema.sql` | Tables, storage bucket, and security rules (run in the SQL Editor) |
+| `supabase/functions/blog/index.ts` | The Edge Function (pasted into the dashboard editor) |
+
 ## Legal pages
 
-The Terms, Privacy, Cookie, and Accessibility pages describe this website as it is actually built: static, no analytics, no cookies, no embedded third-party content, an optional contact form, a blog whose posts are written on GitHub, and hosted on GitHub Pages (which logs visitors' IP addresses for security, as GitHub documents). They are general-purpose documents, not individualized legal advice.
+The Terms, Privacy, Cookie, and Accessibility pages describe this website as it is actually built: static, no analytics, no cookies, no embedded third-party content, an optional contact form, a blog whose posts are written on GitHub, optional accounts provided by Supabase, and hosted on GitHub Pages (which logs visitors' IP addresses for security, as GitHub documents). They are general-purpose documents, not individualized legal advice.
 
 Details that were not provided are intentionally left out, and may need adding later:
 
@@ -467,6 +601,7 @@ Keep the policies in step with the website:
 | Analytics | `privacy.md` (Analytics, Third-party services), `cookies.md` (Analytics cookies, Future services), the CSP; ask for consent where the law requires it |
 | Embedded content (videos, posts, maps) | `privacy.md`, `cookies.md`, the CSP |
 | The built-in contact form | Nothing in the text — the policies update automatically; just update the dates in `_data/legal.yml` |
+| Accounts | Nothing in the text — the policies update automatically; set the email service in `_data/accounts.yml` and update the dates in `_data/legal.yml` |
 | A different form service | `_includes/contact-form.html`, the `form` settings, and the form passages in `privacy.md`, `terms.md`, and `cookies.md` |
 | A new linked platform (e.g. PayPal) | the platform lists in `privacy.md` and `terms.md` |
 | Changes to how blog posts are accepted, reviewed, or removed | the "Blog posts" sections of `terms.md` and `privacy.md` |
@@ -479,15 +614,15 @@ After any change, update the page's date in `_data/legal.yml`.
 - **Tokens** — `_includes/css/tokens.css`: type scale (fluid `clamp()` sizes), spacing scale, content widths, radius, and motion; colors come from `_data/theme.yml`.
 - **Typography** — IBM Plex Sans for text and headings; IBM Plex Mono for labels, handles, and technical details.
 - **Layout** — a 72rem container with fluid side gutters; long-form text is limited to about 42rem per line.
-- **Components** — `_includes/css/components.css`: eyebrow labels, buttons, spec card, feature grid, spec lists and tags, link cards, contact cards, contact form fields, callout, note, table of contents, and prose. Blog components (post list, post details, newer/older links, and styles for post content such as code, tables, and quotes) are in `_includes/css/blog.css`.
+- **Components** — `_includes/css/components.css`: eyebrow labels, buttons, spec card, feature grid, spec lists and tags, link cards, contact cards, contact form fields, callout, note, table of contents, and prose. Blog components (post list, post details, newer/older links, and styles for post content such as code, tables, and quotes) are in `_includes/css/blog.css`, and the account pages' forms, status messages, and author profiles in `_includes/css/account.css`.
 - **Themes** — light and dark palettes, following the device setting until the visitor chooses one with the theme switch.
 - **Motion** — only small hover transitions, all disabled when the device asks for reduced motion.
 
 ## Accessibility, performance, and security
 
 - **Accessibility:** semantic landmarks, a skip link, one `<h1>` per page with ordered headings, visible focus outlines, WCAG AA text contrast in both themes, labelled controls that announce their state, reduced-motion support, and navigation that works without JavaScript. See the [Accessibility page](https://sanskarin.github.io/accessibility/).
-- **Performance:** one stylesheet (≈7 KB gzipped), about 2.5 KB of optional JavaScript, about 75 KB of self-hosted fonts (Latin subset; the main font is preloaded), inline SVG icons, and no third-party requests. CSS, JavaScript, and icon URLs carry a build-time `?v=` parameter because GitHub Pages lets browsers cache files for 10 minutes.
-- **Security:** a Content Security Policy that allows only same-origin resources, no inline scripts or styles, no secrets in the repository, `rel="noopener noreferrer"` on external links, `/.well-known/security.txt`, a blog workflow that treats issues as untrusted input ([details](#safety)), and a [security policy](SECURITY.md).
+- **Performance:** one stylesheet (≈7 KB gzipped), about 2.5 KB of optional JavaScript, about 75 KB of self-hosted fonts (Latin subset; the main font is preloaded), inline SVG icons, and no third-party requests (apart from Supabase on the account and author pages, once accounts are on). CSS, JavaScript, and icon URLs carry a build-time `?v=` parameter because GitHub Pages lets browsers cache files for 10 minutes.
+- **Security:** a Content Security Policy that allows only same-origin resources, no inline scripts or styles, no secrets in the repository, `rel="noopener noreferrer"` on external links, `/.well-known/security.txt`, a blog workflow that treats issues as untrusted input ([details](#safety)), accounts protected by row-level security ([details](#security-notes)), and a [security policy](SECURITY.md).
 
 ## Copyright and licensing
 
