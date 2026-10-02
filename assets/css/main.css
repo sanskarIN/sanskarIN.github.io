@@ -8,4 +8,5 @@
 {% include css/layout.css %}
 {% include css/components.css %}
 {% include css/blog.css %}
+{% include css/account.css %}
 {% include css/pages.css %}
