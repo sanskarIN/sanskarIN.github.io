@@ -1,0 +1,46 @@
+---
+layout: page
+title: Author
+eyebrow: Blog author
+lead: Posts written with an account on this website.
+description: "An author's profile and posts on the sanskarIN.github.io blog."
+permalink: /blog/authors/
+noindex: true
+sitemap: false
+account_app: author
+---
+{%- comment -%}
+  Author page for website accounts: /blog/authors/?u=<username>. The
+  profile comes from Supabase and the posts from /blog/posts.json
+  (assets/js/account.js fills the page in). A profile is shown only once
+  its author has a published post.
+{%- endcomment -%}
+{%- include accounts-config.html -%}
+{%- if accounts_on %}
+<div class="account" data-account-app="author" data-supabase-url="{{ accounts_url }}" data-supabase-key="{{ accounts_key }}" data-posts-index="{{ '/blog/posts.json' | relative_url }}">
+  <p class="account__loading" data-account-view="loading">Loading…</p>
+
+  <div class="account-view" data-account-view="profile" hidden>
+    <div class="author-profile">
+      <p class="author-profile__bio" data-author="bio" hidden></p>
+      <p class="author-profile__website" data-author="website" hidden></p>
+      <p class="author-profile__meta"><span data-author="username"></span></p>
+    </div>
+    <section class="page-section" aria-labelledby="author-posts-title">
+      <h2 id="author-posts-title">Posts</h2>
+      <ul class="post-list" data-author-posts></ul>
+    </section>
+  </div>
+
+  <div class="account-view" data-account-view="missing" hidden>
+    <p>This author hasn't published any posts yet, or the address is wrong.</p>
+  </div>
+</div>
+<noscript>
+  <p class="note">This page needs JavaScript to show the author's profile.</p>
+</noscript>
+{%- else %}
+<p>Author profiles aren't available on this website at the moment.</p>
+{%- endif %}
+
+<p class="page-section">{% include link.html url="/blog/" label="All posts" class="text-link" arrow=true %}</p>
