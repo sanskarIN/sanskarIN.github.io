@@ -11,6 +11,7 @@ policy: accessibility
   When you change this page, update `accessibility` in _data/legal.yml.
   Only describe practices the website actually follows.
 {%- endcomment %}
+{%- include accounts-config.html -%}
 {%- assign form_key = site.data.contact.form.access_key | strip -%}
 {%- assign contact_form = site.data.contact.form %}
 
@@ -33,16 +34,17 @@ The website is designed and built with the Web Content Accessibility Guidelines 
 - **Text alternatives:** icons are decorative and hidden from assistive technology. Icon-only buttons have text labels, and links that open in a new tab say so.
 - **Accessible controls:** the menu button and the theme switch are real buttons that announce their state — expanded or collapsed, on or off.
 {% if form_key != "" %}- **Forms:** every field in the contact form has a visible label, required fields are marked in text, and the result of sending a message is announced to screen readers.
+{% endif %}{% if accounts_on %}- **Accounts:** the sign-in, profile, and post editor forms have visible labels, problems are listed in text and announced to screen readers, and keyboard focus moves to each new step, such as entering the emailed code.
 {% endif %}- **Blog posts:** the post form asks authors to describe every image, a cover image can't be published without a description, and wide tables and code blocks in posts can be scrolled with the keyboard.
 - **Reduced motion:** the website uses very little animation and respects your device's "reduce motion" setting.
 - **Responsive design:** layouts adapt from small phones to large screens without horizontal scrolling, and text can be zoomed to 200% and beyond.
 - **Mobile accessibility:** buttons and menu links are sized for touch, and the website works in both portrait and landscape orientation.
 - **Light and dark themes:** the website follows your device's color setting, and you can switch themes manually.
-- **Works without JavaScript:** all content and navigation remain available if JavaScript is turned off.
+- **Works without JavaScript:** all content and navigation remain available if JavaScript is turned off{% if accounts_on %}, apart from signing in and writing on this website, which need it{% endif %}.
 
 ## Known limitations
 
-Linked third-party services, such as GitHub, LinkedIn, and Discord, are outside my control and may have accessibility issues of their own. Writing a blog post happens on GitHub, so it depends on the accessibility of GitHub's issue form.
+Linked third-party services, such as GitHub, LinkedIn, and Discord, are outside my control and may have accessibility issues of their own. {% if accounts_on %}Writing a blog post with GitHub depends on the accessibility of GitHub's issue form; the editor on this website is an alternative.{% else %}Writing a blog post happens on GitHub, so it depends on the accessibility of GitHub's issue form.{% endif %}
 
 Blog posts are written by their authors, including visitors. Their structure is checked automatically, but their text and image descriptions are not, so some posts may not fully meet accessibility guidelines. Please tell me about any post that causes you problems.
 
