@@ -33,14 +33,16 @@ The website is designed and built with the Web Content Accessibility Guidelines 
 - **Not relying on color alone:** links within text are underlined, and the current page in the navigation is marked with an underline and identified to screen readers.
 - **Text alternatives:** icons are decorative and hidden from assistive technology. Icon-only buttons have text labels, and links that open in a new tab say so.
 - **Accessible controls:** the menu button and the theme switch are real buttons that announce their state — expanded or collapsed, on or off.
+- **Search:** the search opens from the header or with a keyboard shortcut: <kbd>/</kbd>, or <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on a Mac). The number of results is announced to screen readers, the arrow keys move through the results, Enter opens one, and Escape closes the search and returns focus to where you were.
+- **Projects:** the repository filters have visible labels, and the number of matching repositories is announced as you type. The contribution chart is summarized in text, and the share of each language is listed in text as well as shown in a bar.
 {% if form_key != "" %}- **Forms:** every field in the contact form has a visible label, required fields are marked in text, and the result of sending a message is announced to screen readers.
 {% endif %}{% if accounts_on %}- **Accounts:** the sign-in, profile, and post editor forms have visible labels, problems are listed in text and announced to screen readers, and keyboard focus moves to each new step, such as entering the emailed code.
-{% endif %}- **Blog posts:** the post form asks authors to describe every image, a cover image can't be published without a description, and wide tables and code blocks in posts can be scrolled with the keyboard.
+{% endif %}- **Blog posts:** the post form asks authors to describe every image, a cover image can't be published without a description, and wide tables and code blocks in posts can be scrolled with the keyboard. Longer posts include a list of their sections, and each code example has a labeled copy button that announces when the code has been copied.
 - **Reduced motion:** the website uses very little animation and respects your device's "reduce motion" setting.
 - **Responsive design:** layouts adapt from small phones to large screens without horizontal scrolling, and text can be zoomed to 200% and beyond.
 - **Mobile accessibility:** buttons and menu links are sized for touch, and the website works in both portrait and landscape orientation.
 - **Light and dark themes:** the website follows your device's color setting, and you can switch themes manually.
-- **Works without JavaScript:** all content and navigation remain available if JavaScript is turned off{% if accounts_on %}, apart from signing in and writing on this website, which need it{% endif %}.
+- **Works without JavaScript:** all content and navigation remain available if JavaScript is turned off{% if accounts_on %}, apart from signing in and writing on this website, which need it{% endif %}. The search and the project filters need JavaScript too, so they are hidden without it; every project is still listed.
 
 ## Known limitations
 
