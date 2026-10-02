@@ -9,8 +9,8 @@ sitemap: false
   Lists every HTML page, every blog post, and documents from any other
   output collection (for example future project pages in _projects/),
   except those with `sitemap: false` in their front matter. New pages and
-  posts are added automatically. Policy pages and posts include the date
-  they last changed.
+  posts are added automatically. Policy pages, posts, and the Projects page
+  (from its GitHub data) include the date they last changed.
 {%- endcomment -%}
 {%- assign sitemap_pages = site.html_pages | where_exp: "item", "item.sitemap != false" | sort: "url" -%}
 {%- for item in sitemap_pages %}
@@ -18,6 +18,8 @@ sitemap: false
     <loc>{{ item.url | absolute_url | xml_escape }}</loc>
     {%- if item.policy %}
     <lastmod>{{ site.data.legal[item.policy] | date: "%Y-%m-%d" }}</lastmod>
+    {%- elsif item.url == site.projects_url and site.data.github.generated_at %}
+    <lastmod>{{ site.data.github.generated_at | date: "%Y-%m-%d" }}</lastmod>
     {%- endif %}
   </url>
 {%- endfor %}
