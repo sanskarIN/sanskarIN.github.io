@@ -1,8 +1,8 @@
 {%- comment -%}
   Site header. Without JavaScript the navigation is always visible and the
-  two buttons stay hidden. With JavaScript, small screens get a disclosure
-  menu (the button's aria-expanded state drives the CSS) and every screen
-  gets the theme switch.
+  buttons stay hidden. With JavaScript, small screens get a disclosure menu
+  (the button's aria-expanded state drives the CSS), and every screen gets
+  the search button and the theme switch.
 {%- endcomment %}
 <header class="site-header">
   <div class="container site-header__inner">
@@ -13,7 +13,7 @@
     <button class="header-button nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
       {% include icon.html name="menu" class="nav-toggle__open" %}
       {% include icon.html name="close" class="nav-toggle__close" %}
-      <span>Menu</span>
+      <span class="nav-toggle__label">Menu</span>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
       <ul class="site-nav__list">
@@ -22,6 +22,11 @@
         {%- endfor %}
       </ul>
     </nav>
+    <button class="header-button search-toggle" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K /" {% include search-attributes.html %} hidden>
+      {% include icon.html name="search" %}
+      <span class="search-toggle__label">Search</span>
+      <kbd class="search-toggle__key" aria-hidden="true">/</kbd>
+    </button>
     <button class="header-button theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
       {% include icon.html name="moon" class="theme-toggle__moon" %}
       {% include icon.html name="sun" class="theme-toggle__sun" %}
