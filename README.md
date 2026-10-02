@@ -2,7 +2,7 @@
 
 Source for https://sanskarIN.github.io — the personal developer website of **Sanskar** (GitHub: [sanskarIN](https://www.github.com/sanskarIN), X: [@SanskarCodes](https://x.com/SanskarCodes), Reddit: [u/sanskarIN](https://reddit.com/user/sanskarIN)).
 
-The website is a static site built with [Jekyll](https://jekyllrb.com/) and published by [GitHub Pages](https://pages.github.com/). There is no backend of its own, no analytics or tracking, and no third-party script: visitors receive plain HTML, one stylesheet, and two small optional scripts. Blog posts are written with a GitHub issue form and published by a GitHub Actions workflow ([details](#blog)), and the [Projects](#projects) page lists the public GitHub repositories, refreshed daily by another workflow. A [site search](#site-search) runs in the browser. Optional [accounts](#accounts) — sign-in with an emailed code, author profiles, and an editor on the site — use Supabase and stay off until they are set up.
+The website is a static site built with [Jekyll](https://jekyllrb.com/) and published by [GitHub Pages](https://pages.github.com/). There is no backend of its own, no analytics or tracking, and no third-party script: visitors receive plain HTML, one stylesheet, and two small optional scripts, plus a few that load only where they're needed. Blog posts are written with a GitHub issue form and published by a GitHub Actions workflow ([details](#blog)), and the [Projects](#projects) page lists the public GitHub repositories, refreshed daily by another workflow. A [site search](#site-search) runs in the browser. Optional [accounts](#accounts) — sign-in with an emailed code, author profiles, and an editor on the site — use Supabase and stay off until they are set up.
 
 ## Contents
 
@@ -119,13 +119,14 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 │   ├── language-bar.html     Languages of the repositories, as a bar and a list
 │   ├── language-dot.html     A language's color dot
 │   ├── activity-calendar.html  The GitHub contribution calendar
+│   ├── number.html           A number with thousands separators (22,928)
 │   ├── search-attributes.html  Attributes of buttons that open the site search
 │   ├── accounts-config.html  Reads _data/accounts.yml for the templates
 │   └── css/                  Stylesheet partials (combined into assets/css/main.css)
 ├── assets/
 │   ├── css/main.css          Combines the partials into one stylesheet
 │   ├── js/theme-init.js      Runs first: enables JS features, applies a saved theme
-│   ├── js/main.js            Theme switch, mobile menu, copy buttons
+│   ├── js/main.js            Theme switch, menu, search keys, copy buttons, post sections
 │   ├── js/account.js         Account pages: sign-in, profile, editor, author pages
 │   ├── js/projects.js        Projects page: search, filter, and sort the repositories
 │   ├── js/search.js          Site search dialog (loaded when first opened)
@@ -337,7 +338,7 @@ Commit a change and the workflow runs straight away; the page updates a minute o
 
 ### Good to know
 
-- Descriptions, topics, and website links are the ones set on each repository on GitHub — edit them there (the ⚙ next to "About" on the repository page).
+- Descriptions, topics, and website links are the ones set on each repository on GitHub — edit them there (the ⚙ next to "About" on the repository page). A website link that points back to GitHub is left out, because every card already links to the repository.
 - Language percentages are GitHub's own measurements, and forks aren't counted. The colors are GitHub's language colors.
 - The activity calendar shows the same contributions as your GitHub profile. If GitHub's GraphQL API isn't available to the workflow, the page leaves out the calendar and pinned repositories, and features the most-starred repositories instead.
 - If a run fails (for example, GitHub is down), the page keeps the previous data, and the run shows as failed in the Actions tab.
