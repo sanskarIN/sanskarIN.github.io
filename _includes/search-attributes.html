@@ -1,0 +1,8 @@
+{%- comment -%}
+  The data attributes of a button that opens the site search (main.js loads
+  search.js and the index the first time). The button starts hidden, and
+  main.js shows it when the browser supports the search dialog.
+{%- endcomment -%}
+{%- assign search_version = site.time | date: "%s" -%}
+data-search-open data-search-script="{{ '/assets/js/search.js' | relative_url }}?v={{ search_version }}" data-search-index="{{ '/search.json' | relative_url }}?v={{ search_version }}" data-search-sprite="{{ '/assets/icons/sprite.svg' | relative_url }}?v={{ search_version }}"
+{%- comment -%} Ends without a trailing newline. {%- endcomment -%}
