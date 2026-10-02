@@ -1,0 +1,23 @@
+{%- comment -%}
+  The languages used across the GitHub repositories (forks excluded), as a
+  bar and a list, from _data/github.json. Parameter: languages (required).
+  The bar is decorative; the list carries the same information as text.
+{%- endcomment -%}
+{%- assign bar_languages = include.languages -%}
+<div class="languages">
+  <div class="languages__track">
+    <svg class="languages__bar" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      {%- assign bar_x = 0 -%}
+      {%- for language in bar_languages %}
+      <rect x="{{ bar_x | round: 2 }}" y="0" width="{{ language.percent }}" height="10" fill="{{ language.color | escape }}"/>
+      {%- assign bar_x = bar_x | plus: language.percent -%}
+      {%- endfor %}
+    </svg>
+  </div>
+  <ul class="languages__list">
+    {%- for language in bar_languages %}
+    <li>{% include language-dot.html color=language.color %}<span class="languages__name">{{ language.name | escape }}</span> <span class="languages__percent">{% if language.percent < 0.1 %}&lt;0.1{% else %}{{ language.percent }}{% endif %}%</span></li>
+    {%- endfor %}
+  </ul>
+</div>
+{%- comment -%} Ends without a trailing newline. {%- endcomment -%}
