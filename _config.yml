@@ -12,6 +12,7 @@
 #    _data/navigation.yml    header and footer navigation
 #    _data/legal.yml         "Last updated" dates for the policy pages
 #    _data/blog.yml          blog settings: review of visitors' posts, limits
+#    _data/accounts.yml      accounts: email sign-in and author profiles
 #    _data/theme.yml         light and dark color palettes
 #    _data/focus.yml         development focus areas (Home + Developer pages)
 #    _data/technologies.yml  technologies (Home + Developer pages)
@@ -137,3 +138,5 @@ exclude:
   - Gemfile.lock
   - vendor/
   - node_modules/
+  # Supabase setup for accounts (database schema and Edge Function source).
+  - supabase/
