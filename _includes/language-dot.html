@@ -1,0 +1,6 @@
+{%- comment -%}
+  A small decorative dot in a language's color (from GitHub). Always paired
+  with the language's name. Parameter: color (a hex color).
+{%- endcomment -%}
+<svg class="language-dot" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" focusable="false"><circle cx="6" cy="6" r="5.25" fill="{{ include.color | default: '#8b949e' | escape }}"/></svg>
+{%- comment -%} Ends without a trailing newline. {%- endcomment -%}
