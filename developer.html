@@ -75,7 +75,13 @@ toc: true
   <h2 id="open-source">Open source</h2>
   <p>I publish code on GitHub as {{ site.author.username }}, where it can be read, discussed through issues, and improved through pull requests. How code in a repository may be reused depends on that repository's license.</p>
   <p>The source code of this website is on GitHub as well.</p>
+  {%- assign gh = site.data.github %}
+  {%- if gh and gh.languages.size > 0 %}
+  <h3 class="subsection-title">Languages in my public repositories</h3>
+  {% include language-bar.html languages=gh.languages %}
+  {%- endif %}
   <div class="button-row">
+    {% include link.html url=site.projects_url label="Projects" class="button button--primary" arrow=true %}
     {% include link.html url=site.data.social.profiles.github.url label="GitHub profile" icon="github" class="button button--secondary" %}
     {% include link.html url=site.repository_url label="Website repository" class="button button--ghost" arrow=true %}
   </div>
@@ -83,7 +89,16 @@ toc: true
 
 <section class="page-section">
   <h2 id="developer-community">Developer community</h2>
-  <p>I take part in the developer community as {{ site.author.community_username }} and {{ site.author.username }}. Find me here:</p>
+  {%- assign community_names = "" | split: "" %}
+  {%- for key in site.data.social.community %}
+    {%- assign community_profile = site.data.social.profiles[key] %}
+    {%- if community_profile.url != "" and community_profile.username %}
+      {%- unless community_names contains community_profile.username %}
+        {%- assign community_names = community_names | push: community_profile.username %}
+      {%- endunless %}
+    {%- endif %}
+  {%- endfor %}
+  <p>I take part in the developer community as {{ community_names | array_to_sentence_string }}. Find me here:</p>
   {% include profile-list.html items=site.data.social.community variant="card" class="link-grid" %}
 </section>
 
