@@ -39,6 +39,10 @@
             {%- for item in site.data.navigation.information %}
             <li>{% include link.html url=item.url label=item.title %}</li>
             {%- endfor %}
+            {%- include accounts-config.html %}
+            {%- if accounts_on %}
+            <li>{% include link.html url="/account/" label="Your account" %}</li>
+            {%- endif %}
           </ul>
         </div>
 
