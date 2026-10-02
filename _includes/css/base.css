@@ -150,3 +150,15 @@ hr {
     scroll-behavior: auto !important;
   }
 }
+
+/* Page changes fade smoothly in browsers that support cross-document view
+   transitions; the header stays in place. Off when less motion is wanted. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+.site-header {
+  view-transition-name: site-header;
+}
