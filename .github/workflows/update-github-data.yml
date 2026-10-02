@@ -1,0 +1,55 @@
+# Refreshes the GitHub repositories shown on the Projects page (/projects/)
+# and on the Home page. Runs .github/scripts/update_github_data.py, which
+# writes _data/github.json, commits it when something changed, and asks
+# GitHub Pages to rebuild the site. See README.md → "Projects".
+#
+# Runs every day, whenever the Projects settings (_data/projects.yml), the
+# script, or this workflow change on main, and from the Actions tab. It only
+# reads public information, with the workflow's own token: no secrets.
+
+name: Update GitHub data
+
+on:
+  schedule:
+    - cron: "23 4 * * *" # every day at 04:23 UTC
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/update-github-data.yml
+      - .github/scripts/update_github_data.py
+      - _data/projects.yml
+  workflow_dispatch:
+
+permissions: {}
+
+# One run at a time; a run that starts while another is going waits for it.
+concurrency:
+  group: github-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: .github/scripts/requirements.txt
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check -r .github/scripts/requirements.txt
+      - name: Update the data
+        run: python .github/scripts/update_github_data.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          BRANCH: main
+          # Commits made for the data use the site owner's name and email.
+          COMMIT_NAME: sanskarIN
+          COMMIT_EMAIL: sanskarin@outlook.in
