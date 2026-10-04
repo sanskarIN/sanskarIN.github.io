@@ -263,12 +263,14 @@
   /* Contact form ---------------------------------------------------------- */
 
   // Without JavaScript the form posts normally and the form service redirects
-  // to /contact/sent/. Here it is sent in the background instead, so the
-  // visitor stays on the page and hears the result in the status line.
+  // to the thank-you page. Here it is sent in the background instead: once
+  // it's delivered, the thank-you page opens; a problem is reported in the
+  // status line, so nothing typed is lost.
   var contactForm = document.querySelector("[data-contact-form]");
   if (contactForm && window.fetch) {
     var formStatus = contactForm.querySelector("[data-form-status]");
     var sendButton = contactForm.querySelector('button[type="submit"]');
+    var thanksUrl = contactForm.getAttribute("data-thanks");
     var sending = false;
 
     var showStatus = function (message, state) {
@@ -306,14 +308,20 @@
         })
         .then(
           function () {
-            contactForm.reset();
             showStatus("Thank you — your message has been sent.", "success");
+            contactForm.reset();
+            if (thanksUrl) {
+              // The button stays disabled while the thank-you page opens.
+              window.location.assign(thanksUrl);
+              return true;
+            }
           },
           function () {
             showStatus("Sorry, your message could not be sent. Please try again, or email me at one of the addresses above.", "error");
           }
         )
-        .then(function () {
+        .then(function (leaving) {
+          if (leaving) return;
           sending = false;
           sendButton.removeAttribute("aria-disabled");
         });
