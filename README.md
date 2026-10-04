@@ -98,7 +98,8 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 │   ├── default.html          Page skeleton: <head>, header, main content, footer
 │   ├── page.html             Inner pages: title block + content (+ optional "On this page")
 │   ├── legal.html            Policy pages: page layout with table of contents
-│   └── post.html             Blog posts: title, details (dates, author, tags), cover, content
+│   ├── post.html             Blog posts: title, details (dates, author, tags), cover, content
+│   └── thanks.html           Thank-you pages: confirmation, next steps, suggestions
 ├── _includes/
 │   ├── head.html             Meta tags, security policy, stylesheet, scripts, icons
 │   ├── seo.html              Title, description, canonical URL, Open Graph, X cards
