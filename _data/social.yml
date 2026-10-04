@@ -141,3 +141,6 @@ groups:
 
 # Profiles featured in the Home page "Developer community" section.
 community: [devto, discord, x, reddit, bluesky, linkedin]
+
+# Profiles suggested under "Follow along" on the thank-you pages.
+follow: [github, x, reddit, linkedin, devto]
