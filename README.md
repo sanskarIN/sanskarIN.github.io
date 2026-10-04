@@ -605,6 +605,7 @@ To turn accounts off again, clear `supabase_publishable_key`. Existing posts sta
 | `_includes/accounts-config.html` | Reads those settings for the templates and the security policy |
 | `account/index.html`, `account/write.html`, `blog/authors.html` | The account, editor, and author pages |
 | `blog/posts.json` | The list of posts that author pages read |
+| `thank-you/post.html`, `thank-you/account-deleted.html` | The pages that open after sending a post and after deleting an account |
 | `assets/js/account.js`, `_includes/css/account.css` | Everything the account pages do in the browser, and their styles |
 | `supabase/schema.sql` | Tables, storage bucket, and security rules (run in the SQL Editor) |
 | `supabase/functions/blog/index.ts` | The Edge Function (pasted into the dashboard editor) |
