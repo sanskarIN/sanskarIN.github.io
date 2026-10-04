@@ -3,15 +3,16 @@
   Only rendered by contact.html when an access key is set.
 
   Without JavaScript it is a normal form post; the service then redirects to
-  /contact/sent/. With JavaScript, assets/js/main.js sends it in the
-  background and reports the result in the status line.
+  the thank-you page, /thank-you/message/. With JavaScript, assets/js/main.js
+  sends it in the background, opens the same page once it's delivered, and
+  reports any problem in the status line.
 {%- endcomment -%}
 {%- assign contact_form = site.data.contact.form -%}
 <form class="contact-form" action="{{ contact_form.endpoint }}" method="post" data-contact-form>
   <input type="hidden" name="access_key" value="{{ contact_form.access_key | strip }}">
   <input type="hidden" name="subject" value="{{ contact_form.subject }}">
   <input type="hidden" name="from_name" value="{{ site.display_url }}">
-  <input type="hidden" name="redirect" value="{{ '/contact/sent/' | absolute_url }}">
+  <input type="hidden" name="redirect" value="{{ '/thank-you/message/' | absolute_url }}">
 
   <div class="contact-form__trap">
     <label>Leave this box unchecked <input type="checkbox" name="botcheck" tabindex="-1"></label>
