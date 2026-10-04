@@ -43,7 +43,11 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 | `/blog/authors/?u=<username>` | `blog/authors.html` | Author page of a website account (not indexed; [accounts](#accounts)) |
 | `/account/` | `account/index.html` | Sign in or sign up, author profile, your posts (not indexed; [accounts](#accounts)) |
 | `/account/write/` | `account/write.html` | Post editor for accounts (not indexed; [accounts](#accounts)) |
-| `/contact/sent/` | `contact-sent.html` | Contact form confirmation (not indexed; shown after sending without JavaScript) |
+| `/thank-you/message/` | `thank-you/message.html` | Thank-you page after sending the contact form (not indexed; [details](#thank-you-pages)) |
+| `/thank-you/post/` | `thank-you/post.html` | Thank-you page after sending a post from the editor (not indexed) |
+| `/thank-you/account-deleted/` | `thank-you/account-deleted.html` | Shown after an account is deleted (not indexed) |
+| `/thank-you/support/` | `thank-you/support.html` | Thank-you page for supporters (not indexed) |
+| `/contact/sent/` | `contact-sent.html` | The contact form's old confirmation address; forwards to `/thank-you/message/` |
 | any missing URL | `404.html` | Page not found |
 
 Generated files: `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, `/.well-known/security.txt`, the blog's Atom feed at `/blog/feed.xml`, `/blog/posts.json` (a list of posts for author pages), and `/search.json` (the [site search](#site-search) index).
