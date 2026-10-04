@@ -1087,14 +1087,15 @@
       callFunction({ action: "submit", id: editingId || undefined, post: post })
         .then(function () {
           if (!editingId) writeStore(DRAFT_KEY, null);
-          setStatus(status, "");
-          show("sent", true);
+          setStatus(status, "Your post has been sent.", "success");
+          window.location.assign(form.getAttribute("data-thanks"));
+          return true;
         }, function (error) {
           setStatus(status, error.message, "error", error.details);
           status.focus();
         })
-        .then(function () {
-          setBusy(submitButton, false);
+        .then(function (leaving) {
+          if (!leaving) setBusy(submitButton, false);
         });
     });
 
