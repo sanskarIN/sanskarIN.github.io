@@ -326,5 +326,14 @@
           sendButton.removeAttribute("aria-disabled");
         });
     });
+
+    // Coming back from the thank-you page with the Back button: the form is
+    // ready for another message.
+    window.addEventListener("pageshow", function (event) {
+      if (!event.persisted || !sending) return;
+      sending = false;
+      sendButton.removeAttribute("aria-disabled");
+      showStatus("", "");
+    });
   }
 })();
