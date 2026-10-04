@@ -1,0 +1,48 @@
+---
+layout: thanks
+title: Account deleted
+heading: Your account has been deleted
+eyebrow: Account
+lead: Thank you for being part of the blog. You're now signed out on this device.
+description: "Confirmation that your account on sanskarIN.github.io was deleted."
+permalink: /thank-you/account-deleted/
+requires: accounts
+unavailable_heading: Accounts aren't available
+unavailable_lead: This website doesn't have accounts at the moment.
+noindex: true
+sitemap: false
+---
+{%- comment -%}
+  Shown after someone deletes their account on /account/
+  (assets/js/account.js). Keep it in line with "Deleting your account" in
+  privacy.md.
+{%- endcomment -%}
+{%- include thanks-available.html -%}
+{%- if thanks_available %}
+<div class="thanks-next">
+  <h2 class="thanks-next__title">What this means</h2>
+  <ol class="thanks-steps" role="list">
+    <li class="thanks-steps__item">
+      <span class="thanks-steps__name">Your account</span>
+      <span class="thanks-steps__text">Your account, profile, and uploaded images are deleted, and posts still waiting for review are withdrawn.</span>
+    </li>
+    <li class="thanks-steps__item">
+      <span class="thanks-steps__name">Published posts</span>
+      <span class="thanks-steps__text">They stay on the blog under your display name, unless you chose to remove them as well.</span>
+    </li>
+    <li class="thanks-steps__item">
+      <span class="thanks-steps__name">On GitHub</span>
+      <span class="thanks-steps__text">The issues for your posts are closed but stay public. To have them deleted, email {% include email-link.html key="business_primary" %}.</span>
+    </li>
+  </ol>
+</div>
+<div class="button-row thanks__actions">
+  <a class="button button--primary" href="{{ '/' | relative_url }}">Back to Home</a>
+  <a class="button button--secondary" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+</div>
+{%- else %}
+<div class="button-row thanks__actions">
+  <a class="button button--primary" href="{{ '/' | relative_url }}">Back to Home</a>
+  <a class="button button--secondary" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+</div>
+{%- endif %}
