@@ -93,14 +93,6 @@ account_app: write
     <div class="form-status" role="status" data-status tabindex="-1"></div>
   </form>
 
-  <div class="account-view" data-account-view="sent" hidden>
-    <h2 tabindex="-1">Sent for review</h2>
-    <p>Thank you! Your post is checked automatically and published after the site owner reviews it. Your account page shows where it is, and any changes it needs.</p>
-    <div class="button-row">
-      <a class="button button--primary" href="{{ '/account/' | relative_url }}">Go to your account</a>
-      <a class="button button--ghost" href="{{ '/account/write/' | relative_url }}">Write another post</a>
-    </div>
-  </div>
 </div>
 <noscript>
   <p class="note">The editor needs JavaScript. You can still {% include link.html url=github_form_url label="write a post with GitHub" %}.</p>
