@@ -516,7 +516,8 @@ Account pages (assets/js/account.js, in the browser)
 - **Posts become issues** opened with your GitHub token, starting with a hidden note that names the account. The workflow trusts that note only on issues opened by you, shows the account's display name as the author with a link to its author page, accepts images only from that account's own folder in Storage, and treats the post like any visitor's: it waits for your `approved` label, and every change is reviewed again.
 - **Statuses** on the account page come from the issue's labels and the workflow's comments: Being checked, Waiting for review, Needs changes (with the list of problems), Published, Removed, and Declined.
 - **Images** are cleaned in the browser before they are uploaded (location, camera details, and comments removed; the picture itself is kept as it is), and copied into this repository when the post is published, like images from GitHub.
-- **Deleting an account** (on `/account/`) deletes the account, its profile, and its images, withdraws posts still waiting for review, and — if the person asks — removes their published posts.
+- **Thank-you pages:** sending a post opens `/thank-you/post/`, which explains the review.
+- **Deleting an account** (on `/account/`) deletes the account, its profile, and its images, withdraws posts still waiting for review, and — if the person asks — removes their published posts. Then `/thank-you/account-deleted/` opens.
 
 ### Setting up accounts
 
