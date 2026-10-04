@@ -411,6 +411,24 @@ To turn the form off, clear the `access_key` (and update the policy dates); the 
 
 Switching to another form service means changing the form markup in `_includes/contact-form.html` (field names differ between services), the `endpoint` in `_data/contact.yml`, and the service descriptions in the policy pages.
 
+## Thank-you pages
+
+When someone finishes something on the website, a thank-you page opens: it confirms what happened, explains what happens next, and suggests where to go from there (the latest post, Projects, the Developer page, and profiles to follow). These pages are left out of search engines and the sitemap.
+
+| Page | Opens after | Source |
+|---|---|---|
+| `/thank-you/message/` | Sending the contact form, with or without JavaScript | `thank-you/message.html` |
+| `/thank-you/post/` | Sending a post, or a change to one, from the editor | `thank-you/post.html` |
+| `/thank-you/account-deleted/` | Deleting an account on `/account/` | `thank-you/account-deleted.html` |
+| `/thank-you/support/` | Supporting you, on a platform that can send people to a page after they pay | `thank-you/support.html` |
+
+- **One design:** every page uses `_layouts/thanks.html`, with its styles in `_includes/css/thanks.css`. The front matter sets the `heading`, `eyebrow`, `lead`, and `badge` (`check` or `heart`); the page's content holds the steps and buttons.
+- **Features that are off:** a page with `requires: contact_form` or `requires: accounts` shows its `unavailable_heading` and `unavailable_lead` while that feature is off, so it never confirms something that can't have happened.
+- **Supporters:** if Buy Me a Coffee, Gumroad, or another platform lets you choose a page to open after a payment, use `https://sanskarin.github.io/thank-you/support/`.
+- **Follow along:** the profiles at the bottom of each page come from `follow` in `_data/social.yml`.
+- **Adding a page:** copy one in `thank-you/`, change its `permalink` and text, keep `noindex: true` and `sitemap: false`, and send people to its address.
+- **Old address:** `/contact/sent/`, the contact form's earlier confirmation page, forwards to `/thank-you/message/` (`redirect_to` in its front matter).
+
 ## Blog
 
 The blog at `/blog/` has no server of its own: posts are written in **GitHub issues**, stored in this repository, and published by a **GitHub Actions** workflow. Anyone with a GitHub account can write one — or, once [accounts](#accounts) are turned on, anyone with an email address, in an editor on the site. Posts from anyone other than you wait for your approval.
