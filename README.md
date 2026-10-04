@@ -245,7 +245,7 @@ Every profile link on the site (header, footer, Home, About, Developer, Contact,
 | PayPal | *not set yet* | — |
 
 - Each entry has a `name`, `url`, `handle`, `username`, `icon`, and a short `note`. A blank `url` hides that profile everywhere.
-- `groups` sets the order and grouping in the footer and on the Contact page (Developer, Social, Support & Products); `community` lists the profiles featured on the Home page.
+- `groups` sets the order and grouping in the footer and on the Contact page (Developer, Social, Support & Products); `community` lists the profiles featured on the Home page; `follow` lists the profiles suggested on the [thank-you pages](#thank-you-pages).
 - To add a service: add an entry, add its icon to `assets/icons/sprite.svg`, and add its key to a group.
 - External links open in a new tab with `rel="noopener noreferrer"` and tell screen-reader users so; the templates handle this.
 - The Discord link opens a channel inside a server, so it works for members of that server. An invite link (`discord.gg/…`) would also work for non-members, if you prefer one.
