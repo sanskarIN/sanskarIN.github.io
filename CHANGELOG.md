@@ -4,6 +4,26 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.5.0] — 2026-10-04
+
+### Added
+
+- Thank-you pages that open when someone finishes something on the website. Each one confirms what happened, explains what happens next, and suggests where to go from there: the latest post, Projects, the Developer page, and profiles to follow.
+  - `/thank-you/message/` after sending the contact form, with or without JavaScript.
+  - `/thank-you/post/` after sending a post, or a change to one, from the editor.
+  - `/thank-you/account-deleted/` after deleting an account.
+  - `/thank-you/support/` for supporters, for platforms that can send people to a page after they pay.
+- A shared layout for them, `_layouts/thanks.html`, with a check mark or heart that draws itself, unless reduced motion is requested. While the contact form or accounts are off, their pages say so instead of confirming anything.
+- A heart icon, and `follow` in `_data/social.yml` for the profiles suggested on the thank-you pages.
+- `redirect_to` front matter for pages that have moved.
+
+### Changed
+
+- The contact form opens its thank-you page after sending, with JavaScript too. Problems are still shown next to the button, and the message stays in the form.
+- The editor and the account page open their thank-you pages after sending a post and after deleting an account, instead of showing a message in place.
+- `/contact/sent/` forwards to `/thank-you/message/`.
+- The Accessibility page and the Credits page describe the change.
+
 ## [1.4.1] — 2026-10-02
 
 ### Changed
