@@ -1236,6 +1236,13 @@
     });
   }
 
+  // A page restored by the Back button (for example, from a thank-you page)
+  // could show an account that's deleted or a post that's already sent, so
+  // it's loaded again.
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) window.location.reload();
+  });
+
   var page = app.getAttribute("data-account-app");
   if (page === "account") initAccount();
   else if (page === "write") initWrite();
