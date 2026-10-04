@@ -11,7 +11,7 @@
   {%- capture seo_title -%}{{ page.title }} · {{ site.title }}{%- endcapture -%}
 {%- endif -%}
 {%- assign seo_description = page.description | default: site.description | strip_html | normalize_whitespace -%}
-{%- assign seo_url = page.url | absolute_url -%}
+{%- assign seo_url = page.redirect_to | default: page.url | absolute_url -%}
 {%- assign seo_author = page.author | default: site.author.name -%}
 {%- assign is_post = false -%}
 {%- if page.collection == "posts" %}{% assign is_post = true %}{% endif -%}
