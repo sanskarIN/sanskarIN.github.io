@@ -1,0 +1,48 @@
+---
+layout: thanks
+title: Message sent
+heading: Thank you for your message
+eyebrow: Contact
+lead: Your message is on its way to my inbox.
+description: "Confirmation that your message was sent with the contact form on sanskarIN.github.io."
+permalink: /thank-you/message/
+requires: contact_form
+unavailable_heading: No contact form
+unavailable_lead: This website doesn't have a contact form at the moment. Please use one of the email addresses on the Contact page.
+noindex: true
+sitemap: false
+---
+{%- comment -%}
+  Shown after the contact form is sent. With JavaScript, assets/js/main.js
+  opens this page once the message is delivered; without it, the form
+  service redirects here (the `redirect` field in _includes/contact-form.html).
+{%- endcomment -%}
+{%- include thanks-available.html -%}
+{%- if thanks_available %}
+<div class="thanks-next">
+  <h2 class="thanks-next__title">What happens next</h2>
+  <ol class="thanks-steps" role="list">
+    <li class="thanks-steps__item">
+      <span class="thanks-steps__name">Delivered</span>
+      <span class="thanks-steps__text">{{ site.data.contact.form.service }} forwards your message to my email inbox.</span>
+    </li>
+    <li class="thanks-steps__item">
+      <span class="thanks-steps__name">A reply by email</span>
+      <span class="thanks-steps__text">I reply to the email address you entered in the form.</span>
+    </li>
+    <li class="thanks-steps__item">
+      <span class="thanks-steps__name">Check your inbox</span>
+      <span class="thanks-steps__text">If my reply doesn't seem to arrive, look in your spam or junk folder too.</span>
+    </li>
+  </ol>
+</div>
+<div class="button-row thanks__actions">
+  <a class="button button--primary" href="{{ '/' | relative_url }}">Back to Home</a>
+  <a class="button button--secondary" href="{{ '/contact/' | relative_url }}">Send another message</a>
+</div>
+{%- else %}
+<div class="button-row thanks__actions">
+  <a class="button button--primary" href="{{ '/contact/' | relative_url }}">Go to Contact</a>
+  <a class="button button--secondary" href="{{ '/' | relative_url }}">Home</a>
+</div>
+{%- endif %}
