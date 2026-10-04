@@ -1,0 +1,49 @@
+---
+layout: thanks
+title: Thank you
+heading: Thank you for your support
+eyebrow: Support
+lead: Thank you for supporting my work. It helps me keep building and sharing software in the open.
+description: "A thank-you for supporting Sanskar's work on sanskarIN.github.io."
+permalink: /thank-you/support/
+badge: heart
+noindex: true
+sitemap: false
+---
+{%- comment -%}
+  For supporters. If a platform in the "Support & Products" group of
+  _data/social.yml can send people to a page after they pay, use
+  https://sanskarin.github.io/thank-you/support/ there (README.md →
+  "Thank-you pages").
+{%- endcomment -%}
+{%- assign support_names = "" | split: "" -%}
+{%- for profile_id in site.data.social.groups.products.items -%}
+  {%- assign profile = site.data.social.profiles[profile_id] -%}
+  {%- if profile.url and profile.url != "" -%}
+    {%- assign support_names = support_names | push: profile.name -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign gumroad = site.data.social.profiles.gumroad %}
+<div class="thanks-next">
+  <h2 class="thanks-next__title">Good to know</h2>
+  <ol class="thanks-steps" role="list">
+    <li class="thanks-steps__item">
+      <span class="thanks-steps__name">Your receipt</span>
+      <span class="thanks-steps__text">Payments are handled by the platform you used{% if support_names.size > 0 %}, such as {{ support_names | array_to_sentence_string: "or" }},{% endif %} which emails you a receipt.</span>
+    </li>
+    {%- if gumroad.url and gumroad.url != "" %}
+    <li class="thanks-steps__item">
+      <span class="thanks-steps__name">Your purchases</span>
+      <span class="thanks-steps__text">Products bought on {{ gumroad.name }} are in the email from {{ gumroad.name }}, and in your {{ gumroad.name }} library if you have an account.</span>
+    </li>
+    {%- endif %}
+    <li class="thanks-steps__item">
+      <span class="thanks-steps__name">Questions</span>
+      <span class="thanks-steps__text">For anything about a purchase or your support, email {% include email-link.html key="business_primary" %}.</span>
+    </li>
+  </ol>
+</div>
+<div class="button-row thanks__actions">
+  <a class="button button--primary" href="{{ '/' | relative_url }}">Back to Home</a>
+  <a class="button button--secondary" href="{{ site.projects_url | relative_url }}">See my projects</a>
+</div>
