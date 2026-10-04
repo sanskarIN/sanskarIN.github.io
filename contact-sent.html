@@ -1,32 +1,19 @@
 ---
-layout: default
-title: Contact form
-description: Confirmation page for the contact form on sanskarIN.github.io.
+layout: page
+title: Page moved
+heading: This page has moved
+eyebrow: Contact
+lead: The contact form's confirmation is now on its thank-you page.
+description: "This page has moved to the thank-you page for the contact form on sanskarIN.github.io."
 permalink: /contact/sent/
+redirect_to: /thank-you/message/
 noindex: true
 sitemap: false
 ---
 {%- comment -%}
-  Visitors land here after sending the contact form without JavaScript
-  (the form service redirects here). With JavaScript, the Contact page shows
-  the result itself. While the form is off, this page says so instead.
-{%- endcomment -%}
-{%- assign form_key = site.data.contact.form.access_key | strip %}
-<header class="page-header">
-  <div class="container">
-    <p class="eyebrow">Contact</p>
-    {%- if form_key != "" %}
-    <h1 class="page-header__title">Message sent</h1>
-    <p class="page-header__lead">Thank you for getting in touch. Your message is on its way to my inbox, and replies come by email.</p>
-    {%- else %}
-    <h1 class="page-header__title">No contact form</h1>
-    <p class="page-header__lead">This website does not have a contact form at the moment. Please use one of the email addresses on the Contact page.</p>
-    {%- endif %}
-  </div>
-</header>
-<div class="container page-body">
-  <div class="button-row">
-    {% include link.html url="/contact/" label="Back to Contact" class="button button--primary" %}
-    {% include link.html url="/" label="Home" class="button button--secondary" %}
-  </div>
+  The contact form's old confirmation address. It now forwards to
+  /thank-you/message/, for forms opened before the change.
+{%- endcomment %}
+<div class="button-row">
+  <a class="button button--primary" href="{{ '/thank-you/message/' | relative_url }}">Continue</a>
 </div>
