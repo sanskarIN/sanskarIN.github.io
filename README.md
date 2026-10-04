@@ -299,6 +299,7 @@ The "Last updated" date of each policy page. Update the date whenever you change
 | `schema_type` | Structured data type, e.g. `ProfilePage`, `ContactPage` (default `WebPage`) |
 | `noindex: true` | Keeps the page out of search results |
 | `sitemap: false` | Leaves the page out of `sitemap.xml` |
+| `redirect_to` | Sends visitors to another address, for a page that has moved |
 
 ### Branding assets
 
