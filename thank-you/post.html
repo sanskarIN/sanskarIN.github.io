@@ -1,0 +1,53 @@
+---
+layout: thanks
+title: Post sent
+heading: Thank you for your post
+eyebrow: Blog
+lead: Your post has been sent, and it's on its way to the blog.
+description: "Confirmation that your blog post was sent from the editor on sanskarIN.github.io."
+permalink: /thank-you/post/
+requires: accounts
+unavailable_heading: Accounts aren't available
+unavailable_lead: Writing with an account on this website isn't available at the moment, but you can still write a post with GitHub.
+noindex: true
+sitemap: false
+---
+{%- comment -%}
+  Shown after a post (or a change to one) is sent from the editor at
+  /account/write/ (assets/js/account.js). The steps follow
+  `review_visitor_posts` in _data/blog.yml.
+{%- endcomment -%}
+{%- include thanks-available.html -%}
+{%- assign blog = site.data.blog -%}
+{%- capture blog_form_url -%}{{ site.repository_url }}/issues/new?template={{ blog.form }}{%- endcapture -%}
+{%- if thanks_available %}
+<div class="thanks-next">
+  <h2 class="thanks-next__title">What happens next</h2>
+  <ol class="thanks-steps" role="list">
+    <li class="thanks-steps__item">
+      <span class="thanks-steps__name">Automatic checks</span>
+      <span class="thanks-steps__text">Your post's text and formatting are checked, and its images are copied without location and camera details.</span>
+    </li>
+    {%- if blog.review_visitor_posts %}
+    <li class="thanks-steps__item">
+      <span class="thanks-steps__name">Review</span>
+      <span class="thanks-steps__text">I review each post before it's published. Changes to a published post are reviewed again.</span>
+    </li>
+    {%- endif %}
+    <li class="thanks-steps__item">
+      <span class="thanks-steps__name">On the blog</span>
+      <span class="thanks-steps__text">Once it's published, it appears on the blog under your display name. Your account page shows where it is, and any changes it needs.</span>
+    </li>
+  </ol>
+</div>
+<div class="button-row thanks__actions">
+  <a class="button button--primary" href="{{ '/account/' | relative_url }}">Go to your account</a>
+  <a class="button button--secondary" href="{{ '/account/write/' | relative_url }}">Write another post</a>
+  <a class="button button--ghost" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+</div>
+{%- else %}
+<div class="button-row thanks__actions">
+  {% include link.html url=blog_form_url label="Write a post with GitHub" class="button button--primary" %}
+  <a class="button button--secondary" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+</div>
+{%- endif %}
