@@ -126,6 +126,7 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 │   ├── activity-calendar.html  The GitHub contribution calendar
 │   ├── number.html           A number with thousands separators (22,928)
 │   ├── search-attributes.html  Attributes of buttons that open the site search
+│   ├── thanks-available.html  Whether a thank-you page's feature (form, accounts) is on
 │   ├── accounts-config.html  Reads _data/accounts.yml for the templates
 │   └── css/                  Stylesheet partials (combined into assets/css/main.css)
 ├── assets/
