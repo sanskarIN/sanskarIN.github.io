@@ -1,0 +1,14 @@
+{%- comment -%}
+  For the thank-you pages: sets thanks_available to false when the feature
+  the page confirms (front matter `requires`) is turned off — the contact
+  form ("contact_form") or accounts ("accounts").
+{%- endcomment -%}
+{%- assign thanks_available = true -%}
+{%- if page.requires == "contact_form" -%}
+  {%- assign thanks_form_key = site.data.contact.form.access_key | default: "" | strip -%}
+  {%- if thanks_form_key == "" -%}{%- assign thanks_available = false -%}{%- endif -%}
+{%- elsif page.requires == "accounts" -%}
+  {%- include accounts-config.html -%}
+  {%- unless accounts_on -%}{%- assign thanks_available = false -%}{%- endunless -%}
+{%- endif -%}
+{%- comment -%} Ends without a trailing newline. {%- endcomment -%}
