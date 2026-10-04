@@ -140,7 +140,7 @@ account_app: account
       </div>
       <details class="account-details account-details--danger">
         <summary>Delete your account</summary>
-        <form class="form-panel" data-form="delete-account">
+        <form class="form-panel" data-form="delete-account" data-thanks="{{ '/thank-you/account-deleted/' | relative_url }}">
           <p class="form-field--wide">This deletes your account, your profile, and the images you uploaded, and withdraws posts that are still waiting for review. It can't be undone.</p>
           <div class="form-check form-field--wide">
             <input id="delete-posts" name="remove_posts" type="checkbox">
