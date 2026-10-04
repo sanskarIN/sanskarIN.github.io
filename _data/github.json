@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T09:55:08Z",
+  "generated_at": "2026-10-04T10:38:07Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -14,7 +14,7 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 31.2
+      "percent": 31.1
     },
     {
       "name": "C#",
@@ -34,17 +34,17 @@
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 8.5
+      "percent": 8.9
     },
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 7.4
+      "percent": 7.3
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 19.0,
+      "percent": 18.9,
       "other": true
     }
   ],
@@ -70,7 +70,39 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-24",
-      "pushed": "2026-10-03"
+      "pushed": "2026-10-04"
+    },
+    {
+      "name": "CareNest",
+      "url": "https://github.com/sanskarIN/CareNest",
+      "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-09",
+      "pushed": "2026-10-04"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-10-04"
     },
     {
       "name": "CueVersa",
@@ -102,22 +134,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-24",
-      "pushed": "2026-10-02"
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
       "pushed": "2026-10-02"
     },
     {
@@ -453,22 +469,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-08",
-      "pushed": "2026-09-27"
-    },
-    {
-      "name": "CareNest",
-      "url": "https://github.com/sanskarIN/CareNest",
-      "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-09",
       "pushed": "2026-09-27"
     },
     {
@@ -1112,19 +1112,12 @@
     }
   ],
   "activity": {
-    "total": 22938,
-    "start": "2025-09-28",
-    "end": "2026-10-03",
+    "total": 22986,
+    "start": "2025-10-05",
+    "end": "2026-10-04",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
       0,
       0,
       0,
@@ -1488,16 +1481,10 @@
       7,
       10,
       167,
-      0
+      9,
+      39
     ],
     "levels": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
       0,
       0,
       0,
@@ -1861,59 +1848,64 @@
       1,
       1,
       1,
-      0
+      1,
+      1
     ],
     "months": [
       {
-        "week": 1,
+        "week": 0,
         "label": "Oct"
       },
       {
-        "week": 5,
+        "week": 4,
         "label": "Nov"
       },
       {
-        "week": 10,
+        "week": 9,
         "label": "Dec"
       },
       {
-        "week": 14,
+        "week": 13,
         "label": "Jan"
       },
       {
-        "week": 18,
+        "week": 17,
         "label": "Feb"
       },
       {
-        "week": 22,
+        "week": 21,
         "label": "Mar"
       },
       {
-        "week": 27,
+        "week": 26,
         "label": "Apr"
       },
       {
-        "week": 31,
+        "week": 30,
         "label": "May"
       },
       {
-        "week": 36,
+        "week": 35,
         "label": "Jun"
       },
       {
-        "week": 40,
+        "week": 39,
         "label": "Jul"
       },
       {
-        "week": 44,
+        "week": 43,
         "label": "Aug"
       },
       {
-        "week": 49,
+        "week": 48,
         "label": "Sep"
+      },
+      {
+        "week": 52,
+        "label": "Oct"
       }
     ],
-    "active_days": 94,
+    "active_days": 96,
     "longest_streak": 25,
     "busiest": {
       "date": "2026-08-19",
