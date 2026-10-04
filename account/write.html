@@ -12,7 +12,8 @@ account_app: write
 {%- comment -%}
   The post editor for signed-in accounts (assets/js/account.js). Sending a
   post hands it to the "blog" Edge Function, which opens a GitHub issue for
-  review; the publishing workflow does the rest. Limits match _data/blog.yml.
+  review; the publishing workflow does the rest. Once it's sent, the
+  thank-you page /thank-you/post/ opens. Limits match _data/blog.yml.
 {%- endcomment -%}
 {%- include accounts-config.html -%}
 {%- assign limits = site.data.blog.limits -%}
@@ -38,7 +39,7 @@ account_app: write
     </div>
   </div>
 
-  <form class="account-view form-panel form-panel--wide" data-account-view="editor" data-form="post" novalidate hidden>
+  <form class="account-view form-panel form-panel--wide" data-account-view="editor" data-form="post" data-thanks="{{ '/thank-you/post/' | relative_url }}" novalidate hidden>
     <h2 class="form-field--wide" tabindex="-1" data-editor-title>New post</h2>
     <div class="form-field form-field--wide">
       <label class="form-field__label" for="post-title">Title <span class="form-field__required">(required)</span></label>
