@@ -1,6 +1,10 @@
 {%- assign asset_version = site.time | date: "%s" -%}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{%- comment -%} A page that has moved: `redirect_to` in its front matter sends visitors to the new address. {%- endcomment -%}
+{%- if page.redirect_to %}
+<meta http-equiv="refresh" content="0; url={{ page.redirect_to | relative_url }}">
+{%- endif %}
 {%- comment -%}
   Content Security Policy from _config.yml. When the contact form is on, its
   service is allowed in connect-src (sending with JavaScript) and form-action
