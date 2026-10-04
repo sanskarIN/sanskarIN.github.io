@@ -8,7 +8,7 @@
   reports any problem in the status line.
 {%- endcomment -%}
 {%- assign contact_form = site.data.contact.form -%}
-<form class="contact-form" action="{{ contact_form.endpoint }}" method="post" data-contact-form>
+<form class="contact-form" action="{{ contact_form.endpoint }}" method="post" data-contact-form data-thanks="{{ '/thank-you/message/' | relative_url }}">
   <input type="hidden" name="access_key" value="{{ contact_form.access_key | strip }}">
   <input type="hidden" name="subject" value="{{ contact_form.subject }}">
   <input type="hidden" name="from_name" value="{{ site.display_url }}">
