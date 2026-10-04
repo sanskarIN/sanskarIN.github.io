@@ -58,7 +58,7 @@ The colors that identify programming languages on the Projects page are GitHub's
 
 - **Brand icons** come from {% include link.html url="https://simpleicons.org/" label="Simple Icons" %}, released under CC0 1.0 (public domain dedication).
 - **The LinkedIn icon** comes from {% include link.html url="https://icons.getbootstrap.com/" label="Bootstrap Icons" %}, MIT License, © The Bootstrap Authors. The license text is included in the icon file.
-- **Interface icons** — menu, theme switch, search, arrows, email, the focus-area icons, and the repository, star, fork, license, and activity icons — were drawn for this website.
+- **Interface icons** — menu, theme switch, search, arrows, email, the focus-area icons, and the repository, star, fork, license, activity, and heart icons — were drawn for this website.
 
 Brand names and logos are trademarks of their respective owners. They are used only to identify links to those services and do not imply endorsement.
 
