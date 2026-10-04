@@ -1,0 +1,100 @@
+---
+layout: default
+---
+{%- comment -%}
+  Thank-you pages (thank-you/*.html): what people see after sending the
+  contact form, sending a post from the blog editor, deleting their account,
+  or supporting the site. They are left out of search engines and the
+  sitemap.
+
+  Front matter
+    title                page title (browser tab) and default <h1>
+    heading              <h1> text, if it should differ from the title
+    eyebrow              small label above the <h1>
+    lead                 the sentence under the <h1>
+    badge                "check" (default) or "heart"
+    requires             "contact_form" or "accounts": the feature the page
+                         confirms. While it is off, the page shows
+                         unavailable_heading and unavailable_lead instead.
+    explore: false       leaves out "While you're here"
+  The page's content holds what happens next and its buttons; it includes
+  thanks-available.html to know whether the feature is on.
+{%- endcomment -%}
+{%- include thanks-available.html -%}
+{%- if thanks_available -%}
+  {%- assign thanks_heading = page.heading | default: page.title -%}
+  {%- assign thanks_lead = page.lead -%}
+{%- else -%}
+  {%- assign thanks_heading = page.unavailable_heading -%}
+  {%- assign thanks_lead = page.unavailable_lead -%}
+{%- endif %}
+<section class="thanks">
+  <div class="container thanks__inner">
+    {%- if thanks_available %}
+    <div class="thanks__badge" aria-hidden="true">
+      <svg class="thanks__symbol" viewBox="0 0 24 24" width="40" height="40" focusable="false">
+        {%- if page.badge == "heart" %}
+        <path class="thanks__mark" pathLength="1" d="M12 20s-7.25-4.4-7.25-10.05A4.2 4.2 0 0 1 12 7.4a4.2 4.2 0 0 1 7.25 2.55C19.25 15.6 12 20 12 20z"/>
+        {%- else %}
+        <path class="thanks__mark" pathLength="1" d="m6.75 12.5 3.5 3.5 7-7.5"/>
+        {%- endif %}
+      </svg>
+    </div>
+    {%- endif %}
+    {%- if page.eyebrow %}
+    <p class="eyebrow thanks__eyebrow">{{ page.eyebrow }}</p>
+    {%- endif %}
+    <h1 class="thanks__title">{{ thanks_heading }}</h1>
+    {%- if thanks_lead %}
+    <p class="thanks__lead">{{ thanks_lead }}</p>
+    {%- endif %}
+{{ content }}
+  </div>
+</section>
+{%- unless page.explore == false %}
+{%- assign latest_post = site.posts.first %}
+{%- assign repository_count = site.data.github.totals.repositories | default: 0 %}
+<section class="thanks-explore" aria-labelledby="thanks-explore-title">
+  <div class="container">
+    <h2 class="thanks-explore__title" id="thanks-explore-title">While you're here</h2>
+    <ul class="link-grid thanks-explore__grid" role="list">
+      {%- if latest_post %}
+      <li>
+        <a class="link-card" href="{{ latest_post.url | relative_url }}">
+          {% include icon.html name="pencil" class="link-card__icon" %}
+          <span class="link-card__body">
+            <span class="link-card__name">Latest on the blog</span>
+            <span class="link-card__note">{{ latest_post.title | escape }}</span>
+          </span>
+          {% include icon.html name="arrow-right" class="link-card__arrow" %}
+        </a>
+      </li>
+      {%- endif %}
+      <li>
+        <a class="link-card" href="{{ site.projects_url | relative_url }}">
+          {% include icon.html name="repo" class="link-card__icon" %}
+          <span class="link-card__body">
+            <span class="link-card__name">Projects</span>
+            <span class="link-card__note">{% if repository_count > 0 %}{% include number.html value=repository_count %} public repositories on GitHub{% else %}Software I build and share in the open{% endif %}</span>
+          </span>
+          {% include icon.html name="arrow-right" class="link-card__arrow" %}
+        </a>
+      </li>
+      <li>
+        <a class="link-card" href="{{ '/developer/' | relative_url }}">
+          {% include icon.html name="code" class="link-card__icon" %}
+          <span class="link-card__body">
+            <span class="link-card__name">Developer</span>
+            <span class="link-card__note">What I work with and how I build</span>
+          </span>
+          {% include icon.html name="arrow-right" class="link-card__arrow" %}
+        </a>
+      </li>
+    </ul>
+    <div class="thanks-follow">
+      <h3 class="thanks-follow__title">Follow along</h3>
+      {% include profile-list.html items=site.data.social.follow class="thanks-follow__list" %}
+    </div>
+  </div>
+</section>
+{%- endunless %}
