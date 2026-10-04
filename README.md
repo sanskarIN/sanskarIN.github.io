@@ -390,8 +390,8 @@ While a key is set, the following happens automatically on every build:
 
 **How it works:**
 
-- **With JavaScript**, the message is sent in the background; the visitor stays on the page and the result is shown (and announced to screen readers) next to the button.
-- **Without JavaScript**, it is a normal form post; Web3Forms then redirects to `/contact/sent/` on this site.
+- **With JavaScript**, the message is sent in the background. Once it's delivered, the thank-you page `/thank-you/message/` opens; if it can't be sent, the problem is shown (and announced to screen readers) next to the button, and the message stays in the form.
+- **Without JavaScript**, it is a normal form post; Web3Forms then redirects to `/thank-you/message/` on this site.
 - **Spam protection:** a hidden `botcheck` field that people never see; bots that fill it in are rejected by Web3Forms. No captcha script is loaded, so the site stays free of third-party scripts and cookies.
 - **Fields:** name, email (used as the reply address), topic, and message. The topics, email subject, and service details are set in the same `form` block.
 - **No secrets:** the access key is public by design — it only lets people send messages to your address — so it is safe to keep in the repository. It is not a password.
