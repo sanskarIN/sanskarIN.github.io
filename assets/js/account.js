@@ -912,13 +912,14 @@
         .then(function () {
           writeStore(SESSION_KEY, null);
           writeStore(DRAFT_KEY, null);
-          setStatus(emailForm.querySelector("[data-status]"), "Your account was deleted.", "success");
-          show("signin", true);
+          setStatus(status, "Your account was deleted.", "success");
+          window.location.assign(deleteForm.getAttribute("data-thanks"));
+          return true;
         }, function (error) {
           setStatus(status, error.message, "error");
         })
-        .then(function () {
-          setBusy(button, false);
+        .then(function (leaving) {
+          if (!leaving) setBusy(button, false);
         });
     });
 
