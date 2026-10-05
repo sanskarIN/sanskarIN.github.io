@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T10:38:07Z",
+  "generated_at": "2026-10-05T11:36:45Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -14,22 +14,22 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 31.1
+      "percent": 30.9
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 12.1
+      "percent": 12.0
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 11.9
+      "percent": 11.8
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 9.8
+      "percent": 9.7
     },
     {
       "name": "Rust",
@@ -44,7 +44,7 @@
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 18.9,
+      "percent": 19.4,
       "other": true
     }
   ],
@@ -56,6 +56,22 @@
     "2048"
   ],
   "repositories": [
+    {
+      "name": "DevForge",
+      "url": "https://github.com/sanskarIN/DevForge",
+      "description": "A complete offline-first HTML learning platform with 100+ tags, live code editor, 25+ themes, and zero data collection. Pure HTML, CSS & JS — no build step required.",
+      "homepage": null,
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-05-16",
+      "pushed": "2026-10-05"
+    },
     {
       "name": "RepoDNA",
       "url": "https://github.com/sanskarIN/RepoDNA",
@@ -70,22 +86,100 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-24",
-      "pushed": "2026-10-04"
+      "pushed": "2026-10-05"
     },
     {
-      "name": "CareNest",
-      "url": "https://github.com/sanskarIN/CareNest",
-      "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
+      "name": "libracore",
+      "url": "https://github.com/sanskarIN/libracore",
+      "description": "LibraCore, a production-quality Library Management System project that is much more complete than a classroom demo.",
       "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
+      "language": "Java",
+      "language_color": "#b07219",
       "stars": 0,
       "forks": 0,
       "topics": [],
-      "license": "Apache-2.0",
+      "license": "MIT",
       "fork": false,
       "archived": false,
-      "created": "2026-08-09",
+      "created": "2026-08-19",
+      "pushed": "2026-10-05"
+    },
+    {
+      "name": "chronoage",
+      "url": "https://github.com/sanskarIN/chronoage",
+      "description": "",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-10-05"
+    },
+    {
+      "name": "2048",
+      "url": "https://github.com/sanskarIN/2048",
+      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
+      "homepage": null,
+      "language": "Dart",
+      "language_color": "#00B4AB",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "2040",
+        "2048",
+        "2048-clone",
+        "2048-game",
+        "2048-game-online",
+        "2048-redesigned"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-14",
+      "pushed": "2026-10-05"
+    },
+    {
+      "name": "dicelab",
+      "url": "https://github.com/sanskarIN/dicelab",
+      "description": "",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-10-04"
+    },
+    {
+      "name": "DocMergeForge",
+      "url": "https://github.com/sanskarIN/DocMergeForge",
+      "description": "A modern, reliable, local-first document-merging application for very large multi-part books and document series.",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "docmerge",
+        "pdf-merge",
+        "pdf-merger",
+        "pdf-merger-python",
+        "pdf-merger-tool",
+        "pdf-merger-windows-desktop"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-16",
       "pushed": "2026-10-04"
     },
     {
@@ -102,6 +196,22 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-26",
+      "pushed": "2026-10-04"
+    },
+    {
+      "name": "CareNest",
+      "url": "https://github.com/sanskarIN/CareNest",
+      "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-09",
       "pushed": "2026-10-04"
     },
     {
@@ -171,45 +281,6 @@
       "archived": false,
       "created": "2026-08-19",
       "pushed": "2026-10-02"
-    },
-    {
-      "name": "DevForge",
-      "url": "https://github.com/sanskarIN/DevForge",
-      "description": "A complete offline-first HTML learning platform with 100+ tags, live code editor, 25+ themes, and zero data collection. Pure HTML, CSS & JS — no build step required.",
-      "homepage": null,
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-05-16",
-      "pushed": "2026-10-02"
-    },
-    {
-      "name": "2048",
-      "url": "https://github.com/sanskarIN/2048",
-      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
-      "homepage": null,
-      "language": "Dart",
-      "language_color": "#00B4AB",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "2040",
-        "2048",
-        "2048-clone",
-        "2048-game",
-        "2048-game-online",
-        "2048-redesigned"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-14",
-      "pushed": "2026-10-01"
     },
     {
       "name": "sortsmith",
@@ -363,38 +434,6 @@
       "pushed": "2026-09-28"
     },
     {
-      "name": "libracore",
-      "url": "https://github.com/sanskarIN/libracore",
-      "description": "LibraCore, a production-quality Library Management System project that is much more complete than a classroom demo.",
-      "homepage": null,
-      "language": "Java",
-      "language_color": "#b07219",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-09-28"
-    },
-    {
-      "name": "chronoage",
-      "url": "https://github.com/sanskarIN/chronoage",
-      "description": "",
-      "homepage": null,
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-09-28"
-    },
-    {
       "name": "chronodesk",
       "url": "https://github.com/sanskarIN/chronodesk",
       "description": "",
@@ -408,45 +447,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-09-27"
-    },
-    {
-      "name": "dicelab",
-      "url": "https://github.com/sanskarIN/dicelab",
-      "description": "",
-      "homepage": null,
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-09-27"
-    },
-    {
-      "name": "DocMergeForge",
-      "url": "https://github.com/sanskarIN/DocMergeForge",
-      "description": "A modern, reliable, local-first document-merging application for very large multi-part books and document series.",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "docmerge",
-        "pdf-merge",
-        "pdf-merger",
-        "pdf-merger-python",
-        "pdf-merger-tool",
-        "pdf-merger-windows-desktop"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-16",
       "pushed": "2026-09-27"
     },
     {
@@ -1112,9 +1112,9 @@
     }
   ],
   "activity": {
-    "total": 22986,
+    "total": 23119,
     "start": "2025-10-05",
-    "end": "2026-10-04",
+    "end": "2026-10-05",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1482,7 +1482,8 @@
       10,
       167,
       9,
-      39
+      98,
+      74
     ],
     "levels": [
       0,
@@ -1849,6 +1850,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -1905,7 +1907,7 @@
         "label": "Oct"
       }
     ],
-    "active_days": 96,
+    "active_days": 97,
     "longest_streak": 25,
     "busiest": {
       "date": "2026-08-19",
