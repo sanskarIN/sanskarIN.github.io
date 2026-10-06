@@ -68,9 +68,9 @@ profiles:
 
   threads:
     name: Threads
-    url: https://threads.com/dev_sanskarIN
-    handle: "@dev_sanskarIN"
-    username: dev_sanskarIN
+    url: https://threads.com/SanskarCode
+    handle: "@SanskarCode"
+    username: SanskarCode
     icon: threads
     note: Posts and conversations
 
