@@ -182,7 +182,7 @@ bundle install
 bundle exec jekyll serve
 ```
 
-Open http://localhost:4000. Changes to pages, includes, styles, and `_data/` rebuild automatically; restart the server after editing `_config.yml`.
+Open http://localhost:4000. Changes to pages, includes, styles, and `_data/` rebuild automatically; restart the server after editing `_config.yml`. Changing a script needs **Node.js** (18 or later) as well, to compile the TypeScript ([details](#typescript)).
 
 | Task | Command |
 |---|---|
