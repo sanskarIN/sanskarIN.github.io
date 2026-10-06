@@ -134,13 +134,13 @@ groups:
     items: [github, linkedin, devto, discord]
   social:
     title: Social
-    items: [x, reddit, instagram, threads, pinterest, bluesky]
+    items: [x, instagram, threads, pinterest, bluesky]
   products:
     title: Support & Products
     items: [buymeacoffee, gumroad, paypal]
 
 # Profiles featured in the Home page "Developer community" section.
-community: [devto, discord, x, reddit, bluesky, linkedin]
+community: [devto, discord, x, bluesky, linkedin]
 
 # Profiles suggested under "Follow along" on the thank-you pages.
-follow: [github, x, reddit, linkedin, devto]
+follow: [github, x, linkedin, devto]
