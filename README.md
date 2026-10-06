@@ -698,6 +698,7 @@ After any change, update the page's date in `_data/legal.yml`.
 - **Typography** — IBM Plex Sans for text and headings; IBM Plex Mono for labels, handles, and technical details.
 - **Layout** — a 72rem container with fluid side gutters; long-form text is limited to about 42rem per line.
 - **Projects and search** — `_includes/css/projects.css` (stats, repository cards, language bar, activity calendar, filters) and `_includes/css/search.css` (the search button and dialog).
+- **Terminal and spotlight** — `_includes/css/terminal.css` (the Home page terminal) and `_includes/css/spotlight.css` (the glow that follows the mouse across cards, for mouse and trackpad users who haven't asked for reduced motion).
 - **Components** — `_includes/css/components.css`: eyebrow labels, buttons, spec card, feature grid, spec lists and tags, link cards, contact cards, contact form fields, callout, note, table of contents, and prose. Blog components (post list, post details, newer/older links, and styles for post content such as code, tables, and quotes) are in `_includes/css/blog.css`, and the account pages' forms, status messages, and author profiles in `_includes/css/account.css`.
 - **Themes** — light and dark palettes, following the device setting until the visitor chooses one with the theme switch.
 - **Motion** — small hover transitions, a short fade when the search dialog opens, and smooth page-to-page transitions in browsers that support them (cross-document view transitions); all of it is off when the device asks for reduced motion.
