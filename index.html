@@ -5,6 +5,7 @@ seo_title: "Sanskar (sanskarIN) · Software developer & open source"
 description: "Sanskar (sanskarIN) builds software, developer tools, and digital products in the open, with interests in open source, Android, web, games, and AI/ML."
 permalink: /
 body_class: page-home
+scripts: [terminal]
 ---
 {%- assign languages = site.data.technologies | where: "group", "Languages" | first -%}
 <section class="hero">
@@ -22,7 +23,8 @@ body_class: page-home
     </div>
 
     <div class="hero__aside">
-      <div class="spec-card">
+      {%- comment -%} With JavaScript, this card becomes a terminal (src/ts/terminal.ts). {%- endcomment %}
+      <div class="spec-card" data-terminal data-terminal-data="{{ '/terminal.json' | relative_url }}?v={{ site.time | date: '%s' }}">
         <p class="spec-card__header"><span>profile</span><span>{{ site.display_url }}</span></p>
         <dl class="spec-card__list">
           <div class="spec-card__row"><dt>name</dt><dd>{{ site.author.name }}</dd></div>
