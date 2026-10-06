@@ -215,7 +215,7 @@ Most changes need no template edits. After editing, commit to `main` (or preview
 | Setting | Purpose |
 |---|---|
 | `title`, `tagline`, `description` | Site name, short tagline, default meta description |
-| `author.username`, `author.community_username` | `sanskarIN` and `dev_sanskarIN` |
+| `author.username`, `author.community_username` | `sanskarIN` and `SanskarCodes` |
 | `url`, `display_url` | Canonical address (lowercase, as browsers normalize it) and the way it is written in visible text |
 | `repository_url` | Used on the Developer and Credits pages and in `security.txt` |
 | `projects_url` | Address of the future Projects page |
