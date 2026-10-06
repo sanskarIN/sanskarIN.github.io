@@ -58,9 +58,9 @@ URLs end with a slash. GitHub Pages redirects `/about` to `/about/`, so both for
 ## Technology stack
 
 - **Jekyll 3.10** with **Liquid** templates and **kramdown** Markdown — exactly the versions GitHub Pages runs, pinned locally by the `github-pages` gem.
-- **HTML, CSS, and JavaScript** written for this site. No CSS or JavaScript framework.
+- **HTML, CSS, and TypeScript** written for this site. No CSS or JavaScript framework.
   - CSS: custom properties (design tokens), mobile-first, split into partials that Jekyll combines into one file.
-  - JavaScript: progressive enhancement only — `theme-init.js` (≈0.8 KB) and `main.js` (≈3 KB gzipped). Every page works without it. `search.js` loads the first time search is opened, `projects.js` only on the Projects page, and `account.js` only on the account pages once [accounts](#accounts) are turned on.
+  - TypeScript: the scripts are written in `src/ts/` and compiled to plain JavaScript in `assets/js/` ([details](#typescript)). They're progressive enhancement only — `theme-init.js` (≈0.5 KB) and `main.js` (≈4.3 KB gzipped) on every page, and every page works without them. `search.js` loads the first time search is opened, `terminal.js` only on the Home page, `projects.js` only on the Projects page, and `account.js` only on the account pages once [accounts](#accounts) are turned on.
 - **Fonts:** IBM Plex Sans and IBM Plex Mono, self-hosted WOFF2 (SIL Open Font License 1.1).
 - **Icons:** one SVG sprite — brand icons from Simple Icons (CC0), the LinkedIn icon from Bootstrap Icons (MIT), and interface icons drawn for this site.
 
