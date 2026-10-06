@@ -12,6 +12,7 @@
  *    search itself (search.js) is loaded the first time it's used.
  *  - Blog posts: copy buttons on code blocks, and "On this page" shows the
  *    section being read.
+ *  - Card spotlight: a soft glow follows the mouse across cards.
  *  - window.siteActions: the theme and search, for the Home page terminal.
  *
  * Source: src/ts/main.ts, compiled to assets/js/main.js (npm run build).
@@ -316,6 +317,34 @@
       showStatus("", "");
     });
   }
+
+  /* Card spotlight ---------------------------------------------------------- */
+
+  // A soft glow follows the mouse across cards. It's left out for touch
+  // screens and when reduced motion is requested (the CSS checks that too).
+  const SPOTLIGHT_CARDS = ".link-card, .repo-card, .feature, .post-card, .thanks-steps__item";
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let spotCard: HTMLElement | null = null;
+  let spotFrame = 0;
+  let spotX = 0;
+  let spotY = 0;
+  document.addEventListener("pointermove", (event) => {
+    if (event.pointerType !== "mouse" || !finePointer.matches || reducedMotion.matches) return;
+    const target = event.target;
+    spotCard = target instanceof Element ? target.closest<HTMLElement>(SPOTLIGHT_CARDS) : null;
+    if (!spotCard) return;
+    spotX = event.clientX;
+    spotY = event.clientY;
+    if (spotFrame) return;
+    spotFrame = window.requestAnimationFrame(() => {
+      spotFrame = 0;
+      if (!spotCard) return;
+      const box = spotCard.getBoundingClientRect();
+      spotCard.style.setProperty("--spot-x", `${Math.round(spotX - box.left)}px`);
+      spotCard.style.setProperty("--spot-y", `${Math.round(spotY - box.top)}px`);
+    });
+  }, { passive: true });
 
   /* For other scripts ------------------------------------------------------ */
 
