@@ -1,0 +1,19 @@
+{
+  // Compiles the browser scripts in src/ts/ to assets/js/, which the site
+  // loads. Run `npm run build` after changing a .ts file, and commit both.
+  // GitHub Pages serves assets/js/ as they are; it doesn't run TypeScript.
+  "compilerOptions": {
+    "target": "es2020",
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "rootDir": "src/ts",
+    "outDir": "assets/js",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "newLine": "lf",
+    "types": []
+  },
+  "include": ["src/ts"]
+}
