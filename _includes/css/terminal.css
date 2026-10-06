@@ -1,0 +1,183 @@
+/* ==========================================================================
+   Home page terminal (src/ts/terminal.ts): with JavaScript, the profile
+   card in the hero becomes a small terminal. Without it, the card stays.
+   ========================================================================== */
+
+/* Three window dots before "terminal" in the card's top bar. */
+.terminal .spec-card__header span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.terminal .spec-card__header span:first-child::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  box-shadow: 0.875rem 0 0 var(--color-border-strong), 1.75rem 0 0 var(--color-border-strong);
+  margin-right: 1.75rem;
+}
+
+.terminal__screen {
+  max-height: 26rem;
+  padding-block: var(--space-3) var(--space-2);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.terminal__screen:focus-visible {
+  outline-offset: -3px;
+}
+
+.terminal__block + .terminal__block {
+  margin-top: var(--space-3);
+}
+
+.terminal__block .spec-card__list {
+  padding-block: var(--space-1) 0;
+}
+
+.terminal__line {
+  padding: 0.125rem var(--space-5);
+  overflow-wrap: anywhere;
+}
+
+.terminal__line--command {
+  font-weight: 500;
+}
+
+.terminal__prompt {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.terminal__line--muted,
+.terminal__meta {
+  color: var(--color-text-muted);
+}
+
+.terminal__line--error {
+  color: var(--color-accent);
+}
+
+.terminal__rows {
+  padding-block: var(--space-1);
+}
+
+.terminal__row {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: var(--space-3);
+  padding: 0.25rem var(--space-5);
+}
+
+.terminal__row dt {
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.terminal__row dd {
+  overflow-wrap: anywhere;
+}
+
+.terminal__items {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0.125rem var(--space-5);
+  list-style: none;
+}
+
+.terminal__items li {
+  overflow-wrap: anywhere;
+}
+
+.terminal__link {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.terminal__link:hover {
+  color: var(--color-accent-hover);
+}
+
+/* The prompt: the line under the field shows focus, like the search box. */
+.terminal__form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-5);
+  border-top: var(--border);
+}
+
+.terminal__form:focus-within {
+  box-shadow: inset 0 -2px 0 var(--color-accent);
+}
+
+.terminal__input {
+  flex: 1;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  /* At least 16px, so phones don't zoom in when it's focused. */
+  font-size: max(1rem, 16px);
+  caret-color: var(--color-accent);
+}
+
+.terminal__input:focus-visible {
+  outline: none;
+}
+
+.terminal__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5) var(--space-4);
+  border-top: var(--border);
+}
+
+.terminal__chip {
+  min-height: 2.25rem;
+  padding: 0 var(--space-3);
+  border: var(--border);
+  border-radius: 999px;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  transition: border-color var(--duration) var(--ease);
+}
+
+.terminal__chip:hover {
+  border-color: var(--color-text);
+}
+
+/* Small screens: names above values in the output. */
+@media (max-width: 29.99em) {
+  .terminal__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .terminal__block {
+    animation: terminal-in 180ms var(--ease) both;
+  }
+}
+
+@keyframes terminal-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.25rem);
+  }
+}
