@@ -31,7 +31,7 @@ The website does not use any cookies, including essential ones. Every page works
 
 ## Local storage: theme preference
 
-The website has a theme switch for choosing between light and dark colors. If you use it, your choice is saved in your browser's local storage so the website remembers it on your next visit:
+The website has a theme switch for choosing between light and dark colors (the `theme` command of the terminal on the Home page does the same). If you use it, your choice is saved in your browser's local storage so the website remembers it on your next visit:
 
 Name
 : `theme`
