@@ -1,0 +1,91 @@
+---
+layout: none
+permalink: /terminal.json
+sitemap: false
+---
+{%- comment -%}
+  Data for the terminal on the Home page (src/ts/terminal.ts), read the
+  first time someone runs a command that needs it. Everything comes from
+  _data/ and the blog posts, so the terminal never says anything the rest
+  of the website doesn't.
+{%- endcomment -%}
+{%- assign gh = site.data.github -%}
+{%- assign contact_email = site.data.contact.email -%}
+{
+  "name": {{ site.author.name | jsonify }},
+  "username": {{ site.author.username | jsonify }},
+  "community": {{ site.author.community_username | jsonify }},
+  "tagline": {{ site.tagline | jsonify }},
+  "pages": [
+    {%- for item in site.data.navigation.main %}
+    {"title": {{ item.title | jsonify }}, "url": {{ item.url | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
+  "profiles": [
+    {%- assign separator = "" -%}
+    {%- assign profile_groups = "developer,social" | split: "," -%}
+    {%- for group_name in profile_groups -%}
+      {%- for profile_id in site.data.social.groups[group_name].items -%}
+        {%- assign profile = site.data.social.profiles[profile_id] -%}
+        {%- if profile.url and profile.url != "" %}
+    {{ separator }}{"key": {{ profile_id | jsonify }}, "name": {{ profile.name | jsonify }}, "handle": {{ profile.handle | jsonify }}, "url": {{ profile.url | jsonify }}}
+          {%- assign separator = "," -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor %}
+  ],
+  "support": [
+    {%- assign separator = "" -%}
+    {%- for profile_id in site.data.social.groups.products.items -%}
+      {%- assign profile = site.data.social.profiles[profile_id] -%}
+      {%- if profile.url and profile.url != "" %}
+    {{ separator }}{"key": {{ profile_id | jsonify }}, "name": {{ profile.name | jsonify }}, "url": {{ profile.url | jsonify }}, "note": {{ profile.note | jsonify }}}
+        {%- assign separator = "," -%}
+      {%- endif -%}
+    {%- endfor %}
+  ],
+  "emails": [
+    {"label": "Business", "address": {{ contact_email.business_primary | jsonify }}},
+    {"label": "Support", "address": {{ contact_email.support | jsonify }}}
+  ],
+  "focus": [
+    {%- for area in site.data.focus %}
+    {"title": {{ area.title | jsonify }}, "summary": {{ area.summary | jsonify }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
+  "technologies": [
+    {%- for group in site.data.technologies %}
+    {"group": {{ group.group | jsonify }}, "items": {{ group.items | jsonify }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
+  {%- if gh.repositories %}
+  "projects": {
+    "total": {{ gh.totals.repositories | default: 0 }},
+    "stars": {{ gh.totals.stars | default: 0 }},
+    "featured": [
+      {%- assign separator = "" -%}
+      {%- for name in gh.featured -%}
+        {%- assign repo = gh.repositories | where: "name", name | first -%}
+        {%- if repo %}
+      {{ separator }}{"name": {{ repo.name | jsonify }}, "url": {{ repo.url | jsonify }}, "description": {{ repo.description | default: "" | jsonify }}, "language": {{ repo.language | jsonify }}, "stars": {{ repo.stars | default: 0 }}}
+          {%- assign separator = "," -%}
+        {%- endif -%}
+      {%- endfor %}
+    ]
+  },
+  {%- else %}
+  "projects": null,
+  {%- endif %}
+  "posts": [
+    {%- for post in site.posts limit: 5 %}
+    {"title": {{ post.title | jsonify }}, "url": {{ post.url | relative_url | jsonify }}, "date": {{ post.date | date: "%-d %b %Y" | jsonify }}}{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ],
+  "links": {
+    "projects": {{ site.projects_url | relative_url | jsonify }},
+    "blog": {{ '/blog/' | relative_url | jsonify }},
+    "feed": {{ '/blog/feed.xml' | relative_url | jsonify }},
+    "about": {{ '/about/' | relative_url | jsonify }},
+    "contact": {{ '/contact/' | relative_url | jsonify }}
+  }
+}
