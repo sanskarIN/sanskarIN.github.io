@@ -134,7 +134,8 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 ├── assets/
 │   ├── css/main.css          Combines the partials into one stylesheet
 │   ├── js/theme-init.js      Runs first: enables JS features, applies a saved theme
-│   ├── js/main.js            Theme switch, menu, search keys, copy buttons, post sections
+│   ├── js/main.js            Theme switch, menu, search keys, copy buttons, post sections, card spotlight
+│   ├── js/terminal.js        The Home page terminal
 │   ├── js/account.js         Account pages: sign-in, profile, editor, author pages
 │   ├── js/projects.js        Projects page: search, filter, and sort the repositories
 │   ├── js/search.js          Site search dialog (loaded when first opened)
