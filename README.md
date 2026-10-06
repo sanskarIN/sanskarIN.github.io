@@ -14,6 +14,8 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 - [Configuration](#configuration)
 - [Projects](#projects)
 - [Site search](#site-search)
+- [TypeScript](#typescript)
+- [Home page terminal](#home-page-terminal)
 - [Adding PayPal](#adding-paypal)
 - [Contact form](#contact-form)
 - [Thank-you pages](#thank-you-pages)
