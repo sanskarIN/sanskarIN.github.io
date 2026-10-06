@@ -133,6 +133,7 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 │   └── css/                  Stylesheet partials (combined into assets/css/main.css)
 ├── assets/
 │   ├── css/main.css          Combines the partials into one stylesheet
+│   │                         (js/: compiled from src/ts/ — edit the .ts files)
 │   ├── js/theme-init.js      Runs first: enables JS features, applies a saved theme
 │   ├── js/main.js            Theme switch, menu, search keys, copy buttons, post sections, card spotlight
 │   ├── js/terminal.js        The Home page terminal
