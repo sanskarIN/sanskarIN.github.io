@@ -1,0 +1,82 @@
+---
+title: "repodna-v1-2-1-release"
+description: "RepoDNA v1.2.1 is now available, bringing easier npm installation, better accessibility, improved mobile behavior, clearer Git errors, a restored Project DNA card, and more reliable web deployment."
+date: 2026-10-06T08:55:09+00:00
+author: "Sanskar"
+author_url: "/about/"
+author_login: "sanskarIN"
+image: "/assets/images/blog/repodna-v1-2-1-release/a773e5af77d3a90c.png"
+image_alt: "RepoDNA 1.2.1 launch graphic showing the repository intelligence interface across desktop and mobile with npm installation highlighted."
+image_width: 2000
+image_height: 1125
+tags: ["repodna", "opensource", "rust", "developer-tools", "code-analysis"]
+source_issue: 11
+---
+<h2>RepoDNA v1.2.1: Easier Installation and a More Polished Repository Intelligence Experience</h2>
+<p><strong>Published October 6, 2026</strong></p>
+<p>RepoDNA <strong>v1.2.1</strong> is now available.</p>
+<p>This release focuses on making RepoDNA easier to install, more accessible, more usable on phones, and more reliable in everyday workflows.</p>
+<p>RepoDNA is an open-source, local-first repository intelligence and code archaeology platform that turns a repository into an evidence-backed picture of its structure, architecture, dependencies, history, quality, security, tests, documentation, and evolution.</p>
+<h3>The biggest update: npm installation</h3>
+<p>RepoDNA packages are now available on <strong><a href="http://npmjs.com" rel="noopener noreferrer">npmjs.com</a></strong> as well as GitHub Packages.</p>
+<p>That means you can install the command line with:</p>
+<pre tabindex="0"><code>npm install --global @sanskarin/repodna@1.2.1
+</code></pre>
+<p>No GitHub token is required for the normal npm installation flow.</p>
+<p>The release also publishes the RepoDNA schema and visualization packages through npm.</p>
+<h3>Better <code>repodna serve</code></h3>
+<p>The local web interface continues to be one of the main ways to explore an analysis.</p>
+<p>In v1.2.1, the <strong>Project DNA card is working again in <code>repodna serve</code></strong>.</p>
+<p>The start page also does a better job of explaining how repositories are analyzed and how the resulting <code>repodna.json</code> can be opened in the web interface.</p>
+<h3>Accessibility</h3>
+<p>v1.2.1 improves accessibility across both the web interface and generated HTML reports.</p>
+<p>The improvements include better contrast, heading structure, landmarks, keyboard scrolling, and screen-reader descriptions for charts and other interface elements.</p>
+<h3>Mobile improvements</h3>
+<p>Long repository paths, commands and tables can be difficult to use on small screens.</p>
+<p>v1.2.1 improves how those elements behave on phones, including better wrapping, horizontal table scrolling and visual indicators for content outside the current viewport.</p>
+<h3>Clearer errors</h3>
+<p>Git clone failures are now easier to understand.</p>
+<p>RepoDNA reports the actual Git reason without exposing unnecessary command details and provides clearer guidance for common problems such as private repositories, missing repositories, or unreachable hosts.</p>
+<h3>More accurate recent-history analysis</h3>
+<p>The 90-day recent-history window used by <code>repodna ci</code> and onboarding now ends at the repository's latest commit.</p>
+<p>That makes the result more meaningful when analyzing a repository that has been inactive for some time.</p>
+<h3>More reliable web deployment</h3>
+<p>The GitHub Pages deployment flow has also been improved so the web interface can be republished properly after Pages completes its build.</p>
+<p>The workflow additionally warns when the Pages source is still configured from a branch rather than GitHub Actions.</p>
+<h3>A release built around refinement</h3>
+<p>v1.2.1 is not a large rewrite.</p>
+<p>It is about removing friction from a project that is already capable of substantial repository analysis.</p>
+<p>RepoDNA continues to provide:</p>
+<ul>
+<li>architecture and dependency analysis</li>
+<li>Git history and code archaeology</li>
+<li>change hotspots</li>
+<li>quality and complexity signals</li>
+<li>security signals</li>
+<li>tests, build and documentation analysis</li>
+<li>the Codebase Time Machine</li>
+<li>Project DNA cards and reports</li>
+<li>CLI, local web and desktop interfaces</li>
+<li>optional evidence-grounded AI explanations</li>
+</ul>
+<p>The common theme is evidence.</p>
+<p>RepoDNA is designed to show <strong>why</strong> something appears in an analysis rather than simply returning an unexplained score.</p>
+<h3>Install RepoDNA 1.2.1</h3>
+<pre tabindex="0"><code>npm install --global @sanskarin/repodna@1.2.1
+</code></pre>
+<h4>Explore the project</h4>
+<p><strong>Repository:</strong><br>
+<a href="https://github.com/sanskarIN/RepoDNA" rel="noopener noreferrer">https://github.com/sanskarIN/RepoDNA</a></p>
+<p><strong>Release:</strong><br>
+<a href="https://github.com/sanskarIN/RepoDNA/releases/tag/v1.2.1" rel="noopener noreferrer">https://github.com/sanskarIN/RepoDNA/releases/tag/v1.2.1</a></p>
+<p><strong>Release notes:</strong><br>
+<a href="https://github.com/sanskarIN/RepoDNA/blob/main/docs/releases/v1.2.1/README.md" rel="noopener noreferrer">https://github.com/sanskarIN/RepoDNA/blob/main/docs/releases/v1.2.1/README.md</a></p>
+<p><strong>Web version:</strong><br>
+<a href="https://sanskarin.github.io/RepoDNA/" rel="noopener noreferrer">https://sanskarin.github.io/RepoDNA/</a></p>
+<p><strong>Media kit:</strong><br>
+<a href="https://github.com/sanskarIN/RepoDNA/blob/main/docs/media/README.md" rel="noopener noreferrer">https://github.com/sanskarIN/RepoDNA/blob/main/docs/media/README.md</a></p>
+<h3>What's next?</h3>
+<p>RepoDNA's development continues toward making repository intelligence more useful for developers, maintainers, teams, and anyone who needs to understand an unfamiliar codebase.</p>
+<p>For now, v1.2.1 is another step in that direction.</p>
+<p><strong>Understand your codebase. See its DNA.</strong></p>
+<p>— Sanskar</p>
