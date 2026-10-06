@@ -10,6 +10,9 @@ _site/
 vendor/
 Gemfile.lock
 
+# Node.js: the TypeScript compiler (npm install)
+node_modules/
+
 # Python caches (from running the blog script locally)
 __pycache__/
 *.pyc
