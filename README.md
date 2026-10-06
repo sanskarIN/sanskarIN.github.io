@@ -191,6 +191,8 @@ Open http://localhost:4000. Changes to pages, includes, styles, and `_data/` reb
 | Build into `_site/` | `bundle exec jekyll build` |
 | Build exactly like production | `JEKYLL_ENV=production bundle exec jekyll build` |
 | Preview a production build | `JEKYLL_ENV=production bundle exec jekyll serve` |
+| Compile the TypeScript in `src/ts/` | `npm install` (once), then `npm run build`, or `npm run watch` while you work |
+| Check the TypeScript types | `npm run check` |
 
 Notes:
 
