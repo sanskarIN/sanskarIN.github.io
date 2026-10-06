@@ -1,7 +1,7 @@
 /*
  * Site search: a dialog that searches the pages, blog posts, and projects
  * listed in /search.json. Loaded by main.js the first time search is opened
- * (the header button, Ctrl+K or Cmd+K, or the "/" key).
+ * (the header button, Ctrl+K or Cmd+K, the "/" key, or the terminal).
  *
  * Everything happens in the browser: what you type is never sent anywhere.
  * The results follow the combobox pattern: the arrow keys move through
@@ -343,7 +343,9 @@
 
   /* Opening -------------------------------------------------------------------- */
 
-  function open(trigger: HTMLElement): void {
+  // `query`, when given, is typed into the search box (the terminal's
+  // `search` command uses it).
+  function open(trigger: HTMLElement, query?: string): void {
     if (!dialog) {
       indexUrl = trigger.getAttribute("data-search-index") || "";
       build(trigger.getAttribute("data-search-sprite") || "");
@@ -352,6 +354,7 @@
     opener = document.activeElement;
     document.documentElement.classList.add("search-open");
     dialog.showModal();
+    if (query !== undefined) input.value = query;
     input.focus();
     input.select();
     if (entries) render();
