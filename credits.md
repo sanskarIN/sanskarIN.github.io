@@ -31,7 +31,7 @@ Hosting
 
 - **{% include link.html url="https://jekyllrb.com/" label="Jekyll" %}**, a static site generator, builds the pages when changes are published; visitors receive plain HTML files.
 - **Liquid** templates and **kramdown** Markdown, as provided by GitHub Pages.
-- **HTML, CSS, and JavaScript** written for this website, with no CSS or JavaScript framework.
+- **HTML, CSS, and TypeScript** written for this website, with no CSS or JavaScript framework. The {% include link.html url="https://www.typescriptlang.org/" label="TypeScript" %} compiler turns the scripts into plain JavaScript before they're published.
 - **Blog:** posts are written with a GitHub issue form{% if accounts_on %} or with an account on this website{% endif %} and published by a GitHub Actions workflow, which converts them to HTML and prepares their images.
 - **Projects:** a GitHub Actions workflow reads my public repositories and contribution activity from the {% include link.html url="https://docs.github.com/en/rest" label="GitHub API" %} once a day and saves them with the website, so the Projects page needs no requests to GitHub while you browse.
 - **Search:** a small script searches an index of the website's pages, posts, and projects, generated when the site is built, in your browser.
