@@ -35,6 +35,7 @@ Hosting
 - **Blog:** posts are written with a GitHub issue form{% if accounts_on %} or with an account on this website{% endif %} and published by a GitHub Actions workflow, which converts them to HTML and prepares their images.
 - **Projects:** a GitHub Actions workflow reads my public repositories and contribution activity from the {% include link.html url="https://docs.github.com/en/rest" label="GitHub API" %} once a day and saves them with the website, so the Projects page needs no requests to GitHub while you browse.
 - **Search:** a small script searches an index of the website's pages, posts, and projects, generated when the site is built, in your browser.
+- **Terminal:** the terminal on the Home page reads a list of the website's pages, profiles, projects, and posts, also generated when the site is built, and runs in your browser.
 {% if accounts_on %}- **Accounts:** {% include link.html url="https://supabase.com/" label="Supabase" %} provides sign-in with emailed codes, author profiles, and image uploads (its Auth, Postgres database, Storage, and Edge Functions services). The website talks to it with its own small script, without a client library.
 {% endif %}
 ## Third-party libraries
