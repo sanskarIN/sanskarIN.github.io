@@ -1,0 +1,52 @@
+# Checks the TypeScript sources of the site's scripts (src/ts/): that their
+# types are correct, and that the compiled files in assets/js/ — which
+# GitHub Pages serves — are up to date. See README.md → "TypeScript".
+#
+# Runs when the sources, the compiled scripts, or the TypeScript settings
+# change. It only reads the repository: no secrets.
+
+name: TypeScript
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - src/ts/**
+      - assets/js/**
+      - tsconfig.json
+      - package.json
+      - package-lock.json
+      - .github/workflows/typescript.yml
+  pull_request:
+    paths:
+      - src/ts/**
+      - assets/js/**
+      - tsconfig.json
+      - package.json
+      - package-lock.json
+      - .github/workflows/typescript.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install TypeScript
+        # Node.js comes with the runner; the version of TypeScript is the
+        # one in package-lock.json.
+        run: npm ci --no-audit --no-fund
+      - name: Check the types
+        run: npm run check
+      - name: Check that assets/js/ matches src/ts/
+        run: |
+          npm run build
+          if ! git diff --quiet -- assets/js; then
+            git diff --stat -- assets/js
+            echo "::error::assets/js/ is out of date. Run npm run build and commit the result."
+            exit 1
+          fi
