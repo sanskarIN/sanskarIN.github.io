@@ -4,6 +4,25 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.6.0] — 2026-10-06
+
+### Added
+
+- A terminal on the Home page: with JavaScript, the profile card becomes a small terminal for exploring the website. Commands include `help`, `whoami`, `projects`, `blog`, `stack`, `focus`, `socials`, `contact`, `support`, `ls`, `cd`, `open`, `search`, `theme`, `history`, and `clear`, plus a few hidden ones; buttons under the prompt run the main commands. Its data comes from `/terminal.json`, built from `_data/` and the posts. It works with the keyboard and screen readers, and without JavaScript the card stays as it was.
+- A soft spotlight that follows the mouse across cards, for mouse and trackpad users who haven't asked for reduced motion.
+- TypeScript: the website's scripts are now written in TypeScript in `src/ts/`, with strict type checks, and compiled to `assets/js/` (`npm run build`). The new "TypeScript" workflow checks the types and that the compiled files are up to date.
+- `window.siteActions` (theme and search) for scripts that build on the page, and a starting query for the site search.
+
+### Changed
+
+- Instagram and Threads are now [@SanskarCode](https://instagram.com/SanskarCode), and Discord is @SanskarCodes. The community username shown in the footer and on the Home page is now @SanskarCodes.
+- The About page groups usernames shared by several services, such as Instagram and Threads.
+- The Privacy Policy, Terms, Cookie Policy, Accessibility page, and Credits page describe the changes.
+
+### Removed
+
+- The Reddit profile, its links, and its icon.
+
 ## [1.5.0] — 2026-10-04
 
 ### Added
