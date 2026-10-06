@@ -9,8 +9,8 @@ policy: cookies
 ---
 {%- comment -%}
   When you change this page, update `cookies` in _data/legal.yml.
-  The storage details below must match assets/js/main.js (the "theme" storage
-  key) and assets/js/account.js (the "blog-session" and "blog-draft" keys,
+  The storage details below must match src/ts/main.ts (the "theme" storage
+  key) and src/ts/account.ts (the "blog-session" and "blog-draft" keys,
   used only while accounts are turned on in _data/accounts.yml).
 {%- endcomment %}
 {%- include accounts-config.html -%}
