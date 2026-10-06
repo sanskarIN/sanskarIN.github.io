@@ -83,7 +83,7 @@ The website does not use analytics, tracking pixels, or similar measurement tool
 
 ## Search
 
-Searching the website happens entirely in your browser. When you open the search, your browser downloads a list of the website's pages, blog posts, and projects from the website itself and looks for matches in it. What you type is never sent anywhere, and it is not saved. The filters on the Projects page also work in your browser; they are added to the page's address so that you can bookmark or share the filtered list.
+Searching the website happens entirely in your browser. When you open the search, your browser downloads a list of the website's pages, blog posts, and projects from the website itself and looks for matches in it. What you type is never sent anywhere, and it is not saved. The terminal on the Home page works the same way: its commands are handled in your browser, and nothing you type in it is sent or saved. The filters on the Projects page also work in your browser; they are added to the page's address so that you can bookmark or share the filtered list.
 
 ## Third-party services
 
