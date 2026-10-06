@@ -159,6 +159,7 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 │   ├── ISSUE_TEMPLATE/blog-post.yml       The "Write a blog post" form
 │   ├── workflows/publish-blog-post.yml    Publishes posts from the form
 │   ├── workflows/update-github-data.yml   Refreshes the Projects data every day
+│   ├── workflows/typescript.yml           Checks the TypeScript and the compiled scripts
 │   ├── scripts/publish_post.py            What the blog workflow runs (+ requirements.txt)
 │   └── scripts/update_github_data.py      What the Projects workflow runs
 ├── .well-known/security.txt  Security contact (RFC 9116)
