@@ -40,7 +40,7 @@ Hosting
 {% endif %}
 ## Third-party libraries
 
-No third-party JavaScript or CSS libraries are loaded by the website. When the site is built, the `github-pages` Ruby gem (MIT License) provides Jekyll and its plugins at the same versions GitHub Pages uses.
+No third-party JavaScript or CSS libraries are loaded by the website. When the site is built, the `github-pages` Ruby gem (MIT License) provides Jekyll and its plugins at the same versions GitHub Pages uses. The {% include link.html url="https://github.com/microsoft/TypeScript" label="TypeScript compiler" %} (Apache License 2.0) compiles the website's scripts when they change; it's never loaded by the website.
 
 The workflows that publish blog posts and update the Projects page use these Python packages, which are never loaded by the website:
 
