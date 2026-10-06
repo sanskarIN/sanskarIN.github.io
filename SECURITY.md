@@ -31,6 +31,6 @@ Reports are reviewed as soon as reasonably possible; there is no guaranteed resp
 
 ## Scope
 
-**In scope:** this repository and the website it publishes, including its HTML, CSS, JavaScript, configuration, `/.well-known/security.txt`, the blog's issue form, the workflows and scripts in `.github/`, and the accounts' database rules and Edge Function in `supabase/`.
+**In scope:** this repository and the website it publishes, including its HTML, CSS, JavaScript and its TypeScript sources in `src/ts/`, configuration, `/.well-known/security.txt`, the blog's issue form, the workflows and scripts in `.github/`, and the accounts' database rules and Edge Function in `supabase/`.
 
 **Out of scope:** GitHub and the GitHub Pages infrastructure (report those through [GitHub's Security Bug Bounty](https://bounty.github.com/)), the Supabase platform itself (report it to Supabase), and third-party services linked from the website, which should be reported to their providers.
