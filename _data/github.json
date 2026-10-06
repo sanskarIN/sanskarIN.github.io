@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05T11:36:45Z",
+  "generated_at": "2026-10-06T11:20:54Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -14,22 +14,22 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 30.9
+      "percent": 30.8
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 12.0
+      "percent": 11.9
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 11.8
+      "percent": 11.7
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 9.7
+      "percent": 9.9
     },
     {
       "name": "Rust",
@@ -39,12 +39,12 @@
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 7.3
+      "percent": 7.2
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 19.4,
+      "percent": 19.5,
       "other": true
     }
   ],
@@ -56,6 +56,45 @@
     "2048"
   ],
   "repositories": [
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-10-06"
+    },
+    {
+      "name": "RepoDNA",
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 2,
+      "forks": 0,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-10-06"
+    },
     {
       "name": "DevForge",
       "url": "https://github.com/sanskarIN/DevForge",
@@ -70,22 +109,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-05-16",
-      "pushed": "2026-10-05"
-    },
-    {
-      "name": "RepoDNA",
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 2,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
       "pushed": "2026-10-05"
     },
     {
@@ -180,22 +203,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-16",
-      "pushed": "2026-10-04"
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
       "pushed": "2026-10-04"
     },
     {
@@ -1112,9 +1119,9 @@
     }
   ],
   "activity": {
-    "total": 23119,
+    "total": 23349,
     "start": "2025-10-05",
-    "end": "2026-10-05",
+    "end": "2026-10-06",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1474,7 +1481,7 @@
       127,
       201,
       118,
-      218,
+      217,
       10,
       151,
       16,
@@ -1483,7 +1490,8 @@
       167,
       9,
       98,
-      74
+      143,
+      162
     ],
     "levels": [
       0,
@@ -1851,6 +1859,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -1907,7 +1916,7 @@
         "label": "Oct"
       }
     ],
-    "active_days": 97,
+    "active_days": 98,
     "longest_streak": 25,
     "busiest": {
       "date": "2026-08-19",
