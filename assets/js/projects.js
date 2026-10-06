@@ -1,117 +1,100 @@
+"use strict";
 /*
  * The Projects page: search the repositories, filter them by language, and
  * sort them. The list works without this file — it only hides items and
  * changes their order. The choices are kept in the page address
  * (?q=…&language=…&sort=…), so a filtered list can be bookmarked or shared.
+ *
+ * Source: src/ts/projects.ts, compiled to assets/js/projects.js
+ * (npm run build).
  */
-(function () {
-  "use strict";
-
-  var form = document.querySelector("[data-repo-filters]");
-  var list = document.querySelector("[data-repo-list]");
-  if (!form || !list || !window.URLSearchParams || !window.history.replaceState) return;
-
-  var search = form.querySelector("[data-repo-search]");
-  var language = form.querySelector("[data-repo-language]");
-  var sort = form.querySelector("[data-repo-sort]");
-  var status = document.querySelector("[data-repo-status]");
-  var empty = document.querySelector("[data-repo-empty]");
-  var reset = document.querySelector("[data-repo-reset]");
-  // Most recently updated first, as the page lists them.
-  var items = Array.prototype.slice.call(list.children);
-  var statusTimer = null;
-
-  function normalize(text) {
-    text = String(text || "").toLowerCase();
-    return text.normalize ? text.normalize("NFD").replace(/[̀-ͯ]/g, "") : text;
-  }
-
-  items.forEach(function (item) {
-    item.searchText = normalize(item.getAttribute("data-text"));
-  });
-
-  function sorted(by) {
-    var copy = items.slice();
-    if (by === "stars") {
-      copy.sort(function (a, b) {
-        return Number(b.getAttribute("data-stars")) - Number(a.getAttribute("data-stars")) ||
-          items.indexOf(a) - items.indexOf(b);
-      });
-    } else if (by === "name") {
-      copy.sort(function (a, b) {
-        return a.getAttribute("data-name").localeCompare(b.getAttribute("data-name"));
-      });
-    }
-    return copy;
-  }
-
-  function hasOption(select, value) {
-    return Array.prototype.some.call(select.options, function (option) {
-      return option.value === value;
+(() => {
+    const form = document.querySelector("[data-repo-filters]");
+    const list = document.querySelector("[data-repo-list]");
+    if (!form || !list)
+        return;
+    const search = form.querySelector("[data-repo-search]");
+    const language = form.querySelector("[data-repo-language]");
+    const sort = form.querySelector("[data-repo-sort]");
+    const status = document.querySelector("[data-repo-status]");
+    const empty = document.querySelector("[data-repo-empty]");
+    const reset = document.querySelector("[data-repo-reset]");
+    // Most recently updated first, as the page lists them.
+    const items = Array.from(list.children);
+    const searchText = new Map();
+    let statusTimer;
+    const normalize = (text) => String(text || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+    for (const item of items)
+        searchText.set(item, normalize(item.getAttribute("data-text")));
+    const sorted = (by) => {
+        const copy = items.slice();
+        if (by === "stars") {
+            copy.sort((a, b) => Number(b.getAttribute("data-stars")) - Number(a.getAttribute("data-stars")) ||
+                items.indexOf(a) - items.indexOf(b));
+        }
+        else if (by === "name") {
+            copy.sort((a, b) => (a.getAttribute("data-name") || "").localeCompare(b.getAttribute("data-name") || ""));
+        }
+        return copy;
+    };
+    const hasOption = (select, value) => Array.from(select.options).some((option) => option.value === value);
+    const saveToAddress = () => {
+        const params = new URLSearchParams(window.location.search);
+        const choices = [
+            ["q", search.value.trim()],
+            ["language", language.value],
+            ["sort", sort.value === "updated" ? "" : sort.value],
+        ];
+        for (const [key, value] of choices) {
+            if (value)
+                params.set(key, value);
+            else
+                params.delete(key);
+        }
+        const query = params.toString();
+        window.history.replaceState(null, "", window.location.pathname + (query ? "?" + query : "") + window.location.hash);
+    };
+    const update = (save) => {
+        const terms = normalize(search.value).split(/\s+/).filter(Boolean);
+        const chosen = language.value;
+        let shown = 0;
+        for (const item of sorted(sort.value)) {
+            const text = searchText.get(item) || "";
+            const match = (!chosen || item.getAttribute("data-language") === chosen) &&
+                terms.every((term) => text.includes(term));
+            item.hidden = !match;
+            if (match)
+                shown += 1;
+            list.appendChild(item);
+        }
+        empty.hidden = shown !== 0;
+        // Announced after typing pauses, not on every key.
+        window.clearTimeout(statusTimer);
+        const filtered = terms.length > 0 || chosen !== "";
+        statusTimer = window.setTimeout(() => {
+            status.textContent = filtered
+                ? `Showing ${shown} of ${items.length}${items.length === 1 ? " repository." : " repositories."}`
+                : "";
+        }, 400);
+        if (save)
+            saveToAddress();
+    };
+    const params = new URLSearchParams(window.location.search);
+    search.value = (params.get("q") || "").slice(0, 100);
+    if (hasOption(language, params.get("language") || ""))
+        language.value = params.get("language") || "";
+    if (hasOption(sort, params.get("sort") || ""))
+        sort.value = params.get("sort") || "";
+    form.addEventListener("submit", (event) => event.preventDefault());
+    search.addEventListener("input", () => update(true));
+    language.addEventListener("change", () => update(true));
+    sort.addEventListener("change", () => update(true));
+    reset.addEventListener("click", () => {
+        search.value = "";
+        language.value = "";
+        update(true);
+        search.focus();
     });
-  }
-
-  function saveToAddress() {
-    var params = new URLSearchParams(window.location.search);
-    [["q", search.value.trim()], ["language", language.value], ["sort", sort.value === "updated" ? "" : sort.value]]
-      .forEach(function (pair) {
-        if (pair[1]) params.set(pair[0], pair[1]);
-        else params.delete(pair[0]);
-      });
-    var query = params.toString();
-    window.history.replaceState(null, "", window.location.pathname + (query ? "?" + query : "") + window.location.hash);
-  }
-
-  function update(save) {
-    var terms = normalize(search.value).split(/\s+/).filter(Boolean);
-    var chosen = language.value;
-    var shown = 0;
-    sorted(sort.value).forEach(function (item) {
-      var match = (!chosen || item.getAttribute("data-language") === chosen) &&
-        terms.every(function (term) {
-          return item.searchText.indexOf(term) !== -1;
-        });
-      item.hidden = !match;
-      if (match) shown += 1;
-      list.appendChild(item);
-    });
-    empty.hidden = shown !== 0;
-
-    // Announced after typing pauses, not on every key.
-    window.clearTimeout(statusTimer);
-    var filtered = terms.length > 0 || chosen !== "";
-    statusTimer = window.setTimeout(function () {
-      status.textContent = filtered
-        ? "Showing " + shown + " of " + items.length + (items.length === 1 ? " repository." : " repositories.")
-        : "";
-    }, 400);
-    if (save) saveToAddress();
-  }
-
-  var params = new URLSearchParams(window.location.search);
-  search.value = (params.get("q") || "").slice(0, 100);
-  if (hasOption(language, params.get("language") || "")) language.value = params.get("language") || "";
-  if (hasOption(sort, params.get("sort") || "")) sort.value = params.get("sort");
-
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-  });
-  search.addEventListener("input", function () {
-    update(true);
-  });
-  language.addEventListener("change", function () {
-    update(true);
-  });
-  sort.addEventListener("change", function () {
-    update(true);
-  });
-  reset.addEventListener("click", function () {
-    search.value = "";
-    language.value = "";
-    update(true);
-    search.focus();
-  });
-
-  form.hidden = false;
-  update(false);
+    form.hidden = false;
+    update(false);
 })();
