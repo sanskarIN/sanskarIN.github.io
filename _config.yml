@@ -140,5 +140,10 @@ exclude:
   - Gemfile.lock
   - vendor/
   - node_modules/
+  # TypeScript sources and tooling: the site uses the compiled assets/js/.
+  - src/
+  - package.json
+  - package-lock.json
+  - tsconfig.json
   # Supabase setup for accounts (database schema and Edge Function source).
   - supabase/
