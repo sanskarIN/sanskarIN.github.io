@@ -13,6 +13,7 @@
  *    search itself (search.js) is loaded the first time it's used.
  *  - Blog posts: copy buttons on code blocks, and "On this page" shows the
  *    section being read.
+ *  - window.siteActions: the theme and search, for the Home page terminal.
  *
  * Source: src/ts/main.ts, compiled to assets/js/main.js (npm run build).
  */
@@ -122,9 +123,9 @@
     let openSearch = null;
     if (searchButtons.length && "HTMLDialogElement" in window) {
         let searchScript = null;
-        openSearch = (trigger) => {
+        openSearch = (trigger, query) => {
             if (window.siteSearch) {
-                window.siteSearch.open(trigger);
+                window.siteSearch.open(trigger, query);
                 return;
             }
             if (searchScript)
@@ -133,7 +134,7 @@
             searchScript.src = trigger.getAttribute("data-search-script") || "";
             searchScript.onload = () => {
                 if (window.siteSearch)
-                    window.siteSearch.open(trigger);
+                    window.siteSearch.open(trigger, query);
             };
             searchScript.onerror = () => {
                 if (searchScript)
@@ -296,4 +297,15 @@
             showStatus("", "");
         });
     }
+    /* For other scripts ------------------------------------------------------ */
+    window.siteActions = {
+        theme: activeTheme,
+        setTheme,
+        openSearch: (query) => {
+            if (!openSearch || !searchButtons.length)
+                return false;
+            openSearch(searchButtons[0], query);
+            return true;
+        },
+    };
 })();
