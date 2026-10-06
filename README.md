@@ -237,7 +237,7 @@ Every profile link on the site (header, footer, Home, About, Developer, Contact,
 | Discord (developer channel) | https://discord.com/channels/1547184919455989760/1547187031057113098 | `@SanskarCodes` |
 | X | https://x.com/SanskarCodes | `@SanskarCodes` |
 | Instagram | https://instagram.com/SanskarCode | `@SanskarCode` |
-| Threads | https://threads.com/dev_sanskarIN | `@dev_sanskarIN` |
+| Threads | https://threads.com/SanskarCode | `@SanskarCode` |
 | Pinterest | https://www.pinterest.com/dev_sanskarIN | `dev_sanskarIN` |
 | Bluesky | https://sanskarIN.bsky.social | `@sanskarIN.bsky.social` |
 | Buy Me a Coffee | https://www.buymeacoffee.com/sanskarIN | `sanskarIN` |
