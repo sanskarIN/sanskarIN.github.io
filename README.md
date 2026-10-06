@@ -64,7 +64,7 @@ URLs end with a slash. GitHub Pages redirects `/about` to `/about/`, so both for
 - **Fonts:** IBM Plex Sans and IBM Plex Mono, self-hosted WOFF2 (SIL Open Font License 1.1).
 - **Icons:** one SVG sprite — brand icons from Simple Icons (CC0), the LinkedIn icon from Bootstrap Icons (MIT), and interface icons drawn for this site.
 
-**Why Jekyll?** GitHub Pages builds it natively, so there is no build pipeline to maintain; the only workflow in the repository is the one that publishes blog posts. Shared layouts and data files mean the header, footer, and every link and email address are defined once. The output is plain static HTML, so navigation never depends on JavaScript.
+**Why Jekyll?** GitHub Pages builds it natively, so the website needs no build pipeline of its own: the TypeScript is compiled before it's committed, and GitHub Pages serves the result. Shared layouts and data files mean the header, footer, and every link and email address are defined once. The output is plain static HTML, so navigation never depends on JavaScript.
 
 ### Dependencies
 
