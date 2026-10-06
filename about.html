@@ -10,11 +10,14 @@ schema_type: ProfilePage
 ---
 {%- assign professional_profiles = site.data.social.profiles | where: "username", site.author.username | map: "name" -%}
 {%- assign community_profiles = site.data.social.profiles | where: "username", site.author.community_username | map: "name" -%}
-{%- assign other_profiles = "" | split: "" -%}
+{%- comment -%} Other usernames, each with the services that use it. {%- endcomment -%}
+{%- assign other_usernames = "" | split: "" -%}
 {%- for entry in site.data.social.profiles -%}
   {%- assign profile = entry[1] -%}
   {%- if profile.url != "" and profile.username and profile.username != site.author.username and profile.username != site.author.community_username -%}
-    {%- assign other_profiles = other_profiles | push: profile -%}
+    {%- unless other_usernames contains profile.username -%}
+      {%- assign other_usernames = other_usernames | push: profile.username -%}
+    {%- endunless -%}
   {%- endif -%}
 {%- endfor -%}
 <div class="intro-grid">
@@ -39,10 +42,11 @@ schema_type: ProfilePage
         <dt>Community and social</dt>
         <dd><span class="identity__value">{{ site.author.community_username }}</span> on {{ community_profiles | array_to_sentence_string }}</dd>
       </div>
-      {%- for profile in other_profiles %}
+      {%- for other_username in other_usernames %}
+      {%- assign other_names = site.data.social.profiles | where: "username", other_username | where_exp: "item", "item.url != ''" | map: "name" %}
       <div class="identity__row">
-        <dt>{{ profile.name }}</dt>
-        <dd><span class="identity__value">{{ profile.username }}</span></dd>
+        <dt>{{ other_names | array_to_sentence_string }}</dt>
+        <dd><span class="identity__value">{{ other_username }}</span></dd>
       </div>
       {%- endfor %}
     </dl>
