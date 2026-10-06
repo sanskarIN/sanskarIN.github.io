@@ -40,6 +40,7 @@ Every change should keep the site as correct, accessible, fast, and maintainable
 - Reuse the existing includes (`link.html`, `email-link.html`, `profile-list.html`, `contact-card.html`, `icon.html`) and CSS components before adding new ones.
 - CSS: use the design tokens in `_includes/css/tokens.css`, write mobile-first, and put styles in the matching partial in `_includes/css/`.
 - JavaScript is for progressive enhancement only: the site must remain fully usable with JavaScript turned off.
+- Scripts are written in TypeScript, in `src/ts/`. Change the `.ts` file, never `assets/js/` (it's compiled output), and keep `npm run check` passing with the strict settings in `tsconfig.json`.
 - Do not add inline scripts or inline styles — the Content Security Policy blocks them.
 - Templates must stay compatible with GitHub Pages: Jekyll 3.10 and no custom plugins.
 - Do not add frameworks, CDNs, analytics, trackers, or other third-party scripts. Any new dependency needs a clear reason, an acceptable license, and an entry on the Credits page.
