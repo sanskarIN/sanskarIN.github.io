@@ -1,0 +1,14 @@
+{
+  "name": "sanskarin.github.io",
+  "private": true,
+  "license": "UNLICENSED",
+  "description": "The browser scripts of sanskarIN.github.io, written in TypeScript and compiled to assets/js/.",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "watch": "tsc --project tsconfig.json --watch",
+    "check": "tsc --project tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
+  }
+}
