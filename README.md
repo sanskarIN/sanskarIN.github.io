@@ -167,6 +167,7 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 ├── terms.md  privacy.md  cookies.md  accessibility.md  credits.md
 ├── sitemap.xml  robots.txt  manifest.webmanifest  favicon.ico
 ├── Gemfile                   Local development dependencies
+├── package.json  package-lock.json  tsconfig.json   The TypeScript compiler and its settings
 └── README.md  CONTRIBUTING.md  SECURITY.md  LICENSE_DECISION.md  CHANGELOG.md
 ```
 
