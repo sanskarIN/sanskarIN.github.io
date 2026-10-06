@@ -150,6 +150,8 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 ├── blog/                     Blog pages: index.html, tags.html, feed.xml, authors.html, posts.json
 ├── account/                  Account pages: index.html (sign-in, profile, posts), write.html (editor)
 ├── projects/index.html       The Projects page
+├── src/ts/                   TypeScript sources of the scripts in assets/js/ (+ globals.d.ts)
+├── terminal.json             Data for the Home page terminal
 ├── thank-you/                Thank-you pages: message, post, account-deleted, support
 ├── search.json               The site search index
 ├── supabase/                 Accounts backend: schema.sql and functions/blog/index.ts (not part of the site)
