@@ -44,8 +44,8 @@ profiles:
   discord:
     name: Discord
     url: https://discord.com/channels/1547184919455989760/1547187031057113098
-    handle: "@dev_sanskarIN"
-    username: dev_sanskarIN
+    handle: "@SanskarCodes"
+    username: SanskarCodes
     icon: discord
     note: Developer channel
     same_as: false
