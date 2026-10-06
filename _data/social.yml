@@ -60,9 +60,9 @@ profiles:
 
   instagram:
     name: Instagram
-    url: https://www.instagram.com/dev_sanskarIN
-    handle: "@dev_sanskarIN"
-    username: dev_sanskarIN
+    url: https://instagram.com/SanskarCode
+    handle: "@SanskarCode"
+    username: SanskarCode
     icon: instagram
     note: Photos and updates
 
