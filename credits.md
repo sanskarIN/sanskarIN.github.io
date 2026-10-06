@@ -78,5 +78,5 @@ None are loaded while you browse. Every file — fonts, icons, styles, and scrip
 ## Licensing
 
 - The website's source code and content are not published under an open-source license. Being able to read the code on GitHub does not grant permission to reuse it. The repository's {% include link.html url=license_decision_url label="license decision" %} explains this.
-- Third-party components keep their own licenses: IBM Plex (SIL Open Font License 1.1), Simple Icons (CC0 1.0), Bootstrap Icons (MIT), Jekyll (MIT), GitHub Linguist's language colors (MIT), and the workflows' Python packages (MIT, and MIT-CMU for Pillow).
+- Third-party components keep their own licenses: IBM Plex (SIL Open Font License 1.1), Simple Icons (CC0 1.0), Bootstrap Icons (MIT), Jekyll (MIT), the TypeScript compiler (Apache 2.0), GitHub Linguist's language colors (MIT), and the workflows' Python packages (MIT, and MIT-CMU for Pillow).
 - My other projects on GitHub are licensed individually. Check each repository for its license.
