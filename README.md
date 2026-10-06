@@ -73,7 +73,8 @@ URLs end with a slash. GitHub Pages redirects `/about` to `/about/`, so both for
 | `github-pages` gem (MIT) | Local builds with the same Jekyll and plugin versions as GitHub Pages | No — build time only |
 | Python packages in `.github/scripts/requirements.txt` (MIT; Pillow: MIT-CMU) | Publishing blog posts: Markdown to HTML (markdown-it-py), removing unsafe HTML (nh3), checking and resizing images (Pillow), reading settings (PyYAML) | No — GitHub Actions only |
 | GitHub REST and GraphQL APIs | The [Projects](#projects) data: public repositories, languages, pinned repositories, contribution calendar | No — GitHub Actions only; visitors' browsers never contact GitHub for it |
-| `actions/checkout`, `actions/setup-python` | The blog workflow; pinned to exact commits | No — GitHub Actions only |
+| `typescript` (Apache-2.0), in `package.json` | Compiling `src/ts/` to `assets/js/`, and checking the types | No — the compiled JavaScript is committed |
+| `actions/checkout`, `actions/setup-python` | The workflows; pinned to exact commits | No — GitHub Actions only |
 | [Supabase](https://supabase.com/) (optional) | [Accounts](#accounts): sign-in codes, profiles, image uploads, and the `blog` Edge Function | Only on the account and author pages, once accounts are turned on |
 
 Nothing is loaded from a CDN or a third-party domain. The account pages talk to Supabase's API, without a client library.
