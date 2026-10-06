@@ -58,14 +58,6 @@ profiles:
     icon: x
     note: Posts and updates
 
-  reddit:
-    name: Reddit
-    url: https://reddit.com/user/sanskarIN
-    handle: u/sanskarIN
-    username: sanskarIN
-    icon: reddit
-    note: Posts and discussions
-
   instagram:
     name: Instagram
     url: https://www.instagram.com/dev_sanskarIN
