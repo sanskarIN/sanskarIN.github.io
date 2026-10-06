@@ -367,6 +367,49 @@ The search button in the header (or **Ctrl+K**, **⌘K**, or **/**) opens a sear
 
 Results follow the ARIA combobox pattern — the arrow keys move through them, Enter opens one, Escape closes the dialog — and each result is a real link, so it can be opened in a new tab. The 404 page has a search button too.
 
+## TypeScript
+
+The website's scripts are written in TypeScript, in `src/ts/`, and compiled to the plain JavaScript in `assets/js/` that the pages load. GitHub Pages serves `assets/js/` as it is, so **the compiled files are committed too**.
+
+| Source | Compiled to | What it does |
+|---|---|---|
+| `src/ts/theme-init.ts` | `assets/js/theme-init.js` | Runs first: enables JavaScript features and applies a saved theme |
+| `src/ts/main.ts` | `assets/js/main.js` | Theme switch, menu, copy buttons, contact form, search launcher, post sections, card spotlight |
+| `src/ts/search.ts` | `assets/js/search.js` | The site search dialog |
+| `src/ts/terminal.ts` | `assets/js/terminal.js` | The [Home page terminal](#home-page-terminal) |
+| `src/ts/projects.ts` | `assets/js/projects.js` | Search, filter, and sort on the Projects page |
+| `src/ts/account.ts` | `assets/js/account.js` | The account, editor, and author pages |
+| `src/ts/globals.d.ts` | — | Types the scripts share (`window.siteSearch`, `window.siteActions`) |
+
+- **Changing a script:** edit the `.ts` file, run `npm run build` (or keep `npm run watch` running), and commit both the `.ts` and the `.js` file. Never edit `assets/js/` by hand: the next build overwrites it.
+- **Strict types:** `tsconfig.json` turns on TypeScript's strict checks, unused-code checks, and checks that every path of a function returns. `npm run check` runs them without writing files.
+- **The check on GitHub:** the "TypeScript" workflow (`.github/workflows/typescript.yml`) checks the types and fails if `assets/js/` doesn't match `src/ts/`, whenever either changes.
+- **Plain scripts, no bundler:** each file is a self-contained script (no imports), compiled for browsers from 2020 onwards. The Supabase Edge Function in `supabase/functions/blog/` is TypeScript too; it runs on Supabase, not in the browser.
+- The TypeScript compiler (`typescript` in `package.json`, pinned in `package-lock.json`) is only used to build; nothing from `node_modules/` reaches the website.
+
+## Home page terminal
+
+With JavaScript, the profile card at the top of the Home page becomes a small terminal for exploring the website. Without JavaScript, the card stays as it is.
+
+| Command | What it does |
+|---|---|
+| `help` | Lists the commands |
+| `whoami` | The profile (the card's original content) |
+| `projects`, `blog` | Featured projects from GitHub, and the five latest posts |
+| `stack`, `focus` | Technologies and focus areas |
+| `socials`, `contact`, `support` | Profiles, email addresses, and support links |
+| `ls`, `cd <page>`, `open <name>` | Lists the pages, opens a page, or opens a page or profile |
+| `search <words>` | Opens the site search with those words |
+| `theme [light\|dark]` | Switches the theme, like the theme switch |
+| `history`, `clear`, `date`, `echo` | The usual |
+
+There are a few hidden commands too. Under the prompt, buttons run the most useful commands for people who'd rather not type.
+
+- **Data:** `terminal.json`, which Jekyll builds from `_data/` (navigation, profiles, email addresses, focus areas, technologies) and from the blog posts and the Projects data, so the terminal never says anything the rest of the website doesn't. It's loaded the first time a command needs it.
+- **Privacy:** commands are handled in the browser; nothing typed is sent or saved.
+- **Accessibility:** the prompt is a labelled text field; the output is a log that screen readers announce; links in the output are real links; ↑ and ↓ go through earlier commands; Tab completes a command only when there's something to complete, and otherwise moves focus as usual.
+- **Adding a command:** add an entry to the `commands` list in `src/ts/terminal.ts` (its name, a summary for `help`, and what it prints), then run `npm run build`.
+
 ## Adding PayPal
 
 PayPal has intentionally not been added yet. When the final PayPal URL is available, add it to the centralized contact/social configuration and enable the corresponding interface link:
