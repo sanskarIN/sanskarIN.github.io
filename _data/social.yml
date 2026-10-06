@@ -10,7 +10,7 @@
 #    url       full profile URL (a blank url hides the link everywhere)
 #    handle    how the username is written on that service
 #    username  the username used on that service (most use sanskarIN or
-#              dev_sanskarIN; the About page groups profiles by username)
+#              SanskarCodes; the About page groups profiles by username)
 #    icon      symbol id in assets/icons/sprite.svg
 #    note      short description, shown on the Contact and Home pages
 #    same_as   false = leave out of structured data (not a personal profile)
