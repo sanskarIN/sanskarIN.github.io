@@ -8,6 +8,12 @@ type SiteTheme = "light" | "dark";
 interface Window {
   /** The search dialog, once assets/js/search.js has loaded. */
   siteSearch?: {
-    open(trigger: HTMLElement): void;
+    open(trigger: HTMLElement, query?: string): void;
+  };
+  /** The theme and the search, from assets/js/main.js, for other scripts. */
+  siteActions?: {
+    theme(): SiteTheme;
+    setTheme(theme: SiteTheme): void;
+    openSearch(query?: string): boolean;
   };
 }
