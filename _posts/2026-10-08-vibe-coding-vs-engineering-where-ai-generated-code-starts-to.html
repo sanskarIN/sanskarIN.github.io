@@ -1,0 +1,470 @@
+---
+title: "Vibe Coding vs Engineering: Where AI-Generated Code Starts to Break Down"
+description: "Vibe coding can turn ideas into working software quickly, but production quality still depends on architecture, testing, security, maintainability, and human engineering judgment."
+date: 2026-10-08T07:05:44+00:00
+author: "Sanskar"
+author_url: "/about/"
+author_login: "sanskarIN"
+image: "/assets/images/blog/vibe-coding-vs-engineering-where-ai-generated-code-starts-to/37957334b8b62caa.jpg"
+image_alt: "Software developer typing code on a laptop while working at a computer"
+image_width: 2000
+image_height: 1333
+tags: ["vibe-coding", "ai", "software-engineering", "developer-tools", "code-quality"]
+source_issue: 14
+---
+<h2>Vibe Coding vs Engineering: Where AI-Generated Code Starts to Break Down</h2>
+<p>AI has changed the way software can be built.</p>
+<p>A developer can now describe a feature in natural language, ask an AI coding tool to implement it, run the result, report an error, and continue iterating. What once required hours of typing can sometimes become a working prototype in minutes.</p>
+<p>That is the promise of vibe coding.</p>
+<p>But there is an important distinction that is easy to miss:</p>
+<p><strong>Getting software to work is not the same as engineering software.</strong></p>
+<p>A prototype can succeed while its architecture is fragile. A feature can pass a happy-path test while failing under unusual input. An application can look polished while exposing sensitive data. A generated codebase can compile perfectly while becoming increasingly difficult to understand six months later.</p>
+<p>Recent research treats vibe coding as an iterative workflow in which developers move some of their effort away from writing every line and toward specifying intent, supervising generation, evaluating results, and revising the implementation. Early evidence suggests meaningful gains for some tasks, particularly prototyping, while long-term maintainability and safeguards remain less settled.</p>
+<p>So the real question is not:</p>
+<blockquote>
+<p><strong>“Should developers use AI to write code?”</strong></p>
+</blockquote>
+<p>The better question is:</p>
+<blockquote>
+<p><strong>“How do we use AI's speed without abandoning engineering discipline?”</strong></p>
+</blockquote>
+<h3>What Is Vibe Coding?</h3>
+<p>Vibe coding is an AI-assisted development style where a person primarily communicates desired behavior in natural language and an AI system generates or modifies the implementation.</p>
+<p>The workflow might look like this:</p>
+<p><strong>Idea → Prompt → Generated code → Run → Observe → Prompt again → Repeat</strong></p>
+<p>For a simple project, this can feel almost magical.</p>
+<p>You might say:</p>
+<blockquote>
+<p>“Build a dashboard that displays the user's tasks, lets them filter by status, and stores the data locally.”</p>
+</blockquote>
+<p>An AI coding assistant can potentially produce the UI, state management, data model, storage layer, and supporting code in a fraction of the time it would take to manually create everything.</p>
+<p>The important thing is that vibe coding is not necessarily “one prompt and done.” Current literature describes it more accurately as an iterative generation-and-evaluation process.</p>
+<p>That distinction matters because the quality of the final system depends heavily on what happens <strong>after the first generated implementation</strong>.</p>
+<h3>Why Vibe Coding Is So Powerful</h3>
+<p>The biggest advantage is not simply fewer keystrokes.</p>
+<p>It is reduced friction between an idea and an executable experiment.</p>
+<p>Before AI coding assistants became widely capable, developers often had to spend significant time on boilerplate before they could evaluate an idea. AI can compress that initial phase.</p>
+<p>That creates several benefits.</p>
+<h4>1. Faster prototyping</h4>
+<p>An idea can become a working interface quickly.</p>
+<p>This is valuable when you are trying to determine whether an idea is worth pursuing before investing heavily in architecture and infrastructure.</p>
+<h4>2. Lower implementation friction</h4>
+<p>AI can generate repetitive structures such as:</p>
+<ul>
+<li>CRUD operations</li>
+<li>UI components</li>
+<li>configuration files</li>
+<li>test scaffolding</li>
+<li>data transformations</li>
+<li>API clients</li>
+<li>documentation drafts</li>
+</ul>
+<p>That does not mean the generated result should automatically be trusted. It means the developer spends less time starting from an empty file.</p>
+<h4>3. Faster experimentation</h4>
+<p>You can test multiple implementation approaches quickly.</p>
+<p>Instead of spending half a day implementing one approach before discovering that it does not fit, you can ask an AI system to produce alternatives, compare them, and investigate the trade-offs.</p>
+<h4>4. Accessibility</h4>
+<p>Natural-language interfaces lower the barrier to experimenting with software.</p>
+<p>Google describes vibe coding as a workflow that shifts some of the developer's role from line-by-line implementation toward guiding an AI assistant through generation, refinement, and debugging.</p>
+<p>That does not make software engineering irrelevant.</p>
+<p>It changes where engineering effort is spent.</p>
+<hr>
+<h2>The Dangerous Illusion: “It Works”</h2>
+<p>This is where the difference between vibe coding and engineering becomes important.</p>
+<p>Imagine an AI generates a login system.</p>
+<p>You run it.</p>
+<p>The registration page works.</p>
+<p>The login page works.</p>
+<p>The logout button works.</p>
+<p>The application looks correct.</p>
+<p>You might conclude:</p>
+<p><strong>“The authentication system is finished.”</strong></p>
+<p>But what have you actually demonstrated?</p>
+<p>You have demonstrated that some expected scenarios work.</p>
+<p>You have not necessarily demonstrated that:</p>
+<ul>
+<li>authentication boundaries are correct,</li>
+<li>authorization is enforced,</li>
+<li>sessions behave safely,</li>
+<li>secrets are handled properly,</li>
+<li>malicious input is rejected,</li>
+<li>sensitive data is protected,</li>
+<li>error handling is appropriate,</li>
+<li>concurrent requests behave correctly,</li>
+<li>dependencies are safe,</li>
+<li>future changes will remain safe.</li>
+</ul>
+<p>This is the central problem with judging software exclusively by visible behavior.</p>
+<p><strong>A working demo is evidence of functionality. It is not evidence of engineering quality.</strong></p>
+<hr>
+<h2>AI Is Good at Producing Code. Engineering Is About Making Decisions.</h2>
+<p>This is perhaps the most important distinction.</p>
+<p>AI can generate implementation details remarkably quickly.</p>
+<p>Engineering requires decisions about:</p>
+<p><strong>What should the system do?</strong></p>
+<p><strong>What should it never do?</strong></p>
+<p><strong>What happens when assumptions are wrong?</strong></p>
+<p><strong>What happens when the network disappears?</strong></p>
+<p><strong>What happens when the database is corrupted?</strong></p>
+<p><strong>What happens when 100,000 users arrive instead of 100?</strong></p>
+<p><strong>Who is allowed to perform this action?</strong></p>
+<p><strong>What data should never leave the device?</strong></p>
+<p><strong>What happens when another engineer changes this six months later?</strong></p>
+<p>Those are not merely coding questions.</p>
+<p>They are system-design questions.</p>
+<p>AI can assist with those questions, but responsibility for the resulting decisions still belongs somewhere.</p>
+<hr>
+<h2>The Production Gap</h2>
+<p>There is a huge difference between:</p>
+<p><strong>“The application runs.”</strong></p>
+<p>and:</p>
+<p><strong>“The application is ready to be depended upon.”</strong></p>
+<p>A prototype often optimizes for learning.</p>
+<p>Production software must optimize for multiple dimensions at once:</p>
+<p><strong>Correctness</strong><br>
+Does it behave according to the intended requirements?</p>
+<p><strong>Security</strong><br>
+Can an attacker abuse it or obtain information they should not have?</p>
+<p><strong>Reliability</strong><br>
+Does it continue working when something unexpected happens?</p>
+<p><strong>Maintainability</strong><br>
+Can another developer understand and safely modify it?</p>
+<p><strong>Performance</strong><br>
+Does it remain responsive as workload increases?</p>
+<p><strong>Observability</strong><br>
+Can the team understand what happened when something fails?</p>
+<p><strong>Testability</strong><br>
+Can behavior be verified automatically?</p>
+<p><strong>Operability</strong><br>
+Can the software actually be deployed, monitored, upgraded, and recovered?</p>
+<p><strong>Accountability</strong><br>
+Does someone understand and own the consequences of the implementation?</p>
+<p>Vibe coding can help produce the starting point.</p>
+<p>Engineering is what closes this gap.</p>
+<hr>
+<h2>Security Is Where “Looks Correct” Can Become Dangerous</h2>
+<p>One of the strongest reasons not to treat generated code as automatically trustworthy is security.</p>
+<p>A system can be functionally correct and still be insecure.</p>
+<p>Research presented at ICML 2026 evaluated AI coding-agent configurations on 186 feature-request tasks from real-world open-source projects. In one reported setting, 57% of solutions were functionally correct while only 11.8% were secure.</p>
+<p>That gap is enormous.</p>
+<p>It demonstrates why:</p>
+<p><strong>Functional correctness ≠ security correctness</strong></p>
+<p>An AI-generated implementation might:</p>
+<ul>
+<li>trust user-controlled input,</li>
+<li>expose information through error messages,</li>
+<li>choose unsafe defaults,</li>
+<li>mishandle authorization,</li>
+<li>introduce injection risks,</li>
+<li>store secrets incorrectly,</li>
+<li>make assumptions about trusted input.</li>
+</ul>
+<p>The code may still look clean.</p>
+<p>It may still compile.</p>
+<p>It may still pass basic tests.</p>
+<p>This is why security review cannot simply be:</p>
+<blockquote>
+<p>“Ask the AI whether this code is secure.”</p>
+</blockquote>
+<p>The same system that generated the implementation should not be your only source of assurance about that implementation.</p>
+<hr>
+<h2>Testing Cannot Become “Ask the AI to Test Itself”</h2>
+<p>Another common pattern is:</p>
+<ol>
+<li>Ask AI to write code.</li>
+<li>Ask AI to write tests.</li>
+<li>Ask AI whether the tests pass.</li>
+<li>Ship it.</li>
+</ol>
+<p>That creates a risk of circular confidence.</p>
+<p>The tests may encode the same assumptions that produced the implementation.</p>
+<p>A better mindset is to make expected behavior explicit before implementation.</p>
+<p>For example:</p>
+<p>Instead of:</p>
+<blockquote>
+<p>“Build a password-reset system.”</p>
+</blockquote>
+<p>Define requirements such as:</p>
+<ul>
+<li>An unknown account should not reveal whether the account exists.</li>
+<li>Reset tokens should expire.</li>
+<li>A token should not be reusable.</li>
+<li>Invalid tokens should fail safely.</li>
+<li>Password-reset requests should be rate-limited.</li>
+<li>The reset operation should not expose credentials in logs.</li>
+</ul>
+<p>Now the AI has a specification to implement against.</p>
+<p>More importantly, <strong>you have something concrete to test against.</strong></p>
+<p>Research on vibe coding has also highlighted QA concerns, including cases where testing is skipped or responsibility for verification is delegated back to the same AI tools generating the code.</p>
+<p>The solution is not “never use AI for tests.”</p>
+<p>The solution is to make verification an independent engineering activity rather than treating generation as proof.</p>
+<hr>
+<h2>Maintainability Is the Problem You Discover Later</h2>
+<p>Security bugs are not the only concern.</p>
+<p>Some of the most expensive problems are not visible when the application is young.</p>
+<p>AI-generated code can accumulate:</p>
+<ul>
+<li>duplicated logic,</li>
+<li>inconsistent abstractions,</li>
+<li>unnecessary dependencies,</li>
+<li>poorly chosen boundaries,</li>
+<li>unclear naming,</li>
+<li>excessive complexity,</li>
+<li>accidental coupling,</li>
+<li>inconsistent error handling.</li>
+</ul>
+<p>A small application may survive these problems.</p>
+<p>A large application compounds them.</p>
+<p>Consider a project with 30,000 lines of generated code.</p>
+<p>Everything appears functional.</p>
+<p>Then someone asks for a new feature.</p>
+<p>The team discovers that the same business rule exists in four different modules.</p>
+<p>One implementation handles an edge case differently.</p>
+<p>A fifth component copied an older version.</p>
+<p>Nobody knows which implementation is authoritative.</p>
+<p>Now the problem isn't that AI failed to generate code.</p>
+<p>The problem is that <strong>the system accumulated decisions without a coherent architecture.</strong></p>
+<p>Recent research comparing code generated by several vibe-coding tools found differences in code smells, complexity, issue severity, and duplication across tools, reinforcing that generated output has structural trade-offs beyond perceived speed.</p>
+<hr>
+<h2>The Speed Trap</h2>
+<p>Speed is useful.</p>
+<p>But speed can create a dangerous illusion.</p>
+<p>Suppose traditional implementation takes two days.</p>
+<p>AI-assisted implementation takes two hours.</p>
+<p>That looks like an 8× improvement.</p>
+<p>But then imagine that the AI-generated code requires:</p>
+<ul>
+<li>two additional days of debugging,</li>
+<li>a day of refactoring,</li>
+<li>additional security review,</li>
+<li>fixing broken tests,</li>
+<li>redesigning an incorrect abstraction,</li>
+<li>and ongoing maintenance problems.</li>
+</ul>
+<p>The original two-day task may have simply become a different two-day engineering task.</p>
+<p>This is why measuring AI coding productivity purely by generated lines of code, completed tickets, or time to first demo can be misleading.</p>
+<p>A 2026 review of the research literature found that reported productivity results vary substantially depending on how productivity is measured, and that code-review time and longer-term quality can complicate simple “AI makes developers faster” claims.</p>
+<p><strong>Output is not the same thing as value.</strong></p>
+<hr>
+<h2>Where Vibe Coding Shines</h2>
+<p>This does not mean vibe coding is bad.</p>
+<p>Quite the opposite.</p>
+<p>It is extremely useful when applied to the right problems.</p>
+<p>It can be excellent for:</p>
+<h4>Prototypes</h4>
+<p>When the goal is to test an idea quickly, optimizing for iteration speed makes sense.</p>
+<h4>Personal tools</h4>
+<p>For a small internal utility used by one person, the risk profile can be much lower.</p>
+<h4>Boilerplate</h4>
+<p>AI is particularly useful when the implementation is repetitive and the requirements are already well understood.</p>
+<h4>Exploratory development</h4>
+<p>Sometimes you do not yet know the correct architecture.</p>
+<p>A fast prototype can teach you more than a week of theoretical design.</p>
+<h4>Learning</h4>
+<p>Generated examples can help developers explore unfamiliar APIs and frameworks.</p>
+<p>The important condition is that generated code becomes a learning and implementation aid rather than a substitute for understanding.</p>
+<hr>
+<h2>Where Traditional Engineering Becomes More Important</h2>
+<p>As the consequences of failure increase, engineering discipline should increase with them.</p>
+<p>Consider these areas:</p>
+<p><strong>Authentication</strong></p>
+<p><strong>Payments</strong></p>
+<p><strong>Medical or sensitive information</strong></p>
+<p><strong>Authorization</strong></p>
+<p><strong>Financial records</strong></p>
+<p><strong>Infrastructure</strong></p>
+<p><strong>Security-sensitive services</strong></p>
+<p><strong>Large multi-user systems</strong></p>
+<p><strong>Long-lived enterprise applications</strong></p>
+<p><strong>Systems where downtime is expensive</strong></p>
+<p>The more costly the failure, the less reasonable it becomes to rely on “the AI generated it and it seems to work.”</p>
+<p>This can be thought of as a <strong>risk gradient</strong>.</p>
+<p>Low-risk experiment:</p>
+<blockquote>
+<p>Generate quickly → inspect lightly → iterate</p>
+</blockquote>
+<p>Medium-risk application:</p>
+<blockquote>
+<p>Generate → review → test → scan → monitor</p>
+</blockquote>
+<p>High-risk production system:</p>
+<blockquote>
+<p>Specify → design → generate selectively → review → test deeply → security analysis → staged deployment → monitor → maintain</p>
+</blockquote>
+<p>The AI can remain involved at every stage.</p>
+<p>But its role changes.</p>
+<hr>
+<h2>The Developer's Job Is Changing</h2>
+<p>The future developer may spend less time manually typing repetitive code.</p>
+<p>That does not mean the developer disappears.</p>
+<p>Instead, several skills become more important.</p>
+<h4>Specification</h4>
+<p>Can you clearly describe what the software should and should not do?</p>
+<h4>Architecture</h4>
+<p>Can you decide how components should interact?</p>
+<h4>Verification</h4>
+<p>Can you determine whether an implementation is actually correct?</p>
+<h4>Debugging</h4>
+<p>Can you investigate failures rather than merely asking an AI to try again?</p>
+<h4>Security thinking</h4>
+<p>Can you identify dangerous assumptions and attack surfaces?</p>
+<h4>System thinking</h4>
+<p>Can you understand what happens when the application interacts with databases, networks, users, operating systems, and external services?</p>
+<h4>Code reading</h4>
+<p>Even when AI writes most of the code, someone still needs to understand what the system actually contains.</p>
+<p>This creates an interesting paradox:</p>
+<p><strong>The easier it becomes to generate code, the more valuable the ability to judge code becomes.</strong></p>
+<hr>
+<h2>A Better Workflow: Engineering With AI</h2>
+<p>The strongest workflow is not:</p>
+<p><strong>Human vs AI</strong></p>
+<p>It is:</p>
+<p><strong>Human + AI + Verification</strong></p>
+<p>A practical process looks like this.</p>
+<h3>1. Define the problem</h3>
+<p>Before asking for implementation, describe:</p>
+<ul>
+<li>the objective,</li>
+<li>users,</li>
+<li>constraints,</li>
+<li>expected behavior,</li>
+<li>failure conditions,</li>
+<li>important non-functional requirements.</li>
+</ul>
+<h3>2. Define the boundaries</h3>
+<p>Tell the AI what it must not change.</p>
+<p>This is especially important in an existing repository.</p>
+<p>A coding agent that modifies an entire codebase to solve a small problem can introduce unnecessary risk.</p>
+<h3>3. Break work into small changes</h3>
+<p>Large vague prompts produce large vague changes.</p>
+<p>Prefer small, reviewable tasks.</p>
+<p>Instead of:</p>
+<blockquote>
+<p>“Rewrite the application.”</p>
+</blockquote>
+<p>Use:</p>
+<blockquote>
+<p>“Add local caching to the repository layer without changing the public API. Preserve existing behavior and add tests for cache hits, misses, and invalidation.”</p>
+</blockquote>
+<p>Now the change has a boundary.</p>
+<h3>4. Generate</h3>
+<p>Let AI do what it is good at.</p>
+<p>Generate implementation candidates.</p>
+<p>Produce boilerplate.</p>
+<p>Explore alternatives.</p>
+<p>Create tests and documentation drafts.</p>
+<h3>5. Read the important code</h3>
+<p>You do not necessarily need to manually inspect every generated line.</p>
+<p>But high-risk logic deserves human attention.</p>
+<p>Especially:</p>
+<ul>
+<li>authentication,</li>
+<li>authorization,</li>
+<li>data handling,</li>
+<li>concurrency,</li>
+<li>persistence,</li>
+<li>external integrations,</li>
+<li>security boundaries.</li>
+</ul>
+<h3>6. Verify independently</h3>
+<p>Run:</p>
+<ul>
+<li>unit tests,</li>
+<li>integration tests,</li>
+<li>static analysis,</li>
+<li>dependency checks,</li>
+<li>security scanning,</li>
+<li>type checking,</li>
+<li>performance tests where relevant.</li>
+</ul>
+<h3>7. Review the diff</h3>
+<p>Do not review only whether the feature works.</p>
+<p>Ask:</p>
+<p><strong>What did the AI change that it did not need to change?</strong></p>
+<p>That question alone catches many unnecessary modifications.</p>
+<h3>8. Refactor before the code becomes permanent</h3>
+<p>Prototype speed is valuable.</p>
+<p>But once an experimental implementation becomes part of the product, clean it up.</p>
+<p>Do not allow:</p>
+<blockquote>
+<p>“We'll refactor it later.”</p>
+</blockquote>
+<p>to become the architecture.</p>
+<hr>
+<h2>Treat AI Output as a Draft, Not a Verdict</h2>
+<p>This may be the healthiest mental model for AI-assisted development.</p>
+<p>Think of generated code like a very fast junior contributor.</p>
+<p>It can produce a remarkable amount of work.</p>
+<p>It can also misunderstand requirements.</p>
+<p>It may choose an inappropriate abstraction.</p>
+<p>It may overlook an edge case.</p>
+<p>It may confidently present an incorrect implementation.</p>
+<p>So the process becomes:</p>
+<p><strong>AI proposes.<br>
+Engineer evaluates.<br>
+Tests provide evidence.<br>
+Production provides reality.</strong></p>
+<p>The goal is not to distrust AI.</p>
+<p>The goal is to remove the assumption that generated output is automatically correct.</p>
+<hr>
+<h2>The Real Meaning of “AI-Native Engineering”</h2>
+<p>The next stage of software development should not be defined by how much code humans stop writing.</p>
+<p>It should be defined by how effectively humans and AI collaborate around the entire engineering lifecycle.</p>
+<p>That means using AI not only for implementation, but also for:</p>
+<ul>
+<li>exploring requirements,</li>
+<li>generating design alternatives,</li>
+<li>creating test cases,</li>
+<li>analyzing code,</li>
+<li>identifying risks,</li>
+<li>reviewing changes,</li>
+<li>documenting systems,</li>
+<li>investigating bugs,</li>
+<li>understanding unfamiliar repositories.</li>
+</ul>
+<p>But every one of those uses should still have an appropriate verification mechanism.</p>
+<p>The mature workflow is not:</p>
+<p><strong>Prompt → Code → Ship</strong></p>
+<p>It is:</p>
+<p><strong>Intent → Specification → Design → Generation → Verification → Review → Deployment → Observation → Maintenance</strong></p>
+<p>AI can accelerate many stages.</p>
+<p>It does not eliminate the stages.</p>
+<hr>
+<h2>Vibe Coding Is Not the Enemy</h2>
+<p>There is a tendency to frame the debate as:</p>
+<p><strong>Vibe coding vs real programmers</strong></p>
+<p>That framing misses the point.</p>
+<p>Vibe coding is a technique.</p>
+<p>Software engineering is a discipline.</p>
+<p>You can use both.</p>
+<p>The mistake is not using AI-generated code.</p>
+<p>The mistake is assuming that because AI reduced the cost of implementation, it also reduced the cost of correctness.</p>
+<p>It didn't.</p>
+<p>In many cases, the implementation becomes cheaper while <strong>evaluation becomes more important</strong>.</p>
+<p>That means the developer's value increasingly moves toward:</p>
+<p><strong>judgment, architecture, verification, security, communication, and system understanding.</strong></p>
+<hr>
+<h2>The Future Belongs to Engineers Who Can Move Fast Without Losing Control</h2>
+<p>AI coding tools are not going away.</p>
+<p>They will likely become faster, more capable, more autonomous, and better at understanding entire repositories.</p>
+<p>That makes engineering discipline more important, not less.</p>
+<p>A developer who refuses useful AI assistance may eventually be slower than necessary.</p>
+<p>A developer who blindly accepts everything AI generates may eventually become unable to control their own codebase.</p>
+<p>The stronger path is in the middle:</p>
+<p><strong>Use AI aggressively for speed.<br>
+Use engineering rigor for trust.</strong></p>
+<p>That is the difference between building software quickly and building software that can survive.</p>
+<p>Because the hardest part of software development has never been making a computer do something once.</p>
+<p>The hard part is making the system continue to behave correctly when requirements change, users behave unexpectedly, dependencies evolve, traffic grows, failures happen, and another engineer has to maintain it years later.</p>
+<p><strong>AI can help you write the code.</strong></p>
+<p><strong>Engineering is what makes the code worth keeping.</strong></p>
+<hr>
+<h3>Final Takeaway</h3>
+<p>Vibe coding has changed the economics of software experimentation.</p>
+<p>The distance between an idea and a working prototype is dramatically smaller.</p>
+<p>But production software still needs architecture, tests, security, observability, maintainability, and accountable human decisions.</p>
+<p>So don't ask:</p>
+<p><strong>“Was this code written by AI or by a human?”</strong></p>
+<p>Ask:</p>
+<p><strong>“Can we explain it, test it, secure it, maintain it, and trust it under the conditions that matter?”</strong></p>
+<p>That is the question that separates a generated application from engineered software.</p>
