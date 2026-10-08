@@ -1,0 +1,515 @@
+---
+title: "Rust Typestate: Designing APIs That Make Invalid States Unrepresentable"
+description: "Learn how Rust typestate uses the type system to model object lifecycles and prevent invalid operations at compile time, with practical PhantomData examples."
+date: 2026-10-08T07:51:33+00:00
+author: "Sanskar"
+author_url: "/about/"
+author_login: "sanskarIN"
+image: "/assets/images/blog/rust-typestate-designing-apis-that-make-invalid-states/5a16a0d2b06b2352.png"
+image_alt: "Rust typestate diagram showing a builder moving through compile-time states, from incomplete configuration to a fully initialized type, demonstrating how Rust prevents invalid operations through the type system."
+image_width: 2000
+image_height: 1064
+tags: ["rust", "typestate", "systems-programming", "type-systems", "api-design"]
+source_issue: 16
+---
+<h2>Rust Typestate: Designing APIs That Make Invalid States Unrepresentable</h2>
+<p>Most programming languages let you create an object first and worry about whether it is actually ready to use later.</p>
+<p>A connection might be disconnected.</p>
+<p>A file might be closed.</p>
+<p>A transaction might already be committed.</p>
+<p>A parser might not have received enough input.</p>
+<p>A device might not have been initialized.</p>
+<p>In many systems, these conditions are represented by booleans, nullable fields, runtime checks, or conventions documented somewhere that developers may forget.</p>
+<p>Rust gives us another approach:</p>
+<p><strong>make the state part of the type itself.</strong></p>
+<p>This idea is commonly called the <strong>typestate pattern</strong>.</p>
+<p>Instead of creating one type that can exist in many vaguely valid states, we create different compile-time states and allow only the operations that make sense for each state.</p>
+<p>The result is an API where the compiler becomes part of the protocol design.</p>
+<hr>
+<h3>The Core Idea</h3>
+<p>Imagine a connection with two states:</p>
+<pre tabindex="0"><code>Disconnected → Connected → Disconnected
+</code></pre>
+<p>A traditional implementation might look like this:</p>
+<pre tabindex="0"><code>struct Connection &#123;
+    address: String,
+    connected: bool,
+&#125;
+
+impl Connection &#123;
+    fn send(&amp;self, message: &amp;str) &#123;
+        if !self.connected &#123;
+            panic!("connection is not active");
+        &#125;
+
+        println!("Sending: &#123;message&#125;");
+    &#125;
+&#125;
+</code></pre>
+<p>The API allows <code>send()</code> to exist even when the connection is disconnected.</p>
+<p>The programmer has to remember the rule:</p>
+<blockquote>
+<p>“Only call <code>send()</code> after connecting.”</p>
+</blockquote>
+<p>Rust can express that rule directly in the type system.</p>
+<hr>
+<h3>Turning State Into a Type</h3>
+<p>We can represent each state with an empty type:</p>
+<pre tabindex="0"><code>struct Disconnected;
+struct Connected;
+</code></pre>
+<p>These types do not need to store any runtime information.</p>
+<p>They simply represent two different compile-time states.</p>
+<p>Now we can make the connection generic:</p>
+<pre tabindex="0"><code>use std::marker::PhantomData;
+
+struct Connection&lt;State&gt; &#123;
+    address: String,
+    _state: PhantomData&lt;State&gt;,
+&#125;
+</code></pre>
+<p>The <code>State</code> parameter tells Rust which state the connection belongs to.</p>
+<p><code>PhantomData&lt;State&gt;</code> is useful here because it lets the type carry that relationship even though the state itself does not need to occupy storage. Rust documents <code>PhantomData</code> as a zero-sized type used to communicate type-system relationships such as ownership, variance, and related compiler analysis.</p>
+<p>Conceptually:</p>
+<pre tabindex="0"><code>Connection&lt;Disconnected&gt;
+Connection&lt;Connected&gt;
+</code></pre>
+<p>are two different types.</p>
+<p>That difference is extremely important.</p>
+<hr>
+<h3>Restricting Methods by State</h3>
+<p>Now we can implement methods only for the states where they make sense.</p>
+<pre tabindex="0"><code>impl Connection&lt;Disconnected&gt; &#123;
+    fn new(address: impl Into&lt;String&gt;) -&gt; Self &#123;
+        Self &#123;
+            address: address.into(),
+            _state: PhantomData,
+        &#125;
+    &#125;
+
+    fn connect(self) -&gt; Connection&lt;Connected&gt; &#123;
+        Connection &#123;
+            address: self.address,
+            _state: PhantomData,
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p><code>connect()</code> exists only for:</p>
+<pre tabindex="0"><code>Connection&lt;Disconnected&gt;
+</code></pre>
+<p>It consumes the disconnected connection and produces:</p>
+<pre tabindex="0"><code>Connection&lt;Connected&gt;
+</code></pre>
+<p>Then we can define operations for the connected state:</p>
+<pre tabindex="0"><code>impl Connection&lt;Connected&gt; &#123;
+    fn send(&amp;self, message: &amp;str) &#123;
+        println!("Sending '&#123;message&#125;' to &#123;&#125;", self.address);
+    &#125;
+
+    fn disconnect(self) -&gt; Connection&lt;Disconnected&gt; &#123;
+        Connection &#123;
+            address: self.address,
+            _state: PhantomData,
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>Now <code>send()</code> is available only when the compiler knows that the connection is connected.</p>
+<hr>
+<h3>Using the API</h3>
+<p>The normal flow looks natural:</p>
+<pre tabindex="0"><code>fn main() &#123;
+    let connection = Connection::&lt;Disconnected&gt;::new("server.example");
+
+    let connection = connection.connect();
+
+    connection.send("Hello Rust!");
+
+    let connection = connection.disconnect();
+&#125;
+</code></pre>
+<p>The important part is not that this code works.</p>
+<p>The important part is what <strong>cannot</strong> be written successfully.</p>
+<p>Consider:</p>
+<pre tabindex="0"><code>fn main() &#123;
+    let connection = Connection::&lt;Disconnected&gt;::new("server.example");
+
+    connection.send("Hello!");
+&#125;
+</code></pre>
+<p>This fails because the method belongs to:</p>
+<pre tabindex="0"><code>impl Connection&lt;Connected&gt;
+</code></pre>
+<p>not:</p>
+<pre tabindex="0"><code>impl Connection&lt;Disconnected&gt;
+</code></pre>
+<p>The compiler rejects the invalid state transition before the program runs.</p>
+<hr>
+<h2>The Compiler Becomes a Protocol Checker</h2>
+<p>This is where typestate becomes particularly interesting.</p>
+<p>A normal API often documents a protocol like this:</p>
+<pre tabindex="0"><code>create
+   ↓
+initialize
+   ↓
+start
+   ↓
+use
+   ↓
+stop
+</code></pre>
+<p>But documentation alone does not enforce the sequence.</p>
+<p>Typestate can encode the sequence directly:</p>
+<pre tabindex="0"><code>Device&lt;Created&gt;
+       │
+       ▼
+Device&lt;Initialized&gt;
+       │
+       ▼
+Device&lt;Running&gt;
+       │
+       ▼
+Device&lt;Stopped&gt;
+</code></pre>
+<p>Each state can expose a different set of operations.</p>
+<p>For example:</p>
+<pre tabindex="0"><code>struct Created;
+struct Initialized;
+struct Running;
+struct Stopped;
+</code></pre>
+<p>Then:</p>
+<pre tabindex="0"><code>impl Device&lt;Created&gt; &#123;
+    fn initialize(self) -&gt; Device&lt;Initialized&gt; &#123;
+        // ...
+    &#125;
+&#125;
+</code></pre>
+<p>and:</p>
+<pre tabindex="0"><code>impl Device&lt;Initialized&gt; &#123;
+    fn start(self) -&gt; Device&lt;Running&gt; &#123;
+        // ...
+    &#125;
+&#125;
+</code></pre>
+<p>and:</p>
+<pre tabindex="0"><code>impl Device&lt;Running&gt; &#123;
+    fn stop(self) -&gt; Device&lt;Stopped&gt; &#123;
+        // ...
+    &#125;
+&#125;
+</code></pre>
+<p>The resulting API resembles a state machine, but the compiler enforces the legal transitions.</p>
+<hr>
+<h2>Why <code>self</code> Is Often Consumed</h2>
+<p>You may notice something important in these methods:</p>
+<pre tabindex="0"><code>fn connect(self) -&gt; Connection&lt;Connected&gt;
+</code></pre>
+<p>rather than:</p>
+<pre tabindex="0"><code>fn connect(&amp;mut self)
+</code></pre>
+<p>Consuming <code>self</code> is powerful because the old state disappears.</p>
+<p>Consider:</p>
+<pre tabindex="0"><code>let connection = Connection::&lt;Disconnected&gt;::new("server");
+
+let connection = connection.connect();
+</code></pre>
+<p>The original value of type:</p>
+<pre tabindex="0"><code>Connection&lt;Disconnected&gt;
+</code></pre>
+<p>has been moved.</p>
+<p>The new value has type:</p>
+<pre tabindex="0"><code>Connection&lt;Connected&gt;
+</code></pre>
+<p>We have effectively transformed one state into another.</p>
+<p>This fits naturally with Rust's ownership model.</p>
+<p>Instead of:</p>
+<pre tabindex="0"><code>same object
+   ↓
+boolean changes
+</code></pre>
+<p>we get:</p>
+<pre tabindex="0"><code>old type
+   ↓
+ownership transfer
+   ↓
+new type
+</code></pre>
+<p>The state transition becomes a type transition.</p>
+<hr>
+<h2>The Interesting Part: Zero Runtime State</h2>
+<p>One of the most useful properties of this technique is that the state marker does not have to become a runtime field.</p>
+<p>For example:</p>
+<pre tabindex="0"><code>struct Connected;
+struct Disconnected;
+</code></pre>
+<p>contain no data.</p>
+<p>And:</p>
+<pre tabindex="0"><code>PhantomData&lt;State&gt;
+</code></pre>
+<p>is zero-sized.</p>
+<p>So the type:</p>
+<pre tabindex="0"><code>Connection&lt;Connected&gt;
+</code></pre>
+<p>can carry compile-time information without requiring a boolean such as:</p>
+<pre tabindex="0"><code>connected: bool
+</code></pre>
+<p>The state exists primarily for the compiler.</p>
+<p>That gives us an interesting design principle:</p>
+<blockquote>
+<p><strong>Some information belongs in the type system, not in runtime memory.</strong></p>
+</blockquote>
+<hr>
+<h2>Typestate vs Runtime Validation</h2>
+<p>Typestate does not eliminate runtime validation.</p>
+<p>That distinction is important.</p>
+<p>Suppose connecting to a server can fail because the server is unreachable.</p>
+<p>The compiler cannot know whether the network connection will succeed.</p>
+<p>So the transition can still return a <code>Result</code>:</p>
+<pre tabindex="0"><code>impl Connection&lt;Disconnected&gt; &#123;
+    fn connect(self) -&gt; Result&lt;Connection&lt;Connected&gt;, ConnectError&gt; &#123;
+        // Perform runtime connection attempt.
+
+        Ok(Connection &#123;
+            address: self.address,
+            _state: PhantomData,
+        &#125;)
+    &#125;
+&#125;
+</code></pre>
+<p>Now we have two layers:</p>
+<pre tabindex="0"><code>Compile time
+    ↓
+Is this operation legal for this state?
+
+Runtime
+    ↓
+Did the operation actually succeed?
+</code></pre>
+<p>These are different problems.</p>
+<p>Rust can handle both.</p>
+<hr>
+<h2>A More Realistic Example: Transactions</h2>
+<p>Transactions are a great example.</p>
+<p>Imagine these conceptual states:</p>
+<pre tabindex="0"><code>Transaction&lt;Active&gt;
+Transaction&lt;Committed&gt;
+Transaction&lt;RolledBack&gt;
+</code></pre>
+<p>You might want:</p>
+<pre tabindex="0"><code>impl Transaction&lt;Active&gt; &#123;
+    fn commit(self) -&gt; Transaction&lt;Committed&gt; &#123;
+        // ...
+    &#125;
+
+    fn rollback(self) -&gt; Transaction&lt;RolledBack&gt; &#123;
+        // ...
+    &#125;
+&#125;
+</code></pre>
+<p>Meanwhile:</p>
+<pre tabindex="0"><code>impl Transaction&lt;Committed&gt; &#123;
+    // No commit() method.
+&#125;
+</code></pre>
+<p>Now code cannot accidentally commit the same transaction twice through the same typed API.</p>
+<p>Likewise, a rolled-back transaction does not expose operations intended for an active transaction.</p>
+<p>The state machine becomes visible in the API.</p>
+<hr>
+<h2>Typestate Is More Than <code>PhantomData</code></h2>
+<p>It is tempting to think:</p>
+<blockquote>
+<p>“Typestate means using <code>PhantomData</code>.”</p>
+</blockquote>
+<p>Not exactly.</p>
+<p><code>PhantomData</code> is one tool for representing compile-time relationships.</p>
+<p>The deeper concept is:</p>
+<blockquote>
+<p><strong>Use types to encode valid states and legal transitions.</strong></p>
+</blockquote>
+<p>You can often design typestate APIs without <code>PhantomData</code>, especially when state is naturally represented by distinct structs.</p>
+<p>For example:</p>
+<pre tabindex="0"><code>struct Locked &#123;
+    key: String,
+&#125;
+
+struct Unlocked &#123;
+    key: String,
+&#125;
+</code></pre>
+<p>You could transition between completely different structs:</p>
+<pre tabindex="0"><code>impl Locked &#123;
+    fn unlock(self, password: &amp;str) -&gt; Option&lt;Unlocked&gt; &#123;
+        if password == "correct" &#123;
+            Some(Unlocked &#123; key: self.key &#125;)
+        &#125; else &#123;
+            None
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>Here the state is represented by the actual Rust type itself.</p>
+<p><code>PhantomData</code> becomes especially useful when several states share the same underlying representation and only the type-level state changes. Rust's documentation also distinguishes phantom type parameters from <code>PhantomData</code>: a phantom type parameter is unused at runtime, while <code>PhantomData</code> provides a compiler-visible connection to a type.</p>
+<hr>
+<h2>Designing State Machines With Rust Types</h2>
+<p>A useful way to approach typestate design is to first draw the state machine.</p>
+<p>For example:</p>
+<pre tabindex="0"><code>                 ┌──────────────┐
+                 │ Disconnected │
+                 └──────┬───────┘
+                        │ connect()
+                        ▼
+                 ┌──────────────┐
+                 │  Connected   │
+                 └──────┬───────┘
+                        │ disconnect()
+                        ▼
+                 ┌──────────────┐
+                 │ Disconnected │
+                 └──────────────┘
+</code></pre>
+<p>Then ask:</p>
+<p><strong>Which operations are valid in each state?</strong></p>
+<p>For our connection:</p>
+<pre tabindex="0"><code>Disconnected
+    └── connect()
+
+Connected
+    ├── send()
+    └── disconnect()
+</code></pre>
+<p>Finally, encode those rules into <code>impl</code> blocks.</p>
+<p>This turns API design into state-machine design.</p>
+<hr>
+<h2>A Useful Mental Model</h2>
+<p>Think of each type as a permission token.</p>
+<pre tabindex="0"><code>Connection&lt;Disconnected&gt;
+</code></pre>
+<p>means:</p>
+<blockquote>
+<p>“This value has the permissions and operations associated with the disconnected state.”</p>
+</blockquote>
+<p>While:</p>
+<pre tabindex="0"><code>Connection&lt;Connected&gt;
+</code></pre>
+<p>means:</p>
+<blockquote>
+<p>“This value has the permissions and operations associated with the connected state.”</p>
+</blockquote>
+<p>Changing the type changes the permissions.</p>
+<p>That makes Rust's type system feel less like a collection of syntax rules and more like an API security boundary.</p>
+<hr>
+<h2>Where This Pattern Shines</h2>
+<p>Typestate becomes especially valuable when incorrect ordering can produce subtle bugs.</p>
+<p>Examples include:</p>
+<pre tabindex="0"><code>Database transactions
+File lifecycle APIs
+Network protocols
+Hardware drivers
+Resource initialization
+Cryptographic protocols
+Parsers
+Connection pools
+Builder APIs
+Embedded systems
+Concurrency abstractions
+</code></pre>
+<p>A builder is another familiar example.</p>
+<p>Instead of allowing:</p>
+<pre tabindex="0"><code>builder.build()
+</code></pre>
+<p>at every stage, the type system can require mandatory configuration steps before <code>build()</code> becomes available.</p>
+<p>Conceptually:</p>
+<pre tabindex="0"><code>Builder&lt;MissingName&gt;
+        ↓
+Builder&lt;HasName&gt;
+        ↓
+Builder&lt;Complete&gt;
+        ↓
+Product
+</code></pre>
+<p>The compiler effectively becomes a checklist.</p>
+<hr>
+<h2>The Trade-Off</h2>
+<p>Typestate is powerful, but it is not automatically better.</p>
+<p>Too many states can make an API difficult to understand.</p>
+<p>For example:</p>
+<pre tabindex="0"><code>Connection&lt;
+    Authenticated&lt;
+        Encrypted&lt;
+            Connected&lt;
+                Configured
+            &gt;
+        &gt;
+    &gt;
+&gt;
+</code></pre>
+<p>This can become hard to read and maintain.</p>
+<p>The goal is not:</p>
+<blockquote>
+<p>“Put everything into the type system.”</p>
+</blockquote>
+<p>The goal is:</p>
+<blockquote>
+<p><strong>Put important invariants into the type system when doing so makes the API clearer and safer.</strong></p>
+</blockquote>
+<p>A good typestate API should reduce cognitive load, not increase it.</p>
+<hr>
+<h2>A Practical Rule</h2>
+<p>A useful rule for Rust API design is:</p>
+<pre tabindex="0"><code>If a state is important enough to check repeatedly,
+consider making it part of the type.
+</code></pre>
+<p>For example, compare:</p>
+<pre tabindex="0"><code>if !connection.is_connected() &#123;
+    return Err(...);
+&#125;
+
+connection.send(data)?;
+</code></pre>
+<p>with an API where <code>send()</code> simply cannot exist on the disconnected type.</p>
+<p>The first approach asks every caller to remember the invariant.</p>
+<p>The second approach centralizes the invariant in the API design.</p>
+<hr>
+<h2>The Deeper Rust Lesson</h2>
+<p>Typestate reveals something interesting about Rust.</p>
+<p>Rust is not only about memory safety.</p>
+<p>It can also be used to express <strong>protocol safety</strong>.</p>
+<p>Ownership can express who controls a value.</p>
+<p>Lifetimes can express how long references remain valid.</p>
+<p>Traits can express capabilities and behavior.</p>
+<p>Enums can express explicit alternatives.</p>
+<p>And typestate can express valid stages in an object's lifecycle.</p>
+<p>These mechanisms can be combined.</p>
+<p>That is where Rust becomes particularly interesting as a systems language:</p>
+<pre tabindex="0"><code>Memory model
+     +
+Ownership
+     +
+Lifetimes
+     +
+Traits
+     +
+Type-level state
+     =
+Stronger APIs
+</code></pre>
+<p>The compiler does not merely check whether your syntax is valid.</p>
+<p>With thoughtful API design, it can check whether the way you are using a component makes sense.</p>
+<hr>
+<h2>Final Thought</h2>
+<p>One of the biggest shifts in Rust programming is learning to stop asking:</p>
+<blockquote>
+<p>“How do I check that this state is valid?”</p>
+</blockquote>
+<p>and start asking:</p>
+<blockquote>
+<p><strong>“Can I design the API so this invalid state cannot be used in the first place?”</strong></p>
+</blockquote>
+<p>That is the heart of typestate.</p>
+<p>A boolean can tell you that something is connected.</p>
+<p>A type can make it impossible to call <code>send()</code> unless the connection is represented as connected.</p>
+<p>That difference may look small in a code example.</p>
+<p>In a large codebase, it can become a powerful design boundary.</p>
+<p><strong>Rust becomes especially interesting when the compiler is not just checking your implementation—it is enforcing the architecture of your API.</strong></p>
