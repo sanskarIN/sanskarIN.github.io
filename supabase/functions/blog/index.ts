@@ -17,14 +17,17 @@
  *       Deletes the account, its profile and images, and withdraws posts that
  *       are still waiting. With removePosts, published posts are removed too.
  *
- * Secret (Dashboard → Edge Functions → Secrets):
+ * Secret (Dashboard → Edge Functions → Secrets; the "Set up accounts"
+ * workflow sets it from the BLOG_GITHUB_TOKEN repository secret):
  *   GITHUB_TOKEN   a fine-grained GitHub token for this repository with only
  *                  "Issues: Read and write" permission.
  * Optional: SITE_ORIGIN, GITHUB_REPOSITORY, and EXTRA_ORIGINS (comma-separated
  * origins allowed to call the function, for local testing).
  *
- * The function has no dependencies, so it can be pasted into the Dashboard's
- * editor as it is. Keep "Verify JWT" on: only signed-in people may call it.
+ * The "Set up accounts" workflow deploys this file, and deploys it again
+ * whenever it changes on main. It has no dependencies, so it can also be
+ * pasted into the Dashboard's editor as it is. Keep "Verify JWT" on; the
+ * function checks every session itself as well.
  */
 
 const SITE_ORIGIN = setting("SITE_ORIGIN", "https://sanskarin.github.io").replace(/\/$/, "");
