@@ -360,3 +360,71 @@ def running_project(api):
                              "Run this workflow again later.")
         print(f"The project is {readable(status)}; waiting…")
         time.sleep(15)
+
+
+def known_service(host, login):
+    host, login = host.lower(), login.lower()
+    for key, service in EMAIL_SERVICES.items():
+        if host == key or host in service["hosts"] or (not host and login.endswith(service["logins"])):
+            return service
+    return None
+
+
+def email_settings(current, accounts, sender_name):
+    """The SMTP settings to save in Supabase (none, to keep the current ones), and the
+    name and privacy policy of the service that sends the emails."""
+    login, password, host = setting("SMTP_USER"), setting("SMTP_PASSWORD"), setting("SMTP_HOST")
+    smtp = {}
+    if login or password or host:
+        if not (login and password):
+            raise SetupError("Set both SMTP_USER and SMTP_PASSWORD (or neither, to keep the SMTP settings "
+                             "made in the Supabase dashboard).")
+        service = known_service(host, login)
+        if service and host.lower() not in service["hosts"]:
+            host = service["hosts"][0]
+        if not host:
+            raise SetupError("Set SMTP_HOST to the SMTP server of the service that sends the emails. "
+                             "Gmail and Brevo are recognised from SMTP_USER.")
+        if not HOST.fullmatch(host):
+            raise SetupError("SMTP_HOST should be a host name, such as smtp.example.com.")
+        port = setting("SMTP_PORT") or "587"
+        if not (port.isdigit() and 0 < int(port) < 65536):
+            raise SetupError("SMTP_PORT should be a port number, such as 587.")
+        if service is EMAIL_SERVICES["gmail"]:
+            # App passwords are shown in groups of four; the spaces aren't part of them.
+            password = re.sub(r"\s+", "", password)
+            keep_secret(password)
+        sender = setting("SMTP_SENDER_EMAIL")
+        if not sender and (service is None or service["login_is_sender"]) and EMAIL.fullmatch(login):
+            sender = login
+        if not sender:
+            raise SetupError("Set SMTP_SENDER_EMAIL to the address the emails come from "
+                             "(with Brevo, a sender you have added there).")
+        if not EMAIL.fullmatch(sender):
+            raise SetupError("SMTP_SENDER_EMAIL should be an email address.")
+        smtp = {
+            "smtp_host": host,
+            "smtp_port": port,
+            "smtp_user": login,
+            "smtp_pass": password,
+            "smtp_admin_email": sender,
+            "smtp_sender_name": setting("SMTP_SENDER_NAME") or sender_name,
+        }
+    elif current.get("smtp_host"):
+        service = known_service(str(current.get("smtp_host") or ""), str(current.get("smtp_user") or ""))
+    else:
+        raise SetupError("Add SMTP_USER and SMTP_PASSWORD for the service that sends the sign-in codes. Without "
+                         "one, Supabase sends emails only to the members of your Supabase team, so visitors "
+                         "couldn't sign up. README.md → Setting up accounts explains how.")
+
+    name = setting("EMAIL_SERVICE") or (service["name"] if service else "")
+    privacy = setting("EMAIL_SERVICE_PRIVACY_URL") or (service["privacy"] if service else "")
+    if not name and not smtp:
+        name, privacy = accounts["email_service"], accounts["email_service_privacy_url"]
+    if not name or not re.fullmatch(r"[^\x00-\x1f\x7f]{1,60}", name):
+        raise SetupError("Set EMAIL_SERVICE to the name of the service that sends the emails, such as Mailjet: "
+                         "the Privacy Policy names it.")
+    if not re.fullmatch(r"https://[^\s\"'<>]+", privacy):
+        raise SetupError("Set EMAIL_SERVICE_PRIVACY_URL to the address of the email service's privacy policy "
+                         "(https://…): the Privacy Policy links to it.")
+    return smtp, name, privacy
