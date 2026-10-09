@@ -61,6 +61,9 @@
     createdAt: string;
     updatedAt?: string;
     problems?: string[];
+    // The site owner's posts written on GitHub (only in the owner's list).
+    source?: "github";
+    issueUrl?: string;
   }
 
   interface Draft {
