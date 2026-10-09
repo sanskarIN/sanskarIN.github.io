@@ -691,6 +691,7 @@ To turn accounts off again, clear `supabase_publishable_key`. Existing posts sta
 | Change a profile (for example, an offensive display name) | **Table Editor → profiles** |
 | Remove an account | Delete the user in **Authentication → Users** — their profile and post records go with it. Their images don't: delete the folder named after their account ID in **Storage → blog-images** |
 | Replace the GitHub token (before it expires) | Create a new one ([step 3](#setting-up-accounts)), update the `BLOG_GITHUB_TOKEN` secret, and run **Set up accounts** again. Without the workflow, update the function's `GITHUB_TOKEN` secret in Supabase |
+| Change the admin's email address | Update the `ADMIN_EMAIL` secret and run **Set up accounts** again |
 | Change who sends the sign-in emails | Update the `SMTP_…` secrets and run **Set up accounts** again: it updates Supabase, `_data/accounts.yml`, and the Privacy Policy's date |
 
 ### Limits and costs
