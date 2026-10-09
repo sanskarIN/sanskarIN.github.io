@@ -5,9 +5,12 @@
 #
 #  Everything account-related stays hidden until both values below are set.
 #
-#  SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY: copy them from your Supabase
-#  project (Connect dialog, or Settings → API Keys). Both are public by
-#  design — the publishable key (sb_publishable_…) only allows what the
+#  The "Set up accounts" workflow (.github/workflows/setup-accounts.yml)
+#  fills in these values once the Supabase project is set up.
+#
+#  SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY: by hand, copy them from your
+#  Supabase project (Connect dialog, or Settings → API Keys). Both are public
+#  by design — the publishable key (sb_publishable_…) only allows what the
 #  database policies in supabase/schema.sql allow. Never put a secret key
 #  (sb_secret_…) here: the site refuses to use one.
 # =============================================================================
