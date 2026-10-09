@@ -170,6 +170,8 @@ def load_settings():
         "account_images": f"{supabase_url}/storage/v1/object/public/{bucket}/" if supabase_url else None,
         "site_url": site_url,
         "owner_name": str(config["author"]["name"]),
+        # The site owner's own username on the website (see site_account()).
+        "owner_username": str(accounts.get("owner_username") or "").strip().lower(),
         "form": str(blog.get("form") or "blog-post.yml"),
         "review": blog.get("review_visitor_posts", True) is not False,
         "image_bytes": int(float(limits.get("image_size_mb", 10)) * 1024 * 1024),
