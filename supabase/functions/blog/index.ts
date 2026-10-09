@@ -21,8 +21,11 @@
  * workflow sets it from the BLOG_GITHUB_TOKEN repository secret):
  *   GITHUB_TOKEN   a fine-grained GitHub token for this repository with only
  *                  "Issues: Read and write" permission.
- * Optional: SITE_ORIGIN, GITHUB_REPOSITORY, and EXTRA_ORIGINS (comma-separated
- * origins allowed to call the function, for local testing).
+ * Optional: SITE_ORIGIN, GITHUB_REPOSITORY, EXTRA_ORIGINS (comma-separated
+ * origins allowed to call the function, for local testing), and
+ * OWNER_USERNAME (the site owner's own username, owner_username in
+ * _data/accounts.yml; that account's list also shows the owner's posts
+ * written on GitHub).
  *
  * The "Set up accounts" workflow deploys this file, and deploys it again
  * whenever it changes on main. It has no dependencies, so it can also be
@@ -34,6 +37,9 @@ const SITE_ORIGIN = setting("SITE_ORIGIN", "https://sanskarin.github.io").replac
 const REPOSITORY = setting("GITHUB_REPOSITORY", "sanskarIN/sanskarIN.github.io");
 const GITHUB_API = setting("GITHUB_API_URL", "https://api.github.com").replace(/\/$/, "");
 const SUPABASE_URL = setting("SUPABASE_URL", "").replace(/\/$/, "");
+// Only the site admin can take this username (supabase/schema.sql).
+const OWNER_USERNAME = setting("OWNER_USERNAME", "").trim().toLowerCase();
+const OWNER_LOGIN = REPOSITORY.split("/")[0].toLowerCase();
 const BUCKET = "blog-images";
 
 // Keep these in line with _data/blog.yml and the checks in publish_post.py.
