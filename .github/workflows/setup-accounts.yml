@@ -1,0 +1,72 @@
+# Sets up accounts (sign-up and sign-in on the website) on Supabase and turns
+# them on. Runs .github/scripts/setup_accounts.py, which creates the tables,
+# sets up the sign-in emails, deploys the "blog" Edge Function, checks that
+# everything answers, then fills in _data/accounts.yml, commits it, and asks
+# GitHub Pages to rebuild the site. See README.md → "Setting up accounts".
+#
+# Run it from the Actions tab once the secrets below are added. It also runs
+# when supabase/ changes on main, to keep the database and the function up to
+# date; until the secrets are added and accounts are on, those runs only
+# leave a note.
+#
+# Secrets (Settings → Secrets and variables → Actions):
+#   SUPABASE_ACCESS_TOKEN  a Supabase personal access token
+#   SUPABASE_PROJECT_REF   the project's reference ID (or its address)
+#   BLOG_GITHUB_TOKEN      a fine-grained token with Issues: Read and write
+#   SMTP_USER              the login of the service that sends the codes,
+#   SMTP_PASSWORD          such as a Gmail address and an app password
+# Optional, as secrets or variables: SMTP_HOST, SMTP_PORT, SMTP_SENDER_EMAIL,
+# SMTP_SENDER_NAME, EMAIL_SERVICE, EMAIL_SERVICE_PRIVACY_URL.
+#
+# The tokens and the password only go to Supabase: they are never printed or
+# committed.
+
+name: Set up accounts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/setup-accounts.yml
+      - .github/scripts/setup_accounts.py
+      - supabase/**
+  workflow_dispatch:
+
+permissions: {}
+
+# One run at a time; a run that starts while another is going waits for it.
+concurrency:
+  group: accounts-setup
+  cancel-in-progress: false
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+      # The script only needs Python's standard library.
+      - name: Set up accounts
+        run: python3 .github/scripts/setup_accounts.py
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_PROJECT_REF: ${{ vars.SUPABASE_PROJECT_REF || secrets.SUPABASE_PROJECT_REF }}
+          BLOG_GITHUB_TOKEN: ${{ secrets.BLOG_GITHUB_TOKEN }}
+          SMTP_USER: ${{ vars.SMTP_USER || secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_HOST: ${{ vars.SMTP_HOST || secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ vars.SMTP_PORT || secrets.SMTP_PORT }}
+          SMTP_SENDER_EMAIL: ${{ vars.SMTP_SENDER_EMAIL || secrets.SMTP_SENDER_EMAIL }}
+          SMTP_SENDER_NAME: ${{ vars.SMTP_SENDER_NAME || secrets.SMTP_SENDER_NAME }}
+          EMAIL_SERVICE: ${{ vars.EMAIL_SERVICE || secrets.EMAIL_SERVICE }}
+          EMAIL_SERVICE_PRIVACY_URL: ${{ vars.EMAIL_SERVICE_PRIVACY_URL || secrets.EMAIL_SERVICE_PRIVACY_URL }}
+          GITHUB_TOKEN: ${{ github.token }}
+          BRANCH: main
+          # Commits made for the settings use the site owner's name and email.
+          COMMIT_NAME: sanskarIN
+          COMMIT_EMAIL: sanskarin@outlook.in
