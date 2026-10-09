@@ -35,9 +35,9 @@ profiles:
 
   devto:
     name: Dev.to
-    url: https://www.dev.to/sanskarIN
-    handle: sanskarIN
-    username: sanskarIN
+    url: https://dev.to/SanskarCodes
+    handle: SanskarCodes
+    username: SanskarCodes
     icon: devdotto
     note: Articles and developer discussion
 
