@@ -695,10 +695,18 @@
                 item.appendChild(main);
                 if (status !== "removed" && status !== "declined") {
                     const actions = element("div", "account-post__actions");
-                    const edit = element("a", "button button--secondary", "Edit");
-                    edit.href = ($('[data-account-view="dashboard"] a[href$="/account/write/"]').getAttribute("href") || "") +
-                        "?id=" + encodeURIComponent(post.id);
-                    edit.appendChild(element("span", "visually-hidden", ` “${post.title}”`));
+                    const edit = element("a", "button button--secondary", fromGitHub ? "Edit on GitHub" : "Edit");
+                    if (fromGitHub) {
+                        // Posts written on GitHub are changed in their issue.
+                        edit.href = /^https:\/\/github\.com\//.test(post.issueUrl || "") ? post.issueUrl || "" : "https://github.com/";
+                        edit.target = "_blank";
+                        edit.rel = "noopener noreferrer";
+                    }
+                    else {
+                        edit.href = ($('[data-account-view="dashboard"] a[href$="/account/write/"]').getAttribute("href") || "") +
+                            "?id=" + encodeURIComponent(post.id);
+                    }
+                    edit.appendChild(element("span", "visually-hidden", ` “${post.title}”` + (fromGitHub ? " (opens in a new tab)" : "")));
                     const remove = element("button", "button button--ghost", "Remove");
                     remove.type = "button";
                     remove.appendChild(element("span", "visually-hidden", ` “${post.title}”`));
