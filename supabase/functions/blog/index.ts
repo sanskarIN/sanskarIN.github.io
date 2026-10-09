@@ -398,18 +398,50 @@ async function reviewStatus(issueNumber: number | null, known?: Json) {
   }
 }
 
+/** Whether the signed-in person is the site owner (see OWNER_USERNAME). */
+function isOwner(user: User): boolean {
+  return Boolean(OWNER_USERNAME && user.profile && user.profile.username === OWNER_USERNAME);
+}
+
+/** Whether an issue is one of the owner's posts written on GitHub, not on the website. */
+function ownersGitHubPost(issue: Json): boolean {
+  const labels = new Set<string>((issue?.labels ?? []).map((label: Json) => label.name));
+  return Boolean(issue) && !issue.pull_request && String(issue.user?.login ?? "").toLowerCase() === OWNER_LOGIN &&
+    labels.has("blog-post") && !labels.has("from-website") && !String(issue.body ?? "").startsWith("<!-- blog-account:");
+}
+
+/** The owner's posts written on GitHub, newest first, for the owner's own list. */
+async function ownersGitHubPosts() {
+  const issues: Json[] = await github(
+    `/repos/${REPOSITORY}/issues?creator=${encodeURIComponent(OWNER_LOGIN)}&labels=blog-post&state=all` +
+      "&sort=created&direction=desc&per_page=50",
+  );
+  return Promise.all(issues.filter(ownersGitHubPost).map(async (issue) => ({
+    id: `issue-${issue.number}`,
+    source: "github",
+    issueUrl: issue.html_url,
+    title: cleanLine(String(issue.title ?? "").replace(/^\s*\[post\]:?\s*/i, "")) || `Post #${issue.number}`,
+    createdAt: issue.created_at,
+    ...(await reviewStatus(issue.number, issue)),
+  })));
+}
+
 async function list(user: User) {
   const rows: Json[] = await supabase(
     `/rest/v1/submissions?user_id=eq.${user.id}&select=id,title,issue_number,created_at,updated_at&order=created_at.desc&limit=50`,
     { token: user.token },
   );
-  const posts = await Promise.all(rows.map(async (row) => ({
+  const posts: Json[] = await Promise.all(rows.map(async (row) => ({
     id: row.id,
     title: row.title,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
     ...(await reviewStatus(row.issue_number)),
   })));
+  if (isOwner(user)) {
+    posts.push(...await ownersGitHubPosts());
+    posts.sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+  }
   return { posts };
 }
 
