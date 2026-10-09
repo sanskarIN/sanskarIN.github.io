@@ -13,7 +13,8 @@ Supabase Management API:
 
   1. checks the GitHub token for the function, and that the project is
      running (waiting while it starts);
-  2. runs supabase/schema.sql: the tables, the image bucket, and the rules;
+  2. runs supabase/schema.sql: the tables, the image bucket, and the rules,
+     and saves the site admin's email address (ADMIN_EMAIL);
   3. sets up sign-in: 6-digit codes that work for 10 minutes, the email
      templates, the site address, and the SMTP service that sends the emails;
   4. gives the "blog" Edge Function the GitHub token and deploys it;
@@ -35,6 +36,9 @@ Settings, from the workflow's secrets and variables:
   EMAIL_SERVICE, EMAIL_SERVICE_PRIVACY_URL
                          optional: for other services, or to change the
                          defaults
+  ADMIN_EMAIL            optional: the email address of the site owner's own
+                         account, the only one that can take owner_username
+                         from _data/accounts.yml (such as @sanskar)
 
 When it runs for a push, it only keeps an existing setup up to date: it does
 nothing while the secrets are missing or accounts are off. The tokens and the
