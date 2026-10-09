@@ -162,8 +162,10 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 │   ├── workflows/publish-blog-post.yml    Publishes posts from the form
 │   ├── workflows/update-github-data.yml   Refreshes the Projects data every day
 │   ├── workflows/typescript.yml           Checks the TypeScript and the compiled scripts
+│   ├── workflows/setup-accounts.yml       Sets up accounts on Supabase and turns them on
 │   ├── scripts/publish_post.py            What the blog workflow runs (+ requirements.txt)
-│   └── scripts/update_github_data.py      What the Projects workflow runs
+│   ├── scripts/update_github_data.py      What the Projects workflow runs
+│   └── scripts/setup_accounts.py          What the accounts workflow runs
 ├── .well-known/security.txt  Security contact (RFC 9116)
 ├── index.html  about.html  developer.html  contact.html  contact-sent.html  404.html
 ├── terms.md  privacy.md  cookies.md  accessibility.md  credits.md
