@@ -610,3 +610,45 @@ def save_settings(values, was_on):
             LEGAL.write_text(updated, encoding="utf-8")
             changed.append(LEGAL)
     return changed
+
+
+# -----------------------------------------------------------------------------
+# Git and GitHub Pages
+# -----------------------------------------------------------------------------
+
+def git(*args, check=True):
+    env = dict(os.environ)
+    name, email = os.environ["COMMIT_NAME"], os.environ["COMMIT_EMAIL"]
+    env.update(GIT_AUTHOR_NAME=name, GIT_AUTHOR_EMAIL=email, GIT_COMMITTER_NAME=name, GIT_COMMITTER_EMAIL=email)
+    result = subprocess.run(["git", *args], cwd=ROOT, env=env, capture_output=True, text=True)
+    if check and result.returncode != 0:
+        raise SetupError(f"git {args[0]} failed: {scrub(result.stderr.strip())}")
+    return result
+
+
+def commit_and_push(files, message, branch):
+    git("add", "--", *(str(path.relative_to(ROOT)) for path in files))
+    if git("diff", "--cached", "--quiet", check=False).returncode == 0:
+        return None
+    git("commit", "--quiet", "-m", message)
+    for attempt in range(5):
+        if git("push", "--quiet", "origin", f"HEAD:{branch}", check=False).returncode == 0:
+            return git("rev-parse", "--short", "HEAD").stdout.strip()
+        time.sleep(2 ** attempt)
+        git("pull", "--quiet", "--rebase", "origin", branch)
+    raise SetupError("The settings were committed but couldn't be pushed. Run this workflow again.")
+
+
+def request_pages_build(repository):
+    headers = {"Authorization": f"Bearer {setting('GITHUB_TOKEN')}", "Accept": "application/vnd.github+json",
+               "X-GitHub-Api-Version": "2022-11-28"}
+    try:
+        status, _, _ = send("POST", f"{GITHUB_API_URL}/repos/{repository}/pages/builds", headers, b"", 30)
+    except NetworkError as error:
+        status = str(error)
+    if status == 201:
+        print("Requested a GitHub Pages build: accounts appear on the website in a few minutes.")
+        return True
+    print(f"::warning::Could not request a GitHub Pages build ({status}). "
+          "Accounts appear on the website after the next push to the repository.")
+    return False
