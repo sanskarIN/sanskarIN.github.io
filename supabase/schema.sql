@@ -7,13 +7,15 @@
 --  README.md → "Accounts" explains the complete setup.
 --
 --  It creates:
+--    public.site_admins  the site admin's email address (private)
 --    public.profiles     one public author profile per account
 --    public.submissions  the posts each account has sent for review (private)
 --    blog-images         a storage bucket for images in posts
 --                        (images only, 10 MB each, 200 per account)
 --
---  Email addresses stay in Supabase Auth (auth.users) and are never copied
---  into these tables or published.
+--  Visitors' email addresses stay in Supabase Auth (auth.users) and are never
+--  copied into these tables or published. Only the site admin's own address
+--  is kept in public.site_admins, which the website and the API can't read.
 -- =============================================================================
 
 
