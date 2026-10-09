@@ -25,6 +25,18 @@ layout: default
 {%- endcomment -%}
 {%- assign author_name = page.author | default: site.author.name -%}
 {%- assign author_url = page.author_url | default: "/about/" -%}
+{%- comment -%}
+  The owner's posts (from GitHub, by hand, or from the owner's own account)
+  link to the owner's author page on the website while accounts are on.
+{%- endcomment -%}
+{%- include accounts-config.html -%}
+{%- assign owner_username = site.data.accounts.owner_username | default: "" | strip -%}
+{%- assign post_username = page.author_username | default: "" -%}
+{%- if accounts_on and owner_username != "" and post_username == "" -%}
+  {%- unless page.author_login and page.author_login != site.author.username -%}
+    {%- assign author_url = "/blog/authors/?u=" | append: owner_username -%}
+  {%- endunless -%}
+{%- endif -%}
 {%- assign author_label = author_name | escape -%}
 {%- assign word_count = content | strip_html | number_of_words -%}
 {%- assign reading_minutes = word_count | divided_by: 200 -%}
