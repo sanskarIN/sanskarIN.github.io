@@ -4,6 +4,19 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.7.0] — 2026-10-09
+
+### Added
+
+- The "Set up accounts" workflow (`.github/workflows/setup-accounts.yml` and `.github/scripts/setup_accounts.py`), which makes sign-up and sign-in work from a single run. With a Supabase project and a few repository secrets, it runs `supabase/schema.sql`, sets up the sign-in emails (6-digit codes that work for 10 minutes, the email templates, and the SMTP service that sends them), saves the Edge Function's GitHub token and deploys the function, checks that sign-in, the database, and the function answer, and only then turns accounts on: it fills in `_data/accounts.yml`, updates the policy dates, and asks GitHub Pages to rebuild the site.
+- Gmail (with an app password) and Brevo are recognised from the SMTP login, with their privacy policies; any other SMTP service can be named in the settings.
+- The workflow checks the GitHub token without opening an issue and warns two weeks before it expires, waits for a project that is starting, and explains how to fix a paused project, a wrong token, or missing settings. It runs again whenever `supabase/` changes on `main`, so the database and the function keep up with the repository.
+
+### Changed
+
+- README.md → "Setting up accounts" now starts with the workflow; the steps in the Supabase dashboard are kept under "Setting up accounts by hand". The sign-in email says the code expires in 10 minutes.
+- The notes in `_data/accounts.yml`, `supabase/schema.sql`, and the Edge Function mention the workflow.
+
 ## [1.6.0] — 2026-10-06
 
 ### Added
