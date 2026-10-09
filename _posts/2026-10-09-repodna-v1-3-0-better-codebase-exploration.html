@@ -1,0 +1,78 @@
+---
+title: "repodna-v1-3-0-better-codebase-exploration"
+description: "RepoDNA v1.3.0 improves repository exploration with recent analyses, persistent navigation, CSV exports, drag-and-drop support, and a locally runnable web interface."
+date: 2026-10-09T14:23:28+00:00
+author: "Sanskar"
+author_url: "/about/"
+author_login: "sanskarIN"
+image: "/assets/images/blog/repodna-v1-3-0-better-codebase-exploration/0745b75a66451941.png"
+image_alt: "RepoDNA 1.3.0 launch graphic showing the repository-analysis web interface on desktop and mobile, with the headline “Understand your codebase. See its DNA.”"
+image_width: 2000
+image_height: 1125
+tags: ["repodna", "open-source", "rust", "developer-tools", "code-analysis"]
+source_issue: 17
+---
+<h2>RepoDNA v1.3.0: A Better Experience for Understanding Codebases</h2>
+<p>A software repository contains a story. Its architecture shows how components fit together. Its dependencies reveal relationships between packages. Its Git history explains how the project evolved. Its code-quality signals help developers identify areas that deserve further investigation.</p>
+<p>But finding that information can be time-consuming, especially when entering an unfamiliar codebase.</p>
+<p><strong>RepoDNA is an open-source, local-first repository intelligence and code archaeology platform that helps developers explore these details through evidence-backed analysis.</strong></p>
+<p>RepoDNA v1.3.0, released on October 9, 2026, focuses on making that exploration smoother and more practical.</p>
+<p><strong>[<a href="https://github.com/sanskarIN/RepoDNA/releases/tag/v1.3.0" rel="noopener noreferrer">Explore the v1.3.0 release on GitHub</a>](<a href="https://github.com/sanskarIN/RepoDNA/releases/tag/v1.3.0" rel="noopener noreferrer">https://github.com/sanskarIN/RepoDNA/releases/tag/v1.3.0</a>)</strong></p>
+<h3>What's new in RepoDNA 1.3.0?</h3>
+<h4>Return to your recent analyses</h4>
+<p>The web interface keeps a browser-side list of the last five analysis files opened in that browser. Those entries can be reopened from the start page or search, and the feature can be disabled or cleared in Settings.</p>
+<p>It is easier to return to an earlier project without manually reopening the same file.</p>
+<h4>Continue from the view you were exploring</h4>
+<p>Reloading the page preserves the current analysis and view. Navigation between sections and panels has also improved, including links to previous and next views and keyboard navigation with <code>[</code> and <code>]</code>.</p>
+<p>These details matter when working through long reports or investigating a particular part of a codebase.</p>
+<h4>Explore findings with less friction</h4>
+<p>Findings are presented 25 at a time, with controls to load more. Filtered views can be opened through the URL, making specific findings easier to revisit.</p>
+<h4>Export data from every table</h4>
+<p>Every table includes a Download CSV option that exports all rows in their displayed order. The output also handles formula-leading text to reduce the risk of unintended spreadsheet execution.</p>
+<p>This helps developers take analysis results into spreadsheets and other data workflows.</p>
+<h4>Open analysis files through drag and drop</h4>
+<p>You can drop an analysis file anywhere on the page to open it, even when another analysis is already open. The Compare view also accepts a second analysis file for comparison.</p>
+<h4>Run the web interface locally</h4>
+<p>Version 1.3.0 introduces the <code>@sanskarin/repodna-web</code> npm package.</p>
+<p>With Node.js and npm available, run:</p>
+<pre tabindex="0"><code>npx @sanskarin/repodna-web
+</code></pre>
+<p>The package starts a local server at <code>http://127.0.0.1:8080/</code>, where you can open analysis files and explore the demo offline.</p>
+<p>For analyzing your own repository, use the RepoDNA command-line tool or desktop app to create the analysis first. The web package provides the interface for viewing analysis files; it does not independently perform repository analysis.</p>
+<h4>Further usability improvements</h4>
+<p>This release also includes improvements to printing, keyboard access, table navigation, phone layouts, and the desktop app's recent-analysis list.</p>
+<h3>What can RepoDNA help you investigate?</h3>
+<p>RepoDNA goes beyond a basic language breakdown. Its analysis capabilities cover several aspects of repository understanding, including:</p>
+<ul>
+<li><strong>Architecture and dependencies:</strong> inferred modules, dependency relationships, layers, cycles, and architectural patterns.</li>
+<li><strong>Git history:</strong> commits, releases, contributors, file changes, activity, and hotspots.</li>
+<li><strong>Quality signals:</strong> complexity, large functions and files, duplication, and TODO or FIXME markers.</li>
+<li><strong>Security signals:</strong> rules for committed-secret fingerprints and potentially risky patterns in code and configuration.</li>
+<li><strong>Project setup:</strong> tests, build systems, CI, documentation, and onboarding information.</li>
+<li><strong>Reports and sharing:</strong> HTML, Markdown, JSON, CSV, Project DNA cards, and repository comparisons.</li>
+</ul>
+<p>Findings are intended to show supporting evidence and the limitations of the analysis, rather than presenting an unsupported score as the complete truth about a project.</p>
+<h3>Local-first by design</h3>
+<p>RepoDNA is designed to run locally and has no telemetry. When the web interface opens an analysis file, it does not upload the file to display its contents. The recent-analysis list is maintained in the browser.</p>
+<p>Some explicitly requested operations, such as cloning a remote Git URL or contacting a configured AI provider, may still use the network.</p>
+<p>The broader goal is to give developers a useful view into their codebases while keeping control of their work and data.</p>
+<h3>How to get started</h3>
+<p>Install the command-line tool using npm:</p>
+<pre tabindex="0"><code>npm install --global @sanskarin/repodna
+</code></pre>
+<p>Run the analysis and local interface from a repository:</p>
+<pre tabindex="0"><code>repodna analyze
+repodna serve
+</code></pre>
+<p>You can also download prebuilt command-line binaries and desktop installers from the release page.</p>
+<p>If you would first like to explore the interface, visit the [<a href="https://sanskarin.github.io/RepoDNA/" rel="noopener noreferrer">RepoDNA web version</a>](<a href="https://sanskarin.github.io/RepoDNA/" rel="noopener noreferrer">https://sanskarin.github.io/RepoDNA/</a>) and try the included demo.</p>
+<h3>Explore RepoDNA v1.3.0</h3>
+<ul>
+<li><strong>Release and downloads:</strong> <a href="https://github.com/sanskarIN/RepoDNA/releases/tag/v1.3.0" rel="noopener noreferrer">https://github.com/sanskarIN/RepoDNA/releases/tag/v1.3.0</a></li>
+<li><strong>Source code:</strong> <a href="https://github.com/sanskarIN/RepoDNA" rel="noopener noreferrer">https://github.com/sanskarIN/RepoDNA</a></li>
+<li><strong>Web version:</strong> <a href="https://sanskarin.github.io/RepoDNA/" rel="noopener noreferrer">https://sanskarin.github.io/RepoDNA/</a></li>
+<li><strong>Changelog:</strong> <a href="https://github.com/sanskarIN/RepoDNA/blob/main/CHANGELOG.md" rel="noopener noreferrer">https://github.com/sanskarIN/RepoDNA/blob/main/CHANGELOG.md</a></li>
+</ul>
+<p>RepoDNA v1.3.0 is another step toward making repository intelligence easier to explore and more useful in everyday development.</p>
+<p>If you try the release, I'd love to know which parts of repository analysis make the biggest difference to your workflow: understanding architecture, exploring history, examining dependencies, or identifying quality issues.</p>
+<p>Feedback, bug reports, and open-source contributions are welcome.</p>
