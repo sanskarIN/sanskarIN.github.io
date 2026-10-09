@@ -68,14 +68,6 @@ create table if not exists public.profiles (
   constraint profiles_username_format check (
     username ~ '^[a-z0-9]([a-z0-9-]{1,28})[a-z0-9]$' and username !~ '--'
   ),
-  constraint profiles_username_reserved check (
-    username not in (
-      'about', 'account', 'accounts', 'admin', 'administrator', 'api', 'blog',
-      'contact', 'dev-sanskarin', 'help', 'mail', 'moderator', 'null', 'owner',
-      'privacy', 'root', 'sanskar', 'sanskarin', 'security', 'staff', 'support',
-      'system', 'terms', 'undefined', 'www'
-    )
-  ),
   constraint profiles_display_name_format check (
     char_length(btrim(display_name)) between 1 and 60
     and display_name !~ '[<>[:cntrl:]]'
@@ -86,6 +78,18 @@ create table if not exists public.profiles (
   constraint profiles_website_format check (
     website = ''
     or (char_length(website) <= 200 and website ~ '^https://[^[:space:]<>"''`]+$')
+  )
+);
+
+-- Usernames nobody can take. Set here rather than in the table above, so that
+-- running this file again updates the list. The site owner's own usernames
+-- are below: only a site admin can take them.
+alter table public.profiles drop constraint if exists profiles_username_reserved;
+alter table public.profiles add constraint profiles_username_reserved check (
+  username not in (
+    'about', 'account', 'accounts', 'admin', 'administrator', 'api', 'blog',
+    'contact', 'help', 'mail', 'moderator', 'null', 'owner', 'privacy', 'root',
+    'security', 'staff', 'support', 'system', 'terms', 'undefined', 'www'
   )
 );
 
@@ -114,6 +118,38 @@ create policy "People update their own profile"
   to authenticated
   using ((select auth.uid()) = id)
   with check ((select auth.uid()) = id);
+
+-- The site owner's usernames: only an account whose email address is in
+-- public.site_admins may take one, so nobody else can pose as the owner.
+-- Keep in line with owner_username in _data/accounts.yml.
+create or replace function public.check_owner_username()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+  if new.username in ('sanskar', 'sanskarin', 'dev-sanskarin') and not exists (
+    select 1
+    from auth.users as account
+    join public.site_admins as admin on admin.email = lower(account.email)
+    where account.id = new.id
+  ) then
+    raise exception using
+      errcode = '23514',
+      message = 'new row for relation "profiles" violates check constraint "profiles_username_reserved"',
+      constraint = 'profiles_username_reserved';
+  end if;
+  return new;
+end;
+$$;
+
+revoke all on function public.check_owner_username() from public, anon, authenticated;
+
+drop trigger if exists profiles_owner_username on public.profiles;
+create trigger profiles_owner_username
+  before insert or update of username on public.profiles
+  for each row execute function public.check_owner_username();
 
 -- Explicit grants: anyone may read profiles; signed-in people may create
 -- their own and change everything but the username.
