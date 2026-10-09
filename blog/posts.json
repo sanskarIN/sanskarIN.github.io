@@ -4,7 +4,9 @@ permalink: /blog/posts.json
 sitemap: false
 ---
 {%- comment -%}
-  Every post, newest first, for the author pages (/blog/authors/?u=…).
+  Every post, newest first, for the author pages (/blog/authors/?u=…). The
+  owner's posts (not a visitor's or another account's) belong to the owner's
+  username on the website, owner_username in _data/accounts.yml.
 {%- endcomment -%}
 {%- assign owner_username = site.data.accounts.owner_username | default: "" | strip -%}
 [
