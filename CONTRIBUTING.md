@@ -63,4 +63,4 @@ Every change should keep the site as correct, accessible, fast, and maintainable
 5. If you changed the blog workflow or `publish_post.py`, publish a test post and check the result before relying on it.
 6. If you changed `update_github_data.py`, run `python .github/scripts/update_github_data.py --dry-run` and check the Projects page, then restore `_data/github.json` before committing.
 7. If you changed a script, run `npm run check` and `npm run build`, and commit the compiled file in `assets/js/` with the `.ts` file. The "TypeScript" check on GitHub fails if they don't match.
-8. If you changed the account pages, `supabase/schema.sql`, or the Edge Function, update the Supabase project too (re-run the SQL, or paste the new function into its editor) and try signing in, writing a post, and deleting a test account.
+8. If you changed the account pages, `supabase/schema.sql`, or the Edge Function, try signing in, writing a post, and deleting a test account. Once the change reaches `main`, the "Set up accounts" workflow updates the Supabase project; without the workflow, re-run the SQL or paste the new function into its editor.
