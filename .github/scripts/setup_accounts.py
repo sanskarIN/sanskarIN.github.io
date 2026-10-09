@@ -218,3 +218,76 @@ def write_value(text, key, value, quote=True):
 def site_setting(name):
     """A top-level value from _config.yml, such as url or title."""
     return read_value(CONFIG.read_text(encoding="utf-8"), name)
+
+
+# -----------------------------------------------------------------------------
+# HTTP
+# -----------------------------------------------------------------------------
+
+def send(method, url, headers, data=None, timeout=60):
+    """One request: (status, headers, body). NetworkError when there's no answer."""
+    request = urllib.request.Request(url, data=data, method=method)
+    request.add_header("User-Agent", USER_AGENT)
+    for name, value in headers.items():
+        if name.lower() == "authorization":
+            request.add_unredirected_header(name, value)
+        else:
+            request.add_header(name, value)
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            return response.status, response.headers, response.read()
+    except urllib.error.HTTPError as error:
+        return error.code, error.headers, error.read()
+    except (OSError, http.client.HTTPException) as error:
+        raise NetworkError(scrub(str(error))) from error
+
+
+def retry_delay(headers, attempt):
+    try:
+        return min(max(int(headers.get("Retry-After", "")), 1), 60)
+    except (TypeError, ValueError):
+        return 2 ** attempt
+
+
+class Supabase:
+    """The Supabase Management API, for one project."""
+
+    def __init__(self, token, ref):
+        self.token, self.ref = token, ref
+
+    def request(self, method, path, body=None, content_type=None):
+        url = f"{API_URL}/projects/{self.ref}{path}"
+        headers = {"Authorization": f"Bearer {self.token}", "Accept": "application/json"}
+        data = body
+        if body is not None and content_type is None:
+            data, content_type = json.dumps(body).encode("utf-8"), "application/json"
+        if content_type:
+            headers["Content-Type"] = content_type
+        for attempt in range(5):
+            try:
+                status, response_headers, raw = send(method, url, headers, data, timeout=120)
+            except NetworkError as error:
+                if attempt == 4:
+                    raise SetupError(f"Supabase couldn't be reached: {error}") from error
+                time.sleep(2 ** attempt)
+                continue
+            if (status == 429 or status >= 500) and attempt < 4:
+                time.sleep(retry_delay(response_headers, attempt))
+                continue
+            break
+        if 200 <= status < 300:
+            return parse_json(raw)
+        raise SetupError(self.explain(method, path, status, raw))
+
+    def explain(self, method, path, status, raw):
+        detail = error_detail(raw)
+        if status == 401:
+            return ("Supabase didn't accept SUPABASE_ACCESS_TOKEN (401). Create a new access token at "
+                    "https://supabase.com/dashboard/account/tokens and update the secret.")
+        if status == 403:
+            return (f"SUPABASE_ACCESS_TOKEN isn't allowed to manage this project (403: {detail}). "
+                    "Use a token from an account that owns or administers it.")
+        if status == 404 and path == "":
+            return (f"There's no Supabase project {self.ref} for this access token. Check SUPABASE_PROJECT_REF, "
+                    "and that the token comes from the account that has the project.")
+        return f"Supabase answered {status} to {method} {path.split('?')[0] or '/'}: {detail}"
