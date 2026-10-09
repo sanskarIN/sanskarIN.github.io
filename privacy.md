@@ -94,7 +94,7 @@ The website relies on, or links to, the following services. Each has its own pri
 {% if form_key != "" %}- **{{ contact_form.service }}** (contact form delivery): see the {{ contact_form.service }} {% include link.html url=contact_form.service_privacy_url label="privacy and data-handling information" %}.
 {% endif %}{% if accounts_on %}- **Supabase** (accounts, author profiles, and image uploads): see the {% include link.html url="https://supabase.com/privacy" label="Supabase Privacy Policy" %}.
 {% if email_service != "" %}- **{{ email_service }}** (sending sign-in codes){% if email_service_privacy_url != "" %}: see its {% include link.html url=email_service_privacy_url label="privacy policy" %}{% endif %}.
-{% endif %}{% endif %}- **Linked platforms:** GitHub, LinkedIn, Dev.to, Discord, X, Instagram, Threads, Pinterest, Bluesky, Buy Me a Coffee, and Gumroad.
+{% endif %}{% endif %}- **Linked platforms:** GitHub, LinkedIn, Dev.to, Discord, X, Instagram, Threads, Bluesky, Buy Me a Coffee, and Gumroad.
 
 The website does not embed content, scripts, fonts, or images from any of these services{% if accounts_on %}; only its account and author pages connect to Supabase{% endif %}. They receive information about you only if you follow a link to them, send an email{% if form_key != "" %}, submit the contact form{% endif %}{% if accounts_on %}, use an account or author page{% endif %}, or write a blog post.
 
