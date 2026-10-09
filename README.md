@@ -655,6 +655,21 @@ The same steps in the Supabase dashboard, without the workflow. Steps 1–6 happ
 
 7. **Turn accounts on.** In `_data/accounts.yml`, fill in `supabase_url`, `supabase_publishable_key`, `email_service`, and `email_service_privacy_url`. In `_data/legal.yml`, update the dates of `terms`, `privacy`, `cookies`, and `accessibility` — those pages gain their account passages automatically. Commit to `main`.
 
+### Your own account
+
+`owner_username` in `_data/accounts.yml` (`sanskar`) is your own username on the website. The database keeps it — and `sanskarin` and `dev-sanskarin` — for the **site admin**: the account whose email address is the `ADMIN_EMAIL` secret. Nobody else can take it, so nobody can pose as you.
+
+1. Add the `ADMIN_EMAIL` secret (step 5 above) and run **Set up accounts** again. It saves the address in the database, where neither the website nor the API can read it.
+2. Sign up on `/account/` with that address and choose the username `sanskar`, with your name, such as **Sanskar**, as the display name. (Usernames are lower case; the display name can be anything.)
+
+Then:
+
+- **All your posts are credited to `@sanskar`** — the ones you published from GitHub, posts written by hand, and posts you write on the website. Their author link opens your author page, `/blog/authors/?u=sanskar`, which lists them all with your profile. (Search engines and the feed keep pointing to the About page.)
+- **Your account page lists your posts from GitHub** too, with their status. **Edit on GitHub** opens a post's issue, where changes publish automatically, and **Remove** takes the post off the blog.
+- **Posts you write on the website are yours**: they're credited to you and published at once, like your posts from GitHub, without the review visitors' posts wait for.
+
+To use another address, change `ADMIN_EMAIL` and run the workflow again. A username can't be changed, so if you signed up before step 1 with another username, delete that account on `/account/` and sign up again.
+
 ### What changes when accounts are on
 
 When `supabase_url` (starting with `https://`) and `supabase_publishable_key` are both set:
