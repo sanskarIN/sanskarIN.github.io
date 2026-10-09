@@ -24,6 +24,14 @@ supabase_publishable_key: "sb_publishable_QunaVBbZ7t_psyI_3d2FjA_Q2HNBEaQ"
 email_service: "Gmail"
 email_service_privacy_url: "https://policies.google.com/privacy"
 
+# Your own username on the website: the account you sign in with, whose
+# email address is the ADMIN_EMAIL secret of the "Set up accounts" workflow.
+# Only that account can take it. The posts you publish are credited to it:
+# their author links go to its page, /blog/authors/?u=<username>, which
+# lists them all. One of sanskar, sanskarin, or dev-sanskarin, the usernames
+# supabase/schema.sql keeps for you; empty to credit posts to the About page.
+owner_username: sanskar
+
 # Names of the Supabase storage bucket and Edge Function the site uses. They
 # match supabase/schema.sql and supabase/functions/blog/.
 images_bucket: blog-images
