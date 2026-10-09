@@ -289,7 +289,7 @@ Which GitHub account's repositories the [Projects](#projects) page shows, which 
 
 ### Accounts — `_data/accounts.yml`
 
-The Supabase project address and publishable key that turn [accounts](#accounts) on, and the name of the service that sends sign-in emails (for the Privacy Policy). While the address or key is empty, everything account-related stays hidden. The [Set up accounts](#setting-up-accounts) workflow fills them in.
+The Supabase project address and publishable key that turn [accounts](#accounts) on, and the name of the service that sends sign-in emails (for the Privacy Policy). While the address or key is empty, everything account-related stays hidden. The [Set up accounts](#setting-up-accounts) workflow fills them in. `owner_username` is [your own username](#your-own-account) on the website.
 
 ### Theme colors — `_data/theme.yml`
 
