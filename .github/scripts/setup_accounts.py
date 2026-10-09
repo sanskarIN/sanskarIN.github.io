@@ -466,3 +466,27 @@ def set_up_sign_in(api, smtp, site_url, current):
     if current.get("security_captcha_enabled"):
         print("::warning::CAPTCHA protection is on in Supabase (Authentication → Attack Protection), but the "
               "website doesn't show a CAPTCHA, so sign-in will fail. Turn it off there.")
+
+
+def deploy_function(api, name):
+    """Deploys supabase/functions/<name>/index.ts, the way the Supabase CLI does."""
+    source = (FUNCTIONS / name / "index.ts").read_bytes()
+    boundary = "setup-accounts-" + uuid.uuid4().hex
+    # Verify JWT stays on: only requests with a valid session (or the
+    # publishable key) reach the function, which checks the session itself.
+    metadata = json.dumps({"name": name, "entrypoint_path": "index.ts", "verify_jwt": True})
+    body = b"".join([
+        f"--{boundary}\r\n".encode(),
+        b'Content-Disposition: form-data; name="metadata"\r\n\r\n',
+        metadata.encode(), b"\r\n",
+        f"--{boundary}\r\n".encode(),
+        b'Content-Disposition: form-data; name="file"; filename="index.ts"\r\n',
+        b"Content-Type: application/octet-stream\r\n\r\n",
+        source, b"\r\n",
+        f"--{boundary}--\r\n".encode(),
+    ])
+    result = api.request("POST", f"/functions/deploy?slug={name}", body,
+                         content_type=f"multipart/form-data; boundary={boundary}") or {}
+    version = result.get("version")
+    print(f"Edge Function: deployed \"{name}\"{f' (version {version})' if version else ''}.")
+    return version
