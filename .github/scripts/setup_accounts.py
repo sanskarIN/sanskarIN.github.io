@@ -291,3 +291,49 @@ class Supabase:
             return (f"There's no Supabase project {self.ref} for this access token. Check SUPABASE_PROJECT_REF, "
                     "and that the token comes from the account that has the project.")
         return f"Supabase answered {status} to {method} {path.split('?')[0] or '/'}: {detail}"
+
+
+# -----------------------------------------------------------------------------
+# The steps
+# -----------------------------------------------------------------------------
+
+def project_ref(value):
+    match = PROJECT_REF.search(value.lower())
+    if not match:
+        raise SetupError("SUPABASE_PROJECT_REF should be the project's reference ID: the 20 letters in its address, "
+                         "https://<reference ID>.supabase.co (Project Settings → General).")
+    return match.group(0)
+
+
+def check_blog_token(token, repository):
+    """Checks that the function's GitHub token can open issues here, without opening one:
+    an issue without a title is refused (422) only after the permissions are checked."""
+    headers = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json",
+               "X-GitHub-Api-Version": "2022-11-28", "Content-Type": "application/json"}
+    try:
+        status, response_headers, raw = send("POST", f"{GITHUB_API_URL}/repos/{repository}/issues", headers, b"{}", 30)
+    except NetworkError as error:
+        print(f"::warning::BLOG_GITHUB_TOKEN couldn't be checked: {error}")
+        return
+    if status == 401:
+        raise SetupError("GitHub didn't accept BLOG_GITHUB_TOKEN (401): it has expired or was deleted. "
+                         "Create a new one (README.md → Setting up accounts) and update the secret.")
+    if status in (403, 404):
+        raise SetupError(f"BLOG_GITHUB_TOKEN can't open issues in {repository} ({status}). It needs access to "
+                         "this repository with the permission Issues: Read and write.")
+    if status == 410:
+        raise SetupError(f"Issues are turned off in {repository}, and posts from accounts become issues. "
+                         "Turn them on in Settings → General → Features.")
+    if status != 422:
+        print(f"::warning::BLOG_GITHUB_TOKEN couldn't be checked: GitHub answered {status} ({error_detail(raw)}).")
+        return
+    expires = (response_headers.get("GitHub-Authentication-Token-Expiration") or "")[:10]
+    try:
+        days = (datetime.strptime(expires, "%Y-%m-%d").date() - datetime.now(timezone.utc).date()).days
+    except ValueError:
+        print("BLOG_GITHUB_TOKEN can open issues here.")
+        return
+    print(f"BLOG_GITHUB_TOKEN can open issues here; it expires on {expires}.")
+    if days <= TOKEN_WARNING_DAYS:
+        print(f"::warning::BLOG_GITHUB_TOKEN expires on {expires}. Before then, create a new one, update the "
+              "secret, and run this workflow again; until you do, accounts can't send posts.")
