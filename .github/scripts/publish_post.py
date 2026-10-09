@@ -29,7 +29,10 @@ The "unpublish" label, or deleting the issue, removes the post again.
 Posts written with an account on the website arrive the same way: the "blog"
 Edge Function (supabase/functions/blog/) opens the issue with the owner's
 token and marks which account wrote it. Those posts always wait for review,
-and may only use images from that account's own upload folder.
+and may only use images from that account's own upload folder. The one
+exception is the site owner's own account (owner_username in
+_data/accounts.yml, which only the site admin can take): its posts are the
+owner's, published like the owner's posts from GitHub.
 
 Limits and the review setting come from _data/blog.yml; the site address and
 the owner's name from _config.yml. The issue is only ever handled as data: it
