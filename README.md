@@ -637,15 +637,10 @@ The same steps in the Supabase dashboard, without the workflow. Steps 1–6 happ
      <p>It works once and expires in 10 minutes. If you didn't ask for it, you can ignore this email.</p>
      ```
 
-   - **Authentication → Emails → SMTP Settings:** turn on custom SMTP. Without it, Supabase only sends emails to members of your Supabase team (and only 2 an hour), so visitors would never get their codes. Any SMTP service works — for example Brevo's free plan, or a Gmail address with an app password. Then fill in `email_service` and `email_service_privacy_url` in `_data/accounts.yml` (step 7), so the Privacy Policy names it.
+   - **Authentication → Emails → SMTP Settings:** turn on custom SMTP with the service from step 4 above. Then fill in `email_service` and `email_service_privacy_url` in `_data/accounts.yml` (step 7), so the Privacy Policy names it.
    - **Authentication → Rate Limits:** with custom SMTP, Supabase starts at 30 emails an hour; raise it if you need to.
 
-4. **Create a GitHub token for the function.** On GitHub, open **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**:
-   - **Repository access:** Only select repositories → `sanskarIN/sanskarIN.github.io`;
-   - **Permissions:** Repository permissions → **Issues: Read and write** — nothing else;
-   - **Expiration:** pick a date and set yourself a reminder. Once the token expires, accounts can't send posts until you create a new one and update the secret in step 5.
-
-   Copy the token. It goes only into Supabase, never into this repository.
+4. **Create a GitHub token for the function**, as in step 3 above. It goes only into Supabase, never into this repository.
 
 5. **Deploy the Edge Function.** In Supabase, open **Edge Functions → Deploy a new function → Via Editor**, name it `blog`, replace the example code with the whole of [`supabase/functions/blog/index.ts`](supabase/functions/blog/index.ts), and deploy it. Then:
    - open **Edge Functions → Secrets** and add `GITHUB_TOKEN` with the token from step 4. Supabase gives the function its own address and keys automatically;
