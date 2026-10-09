@@ -183,3 +183,38 @@ def summary(*lines):
     if path:
         with open(path, "a", encoding="utf-8") as file:
             file.write("\n".join(lines) + "\n")
+
+
+# -----------------------------------------------------------------------------
+# Reading and writing one-line YAML values, keeping the files' comments
+# -----------------------------------------------------------------------------
+
+def read_value(text, key):
+    """The value of a top-level `key: value` line, or "" when there's none."""
+    match = re.search(rf"(?m)^{re.escape(key)}:(.*)$", text)
+    if not match:
+        return ""
+    rest = match.group(1).strip()
+    if rest.startswith('"'):
+        quoted = re.match(r'"(?:[^"\\]|\\.)*"', rest)
+        if quoted:
+            value = parse_json(quoted.group(0))
+            return value if isinstance(value, str) else quoted.group(0)[1:-1]
+    if rest.startswith("'"):
+        quoted = re.match(r"'(?:[^']|'')*'", rest)
+        if quoted:
+            return quoted.group(0)[1:-1].replace("''", "'")
+    return re.split(r"\s+#", rest, maxsplit=1)[0].strip()
+
+
+def write_value(text, key, value, quote=True):
+    line = f"{key}: {json.dumps(value) if quote else value}"
+    new, count = re.subn(rf"(?m)^{re.escape(key)}:.*$", lambda _: line, text, count=1)
+    if count != 1:
+        raise SetupError(f"There's no `{key}:` line to fill in.")
+    return new
+
+
+def site_setting(name):
+    """A top-level value from _config.yml, such as url or title."""
+    return read_value(CONFIG.read_text(encoding="utf-8"), name)
