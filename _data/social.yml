@@ -84,9 +84,9 @@ profiles:
 
   bluesky:
     name: Bluesky
-    url: https://sanskarIN.bsky.social
-    handle: "@sanskarIN.bsky.social"
-    username: sanskarIN
+    url: https://bsky.app/profile/SanskarCodes.bsky.social
+    handle: "@SanskarCodes.bsky.social"
+    username: SanskarCodes
     icon: bluesky
     note: Posts and updates
 
