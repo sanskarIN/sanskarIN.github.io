@@ -77,7 +77,7 @@ You can create a free account with your email address to write for the blog. If 
 
 ## External links
 
-The website links to other websites and services, including GitHub, LinkedIn, Dev.to, Discord, X, Instagram, Threads, Pinterest, Bluesky, Buy Me a Coffee, and Gumroad. These links are provided for convenience. I do not control those services and am not responsible for their content, availability, or practices. Your use of them is governed by their own terms and policies.
+The website links to other websites and services, including GitHub, LinkedIn, Dev.to, Discord, X, Instagram, Threads, Bluesky, Buy Me a Coffee, and Gumroad. These links are provided for convenience. I do not control those services and am not responsible for their content, availability, or practices. Your use of them is governed by their own terms and policies.
 
 ## Third-party services
 
