@@ -4,6 +4,17 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.8.1] — 2026-10-09
+
+### Changed
+
+- LinkedIn is now [SanskarCodes](https://linkedin.com/in/SanskarCodes), Dev.to is [SanskarCodes](https://dev.to/SanskarCodes), and Bluesky is [@SanskarCodes.bsky.social](https://bsky.app/profile/SanskarCodes.bsky.social). The About page lists them with Discord and X under SanskarCodes.
+- The Privacy Policy and Terms list the linked platforms without Pinterest.
+
+### Removed
+
+- The Pinterest profile, its links, and its icon.
+
 ## [1.8.0] — 2026-10-09
 
 ### Added
