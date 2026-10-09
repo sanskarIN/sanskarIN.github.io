@@ -245,8 +245,8 @@ Every profile link on the site (header, footer, Home, About, Developer, Contact,
 | Service | URL | Username |
 |---|---|---|
 | GitHub | https://www.github.com/sanskarIN | `sanskarIN` |
-| LinkedIn | https://www.linkedin.com/in/sanskarIN | `sanskarIN` |
-| Dev.to | https://www.dev.to/sanskarIN | `sanskarIN` |
+| LinkedIn | https://linkedin.com/in/SanskarCodes | `SanskarCodes` |
+| Dev.to | https://dev.to/SanskarCodes | `SanskarCodes` |
 | Discord (developer channel) | https://discord.com/channels/1547184919455989760/1547187031057113098 | `@SanskarCodes` |
 | X | https://x.com/SanskarCodes | `@SanskarCodes` |
 | Instagram | https://instagram.com/SanskarCode | `@SanskarCode` |
