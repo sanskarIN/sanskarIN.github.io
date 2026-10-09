@@ -490,3 +490,34 @@ def deploy_function(api, name):
     version = result.get("version")
     print(f"Edge Function: deployed \"{name}\"{f' (version {version})' if version else ''}.")
     return version
+
+
+def jwt_role(token):
+    try:
+        payload = token.split(".")[1]
+        payload += "=" * (-len(payload) % 4)
+        return json.loads(base64.urlsafe_b64decode(payload)).get("role")
+    except (IndexError, ValueError, AttributeError):
+        return None
+
+
+def publishable_key(api):
+    """The project's publishable key or, for projects without one, its legacy anon
+    key. Never a secret one. Values hidden in the first answer are asked for again."""
+    answers = []
+    for reveal in ("false", "true"):
+        keys = [key for key in api.request("GET", f"/api-keys?reveal={reveal}") or [] if isinstance(key, dict)]
+        answers.append(keys)
+        publishable = sorted((key for key in keys if key.get("type") == "publishable"),
+                             key=lambda key: key.get("name") != "default")
+        for key in publishable:
+            if isinstance(key.get("api_key"), str) and PUBLISHABLE_KEY.fullmatch(key["api_key"]):
+                return key["api_key"]
+    for keys in answers:
+        for key in keys:
+            value = key.get("api_key")
+            if (key.get("type") == "legacy" and key.get("name") == "anon" and isinstance(value, str)
+                    and JWT.fullmatch(value) and jwt_role(value) == "anon"):
+                return value
+    raise SetupError("The project's publishable key couldn't be read. Copy it from Project Settings → API Keys "
+                     "into supabase_publishable_key in _data/accounts.yml.")
