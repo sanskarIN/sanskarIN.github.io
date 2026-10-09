@@ -36,6 +36,22 @@ revoke all on function public.touch_updated_at() from public, anon, authenticate
 
 
 -- -----------------------------------------------------------------------------
+-- Site admins: the email addresses whose accounts may use the site owner's
+-- usernames (see "The site owner's usernames" below). The "Set up accounts"
+-- workflow fills it in from the ADMIN_EMAIL secret. Nobody can read or change
+-- it through the website or the API.
+-- -----------------------------------------------------------------------------
+
+create table if not exists public.site_admins (
+  email text primary key,
+  constraint site_admins_email_format check (email = lower(btrim(email)) and email like '%_@_%')
+);
+
+alter table public.site_admins enable row level security;
+revoke all on table public.site_admins from anon, authenticated;
+
+
+-- -----------------------------------------------------------------------------
 -- Profiles: public, one per account
 -- -----------------------------------------------------------------------------
 
