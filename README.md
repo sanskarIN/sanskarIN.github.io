@@ -644,7 +644,7 @@ The same steps in the Supabase dashboard, without the workflow. Steps 1–6 happ
 
 5. **Deploy the Edge Function.** In Supabase, open **Edge Functions → Deploy a new function → Via Editor**, name it `blog`, replace the example code with the whole of [`supabase/functions/blog/index.ts`](supabase/functions/blog/index.ts), and deploy it. Then:
    - open **Edge Functions → Secrets** and add `GITHUB_TOKEN` with the token from step 4. Supabase gives the function its own address and keys automatically;
-   - leave JWT verification on (the default), so only signed-in people reach the function. The function also checks every request itself; if the project later moves to new JWT signing keys and the function starts answering 401, turning the setting off is safe;
+   - leave JWT verification on (the default), so only requests with a valid session or the project's key reach the function. The function also checks every session itself;
    - optional secrets: `SITE_ORIGIN` (default `https://sanskarin.github.io`), `GITHUB_REPOSITORY` (default `sanskarIN/sanskarIN.github.io`), and `EXTRA_ORIGINS` (other addresses allowed to call the function, comma-separated — for example `http://localhost:4000` while testing locally).
 
    To update the function later, open it, paste the new code, and select **Deploy updates**.
