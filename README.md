@@ -602,6 +602,8 @@ The **Set up accounts** workflow (`.github/workflows/setup-accounts.yml`) does a
    | `SMTP_USER` | The Gmail address (or the SMTP login) |
    | `SMTP_PASSWORD` | The app password (or the SMTP password or key) |
 
+   Also add **`ADMIN_EMAIL`**: the email address you'll sign in to the website with. Only that account can take your username, `@sanskar` ([Your own account](#your-own-account)).
+
    The optional settings can be secrets or variables (the **Variables** tab): `SMTP_HOST`, `SMTP_PORT`, `SMTP_SENDER_EMAIL`, `SMTP_SENDER_NAME` (the name the emails come from; the site title by default), `EMAIL_SERVICE`, and `EMAIL_SERVICE_PRIVACY_URL`.
 
 6. **Run it:** **Actions → Set up accounts → Run workflow**. In a few minutes it:
