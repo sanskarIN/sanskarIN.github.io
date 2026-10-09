@@ -964,8 +964,9 @@ def handle_issue_event(gh, settings, event):
         return
     is_image = image_check(account, settings)
     # Posts from website accounts are opened with the owner's token, but they
-    # are visitors' posts: they always wait for review.
-    trusted = issue.get("author_association") in TRUSTED_AUTHORS and account is None
+    # are visitors' posts: they always wait for review. Except the owner's own.
+    trusted = (issue.get("author_association") in TRUSTED_AUTHORS
+               and (account is None or owners_account(account, settings)))
     where = "it from your account on the website" if account else "this issue"
     is_open = issue.get("state") == "open"
     existing = find_post(number)
