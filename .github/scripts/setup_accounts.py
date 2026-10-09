@@ -444,3 +444,25 @@ def set_up_database(api, bucket):
         raise SetupError(f"supabase/schema.sql ran, but {and_list(missing)} {'is' if len(missing) == 1 else 'are'} "
                          "missing. Run it in the SQL Editor to see what went wrong.")
     print("Database: the tables, the image bucket, and their security rules are in place.")
+
+
+def set_up_sign_in(api, smtp, site_url, current):
+    api.request("PATCH", "/config/auth", {
+        "site_url": site_url,
+        "external_email_enabled": True,
+        "disable_signup": False,
+        "mailer_otp_length": CODE_LENGTH,
+        "mailer_otp_exp": CODE_MINUTES * 60,
+        **smtp,
+    })
+    # New accounts get the "Confirm sign up" email, existing ones "Magic link":
+    # both send the code instead of a link.
+    api.request("PATCH", "/config/auth", {
+        "mailer_subjects_confirmation": SUBJECT,
+        "mailer_templates_confirmation_content": TEMPLATE,
+        "mailer_subjects_magic_link": SUBJECT,
+        "mailer_templates_magic_link_content": TEMPLATE,
+    })
+    if current.get("security_captcha_enabled"):
+        print("::warning::CAPTCHA protection is on in Supabase (Authentication → Attack Protection), but the "
+              "website doesn't show a CAPTCHA, so sign-in will fail. Turn it off there.")
