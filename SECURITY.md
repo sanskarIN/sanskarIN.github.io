@@ -1,6 +1,6 @@
 # Security Policy
 
-This repository contains the source of https://sanskarIN.github.io, a static website hosted on GitHub Pages. The website has no server of its own: its contact form is delivered by Web3Forms, blog posts are published from GitHub issues by a GitHub Actions workflow, another workflow copies public information about the owner's repositories from the GitHub API for the Projects page, and the optional accounts (sign-in, author profiles, and the post editor) are provided by a Supabase project, with the database schema and Edge Function kept in `supabase/`. Reports of security problems are welcome and taken seriously.
+This repository contains the source of https://sanskarIN.github.io, a static website hosted on GitHub Pages. The website has no server of its own: its contact form is delivered by Web3Forms, blog posts are published from GitHub issues by a GitHub Actions workflow, another workflow copies public information about the owner's repositories from the GitHub API for the Projects page, and the optional accounts (sign-in, author profiles, and the post editor) are provided by a Supabase project, with the database schema and Edge Function kept in `supabase/` and set up by a workflow whose tokens are kept as encrypted GitHub Actions secrets. Reports of security problems are welcome and taken seriously.
 
 ## Reporting a vulnerability
 
