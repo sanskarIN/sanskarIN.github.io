@@ -446,6 +446,18 @@ async function list(user: User) {
 }
 
 async function remove(user: User, input: Json) {
+  // One of the owner's posts written on GitHub (only in the owner's list).
+  const fromGitHub = typeof input?.id === "string" ? /^issue-([1-9][0-9]{0,8})$/.exec(input.id) : null;
+  if (fromGitHub) {
+    if (!isOwner(user)) throw new HttpError(404, "That post couldn't be found.");
+    const number = Number(fromGitHub[1]);
+    const issue = await github(issuePath(number), {}, [200, 404, 410]);
+    if (!ownersGitHubPost(issue)) throw new HttpError(404, "That post couldn't be found.");
+    if (!issue.labels.some((label: Json) => label.name === "unpublish")) {
+      await github(`${issuePath(number)}/labels`, { method: "POST", body: { labels: ["unpublish"] } });
+    }
+    return { removed: true };
+  }
   if (typeof input?.id !== "string" || !UUID.test(input.id)) throw new HttpError(404, "That post couldn't be found.");
   const row = (await supabase(`/rest/v1/submissions?id=eq.${input.id}&user_id=eq.${user.id}&select=id,issue_number`, {
     admin: true,
