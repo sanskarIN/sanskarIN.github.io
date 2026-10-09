@@ -552,7 +552,7 @@ Visitors can create an account on the website with only their email address — 
 
 GitHub Pages can't run a server or keep a secret, so accounts use **[Supabase](https://supabase.com/)** (its free plan is enough): Supabase Auth sends the codes, a Postgres database holds the profiles, Storage holds the images, and an Edge Function holds the GitHub token and turns posts into issues.
 
-**Status: off.** Everything account-related stays hidden — no links, no scripts, no extra security-policy entries — until `_data/accounts.yml` has a Supabase address and publishable key. Follow [Setting up accounts](#setting-up-accounts) to turn them on.
+**Status: off.** Everything account-related stays hidden — no links, no scripts, no extra security-policy entries — until `_data/accounts.yml` has a Supabase address and publishable key. [Setting up accounts](#setting-up-accounts) turns them on: create a Supabase project, save a few keys as secrets in this repository, and run the **Set up accounts** workflow.
 
 ### How accounts work
 
