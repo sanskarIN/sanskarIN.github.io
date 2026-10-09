@@ -72,6 +72,8 @@ WAIT_MINUTES = 10  # how long to wait for a project that is starting
 CHECK_MINUTES = 3  # how long to wait for the checks to pass after the changes
 TOKEN_WARNING_DAYS = 14
 POLICIES = ("terms", "privacy", "cookies", "accessibility")
+# The usernames supabase/schema.sql keeps for the site admin.
+OWNER_USERNAMES = ("sanskar", "sanskarin", "dev-sanskarin")
 
 SUBJECT = "Your sign-in code for sanskarIN.github.io"
 TEMPLATE = """<h2>Your sign-in code</h2>
@@ -695,6 +697,14 @@ def set_up(commit, manual):
                          "_data/accounts.yml.")
     if not NAME.fullmatch(bucket):
         raise SetupError("images_bucket in _data/accounts.yml should be a bucket name, such as blog-images.")
+    owner_username = read_value(accounts_text, "owner_username")
+    if owner_username and owner_username not in OWNER_USERNAMES:
+        raise SetupError(f"owner_username in _data/accounts.yml should be {and_list(OWNER_USERNAMES).replace(' and ', ' or ')}: "
+                         "the usernames supabase/schema.sql keeps for the site admin.")
+    admin_email = setting("ADMIN_EMAIL").lower()
+    keep_secret(admin_email)
+    if admin_email and not EMAIL.fullmatch(admin_email):
+        raise SetupError("ADMIN_EMAIL should be the email address you sign in to the website with.")
     site_url = (site_setting("url") or "https://sanskarin.github.io").rstrip("/")
     repository = os.environ.get("GITHUB_REPOSITORY", "sanskarIN/sanskarIN.github.io")
 
