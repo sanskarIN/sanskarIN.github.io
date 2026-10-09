@@ -718,12 +718,19 @@ def without_modified_date(text):
     return re.sub(r"^last_modified_at: .*\n", "", text, count=1, flags=re.M)
 
 
+def owners_account(account, settings):
+    """Whether a website account is the site owner's own: only the site admin can
+    take owner_username (supabase/schema.sql), so its posts are the owner's."""
+    return bool(account and settings["owner_username"] and account["username"] == settings["owner_username"])
+
+
 def build_post(issue, form, settings, existing, trusted, account=None, is_image=None):
     """Downloads and prepares everything for the post. Nothing is written yet."""
     is_image = is_image or is_attachment
     number = issue["number"]
     login = issue["user"]["login"]
-    is_owner = account is None and login.lower() == os.environ["GITHUB_REPOSITORY"].split("/")[0].lower()
+    by_owner = account is None or owners_account(account, settings)
+    is_owner = by_owner and login.lower() == os.environ["GITHUB_REPOSITORY"].split("/")[0].lower()
     link_rel = "noopener noreferrer" if trusted else "noopener noreferrer nofollow ugc"
     slug = existing["slug"] if existing else new_slug(form["title"], number)
     notes = list(form["notes"])
@@ -789,7 +796,7 @@ def build_post(issue, form, settings, existing, trusted, account=None, is_image=
                      "with location and camera details removed.")
 
     cover = images.get(form["cover_url"]) if form["cover_url"] else None
-    if account:
+    if not by_owner:
         author, author_url = account["name"], f"/blog/authors/?u={account['username']}"
     elif is_owner:
         author, author_url = settings["owner_name"], "/about/"
@@ -802,8 +809,8 @@ def build_post(issue, form, settings, existing, trusted, account=None, is_image=
         "last_modified_at": None,
         "author": author,
         "author_url": author_url,
-        "author_login": None if account else login,
-        "author_username": account["username"] if account else None,
+        "author_login": login if by_owner else None,
+        "author_username": None if by_owner else account["username"],
         "image": cover["src"] if cover else None,
         "image_alt": form["cover_alt"] if cover else None,
         "image_width": cover["width"] if cover else None,
