@@ -448,6 +448,14 @@ def set_up_database(api, bucket):
     print("Database: the tables, the image bucket, and their security rules are in place.")
 
 
+def save_admin(api, email):
+    """Makes email the only address whose account can take the owner's usernames."""
+    quoted = email.replace("'", "''")
+    api.request("POST", "/database/query", {"query": (
+        f"delete from public.site_admins where email <> '{quoted}';\n"
+        f"insert into public.site_admins (email) values ('{quoted}') on conflict (email) do nothing;")})
+
+
 def set_up_sign_in(api, smtp, site_url, current):
     api.request("PATCH", "/config/auth", {
         "site_url": site_url,
@@ -718,6 +726,10 @@ def set_up(commit, manual):
     smtp, service, service_privacy = email_settings(current, accounts, site_setting("title") or "Sanskar")
 
     set_up_database(api, bucket)
+    if admin_email:
+        save_admin(api, admin_email)
+        print(f"Site admin: saved ADMIN_EMAIL; that account can take the username "
+              f"{'@' + owner_username if owner_username else 'of the site owner'}.")
     set_up_sign_in(api, smtp, site_url, current)
     print(f"Sign-in: {CODE_LENGTH}-digit codes that work for {CODE_MINUTES} minutes, sent by {service}"
           f"{' (SMTP settings saved)' if smtp else ' (SMTP settings kept)'}.")
