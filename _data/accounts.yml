@@ -15,14 +15,14 @@
 #  (sb_secret_…) here: the site refuses to use one.
 # =============================================================================
 
-supabase_url: ""
-supabase_publishable_key: ""
+supabase_url: "https://flfewcofbkznzmepzyqz.supabase.co"
+supabase_publishable_key: "sb_publishable_QunaVBbZ7t_psyI_3d2FjA_Q2HNBEaQ"
 
 # The service that sends the sign-in emails: the SMTP provider connected in
 # Supabase (Authentication → Emails → SMTP Settings), such as Brevo or Gmail.
 # The Privacy Policy names it and links to its privacy policy.
-email_service: ""
-email_service_privacy_url: ""
+email_service: "Gmail"
+email_service_privacy_url: "https://policies.google.com/privacy"
 
 # Names of the Supabase storage bucket and Edge Function the site uses. They
 # match supabase/schema.sql and supabase/functions/blog/.
