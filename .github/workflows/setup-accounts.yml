@@ -17,6 +17,9 @@
 #   SMTP_PASSWORD          such as a Gmail address and an app password
 # Optional, as secrets or variables: SMTP_HOST, SMTP_PORT, SMTP_SENDER_EMAIL,
 # SMTP_SENDER_NAME, EMAIL_SERVICE, EMAIL_SERVICE_PRIVACY_URL.
+# Optional secret: ADMIN_EMAIL, the address of your own account on the
+# website; only that account can take your username (owner_username in
+# _data/accounts.yml).
 #
 # The tokens and the password only go to Supabase: they are never printed or
 # committed.
