@@ -368,10 +368,10 @@ async function submit(user: User, input: Json) {
 }
 
 /** Where a post is in the review, from its GitHub issue and the workflow's comment. */
-async function reviewStatus(issueNumber: number | null) {
+async function reviewStatus(issueNumber: number | null, known?: Json) {
   if (!issueNumber) return { status: "processing" };
   try {
-    const issue = await github(issuePath(issueNumber));
+    const issue = known ?? await github(issuePath(issueNumber));
     const labels = new Set<string>(issue.labels.map((label: Json) => label.name));
     const comments: Json[] = await github(`${issuePath(issueNumber)}/comments?per_page=100`);
     const comment = [...comments].reverse()
