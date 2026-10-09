@@ -707,6 +707,7 @@ To turn accounts off again, clear `supabase_publishable_key`. Existing posts sta
 - The browser never talks to GitHub: only the function does, with a token that can do nothing but manage this repository's issues.
 - The function checks every request itself — a valid session, the person's own profile and images, sizes and limits — and answers only the website's own address (CORS).
 - The publishing workflow trusts an account's note only on issues you opened, so nobody can post as an account by copying the note into an issue of their own.
+- Your usernames (`sanskar`, `sanskarin`, `dev-sanskarin`) are kept by the database for the account whose email address is in the private `site_admins` table, so only that account's posts are published without review.
 - Profiles and posts are only ever shown as text or as cleaned HTML; author websites must start with `https://` and are marked `nofollow ugc`.
 
 ### Files
