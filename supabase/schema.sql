@@ -1,8 +1,9 @@
 -- =============================================================================
 --  Accounts for the blog on sanskarIN.github.io — Supabase database setup
 --
---  Run this once in your Supabase project: Dashboard → SQL Editor → New
---  query → paste this whole file → Run. Running it again is safe.
+--  The "Set up accounts" workflow runs it on your Supabase project, and again
+--  whenever it changes on main. By hand: Dashboard → SQL Editor → New query →
+--  paste this whole file → Run. Running it again is safe.
 --  README.md → "Accounts" explains the complete setup.
 --
 --  It creates:
