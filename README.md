@@ -624,7 +624,7 @@ The same steps in the Supabase dashboard, without the workflow. Steps 1–6 happ
 
 1. **Create a project** at https://supabase.com/dashboard (the free plan is enough). Choose a region near your readers.
 
-2. **Create the tables and storage.** Open **SQL Editor**, paste the whole of [`supabase/schema.sql`](supabase/schema.sql), and run it. It creates the `profiles` and `submissions` tables with row-level security, the public `blog-images` bucket (PNG, JPEG, GIF, and WebP up to 10 MB), and the rules that let each account read and change only its own data. Running it again later is safe.
+2. **Create the tables and storage.** Open **SQL Editor**, paste the whole of [`supabase/schema.sql`](supabase/schema.sql), and run it. Running it again later is safe.
 
 3. **Set up the sign-in emails.**
    - **Authentication → URL Configuration:** set **Site URL** to `https://sanskarin.github.io`.
