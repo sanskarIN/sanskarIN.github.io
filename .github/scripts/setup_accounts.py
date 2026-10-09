@@ -774,6 +774,7 @@ def set_up(commit, manual):
         f"- **Edge Function:** \"{function_name}\" deployed{f' (version {version})' if version else ''}, "
         "with the GitHub token",
         "- **Checks:** sign-in, the database, and the function answer",
+        f"- **Site admin:** {'saved; that account can take @' + owner_username if admin_email and owner_username else 'saved' if admin_email else 'not set (add the ADMIN_EMAIL secret to claim your own username)'}",
         f"- **Website:** {outcome}",
         "",
         f"Next: sign up on {site_url}/account/ with your own email address, then write a test post.",
