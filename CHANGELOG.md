@@ -4,6 +4,19 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.8.0] — 2026-10-09
+
+### Added
+
+- Your own account on the website: the username `sanskar` (and `sanskarin` and `dev-sanskarin`) is kept for the site admin, the account whose email address is the new `ADMIN_EMAIL` secret of the "Set up accounts" workflow. The database checks it, with the address kept in a private `site_admins` table that the website and the API can't read.
+- `owner_username` in `_data/accounts.yml`. Every post by the site owner — from GitHub, by hand, or from the owner's account — is credited to that username: author links open its author page, which lists all of them, even before the profile exists.
+- The owner's account page lists the owner's posts written on GitHub as well, with their status, **Edit on GitHub**, and **Remove**.
+- Posts the owner writes on the website are published at once and credited like the owner's posts from GitHub, without the review that visitors' posts wait for.
+
+### Changed
+
+- The "Set up accounts" workflow saves `ADMIN_EMAIL` in the database and gives the Edge Function the owner's username.
+
 ## [1.7.0] — 2026-10-09
 
 ### Added
