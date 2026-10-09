@@ -733,8 +733,13 @@ def set_up(commit, manual):
     set_up_sign_in(api, smtp, site_url, current)
     print(f"Sign-in: {CODE_LENGTH}-digit codes that work for {CODE_MINUTES} minutes, sent by {service}"
           f"{' (SMTP settings saved)' if smtp else ' (SMTP settings kept)'}.")
-    api.request("POST", "/secrets", [{"name": "GITHUB_TOKEN", "value": blog_token}])
-    print("Edge Function: saved BLOG_GITHUB_TOKEN as its GITHUB_TOKEN secret.")
+    secrets = [{"name": "GITHUB_TOKEN", "value": blog_token}]
+    if owner_username:
+        # The function lists the owner's posts from GitHub for this account.
+        secrets.append({"name": "OWNER_USERNAME", "value": owner_username})
+    api.request("POST", "/secrets", secrets)
+    print("Edge Function: saved BLOG_GITHUB_TOKEN as its GITHUB_TOKEN secret"
+          f"{' and owner_username as OWNER_USERNAME' if owner_username else ''}.")
     version = deploy_function(api, function_name)
     project_url = f"https://{ref}.supabase.co"
     check_project(project_url, key, function_name, site_url)
