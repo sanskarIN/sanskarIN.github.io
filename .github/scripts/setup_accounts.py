@@ -337,3 +337,26 @@ def check_blog_token(token, repository):
     if days <= TOKEN_WARNING_DAYS:
         print(f"::warning::BLOG_GITHUB_TOKEN expires on {expires}. Before then, create a new one, update the "
               "secret, and run this workflow again; until you do, accounts can't send posts.")
+
+
+def running_project(api):
+    """The project's details, once it is running."""
+    deadline = time.monotonic() + WAIT_MINUTES * 60
+    while True:
+        project = api.request("GET", "") or {}
+        status = project.get("status") or "UNKNOWN"
+        if status == "ACTIVE_HEALTHY":
+            return project
+        if status == "ACTIVE_UNHEALTHY":
+            print("::warning::Supabase reports the project as running but unhealthy; continuing anyway.")
+            return project
+        if status in ("INACTIVE", "PAUSING", "PAUSE_FAILED", "GOING_DOWN"):
+            raise SetupError("The Supabase project is paused. Restore it in the Supabase dashboard "
+                             "(https://supabase.com/dashboard), wait until it is running, then run this workflow again.")
+        if status in ("REMOVED", "INIT_FAILED", "RESTORE_FAILED"):
+            raise SetupError(f"The Supabase project can't be used ({readable(status)}). Check it in the Supabase dashboard.")
+        if time.monotonic() >= deadline:
+            raise SetupError(f"The Supabase project is still {readable(status)} after {WAIT_MINUTES} minutes. "
+                             "Run this workflow again later.")
+        print(f"The project is {readable(status)}; waiting…")
+        time.sleep(15)
