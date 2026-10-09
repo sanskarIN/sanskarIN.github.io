@@ -628,13 +628,13 @@ The same steps in the Supabase dashboard, without the workflow. Steps 1–6 happ
 
 3. **Set up the sign-in emails.**
    - **Authentication → URL Configuration:** set **Site URL** to `https://sanskarin.github.io`.
-   - **Authentication → Sign In / Providers → Email:** keep it enabled, keep **Email OTP Length** at 6, and set **Email OTP Expiration** to something short, such as 600 seconds (10 minutes).
-   - **Authentication → Emails → Templates:** in both **Confirm sign up** (sent to new accounts) and **Magic link or OTP** (sent to existing ones), replace the link with the code, for example with the subject "Your sign-in code for sanskarIN.github.io" and this message:
+   - **Authentication → Sign In / Providers → Email:** keep it enabled, keep **Email OTP Length** at 6, and set **Email OTP Expiration** to 600 seconds (10 minutes).
+   - **Authentication → Emails → Templates:** in both **Confirm sign up** (sent to new accounts) and **Magic link or OTP** (sent to existing ones), replace the link with the code, with the subject "Your sign-in code for sanskarIN.github.io" and this message:
 
      ```html
      <h2>Your sign-in code</h2>
      <p>Enter this code on sanskarIN.github.io to sign in: <strong>{{ .Token }}</strong></p>
-     <p>It works once and expires soon. If you didn't ask for it, you can ignore this email.</p>
+     <p>It works once and expires in 10 minutes. If you didn't ask for it, you can ignore this email.</p>
      ```
 
    - **Authentication → Emails → SMTP Settings:** turn on custom SMTP. Without it, Supabase only sends emails to members of your Supabase team (and only 2 an hour), so visitors would never get their codes. Any SMTP service works — for example Brevo's free plan, or a Gmail address with an app password. Then fill in `email_service` and `email_service_privacy_url` in `_data/accounts.yml` (step 7), so the Privacy Policy names it.
