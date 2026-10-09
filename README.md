@@ -684,7 +684,8 @@ To turn accounts off again, clear `supabase_publishable_key`. Existing posts sta
 
 ### Security notes
 
-- The project URL and publishable key are public by design: what they allow is decided by the row-level security rules in `supabase/schema.sql`. The secret key and the GitHub token exist only in Supabase.
+- The project URL and publishable key are public by design: what they allow is decided by the row-level security rules in `supabase/schema.sql`. The secret key exists only in Supabase. The function's GitHub token is kept in Supabase and, for the workflow, as an encrypted GitHub Actions secret; the Supabase access token and the SMTP password are only GitHub Actions secrets.
+- The **Set up accounts** workflow runs only from the Actions tab and for pushes to `main` — never for issues or pull requests — and its script never prints the secrets or writes them to a file.
 - The browser never talks to GitHub: only the function does, with a token that can do nothing but manage this repository's issues.
 - The function checks every request itself — a valid session, the person's own profile and images, sizes and limits — and answers only the website's own address (CORS).
 - The publishing workflow trusts an account's note only on issues you opened, so nobody can post as an account by copying the note into an issue of their own.
