@@ -521,3 +521,63 @@ def publishable_key(api):
                 return value
     raise SetupError("The project's publishable key couldn't be read. Copy it from Project Settings → API Keys "
                      "into supabase_publishable_key in _data/accounts.yml.")
+
+
+def wait_for(what, attempt):
+    """Repeats attempt() until it passes; changes can take a moment to reach every server."""
+    deadline = time.monotonic() + CHECK_MINUTES * 60
+    delay = 3
+    while True:
+        try:
+            ok, detail = attempt()
+        except NetworkError as error:
+            ok, detail = False, str(error)
+        if ok:
+            return
+        if time.monotonic() >= deadline:
+            raise SetupError(f"{what} doesn't work yet: {detail}")
+        time.sleep(delay)
+        delay = min(delay * 2, 15)
+
+
+def check_project(url, key, function_name, site_url):
+    """What the website does first: read the sign-in settings and the profiles,
+    and call the function (which turns away a request without a session)."""
+    def sign_in():
+        status, _, raw = send("GET", f"{url}/auth/v1/settings", {"apikey": key})
+        data = parse_json(raw) if status == 200 else None
+        if not isinstance(data, dict):
+            return False, f"Supabase Auth answered {status} ({error_detail(raw)})"
+        if not (data.get("external") or {}).get("email"):
+            return False, "email sign-in is off"
+        if data.get("disable_signup"):
+            return False, "new sign-ups are turned off"
+        return True, ""
+
+    def database():
+        status, _, raw = send("GET", f"{url}/rest/v1/profiles?select=username&limit=1", {"apikey": key})
+        if status == 200 and isinstance(parse_json(raw), list):
+            return True, ""
+        return False, f"reading profiles answered {status} ({error_detail(raw)})"
+
+    def function():
+        target = f"{url}/functions/v1/{function_name}"
+        status, headers, raw = send("OPTIONS", target, {
+            "Origin": site_url,
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "authorization, apikey, content-type",
+        })
+        if status >= 300:
+            return False, f"it answered {status} ({error_detail(raw)})"
+        if headers.get("Access-Control-Allow-Origin") != site_url:
+            return False, f"it doesn't accept requests from {site_url} (check its SITE_ORIGIN secret)"
+        status, _, raw = send("POST", target, {"apikey": key, "Content-Type": "application/json", "Origin": site_url},
+                              b'{"action": "list"}')
+        if status != 401:
+            return False, f"a request without a session answered {status} instead of 401 ({error_detail(raw)})"
+        return True, ""
+
+    wait_for("Sign-in", sign_in)
+    wait_for("The database", database)
+    wait_for(f"The \"{function_name}\" Edge Function", function)
+    print("Checks: sign-in, the database, and the function answer as the website expects.")
