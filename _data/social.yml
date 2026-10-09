@@ -74,14 +74,6 @@ profiles:
     icon: threads
     note: Posts and conversations
 
-  pinterest:
-    name: Pinterest
-    url: https://www.pinterest.com/dev_sanskarIN
-    handle: dev_sanskarIN
-    username: dev_sanskarIN
-    icon: pinterest
-    note: Pins and boards
-
   bluesky:
     name: Bluesky
     url: https://bsky.app/profile/SanskarCodes.bsky.social
@@ -126,7 +118,7 @@ groups:
     items: [github, linkedin, devto, discord]
   social:
     title: Social
-    items: [x, instagram, threads, pinterest, bluesky]
+    items: [x, instagram, threads, bluesky]
   products:
     title: Support & Products
     items: [buymeacoffee, gumroad, paypal]
