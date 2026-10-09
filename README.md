@@ -576,7 +576,51 @@ Account pages (assets/js/account.js, in the browser)
 
 ### Setting up accounts
 
-Steps 1–6 happen on Supabase and GitHub; only step 7 changes this repository. Nothing secret is ever committed.
+The **Set up accounts** workflow (`.github/workflows/setup-accounts.yml`) does almost all of it. You create a Supabase project and a few keys, save them as secrets in this repository, and run the workflow: it creates the tables, sets up the sign-in emails, deploys the Edge Function, checks that everything answers, and turns accounts on. Nothing secret is ever committed or printed. ([Setting up accounts by hand](#setting-up-accounts-by-hand) does the same steps yourself.)
+
+1. **Create a Supabase project** at https://supabase.com/dashboard (the free plan is enough), in a region near your readers. Its **reference ID** is the 20 letters in its address, `https://<reference ID>.supabase.co` (**Project Settings → General**).
+
+2. **Create a Supabase access token** at https://supabase.com/dashboard/account/tokens. Only the workflow uses it, to set up the project; it never reaches the website.
+
+3. **Create a GitHub token for the Edge Function.** On GitHub, open **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**:
+   - **Repository access:** Only select repositories → `sanskarIN/sanskarIN.github.io`;
+   - **Permissions:** Repository permissions → **Issues: Read and write** — nothing else;
+   - **Expiration:** pick a date and set yourself a reminder. Once the token expires, accounts can't send posts until you replace it (see [Managing accounts](#managing-accounts)). The workflow warns you two weeks before.
+
+4. **Choose who sends the sign-in emails.** Until Supabase has an SMTP service, it sends emails only to the members of your Supabase team, so visitors would never get their codes.
+   - **Gmail** is the simplest: turn on 2-Step Verification for the Google account and create an **app password** ([Google's help](https://support.google.com/accounts/answer/185833)). The codes come from that Gmail address, so everyone who signs up sees it — use one you're happy to show, such as an address already on the Contact page.
+   - **Brevo** works too: use the SMTP login and key that Brevo gives you, plus `SMTP_SENDER_EMAIL`, a sender address you have added in Brevo.
+   - **Any other SMTP service:** also set `SMTP_HOST` (and `SMTP_PORT` if it isn't 587), `EMAIL_SERVICE` (its name) and `EMAIL_SERVICE_PRIVACY_URL` (its privacy policy) — the Privacy Policy names the service and links to its policy.
+
+5. **Save them in this repository:** **Settings → Secrets and variables → Actions → New repository secret**, one for each:
+
+   | Secret | Value |
+   |---|---|
+   | `SUPABASE_ACCESS_TOKEN` | The access token from step 2 (`sbp_…`) |
+   | `SUPABASE_PROJECT_REF` | The project's reference ID (its address works too) |
+   | `BLOG_GITHUB_TOKEN` | The GitHub token from step 3 |
+   | `SMTP_USER` | The Gmail address (or the SMTP login) |
+   | `SMTP_PASSWORD` | The app password (or the SMTP password or key) |
+
+   The optional settings can be secrets or variables (the **Variables** tab): `SMTP_HOST`, `SMTP_PORT`, `SMTP_SENDER_EMAIL`, `SMTP_SENDER_NAME` (the name the emails come from; the site title by default), `EMAIL_SERVICE`, and `EMAIL_SERVICE_PRIVACY_URL`.
+
+6. **Run it:** **Actions → Set up accounts → Run workflow**. In a few minutes it:
+   - checks the GitHub token, and waits if the project is still starting;
+   - runs [`supabase/schema.sql`](supabase/schema.sql): the `profiles` and `submissions` tables with row-level security, the public `blog-images` bucket (PNG, JPEG, GIF, and WebP up to 10 MB), and the rules that let each account read and change only its own data;
+   - sets up sign-in: the site address, 6-digit codes that work for 10 minutes, emails that contain the code instead of a link, and the SMTP service;
+   - saves the GitHub token as the function's `GITHUB_TOKEN` secret and deploys [`supabase/functions/blog/index.ts`](supabase/functions/blog/index.ts) as `blog`, with JWT verification on;
+   - checks that sign-in, the database, and the function answer the way the website expects;
+   - fills in `_data/accounts.yml` (the project address, its publishable key, and the email service) and the policy dates in `_data/legal.yml`, commits them, and asks GitHub Pages to rebuild the site.
+
+   If something is missing or wrong, the run stops before turning accounts on, with a message that says what to fix. The run's summary lists what was done. Running it again is safe.
+
+Then try it yourself: sign up on `/account/` with your own email address, create a profile, write a test post with an image, check that its issue appears with the `from-website` label, add `approved`, and watch the account page change to "Published". You can remove the test post and delete the test account on `/account/` afterwards.
+
+From then on, the workflow also runs whenever `supabase/` changes on `main`, so the database and the function keep up with this repository. While the secrets are missing or accounts are off, those runs do nothing.
+
+#### Setting up accounts by hand
+
+The same steps in the Supabase dashboard, without the workflow. Steps 1–6 happen on Supabase and GitHub; only step 7 changes this repository.
 
 1. **Create a project** at https://supabase.com/dashboard (the free plan is enough). Choose a region near your readers.
 
@@ -613,8 +657,6 @@ Steps 1–6 happen on Supabase and GitHub; only step 7 changes this repository. 
 6. **Copy the two public values** from the project's **Connect** dialog, or **Project Settings → API Keys**: the **project URL** (`https://<project>.supabase.co`) and the **publishable key** (`sb_publishable_…`). Never use the secret key (`sb_secret_…`): it bypasses every security rule. The site refuses to use one anyway.
 
 7. **Turn accounts on.** In `_data/accounts.yml`, fill in `supabase_url`, `supabase_publishable_key`, `email_service`, and `email_service_privacy_url`. In `_data/legal.yml`, update the dates of `terms`, `privacy`, `cookies`, and `accessibility` — those pages gain their account passages automatically. Commit to `main`.
-
-Then try it yourself: sign up on `/account/` with your own email address, create a profile, write a test post with an image, check that its issue appears with the `from-website` label, add `approved`, and watch the account page change to "Published". You can remove the test post and delete the test account on `/account/` afterwards.
 
 ### What changes when accounts are on
 
