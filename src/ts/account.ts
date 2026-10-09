@@ -767,7 +767,8 @@
         main.appendChild(title);
         const meta = element("p", "account-post__meta");
         meta.appendChild(element("span", `status-badge status-badge--${status}`, STATUS_LABELS[status]));
-        meta.appendChild(element("span", null, "Sent " + formatDate(post.createdAt)));
+        const fromGitHub = post.source === "github";
+        meta.appendChild(element("span", null, (fromGitHub ? "Written on GitHub " : "Sent ") + formatDate(post.createdAt)));
         if (post.updatedAt && post.updatedAt !== post.createdAt) {
           meta.appendChild(element("span", null, "changed " + formatDate(post.updatedAt)));
         }
