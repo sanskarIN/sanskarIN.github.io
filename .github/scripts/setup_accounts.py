@@ -581,3 +581,32 @@ def check_project(url, key, function_name, site_url):
     wait_for("The database", database)
     wait_for(f"The \"{function_name}\" Edge Function", function)
     print("Checks: sign-in, the database, and the function answer as the website expects.")
+
+
+def save_settings(values, was_on):
+    """Writes values to _data/accounts.yml and, when the policies change, today's
+    date to _data/legal.yml. Returns the files that changed."""
+    old = ACCOUNTS.read_text(encoding="utf-8")
+    new = old
+    for key, value in values.items():
+        new = write_value(new, key, value)
+    if new == old:
+        return []
+    ACCOUNTS.write_text(new, encoding="utf-8")
+    changed = [ACCOUNTS]
+    if not was_on:
+        policies = POLICIES  # they gain their account passages
+    elif any(read_value(old, key) != values[key] for key in ("email_service", "email_service_privacy_url")):
+        policies = ("privacy",)  # it names the email service
+    else:
+        policies = ()
+    if policies:
+        legal = LEGAL.read_text(encoding="utf-8")
+        today = datetime.now(timezone.utc).date().isoformat()
+        updated = legal
+        for policy in policies:
+            updated = write_value(updated, policy, today, quote=False)
+        if updated != legal:
+            LEGAL.write_text(updated, encoding="utf-8")
+            changed.append(LEGAL)
+    return changed
