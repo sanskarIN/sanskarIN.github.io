@@ -65,6 +65,7 @@ jobs:
           SMTP_SENDER_NAME: ${{ vars.SMTP_SENDER_NAME || secrets.SMTP_SENDER_NAME }}
           EMAIL_SERVICE: ${{ vars.EMAIL_SERVICE || secrets.EMAIL_SERVICE }}
           EMAIL_SERVICE_PRIVACY_URL: ${{ vars.EMAIL_SERVICE_PRIVACY_URL || secrets.EMAIL_SERVICE_PRIVACY_URL }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           GITHUB_TOKEN: ${{ github.token }}
           BRANCH: main
           # Commits made for the settings use the site owner's name and email.
