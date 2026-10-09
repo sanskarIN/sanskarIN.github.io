@@ -652,3 +652,119 @@ def request_pages_build(repository):
     print(f"::warning::Could not request a GitHub Pages build ({status}). "
           "Accounts appear on the website after the next push to the repository.")
     return False
+
+
+# -----------------------------------------------------------------------------
+# Main
+# -----------------------------------------------------------------------------
+
+def set_up(commit, manual):
+    access_token = setting("SUPABASE_ACCESS_TOKEN")
+    blog_token = setting("BLOG_GITHUB_TOKEN")
+    for value in (access_token, blog_token, setting("SMTP_PASSWORD")):
+        keep_secret(value)
+    required = (("SUPABASE_ACCESS_TOKEN", access_token), ("SUPABASE_PROJECT_REF", setting("SUPABASE_PROJECT_REF")),
+                ("BLOG_GITHUB_TOKEN", blog_token))
+    missing = [name for name, value in required if not value]
+    if missing and not manual:
+        print("::notice::Accounts aren't set up, so there's nothing to update. "
+              "See README.md → Setting up accounts.")
+        return 0
+    if missing:
+        raise SetupError(f"Add {and_list(missing)} in Settings → Secrets and variables → Actions, then run this "
+                         "workflow again. README.md → Setting up accounts explains each one.")
+
+    accounts_text = ACCOUNTS.read_text(encoding="utf-8")
+    accounts = {key: read_value(accounts_text, key) for key in (
+        "supabase_url", "supabase_publishable_key", "email_service", "email_service_privacy_url",
+        "images_bucket", "function")}
+    was_on = (accounts["supabase_url"].startswith("https://") and accounts["supabase_publishable_key"] != ""
+              and not accounts["supabase_publishable_key"].startswith("sb_secret_"))
+    if not was_on and not manual:
+        print("::notice::Accounts are off in _data/accounts.yml, so there's nothing to update. To turn them on, "
+              "run this workflow from the Actions tab.")
+        return 0
+    if access_token.startswith(("sb_", "eyJ")):
+        raise SetupError("SUPABASE_ACCESS_TOKEN holds a project API key. It needs a personal access token (sbp_…) "
+                         "from https://supabase.com/dashboard/account/tokens.")
+    ref = project_ref(setting("SUPABASE_PROJECT_REF"))
+    function_name = accounts["function"] or "blog"
+    bucket = accounts["images_bucket"] or "blog-images"
+    if not NAME.fullmatch(function_name) or not (FUNCTIONS / function_name / "index.ts").is_file():
+        raise SetupError(f"There's no supabase/functions/{function_name}/index.ts for the function named in "
+                         "_data/accounts.yml.")
+    if not NAME.fullmatch(bucket):
+        raise SetupError("images_bucket in _data/accounts.yml should be a bucket name, such as blog-images.")
+    site_url = (site_setting("url") or "https://sanskarin.github.io").rstrip("/")
+    repository = os.environ.get("GITHUB_REPOSITORY", "sanskarIN/sanskarIN.github.io")
+
+    print(f"Setting up accounts with the Supabase project {ref}.")
+    check_blog_token(blog_token, repository)
+    api = Supabase(access_token, ref)
+    project = running_project(api)
+    print(f"The project{' ' + json.dumps(project['name']) if project.get('name') else ''} is running.")
+    key = publishable_key(api)
+    current = api.request("GET", "/config/auth") or {}
+    smtp, service, service_privacy = email_settings(current, accounts, site_setting("title") or "Sanskar")
+
+    set_up_database(api, bucket)
+    set_up_sign_in(api, smtp, site_url, current)
+    print(f"Sign-in: {CODE_LENGTH}-digit codes that work for {CODE_MINUTES} minutes, sent by {service}"
+          f"{' (SMTP settings saved)' if smtp else ' (SMTP settings kept)'}.")
+    api.request("POST", "/secrets", [{"name": "GITHUB_TOKEN", "value": blog_token}])
+    print("Edge Function: saved BLOG_GITHUB_TOKEN as its GITHUB_TOKEN secret.")
+    version = deploy_function(api, function_name)
+    project_url = f"https://{ref}.supabase.co"
+    check_project(project_url, key, function_name, site_url)
+
+    files = save_settings({
+        "supabase_url": project_url,
+        "supabase_publishable_key": key,
+        "email_service": service,
+        "email_service_privacy_url": service_privacy,
+    }, was_on)
+    message = "Update the accounts settings" if was_on else "Turn on accounts"
+    if not files:
+        outcome = "Accounts are on, and _data/accounts.yml was already up to date."
+    elif not commit:
+        outcome = f"Saved {and_list(str(path.relative_to(ROOT)) for path in files)} (not committed)."
+    else:
+        commit_id = commit_and_push(files, message, os.environ.get("BRANCH", "main"))
+        if commit_id is None:
+            outcome = "Accounts are on, and _data/accounts.yml was already up to date."
+        else:
+            built = request_pages_build(repository)
+            outcome = (f"{'Accounts turned on' if not was_on else 'Settings updated'} in commit {commit_id}"
+                       f"{'; GitHub Pages is rebuilding the website' if built else ''}.")
+    print(outcome)
+
+    summary(
+        "## Accounts",
+        "",
+        f"- **Project:** {project_url}, running",
+        "- **Database:** the tables, the image bucket, and their security rules are in place",
+        f"- **Sign-in:** {CODE_LENGTH}-digit codes that work for {CODE_MINUTES} minutes, sent by {service}",
+        f"- **Edge Function:** \"{function_name}\" deployed{f' (version {version})' if version else ''}, "
+        "with the GitHub token",
+        "- **Checks:** sign-in, the database, and the function answer",
+        f"- **Website:** {outcome}",
+        "",
+        f"Next: sign up on {site_url}/account/ with your own email address, then write a test post.",
+    )
+    return 0
+
+
+def main(argv):
+    sys.stdout.reconfigure(line_buffering=True)
+    manual = os.environ.get("GITHUB_EVENT_NAME", "workflow_dispatch") != "push"
+    try:
+        return set_up("--no-commit" not in argv, manual)
+    except SetupError as error:
+        message = scrub(str(error))
+        print(f"::error::{message}")
+        summary("## Accounts", "", f"The setup stopped: {message}")
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
