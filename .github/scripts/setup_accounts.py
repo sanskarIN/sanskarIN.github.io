@@ -428,3 +428,19 @@ def email_settings(current, accounts, sender_name):
         raise SetupError("Set EMAIL_SERVICE_PRIVACY_URL to the address of the email service's privacy policy "
                          "(https://…): the Privacy Policy links to it.")
     return smtp, name, privacy
+
+
+def set_up_database(api, bucket):
+    api.request("POST", "/database/query", {"query": SCHEMA.read_text(encoding="utf-8")})
+    # The API picks up new tables by itself; this makes it happen right away.
+    api.request("POST", "/database/query", {"query": "notify pgrst, 'reload schema';"})
+    rows = api.request("POST", "/database/query", {"query": CHECK_SQL % bucket})
+    row = rows[0] if isinstance(rows, list) and rows and isinstance(rows[0], dict) else {}
+    missing = [label for key, label in (("profiles", "the profiles table"), ("submissions", "the submissions table"),
+                                        ("bucket", f"the public {bucket} bucket"),
+                                        ("row_security", "row-level security on both tables"))
+               if row.get(key) is not True]
+    if missing:
+        raise SetupError(f"supabase/schema.sql ran, but {and_list(missing)} {'is' if len(missing) == 1 else 'are'} "
+                         "missing. Run it in the SQL Editor to see what went wrong.")
+    print("Database: the tables, the image bucket, and their security rules are in place.")
