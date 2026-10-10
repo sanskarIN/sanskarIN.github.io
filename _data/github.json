@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T11:23:09Z",
+  "generated_at": "2026-10-10T10:40:26Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -7,7 +7,7 @@
   "totals": {
     "repositories": 60,
     "stars": 10,
-    "forks": 0,
+    "forks": 1,
     "languages": 24
   },
   "languages": [
@@ -29,7 +29,7 @@
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 9.9
+      "percent": 10.1
     },
     {
       "name": "Rust",
@@ -57,19 +57,49 @@
   ],
   "repositories": [
     {
-      "name": "CueVersa",
-      "url": "https://github.com/sanskarIN/CueVersa",
-      "description": "",
-      "homepage": null,
-      "language": "Dart",
-      "language_color": "#00B4AB",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
+      "name": "RepoDNA",
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 3,
+      "forks": 1,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
       "license": "Apache-2.0",
       "fork": false,
       "archived": false,
-      "created": "2026-08-14",
+      "created": "2026-09-24",
+      "pushed": "2026-10-10"
+    },
+    {
+      "name": "SpellChecker",
+      "url": "https://github.com/sanskarIN/SpellChecker",
+      "description": "A modern, open-source, offline-first spell checker and writing assistant for Android, Windows, Linux, iOS, and macOS, featuring spelling, grammar, punctuation, style suggestions, personal dictionaries, document analysis, and privacy-focused cross-platform support. Made by…",
+      "homepage": null,
+      "language": "Dart",
+      "language_color": "#00B4AB",
+      "stars": 3,
+      "forks": 0,
+      "topics": [
+        "spell",
+        "spell-check",
+        "spell-checker",
+        "spellcheck",
+        "spellchecker",
+        "spelling"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-07-23",
       "pushed": "2026-10-09"
     },
     {
@@ -86,6 +116,22 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-26",
+      "pushed": "2026-10-09"
+    },
+    {
+      "name": "CueVersa",
+      "url": "https://github.com/sanskarIN/CueVersa",
+      "description": "",
+      "homepage": null,
+      "language": "Dart",
+      "language_color": "#00B4AB",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-14",
       "pushed": "2026-10-09"
     },
     {
@@ -171,29 +217,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-10-08"
-    },
-    {
-      "name": "RepoDNA",
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 3,
-      "forks": 0,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
       "pushed": "2026-10-08"
     },
     {
@@ -575,29 +598,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-21",
-      "pushed": "2026-09-20"
-    },
-    {
-      "name": "SpellChecker",
-      "url": "https://github.com/sanskarIN/SpellChecker",
-      "description": "A modern, open-source, offline-first spell checker and writing assistant for Android, Windows, Linux, iOS, and macOS, featuring spelling, grammar, punctuation, style suggestions, personal dictionaries, document analysis, and privacy-focused cross-platform support. Made by…",
-      "homepage": null,
-      "language": "Dart",
-      "language_color": "#00B4AB",
-      "stars": 3,
-      "forks": 0,
-      "topics": [
-        "spell",
-        "spell-check",
-        "spell-checker",
-        "spellcheck",
-        "spellchecker",
-        "spelling"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-07-23",
       "pushed": "2026-09-20"
     },
     {
@@ -1119,9 +1119,9 @@
     }
   ],
   "activity": {
-    "total": 23415,
+    "total": 23545,
     "start": "2025-10-05",
-    "end": "2026-10-09",
+    "end": "2026-10-10",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1494,7 +1494,8 @@
       176,
       3,
       15,
-      34
+      160,
+      4
     ],
     "levels": [
       0,
@@ -1866,6 +1867,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -1922,7 +1924,7 @@
         "label": "Oct"
       }
     ],
-    "active_days": 101,
+    "active_days": 102,
     "longest_streak": 25,
     "busiest": {
       "date": "2026-08-19",
