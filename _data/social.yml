@@ -90,6 +90,16 @@ profiles:
     icon: buymeacoffee
     note: Support my work
 
+  # A payment page, not a profile: left out of structured data.
+  razorpay:
+    name: Razorpay
+    url: https://razorpay.me/@SanskarCodes
+    handle: "@SanskarCodes"
+    username: SanskarCodes
+    icon: razorpay
+    note: Payments and support
+    same_as: false
+
   gumroad:
     name: Gumroad
     url: https://sanskarIN.gumroad.com
@@ -121,7 +131,7 @@ groups:
     items: [x, instagram, threads, bluesky]
   products:
     title: Support & Products
-    items: [buymeacoffee, gumroad, paypal]
+    items: [buymeacoffee, razorpay, gumroad, paypal]
 
 # Profiles featured in the Home page "Developer community" section.
 community: [devto, discord, x, bluesky, linkedin]
