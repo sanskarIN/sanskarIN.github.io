@@ -4,6 +4,18 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [1.8.2] — 2026-10-12
+
+### Added
+
+- Razorpay, [razorpay.me/@SanskarCodes](https://razorpay.me/@SanskarCodes), as another way to support my work: in the footer, on the Home, About, and Contact pages, and in the terminal's `support` command, with its icon from Simple Icons.
+
+### Changed
+
+- Buy Me a Coffee is now [SanskarCodes](https://buymeacoffee.com/SanskarCodes). The About page lists it and Razorpay under SanskarCodes.
+- The RepoDNA post links to the new Dev.to profile, and "The Hidden Value of Boring Software" to the new Buy Me a Coffee page (the old address no longer works).
+- The Privacy Policy and Terms mention Razorpay.
+
 ## [1.8.1] — 2026-10-09
 
 ### Changed
