@@ -87,7 +87,7 @@ The website links to other websites and services, including GitHub, LinkedIn, De
 {% if accounts_on %}- **Accounts:** accounts, author profiles, and uploaded images are stored by Supabase and handled as described in the [Privacy Policy]({{ '/privacy/' | relative_url }}).
 {% endif %}- **Email:** messages you send to the addresses on this website are handled by the email providers that host those addresses (Microsoft Outlook and Google Gmail).
 {% if form_key != "" %}- **Contact form:** messages sent with the contact form are delivered by {{ contact_form.service }} and handled as described in the [Privacy Policy]({{ '/privacy/' | relative_url }}).
-{% endif %}- **Support and purchases:** any support given through Buy Me a Coffee, and any purchase made through Gumroad, takes place on those platforms and is governed by their terms, including their payment, refund, and privacy terms.
+{% endif %}- **Support and purchases:** any support or payment given through Buy Me a Coffee or Razorpay, and any purchase made through Gumroad, takes place on those platforms and is governed by their terms, including their payment, refund, and privacy terms.
 
 ## Availability
 
