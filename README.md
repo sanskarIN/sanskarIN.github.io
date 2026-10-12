@@ -252,7 +252,8 @@ Every profile link on the site (header, footer, Home, About, Developer, Contact,
 | Instagram | https://instagram.com/SanskarCode | `@SanskarCode` |
 | Threads | https://threads.com/SanskarCode | `@SanskarCode` |
 | Bluesky | https://bsky.app/profile/SanskarCodes.bsky.social | `@SanskarCodes.bsky.social` |
-| Buy Me a Coffee | https://www.buymeacoffee.com/sanskarIN | `sanskarIN` |
+| Buy Me a Coffee | https://buymeacoffee.com/SanskarCodes | `SanskarCodes` |
+| Razorpay | https://razorpay.me/@SanskarCodes | `@SanskarCodes` |
 | Gumroad | https://sanskarIN.gumroad.com | `sanskarIN` |
 | PayPal | *not set yet* | — |
 
