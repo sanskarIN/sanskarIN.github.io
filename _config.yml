@@ -35,7 +35,8 @@ author:
   name: Sanskar
   # GitHub and Gumroad use this username.
   username: sanskarIN
-  # LinkedIn, Dev.to, Discord, X, and Bluesky use this username.
+  # LinkedIn, Dev.to, Discord, X, Bluesky, Buy Me a Coffee, and Razorpay use
+  # this username.
   community_username: SanskarCodes
 
 # First year shown in the footer copyright notice ("© 2026" or "© 2026–2027").
