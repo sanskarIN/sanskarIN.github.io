@@ -39,7 +39,7 @@ schema_type: ProfilePage
         <dd><span class="identity__value">{{ site.author.username }}</span> on {{ professional_profiles | array_to_sentence_string }}</dd>
       </div>
       <div class="identity__row">
-        <dt>Community and social</dt>
+        <dt>Community, social, and support</dt>
         <dd><span class="identity__value">{{ site.author.community_username }}</span> on {{ community_profiles | array_to_sentence_string }}</dd>
       </div>
       {%- for other_username in other_usernames %}
