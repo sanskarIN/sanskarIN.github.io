@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-11T10:53:08Z",
+  "generated_at": "2026-10-12T12:08:56Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -8,33 +8,33 @@
     "repositories": 61,
     "stars": 13,
     "forks": 2,
-    "languages": 24
+    "languages": 26
   },
   "languages": [
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 30.6
+      "percent": 30.2
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 11.7
+      "percent": 11.6
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 11.5
+      "percent": 11.4
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 10.1
+      "percent": 10.0
     },
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 8.8
+      "percent": 8.7
     },
     {
       "name": "Python",
@@ -44,7 +44,7 @@
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 20.1,
+      "percent": 20.9,
       "other": true
     }
   ],
@@ -57,19 +57,126 @@
   ],
   "repositories": [
     {
+      "name": "RepoDNA",
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 5,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-10-12"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-10-12"
+    },
+    {
       "name": "frametrellis",
       "url": "https://github.com/sanskarIN/frametrellis",
       "description": "Open-source video editor.",
-      "homepage": null,
+      "homepage": "https://sanskarin.github.io/frametrellis/",
       "language": "C++",
       "language_color": "#f34b7d",
       "stars": 1,
       "forks": 0,
-      "topics": [],
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
       "license": "GPL-3.0",
       "fork": false,
       "archived": false,
       "created": "2026-10-11",
+      "pushed": "2026-10-12"
+    },
+    {
+      "name": "2048",
+      "url": "https://github.com/sanskarIN/2048",
+      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
+      "homepage": null,
+      "language": "Dart",
+      "language_color": "#00B4AB",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "2040",
+        "2048",
+        "2048-clone",
+        "2048-game",
+        "2048-game-online",
+        "2048-redesigned"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-14",
+      "pushed": "2026-10-12"
+    },
+    {
+      "name": "chronodesk",
+      "url": "https://github.com/sanskarIN/chronodesk",
+      "description": "",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-10-11"
+    },
+    {
+      "name": "Finora",
+      "url": "https://github.com/sanskarIN/Finora",
+      "description": "Finora is a local-first personal finance, expense, budget, savings, and financial-planning application. It must work without an account and keep all private financial information on the user’s device in the current release. Cloud synchronization is planned for a later version…",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "finance",
+        "finance-management",
+        "financial",
+        "financial-analysis",
+        "financial-data"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-08",
       "pushed": "2026-10-11"
     },
     {
@@ -108,45 +215,6 @@
       "archived": false,
       "created": "2026-08-21",
       "pushed": "2026-10-11"
-    },
-    {
-      "name": "RepoDNA",
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 5,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
-      "pushed": "2026-10-11"
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-10-10"
     },
     {
       "name": "SpellChecker",
@@ -318,29 +386,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-10-05"
-    },
-    {
-      "name": "2048",
-      "url": "https://github.com/sanskarIN/2048",
-      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
-      "homepage": null,
-      "language": "Dart",
-      "language_color": "#00B4AB",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "2040",
-        "2048",
-        "2048-clone",
-        "2048-game",
-        "2048-game-online",
-        "2048-redesigned"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-14",
       "pushed": "2026-10-05"
     },
     {
@@ -545,44 +590,6 @@
       "archived": false,
       "created": "2026-08-09",
       "pushed": "2026-09-28"
-    },
-    {
-      "name": "chronodesk",
-      "url": "https://github.com/sanskarIN/chronodesk",
-      "description": "",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-09-27"
-    },
-    {
-      "name": "Finora",
-      "url": "https://github.com/sanskarIN/Finora",
-      "description": "Finora is a local-first personal finance, expense, budget, savings, and financial-planning application. It must work without an account and keep all private financial information on the user’s device in the current release. Cloud synchronization is planned for a later version…",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "finance",
-        "finance-management",
-        "financial",
-        "financial-analysis",
-        "financial-data"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-08",
-      "pushed": "2026-09-27"
     },
     {
       "name": "SpeedPulse",
@@ -1135,9 +1142,9 @@
     }
   ],
   "activity": {
-    "total": 23654,
+    "total": 23788,
     "start": "2025-10-12",
-    "end": "2026-10-11",
+    "end": "2026-10-12",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1505,7 +1512,8 @@
       15,
       160,
       76,
-      27
+      123,
+      38
     ],
     "levels": [
       0,
@@ -1872,6 +1880,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -1928,8 +1937,8 @@
         "label": "Oct"
       }
     ],
-    "active_days": 103,
-    "longest_streak": 25,
+    "active_days": 104,
+    "longest_streak": 26,
     "busiest": {
       "date": "2026-08-19",
       "count": 5851
