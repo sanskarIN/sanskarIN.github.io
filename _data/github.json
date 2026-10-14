@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-13T11:54:05Z",
+  "generated_at": "2026-10-14T09:35:03Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
   },
   "totals": {
     "repositories": 61,
-    "stars": 14,
+    "stars": 15,
     "forks": 2,
     "languages": 26
   },
@@ -14,7 +14,7 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 30.2
+      "percent": 30.7
     },
     {
       "name": "C#",
@@ -24,7 +24,7 @@
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 11.4
+      "percent": 11.3
     },
     {
       "name": "TypeScript",
@@ -34,7 +34,7 @@
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 8.7
+      "percent": 8.6
     },
     {
       "name": "Python",
@@ -44,7 +44,7 @@
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 21.0,
+      "percent": 20.8,
       "other": true
     }
   ],
@@ -57,19 +57,58 @@
   ],
   "repositories": [
     {
-      "name": "unknown-mystery-ai",
-      "url": "https://github.com/sanskarIN/unknown-mystery-ai",
-      "description": "Official companion repository for The Unknown Mystery of the AI by Ram Sandesh — AI code examples, projects, exercises, notebooks, reproducibility resources, and practical learning materials covering ML, Deep Learning, LLMs, RAG, Agents, MLOps, Responsible AI, deployment, and…",
+      "name": "LangSteps",
+      "url": "https://github.com/sanskarIN/LangSteps",
+      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
+      "homepage": "https://sanskarin.github.io/LangSteps/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "beginner-to-advanced",
+        "coding-challenges",
+        "coding-exercises",
+        "csharp",
+        "css",
+        "golang"
+      ],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-05-16",
+      "pushed": "2026-10-14"
+    },
+    {
+      "name": "Sanskar-PDF-Editor",
+      "url": "https://github.com/sanskarIN/Sanskar-PDF-Editor",
+      "description": "An ultimate, enterprise-grade, offline-first PDF Editor featuring 70+ advanced tools. Built with React, Tauri v2, and Rust for lightning-fast, secure performance across Windows, Android, and Web.",
       "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
+      "language": "Rust",
+      "language_color": "#dea584",
       "stars": 0,
       "forks": 0,
       "topics": [],
       "license": "Apache-2.0",
       "fork": false,
       "archived": false,
-      "created": "2026-08-17",
+      "created": "2026-07-09",
+      "pushed": "2026-10-14"
+    },
+    {
+      "name": "healthmetric",
+      "url": "https://github.com/sanskarIN/healthmetric",
+      "description": "",
+      "homepage": null,
+      "language": "Kotlin",
+      "language_color": "#A97BFF",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
       "pushed": "2026-10-13"
     },
     {
@@ -86,6 +125,22 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-26",
+      "pushed": "2026-10-13"
+    },
+    {
+      "name": "unknown-mystery-ai",
+      "url": "https://github.com/sanskarIN/unknown-mystery-ai",
+      "description": "Official companion repository for The Unknown Mystery of the AI by Ram Sandesh — AI code examples, projects, exercises, notebooks, reproducibility resources, and practical learning materials covering ML, Deep Learning, LLMs, RAG, Agents, MLOps, Responsible AI, deployment, and…",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-17",
       "pushed": "2026-10-13"
     },
     {
@@ -444,22 +499,6 @@
       "pushed": "2026-10-08"
     },
     {
-      "name": "DevForge",
-      "url": "https://github.com/sanskarIN/DevForge",
-      "description": "A complete offline-first HTML learning platform with 100+ tags, live code editor, 25+ themes, and zero data collection. Pure HTML, CSS & JS — no build step required.",
-      "homepage": "https://sanskarin.github.io/DevForge/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-05-16",
-      "pushed": "2026-10-05"
-    },
-    {
       "name": "chronoage",
       "url": "https://github.com/sanskarIN/chronoage",
       "description": "",
@@ -606,38 +645,6 @@
       "archived": false,
       "created": "2026-08-17",
       "pushed": "2026-09-29"
-    },
-    {
-      "name": "Sanskar-PDF-Editor",
-      "url": "https://github.com/sanskarIN/Sanskar-PDF-Editor",
-      "description": "An ultimate, enterprise-grade, offline-first PDF Editor featuring 70+ advanced tools. Built with React, Tauri v2, and Rust for lightning-fast, secure performance across Windows, Android, and Web.",
-      "homepage": null,
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-07-09",
-      "pushed": "2026-09-29"
-    },
-    {
-      "name": "healthmetric",
-      "url": "https://github.com/sanskarIN/healthmetric",
-      "description": "",
-      "homepage": null,
-      "language": "Kotlin",
-      "language_color": "#A97BFF",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-09-28"
     },
     {
       "name": "SpeedPulse",
@@ -1142,9 +1149,9 @@
     }
   ],
   "activity": {
-    "total": 26686,
+    "total": 26736,
     "start": "2025-10-12",
-    "end": "2026-10-13",
+    "end": "2026-10-14",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1514,7 +1521,8 @@
       76,
       123,
       86,
-      14
+      15,
+      49
     ],
     "levels": [
       0,
@@ -1883,6 +1891,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -1939,8 +1948,8 @@
         "label": "Oct"
       }
     ],
-    "active_days": 105,
-    "longest_streak": 27,
+    "active_days": 106,
+    "longest_streak": 28,
     "busiest": {
       "date": "2026-08-19",
       "count": 7058
