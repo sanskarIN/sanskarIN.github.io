@@ -1,61 +1,243 @@
 {
-  "generated_at": "2026-10-14T09:35:03Z",
+  "generated_at": "2026-10-15T09:12:48Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
   },
   "totals": {
-    "repositories": 61,
+    "repositories": 62,
     "stars": 15,
-    "forks": 2,
+    "forks": 3,
     "languages": 26
   },
   "languages": [
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 30.7
+      "percent": 31.1
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 11.6
+      "percent": 11.7
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 11.3
+      "percent": 11.4
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 10.0
+      "percent": 10.4
     },
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 8.6
+      "percent": 8.8
     },
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 7.1
+      "percent": 7.2
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 20.8,
+      "percent": 19.4,
       "other": true
     }
   ],
   "featured": [
     "RepoDNA",
     "frametrellis",
+    "EyeZen",
     "Chess",
     "SpellChecker",
-    "CalcNova"
+    "LangSteps"
   ],
   "repositories": [
+    {
+      "name": "campuscore",
+      "url": "https://github.com/sanskarIN/campuscore",
+      "description": "CampusCore, a production-quality Student Management System project that is much more complete than a classroom demo.",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-21",
+      "pushed": "2026-10-15"
+    },
+    {
+      "name": "EyeZen",
+      "url": "https://github.com/sanskarIN/EyeZen",
+      "description": "Your screen. Your comfort. Your environment.",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-14",
+      "pushed": "2026-10-15"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-10-15"
+    },
+    {
+      "name": "frametrellis",
+      "url": "https://github.com/sanskarIN/frametrellis",
+      "description": "Open-source video editor.",
+      "homepage": "https://sanskarin.github.io/frametrellis/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 1,
+      "forks": 1,
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
+      "license": "GPL-3.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-11",
+      "pushed": "2026-10-15"
+    },
+    {
+      "name": "RepoDNA",
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 6,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-10-15"
+    },
+    {
+      "name": "SudokuNova",
+      "url": "https://github.com/sanskarIN/SudokuNova",
+      "description": "SudokuNova is a modern, fully open-source Android Sudoku game built with Kotlin and Jetpack Compose, featuring multiple difficulty levels, smart notes, hints, daily challenges, statistics, custom puzzles, accessibility, themes, offline gameplay, and a polished Material 3 UI/UX.",
+      "homepage": null,
+      "language": "Kotlin",
+      "language_color": "#A97BFF",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-17",
+      "pushed": "2026-10-15"
+    },
+    {
+      "name": "tempotrack",
+      "url": "https://github.com/sanskarIN/tempotrack",
+      "description": "",
+      "homepage": null,
+      "language": "Kotlin",
+      "language_color": "#A97BFF",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-10-15"
+    },
+    {
+      "name": "guessnova",
+      "url": "https://github.com/sanskarIN/guessnova",
+      "description": "",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "guess-the-number",
+        "guess-the-number-game",
+        "guessing-number-game",
+        "guessmynumber",
+        "numberguess",
+        "numberguesser"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-10-14"
+    },
+    {
+      "name": "thermoshift",
+      "url": "https://github.com/sanskarIN/thermoshift",
+      "description": "",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-10-14"
+    },
+    {
+      "name": "contactcore",
+      "url": "https://github.com/sanskarIN/contactcore",
+      "description": "ContactCore, a production-quality Basic Contact Book project that is much more complete than a classroom demo.",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-10-14"
+    },
     {
       "name": "LangSteps",
       "url": "https://github.com/sanskarIN/LangSteps",
@@ -112,22 +294,6 @@
       "pushed": "2026-10-13"
     },
     {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-10-13"
-    },
-    {
       "name": "unknown-mystery-ai",
       "url": "https://github.com/sanskarIN/unknown-mystery-ai",
       "description": "Official companion repository for The Unknown Mystery of the AI by Ram Sandesh — AI code examples, projects, exercises, notebooks, reproducibility resources, and practical learning materials covering ML, Deep Learning, LLMs, RAG, Agents, MLOps, Responsible AI, deployment, and…",
@@ -141,29 +307,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-17",
-      "pushed": "2026-10-13"
-    },
-    {
-      "name": "RepoDNA",
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 6,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
       "pushed": "2026-10-13"
     },
     {
@@ -222,22 +365,6 @@
       "pushed": "2026-10-13"
     },
     {
-      "name": "campuscore",
-      "url": "https://github.com/sanskarIN/campuscore",
-      "description": "CampusCore, a production-quality Student Management System project that is much more complete than a classroom demo.",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-21",
-      "pushed": "2026-10-12"
-    },
-    {
       "name": "libracore",
       "url": "https://github.com/sanskarIN/libracore",
       "description": "LibraCore, a production-quality Library Management System project that is much more complete than a classroom demo.",
@@ -251,29 +378,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-10-12"
-    },
-    {
-      "name": "frametrellis",
-      "url": "https://github.com/sanskarIN/frametrellis",
-      "description": "Open-source video editor.",
-      "homepage": "https://sanskarin.github.io/frametrellis/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "cmake",
-        "cpp",
-        "cpp20",
-        "desktop-application",
-        "docker",
-        "ffmpeg"
-      ],
-      "license": "GPL-3.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-11",
       "pushed": "2026-10-12"
     },
     {
@@ -567,38 +671,6 @@
       "pushed": "2026-10-02"
     },
     {
-      "name": "tempotrack",
-      "url": "https://github.com/sanskarIN/tempotrack",
-      "description": "",
-      "homepage": null,
-      "language": "Kotlin",
-      "language_color": "#A97BFF",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-10-02"
-    },
-    {
-      "name": "thermoshift",
-      "url": "https://github.com/sanskarIN/thermoshift",
-      "description": "",
-      "homepage": null,
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-09-30"
-    },
-    {
       "name": "BeatForge-Rhythm",
       "url": "https://github.com/sanskarIN/BeatForge-Rhythm",
       "description": "BeatForge is an open-source Android rhythm game and beat-map creator featuring offline play, custom charts, challenges, accessibility options, statistics, replay tools and community-ready extensibility.",
@@ -612,22 +684,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-27",
-      "pushed": "2026-09-30"
-    },
-    {
-      "name": "contactcore",
-      "url": "https://github.com/sanskarIN/contactcore",
-      "description": "ContactCore, a production-quality Basic Contact Book project that is much more complete than a classroom demo.",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
       "pushed": "2026-09-30"
     },
     {
@@ -775,22 +831,6 @@
       "pushed": "2026-09-07"
     },
     {
-      "name": "SudokuNova",
-      "url": "https://github.com/sanskarIN/SudokuNova",
-      "description": "SudokuNova is a modern, fully open-source Android Sudoku game built with Kotlin and Jetpack Compose, featuring multiple difficulty levels, smart notes, hints, daily challenges, statistics, custom puzzles, accessibility, themes, offline gameplay, and a polished Material 3 UI/UX.",
-      "homepage": null,
-      "language": "Kotlin",
-      "language_color": "#A97BFF",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-17",
-      "pushed": "2026-09-06"
-    },
-    {
       "name": "PuzzleForge",
       "url": "https://github.com/sanskarIN/PuzzleForge",
       "description": "",
@@ -837,29 +877,6 @@
       "archived": false,
       "created": "2026-08-19",
       "pushed": "2026-08-31"
-    },
-    {
-      "name": "guessnova",
-      "url": "https://github.com/sanskarIN/guessnova",
-      "description": "",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "guess-the-number",
-        "guess-the-number-game",
-        "guessing-number-game",
-        "guessmynumber",
-        "numberguess",
-        "numberguesser"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-08-27"
     },
     {
       "name": "unitflow",
@@ -1149,9 +1166,9 @@
     }
   ],
   "activity": {
-    "total": 26736,
+    "total": 27385,
     "start": "2025-10-12",
-    "end": "2026-10-14",
+    "end": "2026-10-15",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1473,14 +1490,14 @@
       612,
       1466,
       201,
-      96,
+      119,
       31,
       0,
       0,
       14,
       2,
       267,
-      118,
+      148,
       230,
       453,
       155,
@@ -1522,7 +1539,8 @@
       123,
       86,
       15,
-      49
+      95,
+      550
     ],
     "levels": [
       0,
@@ -1892,6 +1910,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -1948,8 +1967,8 @@
         "label": "Oct"
       }
     ],
-    "active_days": 106,
-    "longest_streak": 28,
+    "active_days": 107,
+    "longest_streak": 29,
     "busiest": {
       "date": "2026-08-19",
       "count": 7058
