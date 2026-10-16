@@ -1,0 +1,40 @@
+---
+title: "RepoDNA v1.4.1 Released — WinGet Integration and Windows Packaging Improvements"
+description: "RepoDNA v1.4.1 adds WinGet-ready manifests for Windows desktop and CLI packages, automated checksums, submission tooling, and regression tests. Catalog approval is still required."
+date: 2026-10-16T03:29:33+00:00
+author: "Sanskar"
+author_url: "/about/"
+author_login: "sanskarIN"
+image: "/assets/images/blog/repodna-v1-4-1-released-winget-integration-and-windows/9dc71ff5244bf493.png"
+image_alt: "RepoDNA official wordmark with its blue and teal DNA logo and the tagline “Understand your codebase. See its DNA.”"
+image_width: 1280
+image_height: 320
+tags: ["repodna", "open-source", "winget", "rust", "developer-tools"]
+source_issue: 37
+---
+<h2>RepoDNA v1.4.1 Released</h2>
+<p><strong>Released: October 16, 2026</strong></p>
+<p>RepoDNA v1.4.1 is now available, introducing a new foundation for installing and updating the application through Windows Package Manager (WinGet).</p>
+<p>This release focuses on improving Windows distribution, package validation, and release automation.</p>
+<h3>Release highlights</h3>
+<p><strong>WinGet-ready packaging</strong></p>
+<p>RepoDNA now generates WinGet manifests for the Windows desktop application and command-line tool.</p>
+<p>Both x64 and ARM64 architectures are supported.</p>
+<p><strong>Automated integrity checks</strong></p>
+<p>Release packaging now calculates SHA-256 checksums from the actual built installers and archives.</p>
+<p><strong>Submission automation</strong></p>
+<p>A new optional workflow helps maintainers submit WinGet manifests to Microsoft's community repository for review.</p>
+<p><strong>Expanded testing</strong></p>
+<p>Additional regression tests verify package metadata, executable paths, checksums, architectures, and version handling.</p>
+<h3>Availability</h3>
+<p>RepoDNA v1.4.1 can be obtained from GitHub Releases.</p>
+<p>WinGet installation and upgrade support will become available after the relevant package manifests are accepted and indexed in Microsoft's public catalog.</p>
+<h3>About RepoDNA</h3>
+<p>RepoDNA is an open-source, local-first codebase intelligence platform for exploring repository architecture, dependencies, history, complexity, and other development insights.</p>
+<p>It is designed to help developers understand software projects without requiring them to upload their repositories.</p>
+<h3>Get started</h3>
+<p><strong>Download:</strong> <a href="https://github.com/sanskarIN/RepoDNA/releases/tag/v1.4.1" rel="noopener noreferrer">https://github.com/sanskarIN/RepoDNA/releases/tag/v1.4.1</a></p>
+<p><strong>Web application:</strong> <a href="https://sanskarin.github.io/RepoDNA/" rel="noopener noreferrer">https://sanskarin.github.io/RepoDNA/</a></p>
+<p><strong>Documentation:</strong> <a href="https://sanskarin.github.io/RepoDNA/docs/" rel="noopener noreferrer">https://sanskarin.github.io/RepoDNA/docs/</a></p>
+<p><strong>Source code:</strong> <a href="https://github.com/sanskarIN/RepoDNA" rel="noopener noreferrer">https://github.com/sanskarIN/RepoDNA</a></p>
+<p>Contributions, feedback, and issue reports are welcome.</p>
