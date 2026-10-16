@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-15T09:12:48Z",
+  "generated_at": "2026-10-16T09:05:32Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
   },
   "totals": {
     "repositories": 62,
-    "stars": 15,
+    "stars": 17,
     "forks": 3,
     "languages": 26
   },
@@ -44,7 +44,7 @@
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 19.4,
+      "percent": 19.5,
       "other": true
     }
   ],
@@ -52,81 +52,33 @@
     "RepoDNA",
     "frametrellis",
     "EyeZen",
+    "LangSteps",
     "Chess",
-    "SpellChecker",
-    "LangSteps"
+    "SpellChecker"
   ],
   "repositories": [
     {
-      "name": "campuscore",
-      "url": "https://github.com/sanskarIN/campuscore",
-      "description": "CampusCore, a production-quality Student Management System project that is much more complete than a classroom demo.",
+      "name": "2048",
+      "url": "https://github.com/sanskarIN/2048",
+      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
       "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
+      "language": "Dart",
+      "language_color": "#00B4AB",
+      "stars": 1,
       "forks": 0,
-      "topics": [],
+      "topics": [
+        "2040",
+        "2048",
+        "2048-clone",
+        "2048-game",
+        "2048-game-online",
+        "2048-redesigned"
+      ],
       "license": "MIT",
       "fork": false,
       "archived": false,
-      "created": "2026-08-21",
-      "pushed": "2026-10-15"
-    },
-    {
-      "name": "EyeZen",
-      "url": "https://github.com/sanskarIN/EyeZen",
-      "description": "Your screen. Your comfort. Your environment.",
-      "homepage": null,
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-14",
-      "pushed": "2026-10-15"
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-10-15"
-    },
-    {
-      "name": "frametrellis",
-      "url": "https://github.com/sanskarIN/frametrellis",
-      "description": "Open-source video editor.",
-      "homepage": "https://sanskarin.github.io/frametrellis/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 1,
-      "forks": 1,
-      "topics": [
-        "cmake",
-        "cpp",
-        "cpp20",
-        "desktop-application",
-        "docker",
-        "ffmpeg"
-      ],
-      "license": "GPL-3.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-11",
-      "pushed": "2026-10-15"
+      "created": "2026-08-14",
+      "pushed": "2026-10-16"
     },
     {
       "name": "RepoDNA",
@@ -149,6 +101,123 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-24",
+      "pushed": "2026-10-16"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-10-16"
+    },
+    {
+      "name": "sortsmith",
+      "url": "https://github.com/sanskarIN/sortsmith",
+      "description": "SortSmith, a production-quality File Organizer project.",
+      "homepage": null,
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "fileoragin",
+        "fileordering",
+        "fileordertracker",
+        "fileorganiser",
+        "fileorganization",
+        "fileorganizer"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-21",
+      "pushed": "2026-10-16"
+    },
+    {
+      "name": "frametrellis",
+      "url": "https://github.com/sanskarIN/frametrellis",
+      "description": "Open-source video editor.",
+      "homepage": "https://sanskarin.github.io/frametrellis/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 2,
+      "forks": 1,
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
+      "license": "GPL-3.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-11",
+      "pushed": "2026-10-15"
+    },
+    {
+      "name": "LangSteps",
+      "url": "https://github.com/sanskarIN/LangSteps",
+      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
+      "homepage": "https://sanskarin.github.io/LangSteps/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "beginner-to-advanced",
+        "coding-challenges",
+        "coding-exercises",
+        "csharp",
+        "css",
+        "golang"
+      ],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-05-16",
+      "pushed": "2026-10-15"
+    },
+    {
+      "name": "campuscore",
+      "url": "https://github.com/sanskarIN/campuscore",
+      "description": "CampusCore, a production-quality Student Management System project that is much more complete than a classroom demo.",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-21",
+      "pushed": "2026-10-15"
+    },
+    {
+      "name": "EyeZen",
+      "url": "https://github.com/sanskarIN/EyeZen",
+      "description": "Your screen. Your comfort. Your environment.",
+      "homepage": "https://sanskarin.github.io/EyeZen/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "MPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-14",
       "pushed": "2026-10-15"
     },
     {
@@ -236,29 +305,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-10-14"
-    },
-    {
-      "name": "LangSteps",
-      "url": "https://github.com/sanskarIN/LangSteps",
-      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
-      "homepage": "https://sanskarin.github.io/LangSteps/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "beginner-to-advanced",
-        "coding-challenges",
-        "coding-exercises",
-        "csharp",
-        "css",
-        "golang"
-      ],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-05-16",
       "pushed": "2026-10-14"
     },
     {
@@ -378,29 +424,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-10-12"
-    },
-    {
-      "name": "2048",
-      "url": "https://github.com/sanskarIN/2048",
-      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
-      "homepage": null,
-      "language": "Dart",
-      "language_color": "#00B4AB",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "2040",
-        "2048",
-        "2048-clone",
-        "2048-game",
-        "2048-game-online",
-        "2048-redesigned"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-14",
       "pushed": "2026-10-12"
     },
     {
@@ -538,29 +561,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-14",
-      "pushed": "2026-10-09"
-    },
-    {
-      "name": "sortsmith",
-      "url": "https://github.com/sanskarIN/sortsmith",
-      "description": "SortSmith, a production-quality File Organizer project.",
-      "homepage": null,
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "fileoragin",
-        "fileordering",
-        "fileordertracker",
-        "fileorganiser",
-        "fileorganization",
-        "fileorganizer"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-21",
       "pushed": "2026-10-09"
     },
     {
@@ -1166,9 +1166,9 @@
     }
   ],
   "activity": {
-    "total": 27385,
+    "total": 27576,
     "start": "2025-10-12",
-    "end": "2026-10-15",
+    "end": "2026-10-16",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1540,7 +1540,8 @@
       86,
       15,
       95,
-      550
+      668,
+      73
     ],
     "levels": [
       0,
@@ -1911,6 +1912,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -1967,8 +1969,8 @@
         "label": "Oct"
       }
     ],
-    "active_days": 107,
-    "longest_streak": 29,
+    "active_days": 108,
+    "longest_streak": 30,
     "busiest": {
       "date": "2026-08-19",
       "count": 7058
