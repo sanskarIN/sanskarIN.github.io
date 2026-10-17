@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T09:05:32Z",
+  "generated_at": "2026-10-17T08:38:06Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -58,27 +58,20 @@
   ],
   "repositories": [
     {
-      "name": "2048",
-      "url": "https://github.com/sanskarIN/2048",
-      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
+      "name": "Sanskar-PDF-Editor",
+      "url": "https://github.com/sanskarIN/Sanskar-PDF-Editor",
+      "description": "An ultimate, enterprise-grade, offline-first PDF Editor featuring 70+ advanced tools. Built with React, Tauri v2, and Rust for lightning-fast, secure performance across Windows, Android, and Web.",
       "homepage": null,
-      "language": "Dart",
-      "language_color": "#00B4AB",
-      "stars": 1,
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 0,
       "forks": 0,
-      "topics": [
-        "2040",
-        "2048",
-        "2048-clone",
-        "2048-game",
-        "2048-game-online",
-        "2048-redesigned"
-      ],
-      "license": "MIT",
+      "topics": [],
+      "license": "Apache-2.0",
       "fork": false,
       "archived": false,
-      "created": "2026-08-14",
-      "pushed": "2026-10-16"
+      "created": "2026-07-09",
+      "pushed": "2026-10-17"
     },
     {
       "name": "RepoDNA",
@@ -101,7 +94,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-24",
-      "pushed": "2026-10-16"
+      "pushed": "2026-10-17"
     },
     {
       "name": "sanskarIN.github.io",
@@ -117,6 +110,29 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-26",
+      "pushed": "2026-10-16"
+    },
+    {
+      "name": "2048",
+      "url": "https://github.com/sanskarIN/2048",
+      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
+      "homepage": null,
+      "language": "Dart",
+      "language_color": "#00B4AB",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "2040",
+        "2048",
+        "2048-clone",
+        "2048-game",
+        "2048-game-online",
+        "2048-redesigned"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-14",
       "pushed": "2026-10-16"
     },
     {
@@ -305,22 +321,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-10-14"
-    },
-    {
-      "name": "Sanskar-PDF-Editor",
-      "url": "https://github.com/sanskarIN/Sanskar-PDF-Editor",
-      "description": "An ultimate, enterprise-grade, offline-first PDF Editor featuring 70+ advanced tools. Built with React, Tauri v2, and Rust for lightning-fast, secure performance across Windows, Android, and Web.",
-      "homepage": null,
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-07-09",
       "pushed": "2026-10-14"
     },
     {
@@ -1166,9 +1166,9 @@
     }
   ],
   "activity": {
-    "total": 27576,
+    "total": 27590,
     "start": "2025-10-12",
-    "end": "2026-10-16",
+    "end": "2026-10-17",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1541,7 +1541,8 @@
       15,
       95,
       668,
-      73
+      85,
+      2
     ],
     "levels": [
       0,
@@ -1913,6 +1914,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -1969,8 +1971,8 @@
         "label": "Oct"
       }
     ],
-    "active_days": 108,
-    "longest_streak": 30,
+    "active_days": 109,
+    "longest_streak": 31,
     "busiest": {
       "date": "2026-08-19",
       "count": 7058
