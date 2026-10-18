@@ -1,77 +1,109 @@
 {
-  "generated_at": "2026-10-17T08:38:06Z",
+  "generated_at": "2026-10-18T08:54:44Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
   },
   "totals": {
-    "repositories": 62,
-    "stars": 17,
+    "repositories": 65,
+    "stars": 20,
     "forks": 3,
-    "languages": 26
+    "languages": 27
   },
   "languages": [
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 31.1
+      "percent": 16.5
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 11.7
+      "percent": 13.9
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 11.4
+      "percent": 13.6
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 10.4
+      "percent": 12.8
     },
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 8.8
+      "percent": 11.0
     },
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 7.2
+      "percent": 8.6
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 19.5,
+      "percent": 23.5,
       "other": true
     }
   ],
   "featured": [
     "RepoDNA",
     "frametrellis",
+    "Rewind64",
     "EyeZen",
-    "LangSteps",
-    "Chess",
-    "SpellChecker"
+    "LineLoom",
+    "ReproCrate"
   ],
   "repositories": [
     {
-      "name": "Sanskar-PDF-Editor",
-      "url": "https://github.com/sanskarIN/Sanskar-PDF-Editor",
-      "description": "An ultimate, enterprise-grade, offline-first PDF Editor featuring 70+ advanced tools. Built with React, Tauri v2, and Rust for lightning-fast, secure performance across Windows, Android, and Web.",
+      "name": "Rewind64",
+      "url": "https://github.com/sanskarIN/Rewind64",
+      "description": "A cross-platform, high-performance native debugger and execution recorder built entirely in Assembly.",
       "homepage": null,
-      "language": "Rust",
-      "language_color": "#dea584",
+      "language": "Assembly",
+      "language_color": "#6E4C13",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "BSL-1.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-18",
+      "pushed": "2026-10-18"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "HTML",
+      "language_color": "#e34c26",
       "stars": 0,
       "forks": 0,
       "topics": [],
-      "license": "Apache-2.0",
+      "license": null,
       "fork": false,
       "archived": false,
-      "created": "2026-07-09",
-      "pushed": "2026-10-17"
+      "created": "2026-09-26",
+      "pushed": "2026-10-18"
+    },
+    {
+      "name": "ReproCrate",
+      "url": "https://github.com/sanskarIN/ReproCrate",
+      "description": "Turn bugs into reproducible reports.",
+      "homepage": null,
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "EPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
+      "pushed": "2026-10-18"
     },
     {
       "name": "RepoDNA",
@@ -94,13 +126,75 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-24",
-      "pushed": "2026-10-17"
+      "pushed": "2026-10-18"
     },
     {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
+      "name": "LineLoom",
+      "url": "https://github.com/sanskarIN/LineLoom",
+      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
+      "pushed": "2026-10-18"
+    },
+    {
+      "name": "frametrellis",
+      "url": "https://github.com/sanskarIN/frametrellis",
+      "description": "Open-source video editor.",
+      "homepage": "https://sanskarin.github.io/frametrellis/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 2,
+      "forks": 1,
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
+      "license": "GPL-3.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-11",
+      "pushed": "2026-10-18"
+    },
+    {
+      "name": "LangSteps",
+      "url": "https://github.com/sanskarIN/LangSteps",
+      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
+      "homepage": "https://sanskarin.github.io/LangSteps/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "beginner-to-advanced",
+        "coding-challenges",
+        "coding-exercises",
+        "csharp",
+        "css",
+        "golang"
+      ],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-05-16",
+      "pushed": "2026-10-18"
+    },
+    {
+      "name": "SpeedPulse",
+      "url": "https://github.com/sanskarIN/SpeedPulse",
+      "description": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of…",
+      "homepage": "https://sanskarin.github.io/SpeedPulse/",
       "language": "HTML",
       "language_color": "#e34c26",
       "stars": 0,
@@ -109,8 +203,24 @@
       "license": null,
       "fork": false,
       "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-10-16"
+      "created": "2026-06-19",
+      "pushed": "2026-10-17"
+    },
+    {
+      "name": "Sanskar-PDF-Editor",
+      "url": "https://github.com/sanskarIN/Sanskar-PDF-Editor",
+      "description": "An ultimate, enterprise-grade, offline-first PDF Editor featuring 70+ advanced tools. Built with React, Tauri v2, and Rust for lightning-fast, secure performance across Windows, Android, and Web.",
+      "homepage": null,
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-07-09",
+      "pushed": "2026-10-17"
     },
     {
       "name": "2048",
@@ -157,52 +267,6 @@
       "archived": false,
       "created": "2026-08-21",
       "pushed": "2026-10-16"
-    },
-    {
-      "name": "frametrellis",
-      "url": "https://github.com/sanskarIN/frametrellis",
-      "description": "Open-source video editor.",
-      "homepage": "https://sanskarin.github.io/frametrellis/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 2,
-      "forks": 1,
-      "topics": [
-        "cmake",
-        "cpp",
-        "cpp20",
-        "desktop-application",
-        "docker",
-        "ffmpeg"
-      ],
-      "license": "GPL-3.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-11",
-      "pushed": "2026-10-15"
-    },
-    {
-      "name": "LangSteps",
-      "url": "https://github.com/sanskarIN/LangSteps",
-      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
-      "homepage": "https://sanskarin.github.io/LangSteps/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "beginner-to-advanced",
-        "coding-challenges",
-        "coding-exercises",
-        "csharp",
-        "css",
-        "golang"
-      ],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-05-16",
-      "pushed": "2026-10-15"
     },
     {
       "name": "campuscore",
@@ -703,22 +767,6 @@
       "pushed": "2026-09-29"
     },
     {
-      "name": "SpeedPulse",
-      "url": "https://github.com/sanskarIN/SpeedPulse",
-      "description": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of…",
-      "homepage": null,
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-06-19",
-      "pushed": "2026-09-26"
-    },
-    {
       "name": "tablespark",
       "url": "https://github.com/sanskarIN/tablespark",
       "description": "",
@@ -1038,7 +1086,7 @@
       "name": "sql-master",
       "url": "https://github.com/sanskarIN/sql-master",
       "description": "Companion code, SQL labs, exercises, samples, and documentation for SQL Full Mastery by Ram Sandesh — a complete 120-part journey from SQL fundamentals to production database engineering and interview mastery.",
-      "homepage": "https://ramsandesh.gumroad.com",
+      "homepage": "https://sanskarin.gumroad.com",
       "language": "PLpgSQL",
       "language_color": "#336790",
       "stars": 0,
@@ -1166,19 +1214,12 @@
     }
   ],
   "activity": {
-    "total": 27590,
-    "start": "2025-10-12",
-    "end": "2026-10-17",
+    "total": 28273,
+    "start": "2025-10-19",
+    "end": "2026-10-18",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
       0,
       0,
       0,
@@ -1542,16 +1583,10 @@
       95,
       668,
       85,
-      2
+      318,
+      367
     ],
     "levels": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
       0,
       0,
       0,
@@ -1915,64 +1950,61 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
       {
-        "week": 0,
-        "label": "Oct"
-      },
-      {
-        "week": 3,
+        "week": 2,
         "label": "Nov"
       },
       {
-        "week": 8,
+        "week": 7,
         "label": "Dec"
       },
       {
-        "week": 12,
+        "week": 11,
         "label": "Jan"
       },
       {
-        "week": 16,
+        "week": 15,
         "label": "Feb"
       },
       {
-        "week": 20,
+        "week": 19,
         "label": "Mar"
       },
       {
-        "week": 25,
+        "week": 24,
         "label": "Apr"
       },
       {
-        "week": 29,
+        "week": 28,
         "label": "May"
       },
       {
-        "week": 34,
+        "week": 33,
         "label": "Jun"
       },
       {
-        "week": 38,
+        "week": 37,
         "label": "Jul"
       },
       {
-        "week": 42,
+        "week": 41,
         "label": "Aug"
       },
       {
-        "week": 47,
+        "week": 46,
         "label": "Sep"
       },
       {
-        "week": 51,
+        "week": 50,
         "label": "Oct"
       }
     ],
-    "active_days": 109,
-    "longest_streak": 31,
+    "active_days": 110,
+    "longest_streak": 32,
     "busiest": {
       "date": "2026-08-19",
       "count": 7058
