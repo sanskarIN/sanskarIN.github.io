@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="किस्सों की चौपाल का खुली किताब और बरगद वाला प्रतीक">
+  <circle cx="200" cy="200" r="194" fill="#254e42"/>
+  <circle cx="200" cy="200" r="170" fill="none" stroke="#c9b67f" stroke-width="2"/>
+  <path d="M194 213v-83h15v83m-9-47-32-33m37 17 34-29" fill="none" stroke="#b58a57" stroke-width="13" stroke-linecap="round"/>
+  <g fill="#6d936a"><ellipse cx="148" cy="126" rx="49" ry="35"/><ellipse cx="201" cy="92" rx="58" ry="38"/><ellipse cx="253" cy="121" rx="50" ry="36"/><ellipse cx="197" cy="133" rx="64" ry="35"/></g>
+  <g fill="#a9b87e"><ellipse cx="167" cy="102" rx="29" ry="19"/><ellipse cx="218" cy="82" rx="29" ry="18"/><ellipse cx="263" cy="112" rx="22" ry="17"/></g>
+  <path d="M88 211q62-5 112 29 50-34 112-29v78q-65-6-112 31-47-37-112-31Z" fill="#cfb988"/>
+  <path d="M91 200q59-4 109 30v74q-50-33-109-28Z" fill="#fff0ca"/>
+  <path d="M309 200q-59-4-109 30v74q50-33 109-28Z" fill="#ead6a5"/>
+  <path d="M113 226q34 1 65 19m-65 1q34 1 65 19m109-39q-34 1-65 19m65 1q-34 1-65 19" fill="none" stroke="#bc9c66" stroke-width="5" stroke-linecap="round"/>
+  <path d="M150 341h100" stroke="#d9b970" stroke-width="5" stroke-linecap="round"/>
+</svg>
