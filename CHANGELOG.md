@@ -10,10 +10,12 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 - The first story's synopsis, characters, themes and honest in-production status, with publication links controlled by `_data/kahani.yml`.
 - Browser-local TypeScript search, publication-status filters, accessible empty states and user-triggered sharing, with all content available without JavaScript.
 - Original courtyard and book/tree SVG artwork, a first-episode poster, self-hosted Noto Sans Devanagari with its OFL notice, and a publishing guide in `.github/docs/kahani-publishing.md`.
+- PayPal support at [paypal.me/SanskarCodes](https://paypal.me/SanskarCodes), available in the footer, on the Home, About, and Contact pages, and in the terminal's `support` command.
 
 ### Changed
 
 - Header/footer navigation, the main stylesheet and the Credits page now include the Kahani section.
+- The About page, Privacy Policy, Terms, and documentation include PayPal.
 
 ## [1.8.2] — 2026-10-12
 

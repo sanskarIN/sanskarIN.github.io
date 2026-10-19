@@ -108,15 +108,12 @@ profiles:
     icon: gumroad
     note: Digital products
 
-  # ---------------------------------------------------------------------------
-  # PAYPAL_URL — PayPal is intentionally not enabled yet.
-  # When you have the real PayPal link, paste it between the quotes below.
-  # That's the only step: the PayPal link then appears automatically in the
-  # footer, on the Contact page, and in the Home page support section.
-  # ---------------------------------------------------------------------------
+  # A payment page, not a personal profile.
   paypal:
     name: PayPal
-    url: ""
+    url: https://paypal.me/SanskarCodes
+    handle: SanskarCodes
+    username: SanskarCodes
     icon: paypal
     note: Support my work
     same_as: false

@@ -16,7 +16,7 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 - [Site search](#site-search)
 - [TypeScript](#typescript)
 - [Home page terminal](#home-page-terminal)
-- [Adding PayPal](#adding-paypal)
+- [PayPal](#paypal)
 - [Contact form](#contact-form)
 - [Thank-you pages](#thank-you-pages)
 - [Blog](#blog)
@@ -87,7 +87,7 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 .
 ├── _config.yml               Site identity, URLs, SEO defaults, security policy, build settings
 ├── _data/                    Content settings — most edits happen here
-│   ├── social.yml            Social, professional, and support links (+ the PayPal slot)
+│   ├── social.yml            Social, professional, and support links
 │   ├── contact.yml           The three email addresses and what each is for
 │   ├── navigation.yml        Header and footer navigation
 │   ├── legal.yml             "Last updated" dates of the policy pages
@@ -255,7 +255,7 @@ Every profile link on the site (header, footer, Home, About, Developer, Contact,
 | Buy Me a Coffee | https://buymeacoffee.com/SanskarCodes | `SanskarCodes` |
 | Razorpay | https://razorpay.me/@SanskarCodes | `@SanskarCodes` |
 | Gumroad | https://sanskarIN.gumroad.com | `sanskarIN` |
-| PayPal | *not set yet* | — |
+| PayPal | https://paypal.me/SanskarCodes | `SanskarCodes` |
 
 - Each entry has a `name`, `url`, `handle`, `username`, `icon`, and a short `note`. A blank `url` hides that profile everywhere.
 - `groups` sets the order and grouping in the footer and on the Contact page (Developer, Social, Support & Products); `community` lists the profiles featured on the Home page; `follow` lists the profiles suggested on the [thank-you pages](#thank-you-pages).
@@ -414,17 +414,13 @@ There are a few hidden commands too. Under the prompt, buttons run the most usef
 - **Accessibility:** the prompt is a labelled text field; the output is a log that screen readers announce; links in the output are real links; ↑ and ↓ go through earlier commands; Tab completes a command only when there's something to complete, and otherwise moves focus as usual.
 - **Adding a command:** add an entry to the `commands` list in `src/ts/terminal.ts` (its name, a summary for `help`, and what it prints), then run `npm run build`.
 
-## Adding PayPal
+## PayPal
 
-PayPal has intentionally not been added yet. When the final PayPal URL is available, add it to the centralized contact/social configuration and enable the corresponding interface link:
+PayPal support is available at [paypal.me/SanskarCodes](https://paypal.me/SanskarCodes). Its URL, handle, and icon are defined in the `paypal` entry in `_data/social.yml`.
 
-1. Open `_data/social.yml` and find the `paypal` entry (search for `PAYPAL_URL`).
-2. Paste the real link between the quotes: `url: "…"`.
-3. Commit the change.
+The link appears in the footer's Support & Products group, on the Home, About, and Contact pages, and in the terminal's `support` command. It uses the PayPal icon in the sprite and is left out of personal structured data (`same_as: false`), because a payment link is not a profile. Payments happen on PayPal; the website does not collect payment details.
 
-That single edit enables the PayPal link in the footer's Support & Products group, on the Contact page, and in the Home page's support section, with the PayPal icon (already in the sprite). The link is deliberately left out of structured data (`same_as: false`), because a payment link is not a profile.
-
-Then keep the policies accurate: add PayPal to the lists of third-party services in `privacy.md` and `terms.md`, and update their dates in `_data/legal.yml`.
+If the link changes, update that entry and keep the platform lists in `privacy.md` and `terms.md` and their dates in `_data/legal.yml` accurate.
 
 ## Contact form
 
