@@ -252,6 +252,7 @@ Every profile link on the site (header, footer, Home, About, Developer, Contact,
 | Instagram | https://instagram.com/SanskarCode | `@SanskarCode` |
 | Threads | https://threads.com/SanskarCode | `@SanskarCode` |
 | Bluesky | https://bsky.app/profile/SanskarCodes.bsky.social | `@SanskarCodes.bsky.social` |
+| YouTube (Kahani Wali Shaam) | https://www.youtube.com/@KahaniWaliShaam | `@KahaniWaliShaam` |
 | Buy Me a Coffee | https://buymeacoffee.com/SanskarCodes | `SanskarCodes` |
 | Razorpay | https://razorpay.me/@SanskarCodes | `@SanskarCodes` |
 | Gumroad | https://sanskarIN.gumroad.com | `sanskarIN` |
@@ -262,6 +263,7 @@ Every profile link on the site (header, footer, Home, About, Developer, Contact,
 - To add a service: add an entry, add its icon to `assets/icons/sprite.svg`, and add its key to a group.
 - External links open in a new tab with `rel="noopener noreferrer"` and tell screen-reader users so; the templates handle this.
 - The Discord link opens a channel inside a server, so it works for members of that server. An invite link (`discord.gg/…`) would also work for non-members, if you prefer one.
+- Kahani Wali Shaam is the YouTube channel for listening to kahani (story) videos. It appears in the Social group, on the Contact page, in the terminal's `socials` command, and under "Follow along" on thank-you pages. As a separate storytelling channel, it is left out of the developer's personal structured data (`same_as: false`).
 
 ### Email addresses — `_data/contact.yml`
 

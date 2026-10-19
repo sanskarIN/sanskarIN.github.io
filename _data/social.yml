@@ -82,6 +82,16 @@ profiles:
     icon: bluesky
     note: Posts and updates
 
+  # A storytelling channel, separate from the personal developer profile.
+  youtube:
+    name: YouTube — Kahani Wali Shaam
+    url: https://www.youtube.com/@KahaniWaliShaam
+    handle: "@KahaniWaliShaam"
+    username: KahaniWaliShaam
+    icon: youtube
+    note: Listen to kahani (story) videos
+    same_as: false
+
   buymeacoffee:
     name: Buy Me a Coffee
     url: https://buymeacoffee.com/SanskarCodes
@@ -125,7 +135,7 @@ groups:
     items: [github, linkedin, devto, discord]
   social:
     title: Social
-    items: [x, instagram, threads, bluesky]
+    items: [x, instagram, threads, bluesky, youtube]
   products:
     title: Support & Products
     items: [buymeacoffee, razorpay, gumroad, paypal]
@@ -134,4 +144,4 @@ groups:
 community: [devto, discord, x, bluesky, linkedin]
 
 # Profiles suggested under "Follow along" on the thank-you pages.
-follow: [github, x, instagram, linkedin, devto]
+follow: [github, x, instagram, linkedin, devto, youtube]

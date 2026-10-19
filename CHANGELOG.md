@@ -11,11 +11,12 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 - Browser-local TypeScript search, publication-status filters, accessible empty states and user-triggered sharing, with all content available without JavaScript.
 - Original courtyard and book/tree SVG artwork, a first-episode poster, self-hosted Noto Sans Devanagari with its OFL notice, and a publishing guide in `.github/docs/kahani-publishing.md`.
 - PayPal support at [paypal.me/SanskarCodes](https://paypal.me/SanskarCodes), available in the footer, on the Home, About, and Contact pages, and in the terminal's `support` command.
+- [Kahani Wali Shaam on YouTube](https://www.youtube.com/@KahaniWaliShaam) for listening to kahani (story) videos, with a YouTube icon, Social links, the terminal's `socials` command, and the thank-you pages' "Follow along" links.
 
 ### Changed
 
 - Header/footer navigation, the main stylesheet and the Credits page now include the Kahani section.
-- The About page, Privacy Policy, Terms, and documentation include PayPal.
+- The About page includes PayPal; the Privacy Policy, Terms, and documentation include PayPal and YouTube.
 
 ## [1.8.2] — 2026-10-12
 
