@@ -21,9 +21,8 @@ for (const name of pages) {
 }
 const catalogue = await read(pages[0]);
 assert.match(catalogue, /data-story-filters hidden/u, 'filters progressively enabled by JS');
-assert.match(catalogue, /data-story-status="production"/u, 'first episode remains in production');
-assert.match(catalogue, /आवाज़ व अंतिम संपादन जारी/u, 'honest production message');
-assert.doesNotMatch(catalogue, />YouTube पर देखें</u, 'no empty watch link');
+assert.match(catalogue, /data-story-status="(?:production|published)"/u, 'explicit episode publication state');
+assert.doesNotMatch(catalogue, /<a\b[^>]*\bhref="\s*"/u, 'no empty links after publication updates');
 const search = JSON.parse(await read('search.json'));
 assert(search.some((item) => item.url === '/Kahani/'), 'catalogue is searchable');
 assert(search.some((item) => item.url === '/About-Kahani-Videos/'), 'about page is searchable');

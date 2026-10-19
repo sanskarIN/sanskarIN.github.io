@@ -38,8 +38,8 @@
         });
         update();
     }
-    const shareStatus = document.querySelector("[data-share-status]");
     document.querySelectorAll("[data-story-share]").forEach((button) => {
+        const shareStatus = button.closest("section")?.querySelector("[data-share-status]");
         if (!navigator.share && (!navigator.clipboard || !window.isSecureContext))
             return;
         button.hidden = false;

@@ -85,8 +85,8 @@ image_height: 630
       </div>
       <p class="k-share-status" role="status" aria-live="polite" data-share-status></p>
     </div>
-    <aside class="k-characters" aria-labelledby="characters-title">
-      <h3 id="characters-title">मिलिए कहानी के लोगों से</h3>
+    <aside class="k-characters" aria-labelledby="{{ episode.id }}-characters-title">
+      <h3 id="{{ episode.id }}-characters-title">मिलिए कहानी के लोगों से</h3>
       <dl>{% for character in site.data.kahani.characters %}<div><dt>{{ character.name }}</dt><dd>{{ character.role }}</dd></div>{% endfor %}</dl>
       <p class="k-question">“{{ episode.question }}”</p>
       <a href="{{ '/contact/#send-a-message' | relative_url }}">अपनी बात भेजें <span aria-hidden="true">↗</span></a>

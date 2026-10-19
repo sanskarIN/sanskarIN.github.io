@@ -38,8 +38,8 @@
     update();
   }
 
-  const shareStatus = document.querySelector<HTMLElement>("[data-share-status]");
   document.querySelectorAll<HTMLButtonElement>("[data-story-share]").forEach((button) => {
+    const shareStatus = button.closest("section")?.querySelector<HTMLElement>("[data-share-status]");
     if (!navigator.share && (!navigator.clipboard || !window.isSecureContext)) return;
     button.hidden = false;
     button.addEventListener("click", async () => {
