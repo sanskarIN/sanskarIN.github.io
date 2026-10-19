@@ -753,6 +753,19 @@ Keep the policies in step with the website:
 
 After any change, update the page's date in `_data/legal.yml`.
 
+## Kahani by Ram Sandesh
+
+The Hindi story section uses the same Jekyll build and TypeScript tooling:
+
+- [`/Kahani/`](https://sanskarin.github.io/Kahani/) contains the catalogue and episode introductions.
+- [`/About-Kahani-Videos/`](https://sanskarin.github.io/About-Kahani-Videos/) explains the story identity, fictional content, digital/AI-assisted production and contact route.
+- `_data/kahani.yml` contains the recommended **किस्सों की चौपाल | Ram Sandesh** identity and episode records. The proposed YouTube handle is not treated as a verified channel URL.
+- The first episode is **in production** until its multi-character narration and final edit are complete. Blank media links are not rendered as watch/download buttons.
+- `src/ts/kahani.ts` progressively enhances search, status filtering and sharing; it makes no network requests and stores no visitor data.
+- Original illustrations live in `assets/images/kahani/`. Noto Sans Devanagari is self-hosted with its own OFL notice.
+
+Read [the publishing guide](.github/docs/kahani-publishing.md) before adding a channel URL, video or final captions. These routes become public after the branch is merged into the GitHub Pages source and the Pages build succeeds.
+
 ## Design system
 
 - **Tokens** — `_includes/css/tokens.css`: type scale (fluid `clamp()` sizes), spacing scale, content widths, radius, and motion; colors come from `_data/theme.yml`.

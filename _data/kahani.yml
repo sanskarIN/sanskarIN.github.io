@@ -1,0 +1,37 @@
+# Story identity and the catalogue are independent of the developer profile.
+brand:
+  name: "किस्सों की चौपाल"
+  display_name: "किस्सों की चौपाल | Ram Sandesh"
+  credit: "Kahani by Ram Sandesh"
+  author: "Ram Sandesh"
+  tagline: "हर किस्से में ज़िंदगी का एक रंग।"
+  suggested_handle: "@KisseByRamSandesh"
+  # Set only after the new channel/handle has been created and verified.
+  channel_url: ""
+
+episodes:
+  - id: emaandari-ki-aakhri-thali
+    number: "01"
+    title: "ईमानदारी की आख़िरी थाली"
+    genre: "प्रेरक कहानी"
+    status: production
+    status_label: "आवाज़ व अंतिम संपादन जारी"
+    duration_label: "लगभग 11 मिनट"
+    synopsis: "एक भूखी बच्ची, पूरी वाले की आख़िरी थाली और बारिश में घिरा गाँव। रामू की छोटी सी मदद लोगों को एक साझा रसोई और नए भरोसे तक ले जाती है।"
+    question: "आप रामू की जगह होते, तो क्या करते?"
+    poster: /assets/images/kahani/aakhri-thali-poster.png
+    poster_alt: "रामू, चंदा और पूरी-सब्जी की थाली के साथ ईमानदारी की आख़िरी थाली का चित्र।"
+    themes: ["ईमानदारी", "साझेदारी", "करुणा"]
+    # Keep both empty until the voiced film and final captions are published.
+    youtube_url: ""
+    captions_url: ""
+
+characters:
+  - name: रामू
+    role: "मेहनती पूरी वाला; कमाई के साथ लोगों की भूख और सम्मान की भी चिंता करता है।"
+  - name: मीरा
+    role: "रामू की साथी; छोटी रसोई और मुश्किल फैसलों में बराबर का साथ देती है।"
+  - name: चंदा और दादी
+    role: "दो मुसाफिर, जिनकी एक थाली से कहानी की दिशा बदलती है।"
+  - name: धनराज, मोहन और हरिराम
+    role: "एक दुकानदार, उसका सहायक और गाँव का किसान—मुश्किल समय में सबकी परीक्षा होती है।"

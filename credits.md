@@ -57,6 +57,8 @@ The colors that identify programming languages on the Projects page are GitHub's
 
 ## Icons
 
+**Noto Sans Devanagari** is self-hosted for the Hindi Kahani pages, under the SIL Open Font License 1.1. The font notice is included at [/assets/fonts/OFL-NotoSansDevanagari.txt]({{ '/assets/fonts/OFL-NotoSansDevanagari.txt' | relative_url }}). The original font comes from the Google Fonts Noto Sans Devanagari project.
+
 - **Brand icons** come from {% include link.html url="https://simpleicons.org/" label="Simple Icons" %}, released under CC0 1.0 (public domain dedication).
 - **The LinkedIn icon** comes from {% include link.html url="https://icons.getbootstrap.com/" label="Bootstrap Icons" %}, MIT License, © The Bootstrap Authors. The license text is included in the icon file.
 - **Interface icons** — menu, theme switch, search, arrows, email, the focus-area icons, and the repository, star, fork, license, activity, and heart icons — were drawn for this website.
@@ -66,6 +68,8 @@ Brand names and logos are trademarks of their respective owners. They are used o
 ## Images
 
 The site icons and the social preview image were created for this website from the logo mark and the IBM Plex fonts. Images in blog posts belong to the posts' authors.
+
+The Kahani section is credited **Kahani by Ram Sandesh**. Its courtyard illustration, open-book/tree emblem, and first-episode poster were created as original digital vector artwork. Details about fictional stories, AI-assisted production and publication status are on [About Kahani Videos]({{ '/About-Kahani-Videos/' | relative_url }}).
 
 ## External resources
 
