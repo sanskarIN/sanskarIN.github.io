@@ -1,0 +1,98 @@
+---
+layout: default
+title: "Kahani by Ram Sandesh"
+seo_title: "किस्सों की चौपाल · Kahani by Ram Sandesh"
+description: "राम संदेश की हिंदी कहानियों का घर। किस्सों की चौपाल पर मिलें कहानी परिचय, किरदार, विषय और प्रकाशित वीडियो के आधिकारिक लिंक।"
+permalink: /Kahani/
+lang: hi
+author: Ram Sandesh
+body_class: page-kahani
+scripts: [kahani]
+image: /assets/images/kahani/social-cover.png
+image_alt: "किस्सों की चौपाल — Kahani by Ram Sandesh"
+image_width: 1200
+image_height: 630
+---
+{%- assign brand = site.data.kahani.brand -%}
+<section class="k-hero">
+  <div class="container k-hero__grid">
+    <div>
+      <p class="k-overline">{{ brand.credit }}</p>
+      <h1>{{ brand.name }}</h1>
+      <p class="k-hero__tagline">{{ brand.tagline }}</p>
+      <p class="k-hero__intro">कभी गाँव की गलियों में, कभी रोज़मर्रा के रिश्तों में—एक छोटी सी बात पूरी कहानी बदल देती है। आइए, ऐसे ही कुछ किस्सों के साथ बैठें।</p>
+      <div class="button-row">
+        <a class="button button--primary" href="#stories">कहानियाँ देखें <span aria-hidden="true">↓</span></a>
+        <a class="button button--secondary" href="{{ '/About-Kahani-Videos/' | relative_url }}">इस चौपाल के बारे में</a>
+      </div>
+      <p class="k-byline">कहानी प्रस्तुति · <strong>{{ brand.author }}</strong></p>
+    </div>
+    <div class="k-hero__art">
+      <img src="{{ '/assets/images/kahani/chaupal-illustration.svg' | relative_url }}" width="720" height="620" alt="बरगद की छाँव, खुली किताब और मिट्टी के घरों के बीच कहानी सुनने की चौपाल।" fetchpriority="high">
+      <span class="k-hero__note">एक किस्सा। कई नज़रिए।</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="stories" aria-labelledby="stories-title" data-story-catalogue>
+  <div class="container">
+    <div class="k-section-heading">
+      <div><p class="k-overline">कहानी संग्रह</p><h2 id="stories-title">चौपाल का पहला किस्सा</h2></div>
+      <p>हर कहानी का परिचय, उसके किरदार और पूरा होने पर उसका वीडियो—एक जगह।</p>
+    </div>
+    <form class="k-filters" role="search" aria-label="कहानी खोजें" data-story-filters hidden>
+      <div><label for="story-query">शीर्षक या विषय</label><input id="story-query" type="search" placeholder="जैसे: ईमानदारी" autocomplete="off" data-story-query></div>
+      <div><label for="story-status">स्थिति</label><select id="story-status" data-story-status><option value="all">सभी कहानियाँ</option><option value="published">प्रकाशित</option><option value="production">तैयारी में</option></select></div>
+      <button class="button button--secondary" type="reset">साफ़ करें</button>
+    </form>
+    <p class="k-result-count" role="status" aria-live="polite" data-story-count hidden></p>
+    <ul class="k-story-grid" data-story-list>
+      {%- for episode in site.data.kahani.episodes %}
+      <li data-story-card data-story-status="{{ episode.status | escape }}" data-story-search="{{ episode.title | append: ' ' | append: episode.genre | append: ' ' | append: episode.synopsis | escape }} {{ episode.themes | join: ' ' | escape }}">
+        <article class="k-card">
+          <a class="k-card__image" href="#{{ episode.id }}" aria-label="{{ episode.title }} का परिचय पढ़ें"><img src="{{ episode.poster | relative_url }}" width="1280" height="720" alt="{{ episode.poster_alt | escape }}" loading="lazy"></a>
+          <div class="k-card__body">
+            <div class="k-card__meta"><span>किस्सा {{ episode.number }}</span><span>{{ episode.duration_label }}</span></div>
+            <h3><a href="#{{ episode.id }}">{{ episode.title }}</a></h3>
+            <p>{{ episode.synopsis }}</p>
+            <p class="k-status"><span aria-hidden="true">●</span> {{ episode.status_label }}</p>
+            <a class="text-link" href="#{{ episode.id }}">कहानी का परिचय <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+      </li>
+      {%- endfor %}
+    </ul>
+    <div class="k-empty" data-story-empty hidden><h3>इस खोज में अभी कोई कहानी नहीं मिली।</h3><p>दूसरा शब्द चुनें या स्थिति को “सभी कहानियाँ” करें।</p><button class="button button--secondary" type="button" data-story-clear>सभी कहानियाँ दिखाएँ</button></div>
+  </div>
+</section>
+
+{%- for episode in site.data.kahani.episodes %}
+<section class="section section--surface" id="{{ episode.id }}" aria-labelledby="{{ episode.id }}-title">
+  <div class="container k-episode">
+    <div class="k-episode__intro">
+      <p class="k-overline">किस्सा {{ episode.number }} · {{ episode.genre }}</p>
+      <h2 id="{{ episode.id }}-title">{{ episode.title }}</h2>
+      <p class="k-episode__lead">एक थाली खाने से कहीं ज़्यादा क्या दे सकती है?</p>
+      <p>{{ episode.synopsis }}</p>
+      <ul class="k-themes" aria-label="कहानी के विषय">{% for theme in episode.themes %}<li>{{ theme }}</li>{% endfor %}</ul>
+      <div class="k-production-note"><strong>{{ episode.status_label }}</strong>{% if episode.status == "published" %}<p>पूरा वीडियो नीचे दिए आधिकारिक लिंक पर देखें। उपलब्ध होने पर अंतिम हिंदी उपशीर्षक भी यहीं मिलेंगे।</p>{% else %}<p>दृश्य संस्करण तैयार है। अलग-अलग किरदारों की आवाज़ और अंतिम संपादन पूरा होने के बाद यहाँ प्रकाशित वीडियो का लिंक और अंतिम उपशीर्षक जोड़े जाएँगे।</p>{% endif %}</div>
+      <p class="k-credit">{{ brand.credit }}</p>
+      <div class="button-row">
+        {% if episode.youtube_url != "" %}{% include link.html url=episode.youtube_url label="YouTube पर देखें" class="button button--primary" %}{% endif %}
+        {% if episode.captions_url != "" %}<a class="button button--secondary" href="{{ episode.captions_url | relative_url }}">हिंदी उपशीर्षक</a>{% endif %}
+        <button class="button button--secondary" type="button" data-story-share="{{ episode.id }}" hidden>कहानी का लिंक साझा करें</button>
+        <a class="button button--ghost" href="{{ '/About-Kahani-Videos/' | relative_url }}#story-notes">कहानी संबंधी सूचना</a>
+      </div>
+      <p class="k-share-status" role="status" aria-live="polite" data-share-status></p>
+    </div>
+    <aside class="k-characters" aria-labelledby="characters-title">
+      <h3 id="characters-title">मिलिए कहानी के लोगों से</h3>
+      <dl>{% for character in site.data.kahani.characters %}<div><dt>{{ character.name }}</dt><dd>{{ character.role }}</dd></div>{% endfor %}</dl>
+      <p class="k-question">“{{ episode.question }}”</p>
+      <a href="{{ '/contact/#send-a-message' | relative_url }}">अपनी बात भेजें <span aria-hidden="true">↗</span></a>
+    </aside>
+  </div>
+</section>
+{%- endfor %}
+
+<section class="section"><div class="container k-closing"><img src="{{ '/assets/images/kahani/chaupal-mark.svg' | relative_url }}" width="96" height="96" alt="" loading="lazy"><div><h2>अगले किस्से की जगह यहीं है।</h2><p>नई कहानियों और प्रकाशित वीडियो की जानकारी इसी संग्रह में मिलेगी।</p></div><a class="button button--secondary" href="{{ '/About-Kahani-Videos/' | relative_url }}#contact">सुझाव या सहयोग</a></div></section>

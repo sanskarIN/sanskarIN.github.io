@@ -17,6 +17,8 @@ main:
     url: /projects/
   - title: Blog
     url: /blog/
+  - title: Kahani
+    url: /Kahani/
   - title: Contact
     url: /contact/
 
@@ -33,3 +35,5 @@ legal:
 information:
   - title: Credits
     url: /credits/
+  - title: About Kahani Videos
+    url: /About-Kahani-Videos/
