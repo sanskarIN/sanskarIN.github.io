@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-19T10:01:14Z",
+  "generated_at": "2026-10-20T09:29:32Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
   },
   "totals": {
-    "repositories": 67,
-    "stars": 20,
+    "repositories": 68,
+    "stars": 22,
     "forks": 3,
     "languages": 27
   },
@@ -14,47 +14,46 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 16.5
+      "percent": 16.3
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 13.9
+      "percent": 13.8
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 13.5
+      "percent": 13.2
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 12.8
+      "percent": 12.9
     },
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 11.0
+      "percent": 10.9
     },
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 8.6
+      "percent": 8.7
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 23.8,
+      "percent": 24.2,
       "other": true
     }
   ],
   "featured": [
     "RepoDNA",
     "frametrellis",
-    "Rewind64",
     "LineLoom",
-    "EyeZen",
-    "ReproCrate"
+    "latebrake",
+    "KathaSvara"
   ],
   "repositories": [
     {
@@ -64,38 +63,22 @@
       "homepage": null,
       "language": "C++",
       "language_color": "#f34b7d",
-      "stars": 0,
+      "stars": 1,
       "forks": 0,
       "topics": [],
       "license": "BSD-3-Clause",
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
-      "pushed": "2026-10-19"
-    },
-    {
-      "name": "LineLoom",
-      "url": "https://github.com/sanskarIN/LineLoom",
-      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
-      "homepage": "https://sanskarin.github.io/LineLoom/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-17",
-      "pushed": "2026-10-19"
+      "pushed": "2026-10-20"
     },
     {
       "name": "Rewind64",
       "url": "https://github.com/sanskarIN/Rewind64",
       "description": "A cross-platform, high-performance native debugger and execution recorder built entirely in Assembly.",
       "homepage": null,
-      "language": "Assembly",
-      "language_color": "#6E4C13",
+      "language": "Shell",
+      "language_color": "#89e051",
       "stars": 1,
       "forks": 0,
       "topics": [],
@@ -103,23 +86,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-18",
-      "pushed": "2026-10-19"
-    },
-    {
-      "name": "SwiftDrop",
-      "url": "https://github.com/sanskarIN/SwiftDrop",
-      "description": "SwiftDrop is a local-network, account-free file-transfer application for sending files and text between nearby devices.",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-09",
-      "pushed": "2026-10-19"
+      "pushed": "2026-10-20"
     },
     {
       "name": "sanskarIN.github.io",
@@ -135,39 +102,39 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-26",
-      "pushed": "2026-10-19"
+      "pushed": "2026-10-20"
     },
     {
-      "name": "pairdock",
-      "url": "https://github.com/sanskarIN/pairdock",
-      "description": "Pair, provision, monitor, and update Wi-Fi and Bluetooth devices.",
-      "homepage": null,
-      "language": null,
-      "language_color": null,
-      "stars": 0,
+      "name": "KathaSvara",
+      "url": "https://github.com/sanskarIN/KathaSvara",
+      "description": "Give Every Story a Voice.",
+      "homepage": "https://sanskarin.github.io/KathaSvara/",
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 1,
       "forks": 0,
       "topics": [],
-      "license": "MIT",
+      "license": "MPL-2.0",
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
-      "pushed": "2026-10-19"
+      "pushed": "2026-10-20"
     },
     {
-      "name": "libracore",
-      "url": "https://github.com/sanskarIN/libracore",
-      "description": "LibraCore, a production-quality Library Management System project that is much more complete than a classroom demo.",
-      "homepage": null,
-      "language": "Java",
-      "language_color": "#b07219",
-      "stars": 0,
+      "name": "LineLoom",
+      "url": "https://github.com/sanskarIN/LineLoom",
+      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
+      "homepage": "https://sanskarin.github.io/LineLoom/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 1,
       "forks": 0,
       "topics": [],
       "license": "MIT",
       "fork": false,
       "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-10-19"
+      "created": "2026-10-17",
+      "pushed": "2026-10-20"
     },
     {
       "name": "RepoDNA",
@@ -190,23 +157,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-24",
-      "pushed": "2026-10-19"
-    },
-    {
-      "name": "tablespark",
-      "url": "https://github.com/sanskarIN/tablespark",
-      "description": "",
-      "homepage": null,
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-10-19"
+      "pushed": "2026-10-20"
     },
     {
       "name": "2048",
@@ -229,6 +180,125 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-14",
+      "pushed": "2026-10-20"
+    },
+    {
+      "name": "Sanskar-PDF-Editor",
+      "url": "https://github.com/sanskarIN/Sanskar-PDF-Editor",
+      "description": "An ultimate, enterprise-grade, offline-first PDF Editor featuring 70+ advanced tools. Built with React, Tauri v2, and Rust for lightning-fast, secure performance across Windows, Android, and Web.",
+      "homepage": null,
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-07-09",
+      "pushed": "2026-10-19"
+    },
+    {
+      "name": "campuscore",
+      "url": "https://github.com/sanskarIN/campuscore",
+      "description": "CampusCore, a production-quality Student Management System project that is much more complete than a classroom demo.",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-21",
+      "pushed": "2026-10-19"
+    },
+    {
+      "name": "frametrellis",
+      "url": "https://github.com/sanskarIN/frametrellis",
+      "description": "Open-source video editor.",
+      "homepage": "https://sanskarin.github.io/frametrellis/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 2,
+      "forks": 1,
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
+      "license": "GPL-3.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-11",
+      "pushed": "2026-10-19"
+    },
+    {
+      "name": "pairdock",
+      "url": "https://github.com/sanskarIN/pairdock",
+      "description": "Pair, provision, monitor, and update Wi-Fi and Bluetooth devices.",
+      "homepage": "https://sanskarin.github.io/pairdock/",
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-10-19"
+    },
+    {
+      "name": "SwiftDrop",
+      "url": "https://github.com/sanskarIN/SwiftDrop",
+      "description": "SwiftDrop is a local-network, account-free file-transfer application for sending files and text between nearby devices.",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-09",
+      "pushed": "2026-10-19"
+    },
+    {
+      "name": "libracore",
+      "url": "https://github.com/sanskarIN/libracore",
+      "description": "LibraCore, a production-quality Library Management System project that is much more complete than a classroom demo.",
+      "homepage": null,
+      "language": "Java",
+      "language_color": "#b07219",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-10-19"
+    },
+    {
+      "name": "tablespark",
+      "url": "https://github.com/sanskarIN/tablespark",
+      "description": "",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
       "pushed": "2026-10-19"
     },
     {
@@ -373,22 +443,6 @@
       "pushed": "2026-10-18"
     },
     {
-      "name": "Sanskar-PDF-Editor",
-      "url": "https://github.com/sanskarIN/Sanskar-PDF-Editor",
-      "description": "An ultimate, enterprise-grade, offline-first PDF Editor featuring 70+ advanced tools. Built with React, Tauri v2, and Rust for lightning-fast, secure performance across Windows, Android, and Web.",
-      "homepage": null,
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-07-09",
-      "pushed": "2026-10-18"
-    },
-    {
       "name": "CareNest",
       "url": "https://github.com/sanskarIN/CareNest",
       "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
@@ -418,29 +472,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-17",
-      "pushed": "2026-10-18"
-    },
-    {
-      "name": "frametrellis",
-      "url": "https://github.com/sanskarIN/frametrellis",
-      "description": "Open-source video editor.",
-      "homepage": "https://sanskarin.github.io/frametrellis/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 2,
-      "forks": 1,
-      "topics": [
-        "cmake",
-        "cpp",
-        "cpp20",
-        "desktop-application",
-        "docker",
-        "ffmpeg"
-      ],
-      "license": "GPL-3.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-11",
       "pushed": "2026-10-18"
     },
     {
@@ -504,22 +535,6 @@
       "archived": false,
       "created": "2026-08-21",
       "pushed": "2026-10-16"
-    },
-    {
-      "name": "campuscore",
-      "url": "https://github.com/sanskarIN/campuscore",
-      "description": "CampusCore, a production-quality Student Management System project that is much more complete than a classroom demo.",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-21",
-      "pushed": "2026-10-15"
     },
     {
       "name": "EyeZen",
@@ -1246,9 +1261,9 @@
     }
   ],
   "activity": {
-    "total": 28558,
+    "total": 29586,
     "start": "2025-10-19",
-    "end": "2026-10-19",
+    "end": "2026-10-20",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1612,12 +1627,13 @@
       123,
       86,
       15,
-      106,
-      690,
+      107,
+      694,
       85,
       318,
       377,
-      242
+      442,
+      823
     ],
     "levels": [
       0,
@@ -1985,7 +2001,8 @@
       1,
       1,
       1,
-      1
+      2,
+      2
     ],
     "months": [
       {
@@ -2037,8 +2054,8 @@
         "label": "Oct"
       }
     ],
-    "active_days": 111,
-    "longest_streak": 33,
+    "active_days": 112,
+    "longest_streak": 34,
     "busiest": {
       "date": "2026-08-19",
       "count": 7058
