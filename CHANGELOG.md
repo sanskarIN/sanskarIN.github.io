@@ -18,6 +18,10 @@ Notable changes to this website are recorded here. The format follows [Keep a Ch
 - Header/footer navigation, the main stylesheet and the Credits page now include the Kahani section.
 - The About page includes PayPal; the Privacy Policy, Terms, and documentation include PayPal and YouTube.
 
+### Removed
+
+- The Threads profile link and its unused icon, with the linked-platform lists and documentation updated to match.
+
 ## [1.8.2] — 2026-10-12
 
 ### Added

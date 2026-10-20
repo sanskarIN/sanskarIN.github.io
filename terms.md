@@ -77,7 +77,7 @@ You can create a free account with your email address to write for the blog. If 
 
 ## External links
 
-The website links to other websites and services, including GitHub, LinkedIn, Dev.to, Discord, X, Instagram, Threads, Bluesky, YouTube (Kahani Wali Shaam), Buy Me a Coffee, Razorpay, Gumroad, and PayPal. These links are provided for convenience. I do not control those services and am not responsible for their content, availability, or practices. Your use of them is governed by their own terms and policies.
+The website links to other websites and services, including GitHub, LinkedIn, Dev.to, Discord, X, Instagram, Bluesky, YouTube (Kahani Wali Shaam), Buy Me a Coffee, Razorpay, Gumroad, and PayPal. These links are provided for convenience. I do not control those services and am not responsible for their content, availability, or practices. Your use of them is governed by their own terms and policies.
 
 ## Third-party services
 

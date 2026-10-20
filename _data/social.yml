@@ -66,14 +66,6 @@ profiles:
     icon: instagram
     note: Photos and updates
 
-  threads:
-    name: Threads
-    url: https://threads.com/SanskarCode
-    handle: "@SanskarCode"
-    username: SanskarCode
-    icon: threads
-    note: Posts and conversations
-
   bluesky:
     name: Bluesky
     url: https://bsky.app/profile/SanskarCodes.bsky.social
@@ -135,7 +127,7 @@ groups:
     items: [github, linkedin, devto, discord]
   social:
     title: Social
-    items: [x, instagram, threads, bluesky, youtube]
+    items: [x, instagram, bluesky, youtube]
   products:
     title: Support & Products
     items: [buymeacoffee, razorpay, gumroad, paypal]
