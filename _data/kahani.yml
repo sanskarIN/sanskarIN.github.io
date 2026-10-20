@@ -5,25 +5,25 @@ brand:
   credit: "Kahani by Ram Sandesh"
   author: "Ram Sandesh"
   tagline: "हर किस्से में ज़िंदगी का एक रंग।"
-  suggested_handle: "@KisseByRamSandesh"
-  # Set only after the new channel/handle has been created and verified.
-  channel_url: ""
+  # Reuse the owner-provided channel in _data/social.yml.
+  channel_profile: youtube
 
 episodes:
   - id: emaandari-ki-aakhri-thali
     number: "01"
     title: "ईमानदारी की आख़िरी थाली"
     genre: "प्रेरक कहानी"
-    status: production
-    status_label: "आवाज़ व अंतिम संपादन जारी"
-    duration_label: "लगभग 11 मिनट"
+    status: published
+    status_label: "प्रकाशित"
+    # Runtime confirmed by the site owner.
+    duration_label: "11 मिनट 55 सेकंड"
     synopsis: "एक भूखी बच्ची, पूरी वाले की आख़िरी थाली और बारिश में घिरा गाँव। रामू की छोटी सी मदद लोगों को एक साझा रसोई और नए भरोसे तक ले जाती है।"
     question: "आप रामू की जगह होते, तो क्या करते?"
     poster: /assets/images/kahani/aakhri-thali-poster.png
     poster_alt: "रामू, चंदा और पूरी-सब्जी की थाली के साथ ईमानदारी की आख़िरी थाली का चित्र।"
     themes: ["ईमानदारी", "साझेदारी", "करुणा"]
-    # Keep both empty until the voiced film and final captions are published.
-    youtube_url: ""
+    # Video supplied by the site owner; captions remain optional.
+    youtube_url: "https://youtu.be/ZHGqhWnJRmU"
     captions_url: ""
 
 characters:

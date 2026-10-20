@@ -756,8 +756,8 @@ The Hindi story section uses the same Jekyll build and TypeScript tooling:
 
 - [`/Kahani/`](https://sanskarin.github.io/Kahani/) contains the catalogue and episode introductions.
 - [`/About-Kahani-Videos/`](https://sanskarin.github.io/About-Kahani-Videos/) explains the story identity, fictional content, digital/AI-assisted production and contact route.
-- `_data/kahani.yml` contains the recommended **किस्सों की चौपाल | Ram Sandesh** identity and episode records. The proposed YouTube handle is not treated as a verified channel URL.
-- The first episode is **in production** until its multi-character narration and final edit are complete. Blank media links are not rendered as watch/download buttons.
+- `_data/kahani.yml` contains the **किस्सों की चौपाल | Ram Sandesh** identity and episode records. Its `brand.channel_profile` points to the owner-provided Kahani Wali Shaam channel in `_data/social.yml`.
+- The owner-supplied video for **ईमानदारी की आख़िरी थाली** is [available on YouTube](https://youtu.be/ZHGqhWnJRmU), with watch links on its card and introduction and the owner-confirmed runtime of **11 minutes 55 seconds**. The published-status filter includes it. Captions remain unset until a final file is supplied; blank values are not rendered.
 - `src/ts/kahani.ts` progressively enhances search, status filtering and sharing; it makes no network requests and stores no visitor data.
 - Original illustrations live in `assets/images/kahani/`. Noto Sans Devanagari is self-hosted with its own OFL notice.
 

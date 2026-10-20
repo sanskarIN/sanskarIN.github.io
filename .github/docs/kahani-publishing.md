@@ -12,9 +12,9 @@ Both routes use their requested capitalisation. Jekyll generates index.html in e
 ## Publish a video
 
 1. Finish and check the voiced film and its final subtitles, then publish it to the actual YouTube channel.
-2. In `_data/kahani.yml`, set `brand.channel_url` to the confirmed official channel URL. The suggested handle is not a verified or reserved channel address.
-3. For the episode set `youtube_url`, change `status` to `published` and `status_label` to `प्रकाशित`. Update `duration_label` to the final duration. Set `captions_url` only when a final caption file exists at that path.
-4. Check the episode's publication note: it switches automatically with `status`. The first episode currently has no video link because the narrated film has not been published.
+2. In `_data/kahani.yml`, set `brand.channel_profile` to the appropriate key in `_data/social.yml`. The current `youtube` profile contains the owner-provided Kahani Wali Shaam channel. Keep the channel URL in that shared profile so the Kahani pages and the rest of the website stay in sync.
+3. For the episode set `youtube_url`, change `status` to `published` and `status_label` to `प्रकाशित`. Set `duration_label` only when the final runtime is known; leave it empty otherwise. Set `captions_url` only when a final caption file exists at that path.
+4. Check the episode's publication note: it switches automatically with `status`. The first episode now links to the video supplied by the owner: `https://youtu.be/ZHGqhWnJRmU`, with the owner-confirmed runtime of 11 minutes 55 seconds. Its captions field remains empty until a final caption file is supplied.
 5. Rebuild Jekyll and verify both routes, the episode links, sitemap and search index. Run `npm run check` and `npm run build` if TypeScript changed; commit both `src/ts/kahani.ts` and `assets/js/kahani.js`.
 
 For another episode, append a record in `_data/kahani.yml`, with a unique HTML-safe `id`. Use real production metadata, a local poster and accessible alt text. Do not advertise a placeholder as an already published film.
