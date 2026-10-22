@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-21T09:25:26Z",
+  "generated_at": "2026-10-22T09:28:28Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -19,7 +19,7 @@
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 13.8
+      "percent": 13.7
     },
     {
       "name": "Dart",
@@ -44,7 +44,7 @@
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 24.3,
+      "percent": 24.5,
       "other": true
     }
   ],
@@ -56,6 +56,93 @@
     "KathaSvara"
   ],
   "repositories": [
+    {
+      "name": "latebrake",
+      "url": "https://github.com/sanskarIN/latebrake",
+      "description": "Latebrake — Race Beyond Limits.",
+      "homepage": null,
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "BSD-3-Clause",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-10-22"
+    },
+    {
+      "name": "tempotrack",
+      "url": "https://github.com/sanskarIN/tempotrack",
+      "description": "",
+      "homepage": null,
+      "language": "Kotlin",
+      "language_color": "#A97BFF",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-10-21"
+    },
+    {
+      "name": "thermoshift",
+      "url": "https://github.com/sanskarIN/thermoshift",
+      "description": "",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-10-21"
+    },
+    {
+      "name": "BeatForge-Rhythm",
+      "url": "https://github.com/sanskarIN/BeatForge-Rhythm",
+      "description": "BeatForge is an open-source Android rhythm game and beat-map creator featuring offline play, custom charts, challenges, accessibility options, statistics, replay tools and community-ready extensibility.",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-27",
+      "pushed": "2026-10-21"
+    },
+    {
+      "name": "RepoDNA",
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 6,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-10-21"
+    },
     {
       "name": "KathaSvara",
       "url": "https://github.com/sanskarIN/KathaSvara",
@@ -73,19 +160,35 @@
       "pushed": "2026-10-21"
     },
     {
-      "name": "LineLoom",
-      "url": "https://github.com/sanskarIN/LineLoom",
-      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
-      "homepage": "https://sanskarin.github.io/LineLoom/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 1,
+      "name": "vaultora",
+      "url": "https://github.com/sanskarIN/vaultora",
+      "description": "Vaultora, a production-quality Password Manager project that is much more complete than a classroom demo.",
+      "homepage": null,
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 0,
       "forks": 0,
       "topics": [],
-      "license": "MIT",
+      "license": "Apache-2.0",
       "fork": false,
       "archived": false,
-      "created": "2026-10-17",
+      "created": "2026-08-21",
+      "pushed": "2026-10-21"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
       "pushed": "2026-10-21"
     },
     {
@@ -109,6 +212,22 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-11",
+      "pushed": "2026-10-21"
+    },
+    {
+      "name": "LineLoom",
+      "url": "https://github.com/sanskarIN/LineLoom",
+      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
+      "homepage": "https://sanskarin.github.io/LineLoom/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
       "pushed": "2026-10-21"
     },
     {
@@ -247,38 +366,6 @@
       "pushed": "2026-10-20"
     },
     {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-10-20"
-    },
-    {
-      "name": "latebrake",
-      "url": "https://github.com/sanskarIN/latebrake",
-      "description": "Latebrake — Race Beyond Limits.",
-      "homepage": null,
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "BSD-3-Clause",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-10-20"
-    },
-    {
       "name": "Rewind64",
       "url": "https://github.com/sanskarIN/Rewind64",
       "description": "A cross-platform, high-performance native debugger and execution recorder built entirely in Assembly.",
@@ -292,29 +379,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-18",
-      "pushed": "2026-10-20"
-    },
-    {
-      "name": "RepoDNA",
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 6,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
       "pushed": "2026-10-20"
     },
     {
@@ -514,22 +578,6 @@
       "pushed": "2026-10-18"
     },
     {
-      "name": "thermoshift",
-      "url": "https://github.com/sanskarIN/thermoshift",
-      "description": "",
-      "homepage": null,
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-10-18"
-    },
-    {
       "name": "CareNest",
       "url": "https://github.com/sanskarIN/CareNest",
       "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
@@ -598,22 +646,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-14",
-      "pushed": "2026-10-15"
-    },
-    {
-      "name": "tempotrack",
-      "url": "https://github.com/sanskarIN/tempotrack",
-      "description": "",
-      "homepage": null,
-      "language": "Kotlin",
-      "language_color": "#A97BFF",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
       "pushed": "2026-10-15"
     },
     {
@@ -862,22 +894,6 @@
       "pushed": "2026-10-02"
     },
     {
-      "name": "BeatForge-Rhythm",
-      "url": "https://github.com/sanskarIN/BeatForge-Rhythm",
-      "description": "BeatForge is an open-source Android rhythm game and beat-map creator featuring offline play, custom charts, challenges, accessibility options, statistics, replay tools and community-ready extensibility.",
-      "homepage": null,
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-27",
-      "pushed": "2026-09-30"
-    },
-    {
       "name": "ts-mastery",
       "url": "https://github.com/sanskarIN/ts-mastery",
       "description": "Open-source TypeScript examples, exercises, tests, and companion projects for the 120-part TypeScript Full Mastery series by Ram Sandesh.",
@@ -907,22 +923,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-02",
-      "pushed": "2026-09-07"
-    },
-    {
-      "name": "vaultora",
-      "url": "https://github.com/sanskarIN/vaultora",
-      "description": "Vaultora, a production-quality Password Manager project that is much more complete than a classroom demo.",
-      "homepage": null,
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-21",
       "pushed": "2026-09-07"
     },
     {
@@ -1261,9 +1261,9 @@
     }
   ],
   "activity": {
-    "total": 29922,
+    "total": 30208,
     "start": "2025-10-19",
-    "end": "2026-10-21",
+    "end": "2026-10-22",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1632,9 +1632,10 @@
       85,
       318,
       402,
-      442,
+      508,
       873,
-      261
+      347,
+      134
     ],
     "levels": [
       0,
@@ -2004,6 +2005,7 @@
       1,
       2,
       2,
+      1,
       1
     ],
     "months": [
@@ -2056,8 +2058,8 @@
         "label": "Oct"
       }
     ],
-    "active_days": 113,
-    "longest_streak": 35,
+    "active_days": 114,
+    "longest_streak": 36,
     "busiest": {
       "date": "2026-08-19",
       "count": 7058
