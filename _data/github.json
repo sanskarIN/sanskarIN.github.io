@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T09:28:28Z",
+  "generated_at": "2026-10-23T09:26:07Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -14,37 +14,37 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 16.2
+      "percent": 16.1
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 13.7
-    },
-    {
-      "name": "Dart",
-      "color": "#00B4AB",
-      "percent": 13.1
+      "percent": 13.5
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 13.0
+      "percent": 13.1
+    },
+    {
+      "name": "Dart",
+      "color": "#00B4AB",
+      "percent": 12.9
     },
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 10.9
+      "percent": 10.7
     },
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 8.8
+      "percent": 8.7
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 24.5,
+      "percent": 25.0,
       "other": true
     }
   ],
@@ -57,10 +57,65 @@
   ],
   "repositories": [
     {
+      "name": "RepoDNA",
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 6,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-10-23"
+    },
+    {
+      "name": "KathaSvara",
+      "url": "https://github.com/sanskarIN/KathaSvara",
+      "description": "Give Every Story a Voice.",
+      "homepage": "https://sanskarin.github.io/KathaSvara/",
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "MPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-10-23"
+    },
+    {
+      "name": "LineLoom",
+      "url": "https://github.com/sanskarIN/LineLoom",
+      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
+      "homepage": "https://sanskarin.github.io/LineLoom/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
+      "pushed": "2026-10-23"
+    },
+    {
       "name": "latebrake",
       "url": "https://github.com/sanskarIN/latebrake",
       "description": "Latebrake — Race Beyond Limits.",
-      "homepage": null,
+      "homepage": "https://sanskarin.github.io/latebrake/",
       "language": "C++",
       "language_color": "#f34b7d",
       "stars": 1,
@@ -70,6 +125,162 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
+      "pushed": "2026-10-23"
+    },
+    {
+      "name": "Rewind64",
+      "url": "https://github.com/sanskarIN/Rewind64",
+      "description": "A cross-platform, high-performance native debugger and execution recorder built entirely in Assembly.",
+      "homepage": null,
+      "language": "Shell",
+      "language_color": "#89e051",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "BSL-1.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-18",
+      "pushed": "2026-10-23"
+    },
+    {
+      "name": "frametrellis",
+      "url": "https://github.com/sanskarIN/frametrellis",
+      "description": "Open-source video editor.",
+      "homepage": "https://sanskarin.github.io/frametrellis/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 2,
+      "forks": 0,
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
+      "license": "GPL-3.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-11",
+      "pushed": "2026-10-23"
+    },
+    {
+      "name": "Arithvex",
+      "url": "https://github.com/sanskarIN/Arithvex",
+      "description": "Engineering the Future of Mathematics.",
+      "homepage": null,
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-05-03",
+      "pushed": "2026-10-23"
+    },
+    {
+      "name": "sortsmith",
+      "url": "https://github.com/sanskarIN/sortsmith",
+      "description": "SortSmith, a production-quality File Organizer project.",
+      "homepage": null,
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "fileoragin",
+        "fileordering",
+        "fileordertracker",
+        "fileorganiser",
+        "fileorganization",
+        "fileorganizer"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-21",
+      "pushed": "2026-10-23"
+    },
+    {
+      "name": "BeatForge-Rhythm",
+      "url": "https://github.com/sanskarIN/BeatForge-Rhythm",
+      "description": "BeatForge is an open-source Android rhythm game and beat-map creator featuring offline play, custom charts, challenges, accessibility options, statistics, replay tools and community-ready extensibility.",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-27",
+      "pushed": "2026-10-22"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-10-22"
+    },
+    {
+      "name": "LangSteps",
+      "url": "https://github.com/sanskarIN/LangSteps",
+      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
+      "homepage": "https://sanskarin.github.io/LangSteps/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "beginner-to-advanced",
+        "coding-challenges",
+        "coding-exercises",
+        "csharp",
+        "css",
+        "golang"
+      ],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-05-16",
+      "pushed": "2026-10-22"
+    },
+    {
+      "name": "foliolane",
+      "url": "https://github.com/sanskarIN/foliolane",
+      "description": "A modern, reliable, local-first document-merging application for very large multi-part books and document series.",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "docmerge",
+        "pdf-merge",
+        "pdf-merger",
+        "pdf-merger-python",
+        "pdf-merger-tool",
+        "pdf-merger-windows-desktop"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-16",
       "pushed": "2026-10-22"
     },
     {
@@ -105,61 +316,6 @@
       "pushed": "2026-10-21"
     },
     {
-      "name": "BeatForge-Rhythm",
-      "url": "https://github.com/sanskarIN/BeatForge-Rhythm",
-      "description": "BeatForge is an open-source Android rhythm game and beat-map creator featuring offline play, custom charts, challenges, accessibility options, statistics, replay tools and community-ready extensibility.",
-      "homepage": null,
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-27",
-      "pushed": "2026-10-21"
-    },
-    {
-      "name": "RepoDNA",
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 6,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
-      "pushed": "2026-10-21"
-    },
-    {
-      "name": "KathaSvara",
-      "url": "https://github.com/sanskarIN/KathaSvara",
-      "description": "Give Every Story a Voice.",
-      "homepage": "https://sanskarin.github.io/KathaSvara/",
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "MPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-10-21"
-    },
-    {
       "name": "vaultora",
       "url": "https://github.com/sanskarIN/vaultora",
       "description": "Vaultora, a production-quality Password Manager project that is much more complete than a classroom demo.",
@@ -176,61 +332,6 @@
       "pushed": "2026-10-21"
     },
     {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-10-21"
-    },
-    {
-      "name": "frametrellis",
-      "url": "https://github.com/sanskarIN/frametrellis",
-      "description": "Open-source video editor.",
-      "homepage": "https://sanskarin.github.io/frametrellis/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 2,
-      "forks": 0,
-      "topics": [
-        "cmake",
-        "cpp",
-        "cpp20",
-        "desktop-application",
-        "docker",
-        "ffmpeg"
-      ],
-      "license": "GPL-3.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-11",
-      "pushed": "2026-10-21"
-    },
-    {
-      "name": "LineLoom",
-      "url": "https://github.com/sanskarIN/LineLoom",
-      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
-      "homepage": "https://sanskarin.github.io/LineLoom/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-17",
-      "pushed": "2026-10-21"
-    },
-    {
       "name": "chronoage",
       "url": "https://github.com/sanskarIN/chronoage",
       "description": "",
@@ -244,29 +345,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-10-21"
-    },
-    {
-      "name": "LangSteps",
-      "url": "https://github.com/sanskarIN/LangSteps",
-      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
-      "homepage": "https://sanskarin.github.io/LangSteps/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "beginner-to-advanced",
-        "coding-challenges",
-        "coding-exercises",
-        "csharp",
-        "css",
-        "golang"
-      ],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-05-16",
       "pushed": "2026-10-21"
     },
     {
@@ -363,22 +441,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-10-20"
-    },
-    {
-      "name": "Rewind64",
-      "url": "https://github.com/sanskarIN/Rewind64",
-      "description": "A cross-platform, high-performance native debugger and execution recorder built entirely in Assembly.",
-      "homepage": null,
-      "language": "Shell",
-      "language_color": "#89e051",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "BSL-1.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-18",
       "pushed": "2026-10-20"
     },
     {
@@ -517,29 +579,6 @@
       "pushed": "2026-10-18"
     },
     {
-      "name": "DocMergeForge",
-      "url": "https://github.com/sanskarIN/DocMergeForge",
-      "description": "A modern, reliable, local-first document-merging application for very large multi-part books and document series.",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "docmerge",
-        "pdf-merge",
-        "pdf-merger",
-        "pdf-merger-python",
-        "pdf-merger-tool",
-        "pdf-merger-windows-desktop"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-16",
-      "pushed": "2026-10-18"
-    },
-    {
       "name": "Finora",
       "url": "https://github.com/sanskarIN/Finora",
       "description": "Finora is a local-first personal finance, expense, budget, savings, and financial-planning application. It must work without an account and keep all private financial information on the user’s device in the current release. Cloud synchronization is planned for a later version…",
@@ -608,29 +647,6 @@
       "archived": false,
       "created": "2026-10-17",
       "pushed": "2026-10-18"
-    },
-    {
-      "name": "sortsmith",
-      "url": "https://github.com/sanskarIN/sortsmith",
-      "description": "SortSmith, a production-quality File Organizer project.",
-      "homepage": null,
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "fileoragin",
-        "fileordering",
-        "fileordertracker",
-        "fileorganiser",
-        "fileorganization",
-        "fileorganizer"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-21",
-      "pushed": "2026-10-16"
     },
     {
       "name": "EyeZen",
@@ -1228,22 +1244,6 @@
       "pushed": "2026-07-03"
     },
     {
-      "name": "MathCore-X",
-      "url": "https://github.com/sanskarIN/MathCore-X",
-      "description": "A high-performance, PhD-level C++ computational engine built in Visual Studio. Features 40+ advanced mathematical solvers including calculus (integration, limits), number theory, and the golden ratio.",
-      "homepage": null,
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-05-03",
-      "pushed": "2026-06-30"
-    },
-    {
       "name": "Sanskar-Racing-Game",
       "url": "https://github.com/sanskarIN/Sanskar-Racing-Game",
       "description": "A high-performance custom C++ racing game engine. Features smooth vehicle control, drifting, checkpoints, time trials, and optimized rendering. Madden by the Sanskar Yadav.",
@@ -1261,9 +1261,9 @@
     }
   ],
   "activity": {
-    "total": 30208,
+    "total": 31138,
     "start": "2025-10-19",
-    "end": "2026-10-22",
+    "end": "2026-10-23",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1509,8 +1509,8 @@
       0,
       0,
       45,
-      6,
-      18,
+      0,
+      17,
       1,
       0,
       1,
@@ -1566,8 +1566,8 @@
       207,
       193,
       217,
-      1746,
-      1453,
+      1740,
+      1450,
       790,
       1767,
       2707,
@@ -1635,7 +1635,8 @@
       508,
       873,
       347,
-      134
+      429,
+      651
     ],
     "levels": [
       0,
@@ -1880,7 +1881,7 @@
       0,
       0,
       1,
-      1,
+      0,
       1,
       1,
       0,
@@ -2004,9 +2005,10 @@
       1,
       1,
       2,
-      2,
+      3,
       1,
-      1
+      1,
+      2
     ],
     "months": [
       {
@@ -2059,7 +2061,7 @@
       }
     ],
     "active_days": 114,
-    "longest_streak": 36,
+    "longest_streak": 37,
     "busiest": {
       "date": "2026-08-19",
       "count": 7058
