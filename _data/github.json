@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T09:26:07Z",
+  "generated_at": "2026-10-24T08:56:21Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -14,22 +14,22 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 16.1
+      "percent": 16.0
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 13.5
+      "percent": 13.4
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 13.1
+      "percent": 13.2
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 12.9
+      "percent": 12.8
     },
     {
       "name": "Rust",
@@ -39,12 +39,12 @@
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 8.7
+      "percent": 8.8
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 25.0,
+      "percent": 25.1,
       "other": true
     }
   ],
@@ -56,6 +56,38 @@
     "KathaSvara"
   ],
   "repositories": [
+    {
+      "name": "latebrake",
+      "url": "https://github.com/sanskarIN/latebrake",
+      "description": "Latebrake — Race Beyond Limits.",
+      "homepage": "https://sanskarin.github.io/latebrake/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "BSD-3-Clause",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-10-24"
+    },
+    {
+      "name": "thermoshift",
+      "url": "https://github.com/sanskarIN/thermoshift",
+      "description": "",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-10-24"
+    },
     {
       "name": "RepoDNA",
       "url": "https://github.com/sanskarIN/RepoDNA",
@@ -77,22 +109,45 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-24",
+      "pushed": "2026-10-24"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
       "pushed": "2026-10-23"
     },
     {
-      "name": "KathaSvara",
-      "url": "https://github.com/sanskarIN/KathaSvara",
-      "description": "Give Every Story a Voice.",
-      "homepage": "https://sanskarin.github.io/KathaSvara/",
-      "language": "Python",
-      "language_color": "#3572A5",
+      "name": "2048",
+      "url": "https://github.com/sanskarIN/2048",
+      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
+      "homepage": null,
+      "language": "Dart",
+      "language_color": "#00B4AB",
       "stars": 1,
       "forks": 0,
-      "topics": [],
-      "license": "MPL-2.0",
+      "topics": [
+        "2040",
+        "2048",
+        "2048-clone",
+        "2048-game",
+        "2048-game-online",
+        "2048-redesigned"
+      ],
+      "license": "MIT",
       "fork": false,
       "archived": false,
-      "created": "2026-10-19",
+      "created": "2026-08-14",
       "pushed": "2026-10-23"
     },
     {
@@ -112,16 +167,16 @@
       "pushed": "2026-10-23"
     },
     {
-      "name": "latebrake",
-      "url": "https://github.com/sanskarIN/latebrake",
-      "description": "Latebrake — Race Beyond Limits.",
-      "homepage": "https://sanskarin.github.io/latebrake/",
-      "language": "C++",
-      "language_color": "#f34b7d",
+      "name": "KathaSvara",
+      "url": "https://github.com/sanskarIN/KathaSvara",
+      "description": "Give Every Story a Voice.",
+      "homepage": "https://sanskarin.github.io/KathaSvara/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
       "stars": 1,
       "forks": 0,
       "topics": [],
-      "license": "BSD-3-Clause",
+      "license": "MPL-2.0",
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
@@ -222,22 +277,6 @@
       "pushed": "2026-10-22"
     },
     {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-10-22"
-    },
-    {
       "name": "LangSteps",
       "url": "https://github.com/sanskarIN/LangSteps",
       "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
@@ -290,22 +329,6 @@
       "homepage": null,
       "language": "Kotlin",
       "language_color": "#A97BFF",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-10-21"
-    },
-    {
-      "name": "thermoshift",
-      "url": "https://github.com/sanskarIN/thermoshift",
-      "description": "",
-      "homepage": null,
-      "language": "TypeScript",
-      "language_color": "#3178c6",
       "stars": 0,
       "forks": 0,
       "topics": [],
@@ -441,29 +464,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-10-20"
-    },
-    {
-      "name": "2048",
-      "url": "https://github.com/sanskarIN/2048",
-      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
-      "homepage": null,
-      "language": "Dart",
-      "language_color": "#00B4AB",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "2040",
-        "2048",
-        "2048-clone",
-        "2048-game",
-        "2048-game-online",
-        "2048-redesigned"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-14",
       "pushed": "2026-10-20"
     },
     {
@@ -1261,9 +1261,9 @@
     }
   ],
   "activity": {
-    "total": 31138,
+    "total": 31414,
     "start": "2025-10-19",
-    "end": "2026-10-23",
+    "end": "2026-10-24",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1636,7 +1636,8 @@
       873,
       347,
       429,
-      651
+      913,
+      14
     ],
     "levels": [
       0,
@@ -2008,7 +2009,8 @@
       3,
       1,
       1,
-      2
+      3,
+      1
     ],
     "months": [
       {
@@ -2060,8 +2062,8 @@
         "label": "Oct"
       }
     ],
-    "active_days": 114,
-    "longest_streak": 37,
+    "active_days": 115,
+    "longest_streak": 38,
     "busiest": {
       "date": "2026-08-19",
       "count": 7058
