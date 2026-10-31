@@ -17,10 +17,10 @@ the website in line with it:
   3. Images attached to the issue are downloaded, checked, scaled down if
      they are very large, and saved without location or camera details.
      Images from other websites are turned into links.
-  4. The Markdown is converted to HTML and cleaned with an allowlist, so a
+  4. The submitted Markdown is sanitized as HTML then converted to safe Markdown source, so a
      post cannot add scripts, styles, forms, or embedded content, and any
      Liquid tags in it are shown as plain text.
-  5. The post is written to _posts/, its images to assets/images/blog/, and
+  5. The sanitized post is saved as Markdown in _posts/, its images to assets/images/blog/, and
      proposed in a pull request. The post is marked published only after the
      PR is merged into protected main and GitHub Pages builds it.
 
@@ -61,6 +61,7 @@ from pathlib import Path
 import nh3
 
 from pr_updates import Proposal, git
+from post_markdown import convert_article
 import yaml
 from markdown_it import MarkdownIt
 from PIL import Image, ImageOps
@@ -846,9 +847,9 @@ def save_post(post, existing):
         path = existing["path"]
     else:
         date = now_iso()
-        path = POSTS_DIR / f"{date[:10]}-{slug}.html"
+        path = POSTS_DIR / f"{date[:10]}-{slug}.md"
     fields["date"] = date
-    content = front_matter(fields) + post["markup"].rstrip("\n") + "\n"
+    content = front_matter(fields) + convert_article(post["markup"])
 
     image_dir = IMAGES_DIR / slug
     wanted = set(post["files"])
@@ -858,7 +859,7 @@ def save_post(post, existing):
 
     if existing:
         fields["last_modified_at"] = now_iso()
-        content = front_matter(fields) + post["markup"].rstrip("\n") + "\n"
+        content = front_matter(fields) + convert_article(post["markup"])
     POSTS_DIR.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
     if wanted:
