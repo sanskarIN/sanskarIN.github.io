@@ -5,7 +5,10 @@ on:
     paths:
       - 'developer.html'
       - 'terminal.json'
+      - 'search.json'
       - '.github/scripts/terminal_data.py'
+      - '.github/scripts/search_index.py'
+      - '.github/scripts/tests/test_search_index.py'
       - '.github/scripts/tests/test_data_parity.py'
       - '_config.yml'
       - '_data/github.json'
@@ -45,7 +48,10 @@ on:
     paths:
       - 'developer.html'
       - 'terminal.json'
+      - 'search.json'
       - '.github/scripts/terminal_data.py'
+      - '.github/scripts/search_index.py'
+      - '.github/scripts/tests/test_search_index.py'
       - '.github/scripts/tests/test_data_parity.py'
       - '_config.yml'
       - '_data/github.json'
@@ -102,5 +108,7 @@ jobs:
         run: python -m unittest discover -s .github/scripts/tests -p 'test_build_styles.py' -v
       - name: Test terminal JSON regeneration
         run: python -m unittest discover -s .github/scripts/tests -p 'test_data_parity.py' -v
+      - name: Test Python search-index generation
+        run: python -m unittest discover -s .github/scripts/tests -p 'test_search_index.py' -v
       - name: Test Markdown blog conversion
         run: python -m unittest discover -s .github/scripts/tests -p 'test_post_markdown.py' -v
