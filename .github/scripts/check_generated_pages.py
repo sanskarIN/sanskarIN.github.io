@@ -77,7 +77,7 @@ def check(output):
     for principle in details["principles"]:
         if principle["title"] not in developer_body:
             raise AssertionError(f"Missing Developer principle: {principle['title']}")
-    normalized_home_headings = [re.sub(r"^\\d{2}\\s*", "", heading)
+    normalized_home_headings = [re.sub(r"^\d{2}\s*", "", heading)
                                 for heading in h.headings]
     for section in home["sections"]:
         if normalized_home_headings.count(section["title"]) != 1:
