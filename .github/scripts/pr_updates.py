@@ -105,6 +105,14 @@ class Proposal:
     def url(self):
         return self.open_pr.get("html_url") if self.open_pr else None
 
+    def cancel(self):
+        """Withdraw a pending PR when a post becomes unapproved or invalid."""
+        if self.open_pr:
+            self.api("PATCH", f"/repos/{self.repo}/pulls/{self.open_pr['number']}",
+                     {"state": "closed"})
+            print(f"Closed obsolete proposal: {self.url}")
+            self.open_pr = None
+
     def propose(self, message):
         """Commit staged changes, push to the automation branch, open a PR.
 
@@ -118,6 +126,15 @@ class Proposal:
         if status != 1:
             raise RuntimeError(f"Could not inspect staged changes: git diff exit {status}")
         git("commit", "--quiet", "-m", message)
+        # A submitted post can be withdrawn before first publication.
+        # When that leaves no PR diff, do not propose an empty change.
+        diff = git("diff", "--quiet", f"origin/{self.base}...HEAD",
+                   check=False).returncode
+        if diff == 0:
+            self.cancel()
+            return None
+        if diff != 1:
+            raise RuntimeError(f"Could not compare proposal to main: exit {diff}")
         push_args = ["push", "--quiet"]
         if self.replace_sha:
             push_args.append(
