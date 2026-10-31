@@ -205,6 +205,34 @@ Notes:
 - Messages such as "GitHub Metadata: No GitHub API authentication could be found" or a Faraday retry notice come from GitHub Pages' default plugins and are harmless.
 - `Gemfile.lock` is intentionally not committed: GitHub Pages ignores it, and the `github-pages` gem already pins every version.
 
+### Python-generated content and design tokens
+
+Some formerly hand-written HTML sections and CSS declarations are authored as data
+and compiled by a small **standard-library Python** generator. GitHub Pages still
+receives normal static HTML and CSS; this does **not** rely on JavaScript to render
+the page, and no Python runs in visitors' browsers.
+
+| Edit this source | Generated output | Where it appears |
+|---|---|---|
+| `_data/developer_details.json` | `_includes/generated/developer-core.html` and `developer-philosophy.html` | Developer profile's engineering interests, platforms, tools, learning, and principles |
+| `_data/design_tokens.json` | `_includes/generated/design-tokens.css` | Typography, spacing, widths, and shape/motion variables in the shared stylesheet |
+
+After changing either JSON file, run:
+
+```bash
+python .github/scripts/generate_site_content.py
+python .github/scripts/generate_site_content.py --check
+```
+
+Commit **both the source JSON and generated include files**. The "Generated site
+content" GitHub Actions check rejects stale output, invalid CSS tokens, and
+unsafe values. The Python test suite covers output determinism, escaping, and
+schema validation. Theme-specific colors remain in `_data/theme.yml`.
+
+Generated includes are not edited directly. This keeps HTML/CSS output accessible
+without demanding handwritten markup for every repeated profile entry or design
+token. The rest of the site continues to use Jekyll and TypeScript as before.
+
 ## Deployment to GitHub Pages
 
 The repository is a GitHub Pages *user site*, built by GitHub Pages' built-in Jekyll support. The site itself needs no workflow file; the blog workflow proposes post changes in pull requests, and merging them into protected `main` triggers the normal Pages build ([details](#blog)).
