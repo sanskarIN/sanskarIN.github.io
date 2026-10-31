@@ -1,32 +1,1271 @@
----
-layout: none
-permalink: /search.json
-sitemap: false
----
-{%- comment -%}
-  The index for the site search (assets/js/search.js): the pages, every blog
-  post, and the GitHub repositories from _data/github.json. Pages kept out
-  of search engines (noindex) are left out here too. Searching happens in
-  the visitor's browser; nothing typed is sent anywhere.
-{%- endcomment -%}
-{%- assign search_pages = site.pages | where_exp: "item", "item.title" | sort: "title" -%}
 [
-{%- assign separator = "" -%}
-{%- for item in search_pages -%}
-  {%- if item.noindex or item.sitemap == false -%}{%- continue -%}{%- endif -%}
-  {%- assign item_extension = item.url | split: "." | last -%}
-  {%- if item_extension == "json" or item_extension == "xml" or item_extension == "txt" -%}{%- continue -%}{%- endif %}
-  {{ separator }}{"type": "Page", "title": {{ item.title | jsonify }}, "url": {{ item.url | relative_url | jsonify }}, "text": {{ item.description | default: item.lead | default: "" | strip_html | jsonify }}}
-  {%- assign separator = "," -%}
-{%- endfor -%}
-{%- for post in site.posts -%}
-  {%- capture post_text %}{{ post.description }} {{ post.content | strip_html | normalize_whitespace | truncatewords: 80, "" }}{% endcapture %}
-  {{ separator }}{"type": "Post", "title": {{ post.title | jsonify }}, "url": {{ post.url | relative_url | jsonify }}, "date": {{ post.date | date: "%-d %b %Y" | jsonify }}, "tags": {{ post.tags | jsonify }}, "text": {{ post_text | strip | jsonify }}}
-  {%- assign separator = "," -%}
-{%- endfor -%}
-{%- for repo in site.data.github.repositories -%}
-  {%- capture repo_text %}{{ repo.description }} {{ repo.language }}{% endcapture %}
-  {{ separator }}{"type": "Project", "title": {{ repo.name | jsonify }}, "url": {{ repo.url | jsonify }}, "tags": {{ repo.topics | jsonify }}, "text": {{ repo_text | strip | jsonify }}}
-  {%- assign separator = "," -%}
-{%- endfor %}
+  {
+    "type": "Page",
+    "title": "About",
+    "url": "/about/",
+    "text": "About Sanskar (sanskarIN): a software developer interested in open source, developer tools, Rust and C++, Android, the web, games, and AI/machine learning."
+  },
+  {
+    "type": "Page",
+    "title": "About Kahani Videos",
+    "url": "/About-Kahani-Videos/",
+    "text": "किस्सों की चौपाल और Kahani by Ram Sandesh के बारे में: कहानी की पहचान, प्रस्तुति, काल्पनिक पात्र, डिजिटल निर्माण और संपर्क।"
+  },
+  {
+    "type": "Page",
+    "title": "Accessibility",
+    "url": "/accessibility/",
+    "text": "Accessibility practices used on sanskarIN.github.io and how to report an accessibility barrier."
+  },
+  {
+    "type": "Page",
+    "title": "Blog",
+    "url": "/blog/",
+    "text": "The blog on sanskarIN.github.io: posts and images from Sanskar and visitors, with the date each post was published and last updated."
+  },
+  {
+    "type": "Page",
+    "title": "Blog tags",
+    "url": "/blog/tags/",
+    "text": "Blog posts on sanskarIN.github.io, grouped by topic."
+  },
+  {
+    "type": "Page",
+    "title": "Contact",
+    "url": "/contact/",
+    "text": "Contact Sanskar: business email for collaborations, development services, and partnerships; a support email for technical help; plus GitHub, LinkedIn, Discord, and more."
+  },
+  {
+    "type": "Page",
+    "title": "Cookie Policy",
+    "url": "/cookies/",
+    "text": "Cookie policy for sanskarIN.github.io: the site sets no cookies, and stores in your browser only what the features you use need, such as your theme."
+  },
+  {
+    "type": "Page",
+    "title": "Credits",
+    "url": "/credits/",
+    "text": "Credits and website information for sanskarIN.github.io: technology stack, fonts, icons, hosting, copyright, and licensing."
+  },
+  {
+    "type": "Page",
+    "title": "Developer profile",
+    "url": "/developer/",
+    "text": "Sanskar's developer profile: development focus, languages and technologies, engineering interests, platforms, tools, open source, community, and development philosophy."
+  },
+  {
+    "type": "Page",
+    "title": "Home",
+    "url": "/",
+    "text": "Sanskar (sanskarIN) builds software, developer tools, and digital products in the open, with interests in open source, Android, web, games, and AI/ML."
+  },
+  {
+    "type": "Page",
+    "title": "Kahani by Ram Sandesh",
+    "url": "/Kahani/",
+    "text": "राम संदेश की हिंदी कहानियों का घर। किस्सों की चौपाल पर मिलें कहानी परिचय, किरदार, विषय और प्रकाशित वीडियो के आधिकारिक लिंक।"
+  },
+  {
+    "type": "Page",
+    "title": "Privacy Policy",
+    "url": "/privacy/",
+    "text": "Privacy policy for sanskarIN.github.io: no analytics, no tracking, and no cookies set by the site, plus what happens when you send an email."
+  },
+  {
+    "type": "Page",
+    "title": "Projects",
+    "url": "/projects/",
+    "text": "Sanskar's open-source projects on GitHub: featured repositories, languages, recent activity, and every public repository, updated every day."
+  },
+  {
+    "type": "Page",
+    "title": "Terms and Conditions",
+    "url": "/terms/",
+    "text": "Terms and conditions for using sanskarIN.github.io, the personal website of Sanskar."
+  },
+  {
+    "type": "Post",
+    "title": "repodna-v1-4-3-release",
+    "url": "/blog/repodna-v1-4-3-release/",
+    "date": "23 Oct 2026",
+    "tags": [
+      "repodna",
+      "open-source",
+      "rust",
+      "developer-tools",
+      "software-engineering"
+    ],
+    "text": "RepoDNA v1.4.3 adds a What's New page, CSV exports, file filters, desktop improvements, stronger security, and more reliable browser analysis. RepoDNA v1.4.3 Released: A Better Desktop Experience, Safer Exports, and More Reliable Analysis Published: October 23, 2026 RepoDNA v1.4.3 is officially available as a stable release. This version introduces several improvements to the application experience, repository exploration, analysis reliability, and software distribution. RepoDNA is an open-source, local-first tool that helps developers understand repository architecture, dependencies, change history, complexity, and other important characteristics. What's new? A new What's New experience RepoDNA now includes a dedicated What's New section accessible from the"
+  },
+  {
+    "type": "Post",
+    "title": "langsteps-v1-2-0-release",
+    "url": "/blog/langsteps-v1-2-0-release/",
+    "date": "22 Oct 2026",
+    "tags": [
+      "langsteps",
+      "open-source",
+      "programming-education",
+      "typescript",
+      "web-development"
+    ],
+    "text": "LangSteps v1.2.0 is live! Learn HTML, CSS, JavaScript, React, Python, TypeScript, Rust, Go, SQL and C# for free with improved learning tools. LangSteps v1.2.0 Released — Learn 10 Programming Technologies Online for Free Published: October 22, 2026 Author: Sanskar I'm happy to announce that LangSteps v1.2.0 has officially been released and is available online for everyone. LangSteps is my open-source programming education platform, designed to make learning software development easier, more structured, and accessible without paid subscriptions. Visit LangSteps: https://sanskarin.github.io/LangSteps/ Learn 10 Programming Technologies LangSteps brings together learning resources for: 1. HTML 1. CSS 1. JavaScript 1. React 1. Python 1. TypeScript"
+  },
+  {
+    "type": "Post",
+    "title": "frametrellis-v1-2-2-faster-exports",
+    "url": "/blog/frametrellis-v1-2-2-faster-exports/",
+    "date": "21 Oct 2026",
+    "tags": [
+      "frametrellis",
+      "open-source",
+      "video-editing",
+      "c++",
+      "software-release"
+    ],
+    "text": "Discover FrameTrellis v1.2.2 with faster H.264 export presets, Turbo 720p previews, no-upscale controls, live FPS information, and improved MP4 validation. FrameTrellis v1.2.2 Released — Faster Exports and Smarter Rendering Published: October 21, 2026 FrameTrellis v1.2.2 is now available as a stable release on GitHub. This update focuses on improving video export workflows through speed-oriented H.264 presets, resolution controls, and stronger output verification. FrameTrellis is a free, open-source desktop video editor built with C++20, Qt 6/QML, MLT, and FFmpeg. It follows a local-first design, allowing users to edit their media without uploading it to a cloud service. What's new in v1.2.2?"
+  },
+  {
+    "type": "Post",
+    "title": "lineloom-v1-2-0-release",
+    "url": "/blog/lineloom-v1-2-0-release/",
+    "date": "20 Oct 2026",
+    "tags": [
+      "lineloom",
+      "vs-code",
+      "ollama",
+      "open-source",
+      "developer-tools"
+    ],
+    "text": "LineLoom v1.2.0 adds an improved VS Code Control Center, Ollama diagnostics, safer model discovery, and local-first AI code completion. LineLoom v1.2.0 Released — Smarter Local AI Autocomplete for VS Code Published: October 20, 2026 LineLoom v1.2.0 has officially been released as a stable version, bringing improved editor integration, better visibility into local AI inference, and additional privacy-focused safeguards. The free and open-source Visual Studio Code extension uses Ollama to deliver context-aware inline code completions through developer-configured models. The new release is available through GitHub, the Visual Studio Marketplace, and Open VSX. A more powerful Control Center One of the"
+  },
+  {
+    "type": "Post",
+    "title": "lineloom-v1-stable-release",
+    "url": "/blog/lineloom-v1-stable-release/",
+    "date": "19 Oct 2026",
+    "tags": [
+      "lineloom",
+      "vs-code",
+      "ollama",
+      "autocomplete",
+      "open-source"
+    ],
+    "text": "LineLoom v1.0.0 is live! Free, MIT-licensed VS Code inline autocomplete powered by Ollama, now available on GitHub, Visual Studio Marketplace, and Open VSX. LineLoom v1.0.0 Released — Now on Visual Studio Marketplace and Open VSX Published: October 19, 2026 I'm excited to announce the first stable release of LineLoom v1.0.0 , my free and open-source extension for Visual Studio Code. Following its public preview releases, LineLoom is now available through three distribution channels: GitHub Releases, Visual Studio Marketplace, and Open VSX Registry. What is LineLoom? LineLoom is a local-first coding assistant focused on inline code completion. It allows developers to receive context-aware suggestions"
+  },
+  {
+    "type": "Post",
+    "title": "frametrellis-v1-2-1-release",
+    "url": "/blog/frametrellis-v1-2-1-release/",
+    "date": "18 Oct 2026",
+    "tags": [
+      "frametrellis",
+      "open-source",
+      "video-editing",
+      "c++",
+      "software-releases"
+    ],
+    "text": "FrameTrellis v1.2.1 is here! This stable release improves startup diagnostics, Windows package verification, application cleanup, and testing for a more reliable open-source video editor. FrameTrellis v1.2.1 Released: Better Startup Diagnostics and Windows Verification FrameTrellis v1.2.1 has officially been released as a stable maintenance update. FrameTrellis is a free, open-source, local-first desktop video editor developed using C++20, Qt 6/QML, MLT and FFmpeg. This update focuses on strengthening application startup behavior, package verification and automated testing. What's New in v1.2.1? Improved startup diagnostics Additional lifecycle checkpoints help developers investigate startup, QML initialization and shutdown behavior. Safer cleanup The application now follows its normal cleanup sequence even"
+  },
+  {
+    "type": "Post",
+    "title": "speedpulse-v1-0-0",
+    "url": "/blog/speedpulse-v1-0-0/",
+    "date": "17 Oct 2026",
+    "tags": [
+      "speedpulse",
+      "open-source",
+      "internet-speed-test",
+      "asp.net-core",
+      "web-development"
+    ],
+    "text": "SpeedPulse v1.0.0 is now available. Explore the first stable release of this open-source internet speed tester with charts, diagnostics, and ASP.NET Core 10 support. SpeedPulse v1.0.0 Released — First Stable Version Now Available Published: October 17, 2026 I'm excited to announce the first stable release of SpeedPulse v1.0.0 , an open-source internet speed testing and developer diagnostics application. SpeedPulse brings browser-based performance measurements, interactive charts, and developer tools together in one project. What is SpeedPulse? SpeedPulse helps users explore their internet connection through download and upload measurements, latency readings, performance visualizations, and locally stored test history. It also offers additional diagnostics for developers who"
+  },
+  {
+    "type": "Post",
+    "title": "RepoDNA v1.4.1 Released — WinGet Integration and Windows Packaging Improvements",
+    "url": "/blog/repodna-v1-4-1-released-winget-integration-and-windows/",
+    "date": "16 Oct 2026",
+    "tags": [
+      "repodna",
+      "open-source",
+      "winget",
+      "rust",
+      "developer-tools"
+    ],
+    "text": "RepoDNA v1.4.1 adds WinGet-ready manifests for Windows desktop and CLI packages, automated checksums, submission tooling, and regression tests. Catalog approval is still required. RepoDNA v1.4.1 Released Released: October 16, 2026 RepoDNA v1.4.1 is now available, introducing a new foundation for installing and updating the application through Windows Package Manager (WinGet). This release focuses on improving Windows distribution, package validation, and release automation. Release highlights WinGet-ready packaging RepoDNA now generates WinGet manifests for the Windows desktop application and command-line tool. Both x64 and ARM64 architectures are supported. Automated integrity checks Release packaging now calculates SHA-256 checksums from the actual built installers and archives. Submission"
+  },
+  {
+    "type": "Post",
+    "title": "frametrellis-v1-2-0-release",
+    "url": "/blog/frametrellis-v1-2-0-release/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "frametrellis",
+      "c++",
+      "video-editing",
+      "open-source",
+      "qt6"
+    ],
+    "text": "FrameTrellis v1.2.0 introduces multi-clip duplication, attribute copy/paste, batch mute, and frame-accurate editing to the open-source C++ video editor. FrameTrellis v1.2.0 Released — Batch Timeline Editing Published: October 15, 2026 FrameTrellis v1.2.0 is now available on GitHub. This release introduces significant improvements to multi-clip timeline editing, allowing users to perform more operations across video and audio clips in a single action. Release highlights Multi-clip duplication: Duplicate multiple selected clips across tracks while preserving their relative timing and synchronization. Clip attribute clipboard: Copy and paste audio and picture adjustments without changing the original media or clip timing. Batch editing: Mute,"
+  },
+  {
+    "type": "Post",
+    "title": "SudokuNova v0.2.1 Released — Windows Desktop Improvements",
+    "url": "/blog/sudokunova-v0-2-1-released-windows-desktop-improvements/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "sudokunova",
+      "open-source",
+      "kotlin",
+      "windows",
+      "game-development"
+    ],
+    "text": "SudokuNova v0.2.1 adds native desktop menus, keyboard shortcuts, improved Windows installation, and a better desktop experience for the open-source Sudoku game. SudokuNova v0.2.1 Released — Windows Desktop Improvements SudokuNova v0.2.1 is officially available on GitHub! This update improves the desktop experience of SudokuNova, my open-source, offline-first Sudoku application built with Kotlin and Compose Multiplatform. What's new in v0.2.1? The release introduces several Windows-focused improvements. Native desktop menus: The new Game and Help menus provide convenient access to essential actions and project resources. Keyboard shortcuts: Use Ctrl+N for a new puzzle, Ctrl+Z to undo, Ctrl+M to toggle notes, and Ctrl+H to request"
+  },
+  {
+    "type": "Post",
+    "title": "eyezen-v1-2-0-web-edition-release",
+    "url": "/blog/eyezen-v1-2-0-web-edition-release/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "eyezen",
+      "open-source",
+      "web-application",
+      "desktop-software",
+      "productivity"
+    ],
+    "text": "EyeZen v1.2.0 introduces a local-first web edition, 10 themes, 9 profiles, persistent browser settings, break reminders, and a new documentation website. EyeZen v1.2.0: Now Available on the Web EyeZen v1.2.0 has officially been released, marking a new milestone in the development of this open-source, local-first workspace customization application. The biggest addition is EyeZen Web , a browser-based edition that brings themes, workspace profiles, break reminders, scheduling, and locally stored preferences to the web. Users can choose from 10 appearance themes and 9 starter profiles, create custom profiles, configure their routines, and export settings as JSON backups. This release also introduces a"
+  },
+  {
+    "type": "Post",
+    "title": "langsteps-v1-1-0-go-sql-csharp-learning-paths",
+    "url": "/blog/langsteps-v1-1-0-go-sql-csharp-learning-paths/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "langsteps",
+      "open-source",
+      "programming-education",
+      "go-sql-c#",
+      "software-development"
+    ],
+    "text": "LangSteps v1.1.0 adds 45 lessons across Go, SQL and C# / ASP.NET Core, expanding the open-source learning platform to 10 paths with exercises and local progress tracking. LangSteps v1.1.0 Released: Go, SQL & C Learning Paths Published: October 15, 2026 LangSteps v1.1.0 is officially released, marking another milestone for the open-source programming education platform. This update introduces 45 new guided lessons and expands the supported learning paths from seven to ten. What's New? Three new learning paths join LangSteps: Go Mastery: 15 lessons covering Go fundamentals, interfaces, error handling, concurrency, channels, testing and HTTP services. SQL Mastery: 15 PostgreSQL-oriented lessons covering queries, joins, transactions, window functions, indexing"
+  },
+  {
+    "type": "Post",
+    "title": "frametrellis-v1-1-1-released",
+    "url": "/blog/frametrellis-v1-1-1-released/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "frametrellis",
+      "open-source",
+      "video-editing",
+      "c++",
+      "software-releases"
+    ],
+    "text": "FrameTrellis v1.1.1 improves title creation, adds safer locked-track handling, enhances user feedback, and strengthens MP4 export testing. Windows downloads are available. FrameTrellis v1.1.1 Released: Safer Titles and Improved Export Testing October 15, 2026 FrameTrellis v1.1.1 is officially available on GitHub! This maintenance release focuses on improving title creation, providing clearer editing feedback, and strengthening automated testing. FrameTrellis is an open-source, local-first desktop video editor built with C++20, Qt/QML, MLT, and FFmpeg. What's improved in v1.1.1? Safer title creation The editor now checks whether an unlocked video track is available before allowing a title to be created through the Create Title dialog."
+  },
+  {
+    "type": "Post",
+    "title": "campuscore-v1-0-0-release",
+    "url": "/blog/campuscore-v1-0-0-release/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "campuscore",
+      "open-source",
+      "edtech",
+      "asp.net-core",
+      "react"
+    ],
+    "text": "CampusCore v1.0.0 is live! Explore an open-source, self-hosted student management system featuring attendance, grades, report cards, timetables, and academic administration. CampusCore v1.0.0 Officially Released I'm excited to announce the official release of CampusCore v1.0.0 , the first stable version of my open-source student and academic management system. CampusCore aims to simplify academic operations by bringing essential student, staff, and administrative workflows together in a modern application. Key Features - Student and guardian records - Enrollment, classes, sections, and academic years - Attendance and leave management - Marks, grades, and report cards - Timetables and announcements - Staff management and role-based"
+  },
+  {
+    "type": "Post",
+    "title": "repodna-v1-4-0-release",
+    "url": "/blog/repodna-v1-4-0-release/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "repodna",
+      "open-source",
+      "rust",
+      "developer-tools",
+      "software-engineering"
+    ],
+    "text": "RepoDNA v1.4.0 introduces original SVG branding, a branded startup experience, accessibility improvements, URL fixes, and PayPal.Me support—while staying local-first. RepoDNA v1.4.0 Released: A New Visual Identity and Better Application Experience Published: October 15, 2026 RepoDNA v1.4.0 is officially available on GitHub, introducing an original visual identity alongside accessibility, usability, and reliability improvements. RepoDNA is an open-source, local-first repository intelligence platform that helps developers understand codebase architecture, dependencies, history, quality signals, and software evolution. A new identity for RepoDNA The release introduces a hand-authored SVG logo inspired by the structure of DNA and the relationships within code graphs. The new"
+  },
+  {
+    "type": "Post",
+    "title": "eyezen-v1-1-1-multi-monitor-screen-comfort",
+    "url": "/blog/eyezen-v1-1-1-multi-monitor-screen-comfort/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "eyezen",
+      "open-source",
+      "desktop-applications",
+      "multi-monitor",
+      "screen-comfort"
+    ],
+    "text": "EyeZen v1.1.1 brings multi-monitor screen comfort, adjustable warmth and intensity, automatic display checks, and quick controls. Local-first, open source, and cross-platform. EyeZen v1.1.1 Released — Multi-Monitor Screen Comfort Is Here Published: October 15, 2026 EyeZen v1.1.1 is officially available on GitHub, introducing an important improvement to its screen comfort functionality. The release adds software-based, multi-monitor visual tinting that responds to warmth and intensity preferences on supported desktop systems. What's new in EyeZen v1.1.1? The biggest improvement is the implementation of screen-wide comfort overlays. Previously, users could save warmth and intensity preferences, but those settings did not change the appearance of the"
+  },
+  {
+    "type": "Post",
+    "title": "eyezen-v1-1-0-release",
+    "url": "/blog/eyezen-v1-1-0-release/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "eyezen",
+      "open-source",
+      "rust",
+      "desktop-applications",
+      "software-releases"
+    ],
+    "text": "Discover EyeZen v1.1.0, featuring timed break prompts, improved profiles, reliable local settings and cross-platform desktop downloads. EyeZen v1.1.0 Released — Smarter Breaks, Better Routines & Reliability Improvements Published: October 15, 2026 EyeZen v1.1.0 is officially available, bringing improvements to the reliability, usability and customization of the open-source desktop application. EyeZen helps users personalize their workspace, manage comfort preferences, switch between profiles and configure break reminders through a local-first experience. What's New? Timed Break Prompts A new optional in-app break prompt lets users take a timed pause, finish early or dismiss the prompt. Improved Workspace Profiles Profile"
+  },
+  {
+    "type": "Post",
+    "title": "frametrellis-v1-1-0-release",
+    "url": "/blog/frametrellis-v1-1-0-release/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "frametrellis",
+      "open-source",
+      "c++",
+      "video-editing",
+      "software-release"
+    ],
+    "text": "FrameTrellis v1.1.0 introduces timeline clip duplication, transparent PNG titles, headless rendering, and improved reliability. Download the free video editor. FrameTrellis v1.1.0 Released: New Editing Features and Improved Reliability Published: October 15, 2026 FrameTrellis v1.1.0 is officially available, introducing new editing capabilities, rendering options, and quality improvements to the open-source desktop video editor. Built with C++20, Qt/QML, MLT, and FFmpeg, FrameTrellis focuses on precise multi-track editing and local-first media processing. What's New in FrameTrellis v1.1.0? Faster Editing with Clip Duplication Users can now duplicate selected timeline clips with Ctrl+D, the Edit menu, or the timeline toolbar. The duplicated clips preserve"
+  },
+  {
+    "type": "Post",
+    "title": "sudokunova-v0-2-0-release",
+    "url": "/blog/sudokunova-v0-2-0-release/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "sudokunova",
+      "open-source",
+      "kotlin-multiplatform",
+      "sudoku-game",
+      "cross-platform-development"
+    ],
+    "text": "SudokuNova v0.2.0 introduces expanded cross-platform builds, validated puzzle sharing, imported-game restoration, and release automation for the open-source Sudoku project. SudokuNova v0.2.0 Released — Cross-Platform Sudoku Development Continues Published: October 15, 2026 I'm announcing the release of SudokuNova v0.2.0, the next public milestone of my open-source, offline-first Sudoku project. SudokuNova aims to combine classic Sudoku gameplay with a modern user interface, robust puzzle validation, local data persistence, and an expanding cross-platform architecture. What Is SudokuNova? SudokuNova is an open-source Sudoku application developed using Kotlin, Jetpack Compose, Kotlin Multiplatform, and Compose Multiplatform. Its Android application provides a broader feature set, while"
+  },
+  {
+    "type": "Post",
+    "title": "repodna-v1-3-3-release",
+    "url": "/blog/repodna-v1-3-3-release/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "repodna",
+      "open-source",
+      "rust",
+      "webassembly",
+      "developer-tools"
+    ],
+    "text": "RepoDNA v1.3.3 strengthens WebAssembly CLI validation, prevents accidental analysis-file overwrites, improves documentation processing, updates Rust TLS security dependencies, and expands regression c RepoDNA v1.3.3: Making Repository Analysis Safer and More Reliable October 15, 2026 RepoDNA v1.3.3 is now available. This patch release focuses on improving the reliability, correctness, and safety of RepoDNA's existing features. RepoDNA is my open-source, local-first repository intelligence project. It helps developers understand codebase architecture, dependencies, development history, security and quality signals, and repository evolution through evidence-backed analysis. What's improved? Safer WebAssembly CLI: The command-line launcher now validates missing values, unsupported settings, incorrect command flags, and repeated arguments before"
+  },
+  {
+    "type": "Post",
+    "title": "eyezen-v1-0-0-release",
+    "url": "/blog/eyezen-v1-0-0-release/",
+    "date": "15 Oct 2026",
+    "tags": [
+      "open-source",
+      "rust",
+      "desktop-apps",
+      "productivity",
+      "eyezen"
+    ],
+    "text": "Introducing EyeZen's first open-source desktop release, with customizable interface themes, workspace profiles, scheduling, optional break reminders and local-first settings. EyeZen v1.0.0 — Your Screen. Your Comfort. Your Environment. EyeZen v1.0.0 is now available. It's the first release of my local-first desktop application for workspace personalization, built with Rust, Tauri 2, React and TypeScript. The release includes ten application interface themes, nine starter workspace profiles, weekday and overnight scheduling rules, optional break reminders, and accessibility options. Settings are kept locally, with import, export and backup support. The project is open source under the Mozilla Public License 2.0. The app is"
+  },
+  {
+    "type": "Post",
+    "title": "langsteps-v1-0-0-launch",
+    "url": "/blog/langsteps-v1-0-0-launch/",
+    "date": "14 Oct 2026",
+    "tags": [
+      "langsteps",
+      "programming",
+      "education",
+      "web-development",
+      "rust"
+    ],
+    "text": "Explore LangSteps v1.0.0, a browser-based programming-learning platform featuring seven learning tracks, quizzes, practice tools, progress tracking, and a growing roadmap. LangSteps v1.0.0 Is Here Every Language. Every Level. One Step at a Time. I'm excited to announce the first stable release of LangSteps, a programming-learning platform built around a simple idea: make it easier to explore programming concepts, practice what you learn, and progress across multiple technologies in one place. The v1.0.0 release marks an important milestone in the project's development. It brings together seven current learning tracks, interactive learning features, and a growing collection of programming reference resources. A"
+  },
+  {
+    "type": "Post",
+    "title": "repodna-v1-3-2-documentation-site",
+    "url": "/blog/repodna-v1-3-2-documentation-site/",
+    "date": "13 Oct 2026",
+    "tags": [
+      "repodna",
+      "open-source",
+      "rust",
+      "developer-tools",
+      "code-analysis"
+    ],
+    "text": "RepoDNA v1.3.2 adds a dedicated searchable documentation website, clearer WebAssembly errors, updated support links, and more reliable GitHub Actions downloads. RepoDNA v1.3.2: New Documentation Website and Reliability Improvements I'm pleased to announce the release of RepoDNA v1.3.2. This release brings a dedicated documentation website, clearer error messages, more reliable GitHub Actions downloads, and improvements to documentation maintenance. RepoDNA is an open-source, local-first repository intelligence and code archaeology project designed to help developers understand how software repositories are structured, how their components depend on one another, and how their codebases evolve over time. A dedicated documentation website RepoDNA's documentation is now"
+  },
+  {
+    "type": "Post",
+    "title": "frametrellis-v1-0-0-release",
+    "url": "/blog/frametrellis-v1-0-0-release/",
+    "date": "12 Oct 2026",
+    "tags": [
+      "frametrellis",
+      "open-source",
+      "video-editing",
+      "c++",
+      "local-first-software"
+    ],
+    "text": "FrameTrellis v1.0.0 is here: an open-source, local-first video editor with multi-track editing, audio tools, MP4 export, and safe project recovery. FrameTrellis v1.0.0 Is Here A new milestone for local-first, open-source video editing. FrameTrellis v1.0.0 is the first stable release of my desktop video editor, built with C++20, Qt 6/QML, MLT, and FFmpeg. The goal is to provide practical multi-track editing tools while keeping your media and projects on your own computer. No account is required. There is no cloud processing, telemetry, or advertising. Edit, preview, and export FrameTrellis includes a multi-track timeline for video and audio, clip trimming and splitting,"
+  },
+  {
+    "type": "Post",
+    "title": "frametrellis-v1-development",
+    "url": "/blog/frametrellis-v1-development/",
+    "date": "11 Oct 2026",
+    "tags": [
+      "frametrellis",
+      "open-source",
+      "c++",
+      "qt",
+      "video-editing"
+    ],
+    "text": "Follow FrameTrellis, an open-source, local-first C++ desktop video editor, as development progresses toward its first stable v1.0.0 release. FrameTrellis v1.0.0 Development Has Begun An open-source, local-first desktop video editor built with C++20. I'm working toward the first stable v1.0.0 release of FrameTrellis, a desktop video editor developed using C++20, Qt 6/QML, MLT and FFmpeg. FrameTrellis is designed around a local-first approach: no account is required, and the application does not use cloud processing, telemetry or advertising. The current foundation Development has established an editing workflow that includes: - Importing video, audio and still images. - Editing clips on"
+  },
+  {
+    "type": "Post",
+    "title": "RepoDNA v1.3.1: Analyze Your Codebase Directly in the Browser",
+    "url": "/blog/repodna-v1-3-1-analyze-your-codebase-directly-in-the-browser/",
+    "date": "10 Oct 2026",
+    "tags": [
+      "repodna",
+      "open-source",
+      "webassembly",
+      "rust-developer",
+      "tools"
+    ],
+    "text": "Discover RepoDNA v1.3.1, featuring browser-based codebase analysis with WebAssembly, private local analysis, report exports, and a GitHub Action. RepoDNA v1.3.1: Analyze Your Codebase Directly in the Browser Understand your codebase. See its DNA. I'm excited to share RepoDNA v1.3.1 , the latest release of my open-source, local-first repository intelligence and code archaeology project. Software repositories contain much more than source code. They contain architectural decisions, dependency relationships, project history, development patterns, and clues about where future maintenance may be needed. RepoDNA helps developers explore that information through interactive analysis, evidence-backed findings, historical timelines, architecture maps, and shareable Project"
+  },
+  {
+    "type": "Post",
+    "title": "repodna-v1-3-0-better-codebase-exploration",
+    "url": "/blog/repodna-v1-3-0-better-codebase-exploration/",
+    "date": "9 Oct 2026",
+    "tags": [
+      "repodna",
+      "open-source",
+      "rust",
+      "developer-tools",
+      "code-analysis"
+    ],
+    "text": "RepoDNA v1.3.0 improves repository exploration with recent analyses, persistent navigation, CSV exports, drag-and-drop support, and a locally runnable web interface. RepoDNA v1.3.0: A Better Experience for Understanding Codebases A software repository contains a story. Its architecture shows how components fit together. Its dependencies reveal relationships between packages. Its Git history explains how the project evolved. Its code-quality signals help developers identify areas that deserve further investigation. But finding that information can be time-consuming, especially when entering an unfamiliar codebase. RepoDNA is an open-source, local-first repository intelligence and code archaeology platform that helps developers explore these details through evidence-backed analysis. RepoDNA"
+  },
+  {
+    "type": "Post",
+    "title": "Rust Typestate: Designing APIs That Make Invalid States Unrepresentable",
+    "url": "/blog/rust-typestate-designing-apis-that-make-invalid-states/",
+    "date": "8 Oct 2026",
+    "tags": [
+      "rust",
+      "typestate",
+      "systems-programming",
+      "type-systems",
+      "api-design"
+    ],
+    "text": "Learn how Rust typestate uses the type system to model object lifecycles and prevent invalid operations at compile time, with practical PhantomData examples. Rust Typestate: Designing APIs That Make Invalid States Unrepresentable Most programming languages let you create an object first and worry about whether it is actually ready to use later. A connection might be disconnected. A file might be closed. A transaction might already be committed. A parser might not have received enough input. A device might not have been initialized. In many systems, these conditions are represented by booleans, nullable fields, runtime checks, or conventions documented somewhere that developers may"
+  },
+  {
+    "type": "Post",
+    "title": "digital-gardening-build-a-personal-knowledge-system",
+    "url": "/blog/digital-gardening-build-a-personal-knowledge-system/",
+    "date": "8 Oct 2026",
+    "tags": [
+      "digital-gardening",
+      "knowledge-management",
+      "learning",
+      "productivity",
+      "personal-website"
+    ],
+    "text": "Your best ideas should not disappear into bookmarks, notes, or old posts. A digital garden turns scattered knowledge into a living system that grows as you learn. Digital Gardening: How to Build a Personal Knowledge System That Grows With You Most people collect information. They save articles, bookmark repositories, take screenshots, create notes, watch tutorials, and occasionally write something down. Then months pass. The information is still there, but finding it becomes difficult. Worse, individual pieces of knowledge remain isolated from one another. A better approach is to think about your knowledge like a garden. A digital garden is a collection of interconnected notes and ideas that"
+  },
+  {
+    "type": "Post",
+    "title": "Vibe Coding vs Engineering: Where AI-Generated Code Starts to Break Down",
+    "url": "/blog/vibe-coding-vs-engineering-where-ai-generated-code-starts-to/",
+    "date": "8 Oct 2026",
+    "tags": [
+      "vibe-coding",
+      "ai",
+      "software-engineering",
+      "developer-tools",
+      "code-quality"
+    ],
+    "text": "Vibe coding can turn ideas into working software quickly, but production quality still depends on architecture, testing, security, maintainability, and human engineering judgment. Vibe Coding vs Engineering: Where AI-Generated Code Starts to Break Down AI has changed the way software can be built. A developer can now describe a feature in natural language, ask an AI coding tool to implement it, run the result, report an error, and continue iterating. What once required hours of typing can sometimes become a working prototype in minutes. That is the promise of vibe coding. But there is an important distinction that is easy to miss: Getting"
+  },
+  {
+    "type": "Post",
+    "title": "Build Software That Survives Change: Why Engineering Fundamentals Still Matter",
+    "url": "/blog/build-software-that-survives-change-why-engineering/",
+    "date": "8 Oct 2026",
+    "tags": [
+      "software-engineering",
+      "programming",
+      "developer",
+      "architecture",
+      "open-source"
+    ],
+    "text": "Technology changes fast, but strong engineering fundamentals last. Learn how architecture, testing, debugging, and maintainable code help software stay reliable and adaptable. Build Software That Survives Change: Why Engineering Fundamentals Still Matter Technology changes incredibly fast. A framework that is popular today can be replaced by something completely different a few years later. Programming languages evolve, development tools become smarter, platforms change their APIs, and the way developers build software continues to transform. But some engineering principles remain useful regardless of the technology being used. Good architecture, clear code, testing, debugging, documentation, version control, security, and the ability to understand a problem"
+  },
+  {
+    "type": "Post",
+    "title": "RepoDNA v1.2.2 — Better Mobile Tables and More Predictable npm Releases",
+    "url": "/blog/repodna-v1-2-2-better-mobile-tables-and-more-predictable-npm/",
+    "date": "7 Oct 2026",
+    "tags": [
+      "repodna",
+      "open-source",
+      "rust",
+      "developer-tools",
+      "code-analysis"
+    ],
+    "text": "RepoDNA v1.2.2 is a focused follow-up to v1.2.1, improving mobile table scrolling and npm release handling while continuing to make repository intelligence more usable and predictable. RepoDNA v1.2.2 Better mobile tables. More predictable npm releases. RepoDNA v1.2.2 is now available. This release is a focused follow-up to v1.2.1, improving two areas that directly affect day-to-day use and release distribution: - clearer scrolling feedback for wide tables on phones - safer npm publishing for releases that are older than the current latest RepoDNA remains an open-source, local-first repository intelligence and code archaeology platform designed to help developers understand how a codebase is structured, how it has evolved,"
+  },
+  {
+    "type": "Post",
+    "title": "repodna-v1-2-1-release",
+    "url": "/blog/repodna-v1-2-1-release/",
+    "date": "6 Oct 2026",
+    "tags": [
+      "repodna",
+      "opensource",
+      "rust",
+      "developer-tools",
+      "code-analysis"
+    ],
+    "text": "RepoDNA v1.2.1 is now available, bringing easier npm installation, better accessibility, improved mobile behavior, clearer Git errors, a restored Project DNA card, and more reliable web deployment. RepoDNA v1.2.1: Easier Installation and a More Polished Repository Intelligence Experience Published October 6, 2026 RepoDNA v1.2.1 is now available. This release focuses on making RepoDNA easier to install, more accessible, more usable on phones, and more reliable in everyday workflows. RepoDNA is an open-source, local-first repository intelligence and code archaeology platform that turns a repository into an evidence-backed picture of its structure, architecture, dependencies, history, quality, security, tests, documentation, and evolution. The biggest update: npm installation RepoDNA packages are"
+  },
+  {
+    "type": "Post",
+    "title": "All Releases of RepoDNA from v1.0.0 to v1.2.0",
+    "url": "/blog/all-releases-of-repodna-from-v1-0-0-to-v1-2-0/",
+    "date": "5 Oct 2026",
+    "tags": [
+      "repodna",
+      "open-source",
+      "rust",
+      "developer-tools",
+      "software-development"
+    ],
+    "text": "The all the releases of the RepoDNA from v1.0.0 to v1.2.0 POST 1 — RepoDNA v1.2.0 Title: RepoDNA v1.2.0 Is Here: More Ways to Install, Better Web Experience, and a More Mobile-Friendly Interface Suggested slug: repodna-v1-2-0-release Suggested date: October 5, 2026 Excerpt: RepoDNA v1.2.0 expands distribution through GitHub Packages, adds a self-hostable web interface container, and brings a major round of responsive design improvements for phones and narrow screens. RepoDNA v1.2.0 Is Here Today I’m releasing RepoDNA v1.2.0 , the latest step in the evolution of RepoDNA — a local-first repository"
+  },
+  {
+    "type": "Post",
+    "title": "The Quiet Power of Small Software: Why Tiny Tools Still Matter",
+    "url": "/blog/the-quiet-power-of-small-software-why-tiny-tools-still/",
+    "date": "4 Oct 2026",
+    "tags": [
+      "software-development",
+      "open-source",
+      "developer-tools",
+      "ai",
+      "programming"
+    ],
+    "text": "Small, focused software can solve real problems, improve workflows, and create valuable open-source projects. A practical look at why simple software, focused tools, and small open-source projects can have a bigger impact than we expect. We live in a time when software is often associated with enormous platforms, artificial intelligence, massive cloud systems, and applications used by millions of people. But not every useful piece of software needs to be enormous. Sometimes the most valuable program is a tiny utility that solves one annoying problem. A developer might spend ten minutes every morning renaming"
+  },
+  {
+    "type": "Post",
+    "title": "The Hidden Value of Boring Software: Why Simple Tools Still Matter",
+    "url": "/blog/the-hidden-value-of-boring-software-why-simple-tools-still/",
+    "date": "3 Oct 2026",
+    "tags": [
+      "softwaredevelopment",
+      "developertools",
+      "programming",
+      "opensource",
+      "tech"
+    ],
+    "text": "The most useful software is not always the most impressive. Sometimes, the best tools are the ones that quietly solve a problem, stay reliable, and get out of the developer’s way. The Hidden Value of Boring Software: Why Simple Tools Still Matter Technology is often presented as a race toward the next big thing. A new framework appears. A new programming language gains attention. A new AI model promises to change development. A new platform introduces another set of features. It is easy to believe that software becomes more valuable as it becomes more advanced. But there is another side of software development that receives much less attention: Software does not"
+  },
+  {
+    "type": "Post",
+    "title": "Building Software That Works Locally: Why the Next Generation of Apps Won’t Depend on the Cloud",
+    "url": "/blog/building-software-that-works-locally-why-the-next-generation/",
+    "date": "2 Oct 2026",
+    "tags": [
+      "ai",
+      "local-first",
+      "software-development",
+      "cloud-computing",
+      "open-source"
+    ],
+    "text": "Exploring how local-first AI can make apps faster, more private, and less dependent on the cloud. Building Software That Works Locally: Why the Next Generation of Apps Won’t Depend on the Cloud Modern software has become incredibly powerful, but much of that power comes with a dependency: the cloud. Open an AI application, synchronize your notes, process a document, generate an image, or analyze a large dataset, and there is a good chance that at least part of the operation depends on a remote server. That model has worked remarkably well. Cloud computing gives developers access"
+  },
+  {
+    "type": "Post",
+    "title": "Local-First AI: Why the Future of Personal Software May Run on Your Device",
+    "url": "/blog/local-first-ai-why-the-future-of-personal-software-may-run/",
+    "date": "1 Oct 2026",
+    "tags": [
+      "artificialintelligence",
+      "localai",
+      "androiddevelopment",
+      "softwaredevelopment",
+      "machinelearning"
+    ],
+    "text": "Discover how local-first AI can make software more private, faster, and useful offline while keeping cloud services optional. Local-First AI: Why the Future of Personal Software May Run on Your Device Artificial intelligence is becoming part of almost every type of software. We see AI inside coding tools, search engines, productivity applications, creative platforms, mobile apps, and business systems. But much of today's AI experience depends on a remote server: you send data to a cloud service, the service processes it, and the result comes back to your device. That model is powerful, but it is not the"
+  },
+  {
+    "type": "Post",
+    "title": "Building Software That Matters: What I’m Learning From Open Source, AI, and Real-World Development",
+    "url": "/blog/building-software-that-matters-what-im-learning-from-open/",
+    "date": "30 Sep 2026",
+    "tags": [
+      "softwaredevelopment",
+      "opensource",
+      "artificialintelligence",
+      "localfirst",
+      "programming"
+    ],
+    "text": "personal look at building meaningful software through open source, AI, local-first development, developer tools, and continuous learning. Building Software That Matters: What I’m Learning From Open Source, AI, and Real-World Development Software development is often presented as a race. Learn the newest framework. Try the newest AI model. Build something in a weekend. Collect more technologies. Get more GitHub stars. Publish more projects. Move on to the next thing. But after spending time actually building software, I have started to think about development differently. The most interesting part of programming is not simply writing code. It is"
+  },
+  {
+    "type": "Post",
+    "title": "Building a Privacy-First Spell Checker That Works Locally: Inside SpellChecker",
+    "url": "/blog/building-a-privacy-first-spell-checker-that-works-locally/",
+    "date": "29 Sep 2026",
+    "tags": [
+      "opensource",
+      "flutter",
+      "dart",
+      "privacy",
+      "developertools"
+    ],
+    "text": "SpellChecker is an open-source Flutter project focused on local, privacy-first spelling and writing assistance across multiple platforms. Building a Privacy-First Spell Checker That Works Locally: Inside SpellChecker Modern software increasingly depends on cloud services. That can be extremely useful. Cloud infrastructure can provide powerful models, centralized processing, synchronization, analytics, and continuously updated services. But there are also applications where sending information to a remote server is not necessarily the best architecture. Writing assistance is one of those areas. When someone writes a private document, drafts source code, prepares notes, writes a personal journal, creates a business document,"
+  },
+  {
+    "type": "Post",
+    "title": "RepoDNA: Turning a Software Repository into a Living Project DNA",
+    "url": "/blog/repodna-turning-a-software-repository-into-a-living-project/",
+    "date": "28 Sep 2026",
+    "tags": [
+      "repodna",
+      "rust",
+      "typescript",
+      "react",
+      "open-source"
+    ],
+    "text": "RepoDNA is an open-source repository intelligence and codebase archaeology project designed to help developers understand how a software project is structured. RepoDNA: Turning a Software Repository into a Living Project DNA Software repositories contain far more information than the source code that appears inside their files. A repository tells a story. It contains the structure of a project, the relationships between modules, dependencies between components, development history, architectural decisions, changes made over time, releases, complexity, and countless small signals that can help explain how the project became what it is today. The problem is that much of this information is scattered"
+  },
+  {
+    "type": "Post",
+    "title": "Hello, world: the blog is open",
+    "url": "/blog/hello-world-the-blog-is-open/",
+    "date": "27 Sep 2026",
+    "tags": [
+      "meta",
+      "open-source",
+      "github",
+      "jekyll"
+    ],
+    "text": "The first post on this blog: what it is for, how anyone with a GitHub account can write a post, and how a post travels from a GitHub issue to this website. Welcome to the blog! This first post is a short tour: what the blog is for, how you can write here too, and how a post gets from GitHub to this page. What to expect I'm Sanskar, a software developer building software, developer tools, and digital products in the open. This is where I'll write about the things I work with and learn along the way (Rust and C++, Android, the web, game development, and AI and machine learning) and"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. HTML"
+  },
+  {
+    "type": "Project",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
+    "tags": [],
+    "text": "Latebrake — Race Beyond Limits. C++"
+  },
+  {
+    "type": "Project",
+    "title": "scarp-lang",
+    "url": "https://github.com/sanskarIN/scarp-lang",
+    "tags": [],
+    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "KathaSvara",
+    "url": "https://github.com/sanskarIN/KathaSvara",
+    "tags": [],
+    "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "RepoDNA",
+    "url": "https://github.com/sanskarIN/RepoDNA",
+    "tags": [
+      "cli",
+      "code-analysis",
+      "code-archaeology",
+      "code-metrics",
+      "code-quality",
+      "code-visualization"
+    ],
+    "text": "Understand any GitHub repository before you clone it. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "frametrellis",
+    "url": "https://github.com/sanskarIN/frametrellis",
+    "tags": [
+      "cmake",
+      "cpp",
+      "cpp20",
+      "desktop-application",
+      "docker",
+      "ffmpeg"
+    ],
+    "text": "Open-source video editor. C++"
+  },
+  {
+    "type": "Project",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
+    "tags": [],
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "Sanskar-PDF-Editor",
+    "url": "https://github.com/sanskarIN/Sanskar-PDF-Editor",
+    "tags": [],
+    "text": "An ultimate, enterprise-grade, offline-first PDF Editor featuring 70+ advanced tools. Built with React, Tauri v2, and Rust for lightning-fast, secure performance across Windows, Android, and Web. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "thermoshift",
+    "url": "https://github.com/sanskarIN/thermoshift",
+    "tags": [],
+    "text": "TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "SonicNest",
+    "url": "https://github.com/sanskarIN/SonicNest",
+    "tags": [
+      "mp3",
+      "recorded-sounds",
+      "recorder",
+      "recorder-app",
+      "sound",
+      "soundrecorder"
+    ],
+    "text": "SonicNest is a professional, modern, open-source sound and voice recorder worthy of public release. Dart"
+  },
+  {
+    "type": "Project",
+    "title": "tempotrack",
+    "url": "https://github.com/sanskarIN/tempotrack",
+    "tags": [],
+    "text": "Kotlin"
+  },
+  {
+    "type": "Project",
+    "title": "contactcore",
+    "url": "https://github.com/sanskarIN/contactcore",
+    "tags": [],
+    "text": "ContactCore, a production-quality Basic Contact Book project that is much more complete than a classroom demo. C#"
+  },
+  {
+    "type": "Project",
+    "title": "healthmetric",
+    "url": "https://github.com/sanskarIN/healthmetric",
+    "tags": [],
+    "text": "Kotlin"
+  },
+  {
+    "type": "Project",
+    "title": "unknown-mystery-ai",
+    "url": "https://github.com/sanskarIN/unknown-mystery-ai",
+    "tags": [],
+    "text": "Official companion repository for The Unknown Mystery of the AI by Ram Sandesh — AI code examples, projects, exercises, notebooks, reproducibility resources, and practical learning materials covering ML, Deep Learning, LLMs, RAG, Agents, MLOps, Responsible AI, deployment, and… Python"
+  },
+  {
+    "type": "Project",
+    "title": "SwiftDrop",
+    "url": "https://github.com/sanskarIN/SwiftDrop",
+    "tags": [],
+    "text": "SwiftDrop is a local-network, account-free file-transfer application for sending files and text between nearby devices. C#"
+  },
+  {
+    "type": "Project",
+    "title": "libracore",
+    "url": "https://github.com/sanskarIN/libracore",
+    "tags": [],
+    "text": "LibraCore, a production-quality Library Management System project that is much more complete than a classroom demo. Java"
+  },
+  {
+    "type": "Project",
+    "title": "chronoage",
+    "url": "https://github.com/sanskarIN/chronoage",
+    "tags": [],
+    "text": "TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "2048",
+    "url": "https://github.com/sanskarIN/2048",
+    "tags": [
+      "2040",
+      "2048",
+      "2048-clone",
+      "2048-game",
+      "2048-game-online",
+      "2048-redesigned"
+    ],
+    "text": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar. Dart"
+  },
+  {
+    "type": "Project",
+    "title": "foliolane",
+    "url": "https://github.com/sanskarIN/foliolane",
+    "tags": [
+      "docmerge",
+      "pdf-merge",
+      "pdf-merger",
+      "pdf-merger-python",
+      "pdf-merger-tool",
+      "pdf-merger-windows-desktop"
+    ],
+    "text": "A modern, reliable, local-first document-merging application for very large multi-part books and document series. Python"
+  },
+  {
+    "type": "Project",
+    "title": "Finora",
+    "url": "https://github.com/sanskarIN/Finora",
+    "tags": [
+      "finance",
+      "finance-management",
+      "financial",
+      "financial-analysis",
+      "financial-data"
+    ],
+    "text": "Finora is a local-first personal finance, expense, budget, savings, and financial-planning application. It must work without an account and keep all private financial information on the user’s device in the current release. Cloud synchronization is planned for a later version… C#"
+  },
+  {
+    "type": "Project",
+    "title": "Chess",
+    "url": "https://github.com/sanskarIN/Chess",
+    "tags": [
+      "chess",
+      "chess-bot",
+      "chess-game",
+      "chess-master",
+      "chessboard"
+    ],
+    "text": "Source of the Chess-Master. Dart"
+  },
+  {
+    "type": "Project",
+    "title": "EyeZen",
+    "url": "https://github.com/sanskarIN/EyeZen",
+    "tags": [],
+    "text": "Your screen. Your comfort. Your environment. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "dicelab",
+    "url": "https://github.com/sanskarIN/dicelab",
+    "tags": [],
+    "text": "TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "CareNest",
+    "url": "https://github.com/sanskarIN/CareNest",
+    "tags": [],
+    "text": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s… C#"
+  },
+  {
+    "type": "Project",
+    "title": "LangSteps",
+    "url": "https://github.com/sanskarIN/LangSteps",
+    "tags": [
+      "beginner-to-advanced",
+      "coding-challenges",
+      "coding-exercises",
+      "csharp",
+      "css",
+      "golang"
+    ],
+    "text": "LangSteps — Every Language. Every Level. One Step at a Time. HTML"
+  },
+  {
+    "type": "Project",
+    "title": "ReproCrate",
+    "url": "https://github.com/sanskarIN/ReproCrate",
+    "tags": [],
+    "text": "Turn bugs into reproducible reports. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "PuzzleForge",
+    "url": "https://github.com/sanskarIN/PuzzleForge",
+    "tags": [],
+    "text": "Dart"
+  },
+  {
+    "type": "Project",
+    "title": "Rewind64",
+    "url": "https://github.com/sanskarIN/Rewind64",
+    "tags": [],
+    "text": "A cross-platform, high-performance native debugger and execution recorder built entirely in Assembly. Shell"
+  },
+  {
+    "type": "Project",
+    "title": "Arithvex",
+    "url": "https://github.com/sanskarIN/Arithvex",
+    "tags": [],
+    "text": "Engineering the Future of Mathematics. C++"
+  },
+  {
+    "type": "Project",
+    "title": "sortsmith",
+    "url": "https://github.com/sanskarIN/sortsmith",
+    "tags": [
+      "fileoragin",
+      "fileordering",
+      "fileordertracker",
+      "fileorganiser",
+      "fileorganization",
+      "fileorganizer"
+    ],
+    "text": "SortSmith, a production-quality File Organizer project. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "BeatForge-Rhythm",
+    "url": "https://github.com/sanskarIN/BeatForge-Rhythm",
+    "tags": [],
+    "text": "BeatForge is an open-source Android rhythm game and beat-map creator featuring offline play, custom charts, challenges, accessibility options, statistics, replay tools and community-ready extensibility. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "vaultora",
+    "url": "https://github.com/sanskarIN/vaultora",
+    "tags": [],
+    "text": "Vaultora, a production-quality Password Manager project that is much more complete than a classroom demo. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "SpeedPulse",
+    "url": "https://github.com/sanskarIN/SpeedPulse",
+    "tags": [],
+    "text": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of… HTML"
+  },
+  {
+    "type": "Project",
+    "title": "markora",
+    "url": "https://github.com/sanskarIN/markora",
+    "tags": [],
+    "text": "Markora, a production-quality Markdown Editor project that is much more complete than a classroom demo. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "campuscore",
+    "url": "https://github.com/sanskarIN/campuscore",
+    "tags": [],
+    "text": "CampusCore, a production-quality Student Management System project that is much more complete than a classroom demo. C#"
+  },
+  {
+    "type": "Project",
+    "title": "taskmint",
+    "url": "https://github.com/sanskarIN/taskmint",
+    "tags": [],
+    "text": "TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "tablespark",
+    "url": "https://github.com/sanskarIN/tablespark",
+    "tags": [],
+    "text": "TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "textlens",
+    "url": "https://github.com/sanskarIN/textlens",
+    "tags": [],
+    "text": "TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "pairdock",
+    "url": "https://github.com/sanskarIN/pairdock",
+    "tags": [],
+    "text": "Pair, provision, monitor, and update Wi-Fi and Bluetooth devices. C#"
+  },
+  {
+    "type": "Project",
+    "title": "chronodesk",
+    "url": "https://github.com/sanskarIN/chronodesk",
+    "tags": [],
+    "text": "C#"
+  },
+  {
+    "type": "Project",
+    "title": "neuralforge",
+    "url": "https://github.com/sanskarIN/neuralforge",
+    "tags": [],
+    "text": "Python"
+  },
+  {
+    "type": "Project",
+    "title": "SudokuNova",
+    "url": "https://github.com/sanskarIN/SudokuNova",
+    "tags": [],
+    "text": "SudokuNova is a modern, fully open-source Android Sudoku game built with Kotlin and Jetpack Compose, featuring multiple difficulty levels, smart notes, hints, daily challenges, statistics, custom puzzles, accessibility, themes, offline gameplay, and a polished Material 3 UI/UX. Kotlin"
+  },
+  {
+    "type": "Project",
+    "title": "guessnova",
+    "url": "https://github.com/sanskarIN/guessnova",
+    "tags": [
+      "guess-the-number",
+      "guess-the-number-game",
+      "guessing-number-game",
+      "guessmynumber",
+      "numberguess",
+      "numberguesser"
+    ],
+    "text": "Python"
+  },
+  {
+    "type": "Project",
+    "title": "CalcNova",
+    "url": "https://github.com/sanskarIN/CalcNova",
+    "tags": [],
+    "text": "CalcNova is an open-source, privacy-first cross-platform calculator built with C#, .NET, and Avalonia UI, featuring standard, scientific, programmer, graphing, conversion, history, themes, accessibility, keyboard support, offline-first storage, and polished UI/UX. C#"
+  },
+  {
+    "type": "Project",
+    "title": "stockpilot",
+    "url": "https://github.com/sanskarIN/stockpilot",
+    "tags": [
+      "go",
+      "golang",
+      "stcokpilot",
+      "typescript"
+    ],
+    "text": "StockPilot, a production-quality Inventory Management System project that is much more complete than a classroom demo. Go"
+  },
+  {
+    "type": "Project",
+    "title": "SpellChecker",
+    "url": "https://github.com/sanskarIN/SpellChecker",
+    "tags": [
+      "spell",
+      "spell-check",
+      "spell-checker",
+      "spellcheck",
+      "spellchecker",
+      "spelling"
+    ],
+    "text": "A modern, open-source, offline-first spell checker and writing assistant for Android, Windows, Linux, iOS, and macOS, featuring spelling, grammar, punctuation, style suggestions, personal dictionaries, document analysis, and privacy-focused cross-platform support. Made by… Dart"
+  },
+  {
+    "type": "Project",
+    "title": "CueVersa",
+    "url": "https://github.com/sanskarIN/CueVersa",
+    "tags": [],
+    "text": "Dart"
+  },
+  {
+    "type": "Project",
+    "title": "MeTodo",
+    "url": "https://github.com/sanskarIN/MeTodo",
+    "tags": [
+      "todo",
+      "todo-app",
+      "todo-list",
+      "todoapp",
+      "todolist",
+      "todolist-application"
+    ],
+    "text": "**MeTodo** is a highly advanced, ultra-customizable, cross-platform task management application designed for Windows, Linux, and Android. Built with a heavy emphasis on premium UI/UX, MeTodo goes beyond a simple to-do list by offering unprecedented personalization and… TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "gradecraft",
+    "url": "https://github.com/sanskarIN/gradecraft",
+    "tags": [],
+    "text": "TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "RuneGrid-Tactics",
+    "url": "https://github.com/sanskarIN/RuneGrid-Tactics",
+    "tags": [],
+    "text": "RuneGrid Tactics is an open-source Android-first tactical roguelite featuring procedural battles, strategic heroes, abilities, challenges, replays, achievements, offline play, and extensive customization. C#"
+  },
+  {
+    "type": "Project",
+    "title": "rps-arena",
+    "url": "https://github.com/sanskarIN/rps-arena",
+    "tags": [
+      "rock-paper-scissor",
+      "rock-paper-scissors",
+      "rock-paper-scissors-game"
+    ],
+    "text": "Kotlin"
+  },
+  {
+    "type": "Project",
+    "title": "ts-mastery",
+    "url": "https://github.com/sanskarIN/ts-mastery",
+    "tags": [],
+    "text": "Open-source TypeScript examples, exercises, tests, and companion projects for the 120-part TypeScript Full Mastery series by Ram Sandesh. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "Learning-Rust",
+    "url": "https://github.com/sanskarIN/Learning-Rust",
+    "tags": [],
+    "text": "Repository for learning Rust from the Zero to the Hero level. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "Calc-Avg",
+    "url": "https://github.com/sanskarIN/Calc-Avg",
+    "tags": [],
+    "text": "An advanced, open-source C command-line utility and data science engine to instantly calculate complex statistical averages from dynamic arrays, CSV spreadsheets, JSON objects, and live internet APIs. C"
+  },
+  {
+    "type": "Project",
+    "title": "notenest",
+    "url": "https://github.com/sanskarIN/notenest",
+    "tags": [],
+    "text": "NoteNest, a production-quality Simple Notes App project that is much more complete than a classroom demo. Dart"
+  },
+  {
+    "type": "Project",
+    "title": "unitflow",
+    "url": "https://github.com/sanskarIN/unitflow",
+    "tags": [
+      "unit-conversion",
+      "unit-conversions",
+      "unit-converter",
+      "unit-converters",
+      "unit-convertor",
+      "unitcon"
+    ],
+    "text": "Dart"
+  },
+  {
+    "type": "Project",
+    "title": "keysmith",
+    "url": "https://github.com/sanskarIN/keysmith",
+    "tags": [],
+    "text": "Rust"
+  },
+  {
+    "type": "Project",
+    "title": "countora",
+    "url": "https://github.com/sanskarIN/countora",
+    "tags": [],
+    "text": "Dart"
+  },
+  {
+    "type": "Project",
+    "title": "quizforge",
+    "url": "https://github.com/sanskarIN/quizforge",
+    "tags": [],
+    "text": "Dart"
+  },
+  {
+    "type": "Project",
+    "title": "spendcalc",
+    "url": "https://github.com/sanskarIN/spendcalc",
+    "tags": [],
+    "text": "Kotlin"
+  },
+  {
+    "type": "Project",
+    "title": "CipherNest",
+    "url": "https://github.com/sanskarIN/CipherNest",
+    "tags": [],
+    "text": "C#"
+  },
+  {
+    "type": "Project",
+    "title": "The-Journey-of-Ethical-Hacking",
+    "url": "https://github.com/sanskarIN/The-Journey-of-Ethical-Hacking",
+    "tags": [],
+    "text": "Defensive, authorization-first cybersecurity learning resources for The Journey of Ethical Hacking - 2026 Edition, with safe offline labs, synthetic datasets, checklists, templates and companion projects. Python"
+  },
+  {
+    "type": "Project",
+    "title": "dart-flutter-master",
+    "url": "https://github.com/sanskarIN/dart-flutter-master",
+    "tags": [],
+    "text": "Companion source code, exercises, solutions, master projects, examples, and update notes for Dart & Flutter Full Mastery — the complete 120-part learning series by Ram Sandesh. Dart"
+  },
+  {
+    "type": "Project",
+    "title": "nodejs-mastery",
+    "url": "https://github.com/sanskarIN/nodejs-mastery",
+    "tags": [
+      "node",
+      "node-js",
+      "nodejs",
+      "nodejs-server"
+    ],
+    "text": "Companion code, practical projects, examples, exercises, and production-ready Node.js learning resources for the Node.js Full Mastery eBook by Ram Sandesh. JavaScript"
+  },
+  {
+    "type": "Project",
+    "title": "sql-master",
+    "url": "https://github.com/sanskarIN/sql-master",
+    "tags": [
+      "sql",
+      "sql-server",
+      "sqlite",
+      "sqlserver"
+    ],
+    "text": "Companion code, SQL labs, exercises, samples, and documentation for SQL Full Mastery by Ram Sandesh — a complete 120-part journey from SQL fundamentals to production database engineering and interview mastery. PLpgSQL"
+  },
+  {
+    "type": "Project",
+    "title": "react-master",
+    "url": "https://github.com/sanskarIN/react-master",
+    "tags": [],
+    "text": "Companion code, labs, capstones, architecture references, and validation tools for React Full Mastery: Complete 150-Part Master Edition by Ram Sandesh. Commercial manuscript not included. Python"
+  },
+  {
+    "type": "Project",
+    "title": "Chronova",
+    "url": "https://github.com/sanskarIN/Chronova",
+    "tags": [
+      "calendar",
+      "calendar-app",
+      "calendar-component",
+      "calendar-events",
+      "calendar-view",
+      "calendar-widget"
+    ],
+    "text": "Source of the Chronova Calender. Kotlin"
+  },
+  {
+    "type": "Project",
+    "title": "AI-Cargo-Pathfinder",
+    "url": "https://github.com/sanskarIN/AI-Cargo-Pathfinder",
+    "tags": [],
+    "text": "A 3D autonomous warehouse robot simulation built from scratch using Python, the Panda3D Engine, and Bullet Physics. Features procedural geometry, simulated LiDAR raycasting, and an autonomous FSM AI. HTML"
+  },
+  {
+    "type": "Project",
+    "title": "Sanskar-Racing-Game",
+    "url": "https://github.com/sanskarIN/Sanskar-Racing-Game",
+    "tags": [],
+    "text": "A high-performance custom C++ racing game engine. Features smooth vehicle control, drifting, checkpoints, time trials, and optimized rendering. Madden by the Sanskar Yadav."
+  }
 ]
