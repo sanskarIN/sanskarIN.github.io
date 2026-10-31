@@ -1,6 +1,7 @@
 """Regression tests for Python-authored static site sections and style tokens."""
 
 import copy
+import html
 import json
 import sys
 import unittest
@@ -8,6 +9,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import generate_site_content as sitegen
+from home_render import render_hero, render_sections, SECTION_IDS
 
 
 class SiteGeneratorTests(unittest.TestCase):
@@ -16,6 +18,7 @@ class SiteGeneratorTests(unittest.TestCase):
         cls.details = json.loads(sitegen.DETAILS.read_text(encoding="utf-8"))
         cls.tokens = json.loads(sitegen.TOKENS.read_text(encoding="utf-8"))
         cls.about = json.loads(sitegen.ABOUT.read_text(encoding="utf-8"))
+        cls.home = json.loads(sitegen.HOME.read_text(encoding="utf-8"))
 
     def test_generated_files_match_their_json_sources(self):
         for path, generated in sitegen.generated_files().items():
@@ -108,6 +111,56 @@ class SiteGeneratorTests(unittest.TestCase):
         about["sections"][0]["extra_html"] = "<script></script>"
         with self.assertRaisesRegex(ValueError, "unknown fields"):
             sitegen.render_about_sections(about)
+
+    def test_home_sections_are_ordered_and_generated(self):
+        home = self.home
+        result = render_sections(home)
+        self.assertEqual(result.count('<section class="section'), len(SECTION_IDS))
+        for index, section in enumerate(home["sections"], start=1):
+            self.assertIn(f'>{index:02d}</span>{section["title"] if "&" not in section["title"] else "Support &amp; digital products"}', result)
+        self.assertIn('{%- for name in gh.featured limit: 3 %}', result)
+        self.assertIn('{%- for post in site.posts limit: 3 %}', result)
+        self.assertIn('include contact-card.html group="business"', result)
+        self.assertIn('include profile-list.html group="products"', result)
+
+    def test_home_intro_and_hero_preserve_dynamic_terminal(self):
+        hero = render_hero(self.home)
+        sections = render_sections(self.home)
+        self.assertIn('data-terminal', hero)
+        self.assertIn('data-terminal-data=', hero)
+        self.assertIn('site.data.technologies', hero)
+        self.assertIn('include link.html url=site.projects_url', hero)
+        for paragraph in self.home["about_paragraphs"]:
+            self.assertIn(html.escape(paragraph, quote=True), sections)
+
+    def test_home_html_and_liquid_injections_are_escaped(self):
+        home = copy.deepcopy(self.home)
+        home["hero"]["title"] = '<script>alert(1)</script>'
+        home["sections"][0]["title"] = '{{ site.secret }}'
+        home["about_paragraphs"][0] = '{% include secrets.html %}'
+        result = render_hero(home) + render_sections(home)
+        self.assertNotIn('<script>alert(1)</script>', result)
+        self.assertNotIn('{{ site.secret }}', result)
+        self.assertNotIn('{% include secrets.html %}', result)
+        self.assertIn('&lt;script&gt;', result)
+        self.assertIn('&#123;&#123; site.secret }}', result)
+        self.assertIn('&#123;% include secrets.html %}', result)
+
+    def test_home_invalid_section_order_is_rejected(self):
+        home = copy.deepcopy(self.home)
+        home["sections"][0], home["sections"][1] = home["sections"][1], home["sections"][0]
+        with self.assertRaisesRegex(ValueError, "reordered widget"):
+            render_sections(home)
+
+    def test_home_unknown_fields_and_control_characters_are_rejected(self):
+        home = copy.deepcopy(self.home)
+        home["sections"][0]["arbitrary_html"] = '<p>unsafe</p>'
+        with self.assertRaisesRegex(ValueError, "expected id, title, lead"):
+            render_sections(home)
+        home = copy.deepcopy(self.home)
+        home["hero"]["intro"] = "malicious\x00content"
+        with self.assertRaisesRegex(ValueError, "control character"):
+            render_hero(home)
 
     def test_css_variables_are_present_once(self):
         rendered = sitegen.render_tokens(self.tokens)

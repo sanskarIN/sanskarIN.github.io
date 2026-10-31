@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - 'developer.html'
+      - 'index.html'
+      - '_data/home_content.json'
+      - '.github/scripts/home_render.py'
       - 'about.html'
       - '_data/about_content.json'
       - '_data/developer_details.json'
@@ -17,6 +20,9 @@ on:
     branches: [main]
     paths:
       - 'developer.html'
+      - 'index.html'
+      - '_data/home_content.json'
+      - '.github/scripts/home_render.py'
       - '_data/developer_details.json'
       - '_data/design_tokens.json'
       - '_includes/generated/**'
