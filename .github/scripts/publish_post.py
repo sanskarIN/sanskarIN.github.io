@@ -63,6 +63,7 @@ import nh3
 from pr_updates import Proposal, git
 from post_markdown import convert_article
 from terminal_data import write_terminal_json
+from search_index import write_search_json
 import yaml
 from markdown_it import MarkdownIt
 from PIL import Image, ImageOps
