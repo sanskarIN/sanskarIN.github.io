@@ -1,6 +1,7 @@
 """Regression tests for Python-authored static site sections and style tokens."""
 
 import copy
+import html
 import json
 import sys
 import unittest
@@ -130,7 +131,7 @@ class SiteGeneratorTests(unittest.TestCase):
         self.assertIn('site.data.technologies', hero)
         self.assertIn('include link.html url=site.projects_url', hero)
         for paragraph in self.home["about_paragraphs"]:
-            self.assertIn(paragraph, sections)
+            self.assertIn(html.escape(paragraph, quote=True), sections)
 
     def test_home_html_and_liquid_injections_are_escaped(self):
         home = copy.deepcopy(self.home)
@@ -142,7 +143,7 @@ class SiteGeneratorTests(unittest.TestCase):
         self.assertNotIn('{{ site.secret }}', result)
         self.assertNotIn('{% include secrets.html %}', result)
         self.assertIn('&lt;script&gt;', result)
-        self.assertIn('&#123;{ site.secret }}', result)
+        self.assertIn('&#123;&#123; site.secret }}', result)
         self.assertIn('&#123;% include secrets.html %}', result)
 
     def test_home_invalid_section_order_is_rejected(self):
