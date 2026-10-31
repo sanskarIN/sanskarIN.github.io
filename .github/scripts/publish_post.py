@@ -62,6 +62,7 @@ import nh3
 
 from pr_updates import Proposal, git
 from post_markdown import convert_article
+from terminal_data import write_terminal_json
 import yaml
 from markdown_it import MarkdownIt
 from PIL import Image, ImageOps
@@ -889,7 +890,9 @@ def remove_post(existing):
 # -----------------------------------------------------------------------------
 
 def commit_and_propose(message, proposal):
-    paths = [path for path in ("_posts", "assets/images/blog")
+    # Blog changes affect the five recent posts in the public terminal feed.
+    write_terminal_json(ROOT)
+    paths = [path for path in ("_posts", "assets/images/blog", "terminal.json")
              if (ROOT / path).exists() or git("ls-files", "--", path).stdout.strip()]
     if paths:
         git("add", "--all", "--", *paths)
