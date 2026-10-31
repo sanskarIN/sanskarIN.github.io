@@ -17,6 +17,11 @@ on:
       - '_data/about_content.json'
       - '_data/developer_details.json'
       - '_data/design_tokens.json'
+      - '_data/theme.json'
+      - '_includes/css/**'
+      - 'assets/css/main.css'
+      - '.github/scripts/build_styles.py'
+      - '.github/scripts/tests/test_build_styles.py'
       - '_includes/generated/**'
       - '_includes/css/tokens.css'
       - '.github/scripts/generate_site_content.py'
@@ -37,6 +42,11 @@ on:
       - '.github/scripts/home_render.py'
       - '_data/developer_details.json'
       - '_data/design_tokens.json'
+      - '_data/theme.json'
+      - '_includes/css/**'
+      - 'assets/css/main.css'
+      - '.github/scripts/build_styles.py'
+      - '.github/scripts/tests/test_build_styles.py'
       - '_includes/generated/**'
       - '_includes/css/tokens.css'
       - '.github/scripts/generate_site_content.py'
@@ -60,3 +70,5 @@ jobs:
         run: python .github/scripts/generate_site_content.py --check
       - name: Test Python rendering and input safety
         run: python -m unittest discover -s .github/scripts/tests -p 'test_generate_site_content.py' -v
+      - name: Test Python stylesheet compiler
+        run: python -m unittest discover -s .github/scripts/tests -p 'test_build_styles.py' -v

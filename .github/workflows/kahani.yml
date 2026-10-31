@@ -27,7 +27,10 @@ on:
       - 'assets/**'
       - 'src/ts/kahani.ts'
       - 'Gemfile'
-      - '.github/scripts/check_kahani.mjs'
+      - '_data/theme.json'
+      - '_data/design_tokens.json'
+      - '.github/scripts/build_styles.py'
+      - '.github/scripts/check_kahani.py'
       - '.github/workflows/kahani.yml'
   push:
     branches: [main]
@@ -47,7 +50,10 @@ on:
       - 'assets/**'
       - 'src/ts/kahani.ts'
       - 'Gemfile'
-      - '.github/scripts/check_kahani.mjs'
+      - '_data/theme.json'
+      - '_data/design_tokens.json'
+      - '.github/scripts/build_styles.py'
+      - '.github/scripts/check_kahani.py'
       - '.github/workflows/kahani.yml'
   workflow_dispatch:
 
@@ -70,9 +76,11 @@ jobs:
           npm run check
           npm run build
           git diff --exit-code -- assets/js/
+      - name: Verify Python-generated site sources
+        run: python .github/scripts/generate_site_content.py --check
       - name: Build the GitHub Pages site
         run: bundle exec jekyll build --strict_front_matter --trace
       - name: Check the Kahani pages
-        run: node .github/scripts/check_kahani.mjs _site
+        run: python .github/scripts/check_kahani.py _site
       - name: Check Python-generated pages
         run: python .github/scripts/check_generated_pages.py _site

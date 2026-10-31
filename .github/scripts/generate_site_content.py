@@ -37,6 +37,7 @@ OUTPUTS = {
     "home_sections": ROOT / "_includes" / "generated" / "home-sections.html",
     "contact": ROOT / "_includes" / "generated" / "contact-page.html",
     "not_found": ROOT / "_includes" / "generated" / "not-found-page.html",
+    "stylesheet": ROOT / "assets" / "css" / "main.css",
 }
 TOKEN_NAME = re.compile(r"[a-z][a-z0-9-]*\Z")
 UNSAFE_CSS = re.compile(r"[;{}<>@\x00-\x1f]|/\*|\*/|url\s*\(", re.I)
@@ -267,6 +268,8 @@ def generated_files():
     home = load_object(HOME)
     contact = load_object(CONTACT)
     not_found = load_object(NOT_FOUND)
+    from build_styles import build_css
+
     return {
         OUTPUTS["core"]: render_core(details),
         OUTPUTS["philosophy"]: render_philosophy(details),
@@ -277,6 +280,7 @@ def generated_files():
         OUTPUTS["home_sections"]: render_sections(home),
         OUTPUTS["contact"]: render_contact(contact),
         OUTPUTS["not_found"]: render_not_found(not_found),
+        OUTPUTS["stylesheet"]: build_css(),
     }
 
 
