@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build a browser-search index in Python without parsing Liquid templates.
+"""Build the production browser-search index using Python-maintained sources.
 
-Jekyll's /search.json is the production endpoint until the replacement
-passes CI parity checks. The generated source model combines real page
-front matter, Markdown posts, and the GitHub repository snapshot.
+The committed /search.json is a deterministic static output. Page metadata
+comes from public front matter, posts from Markdown, and repositories from
+the GitHub snapshot. No Liquid templates or network calls are involved.
 """
 
 import html
@@ -125,5 +125,17 @@ def search_index(root=ROOT):
     return entries
 
 
+def render_search_json(root=ROOT):
+    """Return deterministic UTF-8 JSON for the browser's search endpoint."""
+    return json.dumps(search_index(root), ensure_ascii=False, indent=2) + "\n"
+
+
+def write_search_json(root=ROOT):
+    """Rebuild the public feed after posts or project data changes."""
+    target = root / "search.json"
+    target.write_text(render_search_json(root), encoding="utf-8")
+    return target
+
+
 if __name__ == "__main__":
-    print(json.dumps(search_index(), ensure_ascii=False, indent=2))
+    print(render_search_json(), end="")
