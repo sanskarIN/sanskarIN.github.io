@@ -976,6 +976,12 @@ def handle_issue_event(gh, settings, event, proposal):
         labels.discard("approved")
 
     if "unpublish" in labels:
+        if not existing and proposal.url:
+            update_labels(published=False, pending=True)
+            gh.set_status(number, "pending",
+                          f"**Removal awaiting merge.** Review and merge {proposal.url}. "
+                          "The removal is not live yet.")
+            return
         if existing:
             remove_post(existing)
             pr_url = commit_and_propose(
@@ -1081,7 +1087,10 @@ def finalize_merged_proposal(gh, event):
     pr = event.get("pull_request") or {}
     if not pr.get("merged"):
         return
-    branch = (pr.get("head") or {}).get("ref") or ""
+    head = pr.get("head") or {}
+    if (head.get("repo") or {}).get("full_name") != gh.repo:
+        return
+    branch = head.get("ref") or ""
     match = re.fullmatch(r"automation/blog-post-([1-9][0-9]*)", branch)
     if not match:
         return
