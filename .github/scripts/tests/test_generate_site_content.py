@@ -79,6 +79,11 @@ class SiteGeneratorTests(unittest.TestCase):
         self.assertNotIn('onerror=', output.replace("&lt;img src=x onerror=", ""))
         self.assertIn("&lt;script&gt;", output)
         self.assertIn("&amp; friend", output)
+        about["sections"][0]["paragraphs"][0] = "{% include secrets.html %} {{ site.secret }}"
+        output = sitegen.render_about_sections(about)
+        self.assertNotIn("{% include secrets.html %}", output)
+        self.assertNotIn("{{ site.secret }}", output)
+        self.assertIn("&#123;% include secrets.html %}", output)
 
     def test_about_widget_and_action_are_strictly_allowlisted(self):
         for key in ("widget", "action"):
