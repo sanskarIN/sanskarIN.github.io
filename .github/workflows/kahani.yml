@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - 'Kahani.html'
+      - '_posts/**'
+      - '.github/scripts/post_markdown.py'
+      - '.github/scripts/check_blog_posts.py'
       - 'about.html'
       - 'developer.html'
       - 'contact.html'
@@ -42,6 +45,9 @@ on:
       - '.github/scripts/utility_pages.py'
       - '.github/scripts/check_generated_pages.py'
       - 'Kahani.html'
+      - '_posts/**'
+      - '.github/scripts/post_markdown.py'
+      - '.github/scripts/check_blog_posts.py'
       - 'About-Kahani-Videos.html'
       - '_data/kahani.yml'
       - '_data/navigation.yml'
@@ -84,3 +90,5 @@ jobs:
         run: python .github/scripts/check_kahani.py _site
       - name: Check Python-generated pages
         run: python .github/scripts/check_generated_pages.py _site
+      - name: Check Markdown blog posts and published URLs
+        run: python .github/scripts/check_blog_posts.py _site
