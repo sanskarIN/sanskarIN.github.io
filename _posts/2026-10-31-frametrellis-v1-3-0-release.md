@@ -1,7 +1,8 @@
 ---
-title: "frametrellis-v1-3-0-release"
-description: "FrameTrellis v1.3.0 is here! Explore safer project editing, searchable media management, precise timecode navigation, improved rendering diagnostics, and better documentation in this free, open-source"
+title: "FrameTrellis v1.3.0 Released — Safer, Smarter Video Editing"
+description: "FrameTrellis v1.3.0 brings safer project editing, searchable media, precise timecode navigation, stronger rendering diagnostics, and improved documentation."
 date: 2026-10-31T14:14:02+00:00
+last_modified_at: 2026-10-31T14:16:20+00:00
 author: "Sanskar"
 author_url: "/about/"
 author_login: "sanskarIN"
