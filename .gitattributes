@@ -5,3 +5,4 @@ _includes/generated/*.css linguist-generated
 assets/css/main.css linguist-generated
 assets/js/*.js linguist-generated
 terminal.json linguist-generated
+search.json linguist-generated
