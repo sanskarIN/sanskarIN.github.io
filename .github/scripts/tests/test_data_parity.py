@@ -64,7 +64,7 @@ class DataParityTests(unittest.TestCase):
             path.write_text("no front matter", encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "Missing front matter"):
                 parse_front_matter(path)
-            path.write_text("---\\ntitle: hi\\nbody", encoding="utf-8")
+            path.write_text("---\ntitle: hi\nbody", encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "Unclosed front matter"):
                 parse_front_matter(path)
 
