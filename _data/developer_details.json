@@ -1,0 +1,62 @@
+{
+  "engineering_interests": [
+    "Performance-aware systems code in Rust, C, and C++",
+    "Native Android development with Kotlin and Java",
+    "Modern web development with TypeScript and React",
+    "Developer experience: tooling, automation, and clear workflows",
+    "Applying AI and machine learning inside practical software",
+    "Game development and interactive systems",
+    "Software that is accessible, fast, and maintainable"
+  ],
+  "platforms": [
+    {
+      "name": "Android",
+      "description": "Native development with Kotlin and Java."
+    },
+    {
+      "name": "Web",
+      "description": "The browser and the open web, with JavaScript, TypeScript, and React."
+    },
+    {
+      "name": ".NET",
+      "description": "Development with C# on the .NET platform."
+    }
+  ],
+  "tools": [
+    {
+      "name": "Git",
+      "description": "Version control and project history."
+    },
+    {
+      "name": "GitHub",
+      "description": "Code hosting, collaboration, and issue tracking — and, through GitHub Pages, the host of this website."
+    }
+  ],
+  "learning_and_exploration": "Software moves quickly, so learning is part of the work. I learn by building: trying a language, tool, or technique on a real problem, then refining the result. AI and machine learning and game development are areas I keep exploring.",
+  "principles": [
+    {
+      "title": "Readable, maintainable code",
+      "description": "Code is read far more often than it is written. Clear names, simple structure, and honest comments make it easier to change later."
+    },
+    {
+      "title": "The right tool for the problem",
+      "description": "Languages, frameworks, and dependencies are chosen deliberately, based on the problem rather than habit or trend."
+    },
+    {
+      "title": "Small, reviewable changes",
+      "description": "Work moves forward in small steps with a clear history in version control, which makes problems easier to find and fix."
+    },
+    {
+      "title": "Accessible and fast by default",
+      "description": "Accessibility and performance are built in from the start instead of being added at the end."
+    },
+    {
+      "title": "Security as a habit",
+      "description": "Secrets stay out of code, dependencies stay minimal and current, and access is limited to what is actually needed."
+    },
+    {
+      "title": "Documentation that explains why",
+      "description": "Good documentation records decisions and trade-offs, not just usage."
+    }
+  ]
+}
