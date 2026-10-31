@@ -61,7 +61,7 @@ URLs end with a slash. GitHub Pages redirects `/about` to `/about/`, so both for
 
 - **Jekyll 3.10** with **Liquid** templates and **kramdown** Markdown — exactly the versions GitHub Pages runs, pinned locally by the `github-pages` gem.
 - **HTML, CSS, and TypeScript** written for this site. No CSS or JavaScript framework.
-  - CSS: custom properties (design tokens), mobile-first, split into partials that Jekyll combines into one file.
+  - CSS: custom properties (design tokens), mobile-first, assembled by Python into a committed static stylesheet.
   - TypeScript: the scripts are written in `src/ts/` and compiled to plain JavaScript in `assets/js/` ([details](#typescript)). They're progressive enhancement only — `theme-init.js` (≈0.5 KB) and `main.js` (≈4.3 KB gzipped) on every page, and every page works without them. `search.js` loads the first time search is opened, `terminal.js` only on the Home page, `projects.js` only on the Projects page, and `account.js` only on the account pages once [accounts](#accounts) are turned on.
 - **Fonts:** IBM Plex Sans and IBM Plex Mono, self-hosted WOFF2 (SIL Open Font License 1.1).
 - **Icons:** one SVG sprite — brand icons from Simple Icons (CC0), the LinkedIn icon from Bootstrap Icons (MIT), and interface icons drawn for this site.
@@ -132,9 +132,9 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 │   ├── search-attributes.html  Attributes of buttons that open the site search
 │   ├── thanks-available.html  Whether a thank-you page's feature (form, accounts) is on
 │   ├── accounts-config.html  Reads _data/accounts.yml for the templates
-│   └── css/                  Stylesheet partials (combined into assets/css/main.css)
+│   └── css/                  Stylesheet partials (compiled by Python into assets/css/main.css)
 ├── assets/
-│   ├── css/main.css          Combines the partials into one stylesheet
+│   ├── css/main.css          Python-compiled static stylesheet (do not edit by hand)
 │   │                         (js/: compiled from src/ts/ — edit the .ts files)
 │   ├── js/theme-init.js      Runs first: enables JS features, applies a saved theme
 │   ├── js/main.js            Theme switch, menu, search keys, copy buttons, post sections, card spotlight
@@ -219,14 +219,21 @@ the page, and no Python runs in visitors' browsers.
 | `_data/home_content.json` | `_includes/generated/home-hero.html` and `home-sections.html` | Home page hero, section headings, descriptions and summary; interactive terminal and live Jekyll widgets remain functional |
 | `_data/contact_page.json` | `_includes/generated/contact-page.html` | Contact instructions, form notice, security guidance; the working form and social/email links still use Jekyll |
 | `_data/not_found_page.json` | `_includes/generated/not-found-page.html` | 404 text and labels; search and navigation stay operational |
-| `_data/design_tokens.json` | `_includes/generated/design-tokens.css` | Typography, spacing, widths, and shape/motion variables in the shared stylesheet |
+| `_data/design_tokens.json` | `_includes/generated/design-tokens.css` and `assets/css/main.css` | Typography, spacing, widths, and shape/motion variables in the shared stylesheet |
+| `_data/theme.json` plus `_includes/css/*.css` | `assets/css/main.css` | Python-compiled light/dark palettes and a single browser-ready stylesheet without Jekyll CSS templating |
 
-After changing any of these JSON files, run:
+After changing the page JSON, theme JSON, design tokens, or CSS partials, run:
 
 ```bash
 python .github/scripts/generate_site_content.py
 python .github/scripts/generate_site_content.py --check
 ```
+
+The same generator now compiles CSS from the JSON palettes and the existing
+style partials. **Do not edit `assets/css/main.css` manually**. The Python
+stylesheet compiler is `.github/scripts/build_styles.py`; CI checks that the
+checked-in CSS matches the source. Because GitHub Pages deploys from `main`,
+compiled outputs must be committed alongside their inputs.
 
 Commit **both the source JSON and generated include files**. The "Generated site
 content" GitHub Actions check rejects stale output, invalid CSS tokens, and
@@ -235,11 +242,20 @@ schema validation. The Jekyll build additionally runs
 `.github/scripts/check_generated_pages.py` to verify that generated Home,
 About, Developer, Contact, and 404 sections, headings, links, form fallback,
 and dynamic content appear in the public pages.
-Theme-specific colors remain in `_data/theme.yml`.
+Theme-specific colors are in `_data/theme.json` and are compiled by Python.
 
 Generated includes are not edited directly. This keeps HTML/CSS output accessible
 without demanding handwritten markup for every repeated profile entry or design
 token. The rest of the site continues to use Jekyll and TypeScript as before.
+
+### Migration to Python and TypeScript
+
+Python already generates the main static pages and the complete stylesheet;
+TypeScript owns the interactive browser scripts. Jekyll currently remains for
+the shared layouts, SEO, feeds, posts, navigation, structured data and final
+HTML build. The phased plan and parity gates for eliminating the remaining
+Ruby/Jekyll build are documented in [MIGRATION.md](MIGRATION.md).
+The generated HTML/CSS and compiled JavaScript must remain browser-readable.
 
 ## Deployment to GitHub Pages
 
@@ -328,7 +344,7 @@ Which GitHub account's repositories the [Projects](#projects) page shows, which 
 
 The Supabase project address and publishable key that turn [accounts](#accounts) on, and the name of the service that sends sign-in emails (for the Privacy Policy). While the address or key is empty, everything account-related stays hidden. The [Set up accounts](#setting-up-accounts) workflow fills them in. `owner_username` is [your own username](#your-own-account) on the website.
 
-### Theme colors — `_data/theme.yml`
+### Theme colors — `_data/theme.json`
 
 The light and dark palettes. Each value becomes a CSS custom property (`bg` → `--color-bg`), and `bg` also sets the browser UI color and the web app manifest colors. All text colors currently meet WCAG AA contrast (4.5:1) in both themes — check contrast again after changing them.
 
@@ -805,7 +821,7 @@ Read [the publishing guide](.github/docs/kahani-publishing.md) before adding a c
 
 ## Design system
 
-- **Tokens** — `_includes/css/tokens.css`: type scale (fluid `clamp()` sizes), spacing scale, content widths, radius, and motion; colors come from `_data/theme.yml`.
+- **Tokens** — `_data/design_tokens.json`: type scale (fluid `clamp()` sizes), spacing scale, content widths, radius, and motion; colors are defined in `_data/theme.json`. Python compiles both into `assets/css/main.css`.
 - **Typography** — IBM Plex Sans for text and headings; IBM Plex Mono for labels, handles, and technical details.
 - **Layout** — a 72rem container with fluid side gutters; long-form text is limited to about 42rem per line.
 - **Projects and search** — `_includes/css/projects.css` (stats, repository cards, language bar, activity calendar, filters) and `_includes/css/search.css` (the search button and dialog).
