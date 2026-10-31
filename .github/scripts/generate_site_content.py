@@ -47,7 +47,9 @@ def string(value, context):
         raise ValueError(f"{context}: expected non-empty text up to 2000 characters")
     if any(ord(char) < 32 and char not in "\n\t" for char in value):
         raise ValueError(f"{context}: contains control characters")
-    # Liquid is evaluated by Jekyll after include expansion. Escaping only\n    # HTML is insufficient: encode opening braces to keep editorial text inert.\n    return html.escape(value.strip(), quote=True).replace("{", "&#123;")
+    # Liquid runs after include expansion; escape opening braces in prose
+    # to prevent data values from injecting template expressions.
+    return html.escape(value.strip(), quote=True).replace("{", "&#123;")
 
 
 def strings(data, key):
