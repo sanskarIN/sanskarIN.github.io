@@ -2,7 +2,7 @@
 
 Source for https://sanskarIN.github.io — the personal developer website of **Sanskar** (GitHub: [sanskarIN](https://www.github.com/sanskarIN), X: [@SanskarCodes](https://x.com/SanskarCodes), Instagram: [@SanskarCode](https://instagram.com/SanskarCode)).
 
-The website is a static site built with [Jekyll](https://jekyllrb.com/) and published by [GitHub Pages](https://pages.github.com/). There is no backend of its own, no analytics or tracking, and no third-party script: visitors receive plain HTML, one stylesheet, and two small optional scripts, plus a few that load only where they're needed — all written in [TypeScript](#typescript) and compiled to plain JavaScript. The Home page has an interactive [terminal](#home-page-terminal). Blog posts are written with a GitHub issue form and published by a GitHub Actions workflow ([details](#blog)), and the [Projects](#projects) page lists the public GitHub repositories, refreshed daily by another workflow. A [site search](#site-search) runs in the browser. Optional [accounts](#accounts) — sign-in with an emailed code, author profiles, and an editor on the site — use Supabase and stay off until they are set up.
+The website is a static site built with [Jekyll](https://jekyllrb.com/) and published by [GitHub Pages](https://pages.github.com/). There is no backend of its own, no analytics or tracking, and no third-party script: visitors receive plain HTML, one stylesheet, and two small optional scripts, plus a few that load only where they're needed — all written in [TypeScript](#typescript) and compiled to plain JavaScript. The Home page has an interactive [terminal](#home-page-terminal). Blog posts are written with a GitHub issue form, proposed for review by GitHub Actions, and published once merged ([details](#blog)), and the [Projects](#projects) page lists the public GitHub repositories, refreshed through daily reviewable updates from another workflow. A [site search](#site-search) runs in the browser. Optional [accounts](#accounts) — sign-in with an emailed code, author profiles, and an editor on the site — use Supabase and stay off until they are set up.
 
 ## Contents
 
@@ -207,7 +207,7 @@ Notes:
 
 ## Deployment to GitHub Pages
 
-The repository is a GitHub Pages *user site*, built by GitHub Pages' built-in Jekyll support. The site itself needs no workflow file; the blog's workflow only adds posts to `main` and then asks GitHub Pages to rebuild ([details](#blog)).
+The repository is a GitHub Pages *user site*, built by GitHub Pages' built-in Jekyll support. The site itself needs no workflow file; the blog workflow proposes post changes in pull requests, and merging them into protected `main` triggers the normal Pages build ([details](#blog)).
 
 One-time setup:
 
@@ -337,11 +337,15 @@ The policy in `_config.yml` lists each directive on its own line and only allows
 
 The Projects page at `/projects/` shows the public GitHub repositories of [sanskarIN](https://github.com/sanskarIN), and the Home page's "Open source" section features three of them. Everything on the page comes from GitHub — nothing about the projects is written by hand — and it's refreshed every day.
 
+**Required repository setting:** GitHub Actions must be allowed to create pull requests
+(**Settings → Actions → General → Workflow permissions → Allow GitHub Actions to create and approve pull requests**).
+The automation does not bypass the protected `main` branch. Review and merge generated PRs to publish updates.
+
 ### How the data is kept up to date
 
 1. The workflow `.github/workflows/update-github-data.yml` runs `.github/scripts/update_github_data.py` every day at 04:23 UTC, whenever `_data/projects.yml` (or the script or workflow) changes, and from **Actions → Update GitHub data → Run workflow**.
 2. The script reads public information only, with the workflow's own token (no secrets to set up): the account's public repositories (name, description, website, main language, stars, forks, topics, license, and last push), the languages in each one, the repositories pinned on the profile, and the contribution calendar shown on the profile.
-3. It writes `_data/github.json`. If anything changed — apart from the timestamp, and this website's own last push — it commits the file as `sanskarIN <sanskarin@outlook.in>`, pushes it, and asks GitHub Pages to rebuild the site, as the blog workflow does. On days when nothing changed, there's no commit.
+3. It writes `_data/github.json`. If anything changed — apart from the timestamp, and this website's own last push — it commits the file as `sanskarIN <sanskarin@outlook.in>` on `automation/github-data` and opens or updates a pull request to `main`. The site updates after that PR is merged. On days when nothing changed, no new commit is created.
 4. The site builds the page from that file: totals, featured repositories, a language breakdown, the activity calendar, and the full list, which visitors can search, filter by language, and sort. The choices are kept in the address (for example `/projects/?language=Rust&sort=stars`), so a filtered list can be shared. Without JavaScript, the full list is shown.
 
 Until the workflow has run for the first time, the page links to the GitHub profile instead. The "Projects" links in the header, footer, Home page, and 404 page point to `/projects/` because the page exists (see `_includes/resolve-projects-url.html`).
@@ -491,12 +495,12 @@ The blog at `/blog/` has no server of its own: posts are written in **GitHub iss
 1. A visitor (or you) selects **Write a post** on the blog page. It opens the "Write a blog post" issue form (`.github/ISSUE_TEMPLATE/blog-post.yml`), with fields for the title, summary, tags, a cover image and its description, the post in Markdown, and a confirmation box.
 2. Submitting the form opens an issue with the `blog-post` label. The workflow `.github/workflows/publish-blog-post.yml` runs `.github/scripts/publish_post.py`, which:
    - checks the form and, if something needs fixing, says what in a comment on the issue (`needs-changes` label);
-   - for your own posts (and collaborators'), publishes straight away; for anyone else's, adds the `awaiting-review` label and waits for you;
+   - for your own posts (and collaborators'), prepares the post immediately; for anyone else's, adds the `awaiting-review` label and waits for approval;
    - downloads the images attached to the issue, checks that each is a real PNG, JPEG, GIF, or WebP image of at most 10 MB, turns photos the right way up, scales images larger than 2,000 px down, and saves them without metadata (location, camera details, comments) in `assets/images/blog/<post>/`;
    - converts the Markdown to HTML the same way GitHub previews it, then removes anything unsafe (scripts, styles, forms, embeds, event handlers, `javascript:` links) with an allowlist, and turns images from other websites into links;
-   - writes `_posts/<date>-<post>.html`, commits it as `sanskarIN <sanskarin@outlook.in>`, pushes to `main`, and asks GitHub Pages to rebuild the site (pushes made by a workflow don't trigger a build on their own);
-   - comments on the issue with the post's address, adds the `published` label, and closes the issue.
-3. The post appears at `https://sanskarin.github.io/blog/<post>/` a minute or two later, and in the list, the Tags page, the Atom feed, and the sitemap.
+   - writes `_posts/<date>-<post>.html`, commits it as `sanskarIN <sanskarin@outlook.in>` on an issue-specific automation branch, and creates or updates a pull request against protected `main`;
+   - adds the `pending-merge` label and links the pull request. After merge, a separate finalization job adds `published`, posts the live address, and closes the issue.
+3. After the pull request is reviewed and merged, the post appears at `https://sanskarin.github.io/blog/<post>/` following the normal Pages build, and in the list, the Tags page, the Atom feed, and the sitemap.
 
 ### Reviewing and managing posts
 
@@ -507,7 +511,7 @@ The blog at `/blog/` has no server of its own: posts are written in **GitHub iss
 | Change a post | Edit the issue — the post updates. If a visitor edits their published post, the `approved` label is removed and the changes wait for you; the published version stays until you approve again |
 | Remove a post | Add the `unpublish` label (remove it again to republish), or delete the issue |
 
-Every run is listed in the **Actions** tab as "Publish blog post"; the rebuild appears as "pages build and deployment". The labels are created automatically the first time the workflow runs, or with **Actions → Publish blog post → Run workflow**.
+Every run is listed in the **Actions** tab as "Publish blog post"; the post becomes live after the automation pull request merges and the "pages build and deployment" job succeeds. The labels are created automatically the first time the workflow runs, or with **Actions → Publish blog post → Run workflow**.
 
 ### What each post shows
 
@@ -534,7 +538,7 @@ You can also add a Markdown file to `_posts/`, named like `2026-10-01-my-post.md
 
 - Anyone can open an issue, so the workflow treats issues as untrusted data: the text is never placed in a shell command, only GitHub's own image addresses are downloaded, images are fully decoded only once a post is approved, and the HTML is cleaned before it is saved. Braces in posts are written as character references, so Liquid tags in a post are shown as text instead of running.
 - The site's Content Security Policy still applies on top: posts can't load scripts or images from other websites.
-- The workflow's token can write only to this repository's contents, issues, and Pages builds. The actions it uses are pinned to exact commits, and the Python packages to exact versions — update `.github/scripts/requirements.txt` from time to time (especially Pillow), then publish a test post.
+- The workflow's token can write to this repository's contents, issues, and pull requests, but cannot bypass main branch protection. The actions it uses are pinned to exact commits, and the Python packages to exact versions — update `.github/scripts/requirements.txt` from time to time (especially Pillow), then publish a test post.
 
 ### Limits of this approach
 
@@ -566,7 +570,7 @@ Account pages (assets/js/account.js, in the browser)
 
 - **Pages:** `/account/` (sign in or sign up, profile, your posts and where each one is, sign out, delete account), `/account/write/` (the editor), and `/blog/authors/?u=<username>` (author pages, shown once the author has a published post). None of them is indexed by search engines.
 - **Posts become issues** opened with your GitHub token, starting with a hidden note that names the account. The workflow trusts that note only on issues opened by you, shows the account's display name as the author with a link to its author page, accepts images only from that account's own folder in Storage, and treats the post like any visitor's: it waits for your `approved` label, and every change is reviewed again.
-- **Statuses** on the account page come from the issue's labels and the workflow's comments: Being checked, Waiting for review, Needs changes (with the list of problems), Published, Removed, and Declined.
+- **Statuses** on the account page come from the issue's labels and the workflow's comments: Being checked, Waiting for review, Pending merge, Needs changes (with the list of problems), Published, Removed, and Declined.
 - **Images** are cleaned in the browser before they are uploaded (location, camera details, and comments removed; the picture itself is kept as it is), and copied into this repository when the post is published, like images from GitHub.
 - **Thank-you pages:** sending a post opens `/thank-you/post/`, which explains the review.
 - **Deleting an account** (on `/account/`) deletes the account, its profile, and its images, withdraws posts still waiting for review, and — if the person asks — removes their published posts. Then `/thank-you/account-deleted/` opens.

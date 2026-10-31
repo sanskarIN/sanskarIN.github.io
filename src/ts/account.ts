@@ -673,6 +673,7 @@
   const STATUS_LABELS: Record<string, string> = {
     processing: "Being checked",
     waiting: "Waiting for review",
+    pending: "Awaiting publication PR merge",
     "update-waiting": "Published · changes waiting for review",
     published: "Published",
     changes: "Needs changes",

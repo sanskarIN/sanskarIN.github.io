@@ -380,7 +380,8 @@ async function reviewStatus(issueNumber: number | null, known?: Json) {
     const url = text.match(new RegExp(`${escapeRegExp(SITE_ORIGIN)}/blog/[a-z0-9-]+/`))?.[0] ?? null;
 
     let status = "processing";
-    if (labels.has("unpublish")) status = "removed";
+    if (labels.has("pending-merge")) status = "pending";
+    else if (labels.has("unpublish")) status = "removed";
     else if (labels.has("needs-changes")) status = "changes";
     else if (labels.has("awaiting-review")) status = labels.has("published") ? "update-waiting" : "waiting";
     else if (labels.has("published")) status = "published";
