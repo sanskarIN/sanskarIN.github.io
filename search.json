@@ -675,28 +675,7 @@
     "title": "sanskarIN.github.io",
     "url": "https://github.com/sanskarIN/sanskarIN.github.io",
     "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. HTML"
-  },
-  {
-    "type": "Project",
-    "title": "latebrake",
-    "url": "https://github.com/sanskarIN/latebrake",
-    "tags": [],
-    "text": "Latebrake — Race Beyond Limits. C++"
-  },
-  {
-    "type": "Project",
-    "title": "scarp-lang",
-    "url": "https://github.com/sanskarIN/scarp-lang",
-    "tags": [],
-    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
-  },
-  {
-    "type": "Project",
-    "title": "KathaSvara",
-    "url": "https://github.com/sanskarIN/KathaSvara",
-    "tags": [],
-    "text": "Give Every Story a Voice. TypeScript"
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
   },
   {
     "type": "Project",
@@ -714,6 +693,34 @@
   },
   {
     "type": "Project",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
+    "tags": [],
+    "text": "Latebrake — Race Beyond Limits. C++"
+  },
+  {
+    "type": "Project",
+    "title": "scarp-lang",
+    "url": "https://github.com/sanskarIN/scarp-lang",
+    "tags": [],
+    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
+    "tags": [],
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "KathaSvara",
+    "url": "https://github.com/sanskarIN/KathaSvara",
+    "tags": [],
+    "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
     "title": "frametrellis",
     "url": "https://github.com/sanskarIN/frametrellis",
     "tags": [
@@ -725,13 +732,6 @@
       "ffmpeg"
     ],
     "text": "Open-source video editor. C++"
-  },
-  {
-    "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
-    "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
   },
   {
     "type": "Project",
