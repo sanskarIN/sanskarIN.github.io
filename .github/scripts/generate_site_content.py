@@ -286,6 +286,7 @@ def generated_files():
         OUTPUTS["not_found"]: render_not_found(not_found),
         OUTPUTS["stylesheet"]: build_css(),
         OUTPUTS["terminal"]: render_terminal_json(),
+        OUTPUTS["search"]: render_search_json(),
     }
 
 
