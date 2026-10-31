@@ -17,9 +17,12 @@ import re
 import sys
 from pathlib import Path
 
+from home_render import render_hero, render_sections
+
 ROOT = Path(__file__).resolve().parents[2]
 DETAILS = ROOT / "_data" / "developer_details.json"
 ABOUT = ROOT / "_data" / "about_content.json"
+HOME = ROOT / "_data" / "home_content.json"
 TOKENS = ROOT / "_data" / "design_tokens.json"
 OUTPUTS = {
     "core": ROOT / "_includes" / "generated" / "developer-core.html",
@@ -27,6 +30,8 @@ OUTPUTS = {
     "tokens": ROOT / "_includes" / "generated" / "design-tokens.css",
     "about_intro": ROOT / "_includes" / "generated" / "about-intro.html",
     "about_sections": ROOT / "_includes" / "generated" / "about-sections.html",
+    "home_hero": ROOT / "_includes" / "generated" / "home-hero.html",
+    "home_sections": ROOT / "_includes" / "generated" / "home-sections.html",
 }
 TOKEN_NAME = re.compile(r"[a-z][a-z0-9-]*\Z")
 UNSAFE_CSS = re.compile(r"[;{}<>@\x00-\x1f]|/\*|\*/|url\s*\(", re.I)
@@ -254,12 +259,15 @@ def generated_files():
     details = load_object(DETAILS)
     tokens = load_object(TOKENS)
     about = load_object(ABOUT)
+    home = load_object(HOME)
     return {
         OUTPUTS["core"]: render_core(details),
         OUTPUTS["philosophy"]: render_philosophy(details),
         OUTPUTS["tokens"]: render_tokens(tokens),
         OUTPUTS["about_intro"]: render_about_intro(about),
         OUTPUTS["about_sections"]: render_about_sections(about),
+        OUTPUTS["home_hero"]: render_hero(home),
+        OUTPUTS["home_sections"]: render_sections(home),
     }
 
 
