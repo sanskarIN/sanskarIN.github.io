@@ -3,6 +3,10 @@ name: Generated site content
 on:
   pull_request:
     paths:
+      - '*.md'
+      - '*.html'
+      - '**/*.md'
+      - '**/*.html'
       - 'developer.html'
       - 'terminal.json'
       - 'search.json'
@@ -46,6 +50,10 @@ on:
   push:
     branches: [main]
     paths:
+      - '*.md'
+      - '*.html'
+      - '**/*.md'
+      - '**/*.html'
       - 'developer.html'
       - 'terminal.json'
       - 'search.json'
