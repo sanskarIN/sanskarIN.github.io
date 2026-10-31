@@ -496,6 +496,7 @@ def main(argv):
     if proposal is not None:
         git("add", "--", str(OUTPUT.relative_to(ROOT)))
         git("add", "--", "terminal.json")
+        git("add", "--", "search.json")
         proposal.propose("Update GitHub data for the Projects page")
     return 0
 
