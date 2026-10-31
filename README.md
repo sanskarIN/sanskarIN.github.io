@@ -257,6 +257,27 @@ HTML build. The phased plan and parity gates for eliminating the remaining
 Ruby/Jekyll build are documented in [MIGRATION.md](MIGRATION.md).
 The generated HTML/CSS and compiled JavaScript must remain browser-readable.
 
+### Python terminal and search-index parity
+
+The terminal and browser search still load the Jekyll-generated `terminal.json`
+and `search.json`. The Python `.github/scripts/terminal_data.py`
+now independently builds the terminal data from existing YAML, JSON and
+Markdown posts. The `.github/scripts/check_data_parity.py` build check
+compares the Python terminal schema and values with Jekyll's rendered JSON,
+and verifies search results against all published posts, public navigation
+and the repository catalogue. This is a deliberate **dual-rendering safety
+gate** before replacing public JSON endpoints; browser functionality is not
+changed in this milestone.
+
+`python -m pip install -r .github/scripts/requirements.txt` installs the
+pinned PyYAML dependency used by the Python data generator. After building
+the Jekyll site, verify the compatibility:
+
+```bash
+bundle exec jekyll build --strict_front_matter --trace
+python .github/scripts/check_data_parity.py _site
+```
+
 ### GitHub language breakdown and blog authoring
 
 The largest former source of GitHub's HTML language count was the **blog
