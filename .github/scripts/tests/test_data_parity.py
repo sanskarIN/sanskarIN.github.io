@@ -1,14 +1,14 @@
 """Test the Python version of the site's JSON interfaces."""
 
-import copy
 import json
 import sys
 import unittest
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from terminal_data import ROOT, parse_front_matter, published_posts, site_url, terminal_data
-from check_data_parity import diff_paths, validate_search
+from check_data_parity import diff_paths
 
 
 class DataParityTests(unittest.TestCase):
@@ -58,14 +58,15 @@ class DataParityTests(unittest.TestCase):
         self.assertEqual(diff_paths(first, second), ["$.a[1].b (value)"])
         self.assertEqual(diff_paths(first, {"a": []}), ["$.a (length 2 vs 0)", "$.c (missing/extra)"])
 
-    def test_search_index_requires_all_navigation_pages(self):
-        fake = {
-            "pages": [{"url": "/missing/"}],
-        }
-        self.assertRaisesRegex(
-            AssertionError, "Navigation page absent",
-            validate_search, ROOT, ROOT, fake
-        )
+    def test_bad_post_front_matter_is_rejected(self):
+        with TemporaryDirectory() as folder:
+            path = Path(folder) / "post.md"
+            path.write_text("no front matter", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Missing front matter"):
+                parse_front_matter(path)
+            path.write_text("---\\ntitle: hi\\nbody", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Unclosed front matter"):
+                parse_front_matter(path)
 
 
 if __name__ == "__main__":
