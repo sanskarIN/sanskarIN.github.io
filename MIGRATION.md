@@ -38,17 +38,17 @@ switch-over or removal of Ruby happens in this milestone.
    JSON theme and CSS partials, remove Jekyll Liquid from the CSS build,
    port the story-page integration checker to Python and make generated-file
    parity a required PR check.
-3. **Complete:** Convert legacy HTML blog articles to Markdown, preserve complex code and quotes, and have the Python publisher create Markdown for new posts. Verify post URLs and search entries with CI.\n4. **Next:** Move `terminal.json`, `search.json`, sitemap and feeds into
+3. **Complete:** Convert legacy HTML blog articles to Markdown, preserve complex code and quotes, and have the Python publisher create Markdown for new posts. Verify post URLs and search entries with CI.\n4. **In progress:** Implement Python `terminal.json` data generation, and verify\n   that its complete output matches the Jekyll runtime JSON. Add Python checks\n   for search pages, posts, repositories, public URLs and metadata. Keep the\n   Jekyll public endpoints until the compatibility check passes; afterward\n   migrate search-index generation, sitemap and feeds.\n5. **Next:** Move remaining `terminal.json`, `search.json`, sitemap and feeds into
    Python generators. Verify exact shapes and links against the current
    Jekyll output. Do not break existing TypeScript consumers.
-5. **Next:** Replace shared layouts and page templates incrementally with
+6. **Next:** Replace shared layouts and page templates incrementally with
    Python-driven static HTML, including navigation, SEO, CSP, author metadata,
    accessibility and language variants. Keep Jekyll as an oracle in dual
    builds until Python output passes functional checks.
-6. **Next:** Recreate blog post rendering, pagination, author pages, legal
+7. **Next:** Recreate blog post rendering, pagination, author pages, legal
    pages, redirects, structured data, and any account-related site output
    with a Python pipeline. Preserve existing URLs and full CSP rules.
-7. **Only after parity:** Switch GitHub Pages from built-in Jekyll branch
+8. **Only after parity:** Switch GitHub Pages from built-in Jekyll branch
    deployment to a tested GitHub Actions artifact deployment; remove Ruby,
    Gemfile and leftover Liquid. Require a successful rollback drill.
 
