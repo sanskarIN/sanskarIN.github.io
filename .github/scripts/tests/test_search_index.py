@@ -7,7 +7,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from search_index import search_index, searchable_pages, post_excerpt, strip_html
+from search_index import search_index, searchable_pages, post_excerpt, strip_html, render_search_json
 from terminal_data import ROOT
 
 
@@ -19,6 +19,31 @@ class SearchIndexTests(unittest.TestCase):
         self.assertEqual(len(urls), len(set(urls)))
         self.assertTrue(all(item["title"] and item["url"] for item in items))
         self.assertEqual({item["type"] for item in items}, {"Page", "Post", "Project"})
+
+    def test_published_search_feed_is_fresh_and_valid_json(self):
+        raw = (ROOT / "search.json").read_text(encoding="utf-8")
+        self.assertEqual(raw, render_search_json(ROOT))
+        self.assertFalse(raw.startswith("---"))
+        self.assertNotIn("{%", raw)
+        self.assertNotIn("{{", raw)
+        self.assertEqual(json.loads(raw), search_index(ROOT))
+
+    def test_search_contract_and_order_are_stable(self):
+        data = json.loads(render_search_json())
+        self.assertEqual([name for name in ("Page", "Post", "Project")
+                          if any(row["type"] == name for row in data)],
+                         ["Page", "Post", "Project"])
+        order = {"Page": 0, "Post": 1, "Project": 2}
+        self.assertEqual([order[e["type"]] for e in data],
+                         sorted(order[e["type"]] for e in data))
+        for entry in data:
+            self.assertTrue(entry["text"] or entry["type"] == "Page")
+            expected = {
+                "Page": {"type", "title", "url", "text"},
+                "Post": {"type", "title", "url", "date", "tags", "text"},
+                "Project": {"type", "title", "url", "tags", "text"},
+            }[entry["type"]]
+            self.assertEqual(set(entry), expected)
 
     def test_pages_include_public_routes_not_private_pages(self):
         pages = searchable_pages()
