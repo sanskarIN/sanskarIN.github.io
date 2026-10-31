@@ -157,7 +157,7 @@ class SiteGeneratorTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "expected id, title, lead"):
             render_sections(home)
         home = copy.deepcopy(self.home)
-        home["hero"]["intro"] = "malicious\\x00content"
+        home["hero"]["intro"] = "malicious\x00content"
         with self.assertRaisesRegex(ValueError, "control character"):
             render_hero(home)
 
