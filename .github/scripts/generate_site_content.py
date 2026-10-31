@@ -47,7 +47,7 @@ def string(value, context):
         raise ValueError(f"{context}: expected non-empty text up to 2000 characters")
     if any(ord(char) < 32 and char not in "\n\t" for char in value):
         raise ValueError(f"{context}: contains control characters")
-    return html.escape(value.strip(), quote=True)
+    # Liquid is evaluated by Jekyll after include expansion. Escaping only\n    # HTML is insufficient: encode opening braces to keep editorial text inert.\n    return html.escape(value.strip(), quote=True).replace("{", "&#123;")
 
 
 def strings(data, key):
@@ -220,9 +220,9 @@ def render_about_sections(data):
         paragraphs = strings(section, "paragraphs")
         widget = section.get("widget")
         action = section.get("action")
-        if widget is not None and widget not in ABOUT_WIDGETS:
+        if widget is not None and (not isinstance(widget, str) or widget not in ABOUT_WIDGETS):
             raise ValueError(f"about.sections[{index}]: unknown widget")
-        if action is not None and action not in ABOUT_ACTIONS:
+        if action is not None and (not isinstance(action, str) or action not in ABOUT_ACTIONS):
             raise ValueError(f"about.sections[{index}]: unknown action")
         lines.extend([
             '<section class="page-section">',
