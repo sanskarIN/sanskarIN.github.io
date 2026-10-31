@@ -23,9 +23,9 @@ switch-over or removal of Ruby happens in this milestone.
 | Theme colors | `_data/theme.json` | CSS, `theme-color` metadata and manifest | JSON source; Python CSS compiler |
 | Other visual rules | `_includes/css/*.css` | `assets/css/main.css` | Python-assembled CSS; remaining CSS source |
 | Interactive behavior | `src/ts/*.ts` | `assets/js/*.js` | TypeScript compiled with `tsc` |
-| Blog/GitHub sync/account setup | `.github/scripts/*.py` | PRs, content, config | Python automation |
+| Blog source and publication | `_posts/*.md`, `.github/scripts/post_markdown.py`, `.github/scripts/publish_post.py` | Markdown articles and rendered HTML | All existing posts converted; new posts written as Markdown by Python |\n| GitHub sync/account setup | `.github/scripts/*.py` | PRs, config | Python automation |
 | Story-page build checks | `.github/scripts/check_kahani.py` | CI assertions | Python |
-| Site layouts, SEO, sitemap, feed, posts and search/terminal JSON | `_layouts/`, `_includes/`, front matter / Liquid | Jekyll-built static site | **Not yet migrated** |
+| Site layouts, SEO, sitemap, feeds and search/terminal JSON | `_layouts/`, `_includes/`, front matter / Liquid | Jekyll-built static site | **Not yet migrated** |
 | Supabase Edge Function | `supabase/functions/blog/index.ts` | Supabase backend | TypeScript, keep |
 | GitHub workflows | `.github/workflows/*.yml` | CI and deployment | YAML config required by GitHub |
 | Images, fonts, icons and site metadata | `assets/`, `_data/` | Browser assets | Assets/config, not programming languages |
@@ -38,17 +38,17 @@ switch-over or removal of Ruby happens in this milestone.
    JSON theme and CSS partials, remove Jekyll Liquid from the CSS build,
    port the story-page integration checker to Python and make generated-file
    parity a required PR check.
-3. **Next:** Move `terminal.json`, `search.json`, sitemap and feeds into
+3. **Complete:** Convert legacy HTML blog articles to Markdown, preserve complex code and quotes, and have the Python publisher create Markdown for new posts. Verify post URLs and search entries with CI.\n4. **Next:** Move `terminal.json`, `search.json`, sitemap and feeds into
    Python generators. Verify exact shapes and links against the current
    Jekyll output. Do not break existing TypeScript consumers.
-4. **Next:** Replace shared layouts and page templates incrementally with
+5. **Next:** Replace shared layouts and page templates incrementally with
    Python-driven static HTML, including navigation, SEO, CSP, author metadata,
    accessibility and language variants. Keep Jekyll as an oracle in dual
    builds until Python output passes functional checks.
-5. **Next:** Recreate blog post rendering, pagination, author pages, legal
+6. **Next:** Recreate blog post rendering, pagination, author pages, legal
    pages, redirects, structured data, and any account-related site output
    with a Python pipeline. Preserve existing URLs and full CSP rules.
-6. **Only after parity:** Switch GitHub Pages from built-in Jekyll branch
+7. **Only after parity:** Switch GitHub Pages from built-in Jekyll branch
    deployment to a tested GitHub Actions artifact deployment; remove Ruby,
    Gemfile and leftover Liquid. Require a successful rollback drill.
 
