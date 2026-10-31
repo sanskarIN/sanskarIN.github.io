@@ -18,12 +18,15 @@ import sys
 from pathlib import Path
 
 from home_render import render_hero, render_sections
+from utility_pages import render_contact, render_not_found
 
 ROOT = Path(__file__).resolve().parents[2]
 DETAILS = ROOT / "_data" / "developer_details.json"
 ABOUT = ROOT / "_data" / "about_content.json"
 HOME = ROOT / "_data" / "home_content.json"
 TOKENS = ROOT / "_data" / "design_tokens.json"
+CONTACT = ROOT / "_data" / "contact_page.json"
+NOT_FOUND = ROOT / "_data" / "not_found_page.json"
 OUTPUTS = {
     "core": ROOT / "_includes" / "generated" / "developer-core.html",
     "philosophy": ROOT / "_includes" / "generated" / "developer-philosophy.html",
@@ -32,6 +35,8 @@ OUTPUTS = {
     "about_sections": ROOT / "_includes" / "generated" / "about-sections.html",
     "home_hero": ROOT / "_includes" / "generated" / "home-hero.html",
     "home_sections": ROOT / "_includes" / "generated" / "home-sections.html",
+    "contact": ROOT / "_includes" / "generated" / "contact-page.html",
+    "not_found": ROOT / "_includes" / "generated" / "not-found-page.html",
 }
 TOKEN_NAME = re.compile(r"[a-z][a-z0-9-]*\Z")
 UNSAFE_CSS = re.compile(r"[;{}<>@\x00-\x1f]|/\*|\*/|url\s*\(", re.I)
@@ -260,6 +265,8 @@ def generated_files():
     tokens = load_object(TOKENS)
     about = load_object(ABOUT)
     home = load_object(HOME)
+    contact = load_object(CONTACT)
+    not_found = load_object(NOT_FOUND)
     return {
         OUTPUTS["core"]: render_core(details),
         OUTPUTS["philosophy"]: render_philosophy(details),
@@ -268,6 +275,8 @@ def generated_files():
         OUTPUTS["about_sections"]: render_about_sections(about),
         OUTPUTS["home_hero"]: render_hero(home),
         OUTPUTS["home_sections"]: render_sections(home),
+        OUTPUTS["contact"]: render_contact(contact),
+        OUTPUTS["not_found"]: render_not_found(not_found),
     }
 
 
