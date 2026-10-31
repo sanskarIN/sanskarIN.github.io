@@ -4,6 +4,16 @@ on:
   pull_request:
     paths:
       - 'Kahani.html'
+      - 'terminal.json'
+      - 'search.json'
+      - '.github/scripts/terminal_data.py'
+      - '.github/scripts/check_data_parity.py'
+      - '_data/social.yml'
+      - '_data/navigation.yml'
+      - '_data/contact.yml'
+      - '_data/focus.yml'
+      - '_data/technologies.yml'
+      - '_data/github.json'
       - '_posts/**'
       - '.github/scripts/post_markdown.py'
       - '.github/scripts/check_blog_posts.py'
@@ -45,6 +55,16 @@ on:
       - '.github/scripts/utility_pages.py'
       - '.github/scripts/check_generated_pages.py'
       - 'Kahani.html'
+      - 'terminal.json'
+      - 'search.json'
+      - '.github/scripts/terminal_data.py'
+      - '.github/scripts/check_data_parity.py'
+      - '_data/social.yml'
+      - '_data/navigation.yml'
+      - '_data/contact.yml'
+      - '_data/focus.yml'
+      - '_data/technologies.yml'
+      - '_data/github.json'
       - '_posts/**'
       - '.github/scripts/post_markdown.py'
       - '.github/scripts/check_blog_posts.py'
@@ -92,3 +112,7 @@ jobs:
         run: python .github/scripts/check_generated_pages.py _site
       - name: Check Markdown blog posts and published URLs
         run: python .github/scripts/check_blog_posts.py _site
+      - name: Install terminal data YAML parser
+        run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
+      - name: Compare Python terminal and search index to Jekyll
+        run: python .github/scripts/check_data_parity.py _site
