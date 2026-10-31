@@ -108,16 +108,6 @@ jobs:
           git diff --exit-code -- assets/js/
       - name: Install terminal data YAML parser
         run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
-      - name: Capture Python search index for initial generated snapshot
-        run: |
-          python - <<'PY'
-          import sys
-          sys.path.insert(0, ".github/scripts")
-          from search_index import render_search_json
-          print("OPEN_SEARCH_INDEX_BEGIN")
-          print(render_search_json(), end="")
-          print("OPEN_SEARCH_INDEX_END")
-          PY
       - name: Verify Python-generated site sources
         run: python .github/scripts/generate_site_content.py --check
       - name: Build the GitHub Pages site
