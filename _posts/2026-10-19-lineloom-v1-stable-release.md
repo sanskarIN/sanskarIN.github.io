@@ -1,0 +1,86 @@
+---
+title: "lineloom-v1-stable-release"
+description: "LineLoom v1.0.0 is live! Free, MIT-licensed VS Code inline autocomplete powered by Ollama, now available on GitHub, Visual Studio Marketplace, and Open VSX."
+date: 2026-10-19T15:08:18+00:00
+author: "Sanskar"
+author_url: "/about/"
+author_login: "sanskarIN"
+image: "/assets/images/blog/lineloom-v1-stable-release/bf124b8460ddad0c.png"
+image_alt: "LineLoom v1.0.0 stable release announcement graphic with the product logo, “Code completion. On your terms.” headline, an illustrative TypeScript editor panel, and GitHub, Visual Studio Marketplace and Open VSX availability information."
+image_width: 1200
+image_height: 630
+tags: ["lineloom", "vs-code", "ollama", "autocomplete", "open-source"]
+source_issue: 41
+---
+## LineLoom v1.0.0 Released — Now on Visual Studio Marketplace and Open VSX
+
+<strong>Published: October 19, 2026</strong>
+
+I'm excited to announce the first stable release of <strong>LineLoom v1.0.0</strong>, my free and open-source extension for Visual Studio Code.
+
+Following its public preview releases, LineLoom is now available through three distribution channels: GitHub Releases, Visual Studio Marketplace, and Open VSX Registry.
+
+### What is LineLoom?
+
+LineLoom is a local-first coding assistant focused on inline code completion.
+
+It allows developers to receive context-aware suggestions in VS Code using a configured Ollama model.
+
+Rather than requiring an account or mandatory hosted inference service, LineLoom gives users control over their model settings and completion behavior.
+
+### Features in v1.0.0
+
+The first stable release includes native VS Code inline autocomplete, multiline suggestions, per-language model selection, Quick Actions, and privacy-aware source-context handling.
+
+LineLoom supports Python, JavaScript, TypeScript, Rust, and Kotlin, along with experimental Go, Java, C, and C++ support.
+
+It uses bounded active-document context, has no built-in telemetry, and requires explicit approval for configured remote inference endpoints.
+
+The extension is free and distributed under the MIT License.
+
+### Install LineLoom
+
+LineLoom is available from the following official locations:
+
+<strong>Visual Studio Marketplace:</strong><br>
+<a href="https://marketplace.visualstudio.com/items?itemName=SanskarCodes.lineloom" rel="noopener noreferrer">https://marketplace.visualstudio.com/items?itemName=SanskarCodes.lineloom</a>
+
+<strong>Open VSX:</strong><br>
+<a href="https://open-vsx.org/extension/SanskarCodes/lineloom" rel="noopener noreferrer">https://open-vsx.org/extension/SanskarCodes/lineloom</a>
+
+<strong>GitHub:</strong><br>
+<a href="https://github.com/sanskarIN/LineLoom" rel="noopener noreferrer">https://github.com/sanskarIN/LineLoom</a>
+
+You can also download the stable VSIX package directly from the GitHub v1.0.0 release.
+
+The extension requires a compatible version of VS Code and an independently installed Ollama model.
+
+Read the complete installation guide at:
+
+<a href="https://sanskarin.github.io/LineLoom/install.html" rel="noopener noreferrer">https://sanskarin.github.io/LineLoom/install.html</a>
+
+### Release quality and ongoing development
+
+v1.0.0 includes automated package verification, source checks, unit testing, and mocked-model extension-host integration testing.
+
+Additional hands-on verification and real-model performance testing remain ongoing.
+
+Development will continue with a focus on reliability, developer experience, documentation, and compatibility.
+
+### Support the project
+
+LineLoom is an independent open-source project. Contributions, feedback, and issue reports are welcome.
+
+If you find it useful and would like to support continued development, voluntary support is available through:
+
+<strong>Buy Me a Coffee:</strong> <a href="https://buymeacoffee.com/SanskarCodes" rel="noopener noreferrer">https://buymeacoffee.com/SanskarCodes</a>
+
+<strong>Razorpay:</strong> <a href="https://razorpay.me/@SanskarCodes" rel="noopener noreferrer">https://razorpay.me/@SanskarCodes</a>
+
+<strong><a href="http://PayPal.Me" rel="noopener noreferrer">PayPal.Me</a>:</strong> <a href="https://paypal.me/SanskarCodes" rel="noopener noreferrer">https://paypal.me/SanskarCodes</a>
+
+Thank you to everyone interested in exploring and supporting the project.
+
+<strong>LineLoom — Code Smarter. Build Faster. Stay Private.</strong>
+
+<a href="https://github.com/sanskarIN/LineLoom" rel="noopener noreferrer">Explore LineLoom on GitHub</a>
