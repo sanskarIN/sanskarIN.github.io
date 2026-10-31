@@ -77,8 +77,10 @@ def check(output):
     for principle in details["principles"]:
         if principle["title"] not in developer_body:
             raise AssertionError(f"Missing Developer principle: {principle['title']}")
+    normalized_home_headings = [re.sub(r"^\\d{2}\\s*", "", heading)
+                                for heading in h.headings]
     for section in home["sections"]:
-        if h.headings.count(section["title"]) != 1:
+        if normalized_home_headings.count(section["title"]) != 1:
             raise AssertionError(f"Homepage section missing: {section['title']}")
     home_body = " ".join(h.text)
     for paragraph in home["about_paragraphs"]:
