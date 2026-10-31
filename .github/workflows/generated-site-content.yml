@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - 'developer.html'
+      - 'about.html'
+      - '_data/about_content.json'
       - '_data/developer_details.json'
       - '_data/design_tokens.json'
       - '_includes/generated/**'
