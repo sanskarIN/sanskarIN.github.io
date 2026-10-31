@@ -21,8 +21,8 @@ the website in line with it:
      post cannot add scripts, styles, forms, or embedded content, and any
      Liquid tags in it are shown as plain text.
   5. The post is written to _posts/, its images to assets/images/blog/, and
-     the change is committed and pushed. Then GitHub Pages is asked to
-     rebuild the site (pushes made by a workflow do not trigger a build).
+     proposed in a pull request. The post is marked published only after the
+     PR is merged into protected main and GitHub Pages builds it.
 
 The "unpublish" label, or deleting the issue, removes the post again.
 
@@ -59,6 +59,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import nh3
+
+from pr_updates import Proposal, git
 import yaml
 from markdown_it import MarkdownIt
 from PIL import Image, ImageOps
@@ -78,10 +80,11 @@ LABELS = {
     "approved": ("1A7F37", "Publishes this blog post (owner only)"),
     "needs-changes": ("D93F0B", "Blog post needs changes before it can be published"),
     "published": ("0969DA", "This post is on the blog"),
+    "pending-merge": ("D4C5F9", "Post changes are proposed in a pull request"),
     "unpublish": ("6E7781", "Removes this post from the blog (owner only)"),
     "from-website": ("5319E7", "Blog post sent from an account on the website"),
 }
-STATUS_LABELS = ("awaiting-review", "needs-changes", "published")
+STATUS_LABELS = ("awaiting-review", "needs-changes", "published", "pending-merge")
 
 # Headings of the issue form fields (.github/ISSUE_TEMPLATE/blog-post.yml).
 FIELDS_BEFORE_POST = ("Summary", "Tags", "Cover image", "Cover image description")
@@ -884,32 +887,12 @@ def remove_post(existing):
 # Git
 # -----------------------------------------------------------------------------
 
-def git(*args, check=True):
-    env = dict(os.environ)
-    name, email = os.environ["COMMIT_NAME"], os.environ["COMMIT_EMAIL"]
-    env.update(GIT_AUTHOR_NAME=name, GIT_AUTHOR_EMAIL=email, GIT_COMMITTER_NAME=name, GIT_COMMITTER_EMAIL=email)
-    result = subprocess.run(["git", *args], cwd=ROOT, env=env, capture_output=True, text=True)
-    if check and result.returncode != 0:
-        raise RuntimeError(f"git {args[0]} failed: {result.stderr.strip()}")
-    return result
-
-
-def commit_and_push(message, branch):
+def commit_and_propose(message, proposal):
     paths = [path for path in ("_posts", "assets/images/blog")
              if (ROOT / path).exists() or git("ls-files", "--", path).stdout.strip()]
-    if not paths:
-        return False
-    git("add", "--all", "--", *paths)
-    if git("diff", "--cached", "--quiet", check=False).returncode == 0:
-        return False
-    git("commit", "--quiet", "-m", message)
-    for attempt in range(5):
-        if git("push", "--quiet", "origin", f"HEAD:{branch}", check=False).returncode == 0:
-            print(f"Pushed: {message}")
-            return True
-        time.sleep(2 ** attempt)
-        git("pull", "--quiet", "--rebase", "origin", branch)
-    raise RuntimeError("The post was committed but could not be pushed.")
+    if paths:
+        git("add", "--all", "--", *paths)
+    return proposal.propose(message)
 
 
 # -----------------------------------------------------------------------------
@@ -933,18 +916,16 @@ def owner_help(review):
 # Handling an issue event
 # -----------------------------------------------------------------------------
 
-def handle_issue_event(gh, settings, event):
+def handle_issue_event(gh, settings, event, proposal):
     action = event.get("action")
     number = event["issue"]["number"]
-    branch = event["repository"]["default_branch"]
 
     if action == "deleted":
         existing = find_post(number)
         if existing:
             remove_post(existing)
             title = existing["data"].get("title") or existing["slug"]
-            if commit_and_push(f"Remove blog post: {title} (issue deleted)", branch):
-                gh.request_pages_build()
+            commit_and_propose(f"Remove blog post: {title} (issue deleted)", proposal)
         return
 
     issue = gh.issue(number)
@@ -979,9 +960,9 @@ def handle_issue_event(gh, settings, event):
         print("Closed issue without a published post: edits are ignored.")
         return
 
-    def update_labels(published, waiting=False, changes=False):
+    def update_labels(published, waiting=False, changes=False, pending=False):
         wanted = {name for name, on in (("published", published), ("awaiting-review", waiting),
-                                        ("needs-changes", changes)) if on}
+                                        ("needs-changes", changes), ("pending-merge", pending)) if on}
         gh.add_labels(number, wanted - labels)
         for name in (set(STATUS_LABELS) & labels) - wanted:
             gh.remove_label(number, name)
@@ -997,8 +978,14 @@ def handle_issue_event(gh, settings, event):
     if "unpublish" in labels:
         if existing:
             remove_post(existing)
-            if commit_and_push(f"Remove blog post: {existing['data'].get('title') or existing['slug']}", branch):
-                gh.request_pages_build()
+            pr_url = commit_and_propose(
+                f"Remove blog post: {existing['data'].get('title') or existing['slug']}", proposal)
+            if pr_url:
+                update_labels(published=False, pending=True)
+                gh.set_status(number, "pending",
+                              f"**Removal awaiting merge.** Review and merge {pr_url}. "
+                              "The live post remains available until the PR is merged.")
+                return
         update_labels(published=False)
         gh.set_status(number, "removed",
                       "**Removed from the blog.** This post is no longer on the website."
@@ -1015,7 +1002,8 @@ def handle_issue_event(gh, settings, event):
         else:
             precheck_images(form, settings, is_image)
     except PostProblem as problem:
-        update_labels(published=bool(existing), changes=True)
+        proposal.cancel()
+        update_labels(published=False, changes=True)
         text = (f"**This post can't be published yet.** Please edit {where} to fix the following. "
                 "It's checked again after every edit.\n\n" + bullet_list(problem.messages))
         if existing:
@@ -1024,7 +1012,8 @@ def handle_issue_event(gh, settings, event):
         return
 
     if not allowed:
-        update_labels(published=bool(existing), waiting=True)
+        proposal.cancel()
+        update_labels(published=False, waiting=True)
         if existing:
             text = ("**Thanks for the update!** Your changes will be published after the site owner reviews "
                     f"them. Until then, the blog shows the version approved earlier: {live_url}")
@@ -1038,10 +1027,18 @@ def handle_issue_event(gh, settings, event):
 
     result = save_post(post, existing)
     url = post_url(settings, post["slug"])
+    pr_url = proposal.url
     if result != "unchanged":
         verb = "Publish" if result == "created" else "Update"
-        if commit_and_push(f"{verb} blog post: {post['fields']['title']}", branch):
-            gh.request_pages_build()
+        pr_url = commit_and_propose(f"{verb} blog post: {post['fields']['title']}", proposal)
+    if pr_url:
+        update_labels(published=False, pending=True)
+        gh.set_status(number, "pending",
+                      with_notes(
+                          f"**Ready for review, not published yet.** The post will appear "
+                          f"at {url} after this pull request is merged: {pr_url}",
+                          post["notes"]))
+        return
     update_labels(published=True)
     if result == "unchanged":
         text = f"**Published.** The post is up to date: {url}"
@@ -1079,22 +1076,75 @@ def precheck_images(form, settings, is_image=None):
         raise PostProblem(problems)
 
 
+def finalize_merged_proposal(gh, event):
+    """A merged PR is the source of truth for what actually went live."""
+    pr = event.get("pull_request") or {}
+    if not pr.get("merged"):
+        return
+    branch = (pr.get("head") or {}).get("ref") or ""
+    match = re.fullmatch(r"automation/blog-post-([1-9][0-9]*)", branch)
+    if not match:
+        return
+    number = int(match.group(1))
+    try:
+        issue = gh.issue(number)
+    except RuntimeError as error:
+        # A deleted source issue may no longer be addressable.
+        print(f"Could not finalize issue {number}: {error}")
+        return
+    labels = {label["name"] for label in issue.get("labels") or []}
+    for label in ("pending-merge", "awaiting-review", "needs-changes"):
+        if label in labels:
+            gh.remove_label(number, label)
+    if "unpublish" in labels:
+        if "published" in labels:
+            gh.remove_label(number, "published")
+        gh.set_status(number, "removed",
+                      "**Removed from the published website.** The removal PR was merged.")
+        gh.set_state(number, "closed", "not_planned")
+        return
+    post = find_post(number)
+    if not post:
+        gh.set_status(number, "error",
+                      "**The pull request merged, but the post was not found in the website source.** "
+                      "The site owner should investigate the merged changes.")
+        return
+    gh.add_labels(number, {"published"} - labels)
+    url = post_url(load_settings(), post["slug"])
+    gh.set_status(number, "published",
+                  f"**Published!** The pull request was merged. Blog post: {url}")
+    if issue.get("state") == "open":
+        gh.set_state(number, "closed", "completed")
+
+
 def main(argv):
     command = argv[1] if len(argv) > 1 else ""
-    if command not in ("labels", "publish"):
+    if command not in ("labels", "publish", "finalize"):
         print(__doc__)
         return 2
     gh = GitHub(os.environ["GITHUB_REPOSITORY"], os.environ["GITHUB_TOKEN"])
     if command == "labels":
         gh.ensure_labels()
         return 0
+    if command == "finalize":
+        if os.environ.get("GITHUB_EVENT_NAME") == "pull_request":
+            event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_text(encoding="utf-8"))
+            finalize_merged_proposal(gh, event)
+        return 0
     if os.environ.get("GITHUB_EVENT_NAME") != "issues":
         print("Nothing to do: not an issue event.")
         return 0
     event = json.loads(Path(os.environ["GITHUB_EVENT_PATH"]).read_text(encoding="utf-8"))
+    proposal = Proposal(
+        f"automation/blog-post-{int(event['issue']['number'])}",
+        f"Publish website blog issue #{int(event['issue']['number'])}",
+        f"Blog content generated from issue #{int(event['issue']['number'])}. "
+        "Review the article and its images, then merge to publish through GitHub Pages.",
+    )
     settings = load_settings()
     try:
-        handle_issue_event(gh, settings, event)
+        proposal.prepare()
+        handle_issue_event(gh, settings, event, proposal)
     except Exception:
         if event.get("action") != "deleted":
             try:
