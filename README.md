@@ -595,7 +595,7 @@ The blog at `/blog/` has no server of its own: posts are written in **GitHub iss
    - for your own posts (and collaborators'), prepares the post immediately; for anyone else's, adds the `awaiting-review` label and waits for approval;
    - downloads the images attached to the issue, checks that each is a real PNG, JPEG, GIF, or WebP image of at most 10 MB, turns photos the right way up, scales images larger than 2,000 px down, and saves them without metadata (location, camera details, comments) in `assets/images/blog/<post>/`;
    - converts the Markdown to HTML the same way GitHub previews it, then removes anything unsafe (scripts, styles, forms, embeds, event handlers, `javascript:` links) with an allowlist, and turns images from other websites into links;
-   - writes `_posts/<date>-<post>.md` (after Python converts sanitized HTML into Markdown), commits it as `sanskarIN <sanskarin@outlook.in>` on an issue-specific automation branch, and creates or updates a pull request against protected `main`;
+   - writes `_posts/<date>-<post>.md` using the **original issue submission date**, even when review and merging take place later (after Python converts sanitized HTML into Markdown), commits it as `sanskarIN <sanskarin@outlook.in>` on an issue-specific automation branch, and creates or updates a pull request against protected `main`;
    - adds the `pending-merge` label and links the pull request. After merge, a separate finalization job adds `published`, posts the live address, and closes the issue.
 3. After the pull request is reviewed and merged, the post appears at `https://sanskarin.github.io/blog/<post>/` following the normal Pages build, and in the list, the Tags page, the Atom feed, and the sitemap.
 
@@ -612,14 +612,14 @@ Every run is listed in the **Actions** tab as "Publish blog post"; the post beco
 
 ### What each post shows
 
-The title and summary; the date it was **published** and, after any change, the date it was **last updated**; for posts with three or more headings, an **On this page** list that stays beside the post and marks the section being read (headings get anchors automatically, and a heading never skips a level); copy buttons on code examples; a reading-progress bar along the top; up to three **related posts** that share tags; the author (your name, linking to your [author page](#your-own-account) while accounts are on — or to the About page — or the visitor's name, linking to their profile); an estimated reading time; tags; the cover image; links to discuss the post on its GitHub issue and to view its history; a copy-link button; and links to the newer and older posts. Posts are marked up as articles for search engines and link previews (Open Graph, X cards, and `BlogPosting` structured data).
+The title and summary; the **original submission date** (never overwritten when publication is delayed) and, after any change, the date it was **last updated**; for posts with three or more headings, an **On this page** list that stays beside the post and marks the section being read (headings get anchors automatically, and a heading never skips a level); copy buttons on code examples; a reading-progress bar along the top; up to three **related posts** that share tags; the author (your name, linking to your [author page](#your-own-account) while accounts are on — or to the About page — or the visitor's name, linking to their profile); an estimated reading time; tags; the cover image; links to discuss the post on its GitHub issue and to view its history; a copy-link button; and links to the newer and older posts. Posts are marked up as articles for search engines and link previews (Open Graph, X cards, and `BlogPosting` structured data).
 
 The workflow writes this front matter, which you can also use for posts written by hand:
 
 | Key | Meaning |
 |---|---|
 | `title`, `description` | Title and summary |
-| `date` | When the post was first published (it also starts the file name) |
+| `date` | When the source issue was first created (immutable; it also starts the file name). Approval, merge and deployment dates never replace it |
 | `last_modified_at` | When the post last changed (added on updates) |
 | `author`, `author_url`, `author_login` | Author's name, link, and GitHub username (default: you and the About page) |
 | `author_username` | The username of a website account, for posts written with an [account](#accounts) |
