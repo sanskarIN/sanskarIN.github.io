@@ -82,7 +82,7 @@ def check(output):
             raise AssertionError(f"Homepage section missing: {section['title']}")
     home_body = " ".join(h.text)
     for paragraph in home["about_paragraphs"]:
-        if paragraph not in re.sub(r"\\s+", " ", home_body):
+        if paragraph not in re.sub(r"\s+", " ", home_body):
             raise AssertionError(f"Homepage summary missing: {paragraph[:60]}")
     for url in ("/about/", "/developer/", "/contact/"):
         if url not in h.links:
