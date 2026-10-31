@@ -257,28 +257,34 @@ HTML build. The phased plan and parity gates for eliminating the remaining
 Ruby/Jekyll build are documented in [MIGRATION.md](MIGRATION.md).
 The generated HTML/CSS and compiled JavaScript must remain browser-readable.
 
-### Python terminal and search-index parity
+### Python-published terminal JSON and search-index parity
 
-The terminal and browser search still load the Jekyll-generated `terminal.json`
-and `search.json`. Python independently builds the terminal data using
-`.github/scripts/terminal_data.py`, and the new
-`.github/scripts/search_index.py` constructs searchable entries from public
-page front matter, all Markdown blog posts, and GitHub repository metadata.
-The `.github/scripts/check_data_parity.py` CI check compares their schema,
-URLs and metadata to Jekyll's rendered JSON.
+The public `/terminal.json` feed is now **a static, Python-generated JSON
+artifact** from `.github/scripts/terminal_data.py`, rather than a Jekyll
+Liquid template. Its URL and schema remain unchanged, and the TypeScript
+terminal still loads it lazily on demand.
 
-Post excerpts are verified as nonempty rather than byte-identical: Jekyll's
-Kramdown and Python's source-text extraction differ in how they render Markdown.
-This is a **dual-rendering compatibility gate**, not yet a switch of the public
-endpoints.
-
-Install the pinned Python dependencies, then validate against a built site:
+The Python generator reads `_config.yml`, the navigation, email, social,
+focus and technology data, `_data/github.json` and the five newest Markdown
+posts. When those inputs change, rerun:
 
 ```bash
 python -m pip install -r .github/scripts/requirements.txt
-bundle exec jekyll build --strict_front_matter --trace
-python .github/scripts/check_data_parity.py _site
+python .github/scripts/generate_site_content.py
+python .github/scripts/generate_site_content.py --check
 ```
+
+Commit `terminal.json` with the source changes. The automated blog publisher
+and GitHub-data updater regenerate and stage this file inside their respective
+PRs. Both the Python generated-content check and the Jekyll build check fail
+when the committed feed becomes stale.
+
+The public `/search.json` still comes from Jekyll. Python's
+`.github/scripts/search_index.py` independently builds the searchable
+page, post and repository metadata; `.github/scripts/check_data_parity.py`
+checks it against Jekyll. Post excerpt handling still differs between Python
+source-text extraction and Jekyll's Kramdown, so switching the public search
+endpoint is a separate milestone.
 
 ### GitHub language breakdown and blog authoring
 
