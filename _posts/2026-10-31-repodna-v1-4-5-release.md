@@ -1,7 +1,8 @@
 ---
-title: "repodna-v1-4-5-release"
+title: "RepoDNA v1.4.5 Released — Evidence Intelligence and Reliability Improvements"
 description: "RepoDNA v1.4.5 improves reproducible offline evidence ranking and diagnostics, following v1.4.4's native explanations, findings exports, and local-first reliability updates."
 date: 2026-10-31T14:14:07+00:00
+last_modified_at: 2026-10-31T14:16:22+00:00
 author: "Sanskar"
 author_url: "/about/"
 author_login: "sanskarIN"
