@@ -23,6 +23,8 @@ on:
       - '_data/technologies.yml'
       - '_posts/**'
       - '.github/scripts/post_markdown.py'
+      - '.github/scripts/post_dates.py'
+      - '.github/scripts/tests/test_post_dates.py'
       - '.github/scripts/tests/test_post_markdown.py'
       - 'contact.html'
       - '404.html'
@@ -70,6 +72,8 @@ on:
       - '_data/technologies.yml'
       - '_posts/**'
       - '.github/scripts/post_markdown.py'
+      - '.github/scripts/post_dates.py'
+      - '.github/scripts/tests/test_post_dates.py'
       - '.github/scripts/tests/test_post_markdown.py'
       - 'contact.html'
       - '404.html'
@@ -120,3 +124,5 @@ jobs:
         run: python -m unittest discover -s .github/scripts/tests -p 'test_search_index.py' -v
       - name: Test Markdown blog conversion
         run: python -m unittest discover -s .github/scripts/tests -p 'test_post_markdown.py' -v
+      - name: Test immutable blog creation dates
+        run: python -m unittest discover -s .github/scripts/tests -p 'test_post_dates.py' -v
