@@ -38,6 +38,7 @@ OUTPUTS = {
     "contact": ROOT / "_includes" / "generated" / "contact-page.html",
     "not_found": ROOT / "_includes" / "generated" / "not-found-page.html",
     "stylesheet": ROOT / "assets" / "css" / "main.css",
+    "terminal": ROOT / "terminal.json",
 }
 TOKEN_NAME = re.compile(r"[a-z][a-z0-9-]*\Z")
 UNSAFE_CSS = re.compile(r"[;{}<>@\x00-\x1f]|/\*|\*/|url\s*\(", re.I)
@@ -269,6 +270,7 @@ def generated_files():
     contact = load_object(CONTACT)
     not_found = load_object(NOT_FOUND)
     from build_styles import build_css
+    from terminal_data import render_terminal_json
 
     return {
         OUTPUTS["core"]: render_core(details),
@@ -281,6 +283,7 @@ def generated_files():
         OUTPUTS["contact"]: render_contact(contact),
         OUTPUTS["not_found"]: render_not_found(not_found),
         OUTPUTS["stylesheet"]: build_css(),
+        OUTPUTS["terminal"]: render_terminal_json(),
     }
 
 

@@ -184,6 +184,17 @@ def terminal_data(root=ROOT):
             })
     return result
 
+def render_terminal_json(root=ROOT):
+    """Deterministic UTF-8 JSON at the existing public terminal URL."""
+    return json.dumps(terminal_data(root), ensure_ascii=False, indent=2) + "\n"
+
+
+def write_terminal_json(root=ROOT):
+    """Refresh the published feed after modifying posts or GitHub data."""
+    output = root / "terminal.json"
+    output.write_text(render_terminal_json(root), encoding="utf-8")
+    return output
+
 
 if __name__ == "__main__":
-    print(json.dumps(terminal_data(), ensure_ascii=False, indent=2))
+    print(render_terminal_json(), end="")

@@ -24,7 +24,7 @@ switch-over or removal of Ruby happens in this milestone.
 | Other visual rules | `_includes/css/*.css` | `assets/css/main.css` | Python-assembled CSS; remaining CSS source |
 | Interactive behavior | `src/ts/*.ts` | `assets/js/*.js` | TypeScript compiled with `tsc` |
 | Blog source and publication | `_posts/*.md`, `.github/scripts/post_markdown.py`, `.github/scripts/publish_post.py` | Markdown articles and rendered HTML | All existing posts converted; new posts written as Markdown by Python |\n| GitHub sync/account setup | `.github/scripts/*.py` | PRs, config | Python automation |
-| Story-page build checks | `.github/scripts/check_kahani.py` | CI assertions | Python |
+| Terminal JSON public feed | `.github/scripts/terminal_data.py`, `terminal.json` | Python-generated static JSON | **Production**, rebuilt for blog and GitHub updates |\n| Browser search JSON | `.github/scripts/search_index.py`, `search.json` | Jekyll endpoint; Python metadata model | Dual-rendering checks; migration pending |\n| Story-page build checks | `.github/scripts/check_kahani.py` | CI assertions | Python |
 | Site layouts, SEO, sitemap, feeds and search/terminal JSON | `_layouts/`, `_includes/`, front matter / Liquid | Jekyll-built static site | **Not yet migrated** |
 | Supabase Edge Function | `supabase/functions/blog/index.ts` | Supabase backend | TypeScript, keep |
 | GitHub workflows | `.github/workflows/*.yml` | CI and deployment | YAML config required by GitHub |
@@ -38,13 +38,11 @@ switch-over or removal of Ruby happens in this milestone.
    JSON theme and CSS partials, remove Jekyll Liquid from the CSS build,
    port the story-page integration checker to Python and make generated-file
    parity a required PR check.
-3. **Complete:** Convert legacy HTML blog articles to Markdown, preserve complex code and quotes, and have the Python publisher create Markdown for new posts. Verify post URLs and search entries with CI.\n4. **In progress:** The independent Python terminal and search-index
-   models now reconstruct structured site data from JSON, YAML, and Markdown.
-   The terminal data must match Jekyll exactly. Python search results must
-   preserve all public page, post, and repository URLs and metadata.
-   The public Jekyll endpoints remain in place until dynamic source
-   regeneration and HTML/text indexing parity are verified.
-5. **Next:** Move remaining `terminal.json`, `search.json`, sitemap and feeds into
+3. **Complete:** Convert legacy HTML blog articles to Markdown, preserve complex code and quotes, and have the Python publisher create Markdown for new posts. Verify post URLs and search entries with CI.\n4. **Complete:** Move `terminal.json` out of Liquid into a Python-owned
+   static feed, preserve the public URL and TypeScript consumer, and have both
+   the blog publisher and repository-data updater regenerate it automatically.
+   Verify committed-source freshness, JSON schema, and Jekyll static copying.
+5. **Next:** Move `search.json`, sitemap and feeds into
    Python generators. Verify exact shapes and links against the current
    Jekyll output. Do not break existing TypeScript consumers.
 6. **Next:** Replace shared layouts and page templates incrementally with

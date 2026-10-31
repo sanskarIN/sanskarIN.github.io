@@ -7,7 +7,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from terminal_data import ROOT, parse_front_matter, published_posts, site_url, terminal_data
+from terminal_data import ROOT, parse_front_matter, published_posts, site_url, terminal_data, render_terminal_json
 from check_data_parity import diff_paths
 
 
@@ -42,6 +42,25 @@ class DataParityTests(unittest.TestCase):
         for p in posts:
             self.assertEqual(p["url"], "/blog/" + p["_source"][11:].rsplit(".", 1)[0] + "/")
             self.assertRegex(p["date"], r"^\d{1,2} [A-Z][a-z]{2} \d{4}$")
+
+    def test_published_terminal_feed_is_current_and_plain_json(self):
+        source = (ROOT / "terminal.json").read_text(encoding="utf-8")
+        self.assertEqual(source, render_terminal_json(ROOT))
+        self.assertFalse(source.startswith("---"))
+        self.assertNotIn("{%", source)
+        self.assertNotIn("{{", source)
+        value = json.loads(source)
+        self.assertEqual(value, terminal_data(ROOT))
+        self.assertEqual(value["links"]["contact"], "/contact/")
+
+    def test_feed_contains_only_public_project_and_blog_fields(self):
+        value = json.loads(render_terminal_json())
+        self.assertEqual(len(value["posts"]), min(5, len(published_posts(ROOT))))
+        for item in value["posts"]:
+            self.assertEqual(set(item), {"title", "url", "date"})
+        if value["projects"] is not None:
+            for item in value["projects"]["featured"]:
+                self.assertEqual(set(item), {"name", "url", "description", "language", "stars"})
 
     def test_site_relative_url_does_not_accept_external_paths(self):
         self.assertEqual(site_url("/", ""), "/")

@@ -121,7 +121,13 @@ def validate_search(root, output, python_terminal):
 
 
 def check(root, output):
-    jekyll = json.loads((output / "terminal.json").read_text(encoding="utf-8"))
+    # Jekyll must copy the Python-built feed without rewriting the bytes:
+    # the browser depends on the exact same /terminal.json route.
+    source = (root / "terminal.json").read_bytes()
+    copied = (output / "terminal.json").read_bytes()
+    if source != copied:
+        raise AssertionError("Jekyll did not publish the Python terminal feed unchanged")
+    jekyll = json.loads(copied.decode("utf-8"))
     python = terminal_data(root)
     changes = diff_paths(jekyll, python)
     if changes:
