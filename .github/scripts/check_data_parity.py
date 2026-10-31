@@ -10,6 +10,7 @@ import sys
 from pathlib import Path
 
 from terminal_data import ROOT, published_posts, terminal_data
+from search_index import search_index
 
 
 def diff_paths(actual, expected, prefix="$", limit=20):
@@ -80,6 +81,38 @@ def validate_search(root, output, python_terminal):
         problems = diff_paths(actual, expected)
         if problems:
             raise AssertionError(f"Project index mismatch {repo['name']}: {problems}")
+    # Independently reconstruct every search result from maintained sources.
+    # Post text is approximate because Markdown-it/Python and Jekyll Kramdown
+    # do not have identical whitespace handling; metadata and URLs are exact.
+    python_entries = search_index(root)
+    for kind in ("Page", "Post", "Project"):
+        expected = [entry for entry in python_entries if entry["type"] == kind]
+        actual = groups[kind]
+        if len(expected) != len(actual):
+            raise AssertionError(
+                f"Python/Jekyll {kind} count differs: {len(expected)} vs {len(actual)}"
+            )
+        by_url = {item["url"]: item for item in actual}
+        for model in expected:
+            published = by_url.get(model["url"])
+            if published is None:
+                raise AssertionError(f"Python search {kind} missing from Jekyll: {model['url']}")
+            keys = set(model) - ({"text"} if kind == "Post" else set())
+            problems = diff_paths(
+                {key: published.get(key) for key in keys},
+                {key: model[key] for key in keys},
+            )
+            if problems:
+                raise AssertionError(
+                    f"Python search {kind} mismatch for {model['url']}: {problems}"
+                )
+            if kind == "Post":
+                description = model["text"].split(" ", 1)[0]
+                if not isinstance(published.get("text"), str) or not published["text"].strip():
+                    raise AssertionError(f"Empty public post excerpt: {model['url']}")
+                if description and description not in published["text"]:
+                    raise AssertionError(f"Post text lost introduction: {model['url']}")
+
     for item in python_terminal["pages"]:
         if not any(x["url"] == item["url"] for x in groups["Page"]):
             raise AssertionError(f"Navigation page absent from search: {item['url']}")

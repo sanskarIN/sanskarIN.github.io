@@ -38,7 +38,13 @@ switch-over or removal of Ruby happens in this milestone.
    JSON theme and CSS partials, remove Jekyll Liquid from the CSS build,
    port the story-page integration checker to Python and make generated-file
    parity a required PR check.
-3. **Complete:** Convert legacy HTML blog articles to Markdown, preserve complex code and quotes, and have the Python publisher create Markdown for new posts. Verify post URLs and search entries with CI.\n4. **In progress:** Implement Python `terminal.json` data generation, and verify\n   that its complete output matches the Jekyll runtime JSON. Add Python checks\n   for search pages, posts, repositories, public URLs and metadata. Keep the\n   Jekyll public endpoints until the compatibility check passes; afterward\n   migrate search-index generation, sitemap and feeds.\n5. **Next:** Move remaining `terminal.json`, `search.json`, sitemap and feeds into
+3. **Complete:** Convert legacy HTML blog articles to Markdown, preserve complex code and quotes, and have the Python publisher create Markdown for new posts. Verify post URLs and search entries with CI.\n4. **In progress:** The independent Python terminal and search-index
+   models now reconstruct structured site data from JSON, YAML, and Markdown.
+   The terminal data must match Jekyll exactly. Python search results must
+   preserve all public page, post, and repository URLs and metadata.
+   The public Jekyll endpoints remain in place until dynamic source
+   regeneration and HTML/text indexing parity are verified.
+5. **Next:** Move remaining `terminal.json`, `search.json`, sitemap and feeds into
    Python generators. Verify exact shapes and links against the current
    Jekyll output. Do not break existing TypeScript consumers.
 6. **Next:** Replace shared layouts and page templates incrementally with

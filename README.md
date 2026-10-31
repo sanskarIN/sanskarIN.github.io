@@ -260,20 +260,22 @@ The generated HTML/CSS and compiled JavaScript must remain browser-readable.
 ### Python terminal and search-index parity
 
 The terminal and browser search still load the Jekyll-generated `terminal.json`
-and `search.json`. The Python `.github/scripts/terminal_data.py`
-now independently builds the terminal data from existing YAML, JSON and
-Markdown posts. The `.github/scripts/check_data_parity.py` build check
-compares the Python terminal schema and values with Jekyll's rendered JSON,
-and verifies search results against all published posts, public navigation
-and the repository catalogue. This is a deliberate **dual-rendering safety
-gate** before replacing public JSON endpoints; browser functionality is not
-changed in this milestone.
+and `search.json`. Python independently builds the terminal data using
+`.github/scripts/terminal_data.py`, and the new
+`.github/scripts/search_index.py` constructs searchable entries from public
+page front matter, all Markdown blog posts, and GitHub repository metadata.
+The `.github/scripts/check_data_parity.py` CI check compares their schema,
+URLs and metadata to Jekyll's rendered JSON.
 
-`python -m pip install -r .github/scripts/requirements.txt` installs the
-pinned PyYAML dependency used by the Python data generator. After building
-the Jekyll site, verify the compatibility:
+Post excerpts are verified as nonempty rather than byte-identical: Jekyll's
+Kramdown and Python's source-text extraction differ in how they render Markdown.
+This is a **dual-rendering compatibility gate**, not yet a switch of the public
+endpoints.
+
+Install the pinned Python dependencies, then validate against a built site:
 
 ```bash
+python -m pip install -r .github/scripts/requirements.txt
 bundle exec jekyll build --strict_front_matter --trace
 python .github/scripts/check_data_parity.py _site
 ```
