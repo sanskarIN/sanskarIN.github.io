@@ -93,6 +93,9 @@ class Proposal:
         if self.open_pr and not remote_sha:
             raise RuntimeError("The open automation PR has no remote branch.")
         if self.open_pr:
+            # actions/checkout often configures a shallow, single-branch refspec.
+            git("fetch", "--quiet", "origin",
+                f"+refs/heads/{self.branch}:refs/remotes/origin/{self.branch}")
             git("checkout", "-B", self.branch, f"origin/{self.branch}")
         else:
             # A previously merged/closed PR may leave a stale branch behind.
