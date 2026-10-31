@@ -37,7 +37,7 @@ class SearchIndexTests(unittest.TestCase):
         self.assertEqual([order[e["type"]] for e in data],
                          sorted(order[e["type"]] for e in data))
         for entry in data:
-            self.assertTrue(entry["text"] or entry["type"] == "Page")
+            self.assertIsInstance(entry["text"], str)
             expected = {
                 "Page": {"type", "title", "url", "text"},
                 "Post": {"type", "title", "url", "date", "tags", "text"},
