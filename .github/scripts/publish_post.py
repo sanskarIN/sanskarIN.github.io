@@ -893,7 +893,8 @@ def remove_post(existing):
 def commit_and_propose(message, proposal):
     # Blog changes affect the five recent posts in the public terminal feed.
     write_terminal_json(ROOT)
-    paths = [path for path in ("_posts", "assets/images/blog", "terminal.json")
+    write_search_json(ROOT)
+    paths = [path for path in ("_posts", "assets/images/blog", "terminal.json", "search.json")
              if (ROOT / path).exists() or git("ls-files", "--", path).stdout.strip()]
     if paths:
         git("add", "--all", "--", *paths)
