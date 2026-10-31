@@ -1,0 +1,54 @@
+{
+  "hero": {
+    "eyebrow": "Software developer · Open source",
+    "title": "Sanskar",
+    "tagline": "Building software, developer tools, and digital products in the open.",
+    "intro": "My work and interests span Rust and C++, Android, the web, game development, and AI/machine learning — built in public on GitHub and shared with the developer community."
+  },
+  "about_paragraphs": [
+    "I'm Sanskar, a software developer. My interests cover a wide range of software: systems languages such as Rust, C, and C++; Android development with Kotlin and Java; web development with JavaScript, TypeScript, and React; C#, .NET, and Python; game development; and AI and machine learning.",
+    "I build in the open on GitHub, take part in the developer community, and create digital products along the way. This website brings all of that together in one place."
+  ],
+  "sections": [
+    {
+      "id": "about",
+      "title": "About",
+      "lead": "Software developer, open-source builder, and part of the developer community."
+    },
+    {
+      "id": "focus",
+      "title": "Developer focus",
+      "lead": "The areas I build in and keep exploring."
+    },
+    {
+      "id": "technologies",
+      "title": "Technologies",
+      "lead": "Languages, frameworks, and tools across my work and interests."
+    },
+    {
+      "id": "repos",
+      "title": "Open source",
+      "lead": "I publish code on GitHub, where it can be read, discussed, and improved in the open."
+    },
+    {
+      "id": "blog",
+      "title": "Blog",
+      "lead": "Posts and images from me and from visitors. Anyone can write one."
+    },
+    {
+      "id": "community",
+      "title": "Developer community",
+      "lead": "Places to follow along, read, and talk about software."
+    },
+    {
+      "id": "products",
+      "title": "Support & digital products",
+      "lead": "If my work is useful to you, you can support it directly or browse my digital products."
+    },
+    {
+      "id": "contact",
+      "title": "Contact",
+      "lead": "Email is the best way to reach me: business addresses for professional inquiries, and the support address for help."
+    }
+  ]
+}
