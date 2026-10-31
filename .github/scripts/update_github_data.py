@@ -5,7 +5,7 @@ Projects page (/projects/) and in the Home page's "Open source" section.
 Run by .github/workflows/update-github-data.yml every day, whenever
 _data/projects.yml changes, and from the Actions tab:
 
-    python .github/scripts/update_github_data.py            fetch, save, commit, push
+    python .github/scripts/update_github_data.py            fetch, save, propose PR
     python .github/scripts/update_github_data.py --dry-run  fetch and save only
 
 Only public information is read: the account's public repositories and
@@ -453,31 +453,6 @@ def comparable(data, own_repository):
 # -----------------------------------------------------------------------------
 # Saving
 # -----------------------------------------------------------------------------
-
-def git(*args, check=True):
-    env = dict(os.environ)
-    name, email = os.environ["COMMIT_NAME"], os.environ["COMMIT_EMAIL"]
-    env.update(GIT_AUTHOR_NAME=name, GIT_AUTHOR_EMAIL=email, GIT_COMMITTER_NAME=name, GIT_COMMITTER_EMAIL=email)
-    result = subprocess.run(["git", *args], cwd=ROOT, env=env, capture_output=True, text=True)
-    if check and result.returncode != 0:
-        raise RuntimeError(f"git {args[0]} failed: {result.stderr.strip()}")
-    return result
-
-
-def commit_and_push(branch):
-    path = str(OUTPUT.relative_to(ROOT))
-    git("add", "--", path)
-    if git("diff", "--cached", "--quiet", check=False).returncode == 0:
-        return False
-    git("commit", "--quiet", "-m", "Update GitHub data for the Projects page")
-    for attempt in range(5):
-        if git("push", "--quiet", "origin", f"HEAD:{branch}", check=False).returncode == 0:
-            print("Pushed the new data.")
-            return True
-        time.sleep(2 ** attempt)
-        git("pull", "--quiet", "--rebase", "origin", branch)
-    raise RuntimeError("The data was committed but could not be pushed.")
-
 
 def main(argv):
     dry_run = "--dry-run" in argv
