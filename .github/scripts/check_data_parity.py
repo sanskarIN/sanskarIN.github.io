@@ -40,7 +40,13 @@ def diff_paths(actual, expected, prefix="$", limit=20):
 
 
 def validate_search(root, output, python_terminal):
-    index = json.loads((output / "search.json").read_text(encoding="utf-8"))
+    # GitHub Pages must serve Python's published JSON as-is, not rebuild it
+    # from Liquid: this protects the TypeScript search dialog's public contract.
+    original = (root / "search.json").read_bytes()
+    copied = (output / "search.json").read_bytes()
+    if original != copied:
+        raise AssertionError("Jekyll did not copy Python search.json unchanged")
+    index = json.loads(copied.decode("utf-8"))
     if not isinstance(index, list):
         raise AssertionError("Search index must be a JSON array")
     groups = {"Page": [], "Post": [], "Project": []}
