@@ -10,6 +10,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import generate_site_content as sitegen
 from home_render import render_hero, render_sections, SECTION_IDS
+from utility_pages import render_contact, render_not_found
 
 
 class SiteGeneratorTests(unittest.TestCase):
@@ -19,6 +20,8 @@ class SiteGeneratorTests(unittest.TestCase):
         cls.tokens = json.loads(sitegen.TOKENS.read_text(encoding="utf-8"))
         cls.about = json.loads(sitegen.ABOUT.read_text(encoding="utf-8"))
         cls.home = json.loads(sitegen.HOME.read_text(encoding="utf-8"))
+        cls.contact_page = json.loads(sitegen.CONTACT.read_text(encoding="utf-8"))
+        cls.not_found_page = json.loads(sitegen.NOT_FOUND.read_text(encoding="utf-8"))
 
     def test_generated_files_match_their_json_sources(self):
         for path, generated in sitegen.generated_files().items():
@@ -161,6 +164,65 @@ class SiteGeneratorTests(unittest.TestCase):
         home["hero"]["intro"] = "malicious\x00content"
         with self.assertRaisesRegex(ValueError, "control character"):
             render_hero(home)
+
+    def test_contact_generated_markup_preserves_forms_and_links(self):
+        rendered = render_contact(self.contact_page)
+        self.assertIn('{%- if form_key != "" %}', rendered)
+        self.assertIn("{% include contact-form.html %}", rendered)
+        self.assertIn('id="send-a-message"', rendered)
+        self.assertIn("include contact-card.html group=\"business\"", rendered)
+        self.assertIn('include email-link.html key="support"', rendered)
+        self.assertIn('include profile-list.html group=group_key', rendered)
+        for row in self.contact_page["advice"]:
+            self.assertIn(html.escape(row["label"], quote=True), rendered)
+
+    def test_contact_json_cannot_inject_html_or_liquid(self):
+        page = copy.deepcopy(self.contact_page)
+        page["form_heading"] = '<script>alert(1)</script>'
+        page["advice"][0]["description"] = '{% include secrets.html %}'
+        page["security_before"] = "{{ site.secret }}"
+        output = render_contact(page)
+        self.assertNotIn("<script>", output)
+        self.assertNotIn("{% include secrets.html %}", output)
+        self.assertNotIn("{{ site.secret }}", output)
+        self.assertIn("&lt;script&gt;", output)
+        self.assertIn("&#123;% include secrets.html %}", output)
+
+    def test_contact_rejects_invalid_or_duplicate_advice(self):
+        page = copy.deepcopy(self.contact_page)
+        page["advice"].append(copy.deepcopy(page["advice"][0]))
+        with self.assertRaisesRegex(ValueError, "Duplicate advice"):
+            render_contact(page)
+        page = copy.deepcopy(self.contact_page)
+        page["advice"] = []
+        with self.assertRaisesRegex(ValueError, "1-15"):
+            render_contact(page)
+        page = copy.deepcopy(self.contact_page)
+        page["unsafe_html"] = "<script>"
+        with self.assertRaisesRegex(ValueError, "expected exactly"):
+            render_contact(page)
+
+    def test_not_found_preserves_search_and_absolute_root_links(self):
+        output = render_not_found(self.not_found_page)
+        self.assertIn('include search-attributes.html', output)
+        self.assertIn(' hidden>', output)
+        self.assertIn('include link.html url="/"', output)
+        self.assertIn('include link.html url="/contact/"', output)
+        self.assertIn('include link.html url=site.projects_url', output)
+        self.assertIn('<p class="error-page__code" aria-hidden="true">404</p>', output)
+
+    def test_not_found_escapes_all_editable_labels(self):
+        page = copy.deepcopy(self.not_found_page)
+        page["title"] = '{{ site.secret }}'
+        page["link_labels"]["home"] = '" {% include secrets.html %}'
+        output = render_not_found(page)
+        self.assertNotIn("{{ site.secret }}", output)
+        self.assertNotIn('label="\"', output)
+        self.assertIn("&#123;&#123; site.secret }}", output)
+        self.assertIn("&#123;% include secrets.html %}", output)
+        page["link_labels"]["extra"] = "Bad"
+        with self.assertRaisesRegex(ValueError, "expected exactly"):
+            render_not_found(page)
 
     def test_css_variables_are_present_once(self):
         rendered = sitegen.render_tokens(self.tokens)
