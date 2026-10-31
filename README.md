@@ -216,6 +216,7 @@ the page, and no Python runs in visitors' browsers.
 |---|---|---|
 | `_data/developer_details.json` | `_includes/generated/developer-core.html` and `developer-philosophy.html` | Developer profile's engineering interests, platforms, tools, learning, and principles |
 | `_data/about_content.json` | `_includes/generated/about-intro.html` and `about-sections.html` | About page's introduction, editorial sections, action links, and call to action; dynamic profile identity stays in Liquid |
+| `_data/home_content.json` | `_includes/generated/home-hero.html` and `home-sections.html` | Home page hero, section headings, descriptions and summary; interactive terminal and live Jekyll widgets remain functional |
 | `_data/design_tokens.json` | `_includes/generated/design-tokens.css` | Typography, spacing, widths, and shape/motion variables in the shared stylesheet |
 
 After changing any of these JSON files, run:
@@ -229,8 +230,9 @@ Commit **both the source JSON and generated include files**. The "Generated site
 content" GitHub Actions check rejects stale output, invalid CSS tokens, and
 unsafe values. The Python test suite covers output determinism, escaping, and
 schema validation. The Jekyll build additionally runs
-`.github/scripts/check_generated_pages.py` to verify that generated sections,
-headings, and trusted Liquid profile links appear in the public pages.
+`.github/scripts/check_generated_pages.py` to verify that generated Home,
+About, and Developer sections, headings, links, and dynamic content appear in
+the public pages.
 Theme-specific colors remain in `_data/theme.yml`.
 
 Generated includes are not edited directly. This keeps HTML/CSS output accessible
