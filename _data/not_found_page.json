@@ -1,0 +1,11 @@
+{
+  "title": "Page not found",
+  "description": "The page you're looking for doesn't exist or may have moved. Check the address for typos, search the website, or continue from one of these:",
+  "search_label": "Search the website",
+  "link_labels": {
+    "home": "Home",
+    "projects": "Projects",
+    "github": "GitHub",
+    "contact": "Contact"
+  }
+}

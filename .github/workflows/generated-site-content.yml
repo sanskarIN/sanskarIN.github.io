@@ -4,6 +4,12 @@ on:
   pull_request:
     paths:
       - 'developer.html'
+      - 'contact.html'
+      - '404.html'
+      - '_data/contact_page.json'
+      - '_data/not_found_page.json'
+      - '.github/scripts/utility_pages.py'
+      - '.github/scripts/check_generated_pages.py'
       - 'index.html'
       - '_data/home_content.json'
       - '.github/scripts/home_render.py'
@@ -20,6 +26,12 @@ on:
     branches: [main]
     paths:
       - 'developer.html'
+      - 'contact.html'
+      - '404.html'
+      - '_data/contact_page.json'
+      - '_data/not_found_page.json'
+      - '.github/scripts/utility_pages.py'
+      - '.github/scripts/check_generated_pages.py'
       - 'index.html'
       - '_data/home_content.json'
       - '.github/scripts/home_render.py'

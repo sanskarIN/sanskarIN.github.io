@@ -1,0 +1,29 @@
+{
+  "email_heading": "Email",
+  "form_enabled_before": "Email links open your own email app. Prefer not to? ",
+  "form_enabled_link": "Send a message with the form",
+  "form_enabled_after": " instead.",
+  "form_disabled_notice": "There is no contact form on this website. Email links open your own email app, and nothing is sent through this site.",
+  "form_heading": "Send a message",
+  "form_intro": "Write to me here without opening your email app. Messages arrive in my inbox, and replies come by email.",
+  "advice_heading": "Before you write",
+  "advice": [
+    {
+      "label": "Business inquiries",
+      "description": "a short description of what you have in mind, plus any timelines or links that help."
+    },
+    {
+      "label": "Support requests",
+      "description": "what you were trying to do, what happened instead, and the steps to reproduce it. For problems with this website, include your device and browser."
+    },
+    {
+      "label": "Never send secrets",
+      "description": "please don't include passwords, API keys, access tokens, or other credentials in any message."
+    }
+  ],
+  "social_heading": "Find me online",
+  "security_heading": "Security issues",
+  "security_before": "If you find a security issue with this website, please report it privately to ",
+  "security_between": " instead of opening a public issue. The ",
+  "security_after": " explains what to include."
+}
