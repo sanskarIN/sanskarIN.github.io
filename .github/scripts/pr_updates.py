@@ -16,7 +16,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-SAFE_BRANCH = re.compile(r"automation/(?:github-data|blog-post-[1-9][0-9]*)\\Z")
+SAFE_BRANCH = re.compile(r"automation/(?:github-data|blog-post-[1-9][0-9]*)\Z")
 
 
 def git(*args, check=True):
