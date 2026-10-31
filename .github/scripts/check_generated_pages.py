@@ -52,6 +52,8 @@ def check(output):
     details = json.loads((ROOT / "_data/developer_details.json").read_text(encoding="utf-8"))
     a = scan(output / "about" / "index.html")
     d = scan(output / "developer" / "index.html")
+    h = scan(output / "index.html")
+    home = json.loads((ROOT / "_data/home_content.json").read_text(encoding="utf-8"))
     about_body = " ".join(a.text)
     expected = [section["heading"] for section in about["sections"]]
     for heading in expected:
@@ -75,6 +77,19 @@ def check(output):
     for principle in details["principles"]:
         if principle["title"] not in developer_body:
             raise AssertionError(f"Missing Developer principle: {principle['title']}")
+    for section in home["sections"]:
+        if h.headings.count(section["title"]) != 1:
+            raise AssertionError(f"Homepage section missing: {section['title']}")
+    home_body = " ".join(h.text)
+    for paragraph in home["about_paragraphs"]:
+        if paragraph not in re.sub(r"\\s+", " ", home_body):
+            raise AssertionError(f"Homepage summary missing: {paragraph[:60]}")
+    for url in ("/about/", "/developer/", "/contact/"):
+        if url not in h.links:
+            raise AssertionError(f"Homepage link missing: {url}")
+    if "profile" not in home_body:
+        raise AssertionError("Homepage terminal fallback missing")
+    print(f"Verified {len(home['sections'])} homepage sections and links.")
     print(f"Verified {len(expected)} About sections, identity links, "
           f"and {len(details['principles'])} Developer principles.")
 
