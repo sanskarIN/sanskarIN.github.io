@@ -272,6 +272,7 @@ def generated_files():
     not_found = load_object(NOT_FOUND)
     from build_styles import build_css
     from terminal_data import render_terminal_json
+    from search_index import render_search_json
 
     return {
         OUTPUTS["core"]: render_core(details),
