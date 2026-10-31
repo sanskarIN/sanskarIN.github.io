@@ -62,6 +62,7 @@ import nh3
 
 from pr_updates import Proposal, git
 from post_markdown import convert_article
+from post_dates import issue_creation_timestamp
 from terminal_data import write_terminal_json
 from search_index import write_search_json
 import yaml
@@ -830,6 +831,7 @@ def build_post(issue, form, settings, existing, trusted, account=None, is_image=
     return {
         "slug": slug,
         "fields": fields,
+        "source_created_at": issue_creation_timestamp(issue),
         "markup": finish_markup(markup),
         "files": files,
         "notes": list(dict.fromkeys(notes)),
@@ -845,10 +847,11 @@ def save_post(post, existing):
     slug, fields = post["slug"], dict(post["fields"])
     if existing:
         match = re.search(r"^date: (.+)$", existing["text"], re.M)
-        date = match.group(1).strip() if match else now_iso()
+        date = match.group(1).strip() if match else post["source_created_at"]
         path = existing["path"]
     else:
-        date = now_iso()
+        # A delayed review or merge must never change an article's date.
+        date = post["source_created_at"]
         path = POSTS_DIR / f"{date[:10]}-{slug}.md"
     fields["date"] = date
     content = front_matter(fields) + convert_article(post["markup"])
