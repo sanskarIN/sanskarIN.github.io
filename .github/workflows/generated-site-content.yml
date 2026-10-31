@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - 'developer.html'
+      - '_posts/**'
+      - '.github/scripts/post_markdown.py'
+      - '.github/scripts/tests/test_post_markdown.py'
       - 'contact.html'
       - '404.html'
       - '_data/contact_page.json'
@@ -31,6 +34,9 @@ on:
     branches: [main]
     paths:
       - 'developer.html'
+      - '_posts/**'
+      - '.github/scripts/post_markdown.py'
+      - '.github/scripts/tests/test_post_markdown.py'
       - 'contact.html'
       - '404.html'
       - '_data/contact_page.json'
@@ -72,3 +78,5 @@ jobs:
         run: python -m unittest discover -s .github/scripts/tests -p 'test_generate_site_content.py' -v
       - name: Test Python stylesheet compiler
         run: python -m unittest discover -s .github/scripts/tests -p 'test_build_styles.py' -v
+      - name: Test Markdown blog conversion
+        run: python -m unittest discover -s .github/scripts/tests -p 'test_post_markdown.py' -v

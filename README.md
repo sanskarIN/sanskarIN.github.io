@@ -148,7 +148,7 @@ Nothing is loaded from a CDN or a third-party domain. The account pages talk to 
 │       ├── brand/            SVG favicon, Apple touch icon, app icons
 │       ├── social/           Social preview image (1200 × 630)
 │       └── blog/             Images of blog posts, one folder per post (added by the workflow)
-├── _posts/                   Blog posts (added by the workflow, or written by hand)
+├── _posts/                   Markdown articles (added by Python publisher or written by hand)
 ├── blog/                     Blog pages: index.html, tags.html, feed.xml, authors.html, posts.json
 ├── account/                  Account pages: index.html (sign-in, profile, posts), write.html (editor)
 ├── projects/index.html       The Projects page
@@ -256,6 +256,22 @@ the shared layouts, SEO, feeds, posts, navigation, structured data and final
 HTML build. The phased plan and parity gates for eliminating the remaining
 Ruby/Jekyll build are documented in [MIGRATION.md](MIGRATION.md).
 The generated HTML/CSS and compiled JavaScript must remain browser-readable.
+
+### GitHub language breakdown and blog authoring
+
+The largest former source of GitHub's HTML language count was the **blog
+articles**, not the site application. All existing articles are now genuine
+`_posts/*.md` Markdown documents. Python converts newly submitted, sanitized
+post HTML to Markdown in `.github/scripts/post_markdown.py`, while Jekyll
+preserves their dates, cover images, author metadata and `/blog/<slug>/` URLs.
+
+Files actually compiled from Python or TypeScript (such as
+`_includes/generated/`, `assets/js/*.js` and `assets/css/main.css`) are
+listed as generated outputs in `.gitattributes`. Handwritten Jekyll templates
+are **not** disguised as generated. Markdown articles are editorial content
+rather than website application code. Python's
+`.github/scripts/check_blog_posts.py` verifies that every article retains
+its public route and search entry.
 
 ## Deployment to GitHub Pages
 
@@ -550,7 +566,7 @@ The blog at `/blog/` has no server of its own: posts are written in **GitHub iss
    - for your own posts (and collaborators'), prepares the post immediately; for anyone else's, adds the `awaiting-review` label and waits for approval;
    - downloads the images attached to the issue, checks that each is a real PNG, JPEG, GIF, or WebP image of at most 10 MB, turns photos the right way up, scales images larger than 2,000 px down, and saves them without metadata (location, camera details, comments) in `assets/images/blog/<post>/`;
    - converts the Markdown to HTML the same way GitHub previews it, then removes anything unsafe (scripts, styles, forms, embeds, event handlers, `javascript:` links) with an allowlist, and turns images from other websites into links;
-   - writes `_posts/<date>-<post>.html`, commits it as `sanskarIN <sanskarin@outlook.in>` on an issue-specific automation branch, and creates or updates a pull request against protected `main`;
+   - writes `_posts/<date>-<post>.md` (after Python converts sanitized HTML into Markdown), commits it as `sanskarIN <sanskarin@outlook.in>` on an issue-specific automation branch, and creates or updates a pull request against protected `main`;
    - adds the `pending-merge` label and links the pull request. After merge, a separate finalization job adds `published`, posts the live address, and closes the issue.
 3. After the pull request is reviewed and merged, the post appears at `https://sanskarin.github.io/blog/<post>/` following the normal Pages build, and in the list, the Tags page, the Atom feed, and the sitemap.
 
