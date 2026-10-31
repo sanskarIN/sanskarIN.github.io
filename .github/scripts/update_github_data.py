@@ -13,9 +13,8 @@ their languages, the repositories pinned on the profile, and the
 contribution calendar shown on the profile. The settings in
 _data/projects.yml decide which repositories are shown and featured.
 
-The file is rewritten, committed, and pushed only when something besides its
-timestamp changed. Then GitHub Pages is asked to rebuild the site, because
-pushes made by a workflow don't trigger a build. If GitHub can't be reached,
+The file is proposed in a pull request only when something besides its
+timestamp changed. The site updates when the PR is merged into protected main. If GitHub can't be reached,
 the script fails and the file is left as it was.
 """
 
@@ -33,6 +32,8 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import yaml
+
+from pr_updates import Proposal, git
 
 ROOT = Path(__file__).resolve().parents[2]
 SETTINGS = ROOT / "_data" / "projects.yml"
@@ -441,7 +442,7 @@ def build(gh, settings):
 
 def comparable(data, own_repository):
     """The data without what changes on every run: the timestamp, and the
-    last-push date of this website's own repository (each update pushes)."""
+    last-push date of this website's own repository (each merge pushes)."""
     copy = json.loads(json.dumps(data))
     copy.pop("generated_at", None)
     for repo in copy.get("repositories") or []:
@@ -457,6 +458,16 @@ def comparable(data, own_repository):
 def main(argv):
     dry_run = "--dry-run" in argv
     repository = os.environ.get("GITHUB_REPOSITORY", "sanskarIN/sanskarIN.github.io")
+    proposal = None
+    if not dry_run:
+        proposal = Proposal(
+            "automation/github-data",
+            "Refresh website GitHub projects data",
+            "Updates the Projects page snapshot from public GitHub information. "
+            "Review the generated JSON, then merge to publish through GitHub Pages.",
+        )
+        # Checkout the proposal branch before examining the previous snapshot.
+        proposal.prepare()
     settings = load_settings()
     gh = GitHub(os.environ.get("GITHUB_TOKEN", ""))
     data = build(gh, settings)
@@ -477,8 +488,9 @@ def main(argv):
 
     OUTPUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Saved {OUTPUT.relative_to(ROOT)}.")
-    if not dry_run and commit_and_push(os.environ.get("BRANCH", "main")):
-        gh.request_pages_build(repository)
+    if proposal is not None:
+        git("add", "--", str(OUTPUT.relative_to(ROOT)))
+        proposal.propose("Update GitHub data for the Projects page")
     return 0
 
 
