@@ -24,7 +24,7 @@ switch-over or removal of Ruby happens in this milestone.
 | Other visual rules | `_includes/css/*.css` | `assets/css/main.css` | Python-assembled CSS; remaining CSS source |
 | Interactive behavior | `src/ts/*.ts` | `assets/js/*.js` | TypeScript compiled with `tsc` |
 | Blog source and publication | `_posts/*.md`, `.github/scripts/post_markdown.py`, `.github/scripts/publish_post.py` | Markdown articles and rendered HTML | All existing posts converted; new posts written as Markdown by Python |\n| GitHub sync/account setup | `.github/scripts/*.py` | PRs, config | Python automation |
-| Terminal JSON public feed | `.github/scripts/terminal_data.py`, `terminal.json` | Python-generated static JSON | **Production**, rebuilt for blog and GitHub updates |\n| Browser search JSON | `.github/scripts/search_index.py`, `search.json` | Jekyll endpoint; Python metadata model | Dual-rendering checks; migration pending |\n| Story-page build checks | `.github/scripts/check_kahani.py` | CI assertions | Python |
+| Terminal JSON public feed | `.github/scripts/terminal_data.py`, `terminal.json` | Python-generated static JSON | **Production**, rebuilt for blog and GitHub updates |\n| Browser search JSON | `.github/scripts/search_index.py`, `search.json` | Python-generated static JSON | **Production**, rebuilt for blog and GitHub updates |\n| Story-page build checks | `.github/scripts/check_kahani.py` | CI assertions | Python |
 | Site layouts, SEO, sitemap, feeds and search/terminal JSON | `_layouts/`, `_includes/`, front matter / Liquid | Jekyll-built static site | **Not yet migrated** |
 | Supabase Edge Function | `supabase/functions/blog/index.ts` | Supabase backend | TypeScript, keep |
 | GitHub workflows | `.github/workflows/*.yml` | CI and deployment | YAML config required by GitHub |
@@ -42,9 +42,12 @@ switch-over or removal of Ruby happens in this milestone.
    static feed, preserve the public URL and TypeScript consumer, and have both
    the blog publisher and repository-data updater regenerate it automatically.
    Verify committed-source freshness, JSON schema, and Jekyll static copying.
-5. **Next:** Move `search.json`, sitemap and feeds into
-   Python generators. Verify exact shapes and links against the current
-   Jekyll output. Do not break existing TypeScript consumers.
+5. **Complete:** Replace `search.json` Liquid with a Python-generated
+   static index. Preserve the browser URL, result schemas and searchable
+   page/post/project links; regenerate it in both blog and GitHub-data
+   automation and validate output freshness and Jekyll static copying.
+   Post excerpts now come from Python's Markdown text extraction rather
+   than Jekyll's renderer, so minor wording differences are expected.
 6. **Next:** Replace shared layouts and page templates incrementally with
    Python-driven static HTML, including navigation, SEO, CSP, author metadata,
    accessibility and language variants. Keep Jekyll as an oracle in dual
