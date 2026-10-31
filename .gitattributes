@@ -1,0 +1,6 @@
+# These outputs are generated reproducibly from Python / TypeScript sources.
+# Keep only actual generated files here; hand-authored templates are not generated.
+_includes/generated/*.html linguist-generated
+_includes/generated/*.css linguist-generated
+assets/css/main.css linguist-generated
+assets/js/*.js linguist-generated
