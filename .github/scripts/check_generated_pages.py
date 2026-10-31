@@ -71,10 +71,12 @@ def check(output):
             raise AssertionError(f"About page link missing: {url}")
     if "GitHub" not in about_body:
         raise AssertionError("About page dynamic GitHub content did not render")
-    if len(details["principles"]) != 6:
-        # Do not let the verification assume an exact number of principles.
-        print(f"Verifying {len(details['principles'])} principles")
-    print(f"Verified {len(expected)} About sections, identity links, and Developer headings.")
+    developer_body = " ".join(d.text)
+    for principle in details["principles"]:
+        if principle["title"] not in developer_body:
+            raise AssertionError(f"Missing Developer principle: {principle['title']}")
+    print(f"Verified {len(expected)} About sections, identity links, "
+          f"and {len(details['principles'])} Developer principles.")
 
 
 def main(argv):
