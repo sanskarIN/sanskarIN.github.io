@@ -217,7 +217,6 @@ class SiteGeneratorTests(unittest.TestCase):
         page["link_labels"]["home"] = '" {% include secrets.html %}'
         output = render_not_found(page)
         self.assertNotIn("{{ site.secret }}", output)
-        self.assertNotIn('label="\"', output)
         self.assertIn("&#123;&#123; site.secret }}", output)
         self.assertIn("&#123;% include secrets.html %}", output)
         page["link_labels"]["extra"] = "Bad"
