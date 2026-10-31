@@ -39,6 +39,7 @@ OUTPUTS = {
     "not_found": ROOT / "_includes" / "generated" / "not-found-page.html",
     "stylesheet": ROOT / "assets" / "css" / "main.css",
     "terminal": ROOT / "terminal.json",
+    "search": ROOT / "search.json",
 }
 TOKEN_NAME = re.compile(r"[a-z][a-z0-9-]*\Z")
 UNSAFE_CSS = re.compile(r"[;{}<>@\x00-\x1f]|/\*|\*/|url\s*\(", re.I)
