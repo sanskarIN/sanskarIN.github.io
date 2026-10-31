@@ -489,11 +489,14 @@ def main(argv):
     OUTPUT.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     # Keep the terminal project totals and featured repositories in sync.
     from terminal_data import write_terminal_json
+    from search_index import write_search_json
     write_terminal_json(ROOT)
+    write_search_json(ROOT)
     print(f"Saved {OUTPUT.relative_to(ROOT)}.")
     if proposal is not None:
         git("add", "--", str(OUTPUT.relative_to(ROOT)))
         git("add", "--", "terminal.json")
+        git("add", "--", "search.json")
         proposal.propose("Update GitHub data for the Projects page")
     return 0
 

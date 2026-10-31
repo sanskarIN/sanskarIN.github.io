@@ -8,6 +8,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import call, patch
 import terminal_data
+import search_index
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import update_github_data as updater
@@ -34,6 +35,9 @@ class UpdateEntryPointTests(unittest.TestCase):
         self.output.parent.mkdir()
         self.output.write_text(json.dumps(snapshot(0)), encoding="utf-8")
         terminal_patch = patch.object(terminal_data, "write_terminal_json")
+        search_patch = patch.object(search_index, "write_search_json")
+        self.search_writer = search_patch.start()
+        self.addCleanup(search_patch.stop)
         self.terminal_writer = terminal_patch.start()
         self.addCleanup(terminal_patch.stop)
         patches = [
@@ -58,9 +62,11 @@ class UpdateEntryPointTests(unittest.TestCase):
         self.assertEqual(args[0], "automation/github-data")
         updater.Proposal.return_value.prepare.assert_called_once()
         updater.git.assert_has_calls([call("add", "--", "_data/github.json"),
-                                      call("add", "--", "terminal.json")])
-        self.assertEqual(updater.git.call_count, 2)
+                                      call("add", "--", "terminal.json"),
+                                      call("add", "--", "search.json")])
+        self.assertEqual(updater.git.call_count, 3)
         self.terminal_writer.assert_called_once_with(self.root)
+        self.search_writer.assert_called_once_with(self.root)
         updater.Proposal.return_value.propose.assert_called_once_with(
             "Update GitHub data for the Projects page")
         self.assertEqual(json.loads(self.output.read_text())["totals"]["repositories"], 1)
@@ -70,6 +76,7 @@ class UpdateEntryPointTests(unittest.TestCase):
         updater.Proposal.assert_not_called()
         updater.git.assert_not_called()
         self.terminal_writer.assert_called_once_with(self.root)
+        self.search_writer.assert_called_once_with(self.root)
 
     def test_unchanged_snapshot_does_not_propose_commit(self):
         self.output.write_text(json.dumps(snapshot(1)), encoding="utf-8")
@@ -78,6 +85,7 @@ class UpdateEntryPointTests(unittest.TestCase):
         updater.Proposal.return_value.propose.assert_not_called()
         updater.git.assert_not_called()
         self.terminal_writer.assert_not_called()
+        self.search_writer.assert_not_called()
 
 
 if __name__ == "__main__":
