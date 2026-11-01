@@ -192,43 +192,36 @@
     }
   ],
   "projects": {
-    "total": 69,
-    "stars": 27,
+    "total": 68,
+    "stars": 30,
     "featured": [
-      {
-        "name": "scarp-lang",
-        "url": "https://github.com/sanskarIN/scarp-lang",
-        "description": "A next-generation programming language for software, systems, and intelligent computing.",
-        "language": "Rust",
-        "stars": 1
-      },
       {
         "name": "frametrellis",
         "url": "https://github.com/sanskarIN/frametrellis",
         "description": "Open-source video editor.",
         "language": "C++",
-        "stars": 3
+        "stars": 4
       },
       {
         "name": "RepoDNA",
         "url": "https://github.com/sanskarIN/RepoDNA",
         "description": "Understand any GitHub repository before you clone it.",
         "language": "Rust",
-        "stars": 7
+        "stars": 8
       },
       {
         "name": "latebrake",
         "url": "https://github.com/sanskarIN/latebrake",
         "description": "Latebrake — Race Beyond Limits.",
         "language": "C++",
-        "stars": 1
+        "stars": 2
       },
       {
         "name": "LineLoom",
         "url": "https://github.com/sanskarIN/LineLoom",
         "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
         "language": "TypeScript",
-        "stars": 2
+        "stars": 3
       }
     ]
   },
