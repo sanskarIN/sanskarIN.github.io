@@ -85,6 +85,20 @@
   },
   {
     "type": "Post",
+    "title": "why-im-building-scarp-programming-language",
+    "url": "/blog/why-im-building-scarp-programming-language/",
+    "date": "1 Nov 2026",
+    "tags": [
+      "scarp",
+      "programming-language",
+      "open-source",
+      "compiler-development",
+      "ai-development"
+    ],
+    "text": "Discover why I'm building Scarp, a new open-source programming language, and explore its vision for modern software development, AI, compiler design, and developer tooling. Why I'm Building Scarp: A New Programming Language from Scratch November 1, 2026 • Programming Languages • Open Source Building a programming language isn't just about inventing new syntax. It's about rethinking how developers write, understand, and build software. Today, I want to share something I've started working on: Scarp , a new open-source programming language. Scarp is still in its early stages, but the vision behind it is ambitious. I want to explore what a programming language could look"
+  },
+  {
+    "type": "Post",
     "title": "RepoDNA v1.4.5 Released — Evidence Intelligence and Reliability Improvements",
     "url": "/blog/repodna-v1-4-5-release/",
     "date": "30 Oct 2026",
