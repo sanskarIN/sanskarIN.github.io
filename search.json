@@ -714,13 +714,6 @@
   },
   {
     "type": "Project",
-    "title": "latebrake",
-    "url": "https://github.com/sanskarIN/latebrake",
-    "tags": [],
-    "text": "Latebrake — Race Beyond Limits. C++"
-  },
-  {
-    "type": "Project",
     "title": "LineLoom",
     "url": "https://github.com/sanskarIN/LineLoom",
     "tags": [],
@@ -728,17 +721,17 @@
   },
   {
     "type": "Project",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
+    "tags": [],
+    "text": "Latebrake — Race Beyond Limits. C++"
+  },
+  {
+    "type": "Project",
     "title": "KathaSvara",
     "url": "https://github.com/sanskarIN/KathaSvara",
     "tags": [],
     "text": "Give Every Story a Voice. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
   },
   {
     "type": "Project",
@@ -756,10 +749,10 @@
   },
   {
     "type": "Project",
-    "title": "scarp-lang",
-    "url": "https://github.com/sanskarIN/scarp-lang",
+    "title": "CueVersa",
+    "url": "https://github.com/sanskarIN/CueVersa",
     "tags": [],
-    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
+    "text": "Dart"
   },
   {
     "type": "Project",
@@ -767,6 +760,20 @@
     "url": "https://github.com/sanskarIN/Sanskar-PDF-Editor",
     "tags": [],
     "text": "An ultimate, enterprise-grade, offline-first PDF Editor featuring 70+ advanced tools. Built with React, Tauri v2, and Rust for lightning-fast, secure performance across Windows, Android, and Web. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "chronoage",
+    "url": "https://github.com/sanskarIN/chronoage",
+    "tags": [],
+    "text": "TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
   },
   {
     "type": "Project",
@@ -830,13 +837,6 @@
     "url": "https://github.com/sanskarIN/libracore",
     "tags": [],
     "text": "LibraCore, a production-quality Library Management System project that is much more complete than a classroom demo. Java"
-  },
-  {
-    "type": "Project",
-    "title": "chronoage",
-    "url": "https://github.com/sanskarIN/chronoage",
-    "tags": [],
-    "text": "TypeScript"
   },
   {
     "type": "Project",
@@ -1099,13 +1099,6 @@
       "spelling"
     ],
     "text": "A modern, open-source, offline-first spell checker and writing assistant for Android, Windows, Linux, iOS, and macOS, featuring spelling, grammar, punctuation, style suggestions, personal dictionaries, document analysis, and privacy-focused cross-platform support. Made by… Dart"
-  },
-  {
-    "type": "Project",
-    "title": "CueVersa",
-    "url": "https://github.com/sanskarIN/CueVersa",
-    "tags": [],
-    "text": "Dart"
   },
   {
     "type": "Project",

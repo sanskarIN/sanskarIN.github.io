@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-10-31T14:09:54Z",
+  "generated_at": "2026-11-01T11:21:22Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
   },
   "totals": {
-    "repositories": 69,
-    "stars": 27,
+    "repositories": 68,
+    "stars": 30,
     "forks": 2,
     "languages": 27
   },
@@ -14,27 +14,27 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 13.8
+      "percent": 13.9
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 12.7
+      "percent": 12.9
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 12.3
-    },
-    {
-      "name": "Rust",
-      "color": "#dea584",
-      "percent": 11.8
+      "percent": 12.4
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 11.8
+      "percent": 11.9
+    },
+    {
+      "name": "Rust",
+      "color": "#dea584",
+      "percent": 10.8
     },
     {
       "name": "Python",
@@ -44,12 +44,11 @@
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 27.5,
+      "percent": 28.1,
       "other": true
     }
   ],
   "featured": [
-    "scarp-lang",
     "frametrellis",
     "RepoDNA",
     "latebrake",
@@ -63,7 +62,7 @@
       "homepage": "https://sanskarin.github.io/frametrellis/",
       "language": "C++",
       "language_color": "#f34b7d",
-      "stars": 3,
+      "stars": 4,
       "forks": 0,
       "topics": [
         "cmake",
@@ -77,23 +76,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-11",
-      "pushed": "2026-10-31"
-    },
-    {
-      "name": "latebrake",
-      "url": "https://github.com/sanskarIN/latebrake",
-      "description": "Latebrake — Race Beyond Limits.",
-      "homepage": "https://sanskarin.github.io/latebrake/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "BSD-3-Clause",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-10-31"
+      "pushed": "2026-11-01"
     },
     {
       "name": "LineLoom",
@@ -102,14 +85,30 @@
       "homepage": "https://sanskarin.github.io/LineLoom/",
       "language": "TypeScript",
       "language_color": "#3178c6",
-      "stars": 2,
+      "stars": 3,
       "forks": 0,
       "topics": [],
       "license": "MIT",
       "fork": false,
       "archived": false,
       "created": "2026-10-17",
-      "pushed": "2026-10-31"
+      "pushed": "2026-11-01"
+    },
+    {
+      "name": "latebrake",
+      "url": "https://github.com/sanskarIN/latebrake",
+      "description": "Latebrake — Race Beyond Limits.",
+      "homepage": "https://sanskarin.github.io/latebrake/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 2,
+      "forks": 0,
+      "topics": [],
+      "license": "BSD-3-Clause",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-01"
     },
     {
       "name": "KathaSvara",
@@ -125,6 +124,77 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
+      "pushed": "2026-11-01"
+    },
+    {
+      "name": "RepoDNA",
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 8,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-11-01"
+    },
+    {
+      "name": "CueVersa",
+      "url": "https://github.com/sanskarIN/CueVersa",
+      "description": "",
+      "homepage": null,
+      "language": "Dart",
+      "language_color": "#00B4AB",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-14",
+      "pushed": "2026-11-01"
+    },
+    {
+      "name": "Sanskar-PDF-Editor",
+      "url": "https://github.com/sanskarIN/Sanskar-PDF-Editor",
+      "description": "An ultimate, enterprise-grade, offline-first PDF Editor featuring 70+ advanced tools. Built with React, Tauri v2, and Rust for lightning-fast, secure performance across Windows, Android, and Web.",
+      "homepage": null,
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-07-09",
+      "pushed": "2026-11-01"
+    },
+    {
+      "name": "chronoage",
+      "url": "https://github.com/sanskarIN/chronoage",
+      "description": "",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
       "pushed": "2026-10-31"
     },
     {
@@ -141,61 +211,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-26",
-      "pushed": "2026-10-31"
-    },
-    {
-      "name": "RepoDNA",
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 7,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
-      "pushed": "2026-10-31"
-    },
-    {
-      "name": "scarp-lang",
-      "url": "https://github.com/sanskarIN/scarp-lang",
-      "description": "A next-generation programming language for software, systems, and intelligent computing.",
-      "homepage": null,
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-25",
-      "pushed": "2026-10-31"
-    },
-    {
-      "name": "Sanskar-PDF-Editor",
-      "url": "https://github.com/sanskarIN/Sanskar-PDF-Editor",
-      "description": "An ultimate, enterprise-grade, offline-first PDF Editor featuring 70+ advanced tools. Built with React, Tauri v2, and Rust for lightning-fast, secure performance across Windows, Android, and Web.",
-      "homepage": null,
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-07-09",
       "pushed": "2026-10-31"
     },
     {
@@ -324,22 +339,6 @@
       "homepage": null,
       "language": "Java",
       "language_color": "#b07219",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-10-26"
-    },
-    {
-      "name": "chronoage",
-      "url": "https://github.com/sanskarIN/chronoage",
-      "description": "",
-      "homepage": null,
-      "language": "TypeScript",
-      "language_color": "#3178c6",
       "stars": 0,
       "forks": 0,
       "topics": [],
@@ -873,22 +872,6 @@
       "pushed": "2026-10-09"
     },
     {
-      "name": "CueVersa",
-      "url": "https://github.com/sanskarIN/CueVersa",
-      "description": "",
-      "homepage": null,
-      "language": "Dart",
-      "language_color": "#00B4AB",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-14",
-      "pushed": "2026-10-09"
-    },
-    {
       "name": "MeTodo",
       "url": "https://github.com/sanskarIN/MeTodo",
       "description": "**MeTodo** is a highly advanced, ultra-customizable, cross-platform task management application designed for Windows, Linux, and Android. Built with a heavy emphasis on premium UI/UX, MeTodo goes beyond a simple to-do list by offering unprecedented personalization and…",
@@ -1277,19 +1260,12 @@
     }
   ],
   "activity": {
-    "total": 33617,
-    "start": "2025-10-26",
-    "end": "2026-10-31",
+    "total": 34134,
+    "start": "2025-11-02",
+    "end": "2026-11-01",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
       0,
       0,
       0,
@@ -1580,12 +1556,12 @@
       790,
       1767,
       2707,
-      7058,
+      7067,
       1280,
       416,
       164,
       612,
-      1466,
+      1491,
       201,
       119,
       31,
@@ -1641,19 +1617,20 @@
       85,
       318,
       402,
-      508,
-      873,
+      580,
+      884,
       347,
-      443,
-      1006,
-      261,
-      506,
+      469,
+      1065,
+      264,
+      524,
       124,
       236,
       58,
       68,
-      472,
-      385
+      481,
+      458,
+      212
     ],
     "levels": [
       0,
@@ -1789,13 +1766,6 @@
       0,
       0,
       0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
       1,
       0,
       0,
@@ -2015,7 +1985,7 @@
       1,
       1,
       2,
-      2,
+      3,
       1,
       2,
       3,
@@ -2025,64 +1995,69 @@
       1,
       1,
       1,
+      2,
       2,
       1
     ],
     "months": [
       {
-        "week": 1,
+        "week": 0,
         "label": "Nov"
       },
       {
-        "week": 6,
+        "week": 5,
         "label": "Dec"
       },
       {
-        "week": 10,
+        "week": 9,
         "label": "Jan"
       },
       {
-        "week": 14,
+        "week": 13,
         "label": "Feb"
       },
       {
-        "week": 18,
+        "week": 17,
         "label": "Mar"
       },
       {
-        "week": 23,
+        "week": 22,
         "label": "Apr"
       },
       {
-        "week": 27,
+        "week": 26,
         "label": "May"
       },
       {
-        "week": 32,
+        "week": 31,
         "label": "Jun"
       },
       {
-        "week": 36,
+        "week": 35,
         "label": "Jul"
       },
       {
-        "week": 40,
+        "week": 39,
         "label": "Aug"
       },
       {
-        "week": 45,
+        "week": 44,
         "label": "Sep"
       },
       {
-        "week": 49,
+        "week": 48,
         "label": "Oct"
+      },
+      {
+        "week": 52,
+        "label": "Nov"
       }
     ],
-    "active_days": 122,
-    "longest_streak": 45,
+    "active_days": 123,
+    "longest_streak": 46,
     "busiest": {
       "date": "2026-08-19",
-      "count": 7058
+      "count": 7067
     }
   }
 }
