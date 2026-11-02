@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T11:21:22Z",
+  "generated_at": "2026-11-02T12:35:57Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -14,37 +14,37 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 13.9
+      "percent": 13.8
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 12.9
+      "percent": 12.8
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 12.4
+      "percent": 12.3
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 11.9
+      "percent": 11.7
     },
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 10.8
+      "percent": 10.7
     },
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 10.0
+      "percent": 10.3
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 28.1,
+      "percent": 28.4,
       "other": true
     }
   ],
@@ -55,6 +55,22 @@
     "LineLoom"
   ],
   "repositories": [
+    {
+      "name": "latebrake",
+      "url": "https://github.com/sanskarIN/latebrake",
+      "description": "Latebrake — Race Beyond Limits.",
+      "homepage": "https://sanskarin.github.io/latebrake/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 2,
+      "forks": 0,
+      "topics": [],
+      "license": "BSD-3-Clause",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-02"
+    },
     {
       "name": "frametrellis",
       "url": "https://github.com/sanskarIN/frametrellis",
@@ -76,7 +92,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-11",
-      "pushed": "2026-11-01"
+      "pushed": "2026-11-02"
     },
     {
       "name": "LineLoom",
@@ -92,23 +108,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-17",
-      "pushed": "2026-11-01"
-    },
-    {
-      "name": "latebrake",
-      "url": "https://github.com/sanskarIN/latebrake",
-      "description": "Latebrake — Race Beyond Limits.",
-      "homepage": "https://sanskarin.github.io/latebrake/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 2,
-      "forks": 0,
-      "topics": [],
-      "license": "BSD-3-Clause",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-01"
+      "pushed": "2026-11-02"
     },
     {
       "name": "KathaSvara",
@@ -124,6 +124,105 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
+      "pushed": "2026-11-02"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-11-02"
+    },
+    {
+      "name": "2048",
+      "url": "https://github.com/sanskarIN/2048",
+      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
+      "homepage": null,
+      "language": "Dart",
+      "language_color": "#00B4AB",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "2040",
+        "2048",
+        "2048-clone",
+        "2048-game",
+        "2048-game-online",
+        "2048-redesigned"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-14",
+      "pushed": "2026-11-02"
+    },
+    {
+      "name": "stockpilot",
+      "url": "https://github.com/sanskarIN/stockpilot",
+      "description": "StockPilot, a production-quality Inventory Management System project that is much more complete than a classroom demo.",
+      "homepage": null,
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "go",
+        "golang",
+        "stcokpilot",
+        "typescript"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-21",
+      "pushed": "2026-11-01"
+    },
+    {
+      "name": "foliolane",
+      "url": "https://github.com/sanskarIN/foliolane",
+      "description": "A modern, reliable, local-first document-merging application for very large multi-part books and document series.",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "docmerge",
+        "pdf-merge",
+        "pdf-merger",
+        "pdf-merger-python",
+        "pdf-merger-tool",
+        "pdf-merger-windows-desktop"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-16",
+      "pushed": "2026-11-01"
+    },
+    {
+      "name": "The-Journey-of-Ethical-Hacking",
+      "url": "https://github.com/sanskarIN/The-Journey-of-Ethical-Hacking",
+      "description": "Defensive, authorization-first cybersecurity learning resources for The Journey of Ethical Hacking - 2026 Edition, with safe offline labs, synthetic datasets, checklists, templates and companion projects.",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-18",
       "pushed": "2026-11-01"
     },
     {
@@ -195,22 +294,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-10-31"
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
       "pushed": "2026-10-31"
     },
     {
@@ -347,52 +430,6 @@
       "archived": false,
       "created": "2026-08-19",
       "pushed": "2026-10-26"
-    },
-    {
-      "name": "2048",
-      "url": "https://github.com/sanskarIN/2048",
-      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
-      "homepage": null,
-      "language": "Dart",
-      "language_color": "#00B4AB",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "2040",
-        "2048",
-        "2048-clone",
-        "2048-game",
-        "2048-game-online",
-        "2048-redesigned"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-14",
-      "pushed": "2026-10-26"
-    },
-    {
-      "name": "foliolane",
-      "url": "https://github.com/sanskarIN/foliolane",
-      "description": "A modern, reliable, local-first document-merging application for very large multi-part books and document series.",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "docmerge",
-        "pdf-merge",
-        "pdf-merger",
-        "pdf-merger-python",
-        "pdf-merger-tool",
-        "pdf-merger-windows-desktop"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-16",
-      "pushed": "2026-10-25"
     },
     {
       "name": "Finora",
@@ -828,27 +865,6 @@
       "pushed": "2026-10-13"
     },
     {
-      "name": "stockpilot",
-      "url": "https://github.com/sanskarIN/stockpilot",
-      "description": "StockPilot, a production-quality Inventory Management System project that is much more complete than a classroom demo.",
-      "homepage": null,
-      "language": "Go",
-      "language_color": "#00ADD8",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "go",
-        "golang",
-        "stcokpilot",
-        "typescript"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-21",
-      "pushed": "2026-10-11"
-    },
-    {
       "name": "SpellChecker",
       "url": "https://github.com/sanskarIN/SpellChecker",
       "description": "A modern, open-source, offline-first spell checker and writing assistant for Android, Windows, Linux, iOS, and macOS, featuring spelling, grammar, punctuation, style suggestions, personal dictionaries, document analysis, and privacy-focused cross-platform support. Made by…",
@@ -1114,22 +1130,6 @@
       "pushed": "2026-08-24"
     },
     {
-      "name": "The-Journey-of-Ethical-Hacking",
-      "url": "https://github.com/sanskarIN/The-Journey-of-Ethical-Hacking",
-      "description": "Defensive, authorization-first cybersecurity learning resources for The Journey of Ethical Hacking - 2026 Edition, with safe offline labs, synthetic datasets, checklists, templates and companion projects.",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-18",
-      "pushed": "2026-08-19"
-    },
-    {
       "name": "dart-flutter-master",
       "url": "https://github.com/sanskarIN/dart-flutter-master",
       "description": "Companion source code, exercises, solutions, master projects, examples, and update notes for Dart & Flutter Full Mastery — the complete 120-part learning series by Ram Sandesh.",
@@ -1260,9 +1260,9 @@
     }
   ],
   "activity": {
-    "total": 34134,
+    "total": 34924,
     "start": "2025-11-02",
-    "end": "2026-11-01",
+    "end": "2026-11-02",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1630,7 +1630,8 @@
       68,
       481,
       458,
-      212
+      344,
+      658
     ],
     "levels": [
       0,
@@ -1997,7 +1998,8 @@
       1,
       2,
       2,
-      1
+      1,
+      2
     ],
     "months": [
       {
@@ -2053,8 +2055,8 @@
         "label": "Nov"
       }
     ],
-    "active_days": 123,
-    "longest_streak": 46,
+    "active_days": 124,
+    "longest_streak": 47,
     "busiest": {
       "date": "2026-08-19",
       "count": 7067
