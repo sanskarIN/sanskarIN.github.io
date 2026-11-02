@@ -227,6 +227,11 @@
   },
   "posts": [
     {
+      "title": "frametrellis-v1-4-0-release",
+      "url": "/blog/frametrellis-v1-4-0-release/",
+      "date": "2 Nov 2026"
+    },
+    {
       "title": "why-im-building-scarp-programming-language",
       "url": "/blog/why-im-building-scarp-programming-language/",
       "date": "1 Nov 2026"
@@ -245,11 +250,6 @@
       "title": "repodna-v1-4-3-release",
       "url": "/blog/repodna-v1-4-3-release/",
       "date": "23 Oct 2026"
-    },
-    {
-      "title": "langsteps-v1-2-0-release",
-      "url": "/blog/langsteps-v1-2-0-release/",
-      "date": "22 Oct 2026"
     }
   ],
   "links": {
