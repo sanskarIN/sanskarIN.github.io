@@ -714,6 +714,13 @@
   },
   {
     "type": "Project",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
+    "tags": [],
+    "text": "Latebrake — Race Beyond Limits. C++"
+  },
+  {
+    "type": "Project",
     "title": "frametrellis",
     "url": "https://github.com/sanskarIN/frametrellis",
     "tags": [
@@ -735,17 +742,64 @@
   },
   {
     "type": "Project",
-    "title": "latebrake",
-    "url": "https://github.com/sanskarIN/latebrake",
-    "tags": [],
-    "text": "Latebrake — Race Beyond Limits. C++"
-  },
-  {
-    "type": "Project",
     "title": "KathaSvara",
     "url": "https://github.com/sanskarIN/KathaSvara",
     "tags": [],
     "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "2048",
+    "url": "https://github.com/sanskarIN/2048",
+    "tags": [
+      "2040",
+      "2048",
+      "2048-clone",
+      "2048-game",
+      "2048-game-online",
+      "2048-redesigned"
+    ],
+    "text": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar. Dart"
+  },
+  {
+    "type": "Project",
+    "title": "stockpilot",
+    "url": "https://github.com/sanskarIN/stockpilot",
+    "tags": [
+      "go",
+      "golang",
+      "stcokpilot",
+      "typescript"
+    ],
+    "text": "StockPilot, a production-quality Inventory Management System project that is much more complete than a classroom demo. Go"
+  },
+  {
+    "type": "Project",
+    "title": "foliolane",
+    "url": "https://github.com/sanskarIN/foliolane",
+    "tags": [
+      "docmerge",
+      "pdf-merge",
+      "pdf-merger",
+      "pdf-merger-python",
+      "pdf-merger-tool",
+      "pdf-merger-windows-desktop"
+    ],
+    "text": "A modern, reliable, local-first document-merging application for very large multi-part books and document series. Python"
+  },
+  {
+    "type": "Project",
+    "title": "The-Journey-of-Ethical-Hacking",
+    "url": "https://github.com/sanskarIN/The-Journey-of-Ethical-Hacking",
+    "tags": [],
+    "text": "Defensive, authorization-first cybersecurity learning resources for The Journey of Ethical Hacking - 2026 Edition, with safe offline labs, synthetic datasets, checklists, templates and companion projects. Python"
   },
   {
     "type": "Project",
@@ -781,13 +835,6 @@
     "url": "https://github.com/sanskarIN/chronoage",
     "tags": [],
     "text": "TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
   },
   {
     "type": "Project",
@@ -851,34 +898,6 @@
     "url": "https://github.com/sanskarIN/libracore",
     "tags": [],
     "text": "LibraCore, a production-quality Library Management System project that is much more complete than a classroom demo. Java"
-  },
-  {
-    "type": "Project",
-    "title": "2048",
-    "url": "https://github.com/sanskarIN/2048",
-    "tags": [
-      "2040",
-      "2048",
-      "2048-clone",
-      "2048-game",
-      "2048-game-online",
-      "2048-redesigned"
-    ],
-    "text": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar. Dart"
-  },
-  {
-    "type": "Project",
-    "title": "foliolane",
-    "url": "https://github.com/sanskarIN/foliolane",
-    "tags": [
-      "docmerge",
-      "pdf-merge",
-      "pdf-merger",
-      "pdf-merger-python",
-      "pdf-merger-tool",
-      "pdf-merger-windows-desktop"
-    ],
-    "text": "A modern, reliable, local-first document-merging application for very large multi-part books and document series. Python"
   },
   {
     "type": "Project",
@@ -1090,18 +1109,6 @@
   },
   {
     "type": "Project",
-    "title": "stockpilot",
-    "url": "https://github.com/sanskarIN/stockpilot",
-    "tags": [
-      "go",
-      "golang",
-      "stcokpilot",
-      "typescript"
-    ],
-    "text": "StockPilot, a production-quality Inventory Management System project that is much more complete than a classroom demo. Go"
-  },
-  {
-    "type": "Project",
     "title": "SpellChecker",
     "url": "https://github.com/sanskarIN/SpellChecker",
     "tags": [
@@ -1229,13 +1236,6 @@
     "url": "https://github.com/sanskarIN/CipherNest",
     "tags": [],
     "text": "C#"
-  },
-  {
-    "type": "Project",
-    "title": "The-Journey-of-Ethical-Hacking",
-    "url": "https://github.com/sanskarIN/The-Journey-of-Ethical-Hacking",
-    "tags": [],
-    "text": "Defensive, authorization-first cybersecurity learning resources for The Journey of Ethical Hacking - 2026 Edition, with safe offline labs, synthetic datasets, checklists, templates and companion projects. Python"
   },
   {
     "type": "Project",
