@@ -85,6 +85,20 @@
   },
   {
     "type": "Post",
+    "title": "frametrellis-v1-4-0-release",
+    "url": "/blog/frametrellis-v1-4-0-release/",
+    "date": "2 Nov 2026",
+    "tags": [
+      "frametrellis",
+      "open-source",
+      "video-editing",
+      "software-release",
+      "c++-development"
+    ],
+    "text": "FrameTrellis v1.4.0 is here! This stable release introduces advanced timeline editing, animated keyframes, subtitle support, 4K export presets, and improved reliability in a free, open-source video ed FrameTrellis v1.4.0 Released — Advanced Timeline Editing, Keyframes and Subtitles Published: November 2, 2026 Author: Sanskar Category: Open Source / Software Releases FrameTrellis v1.4.0 is now officially available as a stable release on GitHub. This version introduces a substantial collection of video editing improvements, making FrameTrellis more capable for creators who prefer a free, local-first desktop editor. What's New? Advanced Timeline Editing FrameTrellis now includes more flexible multi-track editing operations, precise clip navigation, slip and roll editing, track management, and"
+  },
+  {
+    "type": "Post",
     "title": "why-im-building-scarp-programming-language",
     "url": "/blog/why-im-building-scarp-programming-language/",
     "date": "1 Nov 2026",
