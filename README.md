@@ -34,6 +34,7 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 | `/about/` | `about.html` | About |
 | `/developer/` | `developer.html` | Developer profile |
 | `/contact/` | `contact.html` | Contact |
+| `/support/` | `support.html` | Redirects visitors to `/contact/` (not indexed) |
 | `/terms/` | `terms.md` | Terms and Conditions |
 | `/privacy/` | `privacy.md` | Privacy Policy |
 | `/cookies/` | `cookies.md` | Cookie Policy |
