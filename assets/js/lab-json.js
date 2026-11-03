@@ -29,12 +29,12 @@
     const process = (action) => {
         resetResult();
         const raw = input.value;
-        if (!raw.trim()) {
-            setStatus("Paste some JSON before running this action.", "info");
-            return;
-        }
         if (raw.length > maxInputLength) {
             setStatus("Input is too large. The limit is 1 MiB (1,048,576 characters).", "error");
+            return;
+        }
+        if (!raw.trim()) {
+            setStatus("Paste some JSON before running this action.", "info");
             return;
         }
         try {
