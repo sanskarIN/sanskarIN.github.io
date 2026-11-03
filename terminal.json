@@ -43,14 +43,14 @@
     {
       "key": "linkedin",
       "name": "LinkedIn",
-      "handle": "SanskarCodes",
-      "url": "https://linkedin.com/in/SanskarCodes"
+      "handle": "sanskarIN",
+      "url": "https://www.linkedin.com/in/sanskarIN/"
     },
     {
       "key": "devto",
       "name": "Dev.to",
-      "handle": "SanskarCodes",
-      "url": "https://dev.to/SanskarCodes"
+      "handle": "sanskarIN",
+      "url": "https://dev.to/sanskarIN"
     },
     {
       "key": "discord",
@@ -73,8 +73,8 @@
     {
       "key": "bluesky",
       "name": "Bluesky",
-      "handle": "@SanskarCodes.bsky.social",
-      "url": "https://bsky.app/profile/SanskarCodes.bsky.social"
+      "handle": "@sanskarIN.bsky.social",
+      "url": "https://bsky.app/profile/sanskarIN.bsky.social"
     },
     {
       "key": "youtube",

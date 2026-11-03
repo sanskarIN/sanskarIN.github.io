@@ -27,17 +27,17 @@ profiles:
 
   linkedin:
     name: LinkedIn
-    url: https://linkedin.com/in/SanskarCodes
-    handle: SanskarCodes
-    username: SanskarCodes
+    url: https://www.linkedin.com/in/sanskarIN/
+    handle: sanskarIN
+    username: sanskarIN
     icon: linkedin
     note: Professional profile
 
   devto:
     name: Dev.to
-    url: https://dev.to/SanskarCodes
-    handle: SanskarCodes
-    username: SanskarCodes
+    url: https://dev.to/sanskarIN
+    handle: sanskarIN
+    username: sanskarIN
     icon: devdotto
     note: Articles and developer discussion
 
@@ -68,9 +68,9 @@ profiles:
 
   bluesky:
     name: Bluesky
-    url: https://bsky.app/profile/SanskarCodes.bsky.social
-    handle: "@SanskarCodes.bsky.social"
-    username: SanskarCodes
+    url: https://bsky.app/profile/sanskarIN.bsky.social
+    handle: "@sanskarIN.bsky.social"
+    username: sanskarIN
     icon: bluesky
     note: Posts and updates
 
