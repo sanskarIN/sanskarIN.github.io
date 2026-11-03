@@ -17,6 +17,7 @@ on:
       - package.json
       - package-lock.json
       - .github/workflows/typescript.yml
+      - .github/scripts/tests/lab-json.test.cjs
   pull_request:
     paths:
       - src/ts/**
@@ -25,6 +26,7 @@ on:
       - package.json
       - package-lock.json
       - .github/workflows/typescript.yml
+      - .github/scripts/tests/lab-json.test.cjs
   workflow_dispatch:
 
 permissions:
@@ -42,6 +44,8 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Check the types
         run: npm run check
+      - name: Test Developer Lab browser logic
+        run: npm run test:lab
       - name: Check that assets/js/ matches src/ts/
         run: |
           npm run build

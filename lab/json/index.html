@@ -1,0 +1,50 @@
+---
+layout: page
+title: JSON Formatter & Validator
+heading: JSON Formatter & Validator
+eyebrow: Developer Lab · Data tools
+lead: Validate, pretty-print, and minify JSON locally in your browser.
+description: "Free online JSON formatter and validator. Inspect errors, pretty-print with custom indentation, minify JSON, and copy results privately in your browser."
+permalink: /lab/json/
+scripts: [lab-json]
+---
+<p class="lab-breadcrumb">{% include link.html url="/lab/" label="Developer Lab" class="text-link" arrow=true %}</p>
+<div class="lab-workspace" data-json-tool>
+  <div class="lab-toolbar" role="group" aria-label="JSON actions">
+    <button class="button button--primary" type="button" data-json-format>Format</button>
+    <button class="button button--secondary" type="button" data-json-validate>Validate</button>
+    <button class="button button--secondary" type="button" data-json-minify>Minify</button>
+    <label class="lab-indent-label" for="json-indent">Indentation
+      <select id="json-indent" class="form-field__input lab-indent" data-json-indent>
+        <option value="2">2 spaces</option>
+        <option value="4">4 spaces</option>
+        <option value="tab">Tab</option>
+      </select>
+    </label>
+    <button class="button button--ghost" type="button" data-json-sample>Load example</button>
+    <button class="button button--ghost" type="button" data-json-clear>Clear</button>
+  </div>
+
+  <p class="lab-status" data-json-status role="status" aria-live="polite" aria-atomic="true">Paste JSON and select an action to begin.</p>
+  <div class="lab-tool-grid">
+    <div class="lab-tool-panel">
+      <label for="json-input" class="form-field__label">Input JSON</label>
+      <textarea id="json-input" class="lab-editor" data-json-input rows="18" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder='{"message":"Hello, world!"}' aria-describedby="json-input-help"></textarea>
+      <p class="form-field__hint" id="json-input-help">Maximum input size: 1 MiB. Nothing is uploaded or saved.</p>
+    </div>
+    <div class="lab-tool-panel">
+      <div class="lab-tool-panel__header">
+        <label for="json-output" class="form-field__label">Result</label>
+        <button class="copy-button" type="button" data-json-copy disabled>Copy result</button>
+      </div>
+      <textarea id="json-output" class="lab-editor" data-json-output rows="18" spellcheck="false" readonly placeholder="Your formatted JSON appears here."></textarea>
+      <p class="form-field__hint">Formatting preserves JSON values, but may normalize whitespace and number representations.</p>
+    </div>
+  </div>
+  <noscript><p class="lab-status">Enable JavaScript to use this tool. No external services are required.</p></noscript>
+</div>
+<section class="page-section lab-explainer">
+  <h2>How this tool works</h2>
+  <p>It uses the browser's built-in JSON parser. Formatting and minification only happen after successful validation. The original input remains intact when parsing fails.</p>
+  <p>For sensitive content, double-check that you are using the intended site. All processing happens on this page; the tool does not send your text to a server.</p>
+</section>

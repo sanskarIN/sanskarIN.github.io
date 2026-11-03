@@ -49,6 +49,12 @@
   },
   {
     "type": "Page",
+    "title": "Developer Lab",
+    "url": "/lab/",
+    "text": "Explore Sanskar's Developer Lab: free, privacy-conscious, browser-based utilities for developers."
+  },
+  {
+    "type": "Page",
     "title": "Developer profile",
     "url": "/developer/",
     "text": "Sanskar's developer profile: development focus, languages and technologies, engineering interests, platforms, tools, open source, community, and development philosophy."
@@ -58,6 +64,12 @@
     "title": "Home",
     "url": "/",
     "text": "Sanskar (sanskarIN) builds software, developer tools, and digital products in the open, with interests in open source, Android, web, games, and AI/ML."
+  },
+  {
+    "type": "Page",
+    "title": "JSON Formatter & Validator",
+    "url": "/lab/json/",
+    "text": "Free online JSON formatter and validator. Inspect errors, pretty-print with custom indentation, minify JSON, and copy results privately in your browser."
   },
   {
     "type": "Page",

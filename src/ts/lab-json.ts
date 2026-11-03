@@ -1,0 +1,118 @@
+// Client-only JSON tools: no network requests or persistence.
+(() => {
+  const root = document.querySelector<HTMLElement>("[data-json-tool]");
+  if (!root) return;
+
+  const input = root.querySelector<HTMLTextAreaElement>("[data-json-input]");
+  const output = root.querySelector<HTMLTextAreaElement>("[data-json-output]");
+  const status = root.querySelector<HTMLElement>("[data-json-status]");
+  const indent = root.querySelector<HTMLSelectElement>("[data-json-indent]");
+  const formatButton = root.querySelector<HTMLButtonElement>("[data-json-format]");
+  const validateButton = root.querySelector<HTMLButtonElement>("[data-json-validate]");
+  const minifyButton = root.querySelector<HTMLButtonElement>("[data-json-minify]");
+  const copyButton = root.querySelector<HTMLButtonElement>("[data-json-copy]");
+  const sampleButton = root.querySelector<HTMLButtonElement>("[data-json-sample]");
+  const clearButton = root.querySelector<HTMLButtonElement>("[data-json-clear]");
+
+  if (!input || !output || !status || !indent || !formatButton ||
+      !validateButton || !minifyButton || !copyButton || !sampleButton || !clearButton) return;
+
+  const maxInputLength = 1024 * 1024;
+  const setStatus = (message: string, state: "info" | "success" | "error"): void => {
+    status.textContent = message;
+    status.dataset.state = state;
+  };
+
+  const resetResult = (): void => {
+    output.value = "";
+    copyButton.disabled = true;
+  };
+
+  const process = (action: "format" | "validate" | "minify"): void => {
+    resetResult();
+    const raw = input.value;
+    if (raw.length > maxInputLength) {
+      setStatus("Input is too large. The limit is 1 MiB (1,048,576 characters).", "error");
+      return;
+    }
+    if (!raw.trim()) {
+      setStatus("Paste some JSON before running this action.", "info");
+      return;
+    }
+
+    try {
+      const parsed: unknown = JSON.parse(raw);
+      if (action === "validate") {
+        setStatus("Valid JSON. No changes were made to your input.", "success");
+        return;
+      }
+
+      const spacing = action === "minify"
+        ? undefined
+        : indent.value === "tab" ? "\t" : indent.value === "4" ? 4 : 2;
+      const result = JSON.stringify(parsed, null, spacing);
+      if (typeof result !== "string") {
+        setStatus("This value could not be converted back to JSON.", "error");
+        return;
+      }
+      output.value = result;
+      copyButton.disabled = false;
+      setStatus(action === "minify" ? "Valid JSON — minified." : "Valid JSON — formatted.", "success");
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Parsing failed.";
+      setStatus(`Invalid JSON: ${message}`, "error");
+    }
+  };
+
+  formatButton.addEventListener("click", () => process("format"));
+  validateButton.addEventListener("click", () => process("validate"));
+  minifyButton.addEventListener("click", () => process("minify"));
+
+  input.addEventListener("input", () => {
+    resetResult();
+    setStatus("Input changed. Choose Format, Validate, or Minify.", "info");
+  });
+
+  sampleButton.addEventListener("click", () => {
+    input.value = JSON.stringify({
+      project: "Developer Lab",
+      active: true,
+      tools: ["format", "validate", "minify"],
+      metadata: { version: 1, license: null },
+    }, null, 2);
+    resetResult();
+    setStatus("Example loaded. Choose an action to try it.", "info");
+    input.focus();
+  });
+
+  clearButton.addEventListener("click", () => {
+    input.value = "";
+    resetResult();
+    setStatus("Cleared. Paste JSON to begin.", "info");
+    input.focus();
+  });
+
+  copyButton.addEventListener("click", () => {
+    if (!output.value) return;
+    if (!navigator.clipboard?.writeText) {
+      setStatus("Clipboard access is unavailable. Select and copy the result manually.", "error");
+      output.focus();
+      output.select();
+      return;
+    }
+    void navigator.clipboard.writeText(output.value)
+      .then(() => setStatus("Result copied to your clipboard.", "success"))
+      .catch(() => {
+        setStatus("Clipboard permission was denied. Select and copy the result manually.", "error");
+        output.focus();
+        output.select();
+      });
+  });
+
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault();
+      process("format");
+    }
+  });
+})();
