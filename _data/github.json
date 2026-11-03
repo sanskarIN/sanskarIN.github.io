@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T12:35:57Z",
+  "generated_at": "2026-11-03T12:01:41Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -24,7 +24,7 @@
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 12.3
+      "percent": 12.2
     },
     {
       "name": "Dart",
@@ -56,6 +56,38 @@
   ],
   "repositories": [
     {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-11-03"
+    },
+    {
+      "name": "LineLoom",
+      "url": "https://github.com/sanskarIN/LineLoom",
+      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
+      "homepage": "https://sanskarin.github.io/LineLoom/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 3,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
+      "pushed": "2026-11-03"
+    },
+    {
       "name": "latebrake",
       "url": "https://github.com/sanskarIN/latebrake",
       "description": "Latebrake — Race Beyond Limits.",
@@ -69,6 +101,38 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
+      "pushed": "2026-11-03"
+    },
+    {
+      "name": "BeatForge-Rhythm",
+      "url": "https://github.com/sanskarIN/BeatForge-Rhythm",
+      "description": "BeatForge is an open-source Android rhythm game and beat-map creator featuring offline play, custom charts, challenges, accessibility options, statistics, replay tools and community-ready extensibility.",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-27",
+      "pushed": "2026-11-03"
+    },
+    {
+      "name": "dicelab",
+      "url": "https://github.com/sanskarIN/dicelab",
+      "description": "",
+      "homepage": null,
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
       "pushed": "2026-11-02"
     },
     {
@@ -95,19 +159,42 @@
       "pushed": "2026-11-02"
     },
     {
-      "name": "LineLoom",
-      "url": "https://github.com/sanskarIN/LineLoom",
-      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
-      "homepage": "https://sanskarin.github.io/LineLoom/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 3,
+      "name": "healthmetric",
+      "url": "https://github.com/sanskarIN/healthmetric",
+      "description": "",
+      "homepage": null,
+      "language": "Kotlin",
+      "language_color": "#A97BFF",
+      "stars": 0,
       "forks": 0,
       "topics": [],
       "license": "MIT",
       "fork": false,
       "archived": false,
-      "created": "2026-10-17",
+      "created": "2026-08-19",
+      "pushed": "2026-11-02"
+    },
+    {
+      "name": "RepoDNA",
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 8,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
       "pushed": "2026-11-02"
     },
     {
@@ -124,22 +211,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
-      "pushed": "2026-11-02"
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
       "pushed": "2026-11-02"
     },
     {
@@ -223,29 +294,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-18",
-      "pushed": "2026-11-01"
-    },
-    {
-      "name": "RepoDNA",
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 8,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
       "pushed": "2026-11-01"
     },
     {
@@ -368,22 +416,6 @@
       "pushed": "2026-10-28"
     },
     {
-      "name": "healthmetric",
-      "url": "https://github.com/sanskarIN/healthmetric",
-      "description": "",
-      "homepage": null,
-      "language": "Kotlin",
-      "language_color": "#A97BFF",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-10-26"
-    },
-    {
       "name": "unknown-mystery-ai",
       "url": "https://github.com/sanskarIN/unknown-mystery-ai",
       "description": "Official companion repository for The Unknown Mystery of the AI by Ram Sandesh — AI code examples, projects, exercises, notebooks, reproducibility resources, and practical learning materials covering ML, Deep Learning, LLMs, RAG, Agents, MLOps, Responsible AI, deployment, and…",
@@ -489,22 +521,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-14",
-      "pushed": "2026-10-25"
-    },
-    {
-      "name": "dicelab",
-      "url": "https://github.com/sanskarIN/dicelab",
-      "description": "",
-      "homepage": null,
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
       "pushed": "2026-10-25"
     },
     {
@@ -632,22 +648,6 @@
       "archived": false,
       "created": "2026-08-21",
       "pushed": "2026-10-23"
-    },
-    {
-      "name": "BeatForge-Rhythm",
-      "url": "https://github.com/sanskarIN/BeatForge-Rhythm",
-      "description": "BeatForge is an open-source Android rhythm game and beat-map creator featuring offline play, custom charts, challenges, accessibility options, statistics, replay tools and community-ready extensibility.",
-      "homepage": null,
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-27",
-      "pushed": "2026-10-22"
     },
     {
       "name": "vaultora",
@@ -1260,9 +1260,9 @@
     }
   ],
   "activity": {
-    "total": 34924,
+    "total": 35280,
     "start": "2025-11-02",
-    "end": "2026-11-02",
+    "end": "2026-11-03",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1630,8 +1630,9 @@
       68,
       481,
       458,
-      344,
-      658
+      343,
+      836,
+      179
     ],
     "levels": [
       0,
@@ -1999,7 +2000,8 @@
       2,
       2,
       1,
-      2
+      2,
+      1
     ],
     "months": [
       {
@@ -2055,8 +2057,8 @@
         "label": "Nov"
       }
     ],
-    "active_days": 124,
-    "longest_streak": 47,
+    "active_days": 125,
+    "longest_streak": 48,
     "busiest": {
       "date": "2026-08-19",
       "count": 7067
