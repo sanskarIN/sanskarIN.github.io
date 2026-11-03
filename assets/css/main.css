@@ -4486,3 +4486,28 @@ kbd {
 .lab-diff-line--removed { background: var(--color-surface-muted); border-left: 3px solid var(--color-border-strong); }
 .lab-diff-line--same { border-left: 3px solid transparent; }
 @media print { .lab-toolbar, .lab-flags { display: none !important; } }
+
+/* URL and timestamp converters: fully responsive form and result rows */
+.lab-time-entry { flex: 1 1 16rem; }
+.lab-time-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 23rem), 1fr));
+  gap: var(--space-3);
+}
+.lab-time-result {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-2);
+  align-items: center;
+  padding: var(--space-4);
+  border: var(--border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+}
+.lab-time-result > .form-field__label { grid-column: 1 / -1; }
+.lab-time-result > .form-field__input { min-width: 0; font-family: var(--font-mono); }
+.lab-time-result > .copy-button { min-height: 2.875rem; }
+@media (max-width: 35.99em) {
+  .lab-time-result { grid-template-columns: minmax(0, 1fr); }
+  .lab-time-result > .copy-button { justify-self: start; }
+}

@@ -19,6 +19,7 @@ on:
       - .github/workflows/typescript.yml
       - .github/scripts/tests/lab-json.test.cjs
       - .github/scripts/tests/lab-next.test.cjs
+      - .github/scripts/tests/lab-convert.test.cjs
   pull_request:
     paths:
       - src/ts/**
@@ -29,6 +30,7 @@ on:
       - .github/workflows/typescript.yml
       - .github/scripts/tests/lab-json.test.cjs
       - .github/scripts/tests/lab-next.test.cjs
+      - .github/scripts/tests/lab-convert.test.cjs
   workflow_dispatch:
 
 permissions:

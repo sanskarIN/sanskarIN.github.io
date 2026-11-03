@@ -1,0 +1,57 @@
+---
+layout: page
+title: Timestamp Converter
+heading: Timestamp Converter
+eyebrow: Developer Lab · Date and time tools
+lead: Convert Unix seconds, Unix milliseconds, and ISO 8601 timestamps without leaving your browser.
+description: "Private timestamp converter for Unix seconds, Unix milliseconds, ISO 8601, UTC and browser-local time."
+permalink: /lab/timestamp/
+scripts: [lab-convert]
+---
+<p class="lab-breadcrumb">{% include link.html url="/lab/" label="Developer Lab" class="text-link" arrow=true %}</p>
+<div class="lab-workspace" data-time-tool>
+  <div class="lab-toolbar">
+    <label class="lab-indent-label" for="time-kind">Input format
+      <select class="form-field__input lab-indent" id="time-kind" data-time-kind>
+        <option value="seconds">Unix seconds</option>
+        <option value="milliseconds">Unix milliseconds</option>
+        <option value="iso">ISO 8601 (timezone required)</option>
+      </select>
+    </label>
+    <label class="lab-indent-label lab-time-entry" for="time-input">Timestamp
+      <input class="form-field__input" id="time-input" data-time-input type="text" maxlength="80" spellcheck="false" autocomplete="off" placeholder="0">
+    </label>
+    <button class="button button--primary" type="button" data-time-convert>Convert</button>
+    <button class="button button--secondary" type="button" data-time-now>Use current time</button>
+    <button class="button button--ghost" type="button" data-time-clear>Clear</button>
+  </div>
+  <p class="lab-status" data-time-status role="status" aria-live="polite" aria-atomic="true">Enter a timestamp or choose Use current time.</p>
+  <div class="lab-time-results">
+    <div class="lab-time-result">
+      <label class="form-field__label" for="time-iso">ISO 8601 (UTC)</label>
+      <input class="form-field__input" id="time-iso" data-time-iso readonly>
+      <button class="copy-button" type="button" data-time-copy="iso" disabled>Copy</button>
+    </div>
+    <div class="lab-time-result">
+      <label class="form-field__label" for="time-seconds">Unix seconds</label>
+      <input class="form-field__input" id="time-seconds" data-time-seconds readonly>
+      <button class="copy-button" type="button" data-time-copy="seconds" disabled>Copy</button>
+    </div>
+    <div class="lab-time-result">
+      <label class="form-field__label" for="time-milliseconds">Unix milliseconds</label>
+      <input class="form-field__input" id="time-milliseconds" data-time-milliseconds readonly>
+      <button class="copy-button" type="button" data-time-copy="milliseconds" disabled>Copy</button>
+    </div>
+    <div class="lab-time-result">
+      <label class="form-field__label" for="time-local">Your browser's local time</label>
+      <input class="form-field__input" id="time-local" data-time-local readonly>
+      <button class="copy-button" type="button" data-time-copy="local" disabled>Copy</button>
+    </div>
+  </div>
+  <noscript><p>Enable JavaScript to use this browser-only tool.</p></noscript>
+</div>
+<section class="page-section lab-explainer">
+  <h2>Timestamp notes</h2>
+  <p>Unix timestamps represent time relative to 1 January 1970 at 00:00:00 UTC. Seconds may contain up to three decimal places; milliseconds must be whole numbers.</p>
+  <p>ISO 8601 values require an explicit timezone, such as <code>2026-11-03T13:30:00Z</code> or <code>2026-11-03T19:00:00+05:30</code>. Your browser determines the displayed local timezone. Nothing is uploaded.</p>
+</section>
