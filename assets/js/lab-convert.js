@@ -1,5 +1,4 @@
 "use strict";
-// @ts-nocheck
 // Browser-only tools: no persistence and no network requests.
 (() => {
     const root = document.querySelector("[data-url-tool]");
