@@ -18,7 +18,7 @@
       !validateButton || !minifyButton || !copyButton || !sampleButton || !clearButton) return;
 
   const maxInputLength = 1024 * 1024;
-  const setStatus = (message: string, state) => {
+  const setStatus = (message, state) => {
     status.textContent = message;
     status.dataset.state = state;
   };
