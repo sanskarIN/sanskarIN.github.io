@@ -5,9 +5,10 @@ import sys
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from urllib.parse import urlsplit
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from terminal_data import ROOT, parse_front_matter, published_posts, site_url, terminal_data, render_terminal_json
+from terminal_data import ROOT, read_yaml, parse_front_matter, published_posts, site_url, terminal_data, render_terminal_json
 from check_data_parity import diff_paths
 
 
@@ -34,6 +35,31 @@ class DataParityTests(unittest.TestCase):
         self.assertEqual(result["pages"][0]["url"], "/")
         self.assertTrue(any(p["key"] == "github" for p in result["profiles"]))
         self.assertEqual({e["label"] for e in result["emails"]}, {"Business", "Support"})
+
+    def test_primary_developer_profiles_match_main_username(self):
+        """Keep professional links, visible handles, and the site identity aligned."""
+        config = read_yaml(ROOT, "_config.yml")
+        profiles = read_yaml(ROOT, "_data/social.yml")["profiles"]
+        username = config["author"]["username"]
+        expected = {
+            "linkedin": ("www.linkedin.com", f"/in/{username}", username),
+            "devto": ("dev.to", f"/{username}", username),
+            "bluesky": (
+                "bsky.app",
+                f"/profile/{username}.bsky.social",
+                f"@{username}.bsky.social",
+            ),
+        }
+        for service, (hostname, path, handle) in expected.items():
+            with self.subTest(service=service):
+                profile = profiles[service]
+                url = urlsplit(profile["url"])
+                self.assertEqual(profile["username"].casefold(), username.casefold())
+                self.assertEqual(profile["handle"].casefold(), handle.casefold())
+                self.assertEqual(url.scheme, "https")
+                self.assertEqual(url.hostname, hostname)
+                self.assertEqual(url.path.rstrip("/").casefold(), path.casefold())
+                self.assertFalse(url.query or url.fragment)
 
     def test_slug_date_and_public_url_are_stable(self):
         posts = published_posts(ROOT)
