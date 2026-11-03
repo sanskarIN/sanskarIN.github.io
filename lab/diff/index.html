@@ -1,0 +1,41 @@
+---
+layout: page
+title: Text Diff Checker
+heading: Text Diff Checker
+eyebrow: Developer Lab · Text tools
+lead: Compare two text versions and see additions, deletions, and unchanged lines.
+description: "Private browser-based text comparison. Compare up to 300 lines per side, show line changes, and copy a unified-style summary."
+permalink: /lab/diff/
+scripts: [lab-diff]
+---
+<p class="lab-breadcrumb">{% include link.html url="/lab/" label="Developer Lab" class="text-link" arrow=true %}</p>
+<div class="lab-workspace" data-diff-tool>
+  <div class="lab-tool-grid">
+    <div class="lab-tool-panel">
+      <label for="diff-before" class="form-field__label">Original text</label>
+      <textarea id="diff-before" class="lab-editor" data-diff-before rows="12" spellcheck="false" placeholder="Paste the original version here."></textarea>
+    </div>
+    <div class="lab-tool-panel">
+      <label for="diff-after" class="form-field__label">Updated text</label>
+      <textarea id="diff-after" class="lab-editor" data-diff-after rows="12" spellcheck="false" placeholder="Paste the new version here."></textarea>
+    </div>
+  </div>
+  <p class="form-field__hint">Limit: 32,000 characters and 300 lines per side. The comparison runs entirely in your browser.</p>
+  <div class="lab-toolbar" role="group" aria-label="Comparison actions">
+    <button type="button" class="button button--primary" data-diff-compare>Compare</button>
+    <button type="button" class="button button--secondary" data-diff-example>Load example</button>
+    <button type="button" class="button button--ghost" data-diff-clear>Clear</button>
+    <button type="button" class="copy-button" data-diff-copy disabled>Copy comparison</button>
+  </div>
+  <p class="lab-status" data-diff-status aria-live="polite" role="status" aria-atomic="true">Paste text on either side, then select Compare.</p>
+  <section class="lab-results-panel" aria-label="Text comparison result">
+    <h2>Line changes</h2>
+    <p class="form-field__hint">+ added · − removed · space unchanged. Line order is preserved.</p>
+    <ol class="lab-diff-output" data-diff-output></ol>
+  </section>
+  <noscript><p class="lab-status">JavaScript is required to compare text locally.</p></noscript>
+</div>
+<section class="page-section lab-explainer">
+  <h2>How the comparison works</h2>
+  <p>Compares lines using a longest-common-subsequence algorithm. A changed line may appear as one removal and one addition. The result is text-only, and nothing is uploaded.</p>
+</section>
