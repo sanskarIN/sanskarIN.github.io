@@ -4305,3 +4305,118 @@ kbd {
 .k-note-list p { margin: 0; line-height: 1.95; color: var(--color-text-muted); }
 @media (max-width: 58em) { .k-hero__grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; } .k-hero h1 { font-size: 2.7rem; } .k-hero .button-row { gap: .6rem; } .k-closing { flex-wrap: wrap; } .k-closing > .button { margin-left: 0; } }
 @media (max-width: 46em) { .k-hero__grid, .k-episode, .k-about-grid { grid-template-columns: 1fr; } .k-hero__art { max-width: 30rem; margin-inline: auto; } .k-hero h1 { font-size: clamp(2.2rem, 9vw, 3.6rem); } .k-section-heading { display: block; } .k-section-heading > p { max-width: none; } .k-story-grid { grid-template-columns: 1fr; } .k-about-grid { gap: 2rem; } .k-closing img { width: 72px; height: 72px; } .k-closing { gap: 1.2rem; } .k-closing > div { flex: 1 1 14rem; } }
+
+/* Source: _includes/css/lab.css */
+/* Developer Lab: responsive, local-first editors. */
+
+.lab-breadcrumb {
+  margin-bottom: var(--space-5);
+  font-size: var(--text-sm);
+}
+
+.lab-workspace {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.lab-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: var(--space-3);
+}
+
+.lab-indent-label {
+  display: grid;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.lab-indent {
+  min-height: 2.875rem;
+  width: auto;
+  min-width: 8rem;
+  padding-block: 0.5rem;
+}
+
+.lab-status {
+  min-height: 2.875rem;
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-accent);
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.lab-status[data-state="error"] {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.lab-tool-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+}
+
+.lab-tool-panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-content: start;
+  min-width: 0;
+  gap: var(--space-2);
+}
+
+.lab-tool-panel__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.lab-editor {
+  display: block;
+  width: 100%;
+  min-height: 20rem;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  resize: vertical;
+  tab-size: 2;
+}
+
+.lab-editor:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.lab-editor[readonly] {
+  background-color: var(--color-surface-muted);
+}
+
+.lab-explainer {
+  margin-top: var(--space-8);
+}
+
+.lab-explainer > p + p {
+  margin-top: var(--space-3);
+}
+
+@media (min-width: 62em) {
+  .lab-tool-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 35.99em) {
+  .lab-toolbar > .button {
+    flex: 1 1 auto;
+  }
+}
