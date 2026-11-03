@@ -108,6 +108,18 @@
     "text": "Private browser-based text comparison. Compare up to 300 lines per side, show line changes, and copy a unified-style summary."
   },
   {
+    "type": "Page",
+    "title": "Timestamp Converter",
+    "url": "/lab/timestamp/",
+    "text": "Private timestamp converter for Unix seconds, Unix milliseconds, ISO 8601, UTC and browser-local time."
+  },
+  {
+    "type": "Page",
+    "title": "URL Encoder & Decoder",
+    "url": "/lab/url/",
+    "text": "Free browser-based URL percent encoder and decoder, supporting whole URIs and individual components without uploading data."
+  },
+  {
     "type": "Post",
     "title": "frametrellis-v1-4-0-release",
     "url": "/blog/frametrellis-v1-4-0-release/",
