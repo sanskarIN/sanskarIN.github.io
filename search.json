@@ -91,9 +91,21 @@
   },
   {
     "type": "Page",
+    "title": "Regex Tester",
+    "url": "/lab/regex/",
+    "text": "Browser-based regular expression tester with flags, capture groups, match positions, and a runtime limit. No data upload required."
+  },
+  {
+    "type": "Page",
     "title": "Terms and Conditions",
     "url": "/terms/",
     "text": "Terms and conditions for using sanskarIN.github.io, the personal website of Sanskar."
+  },
+  {
+    "type": "Page",
+    "title": "Text Diff Checker",
+    "url": "/lab/diff/",
+    "text": "Private browser-based text comparison. Compare up to 300 lines per side, show line changes, and copy a unified-style summary."
   },
   {
     "type": "Post",
