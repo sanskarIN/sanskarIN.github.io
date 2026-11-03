@@ -1,0 +1,47 @@
+---
+layout: page
+title: Regex Tester
+heading: Regex Tester
+eyebrow: Developer Lab · Text tools
+lead: Test regular expressions and inspect matches in your browser.
+description: "Browser-based regular expression tester with flags, capture groups, match positions, and a runtime limit. No data upload required."
+permalink: /lab/regex/
+scripts: [lab-regex]
+---
+<p class="lab-breadcrumb">{% include link.html url="/lab/" label="Developer Lab" class="text-link" arrow=true %}</p>
+<div class="lab-workspace" data-regex-tool data-worker-href="{{ '/assets/js/lab-regex-worker.js' | relative_url }}">
+  <div class="lab-tool-panel">
+    <label class="form-field__label" for="regex-pattern">Regular expression (without enclosing slashes)</label>
+    <input class="form-field__input lab-pattern" id="regex-pattern" data-regex-pattern type="text" maxlength="256" autocomplete="off" spellcheck="false" placeholder="[A-Za-z]+" aria-describedby="regex-pattern-help">
+    <p class="form-field__hint" id="regex-pattern-help">JavaScript regular expression syntax; up to 256 characters.</p>
+  </div>
+  <fieldset class="lab-flags">
+    <legend class="form-field__label">Flags</legend>
+    <label><input data-regex-flag type="checkbox" value="g" checked> g · global</label>
+    <label><input data-regex-flag type="checkbox" value="i"> i · ignore case</label>
+    <label><input data-regex-flag type="checkbox" value="m"> m · multiline</label>
+    <label><input data-regex-flag type="checkbox" value="s"> s · dotAll</label>
+    <label><input data-regex-flag type="checkbox" value="u"> u · Unicode</label>
+  </fieldset>
+  <div class="lab-tool-panel">
+    <label for="regex-sample" class="form-field__label">Text to test</label>
+    <textarea id="regex-sample" class="lab-editor lab-editor--compact" data-regex-sample rows="8" spellcheck="false" placeholder="Paste text to test your expression."></textarea>
+    <p class="form-field__hint">32,000 characters maximum. Evaluation stops after 800 ms; at most 200 matches are displayed.</p>
+  </div>
+  <div class="lab-toolbar" role="group" aria-label="Regex actions">
+    <button type="button" class="button button--primary" data-regex-run>Test pattern</button>
+    <button type="button" class="button button--secondary" data-regex-example>Load example</button>
+    <button type="button" class="button button--ghost" data-regex-clear>Clear</button>
+  </div>
+  <p class="lab-status" data-regex-status aria-live="polite" role="status" aria-atomic="true">Enter a pattern and select Test pattern.</p>
+  <section aria-label="Regex results" class="lab-results-panel">
+    <h2>Matches</h2>
+    <ol class="lab-match-list" data-regex-results></ol>
+  </section>
+  <noscript><p class="lab-status">JavaScript is required for the tester. Your text is not sent to a server.</p></noscript>
+</div>
+<section class="page-section lab-explainer">
+  <h2>About this tester</h2>
+  <p>Matching is performed inside a temporary browser worker, which is terminated after the time limit. This limits how long a complex expression can block the tester. Results are rendered as text, never as HTML.</p>
+  <p>Pattern behavior follows your browser's JavaScript engine. This tool is for testing patterns, not for processing untrusted expressions on a production server.</p>
+</section>
