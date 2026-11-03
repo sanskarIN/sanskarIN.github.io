@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 PARTS = (
     "fonts", "base", "layout", "components", "blog", "account",
     "projects", "search", "thanks", "terminal", "spotlight",
-    "pages", "kahani",
+    "pages", "kahani", "lab",
 )
 PROPERTY = re.compile(r"[a-z][a-z0-9-]*\Z")
 COLOR = re.compile(r"(?:#[0-9A-Fa-f]{3,8}|rgb\([0-9 ]+\s*/\s*[0-9]+%\))\Z")
