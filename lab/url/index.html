@@ -1,0 +1,47 @@
+---
+layout: page
+title: URL Encoder & Decoder
+heading: URL Encoder & Decoder
+eyebrow: Developer Lab · Web tools
+lead: Encode and decode URL components or whole URI strings locally in your browser.
+description: "Free browser-based URL percent encoder and decoder, supporting whole URIs and individual components without uploading data."
+permalink: /lab/url/
+scripts: [lab-convert]
+---
+<p class="lab-breadcrumb">{% include link.html url="/lab/" label="Developer Lab" class="text-link" arrow=true %}</p>
+<div class="lab-workspace" data-url-tool>
+  <div class="lab-toolbar">
+    <label class="lab-indent-label" for="url-mode">Encoding mode
+      <select id="url-mode" class="form-field__input lab-indent" data-url-mode>
+        <option value="component">URL component (query value)</option>
+        <option value="uri">Whole URI (preserve URL punctuation)</option>
+      </select>
+    </label>
+    <button class="button button--primary" type="button" data-url-encode>Encode</button>
+    <button class="button button--secondary" type="button" data-url-decode>Decode</button>
+    <button class="button button--ghost" type="button" data-url-example>Load example</button>
+    <button class="button button--ghost" type="button" data-url-clear>Clear</button>
+  </div>
+  <p class="lab-status" data-url-status role="status" aria-live="polite" aria-atomic="true">Enter text and choose Encode or Decode.</p>
+  <div class="lab-tool-grid">
+    <div class="lab-tool-panel">
+      <label class="form-field__label" for="url-input">Original text</label>
+      <textarea class="lab-editor lab-editor--compact" id="url-input" data-url-input rows="9" spellcheck="false" placeholder="hello world &amp; Rust"></textarea>
+      <p class="form-field__hint">Up to 32,000 characters. Ctrl/Cmd + Enter encodes.</p>
+    </div>
+    <div class="lab-tool-panel">
+      <div class="lab-tool-panel__header">
+        <label class="form-field__label" for="url-output">Converted result</label>
+        <button type="button" class="copy-button" data-url-copy disabled>Copy result</button>
+      </div>
+      <textarea class="lab-editor lab-editor--compact" id="url-output" data-url-output rows="9" spellcheck="false" readonly placeholder="Your encoded or decoded result appears here."></textarea>
+      <p class="form-field__hint">The tool never sends your input to a server or stores it.</p>
+    </div>
+  </div>
+  <noscript><p>Enable JavaScript to use this browser-only tool.</p></noscript>
+</div>
+<section class="page-section lab-explainer">
+  <h2>Which mode should I use?</h2>
+  <p><strong>URL component</strong> converts reserved characters as well as spaces, which is useful for query parameter values. <strong>Whole URI</strong> preserves URL punctuation such as slashes, question marks, and ampersands while encoding characters like spaces.</p>
+  <p>This is percent-encoding, not <code>application/x-www-form-urlencoded</code> decoding: a plus sign is treated as a literal plus, not a space.</p>
+</section>
