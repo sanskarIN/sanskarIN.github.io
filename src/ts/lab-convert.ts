@@ -1,30 +1,29 @@
-// @ts-nocheck
 // Browser-only tools: no persistence and no network requests.
 (() => {
-    const root = document.querySelector("[data-url-tool]");
+    const root = document.querySelector<HTMLElement>("[data-url-tool]");
     if (!root)
         return;
-    const get = (name) => root.querySelector("[data-url-" + name + "]");
-    const input = get("input");
-    const output = get("output");
-    const mode = get("mode");
-    const status = get("status");
-    const encode = get("encode");
-    const decode = get("decode");
-    const example = get("example");
-    const clear = get("clear");
-    const copy = get("copy");
+    const get = <T extends HTMLElement>(name: string): T | null => root.querySelector<T>("[data-url-" + name + "]");
+    const input = get<HTMLTextAreaElement>("input");
+    const output = get<HTMLTextAreaElement>("output");
+    const mode = get<HTMLSelectElement>("mode");
+    const status = get<HTMLElement>("status");
+    const encode = get<HTMLButtonElement>("encode");
+    const decode = get<HTMLButtonElement>("decode");
+    const example = get<HTMLButtonElement>("example");
+    const clear = get<HTMLButtonElement>("clear");
+    const copy = get<HTMLButtonElement>("copy");
     if (!input || !output || !mode || !status || !encode || !decode || !example || !clear || !copy)
         return;
-    const say = (message, state) => {
+    const say = (message: string, state: "info" | "success" | "error"): void => {
         status.textContent = message;
         status.dataset.state = state;
     };
-    const reset = () => {
+    const reset = (): void => {
         output.value = "";
         copy.disabled = true;
     };
-    const convert = (action) => {
+    const convert = (action: "encode" | "decode"): void => {
         reset();
         const text = input.value;
         if (text.length > 32000)
@@ -80,37 +79,37 @@
     });
 })();
 (() => {
-    const root = document.querySelector("[data-time-tool]");
+    const root = document.querySelector<HTMLElement>("[data-time-tool]");
     if (!root)
         return;
-    const get = (name) => root.querySelector("[data-time-" + name + "]");
-    const input = get("input");
-    const kind = get("kind");
-    const status = get("status");
-    const convert = get("convert");
-    const now = get("now");
-    const clear = get("clear");
+    const get = <T extends HTMLElement>(name: string): T | null => root.querySelector<T>("[data-time-" + name + "]");
+    const input = get<HTMLInputElement>("input");
+    const kind = get<HTMLSelectElement>("kind");
+    const status = get<HTMLElement>("status");
+    const convert = get<HTMLButtonElement>("convert");
+    const now = get<HTMLButtonElement>("now");
+    const clear = get<HTMLButtonElement>("clear");
     const fields = {
-        iso: get("iso"),
-        seconds: get("seconds"),
-        milliseconds: get("milliseconds"),
-        local: get("local"),
+        iso: get<HTMLInputElement>("iso"),
+        seconds: get<HTMLInputElement>("seconds"),
+        milliseconds: get<HTMLInputElement>("milliseconds"),
+        local: get<HTMLInputElement>("local"),
     };
-    const copies = root.querySelectorAll("[data-time-copy]");
+    const copies = root.querySelectorAll<HTMLButtonElement>("[data-time-copy]");
     if (!input || !kind || !status || !convert || !now || !clear ||
         !fields.iso || !fields.seconds || !fields.milliseconds || !fields.local)
         return;
-    const say = (message, state) => {
+    const say = (message: string, state: "info" | "success" | "error"): void => {
         status.textContent = message;
         status.dataset.state = state;
     };
-    const reset = () => {
+    const reset = (): void => {
         for (const field of Object.values(fields))
-            field.value = "";
+            field!.value = "";
         for (const button of copies)
             button.disabled = true;
     };
-    const parse = (value, type) => {
+    const parse = (value: string, type: string): number => {
         const trimmed = value.trim();
         if (!trimmed || trimmed.length > 80)
             throw new Error("Enter a timestamp of at most 80 characters.");
@@ -149,14 +148,14 @@
             throw new Error("Invalid calendar date or time.");
         return ms;
     };
-    const display = (milliseconds) => {
+    const display = (milliseconds: number): void => {
         const date = new Date(milliseconds);
         if (!Number.isFinite(date.valueOf()))
             throw new Error("Timestamp outside the JavaScript Date range.");
-        fields.iso.value = date.toISOString();
-        fields.seconds.value = String(milliseconds / 1000);
-        fields.milliseconds.value = String(milliseconds);
-        fields.local.value = date.toLocaleString(undefined, { dateStyle: "full", timeStyle: "long" });
+        fields.iso!.value = date.toISOString();
+        fields.seconds!.value = String(milliseconds / 1000);
+        fields.milliseconds!.value = String(milliseconds);
+        fields.local!.value = date.toLocaleString(undefined, { dateStyle: "full", timeStyle: "long" });
         for (const button of copies)
             button.disabled = false;
         say("Converted. Local time uses your browser's timezone.", "success");
@@ -186,7 +185,7 @@
     kind.addEventListener("change", () => { reset(); say("Input type changed. Select Convert.", "info"); });
     for (const button of copies) {
         button.addEventListener("click", () => {
-            const field = fields[button.dataset.timeCopy];
+            const field = fields[button.dataset.timeCopy as keyof typeof fields];
             if (button.disabled || !field?.value)
                 return;
             if (!navigator.clipboard?.writeText)
