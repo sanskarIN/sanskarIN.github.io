@@ -862,6 +862,20 @@ hr {
   }
 }
 
+/* Keep the expanded navigation usable on tablets and small laptops.
+   All links remain visible without relying on the JavaScript mobile menu. */
+@media (min-width: 48em) and (max-width: 68em) {
+  .site-nav {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .site-nav__list {
+    flex-wrap: wrap;
+    padding-bottom: var(--space-2);
+  }
+}
+
 /* Source: _includes/css/components.css */
 /* ==========================================================================
    Components
