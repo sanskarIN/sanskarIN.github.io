@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T12:01:41Z",
+  "generated_at": "2026-11-05T12:29:44Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -14,22 +14,22 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 13.8
+      "percent": 13.6
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 12.8
+      "percent": 13.3
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 12.2
+      "percent": 12.1
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 11.7
+      "percent": 11.6
     },
     {
       "name": "Rust",
@@ -39,12 +39,12 @@
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 10.3
+      "percent": 10.5
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 28.4,
+      "percent": 28.3,
       "other": true
     }
   ],
@@ -56,36 +56,20 @@
   ],
   "repositories": [
     {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
+      "name": "KathaSvara",
+      "url": "https://github.com/sanskarIN/KathaSvara",
+      "description": "Give Every Story a Voice.",
+      "homepage": "https://sanskarin.github.io/KathaSvara/",
       "language": "TypeScript",
       "language_color": "#3178c6",
-      "stars": 0,
+      "stars": 1,
       "forks": 0,
       "topics": [],
-      "license": null,
+      "license": "MPL-2.0",
       "fork": false,
       "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-11-03"
-    },
-    {
-      "name": "LineLoom",
-      "url": "https://github.com/sanskarIN/LineLoom",
-      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
-      "homepage": "https://sanskarin.github.io/LineLoom/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 3,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-17",
-      "pushed": "2026-11-03"
+      "created": "2026-10-19",
+      "pushed": "2026-11-05"
     },
     {
       "name": "latebrake",
@@ -101,7 +85,117 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
-      "pushed": "2026-11-03"
+      "pushed": "2026-11-05"
+    },
+    {
+      "name": "LineLoom",
+      "url": "https://github.com/sanskarIN/LineLoom",
+      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
+      "homepage": "https://sanskarin.github.io/LineLoom/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 3,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
+      "pushed": "2026-11-05"
+    },
+    {
+      "name": "RepoDNA",
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 8,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-11-05"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-11-04"
+    },
+    {
+      "name": "frametrellis",
+      "url": "https://github.com/sanskarIN/frametrellis",
+      "description": "Open-source video editor.",
+      "homepage": "https://sanskarin.github.io/frametrellis/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 4,
+      "forks": 0,
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
+      "license": "GPL-3.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-11",
+      "pushed": "2026-11-04"
+    },
+    {
+      "name": "ReproCrate",
+      "url": "https://github.com/sanskarIN/ReproCrate",
+      "description": "Turn bugs into reproducible reports.",
+      "homepage": null,
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "EPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
+      "pushed": "2026-11-04"
+    },
+    {
+      "name": "contactcore",
+      "url": "https://github.com/sanskarIN/contactcore",
+      "description": "ContactCore, a production-quality Basic Contact Book project that is much more complete than a classroom demo.",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-11-04"
     },
     {
       "name": "BeatForge-Rhythm",
@@ -136,29 +230,6 @@
       "pushed": "2026-11-02"
     },
     {
-      "name": "frametrellis",
-      "url": "https://github.com/sanskarIN/frametrellis",
-      "description": "Open-source video editor.",
-      "homepage": "https://sanskarin.github.io/frametrellis/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 4,
-      "forks": 0,
-      "topics": [
-        "cmake",
-        "cpp",
-        "cpp20",
-        "desktop-application",
-        "docker",
-        "ffmpeg"
-      ],
-      "license": "GPL-3.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-11",
-      "pushed": "2026-11-02"
-    },
-    {
       "name": "healthmetric",
       "url": "https://github.com/sanskarIN/healthmetric",
       "description": "",
@@ -172,45 +243,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-11-02"
-    },
-    {
-      "name": "RepoDNA",
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 8,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
-      "pushed": "2026-11-02"
-    },
-    {
-      "name": "KathaSvara",
-      "url": "https://github.com/sanskarIN/KathaSvara",
-      "description": "Give Every Story a Voice.",
-      "homepage": "https://sanskarin.github.io/KathaSvara/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "MPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
       "pushed": "2026-11-02"
     },
     {
@@ -400,22 +432,6 @@
       "pushed": "2026-10-28"
     },
     {
-      "name": "contactcore",
-      "url": "https://github.com/sanskarIN/contactcore",
-      "description": "ContactCore, a production-quality Basic Contact Book project that is much more complete than a classroom demo.",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-10-28"
-    },
-    {
       "name": "unknown-mystery-ai",
       "url": "https://github.com/sanskarIN/unknown-mystery-ai",
       "description": "Official companion repository for The Unknown Mystery of the AI by Ram Sandesh — AI code examples, projects, exercises, notebooks, reproducibility resources, and practical learning materials covering ML, Deep Learning, LLMs, RAG, Agents, MLOps, Responsible AI, deployment, and…",
@@ -561,22 +577,6 @@
       "archived": false,
       "created": "2026-05-16",
       "pushed": "2026-10-25"
-    },
-    {
-      "name": "ReproCrate",
-      "url": "https://github.com/sanskarIN/ReproCrate",
-      "description": "Turn bugs into reproducible reports.",
-      "homepage": null,
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "EPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-17",
-      "pushed": "2026-10-24"
     },
     {
       "name": "PuzzleForge",
@@ -1260,9 +1260,9 @@
     }
   ],
   "activity": {
-    "total": 35280,
+    "total": 36040,
     "start": "2025-11-02",
-    "end": "2026-11-03",
+    "end": "2026-11-05",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1621,18 +1621,20 @@
       884,
       347,
       469,
-      1065,
-      264,
-      524,
-      124,
+      1093,
+      315,
+      543,
+      198,
       236,
-      58,
-      68,
+      67,
+      70,
       481,
-      458,
-      343,
+      474,
+      498,
       836,
-      179
+      278,
+      214,
+      93
     ],
     "levels": [
       0,
@@ -1999,8 +2001,10 @@
       1,
       2,
       2,
-      1,
       2,
+      2,
+      1,
+      1,
       1
     ],
     "months": [
@@ -2057,8 +2061,8 @@
         "label": "Nov"
       }
     ],
-    "active_days": 125,
-    "longest_streak": 48,
+    "active_days": 127,
+    "longest_streak": 50,
     "busiest": {
       "date": "2026-08-19",
       "count": 7067
