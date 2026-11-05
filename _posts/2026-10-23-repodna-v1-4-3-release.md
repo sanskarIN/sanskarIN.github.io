@@ -84,7 +84,7 @@ If you find it useful, consider starring the repository, reporting issues, shari
 
 You can also support development through:
 
-Buy Me a Coffee: <a href="https://buymeacoffee.com/SanskarCodes" rel="noopener noreferrer">https://buymeacoffee.com/SanskarCodes</a>
+Buy Me a Coffee: <a href="https://buymeacoffee.com/sanskarIN" rel="noopener noreferrer">https://buymeacoffee.com/sanskarIN</a>
 
 Razorpay: <a href="https://razorpay.me/@SanskarCodes" rel="noopener noreferrer">https://razorpay.me/@SanskarCodes</a>
 
