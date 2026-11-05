@@ -1,0 +1,66 @@
+---
+layout: page
+title: Color Contrast Checker
+heading: Color Contrast Checker
+eyebrow: Developer Lab · Accessibility tools
+lead: Check text and interface color pairs against WCAG 2.2 contrast thresholds, entirely in your browser.
+description: "Free, private WCAG 2.2 contrast checker: compare hex colors, preview text, and check AA and AAA contrast levels."
+permalink: /lab/contrast/
+scripts: [lab-contrast]
+---
+<p class="lab-breadcrumb">{% include link.html url="/lab/" label="Developer Lab" class="text-link" arrow=true %}</p>
+<div class="lab-workspace" data-contrast-tool>
+  <div class="lab-contrast-inputs">
+    <div class="lab-contrast-field">
+      <label class="form-field__label" for="contrast-foreground">Text / foreground color</label>
+      <div class="lab-contrast-field__controls">
+        <input id="contrast-foreground" class="form-field__input lab-contrast-hex" data-contrast-foreground type="text" value="#1F2937" maxlength="7" autocomplete="off" spellcheck="false" aria-describedby="contrast-hex-help" pattern="#?[0-9a-fA-F]{3}([0-9a-fA-F]{3})?">
+        <label class="lab-contrast-color-label" for="contrast-foreground-picker">Choose foreground color</label>
+        <input id="contrast-foreground-picker" class="lab-contrast-color-picker" data-contrast-foreground-picker type="color" value="#1f2937" aria-label="Choose foreground color">
+      </div>
+    </div>
+    <div class="lab-contrast-field">
+      <label class="form-field__label" for="contrast-background">Background color</label>
+      <div class="lab-contrast-field__controls">
+        <input id="contrast-background" class="form-field__input lab-contrast-hex" data-contrast-background type="text" value="#FFFFFF" maxlength="7" autocomplete="off" spellcheck="false" aria-describedby="contrast-hex-help" pattern="#?[0-9a-fA-F]{3}([0-9a-fA-F]{3})?">
+        <label class="lab-contrast-color-label" for="contrast-background-picker">Choose background color</label>
+        <input id="contrast-background-picker" class="lab-contrast-color-picker" data-contrast-background-picker type="color" value="#ffffff" aria-label="Choose background color">
+      </div>
+    </div>
+  </div>
+  <p id="contrast-hex-help" class="form-field__hint">Use a three- or six-digit hex color, such as #123 or #112233. Opaque colors only; transparency is not calculated.</p>
+  <div class="lab-toolbar" role="group" aria-label="Color contrast actions">
+    <button type="button" class="button button--secondary" data-contrast-swap>Swap colors</button>
+    <button type="button" class="button button--ghost" data-contrast-reset>Reset colors</button>
+    <button type="button" class="copy-button" data-contrast-copy disabled>Copy results</button>
+  </div>
+  <p class="lab-status" data-contrast-status role="status" aria-live="polite" aria-atomic="true">Contrast results appear automatically when you edit a color.</p>
+  <div class="lab-contrast-results">
+    <section class="lab-results-panel" aria-label="Color preview">
+      <h2>Live preview</h2>
+      <div class="lab-contrast-preview" data-contrast-preview>
+        <p>Normal text: The quick brown fox jumps over the lazy dog.</p>
+        <p class="lab-contrast-preview__large">Large text example</p>
+        <span class="lab-contrast-preview__shape" aria-label="Interface shape preview" role="img"></span>
+      </div>
+    </section>
+    <section class="lab-results-panel" aria-label="WCAG contrast results">
+      <h2>Calculated contrast</h2>
+      <p class="lab-contrast-ratio" data-contrast-ratio>—</p>
+      <dl class="lab-contrast-checks">
+        <div><dt>Normal text · AA <small>(4.5:1)</small></dt><dd data-contrast-aa-normal>Not calculated</dd></div>
+        <div><dt>Normal text · AAA <small>(7:1)</small></dt><dd data-contrast-aaa-normal>Not calculated</dd></div>
+        <div><dt>Large text · AA <small>(3:1)</small></dt><dd data-contrast-aa-large>Not calculated</dd></div>
+        <div><dt>Large text · AAA <small>(4.5:1)</small></dt><dd data-contrast-aaa-large>Not calculated</dd></div>
+        <div><dt>UI components / graphics · AA <small>(3:1)</small></dt><dd data-contrast-aa-ui>Not calculated</dd></div>
+      </dl>
+    </section>
+  </div>
+  <noscript><p class="lab-status">Enable JavaScript to calculate color contrast locally.</p></noscript>
+</div>
+<section class="page-section lab-explainer">
+  <h2>Reading the results</h2>
+  <p>WCAG 2.2 requires at least <strong>4.5:1</strong> contrast for normal text at AA and <strong>7:1</strong> at AAA. Large text needs <strong>3:1</strong> at AA and <strong>4.5:1</strong> at AAA. Essential non-text interface graphics typically need <strong>3:1</strong> at AA against adjacent colors.</p>
+  <p>Large text means at least 18 pt regular (about 24 CSS px) or 14 pt bold (about 18.7 CSS px). These results assess only opaque foreground/background colors, not font thickness, transparency, images, gradients, hover states, or full WCAG conformance. Pass/fail uses the unrounded ratio.</p>
+  <p>Reference: <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" rel="noopener noreferrer">WCAG 2.2 Contrast (Minimum)</a>, <a href="https://www.w3.org/TR/WCAG22/#contrast-enhanced" rel="noopener noreferrer">Contrast (Enhanced)</a>, and <a href="https://www.w3.org/TR/WCAG22/#non-text-contrast" rel="noopener noreferrer">Non-text Contrast</a>. All calculations remain on this page and no input is uploaded or saved.</p>
+</section>
