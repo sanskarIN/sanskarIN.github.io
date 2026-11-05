@@ -61,6 +61,20 @@ class DataParityTests(unittest.TestCase):
                 self.assertEqual(url.path.rstrip("/").casefold(), path.casefold())
                 self.assertFalse(url.query or url.fragment)
 
+
+    def test_buy_me_a_coffee_identity_matches_profile(self):
+        """Keep the current support link and displayed username consistent."""
+        config = read_yaml(ROOT, "_config.yml")
+        profile = read_yaml(ROOT, "_data/social.yml")["profiles"]["buymeacoffee"]
+        username = config["author"]["username"]
+        url = urlsplit(profile["url"])
+        self.assertEqual(url.scheme, "https")
+        self.assertEqual(url.hostname, "buymeacoffee.com")
+        self.assertEqual(url.path.strip("/").casefold(), username.casefold())
+        self.assertEqual(profile["handle"].casefold(), username.casefold())
+        self.assertEqual(profile["username"].casefold(), username.casefold())
+        self.assertFalse(url.query or url.fragment)
+
     def test_slug_date_and_public_url_are_stable(self):
         posts = published_posts(ROOT)
         self.assertGreaterEqual(len(posts), 1)

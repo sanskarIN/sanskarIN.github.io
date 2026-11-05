@@ -73,7 +73,7 @@ LineLoom is an independent open-source project. Contributions, feedback, and iss
 
 If you find it useful and would like to support continued development, voluntary support is available through:
 
-<strong>Buy Me a Coffee:</strong> <a href="https://buymeacoffee.com/SanskarCodes" rel="noopener noreferrer">https://buymeacoffee.com/SanskarCodes</a>
+<strong>Buy Me a Coffee:</strong> <a href="https://buymeacoffee.com/sanskarIN" rel="noopener noreferrer">https://buymeacoffee.com/sanskarIN</a>
 
 <strong>Razorpay:</strong> <a href="https://razorpay.me/@SanskarCodes" rel="noopener noreferrer">https://razorpay.me/@SanskarCodes</a>
 

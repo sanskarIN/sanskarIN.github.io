@@ -343,14 +343,14 @@ Every profile link on the site (header, footer, Home, About, Developer, Contact,
 | Service | URL | Username |
 |---|---|---|
 | GitHub | https://www.github.com/sanskarIN | `sanskarIN` |
-| LinkedIn | https://linkedin.com/in/SanskarCodes | `SanskarCodes` |
-| Dev.to | https://dev.to/SanskarCodes | `SanskarCodes` |
+| LinkedIn | https://www.linkedin.com/in/sanskarIN/ | `sanskarIN` |
+| Dev.to | https://dev.to/sanskarIN | `sanskarIN` |
 | Discord (developer channel) | https://discord.com/channels/1547184919455989760/1547187031057113098 | `@SanskarCodes` |
 | X | https://x.com/SanskarCodes | `@SanskarCodes` |
 | Instagram | https://instagram.com/SanskarCode | `@SanskarCode` |
-| Bluesky | https://bsky.app/profile/SanskarCodes.bsky.social | `@SanskarCodes.bsky.social` |
+| Bluesky | https://bsky.app/profile/sanskarIN.bsky.social | `@sanskarIN.bsky.social` |
 | YouTube (Kahani Wali Shaam) | https://www.youtube.com/@KahaniWaliShaam | `@KahaniWaliShaam` |
-| Buy Me a Coffee | https://buymeacoffee.com/SanskarCodes | `SanskarCodes` |
+| Buy Me a Coffee | https://buymeacoffee.com/sanskarIN | `sanskarIN` |
 | Razorpay | https://razorpay.me/@SanskarCodes | `@SanskarCodes` |
 | Gumroad | https://sanskarIN.gumroad.com | `sanskarIN` |
 | PayPal | https://paypal.me/SanskarCodes | `SanskarCodes` |

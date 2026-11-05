@@ -78,7 +78,7 @@ If you find the project useful, consider starring it on GitHub, reporting issues
 
 You can also support its development:
 
-<a href="https://buymeacoffee.com/SanskarCodes" rel="noopener noreferrer">https://buymeacoffee.com/SanskarCodes</a>
+<a href="https://buymeacoffee.com/sanskarIN" rel="noopener noreferrer">https://buymeacoffee.com/sanskarIN</a>
 
 Thank you for supporting independent open-source software development.
 
