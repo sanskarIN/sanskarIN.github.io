@@ -283,4 +283,4 @@ Explore more on: <a href="https://sanskarin.github.io" rel="noopener noreferrer"
 Explore open source projects: <a href="https://github.com/sanskarIN" rel="noopener noreferrer">https://github.com/sanskarIN</a>
 
 Enjoyed this article? You can support my independent open-source work on Buy Me a Coffee.<br>
-<a href="https://buymeacoffee.com/SanskarCodes" rel="noopener noreferrer">https://buymeacoffee.com/SanskarCodes</a>
+<a href="https://buymeacoffee.com/sanskarIN" rel="noopener noreferrer">https://buymeacoffee.com/sanskarIN</a>
