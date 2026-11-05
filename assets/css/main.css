@@ -4538,3 +4538,15 @@ kbd {
 .lab-contrast-checks dd[data-state="pass"]::before { content: "✓ "; }
 .lab-contrast-checks dd[data-state="fail"]::before { content: "✕ "; }
 @media print { .lab-contrast-color-picker { display: none; } }
+
+/* Contrast suggestions: text alternatives remain usable without relying on color alone. */
+.lab-contrast-suggestions { margin-top: var(--space-3); }
+.lab-contrast-suggestion-list { display: grid; gap: var(--space-3); list-style: none; padding: 0; margin: 0; }
+.lab-contrast-suggestion { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-3); padding: var(--space-4); border: var(--border); border-radius: var(--radius); background: var(--color-surface); }
+.lab-contrast-suggestion__swatch { flex: none; width: 3rem; height: 3rem; border: 1px solid var(--color-border-strong); border-radius: var(--radius-sm); background: var(--color-surface-muted); }
+.lab-contrast-suggestion__details { display: grid; flex: 1 1 13rem; min-width: 0; gap: var(--space-1); overflow-wrap: anywhere; }
+.lab-contrast-suggestion__details h3 { font-size: var(--text-sm); }
+.lab-contrast-suggestion__color { font-family: var(--font-mono); font-size: var(--text-sm); }
+.lab-contrast-suggestion .button { flex: 0 0 auto; }
+.lab-contrast-suggestion .button:disabled { opacity: 0.6; cursor: not-allowed; }
+@media (max-width: 35.99em) { .lab-contrast-suggestion .button { flex: 1 1 100%; } }
