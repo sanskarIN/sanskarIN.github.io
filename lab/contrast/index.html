@@ -32,7 +32,9 @@ scripts: [lab-contrast]
   <div class="lab-toolbar" role="group" aria-label="Color contrast actions">
     <button type="button" class="button button--secondary" data-contrast-swap>Swap colors</button>
     <button type="button" class="button button--ghost" data-contrast-reset>Reset colors</button>
+    <button type="button" class="button button--ghost" data-contrast-example>Try low-contrast example</button>
     <button type="button" class="copy-button" data-contrast-copy disabled>Copy results</button>
+    <button type="button" class="copy-button" data-contrast-copy-css disabled>Copy CSS variables</button>
   </div>
   <p class="lab-status" data-contrast-status role="status" aria-live="polite" aria-atomic="true">Contrast results appear automatically when you edit a color.</p>
   <div class="lab-contrast-results">
@@ -56,11 +58,44 @@ scripts: [lab-contrast]
       </dl>
     </section>
   </div>
+  <section class="lab-results-panel lab-contrast-suggestions" aria-labelledby="contrast-suggestions-title">
+    <h2 id="contrast-suggestions-title">Suggested foreground colors</h2>
+    <p class="form-field__hint">Keep your background and try an adjusted text color. Suggestions blend your foreground toward black or white until they meet the selected contrast ratio. They are not guaranteed to be visually closest or suitable for every design.</p>
+    <ul class="lab-contrast-suggestion-list" role="list">
+      <li class="lab-contrast-suggestion">
+        <span class="lab-contrast-suggestion__swatch" data-contrast-suggest-3-swatch aria-hidden="true"></span>
+        <div class="lab-contrast-suggestion__details">
+          <h3>3:1 · Large text / UI graphics AA</h3>
+          <strong class="lab-contrast-suggestion__color" data-contrast-suggest-3-color>—</strong>
+          <span class="form-field__hint" data-contrast-suggest-3-detail>Enter two valid colors.</span>
+        </div>
+        <button type="button" class="button button--secondary" data-contrast-apply-3 aria-label="Apply suggested 3 to 1 foreground color" disabled>Apply</button>
+      </li>
+      <li class="lab-contrast-suggestion">
+        <span class="lab-contrast-suggestion__swatch" data-contrast-suggest-4-5-swatch aria-hidden="true"></span>
+        <div class="lab-contrast-suggestion__details">
+          <h3>4.5:1 · Normal text AA</h3>
+          <strong class="lab-contrast-suggestion__color" data-contrast-suggest-4-5-color>—</strong>
+          <span class="form-field__hint" data-contrast-suggest-4-5-detail>Enter two valid colors.</span>
+        </div>
+        <button type="button" class="button button--secondary" data-contrast-apply-4-5 aria-label="Apply suggested 4.5 to 1 foreground color" disabled>Apply</button>
+      </li>
+      <li class="lab-contrast-suggestion">
+        <span class="lab-contrast-suggestion__swatch" data-contrast-suggest-7-swatch aria-hidden="true"></span>
+        <div class="lab-contrast-suggestion__details">
+          <h3>7:1 · Normal text AAA</h3>
+          <strong class="lab-contrast-suggestion__color" data-contrast-suggest-7-color>—</strong>
+          <span class="form-field__hint" data-contrast-suggest-7-detail>Enter two valid colors.</span>
+        </div>
+        <button type="button" class="button button--secondary" data-contrast-apply-7 aria-label="Apply suggested 7 to 1 foreground color" disabled>Apply</button>
+      </li>
+    </ul>
+  </section>
   <noscript><p class="lab-status">Enable JavaScript to calculate color contrast locally.</p></noscript>
 </div>
 <section class="page-section lab-explainer">
   <h2>Reading the results</h2>
   <p>WCAG 2.2 requires at least <strong>4.5:1</strong> contrast for normal text at AA and <strong>7:1</strong> at AAA. Large text needs <strong>3:1</strong> at AA and <strong>4.5:1</strong> at AAA. Essential non-text interface graphics typically need <strong>3:1</strong> at AA against adjacent colors.</p>
-  <p>Large text means at least 18 pt regular (about 24 CSS px) or 14 pt bold (about 18.7 CSS px). These results assess only opaque foreground/background colors, not font thickness, transparency, images, gradients, hover states, or full WCAG conformance. Pass/fail uses the unrounded ratio.</p>
-  <p>Reference: <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" rel="noopener noreferrer">WCAG 2.2 Contrast (Minimum)</a>, <a href="https://www.w3.org/TR/WCAG22/#contrast-enhanced" rel="noopener noreferrer">Contrast (Enhanced)</a>, and <a href="https://www.w3.org/TR/WCAG22/#non-text-contrast" rel="noopener noreferrer">Non-text Contrast</a>. All calculations remain on this page and no input is uploaded or saved.</p>
+  <p>Large text means at least 18 pt regular (about 24 CSS px) or 14 pt bold (about 18.7 CSS px). These results assess only opaque foreground/background colors, not font thickness, transparency, images, gradients, hover states, or full WCAG conformance. The suggested foreground is obtained by blending toward black or white and may be unavailable at 7:1 on some backgrounds. Pass/fail uses the unrounded ratio.</p>
+  <p>Reference: <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" rel="noopener noreferrer">WCAG 2.2 Contrast (Minimum)</a>, <a href="https://www.w3.org/TR/WCAG22/#contrast-enhanced" rel="noopener noreferrer">Contrast (Enhanced)</a>, and <a href="https://www.w3.org/TR/WCAG22/#non-text-contrast" rel="noopener noreferrer">Non-text Contrast</a>. Use <strong>Copy CSS variables</strong> to reuse the current colors in a stylesheet. All calculations remain on this page and no input is uploaded or saved.</p>
 </section>
