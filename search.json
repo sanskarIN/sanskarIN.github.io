@@ -31,6 +31,12 @@
   },
   {
     "type": "Page",
+    "title": "Color Contrast Checker",
+    "url": "/lab/contrast/",
+    "text": "Free, private WCAG 2.2 contrast checker: compare hex colors, preview text, and check AA and AAA contrast levels."
+  },
+  {
+    "type": "Page",
     "title": "Contact",
     "url": "/contact/",
     "text": "Contact Sanskar: business email for collaborations, development services, and partnerships; a support email for technical help; plus GitHub, LinkedIn, Discord, and more."
