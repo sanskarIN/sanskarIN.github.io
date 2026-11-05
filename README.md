@@ -44,7 +44,7 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 | `/blog/tags/` | `blog/tags.html` | Blog posts grouped by tag |
 | `/projects/` | `projects/index.html` | Projects: the public GitHub repositories, updated daily ([details](#projects)) |
 | `/lab/` | `lab/index.html` | Developer Lab: local-first browser tools |
-| `/lab/contrast/` | `lab/contrast/index.html` | WCAG 2.2 color contrast checker for AA and AAA thresholds |
+| `/lab/contrast/` | `lab/contrast/index.html` | WCAG 2.2 checker with AA/AAA color suggestions, live preview, and CSS export |
 | `/blog/<post>/` | `_posts/` | One page per blog post ([details](#blog)) |
 | `/blog/authors/?u=<username>` | `blog/authors.html` | Author page of a website account (not indexed; [accounts](#accounts)) |
 | `/account/` | `account/index.html` | Sign in or sign up, author profile, your posts (not indexed; [accounts](#accounts)) |
