@@ -8,11 +8,12 @@ const script = readFileSync(join(__dirname, "../../../assets/js/lab-contrast.js"
 
 function createTool(clipboard = true) {
   const elements = new Map();
-  for (const key of ["foreground", "background", "foreground-picker", "background-picker", "preview", "ratio", "status", "swap", "reset", "copy", "aa-normal", "aaa-normal", "aa-large", "aaa-large", "aa-ui"]) {
+  for (const key of ["foreground", "background", "foreground-picker", "background-picker", "preview", "ratio", "status", "swap", "reset", "example", "copy", "copy-css", "suggest-3-color", "suggest-3-detail", "suggest-3-swatch", "apply-3", "suggest-4-5-color", "suggest-4-5-detail", "suggest-4-5-swatch", "apply-4-5", "suggest-7-color", "suggest-7-detail", "suggest-7-swatch", "apply-7", "aa-normal", "aaa-normal", "aa-large", "aaa-large", "aa-ui"]) {
     elements.set(key, {
-      value: "", textContent: "", disabled: key === "copy", dataset: {}, style: {}, attrs: {}, events: {},
+      value: "", textContent: "", disabled: key === "copy" || key === "copy-css" || key.startsWith("apply-"), dataset: {}, style: {}, attrs: {}, events: {},
       addEventListener(event, fn) { this.events[event] = fn; },
       setAttribute(key, value) { this.attrs[key] = value; },
+      focus() { this.focused = true; },
       fire(event) { assert.ok(this.events[event], `${key} missing ${event}`); this.events[event](); },
     });
   }
@@ -96,4 +97,98 @@ test("copy result includes raw colors and descriptive pass/fail labels", async (
   const noClipboard = createTool(false);
   noClipboard.click("copy");
   assert.match(noClipboard.get("status").textContent, /Clipboard unavailable/);
+});
+
+
+function independentContrast(fg, bg) {
+  function lightness(value) {
+    const rgb = value.slice(1).match(/../g).map((part) => parseInt(part, 16) / 255);
+    const linear = rgb.map((x) => x <= 0.04045 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4);
+    return linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722;
+  }
+  const a = lightness(fg), b = lightness(bg);
+  return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+}
+
+test("example generates three WCAG-compliant foreground proposals", () => {
+  const app = createTool();
+  app.click("example");
+  assert.equal(app.get("foreground").value, "#999999");
+  assert.equal(app.get("aa-normal").textContent, "Fail");
+  for (const [key, threshold] of [["3", 3], ["4-5", 4.5], ["7", 7]]) {
+    const proposed = app.get("suggest-" + key + "-color").textContent;
+    assert.match(proposed, /^#[0-9A-F]{6}$/);
+    assert.ok(independentContrast(proposed, "#FFFFFF") >= threshold, key + " must actually meet threshold");
+    assert.equal(app.get("apply-" + key).disabled, false);
+    assert.equal(app.get("apply-" + key).dataset.color, proposed);
+  }
+});
+
+test("applying the three proposals passes the corresponding checks and returns focus", () => {
+  for (const [key, check] of [["3", "aa-large"], ["4-5", "aa-normal"], ["7", "aaa-normal"]]) {
+    const app = createTool();
+    app.click("example");
+    const proposed = app.get("suggest-" + key + "-color").textContent;
+    app.click("apply-" + key);
+    assert.equal(app.get("foreground").value, proposed);
+    assert.equal(app.get(check).textContent, "Pass");
+    assert.equal(app.get("foreground").focused, true);
+    assert.equal(app.get("apply-" + key).disabled, true);
+  }
+});
+
+test("7:1 unachievable background explicitly disables the AAA proposal", () => {
+  const app = createTool();
+  app.set("foreground", "#808080");
+  app.set("background", "#777777");
+  assert.equal(app.get("suggest-7-color").textContent, "Unavailable");
+  assert.equal(app.get("apply-7").disabled, true);
+  assert.equal(app.get("apply-7").dataset.color, "");
+  assert.match(app.get("suggest-7-detail").textContent, /Neither black nor white/);
+  assert.ok(independentContrast(app.get("suggest-4-5-color").textContent, "#777777") >= 4.5);
+});
+
+test("invalid colors clear suggestions; already passing colors do not need changes", () => {
+  const app = createTool();
+  app.set("foreground", "#000000");
+  assert.equal(app.get("suggest-7-detail").textContent, "Already meets this level.");
+  assert.equal(app.get("apply-7").disabled, true);
+  app.set("background", "invalid");
+  assert.equal(app.get("suggest-4-5-color").textContent, "—");
+  assert.equal(app.get("apply-4-5").disabled, true);
+  assert.equal(app.get("copy-css").disabled, true);
+  app.click("apply-4-5");
+  assert.equal(app.get("foreground").value, "#000000");
+});
+
+test("CSS variables export reflects current colors without extra libraries", async () => {
+  const app = createTool();
+  app.set("foreground", "#112233");
+  app.set("background", "#AABBCC");
+  app.click("copy-css");
+  await Promise.resolve();
+  assert.equal(app.copied[0], ":root {\n  --color-text: #112233;\n  --color-background: #AABBCC;\n}\n");
+  const unavailable = createTool(false);
+  unavailable.click("copy-css");
+  assert.match(unavailable.get("status").textContent, /Clipboard unavailable/);
+});
+
+test("varied light and dark backgrounds never get a failing suggestion", () => {
+  for (const [fg, bg] of [
+    ["#777777", "#FFFFFF"], ["#0000FF", "#444444"], ["#DF4A00", "#F6F0EE"],
+    ["#0B101F", "#272727"], ["#FBBA22", "#FDF7D0"], ["#EE9988", "#223344"],
+  ]) {
+    const app = createTool();
+    app.set("foreground", fg);
+    app.set("background", bg);
+    for (const [key, threshold] of [["3", 3], ["4-5", 4.5], ["7", 7]]) {
+      const candidate = app.get("suggest-" + key + "-color").textContent;
+      if (candidate === "Unavailable") {
+        assert.ok(independentContrast("#000000", bg) < threshold);
+        assert.ok(independentContrast("#FFFFFF", bg) < threshold);
+      } else {
+        assert.ok(independentContrast(candidate, bg) >= threshold, fg + " on " + bg + " at " + threshold);
+      }
+    }
+  }
 });
