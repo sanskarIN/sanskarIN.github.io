@@ -19,6 +19,15 @@
   const copy = find<HTMLButtonElement>("copy");
   const copyCss = find<HTMLButtonElement>("copy-css");
   const copyLink = find<HTMLButtonElement>("copy-link");
+  const copyPaletteCss = find<HTMLButtonElement>("copy-palette-css");
+  const copyPaletteJson = find<HTMLButtonElement>("copy-palette-json");
+  const paletteItems = [
+    { step: 50, amount: 0.9 }, { step: 100, amount: 0.75 },
+    { step: 200, amount: 0.55 }, { step: 300, amount: 0.35 },
+    { step: 400, amount: 0.15 }, { step: 500, amount: 0 },
+    { step: 600, amount: 0.2 }, { step: 700, amount: 0.4 },
+    { step: 800, amount: 0.6 }, { step: 900, amount: 0.8 },
+  ].map(({ step, amount }) => ({ step, amount, element: find<HTMLElement>(`tone-${step}`) }));
   const checks = [
     { element: find<HTMLElement>("aa-normal"), minimum: 4.5, label: "Normal text AA" },
     { element: find<HTMLElement>("aaa-normal"), minimum: 7, label: "Normal text AAA" },
@@ -37,9 +46,10 @@
     };
   });
   if (!foreground || !background || !foregroundPicker || !backgroundPicker ||
-      !preview || !ratio || !status || !swap || !reset || !example || !copy || !copyCss || !copyLink ||
+      !preview || !ratio || !status || !swap || !reset || !example || !copy || !copyCss || !copyLink || !copyPaletteCss || !copyPaletteJson ||
       checks.some((item) => !item.element) ||
-      suggestions.some((item) => !item.color || !item.detail || !item.swatch || !item.apply)) return;
+      suggestions.some((item) => !item.color || !item.detail || !item.swatch || !item.apply) ||
+    paletteItems.some((item) => !item.element)) return;
 
   const parseHex = (value: string): RGB | null => {
     const match = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(value.trim());
@@ -96,6 +106,8 @@
   let copyText = "";
   let cssText = "";
   let linkText = "";
+  let paletteCssText = "";
+  let paletteJsonText = "";
 
   const unavailableSuggestions = (): void => {
     for (const item of suggestions) {
@@ -114,9 +126,13 @@
     copy.disabled = true;
     copyCss.disabled = true;
     copyLink.disabled = true;
+    copyPaletteCss.disabled = true;
+    copyPaletteJson.disabled = true;
     copyText = "";
     cssText = "";
     linkText = "";
+    paletteCssText = "";
+    paletteJsonText = "";
     if (!fg || !bg) {
       ratio.textContent = "—";
       preview.style.color = "";
@@ -126,6 +142,11 @@
         check.element!.dataset.state = "unknown";
       }
       unavailableSuggestions();
+    for (const item of paletteItems) {
+      item.element!.textContent = `${item.step} · Enter a valid color pair.`;
+      item.element!.style.backgroundColor = "";
+      item.element!.style.color = "";
+    }
       announce("Enter valid 3- or 6-digit hexadecimal colors for both fields.", "error");
       return;
     }
@@ -164,6 +185,28 @@
       item.apply!.disabled = value >= item.minimum;
       item.apply!.dataset.color = value >= item.minimum ? "" : color;
     }
+    const black: RGB = [0, 0, 0];
+    const white: RGB = [255, 255, 255];
+    const palette: Record<string, { background: string; foreground: string; contrast: number; level: string }> = {};
+    const cssLines = [":root {"];
+    for (const item of paletteItems) {
+      const swatch = mix(fg, item.step < 500 ? white : black, item.amount);
+      const on = contrast(swatch, black) >= contrast(swatch, white) ? black : white;
+      const swatchHex = canonical(swatch);
+      const textHex = canonical(on);
+      const score = contrast(swatch, on);
+      const level = score >= 7 ? "AAA" : "AA";
+      item.element!.style.backgroundColor = swatchHex;
+      item.element!.style.color = textHex;
+      item.element!.textContent = `${item.step} · ${swatchHex} · Text ${textHex} · ${score.toFixed(2)}:1 · ${level}`;
+      palette[String(item.step)] = { background: swatchHex, foreground: textHex, contrast: Number(score.toFixed(2)), level };
+      cssLines.push(`  --palette-${item.step}: ${swatchHex};`);
+      cssLines.push(`  --palette-on-${item.step}: ${textHex};`);
+    }
+    paletteCssText = [...cssLines, "}", ""].join("\n");
+    paletteJsonText = JSON.stringify({ base: fgColor, shades: palette }, null, 2) + "\n";
+    copyPaletteCss.disabled = false;
+    copyPaletteJson.disabled = false;
     copyText = lines.join("\n");
     cssText = `:root {\n  --color-text: ${fgColor};\n  --color-background: ${bgColor};\n}\n`;
     linkText = `${location.href.split(/[?#]/)[0]}#fg=${fgColor.slice(1)}&bg=${bgColor.slice(1)}`;
@@ -227,6 +270,12 @@
   });
   copyLink.addEventListener("click", () => {
     if (!copyLink.disabled && linkText) copyToClipboard(linkText, "Shareable link copied.");
+  });
+  copyPaletteCss.addEventListener("click", () => {
+    if (!copyPaletteCss.disabled && paletteCssText) copyToClipboard(paletteCssText, "Palette CSS copied.");
+  });
+  copyPaletteJson.addEventListener("click", () => {
+    if (!copyPaletteJson.disabled && paletteJsonText) copyToClipboard(paletteJsonText, "Palette JSON copied.");
   });
   // URL fragments are not sent to the server during page requests.
   const shared = new URLSearchParams(location.hash.slice(1));
