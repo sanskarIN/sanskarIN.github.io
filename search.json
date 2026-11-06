@@ -127,6 +127,20 @@
   },
   {
     "type": "Post",
+    "title": "repodna-v1-5-0-release",
+    "url": "/blog/repodna-v1-5-0-release/",
+    "date": "6 Nov 2026",
+    "tags": [
+      "repodna",
+      "open-source",
+      "rust",
+      "developer-tools",
+      "code-analysis"
+    ],
+    "text": "RepoDNA v1.5.0 adds confirmed analysis-history deletion, safer findings export reviews, clearer CI impact and more reliable comparisons. RepoDNA v1.5.0 Released: More Control, Clearer Evidence, Safer Workflows Published: November 6, 2026 RepoDNA v1.5.0 is now available as a stable GitHub release ! RepoDNA is an open-source, local-first repository intelligence tool that helps developers understand codebases through architecture, dependencies, Git history, code quality, and evidence-backed findings. This release focuses on giving developers more control over their saved analysis data, improving the review process before exporting findings, and making codebase comparisons more reliable. What's New in RepoDNA v1.5.0? 1. Better"
+  },
+  {
+    "type": "Post",
     "title": "frametrellis-v1-4-0-release",
     "url": "/blog/frametrellis-v1-4-0-release/",
     "date": "2 Nov 2026",
