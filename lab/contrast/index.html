@@ -6,7 +6,7 @@ eyebrow: Developer Lab · Accessibility tools
 lead: Check text and interface color pairs against WCAG 2.2 contrast thresholds, entirely in your browser.
 description: "Free, private WCAG 2.2 contrast checker: compare hex colors, preview text, and check AA and AAA contrast levels."
 permalink: /lab/contrast/
-scripts: [lab-contrast]
+scripts: [lab-contrast, lab-themes]
 ---
 <p class="lab-breadcrumb">{% include link.html url="/lab/" label="Developer Lab" class="text-link" arrow=true %}</p>
 <div class="lab-workspace" data-contrast-tool>
@@ -111,6 +111,29 @@ scripts: [lab-contrast]
       <li class="lab-contrast-palette-swatch" data-contrast-tone-800>800 · JavaScript required for preview.</li>
       <li class="lab-contrast-palette-swatch" data-contrast-tone-900>900 · JavaScript required for preview.</li>
     </ul>
+  </section>
+  <section class="lab-results-panel lab-contrast-themes" data-contrast-themes aria-labelledby="contrast-themes-title">
+    <h2 id="contrast-themes-title">Light and dark theme tokens</h2>
+    <p class="form-field__hint">Use the foreground color as an accent seed. The generated accent is adjusted to contrast at least 3:1 against each theme surface, and its black/white button text meets normal-text AA. Neutral colors are predefined. Verify focus, hover, disabled states and other elements in your final interface.</p>
+    <div class="lab-toolbar" role="group" aria-label="Theme export actions">
+      <button type="button" class="copy-button" data-theme-copy-css disabled>Copy theme CSS</button>
+      <button type="button" class="copy-button" data-theme-copy-json disabled>Copy theme JSON</button>
+    </div>
+    <p class="lab-status" role="status" aria-live="polite" aria-atomic="true" data-theme-status>Enter colors to generate two themes.</p>
+    <div class="lab-contrast-theme-grid">
+      <div class="lab-contrast-theme-card" data-theme-card-light>
+        <h3>Light theme</h3>
+        <p data-theme-muted-light>Example secondary text</p>
+        <span class="lab-contrast-theme-action" data-theme-action-light>Sample button</span>
+        <p class="lab-contrast-theme-detail" data-theme-details-light>Requires JavaScript.</p>
+      </div>
+      <div class="lab-contrast-theme-card" data-theme-card-dark>
+        <h3>Dark theme</h3>
+        <p data-theme-muted-dark>Example secondary text</p>
+        <span class="lab-contrast-theme-action" data-theme-action-dark>Sample button</span>
+        <p class="lab-contrast-theme-detail" data-theme-details-dark>Requires JavaScript.</p>
+      </div>
+    </div>
   </section>
   <noscript><p class="lab-status">Enable JavaScript to calculate color contrast locally.</p></noscript>
 </div>
