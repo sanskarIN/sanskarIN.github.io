@@ -7,7 +7,7 @@
     "build": "tsc --project tsconfig.json",
     "watch": "tsc --project tsconfig.json --watch",
     "check": "tsc --project tsconfig.json --noEmit",
-    "test:lab": "node --test .github/scripts/tests/lab-json.test.cjs .github/scripts/tests/lab-next.test.cjs .github/scripts/tests/lab-convert.test.cjs .github/scripts/tests/lab-contrast.test.cjs"
+    "test:lab": "node --test .github/scripts/tests/lab-json.test.cjs .github/scripts/tests/lab-next.test.cjs .github/scripts/tests/lab-convert.test.cjs .github/scripts/tests/lab-contrast.test.cjs .github/scripts/tests/lab-themes.test.cjs"
   },
   "devDependencies": {
     "typescript": "7.0.2"
