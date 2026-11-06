@@ -784,17 +784,24 @@
   },
   {
     "type": "Project",
-    "title": "KathaSvara",
-    "url": "https://github.com/sanskarIN/KathaSvara",
-    "tags": [],
-    "text": "Give Every Story a Voice. TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "latebrake",
     "url": "https://github.com/sanskarIN/latebrake",
     "tags": [],
     "text": "Latebrake — Race Beyond Limits. C++"
+  },
+  {
+    "type": "Project",
+    "title": "frametrellis",
+    "url": "https://github.com/sanskarIN/frametrellis",
+    "tags": [
+      "cmake",
+      "cpp",
+      "cpp20",
+      "desktop-application",
+      "docker",
+      "ffmpeg"
+    ],
+    "text": "Open-source video editor. C++"
   },
   {
     "type": "Project",
@@ -826,17 +833,24 @@
   },
   {
     "type": "Project",
-    "title": "frametrellis",
-    "url": "https://github.com/sanskarIN/frametrellis",
+    "title": "SonicNest",
+    "url": "https://github.com/sanskarIN/SonicNest",
     "tags": [
-      "cmake",
-      "cpp",
-      "cpp20",
-      "desktop-application",
-      "docker",
-      "ffmpeg"
+      "mp3",
+      "recorded-sounds",
+      "recorder",
+      "recorder-app",
+      "sound",
+      "soundrecorder"
     ],
-    "text": "Open-source video editor. C++"
+    "text": "SonicNest is a professional, modern, open-source sound and voice recorder worthy of public release. Dart"
+  },
+  {
+    "type": "Project",
+    "title": "KathaSvara",
+    "url": "https://github.com/sanskarIN/KathaSvara",
+    "tags": [],
+    "text": "Give Every Story a Voice. TypeScript"
   },
   {
     "type": "Project",
@@ -947,20 +961,6 @@
     "url": "https://github.com/sanskarIN/thermoshift",
     "tags": [],
     "text": "TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "SonicNest",
-    "url": "https://github.com/sanskarIN/SonicNest",
-    "tags": [
-      "mp3",
-      "recorded-sounds",
-      "recorder",
-      "recorder-app",
-      "sound",
-      "soundrecorder"
-    ],
-    "text": "SonicNest is a professional, modern, open-source sound and voice recorder worthy of public release. Dart"
   },
   {
     "type": "Project",
