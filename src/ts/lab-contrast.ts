@@ -18,6 +18,7 @@
   const example = find<HTMLButtonElement>("example");
   const copy = find<HTMLButtonElement>("copy");
   const copyCss = find<HTMLButtonElement>("copy-css");
+  const copyLink = find<HTMLButtonElement>("copy-link");
   const checks = [
     { element: find<HTMLElement>("aa-normal"), minimum: 4.5, label: "Normal text AA" },
     { element: find<HTMLElement>("aaa-normal"), minimum: 7, label: "Normal text AAA" },
@@ -36,7 +37,7 @@
     };
   });
   if (!foreground || !background || !foregroundPicker || !backgroundPicker ||
-      !preview || !ratio || !status || !swap || !reset || !example || !copy || !copyCss ||
+      !preview || !ratio || !status || !swap || !reset || !example || !copy || !copyCss || !copyLink ||
       checks.some((item) => !item.element) ||
       suggestions.some((item) => !item.color || !item.detail || !item.swatch || !item.apply)) return;
 
@@ -94,6 +95,7 @@
   };
   let copyText = "";
   let cssText = "";
+  let linkText = "";
 
   const unavailableSuggestions = (): void => {
     for (const item of suggestions) {
@@ -111,8 +113,10 @@
     background.setAttribute("aria-invalid", String(!bg));
     copy.disabled = true;
     copyCss.disabled = true;
+    copyLink.disabled = true;
     copyText = "";
     cssText = "";
+    linkText = "";
     if (!fg || !bg) {
       ratio.textContent = "—";
       preview.style.color = "";
@@ -162,8 +166,10 @@
     }
     copyText = lines.join("\n");
     cssText = `:root {\n  --color-text: ${fgColor};\n  --color-background: ${bgColor};\n}\n`;
+    linkText = `${location.href.split(/[?#]/)[0]}#fg=${fgColor.slice(1)}&bg=${bgColor.slice(1)}`;
     copy.disabled = false;
     copyCss.disabled = false;
+    copyLink.disabled = false;
     announce("Contrast calculated. Suggestions are available below the results.", "success");
   };
   const bindColor = (field: HTMLInputElement, picker: HTMLInputElement): void => {
@@ -219,5 +225,16 @@
   copyCss.addEventListener("click", () => {
     if (!copyCss.disabled && cssText) copyToClipboard(cssText, "CSS variables copied.");
   });
+  copyLink.addEventListener("click", () => {
+    if (!copyLink.disabled && linkText) copyToClipboard(linkText, "Shareable link copied.");
+  });
+  // URL fragments are not sent to the server during page requests.
+  const shared = new URLSearchParams(location.hash.slice(1));
+  const sharedFg = shared.get("fg");
+  const sharedBg = shared.get("bg");
+  if (sharedFg && sharedBg && /^[0-9a-f]{6}$/i.test(sharedFg) && /^[0-9a-f]{6}$/i.test(sharedBg)) {
+    foreground.value = `#${sharedFg.toUpperCase()}`;
+    background.value = `#${sharedBg.toUpperCase()}`;
+  }
   update();
 })();
