@@ -6,11 +6,11 @@ const { join } = require("node:path");
 const vm = require("node:vm");
 const script = readFileSync(join(__dirname, "../../../assets/js/lab-contrast.js"), "utf8");
 
-function createTool(clipboard = true) {
+function createTool(clipboard = true, hash = "") {
   const elements = new Map();
-  for (const key of ["foreground", "background", "foreground-picker", "background-picker", "preview", "ratio", "status", "swap", "reset", "example", "copy", "copy-css", "suggest-3-color", "suggest-3-detail", "suggest-3-swatch", "apply-3", "suggest-4-5-color", "suggest-4-5-detail", "suggest-4-5-swatch", "apply-4-5", "suggest-7-color", "suggest-7-detail", "suggest-7-swatch", "apply-7", "aa-normal", "aaa-normal", "aa-large", "aaa-large", "aa-ui"]) {
+  for (const key of ["foreground", "background", "foreground-picker", "background-picker", "preview", "ratio", "status", "swap", "reset", "example", "copy", "copy-css", "copy-link", "suggest-3-color", "suggest-3-detail", "suggest-3-swatch", "apply-3", "suggest-4-5-color", "suggest-4-5-detail", "suggest-4-5-swatch", "apply-4-5", "suggest-7-color", "suggest-7-detail", "suggest-7-swatch", "apply-7", "aa-normal", "aaa-normal", "aa-large", "aaa-large", "aa-ui"]) {
     elements.set(key, {
-      value: "", textContent: "", disabled: key === "copy" || key === "copy-css" || key.startsWith("apply-"), dataset: {}, style: {}, attrs: {}, events: {},
+      value: "", textContent: "", disabled: key === "copy" || key === "copy-css" || key === "copy-link" || key.startsWith("apply-"), dataset: {}, style: {}, attrs: {}, events: {},
       addEventListener(event, fn) { this.events[event] = fn; },
       setAttribute(key, value) { this.attrs[key] = value; },
       focus() { this.focused = true; },
@@ -26,7 +26,8 @@ function createTool(clipboard = true) {
   const copied = [];
   const document = { querySelector(selector) { return selector === "[data-contrast-tool]" ? root : null; } };
   const navigator = clipboard ? { clipboard: { writeText(value) { copied.push(value); return Promise.resolve(); } } } : {};
-  vm.runInNewContext(script, { document, navigator }, { filename: "lab-contrast.js", timeout: 1200 });
+  const location = { href: "https://sanskarin.github.io/lab/contrast/" + hash, hash };
+  vm.runInNewContext(script, { document, navigator, location, URLSearchParams }, { filename: "lab-contrast.js", timeout: 1200 });
   const get = (key) => elements.get(key);
   const set = (key, value, event = "input") => { get(key).value = value; get(key).fire(event); };
   return { get, set, copied, click(key) { get(key).fire("click"); } };
@@ -191,4 +192,39 @@ test("varied light and dark backgrounds never get a failing suggestion", () => {
       }
     }
   }
+});
+
+test("share link includes only canonical hex colors in a URL fragment", async () => {
+  const app = createTool();
+  app.set("foreground", "#123");
+  app.set("background", "#abc");
+  assert.equal(app.get("copy-link").disabled, false);
+  app.click("copy-link");
+  await Promise.resolve();
+  assert.equal(app.copied[0], "https://sanskarin.github.io/lab/contrast/#fg=112233&bg=AABBCC");
+  assert.equal(app.get("status").dataset.state, "success");
+});
+
+test("shared colors restore on load, but unrelated or invalid fragments are ignored", () => {
+  const restored = createTool(true, "#fg=abcdef&bg=123456");
+  assert.equal(restored.get("foreground").value, "#ABCDEF");
+  assert.equal(restored.get("background").value, "#123456");
+  assert.equal(restored.get("foreground-picker").value, "#ABCDEF");
+  assert.equal(restored.get("ratio").textContent !== "—", true);
+  for (const fragment of ["#section-title", "#fg=GGGGGG&bg=123456", "#fg=ABCDEF&bg=01234G", "#fg=ABCDEF", "#fg=%3Cscript%3E&bg=000000"]) {
+    const ignored = createTool(true, fragment);
+    assert.equal(ignored.get("foreground").value, "#1F2937", fragment);
+    assert.equal(ignored.get("background").value, "#FFFFFF", fragment);
+  }
+});
+
+test("invalid inputs disable share links and unavailable clipboard shows status", () => {
+  const app = createTool();
+  app.set("background", "not-a-color");
+  assert.equal(app.get("copy-link").disabled, true);
+  app.click("copy-link");
+  assert.equal(app.copied.length, 0);
+  const noClipboard = createTool(false);
+  noClipboard.click("copy-link");
+  assert.match(noClipboard.get("status").textContent, /Clipboard unavailable/);
 });

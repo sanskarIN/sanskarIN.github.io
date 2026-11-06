@@ -35,6 +35,7 @@ scripts: [lab-contrast]
     <button type="button" class="button button--ghost" data-contrast-example>Try low-contrast example</button>
     <button type="button" class="copy-button" data-contrast-copy disabled>Copy results</button>
     <button type="button" class="copy-button" data-contrast-copy-css disabled>Copy CSS variables</button>
+    <button type="button" class="copy-button" data-contrast-copy-link disabled>Copy share link</button>
   </div>
   <p class="lab-status" data-contrast-status role="status" aria-live="polite" aria-atomic="true">Contrast results appear automatically when you edit a color.</p>
   <div class="lab-contrast-results">
@@ -97,5 +98,5 @@ scripts: [lab-contrast]
   <h2>Reading the results</h2>
   <p>WCAG 2.2 requires at least <strong>4.5:1</strong> contrast for normal text at AA and <strong>7:1</strong> at AAA. Large text needs <strong>3:1</strong> at AA and <strong>4.5:1</strong> at AAA. Essential non-text interface graphics typically need <strong>3:1</strong> at AA against adjacent colors.</p>
   <p>Large text means at least 18 pt regular (about 24 CSS px) or 14 pt bold (about 18.7 CSS px). These results assess only opaque foreground/background colors, not font thickness, transparency, images, gradients, hover states, or full WCAG conformance. The suggested foreground is obtained by blending toward black or white and may be unavailable at 7:1 on some backgrounds. Pass/fail uses the unrounded ratio.</p>
-  <p>Reference: <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" rel="noopener noreferrer">WCAG 2.2 Contrast (Minimum)</a>, <a href="https://www.w3.org/TR/WCAG22/#contrast-enhanced" rel="noopener noreferrer">Contrast (Enhanced)</a>, and <a href="https://www.w3.org/TR/WCAG22/#non-text-contrast" rel="noopener noreferrer">Non-text Contrast</a>. Use <strong>Copy CSS variables</strong> to reuse the current colors in a stylesheet. All calculations remain on this page and no input is uploaded or saved.</p>
+  <p>Reference: <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" rel="noopener noreferrer">WCAG 2.2 Contrast (Minimum)</a>, <a href="https://www.w3.org/TR/WCAG22/#contrast-enhanced" rel="noopener noreferrer">Contrast (Enhanced)</a>, and <a href="https://www.w3.org/TR/WCAG22/#non-text-contrast" rel="noopener noreferrer">Non-text Contrast</a>. Use <strong>Copy CSS variables</strong> to reuse the current colors in a stylesheet. All calculations remain in your browser and this tool does not upload or persist your color inputs. <strong>Copy share link</strong> creates a URL fragment containing your two hex colors; opening it restores them. URL fragments are not sent to the server in the page request, but shared links may appear in browser history or be visible to anyone you send them to.</p>
 </section>
