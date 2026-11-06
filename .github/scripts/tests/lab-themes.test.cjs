@@ -66,7 +66,9 @@ test("theme previews and exports satisfy independently calculated WCAG threshold
       assert.ok(score(theme.border, theme.surface) >= 3, seed + name + " border");
       assert.ok(score(theme.accent, theme.surface) >= 3, seed + name + " accent");
       assert.ok(score(theme["on-accent"], theme.accent) >= 4.5, seed + name + " button text");
-      assert.equal(app.get("theme-card-" + name).style.backgroundColor, theme.background);
+      assert.ok(score(theme.text, theme.surface) >= 7, seed + name + " surface text");
+      assert.ok(score(theme.muted, theme.surface) >= 4.5, seed + name + " surface muted");
+      assert.equal(app.get("theme-card-" + name).style.backgroundColor, theme.surface);
       assert.equal(app.get("theme-action-" + name).style.backgroundColor, theme.accent);
     }
   }
