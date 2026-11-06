@@ -59,6 +59,7 @@ jobs:
           npm run build
           if ! git diff --quiet -- assets/js; then
             git diff --stat -- assets/js
+            git diff -- assets/js | sed -n '1,220p'
             echo "::error::assets/js/ is out of date. Run npm run build and commit the result."
             exit 1
           fi
