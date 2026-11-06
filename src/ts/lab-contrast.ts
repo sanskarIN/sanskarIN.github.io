@@ -142,11 +142,11 @@
         check.element!.dataset.state = "unknown";
       }
       unavailableSuggestions();
-    for (const item of paletteItems) {
-      item.element!.textContent = `${item.step} · Enter a valid color pair.`;
-      item.element!.style.backgroundColor = "";
-      item.element!.style.color = "";
-    }
+      for (const item of paletteItems) {
+        item.element!.textContent = `${item.step} · Enter a valid color pair.`;
+        item.element!.style.backgroundColor = "";
+        item.element!.style.color = "";
+      }
       announce("Enter valid 3- or 6-digit hexadecimal colors for both fields.", "error");
       return;
     }
