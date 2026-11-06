@@ -254,3 +254,34 @@
   overflow-wrap: anywhere;
 }
 @media print { .lab-contrast-palette .lab-toolbar { display: none; } }
+
+/* Accessible light and dark theme examples; labels remain textual. */
+.lab-contrast-themes { margin-top: var(--space-3); }
+.lab-contrast-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: var(--space-4);
+}
+.lab-contrast-theme-card {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: var(--space-4);
+  min-width: 0;
+  padding: var(--space-5);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+.lab-contrast-theme-card h3 { font-size: var(--text-lg); color: inherit; }
+.lab-contrast-theme-action {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: 600;
+}
+.lab-contrast-theme-detail { font-family: var(--font-mono); font-size: var(--text-sm); }
+@media print { .lab-contrast-themes .lab-toolbar { display: none; } }
