@@ -21,11 +21,11 @@
     const copyPaletteCss = find("copy-palette-css");
     const copyPaletteJson = find("copy-palette-json");
     const paletteItems = [
-      { step: 50, amount: 0.9 }, { step: 100, amount: 0.75 },
-      { step: 200, amount: 0.55 }, { step: 300, amount: 0.35 },
-      { step: 400, amount: 0.15 }, { step: 500, amount: 0 },
-      { step: 600, amount: 0.2 }, { step: 700, amount: 0.4 },
-      { step: 800, amount: 0.6 }, { step: 900, amount: 0.8 },
+        { step: 50, amount: 0.9 }, { step: 100, amount: 0.75 },
+        { step: 200, amount: 0.55 }, { step: 300, amount: 0.35 },
+        { step: 400, amount: 0.15 }, { step: 500, amount: 0 },
+        { step: 600, amount: 0.2 }, { step: 700, amount: 0.4 },
+        { step: 800, amount: 0.6 }, { step: 900, amount: 0.8 },
     ].map(({ step, amount }) => ({ step, amount, element: find(`tone-${step}`) }));
     const checks = [
         { element: find("aa-normal"), minimum: 4.5, label: "Normal text AA" },
@@ -141,11 +141,11 @@
                 check.element.dataset.state = "unknown";
             }
             unavailableSuggestions();
-        for (const item of paletteItems) {
-          item.element.textContent = `${item.step} · Enter a valid color pair.`;
-          item.element.style.backgroundColor = "";
-          item.element.style.color = "";
-        }
+            for (const item of paletteItems) {
+                item.element.textContent = `${item.step} · Enter a valid color pair.`;
+                item.element.style.backgroundColor = "";
+                item.element.style.color = "";
+            }
             announce("Enter valid 3- or 6-digit hexadecimal colors for both fields.", "error");
             return;
         }
