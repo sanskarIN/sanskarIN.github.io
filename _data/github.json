@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T12:29:44Z",
+  "generated_at": "2026-11-06T12:13:13Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -14,7 +14,7 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 13.6
+      "percent": 13.5
     },
     {
       "name": "TypeScript",
@@ -24,17 +24,17 @@
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 12.1
+      "percent": 12.0
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 11.6
+      "percent": 11.5
     },
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 10.7
+      "percent": 10.8
     },
     {
       "name": "Python",
@@ -44,7 +44,7 @@
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 28.3,
+      "percent": 28.4,
       "other": true
     }
   ],
@@ -55,22 +55,6 @@
     "LineLoom"
   ],
   "repositories": [
-    {
-      "name": "KathaSvara",
-      "url": "https://github.com/sanskarIN/KathaSvara",
-      "description": "Give Every Story a Voice.",
-      "homepage": "https://sanskarin.github.io/KathaSvara/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "MPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-05"
-    },
     {
       "name": "latebrake",
       "url": "https://github.com/sanskarIN/latebrake",
@@ -85,62 +69,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
-      "pushed": "2026-11-05"
-    },
-    {
-      "name": "LineLoom",
-      "url": "https://github.com/sanskarIN/LineLoom",
-      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
-      "homepage": "https://sanskarin.github.io/LineLoom/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 3,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-17",
-      "pushed": "2026-11-05"
-    },
-    {
-      "name": "RepoDNA",
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 8,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
-      "pushed": "2026-11-05"
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-11-04"
+      "pushed": "2026-11-06"
     },
     {
       "name": "frametrellis",
@@ -163,7 +92,101 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-11",
-      "pushed": "2026-11-04"
+      "pushed": "2026-11-06"
+    },
+    {
+      "name": "LineLoom",
+      "url": "https://github.com/sanskarIN/LineLoom",
+      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
+      "homepage": "https://sanskarin.github.io/LineLoom/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 3,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
+      "pushed": "2026-11-06"
+    },
+    {
+      "name": "RepoDNA",
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 8,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-11-06"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-11-06"
+    },
+    {
+      "name": "SonicNest",
+      "url": "https://github.com/sanskarIN/SonicNest",
+      "description": "SonicNest is a professional, modern, open-source sound and voice recorder worthy of public release.",
+      "homepage": null,
+      "language": "Dart",
+      "language_color": "#00B4AB",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "mp3",
+        "recorded-sounds",
+        "recorder",
+        "recorder-app",
+        "sound",
+        "soundrecorder"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-14",
+      "pushed": "2026-11-06"
+    },
+    {
+      "name": "KathaSvara",
+      "url": "https://github.com/sanskarIN/KathaSvara",
+      "description": "Give Every Story a Voice.",
+      "homepage": "https://sanskarin.github.io/KathaSvara/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "MPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-05"
     },
     {
       "name": "ReproCrate",
@@ -390,29 +413,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-10-30"
-    },
-    {
-      "name": "SonicNest",
-      "url": "https://github.com/sanskarIN/SonicNest",
-      "description": "SonicNest is a professional, modern, open-source sound and voice recorder worthy of public release.",
-      "homepage": null,
-      "language": "Dart",
-      "language_color": "#00B4AB",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "mp3",
-        "recorded-sounds",
-        "recorder",
-        "recorder-app",
-        "sound",
-        "soundrecorder"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-14",
       "pushed": "2026-10-30"
     },
     {
@@ -1260,9 +1260,9 @@
     }
   ],
   "activity": {
-    "total": 36040,
+    "total": 36482,
     "start": "2025-11-02",
-    "end": "2026-11-05",
+    "end": "2026-11-06",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1633,8 +1633,9 @@
       498,
       836,
       278,
-      214,
-      93
+      227,
+      188,
+      334
     ],
     "levels": [
       0,
@@ -2005,6 +2006,7 @@
       2,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -2061,8 +2063,8 @@
         "label": "Nov"
       }
     ],
-    "active_days": 127,
-    "longest_streak": 50,
+    "active_days": 128,
+    "longest_streak": 51,
     "busiest": {
       "date": "2026-08-19",
       "count": 7067
