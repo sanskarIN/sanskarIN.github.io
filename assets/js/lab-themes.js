@@ -15,16 +15,16 @@
         details: root?.querySelector("[data-theme-details-" + name + "]"),
     }));
     if (!root || !foreground || !background || !cssButton || !jsonButton || !status ||
-            panels.some((panel) => !panel.card || !panel.muted || !panel.action || !panel.details)) return;
-
+        panels.some((panel) => !panel.card || !panel.muted || !panel.action || !panel.details))
+        return;
     const parseHex = (input) => {
         const match = /^#?([a-f0-9]{3}|[a-f0-9]{6})$/i.exec(input.trim());
-        if (!match) return null;
+        if (!match)
+            return null;
         const full = match[1].length === 3 ? Array.from(match[1], (c) => c + c).join("") : match[1];
         return [0, 2, 4].map((i) => parseInt(full.slice(i, i + 2), 16));
     };
-    const hex = (rgb) =>
-        "#" + rgb.map((channel) => channel.toString(16).padStart(2, "0")).join("").toUpperCase();
+    const hex = (rgb) => "#" + rgb.map((channel) => channel.toString(16).padStart(2, "0")).join("").toUpperCase();
     const luminance = (rgb) => {
         const channels = rgb.map((channel) => {
             const value = channel / 255;
@@ -36,27 +36,28 @@
         const first = luminance(a), second = luminance(b);
         return (Math.max(first, second) + 0.05) / (Math.min(first, second) + 0.05);
     };
-    const mix = (a, b, amount) =>
-        a.map((channel, i) => Math.round(channel + (b[i] - channel) * amount));
+    const mix = (a, b, amount) => a.map((channel, i) => Math.round(channel + (b[i] - channel) * amount));
     const black = [0, 0, 0];
     const white = [255, 255, 255];
-
     // When needed, darken or lighten the accent to meet 3:1 against its surface.
     const accessibleAccent = (seed, surface) => {
-        if (contrast(seed, surface) >= 3) return seed;
+        if (contrast(seed, surface) >= 3)
+            return seed;
         const candidates = [];
         for (const target of [black, white]) {
-            if (contrast(target, surface) < 3) continue;
+            if (contrast(target, surface) < 3)
+                continue;
             let low = 0, high = 1;
             for (let i = 0; i < 25; i++) {
                 const middle = (low + high) / 2;
-                if (contrast(mix(seed, target, middle), surface) >= 3) high = middle;
-                else low = middle;
+                if (contrast(mix(seed, target, middle), surface) >= 3)
+                    high = middle;
+                else
+                    low = middle;
             }
             candidates.push(mix(seed, target, high));
         }
-        candidates.sort((a, b) =>
-            a.reduce((sum, value, i) => sum + (value - seed[i]) ** 2, 0) -
+        candidates.sort((a, b) => a.reduce((sum, value, i) => sum + (value - seed[i]) ** 2, 0) -
             b.reduce((sum, value, i) => sum + (value - seed[i]) ** 2, 0));
         // An opaque surface always has at least one black/white endpoint above 3:1.
         return candidates[0] || black;
@@ -112,8 +113,7 @@
             panel.details.textContent = "Button label " + contrast(accent, onAccent).toFixed(2) +
                 ":1 · Accent on surface " + contrast(accent, spec.surface).toFixed(2) + ":1";
         }
-        const lines = (name, indent) =>
-            Object.entries(themes[name]).map(([key, value]) => indent + "--theme-" + key + ": " + value + ";");
+        const lines = (name, indent) => Object.entries(themes[name]).map(([key, value]) => indent + "--theme-" + key + ": " + value + ";");
         themeCss = [
             "/* Light/dark accessible tokens from " + hex(seed) + "; verify in your layout. */",
             ":root {", ...lines("light", "  "), "}",
@@ -136,10 +136,12 @@
             .catch(() => say("Clipboard permission denied.", "error"));
     };
     cssButton.addEventListener("click", () => {
-        if (!cssButton.disabled && themeCss) copy(themeCss, "Theme CSS");
+        if (!cssButton.disabled && themeCss)
+            copy(themeCss, "Theme CSS");
     });
     jsonButton.addEventListener("click", () => {
-        if (!jsonButton.disabled && themeJson) copy(themeJson, "Theme JSON");
+        if (!jsonButton.disabled && themeJson)
+            copy(themeJson, "Theme JSON");
     });
     for (const field of [foreground, background]) {
         field.addEventListener("input", render);
