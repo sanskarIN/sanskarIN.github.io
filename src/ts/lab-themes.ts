@@ -103,7 +103,7 @@
       };
       themes[spec.name] = tokens;
       const panel = panels.find((item) => item.name === spec.name)!;
-      panel.card!.style.backgroundColor = tokens.background;
+      panel.card!.style.backgroundColor = tokens.surface;
       panel.card!.style.color = tokens.text;
       panel.card!.style.borderColor = tokens.border;
       panel.muted!.style.color = tokens.muted;
