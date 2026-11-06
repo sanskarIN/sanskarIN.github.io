@@ -8,9 +8,9 @@ const script = readFileSync(join(__dirname, "../../../assets/js/lab-contrast.js"
 
 function createTool(clipboard = true, hash = "") {
   const elements = new Map();
-  for (const key of ["foreground", "background", "foreground-picker", "background-picker", "preview", "ratio", "status", "swap", "reset", "example", "copy", "copy-css", "copy-link", "suggest-3-color", "suggest-3-detail", "suggest-3-swatch", "apply-3", "suggest-4-5-color", "suggest-4-5-detail", "suggest-4-5-swatch", "apply-4-5", "suggest-7-color", "suggest-7-detail", "suggest-7-swatch", "apply-7", "aa-normal", "aaa-normal", "aa-large", "aaa-large", "aa-ui"]) {
+  for (const key of ["foreground", "background", "foreground-picker", "background-picker", "preview", "ratio", "status", "swap", "reset", "example", "copy", "copy-css", "copy-link", "copy-palette-css", "copy-palette-json", "tone-50", "tone-100", "tone-200", "tone-300", "tone-400", "tone-500", "tone-600", "tone-700", "tone-800", "tone-900", "suggest-3-color", "suggest-3-detail", "suggest-3-swatch", "apply-3", "suggest-4-5-color", "suggest-4-5-detail", "suggest-4-5-swatch", "apply-4-5", "suggest-7-color", "suggest-7-detail", "suggest-7-swatch", "apply-7", "aa-normal", "aaa-normal", "aa-large", "aaa-large", "aa-ui"]) {
     elements.set(key, {
-      value: "", textContent: "", disabled: key === "copy" || key === "copy-css" || key === "copy-link" || key.startsWith("apply-"), dataset: {}, style: {}, attrs: {}, events: {},
+      value: "", textContent: "", disabled: key === "copy" || key === "copy-css" || key === "copy-link" || key === "copy-palette-css" || key === "copy-palette-json" || key.startsWith("apply-"), dataset: {}, style: {}, attrs: {}, events: {},
       addEventListener(event, fn) { this.events[event] = fn; },
       setAttribute(key, value) { this.attrs[key] = value; },
       focus() { this.focused = true; },
@@ -227,4 +227,53 @@ test("invalid inputs disable share links and unavailable clipboard shows status"
   const noClipboard = createTool(false);
   noClipboard.click("copy-link");
   assert.match(noClipboard.get("status").textContent, /Clipboard unavailable/);
+});
+
+test("ten palette swatches use AA-or-better black or white text", () => {
+  for (const seed of ["#000000", "#FFFFFF", "#B93C0B", "#777777", "#123"]) {
+    const app = createTool();
+    app.set("foreground", seed);
+    for (const grade of [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]) {
+      const node = app.get("tone-" + grade);
+      const bg = node.style.backgroundColor;
+      const fg = node.style.color;
+      assert.match(bg, /^#[0-9A-F]{6}$/);
+      assert.ok(fg === "#000000" || fg === "#FFFFFF");
+      const contrast = independentContrast(bg, fg);
+      assert.ok(contrast >= 4.5, seed + ": " + grade);
+      assert.match(node.textContent, /AA/);
+      assert.match(node.textContent, new RegExp(String(grade) + " ·"));
+    }
+  }
+});
+
+test("palette CSS and JSON exports include reproducible colors and AA text pairs", async () => {
+  const app = createTool();
+  app.set("foreground", "#B93C0B");
+  app.click("copy-palette-css");
+  app.click("copy-palette-json");
+  await Promise.resolve();
+  const css = app.copied[0], json = JSON.parse(app.copied[1]);
+  assert.match(css, /--palette-500: #B93C0B;/);
+  assert.match(css, /--palette-on-500: #[0-9A-F]{6};/);
+  assert.equal(json.base, "#B93C0B");
+  assert.equal(Object.keys(json.shades).length, 10);
+  for (const [step, info] of Object.entries(json.shades)) {
+    assert.ok(independentContrast(info.background, info.foreground) >= 4.5, step);
+    assert.equal(info.background, app.get("tone-" + step).style.backgroundColor);
+    assert.ok(["AA", "AAA"].includes(info.level));
+  }
+});
+
+test("invalid color pairs clear palette, disable exports and show clipboard errors", () => {
+  const app = createTool();
+  app.set("background", "invalid");
+  assert.equal(app.get("copy-palette-css").disabled, true);
+  assert.equal(app.get("copy-palette-json").disabled, true);
+  assert.equal(app.get("tone-500").style.backgroundColor, "");
+  app.click("copy-palette-css");
+  assert.equal(app.copied.length, 0);
+  const denied = createTool(false);
+  denied.click("copy-palette-json");
+  assert.match(denied.get("status").textContent, /Clipboard unavailable/);
 });
