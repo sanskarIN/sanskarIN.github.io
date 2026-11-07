@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T12:13:13Z",
+  "generated_at": "2026-11-07T11:09:40Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -24,12 +24,12 @@
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 12.0
+      "percent": 11.9
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 11.5
+      "percent": 11.4
     },
     {
       "name": "Rust",
@@ -44,7 +44,7 @@
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 28.4,
+      "percent": 28.5,
       "other": true
     }
   ],
@@ -69,7 +69,23 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
-      "pushed": "2026-11-06"
+      "pushed": "2026-11-07"
+    },
+    {
+      "name": "KathaSvara",
+      "url": "https://github.com/sanskarIN/KathaSvara",
+      "description": "Give Every Story a Voice.",
+      "homepage": "https://sanskarin.github.io/KathaSvara/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "MPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-07"
     },
     {
       "name": "frametrellis",
@@ -92,23 +108,46 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-11",
-      "pushed": "2026-11-06"
+      "pushed": "2026-11-07"
     },
     {
-      "name": "LineLoom",
-      "url": "https://github.com/sanskarIN/LineLoom",
-      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
-      "homepage": "https://sanskarin.github.io/LineLoom/",
+      "name": "EyeZen",
+      "url": "https://github.com/sanskarIN/EyeZen",
+      "description": "Your screen. Your comfort. Your environment.",
+      "homepage": "https://sanskarin.github.io/EyeZen/",
       "language": "TypeScript",
       "language_color": "#3178c6",
-      "stars": 3,
+      "stars": 1,
       "forks": 0,
       "topics": [],
-      "license": "MIT",
+      "license": "MPL-2.0",
       "fork": false,
       "archived": false,
-      "created": "2026-10-17",
-      "pushed": "2026-11-06"
+      "created": "2026-10-14",
+      "pushed": "2026-11-07"
+    },
+    {
+      "name": "LangSteps",
+      "url": "https://github.com/sanskarIN/LangSteps",
+      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
+      "homepage": "https://sanskarin.github.io/LangSteps/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "beginner-to-advanced",
+        "coding-challenges",
+        "coding-exercises",
+        "csharp",
+        "css",
+        "golang"
+      ],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-05-16",
+      "pushed": "2026-11-07"
     },
     {
       "name": "RepoDNA",
@@ -131,23 +170,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-24",
-      "pushed": "2026-11-06"
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-11-06"
+      "pushed": "2026-11-07"
     },
     {
       "name": "SonicNest",
@@ -173,22 +196,6 @@
       "pushed": "2026-11-06"
     },
     {
-      "name": "KathaSvara",
-      "url": "https://github.com/sanskarIN/KathaSvara",
-      "description": "Give Every Story a Voice.",
-      "homepage": "https://sanskarin.github.io/KathaSvara/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "MPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-05"
-    },
-    {
       "name": "ReproCrate",
       "url": "https://github.com/sanskarIN/ReproCrate",
       "description": "Turn bugs into reproducible reports.",
@@ -202,7 +209,55 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-17",
-      "pushed": "2026-11-04"
+      "pushed": "2026-11-06"
+    },
+    {
+      "name": "The-Journey-of-Ethical-Hacking",
+      "url": "https://github.com/sanskarIN/The-Journey-of-Ethical-Hacking",
+      "description": "Defensive, authorization-first cybersecurity learning resources for The Journey of Ethical Hacking - 2026 Edition, with safe offline labs, synthetic datasets, checklists, templates and companion projects.",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-18",
+      "pushed": "2026-11-06"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-11-06"
+    },
+    {
+      "name": "LineLoom",
+      "url": "https://github.com/sanskarIN/LineLoom",
+      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
+      "homepage": "https://sanskarin.github.io/LineLoom/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 3,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
+      "pushed": "2026-11-06"
     },
     {
       "name": "contactcore",
@@ -333,22 +388,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-16",
-      "pushed": "2026-11-01"
-    },
-    {
-      "name": "The-Journey-of-Ethical-Hacking",
-      "url": "https://github.com/sanskarIN/The-Journey-of-Ethical-Hacking",
-      "description": "Defensive, authorization-first cybersecurity learning resources for The Journey of Ethical Hacking - 2026 Edition, with safe offline labs, synthetic datasets, checklists, templates and companion projects.",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-18",
       "pushed": "2026-11-01"
     },
     {
@@ -524,22 +563,6 @@
       "pushed": "2026-10-25"
     },
     {
-      "name": "EyeZen",
-      "url": "https://github.com/sanskarIN/EyeZen",
-      "description": "Your screen. Your comfort. Your environment.",
-      "homepage": "https://sanskarin.github.io/EyeZen/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "MPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-14",
-      "pushed": "2026-10-25"
-    },
-    {
       "name": "CareNest",
       "url": "https://github.com/sanskarIN/CareNest",
       "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
@@ -553,29 +576,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-09",
-      "pushed": "2026-10-25"
-    },
-    {
-      "name": "LangSteps",
-      "url": "https://github.com/sanskarIN/LangSteps",
-      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
-      "homepage": "https://sanskarin.github.io/LangSteps/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "beginner-to-advanced",
-        "coding-challenges",
-        "coding-exercises",
-        "csharp",
-        "css",
-        "golang"
-      ],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-05-16",
       "pushed": "2026-10-25"
     },
     {
@@ -1260,9 +1260,9 @@
     }
   ],
   "activity": {
-    "total": 36482,
+    "total": 36723,
     "start": "2025-11-02",
-    "end": "2026-11-06",
+    "end": "2026-11-07",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1561,9 +1561,9 @@
       416,
       164,
       612,
-      1491,
+      1519,
       201,
-      119,
+      123,
       31,
       0,
       0,
@@ -1635,7 +1635,8 @@
       278,
       227,
       188,
-      334
+      374,
+      169
     ],
     "levels": [
       0,
@@ -2007,6 +2008,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -2063,8 +2065,8 @@
         "label": "Nov"
       }
     ],
-    "active_days": 128,
-    "longest_streak": 51,
+    "active_days": 129,
+    "longest_streak": 52,
     "busiest": {
       "date": "2026-08-19",
       "count": 7067
