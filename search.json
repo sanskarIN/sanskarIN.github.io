@@ -784,17 +784,24 @@
   },
   {
     "type": "Project",
+    "title": "CareNest",
+    "url": "https://github.com/sanskarIN/CareNest",
+    "tags": [],
+    "text": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s… C#"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
     "title": "latebrake",
     "url": "https://github.com/sanskarIN/latebrake",
     "tags": [],
     "text": "Latebrake — Race Beyond Limits. C++"
-  },
-  {
-    "type": "Project",
-    "title": "KathaSvara",
-    "url": "https://github.com/sanskarIN/KathaSvara",
-    "tags": [],
-    "text": "Give Every Story a Voice. TypeScript"
   },
   {
     "type": "Project",
@@ -812,24 +819,10 @@
   },
   {
     "type": "Project",
-    "title": "EyeZen",
-    "url": "https://github.com/sanskarIN/EyeZen",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
     "tags": [],
-    "text": "Your screen. Your comfort. Your environment. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "LangSteps",
-    "url": "https://github.com/sanskarIN/LangSteps",
-    "tags": [
-      "beginner-to-advanced",
-      "coding-challenges",
-      "coding-exercises",
-      "csharp",
-      "css",
-      "golang"
-    ],
-    "text": "LangSteps — Every Language. Every Level. One Step at a Time. HTML"
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
   },
   {
     "type": "Project",
@@ -844,6 +837,48 @@
       "code-visualization"
     ],
     "text": "Understand any GitHub repository before you clone it. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "awesome-tech-atlas",
+    "url": "https://github.com/sanskarIN/awesome-tech-atlas",
+    "tags": [
+      "awesome-list",
+      "computer-science",
+      "developer-resources",
+      "machine-learning",
+      "open-source",
+      "programming"
+    ],
+    "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
+  },
+  {
+    "type": "Project",
+    "title": "EyeZen",
+    "url": "https://github.com/sanskarIN/EyeZen",
+    "tags": [],
+    "text": "Your screen. Your comfort. Your environment. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "KathaSvara",
+    "url": "https://github.com/sanskarIN/KathaSvara",
+    "tags": [],
+    "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "LangSteps",
+    "url": "https://github.com/sanskarIN/LangSteps",
+    "tags": [
+      "beginner-to-advanced",
+      "coding-challenges",
+      "coding-exercises",
+      "csharp",
+      "css",
+      "golang"
+    ],
+    "text": "LangSteps — Every Language. Every Level. One Step at a Time. HTML"
   },
   {
     "type": "Project",
@@ -872,20 +907,6 @@
     "url": "https://github.com/sanskarIN/The-Journey-of-Ethical-Hacking",
     "tags": [],
     "text": "Defensive, authorization-first cybersecurity learning resources for The Journey of Ethical Hacking - 2026 Edition, with safe offline labs, synthetic datasets, checklists, templates and companion projects. Python"
-  },
-  {
-    "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
-    "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
   },
   {
     "type": "Project",
@@ -1036,13 +1057,6 @@
       "chessboard"
     ],
     "text": "Source of the Chess-Master. Dart"
-  },
-  {
-    "type": "Project",
-    "title": "CareNest",
-    "url": "https://github.com/sanskarIN/CareNest",
-    "tags": [],
-    "text": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s… C#"
   },
   {
     "type": "Project",

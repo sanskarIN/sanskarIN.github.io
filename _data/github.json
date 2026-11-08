@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-11-07T11:09:40Z",
+  "generated_at": "2026-11-08T11:21:58Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
   },
   "totals": {
-    "repositories": 68,
-    "stars": 30,
+    "repositories": 69,
+    "stars": 31,
     "forks": 2,
     "languages": 27
   },
@@ -39,12 +39,12 @@
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 10.5
+      "percent": 10.6
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 28.5,
+      "percent": 28.6,
       "other": true
     }
   ],
@@ -52,9 +52,42 @@
     "frametrellis",
     "RepoDNA",
     "latebrake",
-    "LineLoom"
+    "LineLoom",
+    "awesome-tech-atlas"
   ],
   "repositories": [
+    {
+      "name": "CareNest",
+      "url": "https://github.com/sanskarIN/CareNest",
+      "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-09",
+      "pushed": "2026-11-08"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-11-08"
+    },
     {
       "name": "latebrake",
       "url": "https://github.com/sanskarIN/latebrake",
@@ -69,23 +102,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
-      "pushed": "2026-11-07"
-    },
-    {
-      "name": "KathaSvara",
-      "url": "https://github.com/sanskarIN/KathaSvara",
-      "description": "Give Every Story a Voice.",
-      "homepage": "https://sanskarin.github.io/KathaSvara/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "MPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-07"
+      "pushed": "2026-11-08"
     },
     {
       "name": "frametrellis",
@@ -108,7 +125,69 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-11",
-      "pushed": "2026-11-07"
+      "pushed": "2026-11-08"
+    },
+    {
+      "name": "LineLoom",
+      "url": "https://github.com/sanskarIN/LineLoom",
+      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
+      "homepage": "https://sanskarin.github.io/LineLoom/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 3,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
+      "pushed": "2026-11-08"
+    },
+    {
+      "name": "RepoDNA",
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 8,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-11-08"
+    },
+    {
+      "name": "awesome-tech-atlas",
+      "url": "https://github.com/sanskarIN/awesome-tech-atlas",
+      "description": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references.",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "awesome-list",
+        "computer-science",
+        "developer-resources",
+        "machine-learning",
+        "open-source",
+        "programming"
+      ],
+      "license": "CC0-1.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-11-08",
+      "pushed": "2026-11-08"
     },
     {
       "name": "EyeZen",
@@ -124,6 +203,22 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-14",
+      "pushed": "2026-11-07"
+    },
+    {
+      "name": "KathaSvara",
+      "url": "https://github.com/sanskarIN/KathaSvara",
+      "description": "Give Every Story a Voice.",
+      "homepage": "https://sanskarin.github.io/KathaSvara/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "MPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
       "pushed": "2026-11-07"
     },
     {
@@ -147,29 +242,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-05-16",
-      "pushed": "2026-11-07"
-    },
-    {
-      "name": "RepoDNA",
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 8,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
       "pushed": "2026-11-07"
     },
     {
@@ -225,38 +297,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-18",
-      "pushed": "2026-11-06"
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-11-06"
-    },
-    {
-      "name": "LineLoom",
-      "url": "https://github.com/sanskarIN/LineLoom",
-      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
-      "homepage": "https://sanskarin.github.io/LineLoom/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 3,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-17",
       "pushed": "2026-11-06"
     },
     {
@@ -560,22 +600,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-07-23",
-      "pushed": "2026-10-25"
-    },
-    {
-      "name": "CareNest",
-      "url": "https://github.com/sanskarIN/CareNest",
-      "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-09",
       "pushed": "2026-10-25"
     },
     {
@@ -1260,19 +1284,12 @@
     }
   ],
   "activity": {
-    "total": 36723,
-    "start": "2025-11-02",
-    "end": "2026-11-07",
+    "total": 36902,
+    "start": "2025-11-09",
+    "end": "2026-11-08",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
       0,
       0,
       0,
@@ -1636,7 +1653,8 @@
       227,
       188,
       374,
-      169
+      241,
+      107
     ],
     "levels": [
       0,
@@ -1765,13 +1783,6 @@
       0,
       0,
       0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
       1,
       0,
       0,
@@ -2005,6 +2016,7 @@
       2,
       2,
       2,
+      1,
       1,
       1,
       1,
@@ -2017,56 +2029,56 @@
         "label": "Nov"
       },
       {
-        "week": 5,
+        "week": 4,
         "label": "Dec"
       },
       {
-        "week": 9,
+        "week": 8,
         "label": "Jan"
       },
       {
-        "week": 13,
+        "week": 12,
         "label": "Feb"
       },
       {
-        "week": 17,
+        "week": 16,
         "label": "Mar"
       },
       {
-        "week": 22,
+        "week": 21,
         "label": "Apr"
       },
       {
-        "week": 26,
+        "week": 25,
         "label": "May"
       },
       {
-        "week": 31,
+        "week": 30,
         "label": "Jun"
       },
       {
-        "week": 35,
+        "week": 34,
         "label": "Jul"
       },
       {
-        "week": 39,
+        "week": 38,
         "label": "Aug"
       },
       {
-        "week": 44,
+        "week": 43,
         "label": "Sep"
       },
       {
-        "week": 48,
+        "week": 47,
         "label": "Oct"
       },
       {
-        "week": 52,
+        "week": 51,
         "label": "Nov"
       }
     ],
-    "active_days": 129,
-    "longest_streak": 52,
+    "active_days": 130,
+    "longest_streak": 53,
     "busiest": {
       "date": "2026-08-19",
       "count": 7067
