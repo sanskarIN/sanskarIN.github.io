@@ -2,7 +2,7 @@
 layout: page
 title: Projects
 eyebrow: Open source
-lead: Software I build and share in the open on GitHub, from developer tools to apps and experiments.
+lead: Software I build and maintain in the open, including the Scarp programming language and my GitHub projects.
 description: "Sanskar's open-source projects on GitHub: featured repositories, languages, recent activity, and every public repository, updated every day."
 permalink: /projects/
 schema_type: CollectionPage
@@ -20,13 +20,19 @@ scripts: [projects]
 {%- if gh and gh.repositories.size > 0 %}
 <dl class="stats">
   <div class="stats__item">
-    <dt class="stats__label">Public repositories</dt>
+    <dt class="stats__label">Public project repositories</dt>
     <dd class="stats__value">{% include number.html value=gh.totals.repositories %}</dd>
   </div>
   <div class="stats__item">
     <dt class="stats__label">Stars</dt>
     <dd class="stats__value">{% include number.html value=gh.totals.stars %}</dd>
   </div>
+  {%- if gh.totals.language_bytes %}
+  <div class="stats__item">
+    <dt class="stats__label">Classified code (MiB)</dt>
+    <dd class="stats__value">{{ gh.totals.language_bytes | divided_by: 1048576.0 | round: 1 }}</dd>
+  </div>
+  {%- endif %}
   <div class="stats__item">
     <dt class="stats__label">Languages</dt>
     <dd class="stats__value">{% include number.html value=gh.totals.languages %}</dd>
@@ -62,7 +68,7 @@ scripts: [projects]
     {%- if gh.languages.size > 0 %}
     <div class="glance__panel">
       <h3 class="glance__title">Languages</h3>
-      <p class="glance__note">Share of the code in my repositories, as measured by GitHub (forks not included).</p>
+      <p class="glance__note">Share of GitHub-classified language bytes in my public repositories and explicitly maintained organization projects, including Scarp. Not a count of lines written or a measure of authorship.</p>
       {% include language-bar.html languages=gh.languages %}
     </div>
     {%- endif %}
@@ -116,7 +122,7 @@ scripts: [projects]
   </div>
 </section>
 
-<p class="page-section data-note">{% include icon.html name="github" %}<span>Repositories and activity come from {% include link.html url=github_profile label="my GitHub profile" %} and are updated every day; last updated <time datetime="{{ gh.generated_at }}">{{ gh.generated_at | date: "%-d %B %Y" }}</time>.</span></p>
+<p class="page-section data-note">{% include icon.html name="github" %}<span>Public repository data comes from {% include link.html url=github_profile label="my GitHub profile" %} and explicitly maintained organization repositories. GitHub language-byte totals exclude some files and are not lines of code. The activity calendar is from my personal profile. Refreshed daily; last updated <time datetime="{{ gh.generated_at }}">{{ gh.generated_at | date: "%-d %B %Y" }}</time>.</span></p>
 {%- else %}
 <div class="callout">
   {% include icon.html name="github" class="callout__icon" %}
