@@ -4,7 +4,8 @@
 #
 #  The repositories themselves come from GitHub: the "Update GitHub data"
 #  workflow (.github/workflows/update-github-data.yml) reads this file,
-#  fetches the account's public repositories plus explicitly maintained organization\n#  repositories, and writes _data/github.json.
+#  fetches the account's public repositories plus explicitly maintained organization
+#  repositories, and writes _data/github.json.
 #  It runs every day and whenever this file changes — don't edit
 #  _data/github.json by hand.
 # =============================================================================
