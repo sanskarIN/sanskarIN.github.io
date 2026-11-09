@@ -204,8 +204,15 @@ def load_settings():
             raise SystemExit(f"_data/projects.yml: {key} must be a list of repository names.")
         return [str(item).strip() for item in value if str(item).strip()]
 
+    additional = names("additional_repositories")
+    if any(not REPO_URL.fullmatch(f"https://github.com/{name}") for name in additional):
+        raise SystemExit("_data/projects.yml: additional_repositories requires owner/repository names.")
+    if len({name.lower() for name in additional}) != len(additional):
+        raise SystemExit("_data/projects.yml: duplicate additional_repositories entry.")
+
     return {
         "login": login,
+        "additional_repositories": additional,
         "featured": names("featured"),
         "hidden": {name.lower() for name in names("hidden")},
         "show_forks": data.get("show_forks") is True,
@@ -278,10 +285,37 @@ def shown_repositories(repos, settings):
     return shown
 
 
-def repository_record(repo, colors):
+def include_additional_repositories(gh, repos, settings):
+    """Add explicitly maintained public organization repositories, without duplication."""
+    shown = list(repos)
+    seen = {repo["full_name"].lower() for repo in shown}
+    for full_name in settings["additional_repositories"]:
+        _, repo = gh.get(f"/repos/{full_name}")
+        actual = (repo.get("full_name") or "").lower()
+        if actual != full_name.lower() or repo.get("private"):
+            raise RuntimeError(f"Configured repository {full_name!r} is not public or does not match.")
+        if not REPO_URL.fullmatch(repo.get("html_url") or ""):
+            raise RuntimeError(f"Configured repository {full_name!r} has an invalid GitHub URL.")
+        if actual in seen or actual in settings["hidden"] or repo["name"].lower() in settings["hidden"]:
+            continue
+        if repo.get("fork") and not settings["show_forks"]:
+            continue
+        if repo.get("archived") and not settings["show_archived"]:
+            continue
+        shown.append(repo)
+        seen.add(actual)
+    shown.sort(key=lambda repo: (repo.get("pushed_at") or "", repo["full_name"].lower()), reverse=True)
+    return shown
+
+
+def repository_record(repo, colors, language_bytes=0, primary_owner=""):
     language = repo.get("language") or None
     return {
         "name": repo["name"],
+        "full_name": repo["full_name"],
+        "owner": repo["owner"]["login"],
+        "external": repo["owner"]["login"].lower() != primary_owner.lower(),
+        "language_bytes": language_bytes,
         "url": repo["html_url"],
         "description": clean_text(repo.get("description"), 280),
         "homepage": homepage_of(repo),
@@ -312,8 +346,13 @@ def language_sizes(gh, login, repos):
                 languages[edge["node"]["name"]] = int(edge["size"])
                 if edge["node"].get("color"):
                     colors[edge["node"]["name"]] = edge["node"]["color"]
-            sizes[node["name"].lower()] = languages
+            sizes[f"{login}/{node[\u0027name\u0027]}".lower()] = languages
         if not page["pageInfo"]["hasNextPage"]:
+            for repo in repos:
+                if repo["owner"]["login"].lower() == login.lower():
+                    continue
+                _, external_languages = gh.get(f"/repos/{repo[\u0027full_name\u0027]}/languages")
+                sizes[repo["full_name"].lower()] = {name: int(size) for name, size in external_languages.items()}
             return sizes, colors
         after = page["pageInfo"]["endCursor"]
     # Without GraphQL: one REST request per repository.
@@ -321,7 +360,7 @@ def language_sizes(gh, login, repos):
     for repo in repos:
         if not repo.get("fork"):
             _, languages = gh.get(f"/repos/{repo['full_name']}/languages")
-            sizes[repo["name"].lower()] = {name: int(size) for name, size in languages.items()}
+            sizes[repo["full_name"].lower()] = {name: int(size) for name, size in languages.items()}
     return sizes, {}
 
 
@@ -331,11 +370,11 @@ def language_summary(repos, sizes, colors):
     for repo in repos:
         if repo.get("fork"):
             continue
-        for name, size in sizes.get(repo["name"].lower(), {}).items():
+        for name, size in sizes.get(repo["full_name"].lower(), {}).items():
             totals[name] = totals.get(name, 0) + size
     grand = sum(totals.values())
     if not grand:
-        return [], 0
+        return [], 0, 0
     ranked = sorted(totals.items(), key=lambda item: (-item[1], item[0]))
     shown, rest = ranked[:MAX_LANGUAGES], ranked[MAX_LANGUAGES:]
     if len(rest) == 1:
@@ -345,7 +384,7 @@ def language_summary(repos, sizes, colors):
     if rest:
         summary.append({"name": "Other", "color": DEFAULT_COLOR,
                         "percent": round(100 * sum(size for _, size in rest) / grand, 1), "other": True})
-    return summary, len(totals)
+    return summary, len(totals), grand
 
 
 def pinned_names(gh, login):
@@ -420,10 +459,11 @@ def build(gh, settings):
     login = settings["login"]
     _, user = gh.get(f"/users/{login}")
     repos = gh.paginate(f"/users/{login}/repos?type=owner&sort=pushed&per_page=100")
-    shown = shown_repositories(repos, settings)
+    shown = include_additional_repositories(gh, shown_repositories(repos, settings), settings)
     sizes, colors = language_sizes(gh, login, shown)
-    records = [repository_record(repo, colors) for repo in shown]
-    languages, language_count = language_summary(shown, sizes, colors)
+    records = [repository_record(repo, colors, sum(sizes.get(repo["full_name"].lower(), {}).values()), login)
+               for repo in shown]
+    languages, language_count, language_bytes = language_summary(shown, sizes, colors)
     return {
         "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "user": {"login": user.get("login") or login, "url": f"https://github.com/{user.get('login') or login}"},
@@ -432,6 +472,7 @@ def build(gh, settings):
             "stars": sum(record["stars"] for record in records),
             "forks": sum(record["forks"] for record in records),
             "languages": language_count,
+            "language_bytes": language_bytes,
         },
         "languages": languages,
         "featured": featured_names(records, settings, pinned_names(gh, login)),
