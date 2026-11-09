@@ -346,12 +346,12 @@ def language_sizes(gh, login, repos):
                 languages[edge["node"]["name"]] = int(edge["size"])
                 if edge["node"].get("color"):
                     colors[edge["node"]["name"]] = edge["node"]["color"]
-            sizes[f"{login}/{node[\u0027name\u0027]}".lower()] = languages
+            sizes[f"{login}/{node['name']}".lower()] = languages
         if not page["pageInfo"]["hasNextPage"]:
             for repo in repos:
                 if repo["owner"]["login"].lower() == login.lower():
                     continue
-                _, external_languages = gh.get(f"/repos/{repo[\u0027full_name\u0027]}/languages")
+                _, external_languages = gh.get(f"/repos/{repo['full_name']}/languages")
                 sizes[repo["full_name"].lower()] = {name: int(size) for name, size in external_languages.items()}
             return sizes, colors
         after = page["pageInfo"]["endCursor"]
