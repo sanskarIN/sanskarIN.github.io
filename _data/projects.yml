@@ -4,7 +4,7 @@
 #
 #  The repositories themselves come from GitHub: the "Update GitHub data"
 #  workflow (.github/workflows/update-github-data.yml) reads this file,
-#  fetches the account's public repositories, and writes _data/github.json.
+#  fetches the account's public repositories plus explicitly maintained organization\n#  repositories, and writes _data/github.json.
 #  It runs every day and whenever this file changes — don't edit
 #  _data/github.json by hand.
 # =============================================================================
@@ -12,10 +12,22 @@
 # The GitHub account whose public repositories are shown.
 github_user: sanskarIN
 
-# Repositories to feature, in this order (repository names). When empty, the
-# repositories pinned on the GitHub profile are featured, or else the ones
-# with the most stars. Up to six are shown.
-featured: []
+# Public organization repositories I actively maintain. These are included in
+# project listings, GitHub language percentages, and total classified code size.
+# The list is explicit so contributions to unrelated organizations are not
+# incorrectly presented as my own work.
+additional_repositories:
+  - scarp-lang/scarp
+
+# Feature up to six repositories in the exact order below (repository names).
+# Scarp is maintained in the scarp-lang organization rather than this account.
+featured:
+  - scarp
+  - RepoDNA
+  - frametrellis
+  - latebrake
+  - LineLoom
+  - awesome-tech-atlas
 
 # Repositories to leave out (repository names). The profile README
 # repository (github.com/sanskarIN/sanskarIN) is always left out.
