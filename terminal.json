@@ -196,15 +196,15 @@
     }
   ],
   "projects": {
-    "total": 69,
-    "stars": 31,
+    "total": 70,
+    "stars": 33,
     "featured": [
       {
-        "name": "frametrellis",
-        "url": "https://github.com/sanskarIN/frametrellis",
-        "description": "Open-source video editor.",
-        "language": "C++",
-        "stars": 4
+        "name": "scarp",
+        "url": "https://github.com/scarp-lang/scarp",
+        "description": "A next-generation programming language for software, systems, and intelligent computing.",
+        "language": "Rust",
+        "stars": 2
       },
       {
         "name": "RepoDNA",
@@ -212,6 +212,13 @@
         "description": "Understand any GitHub repository before you clone it.",
         "language": "Rust",
         "stars": 8
+      },
+      {
+        "name": "frametrellis",
+        "url": "https://github.com/sanskarIN/frametrellis",
+        "description": "Open-source video editor.",
+        "language": "C++",
+        "stars": 4
       },
       {
         "name": "latebrake",
