@@ -784,17 +784,45 @@
   },
   {
     "type": "Project",
-    "title": "frametrellis",
-    "url": "https://github.com/sanskarIN/frametrellis",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
+    "tags": [],
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "scarp",
+    "url": "https://github.com/scarp-lang/scarp",
     "tags": [
-      "cmake",
-      "cpp",
-      "cpp20",
-      "desktop-application",
-      "docker",
-      "ffmpeg"
+      "cli",
+      "compiler",
+      "compiler-design",
+      "developer-tools",
+      "interpreter",
+      "language-design"
     ],
-    "text": "Open-source video editor. C++"
+    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
+    "tags": [],
+    "text": "Latebrake — Race Beyond Limits. C++"
+  },
+  {
+    "type": "Project",
+    "title": "healthmetric",
+    "url": "https://github.com/sanskarIN/healthmetric",
+    "tags": [],
+    "text": "Kotlin"
   },
   {
     "type": "Project",
@@ -812,6 +840,20 @@
   },
   {
     "type": "Project",
+    "title": "frametrellis",
+    "url": "https://github.com/sanskarIN/frametrellis",
+    "tags": [
+      "cmake",
+      "cpp",
+      "cpp20",
+      "desktop-application",
+      "docker",
+      "ffmpeg"
+    ],
+    "text": "Open-source video editor. C++"
+  },
+  {
+    "type": "Project",
     "title": "awesome-tech-atlas",
     "url": "https://github.com/sanskarIN/awesome-tech-atlas",
     "tags": [
@@ -823,13 +865,6 @@
       "programming"
     ],
     "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
-  },
-  {
-    "type": "Project",
-    "title": "latebrake",
-    "url": "https://github.com/sanskarIN/latebrake",
-    "tags": [],
-    "text": "Latebrake — Race Beyond Limits. C++"
   },
   {
     "type": "Project",
@@ -887,24 +922,10 @@
   },
   {
     "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "CareNest",
     "url": "https://github.com/sanskarIN/CareNest",
     "tags": [],
     "text": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s… C#"
-  },
-  {
-    "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
-    "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
   },
   {
     "type": "Project",
@@ -975,13 +996,6 @@
     "url": "https://github.com/sanskarIN/dicelab",
     "tags": [],
     "text": "TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "healthmetric",
-    "url": "https://github.com/sanskarIN/healthmetric",
-    "tags": [],
-    "text": "Kotlin"
   },
   {
     "type": "Project",
