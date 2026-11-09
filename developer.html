@@ -34,7 +34,10 @@ toc: true
   <p>The source code of this website is on GitHub as well.</p>
   {%- assign gh = site.data.github %}
   {%- if gh and gh.languages.size > 0 %}
-  <h3 class="subsection-title">Languages in my public repositories</h3>
+  <h3 class="subsection-title">Languages across my maintained public projects</h3>
+  {%- if gh.totals.language_bytes %}
+  <p><strong>{{ gh.totals.language_bytes | divided_by: 1048576.0 | round: 1 }} MiB</strong> of GitHub-classified code across the listed projects, including the <a href="https://github.com/scarp-lang/scarp">Scarp compiler</a> maintained in the scarp-lang organization. Percentages are based on language bytes, not lines of code or individual authorship.</p>
+  {%- endif %}
   {% include language-bar.html languages=gh.languages %}
   {%- endif %}
   <div class="button-row">
