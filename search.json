@@ -784,27 +784,6 @@
   },
   {
     "type": "Project",
-    "title": "CareNest",
-    "url": "https://github.com/sanskarIN/CareNest",
-    "tags": [],
-    "text": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s… C#"
-  },
-  {
-    "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "latebrake",
-    "url": "https://github.com/sanskarIN/latebrake",
-    "tags": [],
-    "text": "Latebrake — Race Beyond Limits. C++"
-  },
-  {
-    "type": "Project",
     "title": "frametrellis",
     "url": "https://github.com/sanskarIN/frametrellis",
     "tags": [
@@ -816,13 +795,6 @@
       "ffmpeg"
     ],
     "text": "Open-source video editor. C++"
-  },
-  {
-    "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
-    "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
   },
   {
     "type": "Project",
@@ -854,10 +826,10 @@
   },
   {
     "type": "Project",
-    "title": "EyeZen",
-    "url": "https://github.com/sanskarIN/EyeZen",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
     "tags": [],
-    "text": "Your screen. Your comfort. Your environment. TypeScript"
+    "text": "Latebrake — Race Beyond Limits. C++"
   },
   {
     "type": "Project",
@@ -865,6 +837,81 @@
     "url": "https://github.com/sanskarIN/KathaSvara",
     "tags": [],
     "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "2048",
+    "url": "https://github.com/sanskarIN/2048",
+    "tags": [
+      "2040",
+      "2048",
+      "2048-clone",
+      "2048-game",
+      "2048-game-online",
+      "2048-redesigned"
+    ],
+    "text": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar. Dart"
+  },
+  {
+    "type": "Project",
+    "title": "chronodesk",
+    "url": "https://github.com/sanskarIN/chronodesk",
+    "tags": [],
+    "text": "C#"
+  },
+  {
+    "type": "Project",
+    "title": "stockpilot",
+    "url": "https://github.com/sanskarIN/stockpilot",
+    "tags": [
+      "go",
+      "golang",
+      "stcokpilot",
+      "typescript"
+    ],
+    "text": "StockPilot, a production-quality Inventory Management System project that is much more complete than a classroom demo. Go"
+  },
+  {
+    "type": "Project",
+    "title": "foliolane",
+    "url": "https://github.com/sanskarIN/foliolane",
+    "tags": [
+      "docmerge",
+      "pdf-merge",
+      "pdf-merger",
+      "pdf-merger-python",
+      "pdf-merger-tool",
+      "pdf-merger-windows-desktop"
+    ],
+    "text": "A modern, reliable, local-first document-merging application for very large multi-part books and document series. Python"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "CareNest",
+    "url": "https://github.com/sanskarIN/CareNest",
+    "tags": [],
+    "text": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s… C#"
+  },
+  {
+    "type": "Project",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
+    "tags": [],
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "EyeZen",
+    "url": "https://github.com/sanskarIN/EyeZen",
+    "tags": [],
+    "text": "Your screen. Your comfort. Your environment. TypeScript"
   },
   {
     "type": "Project",
@@ -935,46 +982,6 @@
     "url": "https://github.com/sanskarIN/healthmetric",
     "tags": [],
     "text": "Kotlin"
-  },
-  {
-    "type": "Project",
-    "title": "2048",
-    "url": "https://github.com/sanskarIN/2048",
-    "tags": [
-      "2040",
-      "2048",
-      "2048-clone",
-      "2048-game",
-      "2048-game-online",
-      "2048-redesigned"
-    ],
-    "text": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar. Dart"
-  },
-  {
-    "type": "Project",
-    "title": "stockpilot",
-    "url": "https://github.com/sanskarIN/stockpilot",
-    "tags": [
-      "go",
-      "golang",
-      "stcokpilot",
-      "typescript"
-    ],
-    "text": "StockPilot, a production-quality Inventory Management System project that is much more complete than a classroom demo. Go"
-  },
-  {
-    "type": "Project",
-    "title": "foliolane",
-    "url": "https://github.com/sanskarIN/foliolane",
-    "tags": [
-      "docmerge",
-      "pdf-merge",
-      "pdf-merger",
-      "pdf-merger-python",
-      "pdf-merger-tool",
-      "pdf-merger-windows-desktop"
-    ],
-    "text": "A modern, reliable, local-first document-merging application for very large multi-part books and document series. Python"
   },
   {
     "type": "Project",
@@ -1148,13 +1155,6 @@
     "url": "https://github.com/sanskarIN/pairdock",
     "tags": [],
     "text": "Pair, provision, monitor, and update Wi-Fi and Bluetooth devices. C#"
-  },
-  {
-    "type": "Project",
-    "title": "chronodesk",
-    "url": "https://github.com/sanskarIN/chronodesk",
-    "tags": [],
-    "text": "C#"
   },
   {
     "type": "Project",

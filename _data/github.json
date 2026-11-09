@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T11:21:58Z",
+  "generated_at": "2026-11-09T12:59:47Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -14,27 +14,27 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 13.5
+      "percent": 13.4
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 13.3
+      "percent": 13.2
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 11.9
+      "percent": 11.8
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 11.4
+      "percent": 11.3
     },
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 10.8
+      "percent": 10.7
     },
     {
       "name": "Python",
@@ -44,7 +44,7 @@
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 28.6,
+      "percent": 28.8,
       "other": true
     }
   ],
@@ -56,54 +56,6 @@
     "awesome-tech-atlas"
   ],
   "repositories": [
-    {
-      "name": "CareNest",
-      "url": "https://github.com/sanskarIN/CareNest",
-      "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-09",
-      "pushed": "2026-11-08"
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-11-08"
-    },
-    {
-      "name": "latebrake",
-      "url": "https://github.com/sanskarIN/latebrake",
-      "description": "Latebrake — Race Beyond Limits.",
-      "homepage": "https://sanskarin.github.io/latebrake/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 2,
-      "forks": 0,
-      "topics": [],
-      "license": "BSD-3-Clause",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-08"
-    },
     {
       "name": "frametrellis",
       "url": "https://github.com/sanskarIN/frametrellis",
@@ -125,23 +77,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-11",
-      "pushed": "2026-11-08"
-    },
-    {
-      "name": "LineLoom",
-      "url": "https://github.com/sanskarIN/LineLoom",
-      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
-      "homepage": "https://sanskarin.github.io/LineLoom/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 3,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-17",
-      "pushed": "2026-11-08"
+      "pushed": "2026-11-09"
     },
     {
       "name": "RepoDNA",
@@ -164,7 +100,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-24",
-      "pushed": "2026-11-08"
+      "pushed": "2026-11-09"
     },
     {
       "name": "awesome-tech-atlas",
@@ -187,6 +123,169 @@
       "fork": false,
       "archived": false,
       "created": "2026-11-08",
+      "pushed": "2026-11-09"
+    },
+    {
+      "name": "latebrake",
+      "url": "https://github.com/sanskarIN/latebrake",
+      "description": "Latebrake — Race Beyond Limits.",
+      "homepage": "https://sanskarin.github.io/latebrake/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 2,
+      "forks": 0,
+      "topics": [],
+      "license": "BSD-3-Clause",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-09"
+    },
+    {
+      "name": "KathaSvara",
+      "url": "https://github.com/sanskarIN/KathaSvara",
+      "description": "Give Every Story a Voice.",
+      "homepage": "https://sanskarin.github.io/KathaSvara/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "MPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-09"
+    },
+    {
+      "name": "2048",
+      "url": "https://github.com/sanskarIN/2048",
+      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
+      "homepage": null,
+      "language": "Dart",
+      "language_color": "#00B4AB",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "2040",
+        "2048",
+        "2048-clone",
+        "2048-game",
+        "2048-game-online",
+        "2048-redesigned"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-14",
+      "pushed": "2026-11-09"
+    },
+    {
+      "name": "chronodesk",
+      "url": "https://github.com/sanskarIN/chronodesk",
+      "description": "",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-11-08"
+    },
+    {
+      "name": "stockpilot",
+      "url": "https://github.com/sanskarIN/stockpilot",
+      "description": "StockPilot, a production-quality Inventory Management System project that is much more complete than a classroom demo.",
+      "homepage": null,
+      "language": "Go",
+      "language_color": "#00ADD8",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "go",
+        "golang",
+        "stcokpilot",
+        "typescript"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-21",
+      "pushed": "2026-11-08"
+    },
+    {
+      "name": "foliolane",
+      "url": "https://github.com/sanskarIN/foliolane",
+      "description": "A modern, reliable, local-first document-merging application for very large multi-part books and document series.",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "docmerge",
+        "pdf-merge",
+        "pdf-merger",
+        "pdf-merger-python",
+        "pdf-merger-tool",
+        "pdf-merger-windows-desktop"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-16",
+      "pushed": "2026-11-08"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-11-08"
+    },
+    {
+      "name": "CareNest",
+      "url": "https://github.com/sanskarIN/CareNest",
+      "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-09",
+      "pushed": "2026-11-08"
+    },
+    {
+      "name": "LineLoom",
+      "url": "https://github.com/sanskarIN/LineLoom",
+      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
+      "homepage": "https://sanskarin.github.io/LineLoom/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 3,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
       "pushed": "2026-11-08"
     },
     {
@@ -203,22 +302,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-14",
-      "pushed": "2026-11-07"
-    },
-    {
-      "name": "KathaSvara",
-      "url": "https://github.com/sanskarIN/KathaSvara",
-      "description": "Give Every Story a Voice.",
-      "homepage": "https://sanskarin.github.io/KathaSvara/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "MPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
       "pushed": "2026-11-07"
     },
     {
@@ -362,73 +445,6 @@
       "archived": false,
       "created": "2026-08-19",
       "pushed": "2026-11-02"
-    },
-    {
-      "name": "2048",
-      "url": "https://github.com/sanskarIN/2048",
-      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
-      "homepage": null,
-      "language": "Dart",
-      "language_color": "#00B4AB",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "2040",
-        "2048",
-        "2048-clone",
-        "2048-game",
-        "2048-game-online",
-        "2048-redesigned"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-14",
-      "pushed": "2026-11-02"
-    },
-    {
-      "name": "stockpilot",
-      "url": "https://github.com/sanskarIN/stockpilot",
-      "description": "StockPilot, a production-quality Inventory Management System project that is much more complete than a classroom demo.",
-      "homepage": null,
-      "language": "Go",
-      "language_color": "#00ADD8",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "go",
-        "golang",
-        "stcokpilot",
-        "typescript"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-21",
-      "pushed": "2026-11-01"
-    },
-    {
-      "name": "foliolane",
-      "url": "https://github.com/sanskarIN/foliolane",
-      "description": "A modern, reliable, local-first document-merging application for very large multi-part books and document series.",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "docmerge",
-        "pdf-merge",
-        "pdf-merger",
-        "pdf-merger-python",
-        "pdf-merger-tool",
-        "pdf-merger-windows-desktop"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-16",
-      "pushed": "2026-11-01"
     },
     {
       "name": "CueVersa",
@@ -800,22 +816,6 @@
       "archived": false,
       "created": "2026-10-19",
       "pushed": "2026-10-19"
-    },
-    {
-      "name": "chronodesk",
-      "url": "https://github.com/sanskarIN/chronodesk",
-      "description": "",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-10-18"
     },
     {
       "name": "neuralforge",
@@ -1284,9 +1284,9 @@
     }
   ],
   "activity": {
-    "total": 36902,
+    "total": 36981,
     "start": "2025-11-09",
-    "end": "2026-11-08",
+    "end": "2026-11-09",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1654,7 +1654,8 @@
       188,
       374,
       241,
-      107
+      107,
+      79
     ],
     "levels": [
       0,
@@ -2021,6 +2022,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -2077,8 +2079,8 @@
         "label": "Nov"
       }
     ],
-    "active_days": 130,
-    "longest_streak": 53,
+    "active_days": 131,
+    "longest_streak": 54,
     "busiest": {
       "date": "2026-08-19",
       "count": 7067
