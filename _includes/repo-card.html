@@ -15,8 +15,9 @@
     {%- include icon.html name="repo" class="repo-card__icon" %}
     {% include link.html url=repo.url label=repo_label class="repo-card__link" %}
   </h{{ repo_heading }}>
-  {%- if repo.archived or repo.fork or repo.name == site_repo_name %}
+  {%- if repo.archived or repo.fork or repo.external or repo.name == site_repo_name %}
   <p class="repo-card__badges">
+    {%- if repo.external %}<span class="repo-badge">{{ repo.owner | escape }} organization</span>{% endif -%}
     {%- if repo.name == site_repo_name %}<span class="repo-badge">This website</span>{% endif -%}
     {%- if repo.archived %}<span class="repo-badge">Archived</span>{% endif -%}
     {%- if repo.fork %}<span class="repo-badge">Fork</span>{% endif -%}
@@ -46,6 +47,15 @@
     {%- endif %}
     {%- if repo.license %}
     <li>{% include icon.html name="scale" %}<span class="visually-hidden">License: </span>{{ repo.license | escape }}</li>
+    {%- endif %}
+    {%- if repo.language_bytes and repo.language_bytes > 0 %}
+    <li title="GitHub-classified language bytes; not lines of code">
+      {%- if repo.language_bytes >= 1048576 -%}
+      Code {{ repo.language_bytes | divided_by: 1048576.0 | round: 2 }} MiB
+      {%- else -%}
+      Code {{ repo.language_bytes | divided_by: 1024.0 | round: 1 }} KiB
+      {%- endif -%}
+    </li>
     {%- endif %}
     {%- if repo.pushed %}
     <li>Updated <time datetime="{{ repo.pushed }}">{{ repo.pushed | date: "%-d %b %Y" }}</time></li>
