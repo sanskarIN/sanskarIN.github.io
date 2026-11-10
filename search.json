@@ -784,20 +784,6 @@
   },
   {
     "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
-    "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "scarp",
     "url": "https://github.com/scarp-lang/scarp",
     "tags": [
@@ -816,13 +802,6 @@
     "url": "https://github.com/sanskarIN/latebrake",
     "tags": [],
     "text": "Latebrake — Race Beyond Limits. C++"
-  },
-  {
-    "type": "Project",
-    "title": "healthmetric",
-    "url": "https://github.com/sanskarIN/healthmetric",
-    "tags": [],
-    "text": "Kotlin"
   },
   {
     "type": "Project",
@@ -851,6 +830,27 @@
       "ffmpeg"
     ],
     "text": "Open-source video editor. C++"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
+    "tags": [],
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "healthmetric",
+    "url": "https://github.com/sanskarIN/healthmetric",
+    "tags": [],
+    "text": "Kotlin"
   },
   {
     "type": "Project",
