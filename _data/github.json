@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-09T15:15:52Z",
+  "generated_at": "2026-11-10T12:44:55Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -9,33 +9,33 @@
     "stars": 33,
     "forks": 3,
     "languages": 27,
-    "language_bytes": 44602820
+    "language_bytes": 44770769
   },
   "languages": [
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 13.7
+      "percent": 13.9
     },
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 12.9
+      "percent": 12.8
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 12.7
+      "percent": 12.6
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 11.4
+      "percent": 11.3
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 10.9
+      "percent": 10.8
     },
     {
       "name": "Python",
@@ -45,7 +45,7 @@
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 27.9,
+      "percent": 27.8,
       "other": true
     }
   ],
@@ -58,6 +58,107 @@
     "awesome-tech-atlas"
   ],
   "repositories": [
+    {
+      "name": "scarp",
+      "full_name": "scarp-lang/scarp",
+      "owner": "scarp-lang",
+      "external": true,
+      "language_bytes": 1850372,
+      "url": "https://github.com/scarp-lang/scarp",
+      "description": "A next-generation programming language for software, systems, and intelligent computing.",
+      "homepage": "https://scarp-lang.github.io/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 2,
+      "forks": 1,
+      "topics": [
+        "cli",
+        "compiler",
+        "compiler-design",
+        "developer-tools",
+        "interpreter",
+        "language-design"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-25",
+      "pushed": "2026-11-10"
+    },
+    {
+      "name": "latebrake",
+      "full_name": "sanskarIN/latebrake",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 2739357,
+      "url": "https://github.com/sanskarIN/latebrake",
+      "description": "Latebrake — Race Beyond Limits.",
+      "homepage": "https://sanskarin.github.io/latebrake/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 2,
+      "forks": 0,
+      "topics": [],
+      "license": "BSD-3-Clause",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-10"
+    },
+    {
+      "name": "RepoDNA",
+      "full_name": "sanskarIN/RepoDNA",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 4063852,
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 8,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-11-10"
+    },
+    {
+      "name": "frametrellis",
+      "full_name": "sanskarIN/frametrellis",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 2154894,
+      "url": "https://github.com/sanskarIN/frametrellis",
+      "description": "Open-source video editor.",
+      "homepage": "https://sanskarin.github.io/frametrellis/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 4,
+      "forks": 0,
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
+      "license": "GPL-3.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-11",
+      "pushed": "2026-11-10"
+    },
     {
       "name": "sanskarIN.github.io",
       "full_name": "sanskarIN/sanskarIN.github.io",
@@ -76,7 +177,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-26",
-      "pushed": "2026-11-09"
+      "pushed": "2026-11-10"
     },
     {
       "name": "LineLoom",
@@ -99,53 +200,6 @@
       "pushed": "2026-11-09"
     },
     {
-      "name": "scarp",
-      "full_name": "scarp-lang/scarp",
-      "owner": "scarp-lang",
-      "external": true,
-      "language_bytes": 1710856,
-      "url": "https://github.com/scarp-lang/scarp",
-      "description": "A next-generation programming language for software, systems, and intelligent computing.",
-      "homepage": "https://scarp-lang.github.io/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 2,
-      "forks": 1,
-      "topics": [
-        "cli",
-        "compiler",
-        "compiler-design",
-        "developer-tools",
-        "interpreter",
-        "language-design"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-25",
-      "pushed": "2026-11-09"
-    },
-    {
-      "name": "latebrake",
-      "full_name": "sanskarIN/latebrake",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 2739357,
-      "url": "https://github.com/sanskarIN/latebrake",
-      "description": "Latebrake — Race Beyond Limits.",
-      "homepage": "https://sanskarin.github.io/latebrake/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 2,
-      "forks": 0,
-      "topics": [],
-      "license": "BSD-3-Clause",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-09"
-    },
-    {
       "name": "healthmetric",
       "full_name": "sanskarIN/healthmetric",
       "owner": "sanskarIN",
@@ -163,60 +217,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-19",
-      "pushed": "2026-11-09"
-    },
-    {
-      "name": "RepoDNA",
-      "full_name": "sanskarIN/RepoDNA",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 4055635,
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 8,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
-      "pushed": "2026-11-09"
-    },
-    {
-      "name": "frametrellis",
-      "full_name": "sanskarIN/frametrellis",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 2134678,
-      "url": "https://github.com/sanskarIN/frametrellis",
-      "description": "Open-source video editor.",
-      "homepage": "https://sanskarin.github.io/frametrellis/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 4,
-      "forks": 0,
-      "topics": [
-        "cmake",
-        "cpp",
-        "cpp20",
-        "desktop-application",
-        "docker",
-        "ffmpeg"
-      ],
-      "license": "GPL-3.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-11",
       "pushed": "2026-11-09"
     },
     {
@@ -1589,9 +1589,9 @@
     }
   ],
   "activity": {
-    "total": 37015,
+    "total": 37081,
     "start": "2025-11-09",
-    "end": "2026-11-09",
+    "end": "2026-11-10",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -1960,7 +1960,8 @@
       374,
       241,
       108,
-      112
+      124,
+      54
     ],
     "levels": [
       0,
@@ -2328,6 +2329,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -2384,8 +2386,8 @@
         "label": "Nov"
       }
     ],
-    "active_days": 131,
-    "longest_streak": 54,
+    "active_days": 132,
+    "longest_streak": 55,
     "busiest": {
       "date": "2026-08-19",
       "count": 7067
