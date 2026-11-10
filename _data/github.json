@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T12:44:55Z",
+  "generated_at": "2026-11-10T15:06:53Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -9,7 +9,7 @@
     "stars": 33,
     "forks": 3,
     "languages": 27,
-    "language_bytes": 44770769
+    "language_bytes": 44790591
   },
   "languages": [
     {
@@ -59,107 +59,6 @@
   ],
   "repositories": [
     {
-      "name": "scarp",
-      "full_name": "scarp-lang/scarp",
-      "owner": "scarp-lang",
-      "external": true,
-      "language_bytes": 1850372,
-      "url": "https://github.com/scarp-lang/scarp",
-      "description": "A next-generation programming language for software, systems, and intelligent computing.",
-      "homepage": "https://scarp-lang.github.io/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 2,
-      "forks": 1,
-      "topics": [
-        "cli",
-        "compiler",
-        "compiler-design",
-        "developer-tools",
-        "interpreter",
-        "language-design"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-25",
-      "pushed": "2026-11-10"
-    },
-    {
-      "name": "latebrake",
-      "full_name": "sanskarIN/latebrake",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 2739357,
-      "url": "https://github.com/sanskarIN/latebrake",
-      "description": "Latebrake — Race Beyond Limits.",
-      "homepage": "https://sanskarin.github.io/latebrake/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 2,
-      "forks": 0,
-      "topics": [],
-      "license": "BSD-3-Clause",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-10"
-    },
-    {
-      "name": "RepoDNA",
-      "full_name": "sanskarIN/RepoDNA",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 4063852,
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 8,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
-      "pushed": "2026-11-10"
-    },
-    {
-      "name": "frametrellis",
-      "full_name": "sanskarIN/frametrellis",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 2154894,
-      "url": "https://github.com/sanskarIN/frametrellis",
-      "description": "Open-source video editor.",
-      "homepage": "https://sanskarin.github.io/frametrellis/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 4,
-      "forks": 0,
-      "topics": [
-        "cmake",
-        "cpp",
-        "cpp20",
-        "desktop-application",
-        "docker",
-        "ffmpeg"
-      ],
-      "license": "GPL-3.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-11",
-      "pushed": "2026-11-10"
-    },
-    {
       "name": "sanskarIN.github.io",
       "full_name": "sanskarIN/sanskarIN.github.io",
       "owner": "sanskarIN",
@@ -197,7 +96,222 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-17",
-      "pushed": "2026-11-09"
+      "pushed": "2026-11-10",
+      "languages": [
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "percent": 44.7
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "percent": 28.6
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 23.3
+        },
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "percent": 3.4
+        }
+      ]
+    },
+    {
+      "name": "latebrake",
+      "full_name": "sanskarIN/latebrake",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 2739357,
+      "url": "https://github.com/sanskarIN/latebrake",
+      "description": "Latebrake — Race Beyond Limits.",
+      "homepage": "https://sanskarin.github.io/latebrake/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 2,
+      "forks": 0,
+      "topics": [],
+      "license": "BSD-3-Clause",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-10",
+      "languages": [
+        {
+          "name": "C++",
+          "color": "#f34b7d",
+          "percent": 62.9
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 27.0
+        },
+        {
+          "name": "PowerShell",
+          "color": "#012456",
+          "percent": 5.7
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 4.4,
+          "other": true
+        }
+      ]
+    },
+    {
+      "name": "RepoDNA",
+      "full_name": "sanskarIN/RepoDNA",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 4070728,
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 8,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-11-10",
+      "languages": [
+        {
+          "name": "Rust",
+          "color": "#dea584",
+          "percent": 79.2
+        },
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "percent": 14.8
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "percent": 4.4
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 1.7,
+          "other": true
+        }
+      ]
+    },
+    {
+      "name": "frametrellis",
+      "full_name": "sanskarIN/frametrellis",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 2167840,
+      "url": "https://github.com/sanskarIN/frametrellis",
+      "description": "Open-source video editor.",
+      "homepage": "https://sanskarin.github.io/frametrellis/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 4,
+      "forks": 0,
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
+      "license": "GPL-3.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-11",
+      "pushed": "2026-11-10",
+      "languages": [
+        {
+          "name": "C++",
+          "color": "#f34b7d",
+          "percent": 76.7
+        },
+        {
+          "name": "QML",
+          "color": "#44a51c",
+          "percent": 13.2
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 3.1
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 6.9,
+          "other": true
+        }
+      ]
+    },
+    {
+      "name": "scarp",
+      "full_name": "scarp-lang/scarp",
+      "owner": "scarp-lang",
+      "external": true,
+      "language_bytes": 1850372,
+      "url": "https://github.com/scarp-lang/scarp",
+      "description": "A next-generation programming language for software, systems, and intelligent computing.",
+      "homepage": "https://scarp-lang.github.io/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 2,
+      "forks": 1,
+      "topics": [
+        "cli",
+        "compiler",
+        "compiler-design",
+        "developer-tools",
+        "interpreter",
+        "language-design"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-25",
+      "pushed": "2026-11-10",
+      "languages": [
+        {
+          "name": "Rust",
+          "color": "#dea584",
+          "percent": 86.9
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 10.2
+        },
+        {
+          "name": "PowerShell",
+          "color": "#012456",
+          "percent": 2.5
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 0.4,
+          "other": true
+        }
+      ]
     },
     {
       "name": "healthmetric",
@@ -244,7 +358,29 @@
       "fork": false,
       "archived": false,
       "created": "2026-11-08",
-      "pushed": "2026-11-09"
+      "pushed": "2026-11-09",
+      "languages": [
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 59.5
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "percent": 19.7
+        },
+        {
+          "name": "CSS",
+          "color": "#663399",
+          "percent": 13.6
+        },
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "percent": 7.2
+        }
+      ]
     },
     {
       "name": "KathaSvara",
@@ -1589,7 +1725,7 @@
     }
   ],
   "activity": {
-    "total": 37081,
+    "total": 37118,
     "start": "2025-11-09",
     "end": "2026-11-10",
     "first_weekday": 0,
@@ -1961,7 +2097,7 @@
       241,
       108,
       124,
-      54
+      91
     ],
     "levels": [
       0,
