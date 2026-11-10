@@ -48,6 +48,8 @@ on:
       - '_includes/css/tokens.css'
       - '.github/scripts/generate_site_content.py'
       - '.github/scripts/tests/test_generate_site_content.py'
+      - '.github/scripts/update_github_data.py'
+      - '.github/scripts/tests/test_maintained_repositories.py'
       - '.github/workflows/generated-site-content.yml'
   push:
     branches: [main]
@@ -95,6 +97,8 @@ on:
       - '_includes/css/tokens.css'
       - '.github/scripts/generate_site_content.py'
       - '.github/scripts/tests/test_generate_site_content.py'
+      - '.github/scripts/update_github_data.py'
+      - '.github/scripts/tests/test_maintained_repositories.py'
       - '.github/workflows/generated-site-content.yml'
   workflow_dispatch:
 
@@ -118,6 +122,8 @@ jobs:
         run: python -m unittest discover -s .github/scripts/tests -p 'test_generate_site_content.py' -v
       - name: Test Python stylesheet compiler
         run: python -m unittest discover -s .github/scripts/tests -p 'test_build_styles.py' -v
+      - name: Test GitHub project language breakdowns
+        run: python -m unittest discover -s .github/scripts/tests -p 'test_maintained_repositories.py' -v
       - name: Test terminal JSON regeneration
         run: python -m unittest discover -s .github/scripts/tests -p 'test_data_parity.py' -v
       - name: Test Python search-index generation

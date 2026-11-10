@@ -54,7 +54,7 @@
       {%- for name in gh.featured limit: 3 %}
         {%- assign repo = gh.repositories | where: "name", name | first %}
         {%- if repo %}
-      <li>{% include repo-card.html repo=repo %}</li>
+      <li>{% include repo-card.html repo=repo show_languages=true %}</li>
         {%- endif %}
       {%- endfor %}
     </ul>

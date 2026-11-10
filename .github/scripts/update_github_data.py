@@ -364,7 +364,7 @@ def language_sizes(gh, login, repos):
     return sizes, {}
 
 
-def language_summary(repos, sizes, colors):
+def language_summary(repos, sizes, colors, max_languages=MAX_LANGUAGES):
     """The languages of the repositories (not forks), largest first."""
     totals = {}
     for repo in repos:
@@ -376,7 +376,7 @@ def language_summary(repos, sizes, colors):
     if not grand:
         return [], 0, 0
     ranked = sorted(totals.items(), key=lambda item: (-item[1], item[0]))
-    shown, rest = ranked[:MAX_LANGUAGES], ranked[MAX_LANGUAGES:]
+    shown, rest = ranked[:max_languages], ranked[max_languages:]
     if len(rest) == 1:
         shown, rest = ranked, []
     summary = [{"name": name, "color": color_of(name, colors), "percent": round(100 * size / grand, 1)}
@@ -385,6 +385,16 @@ def language_summary(repos, sizes, colors):
         summary.append({"name": "Other", "color": DEFAULT_COLOR,
                         "percent": round(100 * sum(size for _, size in rest) / grand, 1), "other": True})
     return summary, len(totals), grand
+
+
+def attach_featured_languages(records, sizes, colors, featured):
+    """Include compact per-project language percentages for featured cards only."""
+    selected = {name.lower() for name in featured}
+    for record in records:
+        if record["name"].lower() in selected:
+            summary, _, _ = language_summary([record], sizes, colors, max_languages=3)
+            if summary:
+                record["languages"] = summary
 
 
 def pinned_names(gh, login):
@@ -464,6 +474,8 @@ def build(gh, settings):
     records = [repository_record(repo, colors, sum(sizes.get(repo["full_name"].lower(), {}).values()), login)
                for repo in shown]
     languages, language_count, language_bytes = language_summary(shown, sizes, colors)
+    featured = featured_names(records, settings, pinned_names(gh, login))
+    attach_featured_languages(records, sizes, colors, featured)
     return {
         "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         "user": {"login": user.get("login") or login, "url": f"https://github.com/{user.get('login') or login}"},
@@ -475,7 +487,7 @@ def build(gh, settings):
             "language_bytes": language_bytes,
         },
         "languages": languages,
-        "featured": featured_names(records, settings, pinned_names(gh, login)),
+        "featured": featured,
         "repositories": records,
         "activity": activity(gh, login),
     }

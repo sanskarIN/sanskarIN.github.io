@@ -199,6 +199,36 @@
   height: 0.9375rem;
 }
 
+.repo-card__language-breakdown {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.repo-card__language-heading {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.repo-card__language-breakdown .languages {
+  gap: var(--space-2);
+  margin-top: 0;
+}
+
+.repo-card__language-breakdown .languages__track {
+  height: 0.5rem;
+}
+
+.repo-card__language-breakdown .languages__list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+}
+
+.repo-card__language-breakdown .languages__list li {
+  min-width: 0;
+}
+
 /* Links inside the card sit above the title link's cover. */
 .repo-card__more {
   position: relative;
