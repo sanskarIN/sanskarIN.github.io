@@ -91,6 +91,32 @@ class MaintainedProjectTests(unittest.TestCase):
         self.assertEqual(summary[0]["percent"], 90.0)
         self.assertEqual(summary[1]["percent"], 10.0)
 
+    def test_featured_breakdown_uses_repository_language_bytes(self):
+        scarp = repo("scarp-lang", "scarp")
+        other = repo("sanskarIN", "RepoDNA")
+        records = [
+            project_data.repository_record(scarp, {}, 10000, "sanskarIN"),
+            project_data.repository_record(other, {}, 1000, "sanskarIN"),
+        ]
+        sizes = {
+            "scarp-lang/scarp": {
+                "Rust": 8000, "Python": 1000, "Shell": 500,
+                "TOML": 250, "Makefile": 250,
+            },
+            "sanskarin/repodna": {"Rust": 1000},
+        }
+        project_data.attach_featured_languages(records, sizes, {}, ["scarp"])
+        breakdown = records[0]["languages"]
+        self.assertEqual([(item["name"], item["percent"]) for item in breakdown],
+                         [("Rust", 80.0), ("Python", 10.0), ("Shell", 5.0), ("Other", 5.0)])
+        self.assertAlmostEqual(sum(item["percent"] for item in breakdown), 100.0)
+        self.assertNotIn("languages", records[1])
+
+    def test_featured_breakdown_omits_zero_byte_repositories(self):
+        record = project_data.repository_record(repo("scarp-lang", "scarp"), {}, 0, "sanskarIN")
+        project_data.attach_featured_languages([record], {"scarp-lang/scarp": {}}, {}, ["scarp"])
+        self.assertNotIn("languages", record)
+
     def test_featured_has_scarp_first(self):
         records = [
             {"name": "RepoDNA", "stars": 9, "pushed": "2026-11-09", "fork": False, "archived": False},

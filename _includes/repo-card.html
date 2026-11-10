@@ -35,6 +35,12 @@
     {%- endfor %}
   </ul>
   {%- endif %}
+  {%- if include.show_languages and repo.languages.size > 0 %}
+  <div class="repo-card__language-breakdown">
+    <p class="repo-card__language-heading">Code composition <span>(GitHub language bytes)</span></p>
+    {% include language-bar.html languages=repo.languages %}
+  </div>
+  {%- endif %}
   <ul class="repo-card__meta">
     {%- if repo.language %}
     <li>{% include language-dot.html color=repo.language_color %}{{ repo.language | escape }}</li>
