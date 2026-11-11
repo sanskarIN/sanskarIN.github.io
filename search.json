@@ -784,52 +784,10 @@
   },
   {
     "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
-    "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "latebrake",
     "url": "https://github.com/sanskarIN/latebrake",
     "tags": [],
     "text": "Latebrake — Race Beyond Limits. C++"
-  },
-  {
-    "type": "Project",
-    "title": "RepoDNA",
-    "url": "https://github.com/sanskarIN/RepoDNA",
-    "tags": [
-      "cli",
-      "code-analysis",
-      "code-archaeology",
-      "code-metrics",
-      "code-quality",
-      "code-visualization"
-    ],
-    "text": "Understand any GitHub repository before you clone it. Rust"
-  },
-  {
-    "type": "Project",
-    "title": "frametrellis",
-    "url": "https://github.com/sanskarIN/frametrellis",
-    "tags": [
-      "cmake",
-      "cpp",
-      "cpp20",
-      "desktop-application",
-      "docker",
-      "ffmpeg"
-    ],
-    "text": "Open-source video editor. C++"
   },
   {
     "type": "Project",
@@ -847,10 +805,38 @@
   },
   {
     "type": "Project",
-    "title": "healthmetric",
-    "url": "https://github.com/sanskarIN/healthmetric",
+    "title": "frametrellis",
+    "url": "https://github.com/sanskarIN/frametrellis",
+    "tags": [
+      "cmake",
+      "cpp",
+      "cpp20",
+      "desktop-application",
+      "docker",
+      "ffmpeg"
+    ],
+    "text": "Open-source video editor. C++"
+  },
+  {
+    "type": "Project",
+    "title": "KathaSvara",
+    "url": "https://github.com/sanskarIN/KathaSvara",
     "tags": [],
-    "text": "Kotlin"
+    "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "contactcore",
+    "url": "https://github.com/sanskarIN/contactcore",
+    "tags": [],
+    "text": "ContactCore, a production-quality Basic Contact Book project that is much more complete than a classroom demo. C#"
+  },
+  {
+    "type": "Project",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
+    "tags": [],
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
   },
   {
     "type": "Project",
@@ -868,10 +854,31 @@
   },
   {
     "type": "Project",
-    "title": "KathaSvara",
-    "url": "https://github.com/sanskarIN/KathaSvara",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
     "tags": [],
-    "text": "Give Every Story a Voice. TypeScript"
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "RepoDNA",
+    "url": "https://github.com/sanskarIN/RepoDNA",
+    "tags": [
+      "cli",
+      "code-analysis",
+      "code-archaeology",
+      "code-metrics",
+      "code-quality",
+      "code-visualization"
+    ],
+    "text": "Understand any GitHub repository before you clone it. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "healthmetric",
+    "url": "https://github.com/sanskarIN/healthmetric",
+    "tags": [],
+    "text": "Kotlin"
   },
   {
     "type": "Project",
@@ -975,13 +982,6 @@
     "url": "https://github.com/sanskarIN/The-Journey-of-Ethical-Hacking",
     "tags": [],
     "text": "Defensive, authorization-first cybersecurity learning resources for The Journey of Ethical Hacking - 2026 Edition, with safe offline labs, synthetic datasets, checklists, templates and companion projects. Python"
-  },
-  {
-    "type": "Project",
-    "title": "contactcore",
-    "url": "https://github.com/sanskarIN/contactcore",
-    "tags": [],
-    "text": "ContactCore, a production-quality Basic Contact Book project that is much more complete than a classroom demo. C#"
   },
   {
     "type": "Project",
