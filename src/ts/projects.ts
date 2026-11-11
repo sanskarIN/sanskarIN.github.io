@@ -1,8 +1,8 @@
 /*
- * The Projects page: search the repositories, filter them by language, and
- * sort them. The list works without this file — it only hides items and
+ * The Projects page: search repositories, filter by language and ownership,
+ * and sort by recency, stars, classified code bytes, or name. The list works without this file — it only hides items and
  * changes their order. The choices are kept in the page address
- * (?q=…&language=…&sort=…), so a filtered list can be bookmarked or shared.
+ * (?q=…&language=…&scope=…&sort=…), so a filtered list can be bookmarked or shared.
  *
  * Source: src/ts/projects.ts, compiled to assets/js/projects.js
  * (npm run build).
@@ -14,6 +14,7 @@
 
   const search = form.querySelector<HTMLInputElement>("[data-repo-search]")!;
   const language = form.querySelector<HTMLSelectElement>("[data-repo-language]")!;
+  const scope = form.querySelector<HTMLSelectElement>("[data-repo-scope]")!;
   const sort = form.querySelector<HTMLSelectElement>("[data-repo-sort]")!;
   const status = document.querySelector<HTMLElement>("[data-repo-status]")!;
   const empty = document.querySelector<HTMLElement>("[data-repo-empty]")!;
@@ -34,6 +35,10 @@
       copy.sort((a, b) =>
         Number(b.getAttribute("data-stars")) - Number(a.getAttribute("data-stars")) ||
         items.indexOf(a) - items.indexOf(b));
+    } else if (by === "code") {
+      copy.sort((a, b) =>
+        Number(b.getAttribute("data-code-bytes")) - Number(a.getAttribute("data-code-bytes")) ||
+        items.indexOf(a) - items.indexOf(b));
     } else if (by === "name") {
       copy.sort((a, b) => (a.getAttribute("data-name") || "").localeCompare(b.getAttribute("data-name") || ""));
     }
@@ -48,6 +53,7 @@
     const choices: Array<[string, string]> = [
       ["q", search.value.trim()],
       ["language", language.value],
+      ["scope", scope.value],
       ["sort", sort.value === "updated" ? "" : sort.value],
     ];
     for (const [key, value] of choices) {
@@ -61,10 +67,12 @@
   const update = (save: boolean): void => {
     const terms = normalize(search.value).split(/\s+/).filter(Boolean);
     const chosen = language.value;
+    const selectedScope = scope.value;
     let shown = 0;
     for (const item of sorted(sort.value)) {
       const text = searchText.get(item) || "";
       const match = (!chosen || item.getAttribute("data-language") === chosen) &&
+        (!selectedScope || item.getAttribute("data-scope") === selectedScope) &&
         terms.every((term) => text.includes(term));
       item.hidden = !match;
       if (match) shown += 1;
@@ -74,7 +82,7 @@
 
     // Announced after typing pauses, not on every key.
     window.clearTimeout(statusTimer);
-    const filtered = terms.length > 0 || chosen !== "";
+    const filtered = terms.length > 0 || chosen !== "" || selectedScope !== "";
     statusTimer = window.setTimeout(() => {
       status.textContent = filtered
         ? `Showing ${shown} of ${items.length}${items.length === 1 ? " repository." : " repositories."}`
@@ -86,15 +94,18 @@
   const params = new URLSearchParams(window.location.search);
   search.value = (params.get("q") || "").slice(0, 100);
   if (hasOption(language, params.get("language") || "")) language.value = params.get("language") || "";
+  if (hasOption(scope, params.get("scope") || "")) scope.value = params.get("scope") || "";
   if (hasOption(sort, params.get("sort") || "")) sort.value = params.get("sort") || "";
 
   form.addEventListener("submit", (event) => event.preventDefault());
   search.addEventListener("input", () => update(true));
   language.addEventListener("change", () => update(true));
+  scope.addEventListener("change", () => update(true));
   sort.addEventListener("change", () => update(true));
   reset.addEventListener("click", () => {
     search.value = "";
     language.value = "";
+    scope.value = "";
     update(true);
     search.focus();
   });
