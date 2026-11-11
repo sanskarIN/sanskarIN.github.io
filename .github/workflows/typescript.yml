@@ -23,7 +23,6 @@ on:
       - .github/scripts/tests/lab-contrast.test.cjs
       - .github/scripts/tests/lab-themes.test.cjs
       - .github/scripts/tests/projects.test.cjs
-      - .github/scripts/tests/projects.test.cjs
   pull_request:
     paths:
       - src/ts/**
@@ -37,6 +36,7 @@ on:
       - .github/scripts/tests/lab-convert.test.cjs
       - .github/scripts/tests/lab-contrast.test.cjs
       - .github/scripts/tests/lab-themes.test.cjs
+      - .github/scripts/tests/projects.test.cjs
   workflow_dispatch:
 
 permissions:
