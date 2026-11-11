@@ -22,6 +22,8 @@ on:
       - .github/scripts/tests/lab-convert.test.cjs
       - .github/scripts/tests/lab-contrast.test.cjs
       - .github/scripts/tests/lab-themes.test.cjs
+      - .github/scripts/tests/projects.test.cjs
+      - .github/scripts/tests/projects.test.cjs
   pull_request:
     paths:
       - src/ts/**
@@ -54,6 +56,8 @@ jobs:
         run: npm run check
       - name: Test Developer Lab browser logic
         run: npm run test:lab
+      - name: Test Projects page filtering and sorting
+        run: npm run test:projects
       - name: Check that assets/js/ matches src/ts/
         run: |
           npm run build
