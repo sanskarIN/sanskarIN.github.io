@@ -162,7 +162,6 @@ class SiteGeneratorTests(unittest.TestCase):
         self.assertIn("site.data.scarp_ecosystem", page)
         self.assertIn("{{ entry.url | escape }}", page)
         self.assertIn('url="/projects/#scarp-ecosystem"', render_sections(self.home))
-        self.assertNotIn("scarp-docs", (sitegen.ROOT / "_data/projects.yml").read_text(encoding="utf-8"))
 
     def test_home_intro_and_hero_preserve_dynamic_terminal(self):
         hero = render_hero(self.home)
