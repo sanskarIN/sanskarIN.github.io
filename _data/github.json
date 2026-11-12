@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T11:56:28Z",
+  "generated_at": "2026-11-12T12:53:05Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -9,13 +9,13 @@
     "stars": 33,
     "forks": 3,
     "languages": 27,
-    "language_bytes": 45097341
+    "language_bytes": 45314775
   },
   "languages": [
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 14.0
+      "percent": 13.9
     },
     {
       "name": "TypeScript",
@@ -30,16 +30,16 @@
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 11.3
-    },
-    {
-      "name": "Dart",
-      "color": "#00B4AB",
-      "percent": 10.8
+      "percent": 11.2
     },
     {
       "name": "Python",
       "color": "#3572A5",
+      "percent": 10.8
+    },
+    {
+      "name": "Dart",
+      "color": "#00B4AB",
       "percent": 10.7
     },
     {
@@ -59,11 +59,31 @@
   ],
   "repositories": [
     {
+      "name": "KathaSvara",
+      "full_name": "sanskarIN/KathaSvara",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 1191934,
+      "url": "https://github.com/sanskarIN/KathaSvara",
+      "description": "Give Every Story a Voice.",
+      "homepage": "https://sanskarin.github.io/KathaSvara/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "MPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-12"
+    },
+    {
       "name": "latebrake",
       "full_name": "sanskarIN/latebrake",
       "owner": "sanskarIN",
       "external": false,
-      "language_bytes": 2761508,
+      "language_bytes": 2850339,
       "url": "https://github.com/sanskarIN/latebrake",
       "description": "Latebrake — Race Beyond Limits.",
       "homepage": "https://sanskarin.github.io/latebrake/",
@@ -76,27 +96,127 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
-      "pushed": "2026-11-11",
+      "pushed": "2026-11-12",
       "languages": [
         {
           "name": "C++",
           "color": "#f34b7d",
-          "percent": 62.3
+          "percent": 62.2
         },
         {
           "name": "Python",
           "color": "#3572A5",
-          "percent": 27.6
+          "percent": 27.9
         },
         {
           "name": "PowerShell",
           "color": "#012456",
-          "percent": 5.7
+          "percent": 5.5
         },
         {
           "name": "Other",
           "color": "#8b949e",
           "percent": 4.4,
+          "other": true
+        }
+      ]
+    },
+    {
+      "name": "RepoDNA",
+      "full_name": "sanskarIN/RepoDNA",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 4078975,
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 8,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-11-12",
+      "languages": [
+        {
+          "name": "Rust",
+          "color": "#dea584",
+          "percent": 79.2
+        },
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "percent": 14.7
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "percent": 4.4
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 1.7,
+          "other": true
+        }
+      ]
+    },
+    {
+      "name": "frametrellis",
+      "full_name": "sanskarIN/frametrellis",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 2302458,
+      "url": "https://github.com/sanskarIN/frametrellis",
+      "description": "Open-source video editor.",
+      "homepage": "https://sanskarin.github.io/frametrellis/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 4,
+      "forks": 0,
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
+      "license": "GPL-3.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-11",
+      "pushed": "2026-11-12",
+      "languages": [
+        {
+          "name": "C++",
+          "color": "#f34b7d",
+          "percent": 74.2
+        },
+        {
+          "name": "QML",
+          "color": "#44a51c",
+          "percent": 12.7
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 5.4
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 7.7,
           "other": true
         }
       ]
@@ -126,7 +246,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-25",
-      "pushed": "2026-11-11",
+      "pushed": "2026-11-12",
       "languages": [
         {
           "name": "Rust",
@@ -152,64 +272,14 @@
       ]
     },
     {
-      "name": "frametrellis",
-      "full_name": "sanskarIN/frametrellis",
+      "name": "EyeZen",
+      "full_name": "sanskarIN/EyeZen",
       "owner": "sanskarIN",
       "external": false,
-      "language_bytes": 2224621,
-      "url": "https://github.com/sanskarIN/frametrellis",
-      "description": "Open-source video editor.",
-      "homepage": "https://sanskarin.github.io/frametrellis/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 4,
-      "forks": 0,
-      "topics": [
-        "cmake",
-        "cpp",
-        "cpp20",
-        "desktop-application",
-        "docker",
-        "ffmpeg"
-      ],
-      "license": "GPL-3.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-11",
-      "pushed": "2026-11-11",
-      "languages": [
-        {
-          "name": "C++",
-          "color": "#f34b7d",
-          "percent": 76.5
-        },
-        {
-          "name": "QML",
-          "color": "#44a51c",
-          "percent": 13.2
-        },
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 3.1
-        },
-        {
-          "name": "Other",
-          "color": "#8b949e",
-          "percent": 7.3,
-          "other": true
-        }
-      ]
-    },
-    {
-      "name": "KathaSvara",
-      "full_name": "sanskarIN/KathaSvara",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 1151798,
-      "url": "https://github.com/sanskarIN/KathaSvara",
-      "description": "Give Every Story a Voice.",
-      "homepage": "https://sanskarin.github.io/KathaSvara/",
+      "language_bytes": 223975,
+      "url": "https://github.com/sanskarIN/EyeZen",
+      "description": "Your screen. Your comfort. Your environment.",
+      "homepage": "https://sanskarin.github.io/EyeZen/",
       "language": "TypeScript",
       "language_color": "#3178c6",
       "stars": 1,
@@ -218,28 +288,8 @@
       "license": "MPL-2.0",
       "fork": false,
       "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-11"
-    },
-    {
-      "name": "contactcore",
-      "full_name": "sanskarIN/contactcore",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 63338,
-      "url": "https://github.com/sanskarIN/contactcore",
-      "description": "ContactCore, a production-quality Basic Contact Book project that is much more complete than a classroom demo.",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-11-11"
+      "created": "2026-10-14",
+      "pushed": "2026-11-12"
     },
     {
       "name": "LineLoom",
@@ -259,7 +309,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-17",
-      "pushed": "2026-11-10",
+      "pushed": "2026-11-12",
       "languages": [
         {
           "name": "TypeScript",
@@ -284,53 +334,31 @@
       ]
     },
     {
-      "name": "awesome-tech-atlas",
-      "full_name": "sanskarIN/awesome-tech-atlas",
+      "name": "LangSteps",
+      "full_name": "sanskarIN/LangSteps",
       "owner": "sanskarIN",
       "external": false,
-      "language_bytes": 85451,
-      "url": "https://github.com/sanskarIN/awesome-tech-atlas",
-      "description": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references.",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
+      "language_bytes": 4742994,
+      "url": "https://github.com/sanskarIN/LangSteps",
+      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
+      "homepage": "https://sanskarin.github.io/LangSteps/",
+      "language": "HTML",
+      "language_color": "#e34c26",
       "stars": 1,
       "forks": 0,
       "topics": [
-        "awesome-list",
-        "computer-science",
-        "developer-resources",
-        "machine-learning",
-        "open-source",
-        "programming"
+        "beginner-to-advanced",
+        "coding-challenges",
+        "coding-exercises",
+        "csharp",
+        "css",
+        "golang"
       ],
-      "license": "CC0-1.0",
+      "license": null,
       "fork": false,
       "archived": false,
-      "created": "2026-11-08",
-      "pushed": "2026-11-10",
-      "languages": [
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 60.9
-        },
-        {
-          "name": "JavaScript",
-          "color": "#f1e05a",
-          "percent": 19.0
-        },
-        {
-          "name": "CSS",
-          "color": "#663399",
-          "percent": 13.2
-        },
-        {
-          "name": "HTML",
-          "color": "#e34c26",
-          "percent": 6.9
-        }
-      ]
+      "created": "2026-05-16",
+      "pushed": "2026-11-12"
     },
     {
       "name": "sanskarIN.github.io",
@@ -350,57 +378,156 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-26",
-      "pushed": "2026-11-10"
+      "pushed": "2026-11-12"
     },
     {
-      "name": "RepoDNA",
-      "full_name": "sanskarIN/RepoDNA",
+      "name": "SpeedPulse",
+      "full_name": "sanskarIN/SpeedPulse",
       "owner": "sanskarIN",
       "external": false,
-      "language_bytes": 4070728,
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 8,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
+      "language_bytes": 614480,
+      "url": "https://github.com/sanskarIN/SpeedPulse",
+      "description": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of…",
+      "homepage": "https://sanskarin.github.io/SpeedPulse/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": null,
       "fork": false,
       "archived": false,
-      "created": "2026-09-24",
-      "pushed": "2026-11-10",
+      "created": "2026-06-19",
+      "pushed": "2026-11-12"
+    },
+    {
+      "name": "Rewind64",
+      "full_name": "sanskarIN/Rewind64",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 195706,
+      "url": "https://github.com/sanskarIN/Rewind64",
+      "description": "A cross-platform, high-performance native debugger and execution recorder built entirely in Assembly.",
+      "homepage": null,
+      "language": "Shell",
+      "language_color": "#89e051",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "BSL-1.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-18",
+      "pushed": "2026-11-12"
+    },
+    {
+      "name": "ReproCrate",
+      "full_name": "sanskarIN/ReproCrate",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 255243,
+      "url": "https://github.com/sanskarIN/ReproCrate",
+      "description": "Turn bugs into reproducible reports.",
+      "homepage": null,
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "EPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
+      "pushed": "2026-11-12"
+    },
+    {
+      "name": "tempotrack",
+      "full_name": "sanskarIN/tempotrack",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 215329,
+      "url": "https://github.com/sanskarIN/tempotrack",
+      "description": "",
+      "homepage": null,
+      "language": "Kotlin",
+      "language_color": "#A97BFF",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-11-11"
+    },
+    {
+      "name": "awesome-tech-atlas",
+      "full_name": "sanskarIN/awesome-tech-atlas",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 87834,
+      "url": "https://github.com/sanskarIN/awesome-tech-atlas",
+      "description": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references.",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "awesome-list",
+        "computer-science",
+        "developer-resources",
+        "machine-learning",
+        "open-source",
+        "programming"
+      ],
+      "license": "CC0-1.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-11-08",
+      "pushed": "2026-11-11",
       "languages": [
         {
-          "name": "Rust",
-          "color": "#dea584",
-          "percent": 79.2
-        },
-        {
-          "name": "TypeScript",
-          "color": "#3178c6",
-          "percent": 14.8
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 59.4
         },
         {
           "name": "JavaScript",
           "color": "#f1e05a",
-          "percent": 4.4
+          "percent": 20.9
         },
         {
-          "name": "Other",
-          "color": "#8b949e",
-          "percent": 1.7,
-          "other": true
+          "name": "CSS",
+          "color": "#663399",
+          "percent": 12.8
+        },
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "percent": 7.0
         }
       ]
+    },
+    {
+      "name": "contactcore",
+      "full_name": "sanskarIN/contactcore",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 63338,
+      "url": "https://github.com/sanskarIN/contactcore",
+      "description": "ContactCore, a production-quality Basic Contact Book project that is much more complete than a classroom demo.",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-11-11"
     },
     {
       "name": "healthmetric",
@@ -542,53 +669,6 @@
       "pushed": "2026-11-08"
     },
     {
-      "name": "EyeZen",
-      "full_name": "sanskarIN/EyeZen",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 223975,
-      "url": "https://github.com/sanskarIN/EyeZen",
-      "description": "Your screen. Your comfort. Your environment.",
-      "homepage": "https://sanskarin.github.io/EyeZen/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "MPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-14",
-      "pushed": "2026-11-07"
-    },
-    {
-      "name": "LangSteps",
-      "full_name": "sanskarIN/LangSteps",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 4742994,
-      "url": "https://github.com/sanskarIN/LangSteps",
-      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
-      "homepage": "https://sanskarin.github.io/LangSteps/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "beginner-to-advanced",
-        "coding-challenges",
-        "coding-exercises",
-        "csharp",
-        "css",
-        "golang"
-      ],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-05-16",
-      "pushed": "2026-11-07"
-    },
-    {
       "name": "SonicNest",
       "full_name": "sanskarIN/SonicNest",
       "owner": "sanskarIN",
@@ -613,26 +693,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-14",
-      "pushed": "2026-11-06"
-    },
-    {
-      "name": "ReproCrate",
-      "full_name": "sanskarIN/ReproCrate",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 255243,
-      "url": "https://github.com/sanskarIN/ReproCrate",
-      "description": "Turn bugs into reproducible reports.",
-      "homepage": null,
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "EPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-17",
       "pushed": "2026-11-06"
     },
     {
@@ -776,26 +836,6 @@
       "pushed": "2026-10-30"
     },
     {
-      "name": "tempotrack",
-      "full_name": "sanskarIN/tempotrack",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 215329,
-      "url": "https://github.com/sanskarIN/tempotrack",
-      "description": "",
-      "homepage": null,
-      "language": "Kotlin",
-      "language_color": "#A97BFF",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-10-28"
-    },
-    {
       "name": "unknown-mystery-ai",
       "full_name": "sanskarIN/unknown-mystery-ai",
       "owner": "sanskarIN",
@@ -928,26 +968,6 @@
       "pushed": "2026-10-24"
     },
     {
-      "name": "Rewind64",
-      "full_name": "sanskarIN/Rewind64",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 195706,
-      "url": "https://github.com/sanskarIN/Rewind64",
-      "description": "A cross-platform, high-performance native debugger and execution recorder built entirely in Assembly.",
-      "homepage": null,
-      "language": "Shell",
-      "language_color": "#89e051",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "BSL-1.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-18",
-      "pushed": "2026-10-23"
-    },
-    {
       "name": "Arithvex",
       "full_name": "sanskarIN/Arithvex",
       "owner": "sanskarIN",
@@ -1012,26 +1032,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-21",
-      "pushed": "2026-10-21"
-    },
-    {
-      "name": "SpeedPulse",
-      "full_name": "sanskarIN/SpeedPulse",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 614480,
-      "url": "https://github.com/sanskarIN/SpeedPulse",
-      "description": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of…",
-      "homepage": "https://sanskarin.github.io/SpeedPulse/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-06-19",
       "pushed": "2026-10-21"
     },
     {
@@ -1725,9 +1725,9 @@
     }
   ],
   "activity": {
-    "total": 37245,
+    "total": 37499,
     "start": "2025-11-09",
-    "end": "2026-11-11",
+    "end": "2026-11-12",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -2075,14 +2075,14 @@
       85,
       318,
       402,
-      580,
+      579,
       884,
       347,
-      469,
+      468,
       1093,
       315,
       543,
-      198,
+      197,
       236,
       67,
       70,
@@ -2098,7 +2098,8 @@
       108,
       124,
       105,
-      113
+      158,
+      212
     ],
     "levels": [
       0,
@@ -2468,6 +2469,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -2524,8 +2526,8 @@
         "label": "Nov"
       }
     ],
-    "active_days": 133,
-    "longest_streak": 56,
+    "active_days": 134,
+    "longest_streak": 57,
     "busiest": {
       "date": "2026-08-19",
       "count": 7067
