@@ -884,6 +884,10 @@ Read [the publishing guide](.github/docs/kahani-publishing.md) before adding a c
 - **Performance:** one stylesheet (≈15 KB gzipped), about 5 KB of optional JavaScript on most pages (11 KB on the Home page, with the terminal), about 75 KB of self-hosted fonts (Latin subset; the main font is preloaded), inline SVG icons, and no third-party requests (apart from Supabase on the account and author pages, once accounts are on). CSS, JavaScript, and icon URLs carry a build-time `?v=` parameter because GitHub Pages lets browsers cache files for 10 minutes.
 - **Security:** a Content Security Policy that allows only same-origin resources, no inline scripts or styles, no secrets in the repository, `rel="noopener noreferrer"` on external links, `/.well-known/security.txt`, a blog workflow that treats issues as untrusted input ([details](#safety)), accounts protected by row-level security ([details](#security-notes)), and a [security policy](SECURITY.md).
 
+## Support ongoing development
+
+If the projects and developer resources on this website are useful, you can [support development on GitHub Sponsors](https://github.com/sponsors/sanskarIN). Sponsorship is voluntary and does not unlock or restrict public content.
+
 ## Copyright and licensing
 
 © 2026 Sanskar. All rights reserved.
