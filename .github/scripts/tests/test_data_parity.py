@@ -75,6 +75,24 @@ class DataParityTests(unittest.TestCase):
         self.assertEqual(profile["username"].casefold(), username.casefold())
         self.assertFalse(url.query or url.fragment)
 
+    def test_github_sponsors_url_and_support_discovery(self):
+        """Keep funding, website cards, and the terminal support command aligned."""
+        config = read_yaml(ROOT, "_config.yml")
+        username = config["author"]["username"]
+        social = read_yaml(ROOT, "_data/social.yml")
+        profile = social["profiles"]["github_sponsors"]
+        url = urlsplit(profile["url"])
+        self.assertEqual(url.scheme, "https")
+        self.assertEqual(url.hostname, "github.com")
+        self.assertEqual(url.path.casefold(), f"/sponsors/{username}".casefold())
+        self.assertFalse(url.query or url.fragment)
+        self.assertEqual(profile["handle"].casefold(), username.casefold())
+        self.assertIs(profile["same_as"], False)
+        self.assertIn("github_sponsors", social["groups"]["products"]["items"])
+        sponsorship = [item for item in terminal_data()["support"] if item["key"] == "github_sponsors"]
+        self.assertEqual(len(sponsorship), 1)
+        self.assertEqual(sponsorship[0]["url"], profile["url"])
+
     def test_slug_date_and_public_url_are_stable(self):
         posts = published_posts(ROOT)
         self.assertGreaterEqual(len(posts), 1)
