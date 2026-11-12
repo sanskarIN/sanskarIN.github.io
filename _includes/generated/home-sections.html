@@ -60,6 +60,9 @@
     </ul>
     <p class="section-footer link-row">
       {% include link.html url=site.projects_url label="All projects" class="text-link" arrow=true %}
+      {%- if gh.featured contains "scarp" %}
+      {% include link.html url="/projects/#scarp-ecosystem" label="Scarp ecosystem" class="text-link" arrow=true %}
+      {%- endif %}
       {% include link.html url=site.data.social.profiles.github.url label="GitHub profile" icon="github" class="text-link" %}
     </p>
     {%- else %}

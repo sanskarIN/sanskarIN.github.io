@@ -6,11 +6,13 @@ import json
 import sys
 import unittest
 from pathlib import Path
+from urllib.parse import urlsplit
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import generate_site_content as sitegen
 from home_render import render_hero, render_sections, SECTION_IDS
 from utility_pages import render_contact, render_not_found
+from terminal_data import read_yaml
 
 
 class SiteGeneratorTests(unittest.TestCase):
@@ -125,6 +127,41 @@ class SiteGeneratorTests(unittest.TestCase):
         self.assertIn('{%- for post in site.posts limit: 3 %}', result)
         self.assertIn('include contact-card.html group="business"', result)
         self.assertIn('include profile-list.html group="products"', result)
+
+    def test_scarp_ecosystem_links_are_curated_and_safe(self):
+        """Discover the ecosystem without misrepresenting code totals or injecting URLs."""
+        entries = read_yaml(sitegen.ROOT, "_data/scarp_ecosystem.yml")
+        self.assertIsInstance(entries, list)
+        self.assertEqual(len(entries), 6)
+        expected = {
+            "scarp-lang/scarp",
+            "scarp-lang/scarp-docs",
+            "scarp-lang/scarp-playground",
+            "scarp-lang/scarp-by-example",
+            "scarp-lang/scarp-vscode",
+            "scarp-lang/scarp-lang.github.io",
+        }
+        self.assertEqual({entry["repository"] for entry in entries}, expected)
+        urls = set()
+        for entry in entries:
+            with self.subTest(repository=entry["repository"]):
+                self.assertEqual(set(entry), {"title", "repository", "url", "description"})
+                self.assertTrue(entry["title"].strip())
+                self.assertTrue(entry["description"].strip())
+                url = urlsplit(entry["url"])
+                self.assertEqual(url.scheme, "https")
+                self.assertIn(url.hostname, ("scarp-lang.github.io", "github.com"))
+                self.assertFalse(url.query or url.fragment or url.username or url.password)
+                self.assertNotIn("..", url.path)
+                if url.hostname == "github.com":
+                    self.assertEqual(url.path.rstrip("/"), "/" + entry["repository"])
+                self.assertNotIn(entry["url"], urls)
+                urls.add(entry["url"])
+        page = (sitegen.ROOT / "projects/index.html").read_text(encoding="utf-8")
+        self.assertIn('id="scarp-ecosystem"', page)
+        self.assertIn("site.data.scarp_ecosystem", page)
+        self.assertIn("{{ entry.url | escape }}", page)
+        self.assertIn('url="/projects/#scarp-ecosystem"', render_sections(self.home))
 
     def test_home_intro_and_hero_preserve_dynamic_terminal(self):
         hero = render_hero(self.home)
