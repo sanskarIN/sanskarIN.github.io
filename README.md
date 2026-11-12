@@ -436,7 +436,7 @@ The policy in `_config.yml` lists each directive on its own line and only allows
 
 ## Projects
 
-The Projects page at `/projects/` shows the public GitHub repositories of [sanskarIN](https://github.com/sanskarIN), and the Home page's "Open source" section features three of them. Everything on the page comes from GitHub — nothing about the projects is written by hand — and it's refreshed every day.
+The Projects page at `/projects/` shows public GitHub repositories of [sanskarIN](https://github.com/sanskarIN) and explicitly maintained organization repositories, including the Scarp compiler. The Home page's "Open source" section features three projects. Repository statistics, cards, language composition, and activity come from GitHub's daily refresh; curated ecosystem links are maintained separately in `_data/scarp_ecosystem.yml`.
 
 **Required repository setting:** GitHub Actions must be allowed to create pull requests
 (**Settings → Actions → General → Workflow permissions → Allow GitHub Actions to create and approve pull requests**).
@@ -447,7 +447,7 @@ The automation does not bypass the protected `main` branch. Review and merge gen
 1. The workflow `.github/workflows/update-github-data.yml` runs `.github/scripts/update_github_data.py` every day at 04:23 UTC, whenever `_data/projects.yml` (or the script or workflow) changes, and from **Actions → Update GitHub data → Run workflow**.
 2. The script reads public information only, with the workflow's own token (no secrets to set up): the account's public repositories (name, description, website, main language, stars, forks, topics, license, and last push), the languages in each one, the repositories pinned on the profile, and the contribution calendar shown on the profile.
 3. It writes `_data/github.json`. If anything changed — apart from the timestamp, and this website's own last push — it commits the file as `sanskarIN <sanskarin@outlook.in>` on `automation/github-data` and opens or updates a pull request to `main`. The site updates after that PR is merged. On days when nothing changed, no new commit is created.
-4. The site builds the page from that file: totals, featured repositories, a language breakdown, the activity calendar, and the full list, which visitors can search, filter by language, and sort. The choices are kept in the address (for example `/projects/?language=Rust&sort=stars`), so a filtered list can be shared. Without JavaScript, the full list is shown.
+4. The site builds the page from that file: totals, featured repositories, a language breakdown, the activity calendar, and the full list, which visitors can search, filter by language or ownership, and sort by recency, stars, GitHub-classified code bytes, or name. Choices are kept in the address (for example `/projects/?language=Rust&scope=organization&sort=code`), so a filtered list can be shared. Without JavaScript, the full list is shown. Code bytes are not source lines or personal authorship.
 
 Until the workflow has run for the first time, the page links to the GitHub profile instead. The "Projects" links in the header, footer, Home page, and 404 page point to `/projects/` because the page exists (see `_includes/resolve-projects-url.html`).
 
@@ -457,11 +457,18 @@ Until the workflow has run for the first time, the page links to the GitHub prof
 |---|---|
 | `github_user` | The account whose public repositories are shown (`sanskarIN`) |
 | `featured` | Repositories to feature, in order (up to six). When empty, the repositories pinned on the GitHub profile are featured, or else the ones with the most stars |
+| `additional_repositories` | Explicitly included public organization repositories maintained by the portfolio owner; not a claim to own an entire organization |
 | `hidden` | Repositories to leave out. The profile README repository (`sanskarIN/sanskarIN`) is always left out |
 | `show_forks` | Include forks of other people's repositories (off) |
 | `show_archived` | Include archived repositories, marked "Archived" (on) |
 
 Commit a change and the workflow runs straight away; the page updates a minute or two later. To show a brand-new repository or description before the next daily run, run the workflow from the Actions tab.
+
+### Scarp ecosystem links
+
+The Scarp compiler is the first featured project, and the Projects page contains a separate **Scarp ecosystem** section at `/projects/#scarp-ecosystem` with verified entry points to the official website, compiler, documentation, playground, examples, and VS Code tooling. The Home page links directly to this section when Scarp is featured.
+
+The link titles, descriptions, repository identities, and URLs live in `_data/scarp_ecosystem.yml`. Update that file when upstream pages move. These six curated links are **not automatically added to the repository totals or language percentages**; only the account repositories and the explicitly configured maintained organization repositories in `_data/projects.yml` contribute to those metrics. Scarp is under pre-release development, so do not describe unverified features as stable or production-ready.
 
 ### Good to know
 
