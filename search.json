@@ -784,6 +784,13 @@
   },
   {
     "type": "Project",
+    "title": "KathaSvara",
+    "url": "https://github.com/sanskarIN/KathaSvara",
+    "tags": [],
+    "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
     "title": "latebrake",
     "url": "https://github.com/sanskarIN/latebrake",
     "tags": [],
@@ -791,17 +798,17 @@
   },
   {
     "type": "Project",
-    "title": "scarp",
-    "url": "https://github.com/scarp-lang/scarp",
+    "title": "RepoDNA",
+    "url": "https://github.com/sanskarIN/RepoDNA",
     "tags": [
       "cli",
-      "compiler",
-      "compiler-design",
-      "developer-tools",
-      "interpreter",
-      "language-design"
+      "code-analysis",
+      "code-archaeology",
+      "code-metrics",
+      "code-quality",
+      "code-visualization"
     ],
-    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
+    "text": "Understand any GitHub repository before you clone it. Rust"
   },
   {
     "type": "Project",
@@ -819,17 +826,24 @@
   },
   {
     "type": "Project",
-    "title": "KathaSvara",
-    "url": "https://github.com/sanskarIN/KathaSvara",
-    "tags": [],
-    "text": "Give Every Story a Voice. TypeScript"
+    "title": "scarp",
+    "url": "https://github.com/scarp-lang/scarp",
+    "tags": [
+      "cli",
+      "compiler",
+      "compiler-design",
+      "developer-tools",
+      "interpreter",
+      "language-design"
+    ],
+    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
   },
   {
     "type": "Project",
-    "title": "contactcore",
-    "url": "https://github.com/sanskarIN/contactcore",
+    "title": "EyeZen",
+    "url": "https://github.com/sanskarIN/EyeZen",
     "tags": [],
-    "text": "ContactCore, a production-quality Basic Contact Book project that is much more complete than a classroom demo. C#"
+    "text": "Your screen. Your comfort. Your environment. TypeScript"
   },
   {
     "type": "Project",
@@ -837,6 +851,55 @@
     "url": "https://github.com/sanskarIN/LineLoom",
     "tags": [],
     "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "LangSteps",
+    "url": "https://github.com/sanskarIN/LangSteps",
+    "tags": [
+      "beginner-to-advanced",
+      "coding-challenges",
+      "coding-exercises",
+      "csharp",
+      "css",
+      "golang"
+    ],
+    "text": "LangSteps — Every Language. Every Level. One Step at a Time. HTML"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "SpeedPulse",
+    "url": "https://github.com/sanskarIN/SpeedPulse",
+    "tags": [],
+    "text": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of… HTML"
+  },
+  {
+    "type": "Project",
+    "title": "Rewind64",
+    "url": "https://github.com/sanskarIN/Rewind64",
+    "tags": [],
+    "text": "A cross-platform, high-performance native debugger and execution recorder built entirely in Assembly. Shell"
+  },
+  {
+    "type": "Project",
+    "title": "ReproCrate",
+    "url": "https://github.com/sanskarIN/ReproCrate",
+    "tags": [],
+    "text": "Turn bugs into reproducible reports. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "tempotrack",
+    "url": "https://github.com/sanskarIN/tempotrack",
+    "tags": [],
+    "text": "Kotlin"
   },
   {
     "type": "Project",
@@ -854,24 +917,10 @@
   },
   {
     "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "title": "contactcore",
+    "url": "https://github.com/sanskarIN/contactcore",
     "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "RepoDNA",
-    "url": "https://github.com/sanskarIN/RepoDNA",
-    "tags": [
-      "cli",
-      "code-analysis",
-      "code-archaeology",
-      "code-metrics",
-      "code-quality",
-      "code-visualization"
-    ],
-    "text": "Understand any GitHub repository before you clone it. Rust"
+    "text": "ContactCore, a production-quality Basic Contact Book project that is much more complete than a classroom demo. C#"
   },
   {
     "type": "Project",
@@ -936,27 +985,6 @@
   },
   {
     "type": "Project",
-    "title": "EyeZen",
-    "url": "https://github.com/sanskarIN/EyeZen",
-    "tags": [],
-    "text": "Your screen. Your comfort. Your environment. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "LangSteps",
-    "url": "https://github.com/sanskarIN/LangSteps",
-    "tags": [
-      "beginner-to-advanced",
-      "coding-challenges",
-      "coding-exercises",
-      "csharp",
-      "css",
-      "golang"
-    ],
-    "text": "LangSteps — Every Language. Every Level. One Step at a Time. HTML"
-  },
-  {
-    "type": "Project",
     "title": "SonicNest",
     "url": "https://github.com/sanskarIN/SonicNest",
     "tags": [
@@ -968,13 +996,6 @@
       "soundrecorder"
     ],
     "text": "SonicNest is a professional, modern, open-source sound and voice recorder worthy of public release. Dart"
-  },
-  {
-    "type": "Project",
-    "title": "ReproCrate",
-    "url": "https://github.com/sanskarIN/ReproCrate",
-    "tags": [],
-    "text": "Turn bugs into reproducible reports. Rust"
   },
   {
     "type": "Project",
@@ -1024,13 +1045,6 @@
     "url": "https://github.com/sanskarIN/thermoshift",
     "tags": [],
     "text": "TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "tempotrack",
-    "url": "https://github.com/sanskarIN/tempotrack",
-    "tags": [],
-    "text": "Kotlin"
   },
   {
     "type": "Project",
@@ -1088,13 +1102,6 @@
   },
   {
     "type": "Project",
-    "title": "Rewind64",
-    "url": "https://github.com/sanskarIN/Rewind64",
-    "tags": [],
-    "text": "A cross-platform, high-performance native debugger and execution recorder built entirely in Assembly. Shell"
-  },
-  {
-    "type": "Project",
     "title": "Arithvex",
     "url": "https://github.com/sanskarIN/Arithvex",
     "tags": [],
@@ -1120,13 +1127,6 @@
     "url": "https://github.com/sanskarIN/vaultora",
     "tags": [],
     "text": "Vaultora, a production-quality Password Manager project that is much more complete than a classroom demo. Rust"
-  },
-  {
-    "type": "Project",
-    "title": "SpeedPulse",
-    "url": "https://github.com/sanskarIN/SpeedPulse",
-    "tags": [],
-    "text": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of… HTML"
   },
   {
     "type": "Project",
