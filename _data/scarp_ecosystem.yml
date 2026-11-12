@@ -1,0 +1,32 @@
+# Curated public entry points for the actively developed Scarp ecosystem.
+# Verify links against the upstream scarp-lang repository homepages before changing them.
+# Listing a project here does NOT add its bytes to the site-wide GitHub metrics.
+- title: Language website
+  repository: scarp-lang/scarp-lang.github.io
+  url: https://scarp-lang.github.io/
+  description: Overview, news, and entry points for the programming language.
+
+- title: Compiler and CLI
+  repository: scarp-lang/scarp
+  url: https://github.com/scarp-lang/scarp
+  description: Compiler source, releases, and implementation progress.
+
+- title: Documentation
+  repository: scarp-lang/scarp-docs
+  url: https://scarp-lang.github.io/scarp-docs/
+  description: Language guides, reference material, and getting started.
+
+- title: Online playground
+  repository: scarp-lang/scarp-playground
+  url: https://scarp-lang.github.io/scarp-playground/
+  description: Browser-based tools for exploring Scarp.
+
+- title: Scarp by Example
+  repository: scarp-lang/scarp-by-example
+  url: https://scarp-lang.github.io/scarp-by-example/
+  description: Learn the language through practical examples.
+
+- title: VS Code extension
+  repository: scarp-lang/scarp-vscode
+  url: https://github.com/scarp-lang/scarp-vscode
+  description: Editor integration and development tools for Scarp.
