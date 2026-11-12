@@ -352,6 +352,7 @@ Every profile link on the site (header, footer, Home, About, Developer, Contact,
 | Instagram | https://instagram.com/SanskarCode | `@SanskarCode` |
 | Bluesky | https://bsky.app/profile/sanskarIN.bsky.social | `@sanskarIN.bsky.social` |
 | YouTube (Kahani Wali Shaam) | https://www.youtube.com/@KahaniWaliShaam | `@KahaniWaliShaam` |
+| GitHub Sponsors | https://github.com/sponsors/sanskarIN | `sanskarIN` |
 | Buy Me a Coffee | https://buymeacoffee.com/sanskarIN | `sanskarIN` |
 | Razorpay | https://razorpay.me/@SanskarCodes | `@SanskarCodes` |
 | Gumroad | https://sanskarIN.gumroad.com | `sanskarIN` |

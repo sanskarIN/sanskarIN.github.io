@@ -84,6 +84,15 @@ profiles:
     note: Listen to kahani (story) videos
     same_as: false
 
+  github_sponsors:
+    name: GitHub Sponsors
+    url: https://github.com/sponsors/sanskarIN
+    handle: sanskarIN
+    username: sanskarIN
+    icon: github
+    note: Sponsor my open-source work
+    same_as: false
+
   buymeacoffee:
     name: Buy Me a Coffee
     url: https://buymeacoffee.com/sanskarIN
@@ -130,7 +139,7 @@ groups:
     items: [x, instagram, bluesky, youtube]
   products:
     title: Support & Products
-    items: [buymeacoffee, razorpay, gumroad, paypal]
+    items: [github_sponsors, buymeacoffee, razorpay, gumroad, paypal]
 
 # Profiles featured in the Home page "Developer community" section.
 community: [devto, discord, x, bluesky, linkedin]
