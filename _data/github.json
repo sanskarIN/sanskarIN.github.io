@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T12:53:05Z",
+  "generated_at": "2026-11-13T12:20:16Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -9,13 +9,13 @@
     "stars": 33,
     "forks": 3,
     "languages": 27,
-    "language_bytes": 45314775
+    "language_bytes": 45769284
   },
   "languages": [
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 13.9
+      "percent": 14.3
     },
     {
       "name": "TypeScript",
@@ -25,22 +25,22 @@
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 12.7
+      "percent": 12.6
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 11.2
+      "percent": 11.1
     },
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 10.8
+      "percent": 10.9
     },
     {
       "name": "Dart",
       "color": "#00B4AB",
-      "percent": 10.7
+      "percent": 10.6
     },
     {
       "name": "Other",
@@ -59,11 +59,265 @@
   ],
   "repositories": [
     {
+      "name": "frametrellis",
+      "full_name": "sanskarIN/frametrellis",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 2396534,
+      "url": "https://github.com/sanskarIN/frametrellis",
+      "description": "Open-source video editor.",
+      "homepage": "https://sanskarin.github.io/frametrellis/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 4,
+      "forks": 0,
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
+      "license": "GPL-3.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-11",
+      "pushed": "2026-11-13",
+      "languages": [
+        {
+          "name": "C++",
+          "color": "#f34b7d",
+          "percent": 71.4
+        },
+        {
+          "name": "QML",
+          "color": "#44a51c",
+          "percent": 12.2
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 7.9
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 8.5,
+          "other": true
+        }
+      ]
+    },
+    {
+      "name": "scarp",
+      "full_name": "scarp-lang/scarp",
+      "owner": "scarp-lang",
+      "external": true,
+      "language_bytes": 2093292,
+      "url": "https://github.com/scarp-lang/scarp",
+      "description": "A next-generation programming language for software, systems, and intelligent computing.",
+      "homepage": "https://scarp-lang.github.io/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 2,
+      "forks": 1,
+      "topics": [
+        "cli",
+        "compiler",
+        "compiler-design",
+        "developer-tools",
+        "interpreter",
+        "language-design"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-25",
+      "pushed": "2026-11-13",
+      "languages": [
+        {
+          "name": "Rust",
+          "color": "#dea584",
+          "percent": 87.6
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 9.6
+        },
+        {
+          "name": "PowerShell",
+          "color": "#012456",
+          "percent": 2.4
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 0.4,
+          "other": true
+        }
+      ]
+    },
+    {
+      "name": "latebrake",
+      "full_name": "sanskarIN/latebrake",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 2944839,
+      "url": "https://github.com/sanskarIN/latebrake",
+      "description": "Latebrake — Race Beyond Limits.",
+      "homepage": "https://sanskarin.github.io/latebrake/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 2,
+      "forks": 0,
+      "topics": [],
+      "license": "BSD-3-Clause",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-13",
+      "languages": [
+        {
+          "name": "C++",
+          "color": "#f34b7d",
+          "percent": 62.3
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 27.7
+        },
+        {
+          "name": "PowerShell",
+          "color": "#012456",
+          "percent": 5.3
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 4.7,
+          "other": true
+        }
+      ]
+    },
+    {
+      "name": "LineLoom",
+      "full_name": "sanskarIN/LineLoom",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 1278048,
+      "url": "https://github.com/sanskarIN/LineLoom",
+      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
+      "homepage": "https://sanskarin.github.io/LineLoom/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 3,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
+      "pushed": "2026-11-12",
+      "languages": [
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "percent": 45.1
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "percent": 28.5
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 23.1
+        },
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "percent": 3.4
+        }
+      ]
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "full_name": "sanskarIN/sanskarIN.github.io",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 464513,
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-11-12"
+    },
+    {
+      "name": "awesome-tech-atlas",
+      "full_name": "sanskarIN/awesome-tech-atlas",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 90898,
+      "url": "https://github.com/sanskarIN/awesome-tech-atlas",
+      "description": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references.",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "awesome-list",
+        "computer-science",
+        "developer-resources",
+        "machine-learning",
+        "open-source",
+        "programming"
+      ],
+      "license": "CC0-1.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-11-08",
+      "pushed": "2026-11-12",
+      "languages": [
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 57.5
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "percent": 23.2
+        },
+        {
+          "name": "CSS",
+          "color": "#663399",
+          "percent": 12.5
+        },
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "percent": 6.8
+        }
+      ]
+    },
+    {
       "name": "KathaSvara",
       "full_name": "sanskarIN/KathaSvara",
       "owner": "sanskarIN",
       "external": false,
-      "language_bytes": 1191934,
+      "language_bytes": 1226600,
       "url": "https://github.com/sanskarIN/KathaSvara",
       "description": "Give Every Story a Voice.",
       "homepage": "https://sanskarin.github.io/KathaSvara/",
@@ -79,54 +333,11 @@
       "pushed": "2026-11-12"
     },
     {
-      "name": "latebrake",
-      "full_name": "sanskarIN/latebrake",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 2850339,
-      "url": "https://github.com/sanskarIN/latebrake",
-      "description": "Latebrake — Race Beyond Limits.",
-      "homepage": "https://sanskarin.github.io/latebrake/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 2,
-      "forks": 0,
-      "topics": [],
-      "license": "BSD-3-Clause",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-12",
-      "languages": [
-        {
-          "name": "C++",
-          "color": "#f34b7d",
-          "percent": 62.2
-        },
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 27.9
-        },
-        {
-          "name": "PowerShell",
-          "color": "#012456",
-          "percent": 5.5
-        },
-        {
-          "name": "Other",
-          "color": "#8b949e",
-          "percent": 4.4,
-          "other": true
-        }
-      ]
-    },
-    {
       "name": "RepoDNA",
       "full_name": "sanskarIN/RepoDNA",
       "owner": "sanskarIN",
       "external": false,
-      "language_bytes": 4078975,
+      "language_bytes": 4085138,
       "url": "https://github.com/sanskarIN/RepoDNA",
       "description": "Understand any GitHub repository before you clone it.",
       "homepage": "https://sanskarin.github.io/RepoDNA/",
@@ -156,7 +367,7 @@
         {
           "name": "TypeScript",
           "color": "#3178c6",
-          "percent": 14.7
+          "percent": 14.8
         },
         {
           "name": "JavaScript",
@@ -167,106 +378,6 @@
           "name": "Other",
           "color": "#8b949e",
           "percent": 1.7,
-          "other": true
-        }
-      ]
-    },
-    {
-      "name": "frametrellis",
-      "full_name": "sanskarIN/frametrellis",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 2302458,
-      "url": "https://github.com/sanskarIN/frametrellis",
-      "description": "Open-source video editor.",
-      "homepage": "https://sanskarin.github.io/frametrellis/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 4,
-      "forks": 0,
-      "topics": [
-        "cmake",
-        "cpp",
-        "cpp20",
-        "desktop-application",
-        "docker",
-        "ffmpeg"
-      ],
-      "license": "GPL-3.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-11",
-      "pushed": "2026-11-12",
-      "languages": [
-        {
-          "name": "C++",
-          "color": "#f34b7d",
-          "percent": 74.2
-        },
-        {
-          "name": "QML",
-          "color": "#44a51c",
-          "percent": 12.7
-        },
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 5.4
-        },
-        {
-          "name": "Other",
-          "color": "#8b949e",
-          "percent": 7.7,
-          "other": true
-        }
-      ]
-    },
-    {
-      "name": "scarp",
-      "full_name": "scarp-lang/scarp",
-      "owner": "scarp-lang",
-      "external": true,
-      "language_bytes": 1879270,
-      "url": "https://github.com/scarp-lang/scarp",
-      "description": "A next-generation programming language for software, systems, and intelligent computing.",
-      "homepage": "https://scarp-lang.github.io/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 2,
-      "forks": 1,
-      "topics": [
-        "cli",
-        "compiler",
-        "compiler-design",
-        "developer-tools",
-        "interpreter",
-        "language-design"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-25",
-      "pushed": "2026-11-12",
-      "languages": [
-        {
-          "name": "Rust",
-          "color": "#dea584",
-          "percent": 86.9
-        },
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 10.2
-        },
-        {
-          "name": "PowerShell",
-          "color": "#012456",
-          "percent": 2.5
-        },
-        {
-          "name": "Other",
-          "color": "#8b949e",
-          "percent": 0.4,
           "other": true
         }
       ]
@@ -290,48 +401,6 @@
       "archived": false,
       "created": "2026-10-14",
       "pushed": "2026-11-12"
-    },
-    {
-      "name": "LineLoom",
-      "full_name": "sanskarIN/LineLoom",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 1272574,
-      "url": "https://github.com/sanskarIN/LineLoom",
-      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
-      "homepage": "https://sanskarin.github.io/LineLoom/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 3,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-17",
-      "pushed": "2026-11-12",
-      "languages": [
-        {
-          "name": "TypeScript",
-          "color": "#3178c6",
-          "percent": 45.0
-        },
-        {
-          "name": "JavaScript",
-          "color": "#f1e05a",
-          "percent": 28.5
-        },
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 23.2
-        },
-        {
-          "name": "HTML",
-          "color": "#e34c26",
-          "percent": 3.4
-        }
-      ]
     },
     {
       "name": "LangSteps",
@@ -358,26 +427,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-05-16",
-      "pushed": "2026-11-12"
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "full_name": "sanskarIN/sanskarIN.github.io",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 461969,
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
       "pushed": "2026-11-12"
     },
     {
@@ -459,55 +508,6 @@
       "archived": false,
       "created": "2026-08-19",
       "pushed": "2026-11-11"
-    },
-    {
-      "name": "awesome-tech-atlas",
-      "full_name": "sanskarIN/awesome-tech-atlas",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 87834,
-      "url": "https://github.com/sanskarIN/awesome-tech-atlas",
-      "description": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references.",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "awesome-list",
-        "computer-science",
-        "developer-resources",
-        "machine-learning",
-        "open-source",
-        "programming"
-      ],
-      "license": "CC0-1.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-11-08",
-      "pushed": "2026-11-11",
-      "languages": [
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 59.4
-        },
-        {
-          "name": "JavaScript",
-          "color": "#f1e05a",
-          "percent": 20.9
-        },
-        {
-          "name": "CSS",
-          "color": "#663399",
-          "percent": 12.8
-        },
-        {
-          "name": "HTML",
-          "color": "#e34c26",
-          "percent": 7.0
-        }
-      ]
     },
     {
       "name": "contactcore",
@@ -1725,9 +1725,9 @@
     }
   ],
   "activity": {
-    "total": 37499,
+    "total": 37789,
     "start": "2025-11-09",
-    "end": "2026-11-12",
+    "end": "2026-11-13",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -2098,8 +2098,9 @@
       108,
       124,
       105,
-      158,
-      212
+      181,
+      406,
+      73
     ],
     "levels": [
       0,
@@ -2470,6 +2471,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -2526,8 +2528,8 @@
         "label": "Nov"
       }
     ],
-    "active_days": 134,
-    "longest_streak": 57,
+    "active_days": 135,
+    "longest_streak": 58,
     "busiest": {
       "date": "2026-08-19",
       "count": 7067
