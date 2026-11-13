@@ -3,15 +3,15 @@ layout: page
 title: Projects
 eyebrow: Open source
 lead: Software I build and maintain in the open, including the Scarp programming language and my GitHub projects.
-description: "Sanskar's open-source projects on GitHub: featured repositories, languages, recent activity, and every public repository, updated every day."
+description: "Sanskar's open-source projects on GitHub: featured repositories, languages, recent activity, and public repositories from a reviewed GitHub snapshot."
 permalink: /projects/
 schema_type: CollectionPage
 scripts: [projects]
 ---
 {%- comment -%}
   The public GitHub repositories, from _data/github.json. That file is
-  written by the "Update GitHub data" workflow every day, using the settings
-  in _data/projects.yml (see README.md → "Projects"). Until it exists, the
+  proposed by the "Update GitHub data" workflow each day, using the settings
+  in _data/projects.yml (see README.md → "Projects"). After review, a merged snapshot is published. Until it exists, the
   page links to the GitHub profile instead. With JavaScript, the list can be
   searched, filtered by language, and sorted (assets/js/projects.js).
 {%- endcomment -%}
@@ -155,13 +155,13 @@ scripts: [projects]
   </div>
 </section>
 
-<p class="page-section data-note">{% include icon.html name="github" %}<span>Public repository data comes from {% include link.html url=github_profile label="my GitHub profile" %} and explicitly maintained organization repositories. GitHub language-byte totals exclude some files and are not lines of code. The activity calendar is from my personal profile. Refreshed daily; last updated <time datetime="{{ gh.generated_at }}">{{ gh.generated_at | date: "%-d %B %Y" }}</time>.</span></p>
+<p class="page-section data-note">{% include icon.html name="github" %}<span>Public repository data comes from {% include link.html url=github_profile label="my GitHub profile" %} and explicitly maintained organization repositories. GitHub language-byte totals exclude some files and are not lines of code. The activity calendar is from my personal profile. Data updates are proposed daily and published after review. Snapshot generated <time datetime="{{ gh.generated_at }}">{{ gh.generated_at | date: "%-d %B %Y" }}</time>.</span></p>
 {%- else %}
 <div class="callout">
   {% include icon.html name="github" class="callout__icon" %}
   <div>
     <h2 class="callout__title">github.com/{{ site.author.username }}</h2>
-    <p class="callout__text">My repositories appear here once they have been loaded from GitHub, which happens every day. Until then, you can browse them on GitHub.</p>
+    <p class="callout__text">My repositories appear here after a generated GitHub snapshot is reviewed and published. Until then, you can browse them on GitHub.</p>
   </div>
   {% include link.html url=github_profile label="Visit GitHub" class="button button--primary" arrow=true %}
 </div>
