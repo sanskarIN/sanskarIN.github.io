@@ -30,3 +30,8 @@
   repository: scarp-lang/scarp-vscode
   url: https://github.com/scarp-lang/scarp-vscode
   description: Editor integration and development tools for Scarp.
+
+- title: Scarp Studio
+  repository: scarp-lang/scarp-studio
+  url: https://github.com/scarp-lang/scarp-studio
+  description: Experimental desktop IDE for Scarp (.srp) files; check release notes for supported features.
