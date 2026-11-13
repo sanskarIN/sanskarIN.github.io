@@ -49,6 +49,8 @@ on:
       - '_includes/css/tokens.css'
       - '.github/scripts/generate_site_content.py'
       - '.github/scripts/tests/test_generate_site_content.py'
+      - '.github/scripts/check_scarp_ecosystem.py'
+      - '.github/scripts/tests/test_scarp_ecosystem.py'
       - '.github/scripts/update_github_data.py'
       - '.github/scripts/tests/test_maintained_repositories.py'
       - '.github/workflows/generated-site-content.yml'
@@ -99,6 +101,8 @@ on:
       - '_includes/css/tokens.css'
       - '.github/scripts/generate_site_content.py'
       - '.github/scripts/tests/test_generate_site_content.py'
+      - '.github/scripts/check_scarp_ecosystem.py'
+      - '.github/scripts/tests/test_scarp_ecosystem.py'
       - '.github/scripts/update_github_data.py'
       - '.github/scripts/tests/test_maintained_repositories.py'
       - '.github/workflows/generated-site-content.yml'
@@ -122,6 +126,8 @@ jobs:
         run: python .github/scripts/generate_site_content.py --check
       - name: Test Python rendering and input safety
         run: python -m unittest discover -s .github/scripts/tests -p 'test_generate_site_content.py' -v
+      - name: Test Scarp ecosystem link validation (offline)
+        run: python -m unittest discover -s .github/scripts/tests -p 'test_scarp_ecosystem.py' -v
       - name: Test Python stylesheet compiler
         run: python -m unittest discover -s .github/scripts/tests -p 'test_build_styles.py' -v
       - name: Test GitHub project language breakdowns
