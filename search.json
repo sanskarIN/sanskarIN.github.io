@@ -127,6 +127,20 @@
   },
   {
     "type": "Post",
+    "title": "FrameTrellis-v1-5-0-Featured-Release",
+    "url": "/blog/frametrellis-v1-5-0-featured-release/",
+    "date": "14 Nov 2026",
+    "tags": [
+      "frametrellis",
+      "open-source",
+      "video-editing",
+      "software-release",
+      "c++-development"
+    ],
+    "text": "FrameTrellis v1.5.0 is here! This featured stable release brings precision editing, flexible exports, improved audio and subtitles, media recovery, and enhanced stability. FrameTrellis v1.5.0 Released — Source Monitor, Flexible Exports and More Published: November 14, 2026 Category: Open Source / Software Releases FrameTrellis v1.5.0 is now officially available as a featured stable release on GitHub. Built using C++20, Qt 6, MLT and FFmpeg, FrameTrellis is a free, open-source video editor focused on non-destructive editing and local media processing. What's New? Source Monitor and Timeline Editing The new Source Monitor allows precise In/Out selection before adding material to the timeline. Additional features include"
+  },
+  {
+    "type": "Post",
     "title": "repodna-v1-5-0-release",
     "url": "/blog/repodna-v1-5-0-release/",
     "date": "6 Nov 2026",

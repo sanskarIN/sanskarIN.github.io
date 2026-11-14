@@ -257,6 +257,11 @@
   },
   "posts": [
     {
+      "title": "FrameTrellis-v1-5-0-Featured-Release",
+      "url": "/blog/frametrellis-v1-5-0-featured-release/",
+      "date": "14 Nov 2026"
+    },
+    {
       "title": "repodna-v1-5-0-release",
       "url": "/blog/repodna-v1-5-0-release/",
       "date": "6 Nov 2026"
@@ -275,11 +280,6 @@
       "title": "RepoDNA v1.4.5 Released — Evidence Intelligence and Reliability Improvements",
       "url": "/blog/repodna-v1-4-5-release/",
       "date": "30 Oct 2026"
-    },
-    {
-      "title": "FrameTrellis v1.3.0 Released — Safer, Smarter Video Editing",
-      "url": "/blog/frametrellis-v1-3-0-release/",
-      "date": "25 Oct 2026"
     }
   ],
   "links": {
