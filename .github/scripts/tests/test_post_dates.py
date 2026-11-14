@@ -7,6 +7,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from post_dates import issue_creation_timestamp
+from terminal_data import published_posts
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -31,6 +32,7 @@ class BlogCreationDateTests(unittest.TestCase):
     def test_original_submissions_and_indexes_keep_their_dates(self):
         search = json.loads((ROOT / "search.json").read_text(encoding="utf-8"))
         terminal = json.loads((ROOT / "terminal.json").read_text(encoding="utf-8"))
+        recent_urls = {post["url"] for post in published_posts(ROOT)[:5]}
         samples = [
             (47, "2026-10-25", "11:34:19", "frametrellis-v1-3-0-release", "25 Oct 2026"),
             (49, "2026-10-30", "09:34:27", "repodna-v1-4-5-release", "30 Oct 2026"),
@@ -46,9 +48,12 @@ class BlogCreationDateTests(unittest.TestCase):
                 indexed = [x for x in search if x.get("type") == "Post" and x.get("url") == url]
                 shown = [x for x in terminal["posts"] if x.get("url") == url]
                 self.assertEqual(len(indexed), 1)
-                self.assertEqual(len(shown), 1)
                 self.assertEqual(indexed[0]["date"], label)
-                self.assertEqual(shown[0]["date"], label)
+                # The terminal intentionally lists only the five newest posts.
+                # Historical posts must stay indexed but may leave that feed.
+                self.assertEqual(len(shown), 1 if url in recent_urls else 0)
+                if shown:
+                    self.assertEqual(shown[0]["date"], label)
 
 
 if __name__ == "__main__":
