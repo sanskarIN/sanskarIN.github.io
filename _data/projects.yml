@@ -22,13 +22,14 @@ additional_repositories:
 
 # Feature up to six repositories in the exact order below (repository names).
 # Scarp is maintained in the scarp-lang organization rather than this account.
+# Sonumio is an early-development project; being featured is not a release claim.
 featured:
   - scarp
-  - RepoDNA
+  - sonumio
   - frametrellis
-  - latebrake
+  - RepoDNA
   - LineLoom
-  - awesome-tech-atlas
+  - latebrake
 
 # Repositories to leave out (repository names). The profile README
 # repository (github.com/sanskarIN/sanskarIN) is always left out.
