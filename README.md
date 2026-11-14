@@ -350,6 +350,7 @@ Every profile link on the site (header, footer, Home, About, Developer, Contact,
 | Discord (developer channel) | https://discord.com/channels/1547184919455989760/1547187031057113098 | `@SanskarCodes` |
 | X | https://x.com/SanskarCodes | `@SanskarCodes` |
 | Instagram | https://instagram.com/SanskarCode | `@SanskarCode` |
+| Facebook | https://facebook.com/sanskarIN | `@sanskarIN` |
 | Bluesky | https://bsky.app/profile/sanskarIN.bsky.social | `@sanskarIN.bsky.social` |
 | YouTube (Kahani Wali Shaam) | https://www.youtube.com/@KahaniWaliShaam | `@KahaniWaliShaam` |
 | GitHub Sponsors | https://github.com/sponsors/sanskarIN | `sanskarIN` |
