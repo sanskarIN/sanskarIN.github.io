@@ -124,6 +124,33 @@ class MaintainedProjectTests(unittest.TestCase):
         ]
         self.assertEqual(project_data.featured_names(records, SETTINGS, []), ["scarp", "RepoDNA"])
 
+    def test_curated_featured_projects_match_site_order(self):
+        # Keep the personal website's six featured repositories deliberate,
+        # including the maintained organization compiler and early Sonumio.
+        expected = [
+            "scarp", "sonumio", "frametrellis",
+            "RepoDNA", "LineLoom", "latebrake",
+        ]
+        settings = project_data.load_settings()
+        self.assertEqual(settings["featured"], expected)
+        self.assertEqual(len({name.lower() for name in expected}), len(expected))
+        records = [
+            {"name": name, "stars": 0, "pushed": "2026-11-14",
+             "fork": False, "archived": False}
+            for name in reversed(expected)
+        ]
+        self.assertEqual(project_data.featured_names(records, settings, []), expected)
+
+    def test_featured_skips_missing_new_project_until_snapshot_refresh(self):
+        settings = project_data.load_settings()
+        records = [
+            {"name": name, "stars": 0, "pushed": "2026-11-14",
+             "fork": False, "archived": False}
+            for name in ("scarp", "RepoDNA", "frametrellis", "LineLoom", "latebrake")
+        ]
+        self.assertEqual(project_data.featured_names(records, settings, []),
+                         ["scarp", "frametrellis", "RepoDNA", "LineLoom", "latebrake"])
+
     def test_external_fork_obeys_visibility_setting(self):
         github = GitHubStub(repo("scarp-lang", "scarp", fork=True))
         self.assertEqual(project_data.include_additional_repositories(github, [], SETTINGS), [])
