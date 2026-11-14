@@ -208,7 +208,7 @@
     }
   ],
   "projects": {
-    "total": 70,
+    "total": 71,
     "stars": 33,
     "featured": [
       {
@@ -219,11 +219,11 @@
         "stars": 2
       },
       {
-        "name": "RepoDNA",
-        "url": "https://github.com/sanskarIN/RepoDNA",
-        "description": "Understand any GitHub repository before you clone it.",
-        "language": "Rust",
-        "stars": 8
+        "name": "sonumio",
+        "url": "https://github.com/sanskarIN/sonumio",
+        "description": "Open Source AI audio generator",
+        "language": null,
+        "stars": 0
       },
       {
         "name": "frametrellis",
@@ -233,11 +233,11 @@
         "stars": 4
       },
       {
-        "name": "latebrake",
-        "url": "https://github.com/sanskarIN/latebrake",
-        "description": "Latebrake — Race Beyond Limits.",
-        "language": "C++",
-        "stars": 2
+        "name": "RepoDNA",
+        "url": "https://github.com/sanskarIN/RepoDNA",
+        "description": "Understand any GitHub repository before you clone it.",
+        "language": "Rust",
+        "stars": 8
       },
       {
         "name": "LineLoom",
@@ -247,11 +247,11 @@
         "stars": 3
       },
       {
-        "name": "awesome-tech-atlas",
-        "url": "https://github.com/sanskarIN/awesome-tech-atlas",
-        "description": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references.",
-        "language": "Python",
-        "stars": 1
+        "name": "latebrake",
+        "url": "https://github.com/sanskarIN/latebrake",
+        "description": "Latebrake — Race Beyond Limits.",
+        "language": "C++",
+        "stars": 2
       }
     ]
   },

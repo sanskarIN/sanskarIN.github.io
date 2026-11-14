@@ -798,6 +798,48 @@
   },
   {
     "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
+    "tags": [],
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
+    "tags": [],
+    "text": "Latebrake — Race Beyond Limits. C++"
+  },
+  {
+    "type": "Project",
+    "title": "MeTodo",
+    "url": "https://github.com/sanskarIN/MeTodo",
+    "tags": [
+      "todo",
+      "todo-app",
+      "todo-list",
+      "todoapp",
+      "todolist",
+      "todolist-application"
+    ],
+    "text": "**MeTodo** is a highly advanced, ultra-customizable, cross-platform task management application designed for Windows, Linux, and Android. Built with a heavy emphasis on premium UI/UX, MeTodo goes beyond a simple to-do list by offering unprecedented personalization and… TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "sonumio",
+    "url": "https://github.com/sanskarIN/sonumio",
+    "tags": [],
+    "text": "Open Source AI audio generator"
+  },
+  {
+    "type": "Project",
     "title": "frametrellis",
     "url": "https://github.com/sanskarIN/frametrellis",
     "tags": [
@@ -826,24 +868,17 @@
   },
   {
     "type": "Project",
-    "title": "latebrake",
-    "url": "https://github.com/sanskarIN/latebrake",
-    "tags": [],
-    "text": "Latebrake — Race Beyond Limits. C++"
-  },
-  {
-    "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
-    "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+    "title": "RepoDNA",
+    "url": "https://github.com/sanskarIN/RepoDNA",
+    "tags": [
+      "cli",
+      "code-analysis",
+      "code-archaeology",
+      "code-metrics",
+      "code-quality",
+      "code-visualization"
+    ],
+    "text": "Understand any GitHub repository before you clone it. Rust"
   },
   {
     "type": "Project",
@@ -865,20 +900,6 @@
     "url": "https://github.com/sanskarIN/KathaSvara",
     "tags": [],
     "text": "Give Every Story a Voice. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "RepoDNA",
-    "url": "https://github.com/sanskarIN/RepoDNA",
-    "tags": [
-      "cli",
-      "code-analysis",
-      "code-archaeology",
-      "code-metrics",
-      "code-quality",
-      "code-visualization"
-    ],
-    "text": "Understand any GitHub repository before you clone it. Rust"
   },
   {
     "type": "Project",
@@ -1232,20 +1253,6 @@
       "spelling"
     ],
     "text": "A modern, open-source, offline-first spell checker and writing assistant for Android, Windows, Linux, iOS, and macOS, featuring spelling, grammar, punctuation, style suggestions, personal dictionaries, document analysis, and privacy-focused cross-platform support. Made by… Dart"
-  },
-  {
-    "type": "Project",
-    "title": "MeTodo",
-    "url": "https://github.com/sanskarIN/MeTodo",
-    "tags": [
-      "todo",
-      "todo-app",
-      "todo-list",
-      "todoapp",
-      "todolist",
-      "todolist-application"
-    ],
-    "text": "**MeTodo** is a highly advanced, ultra-customizable, cross-platform task management application designed for Windows, Linux, and Android. Built with a heavy emphasis on premium UI/UX, MeTodo goes beyond a simple to-do list by offering unprecedented personalization and… TypeScript"
   },
   {
     "type": "Project",
