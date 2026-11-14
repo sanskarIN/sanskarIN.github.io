@@ -798,10 +798,17 @@
   },
   {
     "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+    "title": "awesome-tech-atlas",
+    "url": "https://github.com/sanskarIN/awesome-tech-atlas",
+    "tags": [
+      "awesome-list",
+      "computer-science",
+      "developer-resources",
+      "machine-learning",
+      "open-source",
+      "programming"
+    ],
+    "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
   },
   {
     "type": "Project",
@@ -809,6 +816,20 @@
     "url": "https://github.com/sanskarIN/LineLoom",
     "tags": [],
     "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "KathaSvara",
+    "url": "https://github.com/sanskarIN/KathaSvara",
+    "tags": [],
+    "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
   },
   {
     "type": "Project",
@@ -879,27 +900,6 @@
       "code-visualization"
     ],
     "text": "Understand any GitHub repository before you clone it. Rust"
-  },
-  {
-    "type": "Project",
-    "title": "awesome-tech-atlas",
-    "url": "https://github.com/sanskarIN/awesome-tech-atlas",
-    "tags": [
-      "awesome-list",
-      "computer-science",
-      "developer-resources",
-      "machine-learning",
-      "open-source",
-      "programming"
-    ],
-    "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
-  },
-  {
-    "type": "Project",
-    "title": "KathaSvara",
-    "url": "https://github.com/sanskarIN/KathaSvara",
-    "tags": [],
-    "text": "Give Every Story a Voice. TypeScript"
   },
   {
     "type": "Project",
