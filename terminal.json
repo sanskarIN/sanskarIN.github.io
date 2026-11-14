@@ -75,6 +75,12 @@
       "url": "https://instagram.com/SanskarCode"
     },
     {
+      "key": "facebook",
+      "name": "Facebook",
+      "handle": "@sanskarIN",
+      "url": "https://facebook.com/sanskarIN"
+    },
+    {
       "key": "bluesky",
       "name": "Bluesky",
       "handle": "@sanskarIN.bsky.social",

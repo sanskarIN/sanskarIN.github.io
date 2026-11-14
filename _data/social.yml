@@ -66,6 +66,14 @@ profiles:
     icon: instagram
     note: Photos and updates
 
+  facebook:
+    name: Facebook
+    url: https://facebook.com/sanskarIN
+    handle: "@sanskarIN"
+    username: sanskarIN
+    icon: facebook
+    note: Posts and community updates
+
   bluesky:
     name: Bluesky
     url: https://bsky.app/profile/sanskarIN.bsky.social
@@ -136,13 +144,13 @@ groups:
     items: [github, linkedin, devto, discord]
   social:
     title: Social
-    items: [x, instagram, bluesky, youtube]
+    items: [x, instagram, facebook, bluesky, youtube]
   products:
     title: Support & Products
     items: [github_sponsors, buymeacoffee, razorpay, gumroad, paypal]
 
 # Profiles featured in the Home page "Developer community" section.
-community: [devto, discord, x, bluesky, linkedin]
+community: [devto, discord, x, facebook, bluesky, linkedin]
 
 # Profiles suggested under "Follow along" on the thank-you pages.
-follow: [github, x, instagram, linkedin, devto, youtube]
+follow: [github, x, instagram, facebook, linkedin, devto, youtube]
