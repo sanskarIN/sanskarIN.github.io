@@ -9,7 +9,7 @@ This repository deliberately does **not** include an open-source license (such a
 - Without a license, default copyright applies. The website's content, design, logo, and code are © Sanskar, all rights reserved.
 - Unlicensed code is **not** automatically free to reuse. Being able to read the source on GitHub does not grant permission to copy, modify, or redistribute it.
 - GitHub's Terms of Service let other GitHub users view and fork public repositories within GitHub ([section D.5](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service#5-license-grant-to-other-users)). That permission does not extend to using the code or content anywhere else.
-- If you would like to reuse something from this website, ask first by emailing sanskarin@outlook.in.
+- If you would like to reuse something from this website, ask first by emailing sanskarprogrammer@gmail.com.
 
 ## Third-party components
 

@@ -371,9 +371,8 @@ Each address is written exactly once, under `email:`. Every other place refers t
 
 | Key | Address | Used for |
 |---|---|---|
-| `business_primary` | sanskarin@outlook.in | Business contact; general and legal contact on the policy pages |
-| `business_secondary` | sanskarin.business@gmail.com | Business contact |
-| `support` | supportramsandesh@gmail.com | Support, accessibility feedback, security reports, `security.txt` |
+| `business_primary` | sanskarprogrammer@gmail.com | Business contact; general and legal contact on the policy pages |
+| `support` | sanskarcoder@outlook.com | Support, accessibility feedback, security reports, `security.txt` |
 
 `groups` describes the Business and Support groups shown on the Home and Contact pages and in the footer (title, summary, purposes, and which addresses belong to each). `form` holds the optional [contact form](#contact-form) settings.
 
