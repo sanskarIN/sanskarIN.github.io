@@ -127,6 +127,20 @@
   },
   {
     "type": "Post",
+    "title": "repodna-v1-5-1-stable-release-reliability-security-improvements",
+    "url": "/blog/repodna-v1-5-1-stable-release-reliability-security/",
+    "date": "16 Nov 2026",
+    "tags": [
+      "repodna",
+      "open-source",
+      "developer-tools",
+      "software-engineering",
+      "release-updates"
+    ],
+    "text": "RepoDNA v1.5.1 is now stable! This release improves saved-analysis recovery, artifact validation, storage reliability, and Git security for safer, more dependable local-first repository analysis. RepoDNA v1.5.1 Stable Release — Recovery, Validation, and Git Security Published: November 16, 2026 RepoDNA v1.5.1 is now available as a stable maintenance release. This update improves local analysis recovery, storage reliability, artifact validation, and Git remote security. Release highlights - Saved JSON analyses remain preserved when resetting the SQLite cache. - The repodna cache repair command can restore indexing. - Storage cleanup is more accurate when unindexed artifacts exist. - Malformed imported analysis files are rejected. - Git error"
+  },
+  {
+    "type": "Post",
     "title": "FrameTrellis-v1-5-0-Featured-Release",
     "url": "/blog/frametrellis-v1-5-0-featured-release/",
     "date": "14 Nov 2026",
