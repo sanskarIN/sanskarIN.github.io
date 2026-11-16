@@ -4,7 +4,7 @@ This repository contains the source of https://sanskarIN.github.io, a static web
 
 ## Reporting a vulnerability
 
-Please report security issues **privately** by email to **supportramsandesh@gmail.com**, with a subject line such as "Security issue: sanskarIN.github.io".
+Please report security issues **privately** by email to **sanskarcoder@outlook.com**, with a subject line such as "Security issue: sanskarIN.github.io".
 
 Helpful details to include:
 

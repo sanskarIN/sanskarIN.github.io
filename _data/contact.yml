@@ -9,9 +9,8 @@
 # =============================================================================
 
 email:
-  business_primary: sanskarin@outlook.in
-  business_secondary: sanskarin.business@gmail.com
-  support: supportramsandesh@gmail.com
+  business_primary: sanskarprogrammer@gmail.com
+  support: sanskarcoder@outlook.com
 
 # What each group of addresses is for, as shown on the site.
 groups:
@@ -28,9 +27,7 @@ groups:
       - General professional communication
     addresses:
       - key: business_primary
-        label: Primary
-      - key: business_secondary
-        label: Secondary
+        label: Business
 
   support:
     title: Support

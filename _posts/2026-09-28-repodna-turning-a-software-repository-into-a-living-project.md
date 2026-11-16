@@ -979,8 +979,8 @@ And this is only the beginning.
 
 #### Contact
 
-<strong>Business:</strong> [<a href="mailto:sanskarin@outlook.in" rel="noopener noreferrer">sanskarin@outlook.in</a>](<a href="mailto:sanskarin@outlook.in" rel="noopener noreferrer">mailto:sanskarin@outlook.in</a>)<br>
-<strong>Business:</strong> [<a href="mailto:sanskarin.business@gmail.com" rel="noopener noreferrer">sanskarin.business@gmail.com</a>](<a href="mailto:sanskarin.business@gmail.com" rel="noopener noreferrer">mailto:sanskarin.business@gmail.com</a>)
+<strong>Business:</strong> [<a href="mailto:sanskarprogrammer@gmail.com" rel="noopener noreferrer">sanskarprogrammer@gmail.com</a>](<a href="mailto:sanskarprogrammer@gmail.com" rel="noopener noreferrer">mailto:sanskarprogrammer@gmail.com</a>)<br>
+<strong>Support:</strong> [<a href="mailto:sanskarcoder@outlook.com" rel="noopener noreferrer">sanskarcoder@outlook.com</a>](<a href="mailto:sanskarcoder@outlook.com" rel="noopener noreferrer">mailto:sanskarcoder@outlook.com</a>)
 
 ---
 
