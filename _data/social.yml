@@ -58,14 +58,6 @@ profiles:
     icon: x
     note: Posts and updates
 
-  instagram:
-    name: Instagram
-    url: https://instagram.com/SanskarCode
-    handle: "@SanskarCode"
-    username: SanskarCode
-    icon: instagram
-    note: Photos and updates
-
   facebook:
     name: Facebook
     url: https://facebook.com/sanskarIN
@@ -144,7 +136,7 @@ groups:
     items: [github, linkedin, devto, discord]
   social:
     title: Social
-    items: [x, instagram, facebook, bluesky, youtube]
+    items: [x, facebook, bluesky, youtube]
   products:
     title: Support & Products
     items: [github_sponsors, buymeacoffee, razorpay, gumroad, paypal]
@@ -153,4 +145,4 @@ groups:
 community: [devto, discord, x, facebook, bluesky, linkedin]
 
 # Profiles suggested under "Follow along" on the thank-you pages.
-follow: [github, x, instagram, facebook, linkedin, devto, youtube]
+follow: [github, x, facebook, linkedin, devto, youtube]
