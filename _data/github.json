@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T12:00:40Z",
+  "generated_at": "2026-11-16T12:53:21Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -7,9 +7,9 @@
   "totals": {
     "repositories": 71,
     "stars": 33,
-    "forks": 4,
+    "forks": 5,
     "languages": 27,
-    "language_bytes": 48400332
+    "language_bytes": 48471279
   },
   "languages": [
     {
@@ -33,13 +33,13 @@
       "percent": 11.9
     },
     {
-      "name": "C#",
-      "color": "#7355dd",
+      "name": "Python",
+      "color": "#3572A5",
       "percent": 10.5
     },
     {
-      "name": "Python",
-      "color": "#3572A5",
+      "name": "C#",
+      "color": "#7355dd",
       "percent": 10.5
     },
     {
@@ -59,31 +59,11 @@
   ],
   "repositories": [
     {
-      "name": "CareNest",
-      "full_name": "sanskarIN/CareNest",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 822996,
-      "url": "https://github.com/sanskarIN/CareNest",
-      "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-09",
-      "pushed": "2026-11-15"
-    },
-    {
       "name": "scarp",
       "full_name": "scarp-lang/scarp",
       "owner": "scarp-lang",
       "external": true,
-      "language_bytes": 2427607,
+      "language_bytes": 2456108,
       "url": "https://github.com/scarp-lang/scarp",
       "description": "A next-generation programming language for software, systems, and intelligent computing.",
       "homepage": "https://scarp-lang.github.io/",
@@ -103,17 +83,17 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-25",
-      "pushed": "2026-11-15",
+      "pushed": "2026-11-16",
       "languages": [
         {
           "name": "Rust",
           "color": "#dea584",
-          "percent": 88.7
+          "percent": 88.8
         },
         {
           "name": "Python",
           "color": "#3572A5",
-          "percent": 8.7
+          "percent": 8.8
         },
         {
           "name": "PowerShell",
@@ -127,6 +107,403 @@
           "other": true
         }
       ]
+    },
+    {
+      "name": "sonumio",
+      "full_name": "sanskarIN/sonumio",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 0,
+      "url": "https://github.com/sanskarIN/sonumio",
+      "description": "Open Source AI audio generator",
+      "homepage": null,
+      "language": null,
+      "language_color": null,
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-11-14",
+      "pushed": "2026-11-16"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "full_name": "sanskarIN/sanskarIN.github.io",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 464619,
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-11-16"
+    },
+    {
+      "name": "awesome-tech-atlas",
+      "full_name": "sanskarIN/awesome-tech-atlas",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 116494,
+      "url": "https://github.com/sanskarIN/awesome-tech-atlas",
+      "description": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references.",
+      "homepage": "https://sanskarin.github.io/awesome-tech-atlas/",
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "awesome-list",
+        "computer-science",
+        "developer-resources",
+        "machine-learning",
+        "open-source",
+        "programming"
+      ],
+      "license": "CC0-1.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-11-08",
+      "pushed": "2026-11-16"
+    },
+    {
+      "name": "MeTodo",
+      "full_name": "sanskarIN/MeTodo",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 1236524,
+      "url": "https://github.com/sanskarIN/MeTodo",
+      "description": "**MeTodo** is a highly advanced, ultra-customizable, cross-platform task management application designed for Windows, Linux, and Android. Built with a heavy emphasis on premium UI/UX, MeTodo goes beyond a simple to-do list by offering unprecedented personalization and…",
+      "homepage": "https://sanskarin.github.io",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "todo",
+        "todo-app",
+        "todo-list",
+        "todoapp",
+        "todolist",
+        "todolist-application"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-06-29",
+      "pushed": "2026-11-16"
+    },
+    {
+      "name": "latebrake",
+      "full_name": "sanskarIN/latebrake",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 5186790,
+      "url": "https://github.com/sanskarIN/latebrake",
+      "description": "Latebrake — Race Beyond Limits.",
+      "homepage": "https://sanskarin.github.io/latebrake/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 2,
+      "forks": 0,
+      "topics": [],
+      "license": "BSD-3-Clause",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-16",
+      "languages": [
+        {
+          "name": "C++",
+          "color": "#f34b7d",
+          "percent": 77.3
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 15.9
+        },
+        {
+          "name": "PowerShell",
+          "color": "#012456",
+          "percent": 3.0
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 3.9,
+          "other": true
+        }
+      ]
+    },
+    {
+      "name": "frametrellis",
+      "full_name": "sanskarIN/frametrellis",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 2455600,
+      "url": "https://github.com/sanskarIN/frametrellis",
+      "description": "Open-source video editor.",
+      "homepage": "https://sanskarin.github.io/frametrellis/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 4,
+      "forks": 1,
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
+      "license": "GPL-3.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-11",
+      "pushed": "2026-11-16",
+      "languages": [
+        {
+          "name": "C++",
+          "color": "#f34b7d",
+          "percent": 69.8
+        },
+        {
+          "name": "QML",
+          "color": "#44a51c",
+          "percent": 11.9
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 9.9
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 8.5,
+          "other": true
+        }
+      ]
+    },
+    {
+      "name": "RepoDNA",
+      "full_name": "sanskarIN/RepoDNA",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 4092272,
+      "url": "https://github.com/sanskarIN/RepoDNA",
+      "description": "Understand any GitHub repository before you clone it.",
+      "homepage": "https://sanskarin.github.io/RepoDNA/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 8,
+      "forks": 2,
+      "topics": [
+        "cli",
+        "code-analysis",
+        "code-archaeology",
+        "code-metrics",
+        "code-quality",
+        "code-visualization"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-24",
+      "pushed": "2026-11-16",
+      "languages": [
+        {
+          "name": "Rust",
+          "color": "#dea584",
+          "percent": 79.1
+        },
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "percent": 14.8
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "percent": 4.4
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 1.7,
+          "other": true
+        }
+      ]
+    },
+    {
+      "name": "KathaSvara",
+      "full_name": "sanskarIN/KathaSvara",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 1226600,
+      "url": "https://github.com/sanskarIN/KathaSvara",
+      "description": "Give Every Story a Voice.",
+      "homepage": "https://sanskarin.github.io/KathaSvara/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "MPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-16"
+    },
+    {
+      "name": "SwiftDrop",
+      "full_name": "sanskarIN/SwiftDrop",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 950155,
+      "url": "https://github.com/sanskarIN/SwiftDrop",
+      "description": "SwiftDrop is a local-network, account-free file-transfer application for sending files and text between nearby devices.",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-09",
+      "pushed": "2026-11-16"
+    },
+    {
+      "name": "2048",
+      "full_name": "sanskarIN/2048",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 885558,
+      "url": "https://github.com/sanskarIN/2048",
+      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
+      "homepage": null,
+      "language": "Dart",
+      "language_color": "#00B4AB",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "2040",
+        "2048",
+        "2048-clone",
+        "2048-game",
+        "2048-game-online",
+        "2048-redesigned"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-14",
+      "pushed": "2026-11-16"
+    },
+    {
+      "name": "chronodesk",
+      "full_name": "sanskarIN/chronodesk",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 125877,
+      "url": "https://github.com/sanskarIN/chronodesk",
+      "description": "",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-19",
+      "pushed": "2026-11-15"
+    },
+    {
+      "name": "foliolane",
+      "full_name": "sanskarIN/foliolane",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 745959,
+      "url": "https://github.com/sanskarIN/foliolane",
+      "description": "A modern, reliable, local-first document-merging application for very large multi-part books and document series.",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "docmerge",
+        "pdf-merge",
+        "pdf-merger",
+        "pdf-merger-python",
+        "pdf-merger-tool",
+        "pdf-merger-windows-desktop"
+      ],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-16",
+      "pushed": "2026-11-15"
+    },
+    {
+      "name": "Finora",
+      "full_name": "sanskarIN/Finora",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 1169204,
+      "url": "https://github.com/sanskarIN/Finora",
+      "description": "Finora is a local-first personal finance, expense, budget, savings, and financial-planning application. It must work without an account and keep all private financial information on the user’s device in the current release. Cloud synchronization is planned for a later version…",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [
+        "finance",
+        "finance-management",
+        "financial",
+        "financial-analysis",
+        "financial-data"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-08",
+      "pushed": "2026-11-15"
+    },
+    {
+      "name": "CareNest",
+      "full_name": "sanskarIN/CareNest",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 822996,
+      "url": "https://github.com/sanskarIN/CareNest",
+      "description": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s…",
+      "homepage": null,
+      "language": "C#",
+      "language_color": "#7355dd",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-08-09",
+      "pushed": "2026-11-15"
     },
     {
       "name": "LineLoom",
@@ -167,263 +544,6 @@
           "name": "HTML",
           "color": "#e34c26",
           "percent": 3.4
-        }
-      ]
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "full_name": "sanskarIN/sanskarIN.github.io",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 464640,
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-11-14"
-    },
-    {
-      "name": "awesome-tech-atlas",
-      "full_name": "sanskarIN/awesome-tech-atlas",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 97801,
-      "url": "https://github.com/sanskarIN/awesome-tech-atlas",
-      "description": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references.",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "awesome-list",
-        "computer-science",
-        "developer-resources",
-        "machine-learning",
-        "open-source",
-        "programming"
-      ],
-      "license": "CC0-1.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-11-08",
-      "pushed": "2026-11-14"
-    },
-    {
-      "name": "KathaSvara",
-      "full_name": "sanskarIN/KathaSvara",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 1226600,
-      "url": "https://github.com/sanskarIN/KathaSvara",
-      "description": "Give Every Story a Voice.",
-      "homepage": "https://sanskarin.github.io/KathaSvara/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "MPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-14"
-    },
-    {
-      "name": "latebrake",
-      "full_name": "sanskarIN/latebrake",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 5169142,
-      "url": "https://github.com/sanskarIN/latebrake",
-      "description": "Latebrake — Race Beyond Limits.",
-      "homepage": "https://sanskarin.github.io/latebrake/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 2,
-      "forks": 0,
-      "topics": [],
-      "license": "BSD-3-Clause",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-14",
-      "languages": [
-        {
-          "name": "C++",
-          "color": "#f34b7d",
-          "percent": 77.5
-        },
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 15.8
-        },
-        {
-          "name": "PowerShell",
-          "color": "#012456",
-          "percent": 3.0
-        },
-        {
-          "name": "Other",
-          "color": "#8b949e",
-          "percent": 3.6,
-          "other": true
-        }
-      ]
-    },
-    {
-      "name": "MeTodo",
-      "full_name": "sanskarIN/MeTodo",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 1236524,
-      "url": "https://github.com/sanskarIN/MeTodo",
-      "description": "**MeTodo** is a highly advanced, ultra-customizable, cross-platform task management application designed for Windows, Linux, and Android. Built with a heavy emphasis on premium UI/UX, MeTodo goes beyond a simple to-do list by offering unprecedented personalization and…",
-      "homepage": "https://sanskarin.github.io",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "todo",
-        "todo-app",
-        "todo-list",
-        "todoapp",
-        "todolist",
-        "todolist-application"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-06-29",
-      "pushed": "2026-11-14"
-    },
-    {
-      "name": "sonumio",
-      "full_name": "sanskarIN/sonumio",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 0,
-      "url": "https://github.com/sanskarIN/sonumio",
-      "description": "Open Source AI audio generator",
-      "homepage": null,
-      "language": null,
-      "language_color": null,
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-11-14",
-      "pushed": "2026-11-14"
-    },
-    {
-      "name": "frametrellis",
-      "full_name": "sanskarIN/frametrellis",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 2449474,
-      "url": "https://github.com/sanskarIN/frametrellis",
-      "description": "Open-source video editor.",
-      "homepage": "https://sanskarin.github.io/frametrellis/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 4,
-      "forks": 0,
-      "topics": [
-        "cmake",
-        "cpp",
-        "cpp20",
-        "desktop-application",
-        "docker",
-        "ffmpeg"
-      ],
-      "license": "GPL-3.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-11",
-      "pushed": "2026-11-14",
-      "languages": [
-        {
-          "name": "C++",
-          "color": "#f34b7d",
-          "percent": 69.9
-        },
-        {
-          "name": "QML",
-          "color": "#44a51c",
-          "percent": 12.0
-        },
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 9.6
-        },
-        {
-          "name": "Other",
-          "color": "#8b949e",
-          "percent": 8.5,
-          "other": true
-        }
-      ]
-    },
-    {
-      "name": "RepoDNA",
-      "full_name": "sanskarIN/RepoDNA",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 4092272,
-      "url": "https://github.com/sanskarIN/RepoDNA",
-      "description": "Understand any GitHub repository before you clone it.",
-      "homepage": "https://sanskarin.github.io/RepoDNA/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 8,
-      "forks": 2,
-      "topics": [
-        "cli",
-        "code-analysis",
-        "code-archaeology",
-        "code-metrics",
-        "code-quality",
-        "code-visualization"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-24",
-      "pushed": "2026-11-14",
-      "languages": [
-        {
-          "name": "Rust",
-          "color": "#dea584",
-          "percent": 79.1
-        },
-        {
-          "name": "TypeScript",
-          "color": "#3178c6",
-          "percent": 14.8
-        },
-        {
-          "name": "JavaScript",
-          "color": "#f1e05a",
-          "percent": 4.4
-        },
-        {
-          "name": "Other",
-          "color": "#8b949e",
-          "percent": 1.7,
-          "other": true
         }
       ]
     },
@@ -595,53 +715,6 @@
       "pushed": "2026-11-09"
     },
     {
-      "name": "2048",
-      "full_name": "sanskarIN/2048",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 885558,
-      "url": "https://github.com/sanskarIN/2048",
-      "description": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar.",
-      "homepage": null,
-      "language": "Dart",
-      "language_color": "#00B4AB",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "2040",
-        "2048",
-        "2048-clone",
-        "2048-game",
-        "2048-game-online",
-        "2048-redesigned"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-14",
-      "pushed": "2026-11-09"
-    },
-    {
-      "name": "chronodesk",
-      "full_name": "sanskarIN/chronodesk",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 125877,
-      "url": "https://github.com/sanskarIN/chronodesk",
-      "description": "",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-19",
-      "pushed": "2026-11-08"
-    },
-    {
       "name": "stockpilot",
       "full_name": "sanskarIN/stockpilot",
       "owner": "sanskarIN",
@@ -664,33 +737,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-08-21",
-      "pushed": "2026-11-08"
-    },
-    {
-      "name": "foliolane",
-      "full_name": "sanskarIN/foliolane",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 745959,
-      "url": "https://github.com/sanskarIN/foliolane",
-      "description": "A modern, reliable, local-first document-merging application for very large multi-part books and document series.",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "docmerge",
-        "pdf-merge",
-        "pdf-merger",
-        "pdf-merger-python",
-        "pdf-merger-tool",
-        "pdf-merger-windows-desktop"
-      ],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-16",
       "pushed": "2026-11-08"
     },
     {
@@ -881,26 +927,6 @@
       "pushed": "2026-10-26"
     },
     {
-      "name": "SwiftDrop",
-      "full_name": "sanskarIN/SwiftDrop",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 950155,
-      "url": "https://github.com/sanskarIN/SwiftDrop",
-      "description": "SwiftDrop is a local-network, account-free file-transfer application for sending files and text between nearby devices.",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-09",
-      "pushed": "2026-10-26"
-    },
-    {
       "name": "libracore",
       "full_name": "sanskarIN/libracore",
       "owner": "sanskarIN",
@@ -919,32 +945,6 @@
       "archived": false,
       "created": "2026-08-19",
       "pushed": "2026-10-26"
-    },
-    {
-      "name": "Finora",
-      "full_name": "sanskarIN/Finora",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 1169204,
-      "url": "https://github.com/sanskarIN/Finora",
-      "description": "Finora is a local-first personal finance, expense, budget, savings, and financial-planning application. It must work without an account and keep all private financial information on the user’s device in the current release. Cloud synchronization is planned for a later version…",
-      "homepage": null,
-      "language": "C#",
-      "language_color": "#7355dd",
-      "stars": 0,
-      "forks": 0,
-      "topics": [
-        "finance",
-        "finance-management",
-        "financial",
-        "financial-analysis",
-        "financial-data"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-08-08",
-      "pushed": "2026-10-25"
     },
     {
       "name": "Chess",
@@ -1723,9 +1723,9 @@
     }
   ],
   "activity": {
-    "total": 37862,
+    "total": 37938,
     "start": "2025-11-16",
-    "end": "2026-11-15",
+    "end": "2026-11-16",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -2092,8 +2092,9 @@
       181,
       407,
       191,
-      149,
-      0
+      154,
+      12,
+      59
     ],
     "levels": [
       0,
@@ -2460,7 +2461,8 @@
       1,
       1,
       1,
-      0
+      1,
+      1
     ],
     "months": [
       {
@@ -2516,8 +2518,8 @@
         "label": "Nov"
       }
     ],
-    "active_days": 121,
-    "longest_streak": 59,
+    "active_days": 123,
+    "longest_streak": 61,
     "busiest": {
       "date": "2026-08-19",
       "count": 7067
