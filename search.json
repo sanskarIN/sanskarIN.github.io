@@ -812,6 +812,27 @@
   },
   {
     "type": "Project",
+    "title": "frametrellis",
+    "url": "https://github.com/sanskarIN/frametrellis",
+    "tags": [
+      "cmake",
+      "cpp",
+      "cpp20",
+      "desktop-application",
+      "docker",
+      "ffmpeg"
+    ],
+    "text": "Open-source video editor. C++"
+  },
+  {
+    "type": "Project",
+    "title": "KathaSvara",
+    "url": "https://github.com/sanskarIN/KathaSvara",
+    "tags": [],
+    "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
     "title": "scarp",
     "url": "https://github.com/scarp-lang/scarp",
     "tags": [
@@ -830,27 +851,6 @@
     "url": "https://github.com/sanskarIN/sonumio",
     "tags": [],
     "text": "Open Source AI audio generator"
-  },
-  {
-    "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "awesome-tech-atlas",
-    "url": "https://github.com/sanskarIN/awesome-tech-atlas",
-    "tags": [
-      "awesome-list",
-      "computer-science",
-      "developer-resources",
-      "machine-learning",
-      "open-source",
-      "programming"
-    ],
-    "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
   },
   {
     "type": "Project",
@@ -875,17 +875,31 @@
   },
   {
     "type": "Project",
-    "title": "frametrellis",
-    "url": "https://github.com/sanskarIN/frametrellis",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
+    "tags": [],
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "awesome-tech-atlas",
+    "url": "https://github.com/sanskarIN/awesome-tech-atlas",
     "tags": [
-      "cmake",
-      "cpp",
-      "cpp20",
-      "desktop-application",
-      "docker",
-      "ffmpeg"
+      "awesome-list",
+      "computer-science",
+      "developer-resources",
+      "machine-learning",
+      "open-source",
+      "programming"
     ],
-    "text": "Open-source video editor. C++"
+    "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
   },
   {
     "type": "Project",
@@ -900,13 +914,6 @@
       "code-visualization"
     ],
     "text": "Understand any GitHub repository before you clone it. Rust"
-  },
-  {
-    "type": "Project",
-    "title": "KathaSvara",
-    "url": "https://github.com/sanskarIN/KathaSvara",
-    "tags": [],
-    "text": "Give Every Story a Voice. TypeScript"
   },
   {
     "type": "Project",
@@ -969,13 +976,6 @@
     "url": "https://github.com/sanskarIN/CareNest",
     "tags": [],
     "text": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s… C#"
-  },
-  {
-    "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
-    "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
   },
   {
     "type": "Project",
