@@ -812,6 +812,34 @@
   },
   {
     "type": "Project",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
+    "tags": [],
+    "text": "Latebrake — Race Beyond Limits. C++"
+  },
+  {
+    "type": "Project",
+    "title": "EyeZen",
+    "url": "https://github.com/sanskarIN/EyeZen",
+    "tags": [],
+    "text": "Your screen. Your comfort. Your environment. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "frametrellis",
+    "url": "https://github.com/sanskarIN/frametrellis",
+    "tags": [
+      "cmake",
+      "cpp",
+      "cpp20",
+      "desktop-application",
+      "docker",
+      "ffmpeg"
+    ],
+    "text": "Open-source video editor. C++"
+  },
+  {
+    "type": "Project",
     "title": "scarp",
     "url": "https://github.com/scarp-lang/scarp",
     "tags": [
@@ -823,6 +851,55 @@
       "language-design"
     ],
     "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "KathaSvara",
+    "url": "https://github.com/sanskarIN/KathaSvara",
+    "tags": [],
+    "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "RepoDNA",
+    "url": "https://github.com/sanskarIN/RepoDNA",
+    "tags": [
+      "cli",
+      "code-analysis",
+      "code-archaeology",
+      "code-metrics",
+      "code-quality",
+      "code-visualization"
+    ],
+    "text": "Understand any GitHub repository before you clone it. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "tempotrack",
+    "url": "https://github.com/sanskarIN/tempotrack",
+    "tags": [],
+    "text": "Kotlin"
+  },
+  {
+    "type": "Project",
+    "title": "thermoshift",
+    "url": "https://github.com/sanskarIN/thermoshift",
+    "tags": [],
+    "text": "TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "sonumio",
+    "url": "https://github.com/sanskarIN/sonumio",
+    "tags": [],
+    "text": "Open Source AI audio generator"
   },
   {
     "type": "Project",
@@ -847,13 +924,6 @@
   },
   {
     "type": "Project",
-    "title": "KathaSvara",
-    "url": "https://github.com/sanskarIN/KathaSvara",
-    "tags": [],
-    "text": "Give Every Story a Voice. TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "awesome-tech-atlas",
     "url": "https://github.com/sanskarIN/awesome-tech-atlas",
     "tags": [
@@ -865,55 +935,6 @@
       "programming"
     ],
     "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
-  },
-  {
-    "type": "Project",
-    "title": "latebrake",
-    "url": "https://github.com/sanskarIN/latebrake",
-    "tags": [],
-    "text": "Latebrake — Race Beyond Limits. C++"
-  },
-  {
-    "type": "Project",
-    "title": "sonumio",
-    "url": "https://github.com/sanskarIN/sonumio",
-    "tags": [],
-    "text": "Open Source AI audio generator"
-  },
-  {
-    "type": "Project",
-    "title": "frametrellis",
-    "url": "https://github.com/sanskarIN/frametrellis",
-    "tags": [
-      "cmake",
-      "cpp",
-      "cpp20",
-      "desktop-application",
-      "docker",
-      "ffmpeg"
-    ],
-    "text": "Open-source video editor. C++"
-  },
-  {
-    "type": "Project",
-    "title": "RepoDNA",
-    "url": "https://github.com/sanskarIN/RepoDNA",
-    "tags": [
-      "cli",
-      "code-analysis",
-      "code-archaeology",
-      "code-metrics",
-      "code-quality",
-      "code-visualization"
-    ],
-    "text": "Understand any GitHub repository before you clone it. Rust"
-  },
-  {
-    "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
   },
   {
     "type": "Project",
@@ -979,13 +1000,6 @@
   },
   {
     "type": "Project",
-    "title": "EyeZen",
-    "url": "https://github.com/sanskarIN/EyeZen",
-    "tags": [],
-    "text": "Your screen. Your comfort. Your environment. TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "LangSteps",
     "url": "https://github.com/sanskarIN/LangSteps",
     "tags": [
@@ -1018,13 +1032,6 @@
     "url": "https://github.com/sanskarIN/ReproCrate",
     "tags": [],
     "text": "Turn bugs into reproducible reports. Rust"
-  },
-  {
-    "type": "Project",
-    "title": "tempotrack",
-    "url": "https://github.com/sanskarIN/tempotrack",
-    "tags": [],
-    "text": "Kotlin"
   },
   {
     "type": "Project",
@@ -1105,13 +1112,6 @@
     "type": "Project",
     "title": "chronoage",
     "url": "https://github.com/sanskarIN/chronoage",
-    "tags": [],
-    "text": "TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "thermoshift",
-    "url": "https://github.com/sanskarIN/thermoshift",
     "tags": [],
     "text": "TypeScript"
   },
