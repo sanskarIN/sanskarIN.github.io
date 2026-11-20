@@ -251,6 +251,11 @@
   },
   "posts": [
     {
+      "title": "frametrellis-v1-5-1-stable-release",
+      "url": "/blog/frametrellis-v1-5-1-stable-release/",
+      "date": "20 Nov 2026"
+    },
+    {
       "title": "repodna-v1-5-1-stable-release-reliability-security-improvements",
       "url": "/blog/repodna-v1-5-1-stable-release-reliability-security/",
       "date": "16 Nov 2026"
@@ -269,11 +274,6 @@
       "title": "frametrellis-v1-4-0-release",
       "url": "/blog/frametrellis-v1-4-0-release/",
       "date": "2 Nov 2026"
-    },
-    {
-      "title": "why-im-building-scarp-programming-language",
-      "url": "/blog/why-im-building-scarp-programming-language/",
-      "date": "1 Nov 2026"
     }
   ],
   "links": {

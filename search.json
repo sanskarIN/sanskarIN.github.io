@@ -127,6 +127,20 @@
   },
   {
     "type": "Post",
+    "title": "frametrellis-v1-5-1-stable-release",
+    "url": "/blog/frametrellis-v1-5-1-stable-release/",
+    "date": "20 Nov 2026",
+    "tags": [
+      "frametrellis",
+      "open-source",
+      "video-editing",
+      "c++",
+      "software-releases"
+    ],
+    "text": "FrameTrellis v1.5.1 improves export controls, rendering reliability, playback precision, and media safety in the free, local-first video editor. FrameTrellis v1.5.1 Released — Better Exports, Safer Playback and Improved Stability FrameTrellis v1.5.1 is officially available as a stable maintenance update to the free and open-source desktop video editor. Following the featured v1.5.0 release, this update focuses on refining the existing experience, improving native media safety, and strengthening export reliability. A More Reliable Editing Experience FrameTrellis is designed for creators who want precise multi-track editing without depending on cloud services. Built using C++20, Qt 6/QML, MLT, and FFmpeg, the editor"
+  },
+  {
+    "type": "Post",
     "title": "repodna-v1-5-1-stable-release-reliability-security-improvements",
     "url": "/blog/repodna-v1-5-1-stable-release-reliability-security/",
     "date": "16 Nov 2026",
