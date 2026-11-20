@@ -203,7 +203,7 @@
   ],
   "projects": {
     "total": 71,
-    "stars": 33,
+    "stars": 34,
     "featured": [
       {
         "name": "scarp",
@@ -215,9 +215,9 @@
       {
         "name": "sonumio",
         "url": "https://github.com/sanskarIN/sonumio",
-        "description": "Open Source AI audio generator",
-        "language": null,
-        "stars": 0
+        "description": "Open Source AI audio generator.",
+        "language": "Python",
+        "stars": 1
       },
       {
         "name": "frametrellis",
