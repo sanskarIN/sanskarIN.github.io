@@ -826,6 +826,13 @@
   },
   {
     "type": "Project",
+    "title": "KathaSvara",
+    "url": "https://github.com/sanskarIN/KathaSvara",
+    "tags": [],
+    "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
     "title": "RepoDNA",
     "url": "https://github.com/sanskarIN/RepoDNA",
     "tags": [
@@ -840,17 +847,10 @@
   },
   {
     "type": "Project",
-    "title": "scarp",
-    "url": "https://github.com/scarp-lang/scarp",
-    "tags": [
-      "cli",
-      "compiler",
-      "compiler-design",
-      "developer-tools",
-      "interpreter",
-      "language-design"
-    ],
-    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
+    "tags": [],
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
   },
   {
     "type": "Project",
@@ -868,24 +868,17 @@
   },
   {
     "type": "Project",
-    "title": "MeTodo",
-    "url": "https://github.com/sanskarIN/MeTodo",
-    "tags": [
-      "todo",
-      "todo-app",
-      "todo-list",
-      "todoapp",
-      "todolist",
-      "todolist-application"
-    ],
-    "text": "**MeTodo** is a highly advanced, ultra-customizable, cross-platform task management application designed for Windows, Linux, and Android. Built with a heavy emphasis on premium UI/UX, MeTodo goes beyond a simple to-do list by offering unprecedented personalization and… TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "sonumio",
     "url": "https://github.com/sanskarIN/sonumio",
-    "tags": [],
-    "text": "Open Source AI audio generator. Python"
+    "tags": [
+      "ai-audio",
+      "artificial-intelligence",
+      "audio-ai",
+      "audio-generation",
+      "audio-processing",
+      "audio-synthesis"
+    ],
+    "text": "Open-source AI platform for speech, music, and sound generation. Python"
   },
   {
     "type": "Project",
@@ -896,24 +889,17 @@
   },
   {
     "type": "Project",
-    "title": "sortsmith",
-    "url": "https://github.com/sanskarIN/sortsmith",
+    "title": "scarp",
+    "url": "https://github.com/scarp-lang/scarp",
     "tags": [
-      "fileoragin",
-      "fileordering",
-      "fileordertracker",
-      "fileorganiser",
-      "fileorganization",
-      "fileorganizer"
+      "cli",
+      "compiler",
+      "compiler-design",
+      "developer-tools",
+      "interpreter",
+      "language-design"
     ],
-    "text": "SortSmith, a production-quality File Organizer project. Rust"
-  },
-  {
-    "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
-    "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
   },
   {
     "type": "Project",
@@ -931,24 +917,45 @@
   },
   {
     "type": "Project",
-    "title": "EyeZen",
-    "url": "https://github.com/sanskarIN/EyeZen",
-    "tags": [],
-    "text": "Your screen. Your comfort. Your environment. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "KathaSvara",
-    "url": "https://github.com/sanskarIN/KathaSvara",
-    "tags": [],
-    "text": "Give Every Story a Voice. TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "sanskarIN.github.io",
     "url": "https://github.com/sanskarIN/sanskarIN.github.io",
     "tags": [],
     "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "MeTodo",
+    "url": "https://github.com/sanskarIN/MeTodo",
+    "tags": [
+      "todo",
+      "todo-app",
+      "todo-list",
+      "todoapp",
+      "todolist",
+      "todolist-application"
+    ],
+    "text": "**MeTodo** is a highly advanced, ultra-customizable, cross-platform task management application designed for Windows, Linux, and Android. Built with a heavy emphasis on premium UI/UX, MeTodo goes beyond a simple to-do list by offering unprecedented personalization and… TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "sortsmith",
+    "url": "https://github.com/sanskarIN/sortsmith",
+    "tags": [
+      "fileoragin",
+      "fileordering",
+      "fileordertracker",
+      "fileorganiser",
+      "fileorganization",
+      "fileorganizer"
+    ],
+    "text": "SortSmith, a production-quality File Organizer project. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "EyeZen",
+    "url": "https://github.com/sanskarIN/EyeZen",
+    "tags": [],
+    "text": "Your screen. Your comfort. Your environment. TypeScript"
   },
   {
     "type": "Project",
