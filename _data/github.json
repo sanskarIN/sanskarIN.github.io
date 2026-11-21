@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T13:07:33Z",
+  "generated_at": "2026-11-21T12:46:42Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -9,43 +9,43 @@
     "stars": 34,
     "forks": 5,
     "languages": 27,
-    "language_bytes": 51698091
+    "language_bytes": 53411479
   },
   "languages": [
     {
-      "name": "Rust",
-      "color": "#dea584",
-      "percent": 14.4
-    },
-    {
       "name": "C++",
       "color": "#f34b7d",
-      "percent": 13.6
+      "percent": 15.9
+    },
+    {
+      "name": "Rust",
+      "color": "#dea584",
+      "percent": 14.0
     },
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 12.6
+      "percent": 12.4
     },
     {
       "name": "TypeScript",
       "color": "#3178c6",
-      "percent": 11.4
+      "percent": 11.2
     },
     {
       "name": "HTML",
       "color": "#e34c26",
-      "percent": 11.1
+      "percent": 10.8
     },
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 9.8
+      "percent": 9.5
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 27.0,
+      "percent": 26.3,
       "other": true
     }
   ],
@@ -59,11 +59,31 @@
   ],
   "repositories": [
     {
+      "name": "KathaSvara",
+      "full_name": "sanskarIN/KathaSvara",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 1350061,
+      "url": "https://github.com/sanskarIN/KathaSvara",
+      "description": "Give Every Story a Voice.",
+      "homepage": "https://sanskarin.github.io/KathaSvara/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 1,
+      "forks": 0,
+      "topics": [],
+      "license": "MPL-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-21"
+    },
+    {
       "name": "RepoDNA",
       "full_name": "sanskarIN/RepoDNA",
       "owner": "sanskarIN",
       "external": false,
-      "language_bytes": 4158186,
+      "language_bytes": 4163624,
       "url": "https://github.com/sanskarIN/RepoDNA",
       "description": "Understand any GitHub repository before you clone it.",
       "homepage": "https://sanskarin.github.io/RepoDNA/",
@@ -83,12 +103,12 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-24",
-      "pushed": "2026-11-20",
+      "pushed": "2026-11-21",
       "languages": [
         {
           "name": "Rust",
           "color": "#dea584",
-          "percent": 78.8
+          "percent": 78.7
         },
         {
           "name": "TypeScript",
@@ -98,7 +118,7 @@
         {
           "name": "JavaScript",
           "color": "#f1e05a",
-          "percent": 4.6
+          "percent": 4.7
         },
         {
           "name": "Other",
@@ -109,11 +129,195 @@
       ]
     },
     {
+      "name": "LineLoom",
+      "full_name": "sanskarIN/LineLoom",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 1293428,
+      "url": "https://github.com/sanskarIN/LineLoom",
+      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
+      "homepage": "https://sanskarin.github.io/LineLoom/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 3,
+      "forks": 0,
+      "topics": [],
+      "license": "MIT",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-17",
+      "pushed": "2026-11-21",
+      "languages": [
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "percent": 45.3
+        },
+        {
+          "name": "JavaScript",
+          "color": "#f1e05a",
+          "percent": 28.4
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 22.8
+        },
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "percent": 3.5
+        }
+      ]
+    },
+    {
+      "name": "frametrellis",
+      "full_name": "sanskarIN/frametrellis",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 2511432,
+      "url": "https://github.com/sanskarIN/frametrellis",
+      "description": "Open-source video editor.",
+      "homepage": "https://sanskarin.github.io/frametrellis/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 4,
+      "forks": 1,
+      "topics": [
+        "cmake",
+        "cpp",
+        "cpp20",
+        "desktop-application",
+        "docker",
+        "ffmpeg"
+      ],
+      "license": "GPL-3.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-11",
+      "pushed": "2026-11-21",
+      "languages": [
+        {
+          "name": "C++",
+          "color": "#f34b7d",
+          "percent": 70.0
+        },
+        {
+          "name": "QML",
+          "color": "#44a51c",
+          "percent": 11.8
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 10.0
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 8.3,
+          "other": true
+        }
+      ]
+    },
+    {
+      "name": "sonumio",
+      "full_name": "sanskarIN/sonumio",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 1408874,
+      "url": "https://github.com/sanskarIN/sonumio",
+      "description": "Open-source AI platform for speech, music, and sound generation.",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "ai-audio",
+        "artificial-intelligence",
+        "audio-ai",
+        "audio-generation",
+        "audio-processing",
+        "audio-synthesis"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-11-14",
+      "pushed": "2026-11-21",
+      "languages": [
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 96.5
+        },
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "percent": 2.9
+        },
+        {
+          "name": "CSS",
+          "color": "#663399",
+          "percent": 0.5
+        },
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "percent": 0.0
+        }
+      ]
+    },
+    {
+      "name": "latebrake",
+      "full_name": "sanskarIN/latebrake",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 7765727,
+      "url": "https://github.com/sanskarIN/latebrake",
+      "description": "Latebrake — Race Beyond Limits.",
+      "homepage": "https://sanskarin.github.io/latebrake/",
+      "language": "C++",
+      "language_color": "#f34b7d",
+      "stars": 2,
+      "forks": 0,
+      "topics": [],
+      "license": "BSD-3-Clause",
+      "fork": false,
+      "archived": false,
+      "created": "2026-10-19",
+      "pushed": "2026-11-21",
+      "languages": [
+        {
+          "name": "C++",
+          "color": "#f34b7d",
+          "percent": 83.9
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 10.8
+        },
+        {
+          "name": "PowerShell",
+          "color": "#012456",
+          "percent": 2.0
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 3.2,
+          "other": true
+        }
+      ]
+    },
+    {
       "name": "scarp",
       "full_name": "scarp-lang/scarp",
       "owner": "scarp-lang",
       "external": true,
-      "language_bytes": 2983113,
+      "language_bytes": 3034531,
       "url": "https://github.com/scarp-lang/scarp",
       "description": "A next-generation programming language for software, systems, and intelligent computing.",
       "homepage": "https://scarp-lang.github.io/",
@@ -133,7 +337,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-25",
-      "pushed": "2026-11-20",
+      "pushed": "2026-11-21",
       "languages": [
         {
           "name": "Rust",
@@ -159,54 +363,51 @@
       ]
     },
     {
-      "name": "frametrellis",
-      "full_name": "sanskarIN/frametrellis",
+      "name": "awesome-tech-atlas",
+      "full_name": "sanskarIN/awesome-tech-atlas",
       "owner": "sanskarIN",
       "external": false,
-      "language_bytes": 2502568,
-      "url": "https://github.com/sanskarIN/frametrellis",
-      "description": "Open-source video editor.",
-      "homepage": "https://sanskarin.github.io/frametrellis/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 4,
-      "forks": 1,
+      "language_bytes": 215273,
+      "url": "https://github.com/sanskarIN/awesome-tech-atlas",
+      "description": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references.",
+      "homepage": "https://sanskarin.github.io/awesome-tech-atlas/",
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 1,
+      "forks": 0,
       "topics": [
-        "cmake",
-        "cpp",
-        "cpp20",
-        "desktop-application",
-        "docker",
-        "ffmpeg"
+        "awesome-list",
+        "computer-science",
+        "developer-resources",
+        "machine-learning",
+        "open-source",
+        "programming"
       ],
-      "license": "GPL-3.0",
+      "license": "CC0-1.0",
       "fork": false,
       "archived": false,
-      "created": "2026-10-11",
-      "pushed": "2026-11-20",
-      "languages": [
-        {
-          "name": "C++",
-          "color": "#f34b7d",
-          "percent": 70.0
-        },
-        {
-          "name": "QML",
-          "color": "#44a51c",
-          "percent": 11.7
-        },
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 10.0
-        },
-        {
-          "name": "Other",
-          "color": "#8b949e",
-          "percent": 8.3,
-          "other": true
-        }
-      ]
+      "created": "2026-11-08",
+      "pushed": "2026-11-21"
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "full_name": "sanskarIN/sanskarIN.github.io",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 464619,
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "TypeScript",
+      "language_color": "#3178c6",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-11-21"
     },
     {
       "name": "MeTodo",
@@ -236,91 +437,6 @@
       "pushed": "2026-11-20"
     },
     {
-      "name": "sonumio",
-      "full_name": "sanskarIN/sonumio",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 1322686,
-      "url": "https://github.com/sanskarIN/sonumio",
-      "description": "Open Source AI audio generator.",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-11-14",
-      "pushed": "2026-11-20",
-      "languages": [
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 97.3
-        },
-        {
-          "name": "TypeScript",
-          "color": "#3178c6",
-          "percent": 2.1
-        },
-        {
-          "name": "CSS",
-          "color": "#663399",
-          "percent": 0.5
-        },
-        {
-          "name": "HTML",
-          "color": "#e34c26",
-          "percent": 0.0
-        }
-      ]
-    },
-    {
-      "name": "latebrake",
-      "full_name": "sanskarIN/latebrake",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 6294207,
-      "url": "https://github.com/sanskarIN/latebrake",
-      "description": "Latebrake — Race Beyond Limits.",
-      "homepage": "https://sanskarin.github.io/latebrake/",
-      "language": "C++",
-      "language_color": "#f34b7d",
-      "stars": 2,
-      "forks": 0,
-      "topics": [],
-      "license": "BSD-3-Clause",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-20",
-      "languages": [
-        {
-          "name": "C++",
-          "color": "#f34b7d",
-          "percent": 80.6
-        },
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 13.2
-        },
-        {
-          "name": "PowerShell",
-          "color": "#012456",
-          "percent": 2.5
-        },
-        {
-          "name": "Other",
-          "color": "#8b949e",
-          "percent": 3.7,
-          "other": true
-        }
-      ]
-    },
-    {
       "name": "sortsmith",
       "full_name": "sanskarIN/sortsmith",
       "owner": "sanskarIN",
@@ -348,75 +464,6 @@
       "pushed": "2026-11-20"
     },
     {
-      "name": "LineLoom",
-      "full_name": "sanskarIN/LineLoom",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 1286645,
-      "url": "https://github.com/sanskarIN/LineLoom",
-      "description": "LineLoom — Code Smarter. Build Faster. Stay Private.",
-      "homepage": "https://sanskarin.github.io/LineLoom/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 3,
-      "forks": 0,
-      "topics": [],
-      "license": "MIT",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-17",
-      "pushed": "2026-11-19",
-      "languages": [
-        {
-          "name": "TypeScript",
-          "color": "#3178c6",
-          "percent": 45.4
-        },
-        {
-          "name": "JavaScript",
-          "color": "#f1e05a",
-          "percent": 28.3
-        },
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 22.9
-        },
-        {
-          "name": "HTML",
-          "color": "#e34c26",
-          "percent": 3.4
-        }
-      ]
-    },
-    {
-      "name": "awesome-tech-atlas",
-      "full_name": "sanskarIN/awesome-tech-atlas",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 201810,
-      "url": "https://github.com/sanskarIN/awesome-tech-atlas",
-      "description": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references.",
-      "homepage": "https://sanskarin.github.io/awesome-tech-atlas/",
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "awesome-list",
-        "computer-science",
-        "developer-resources",
-        "machine-learning",
-        "open-source",
-        "programming"
-      ],
-      "license": "CC0-1.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-11-08",
-      "pushed": "2026-11-19"
-    },
-    {
       "name": "EyeZen",
       "full_name": "sanskarIN/EyeZen",
       "owner": "sanskarIN",
@@ -434,46 +481,6 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-14",
-      "pushed": "2026-11-19"
-    },
-    {
-      "name": "KathaSvara",
-      "full_name": "sanskarIN/KathaSvara",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 1280347,
-      "url": "https://github.com/sanskarIN/KathaSvara",
-      "description": "Give Every Story a Voice.",
-      "homepage": "https://sanskarin.github.io/KathaSvara/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 1,
-      "forks": 0,
-      "topics": [],
-      "license": "MPL-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-19",
-      "pushed": "2026-11-19"
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "full_name": "sanskarIN/sanskarIN.github.io",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 464619,
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "TypeScript",
-      "language_color": "#3178c6",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
       "pushed": "2026-11-19"
     },
     {
@@ -1745,9 +1752,9 @@
     }
   ],
   "activity": {
-    "total": 38621,
+    "total": 38937,
     "start": "2025-11-16",
-    "end": "2026-11-20",
+    "end": "2026-11-21",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -2119,8 +2126,9 @@
       309,
       162,
       125,
-      64,
-      53
+      67,
+      136,
+      230
     ],
     "levels": [
       0,
@@ -2492,6 +2500,7 @@
       1,
       1,
       1,
+      1,
       1
     ],
     "months": [
@@ -2548,8 +2557,8 @@
         "label": "Nov"
       }
     ],
-    "active_days": 127,
-    "longest_streak": 65,
+    "active_days": 128,
+    "longest_streak": 66,
     "busiest": {
       "date": "2026-08-19",
       "count": 7067
