@@ -826,6 +826,55 @@
   },
   {
     "type": "Project",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
+    "tags": [],
+    "text": "Latebrake — Race Beyond Limits. C++"
+  },
+  {
+    "type": "Project",
+    "title": "sonumio",
+    "url": "https://github.com/sanskarIN/sonumio",
+    "tags": [
+      "ai-audio",
+      "artificial-intelligence",
+      "audio-ai",
+      "audio-generation",
+      "audio-processing",
+      "audio-synthesis"
+    ],
+    "text": "Open-source AI platform for speech, music, and sound generation. Python"
+  },
+  {
+    "type": "Project",
+    "title": "scarp",
+    "url": "https://github.com/scarp-lang/scarp",
+    "tags": [
+      "cli",
+      "compiler",
+      "compiler-design",
+      "developer-tools",
+      "interpreter",
+      "language-design"
+    ],
+    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
+    "tags": [],
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
     "title": "KathaSvara",
     "url": "https://github.com/sanskarIN/KathaSvara",
     "tags": [],
@@ -847,13 +896,6 @@
   },
   {
     "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
-    "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "frametrellis",
     "url": "https://github.com/sanskarIN/frametrellis",
     "tags": [
@@ -868,41 +910,6 @@
   },
   {
     "type": "Project",
-    "title": "sonumio",
-    "url": "https://github.com/sanskarIN/sonumio",
-    "tags": [
-      "ai-audio",
-      "artificial-intelligence",
-      "audio-ai",
-      "audio-generation",
-      "audio-processing",
-      "audio-synthesis"
-    ],
-    "text": "Open-source AI platform for speech, music, and sound generation. Python"
-  },
-  {
-    "type": "Project",
-    "title": "latebrake",
-    "url": "https://github.com/sanskarIN/latebrake",
-    "tags": [],
-    "text": "Latebrake — Race Beyond Limits. C++"
-  },
-  {
-    "type": "Project",
-    "title": "scarp",
-    "url": "https://github.com/scarp-lang/scarp",
-    "tags": [
-      "cli",
-      "compiler",
-      "compiler-design",
-      "developer-tools",
-      "interpreter",
-      "language-design"
-    ],
-    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
-  },
-  {
-    "type": "Project",
     "title": "awesome-tech-atlas",
     "url": "https://github.com/sanskarIN/awesome-tech-atlas",
     "tags": [
@@ -914,13 +921,6 @@
       "programming"
     ],
     "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
-  },
-  {
-    "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
   },
   {
     "type": "Project",
