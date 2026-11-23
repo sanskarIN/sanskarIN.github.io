@@ -39,15 +39,23 @@ def validate_entries(raw):
             raise ValueError(f"Entry {index}: invalid scarp-lang repository name")
         title, url = entry["title"], entry["url"]
         repo_name = repository.split("/", 1)[1]
-        allowed_urls = {
-            f"https://github.com/{repository}",
-            "https://scarp-lang.github.io/" if repo_name == "scarp-lang.github.io"
-            else f"https://scarp-lang.github.io/{repo_name}/",
-        }
+        allowed_urls = {f"https://github.com/{repository}"}
+        if repo_name == "scarp-lang.github.io":
+            # The official website and its download page are separate visitor
+            # destinations belonging to the same verified repository.
+            allowed_urls.update({
+                "https://scarp-lang.github.io/",
+                "https://scarp-lang.github.io/downloads/",
+            })
+        else:
+            allowed_urls.add(f"https://scarp-lang.github.io/{repo_name}/")
         if url not in allowed_urls:
             raise ValueError(f"Entry {index}: URL does not match its curated repository")
+        repo_key = repository.casefold()
+        if repo_key in seen_repos and repo_name != "scarp-lang.github.io":
+            raise ValueError(f"Entry {index}: duplicate repository")
+        seen_repos.add(repo_key)
         for seen, value, label in (
-            (seen_repos, repository.casefold(), "repository"),
             (seen_titles, title.casefold(), "title"),
             (seen_urls, url, "URL"),
         ):

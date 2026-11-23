@@ -132,7 +132,7 @@ class SiteGeneratorTests(unittest.TestCase):
         """Discover the ecosystem without misrepresenting code totals or injecting URLs."""
         entries = read_yaml(sitegen.ROOT, "_data/scarp_ecosystem.yml")
         self.assertIsInstance(entries, list)
-        self.assertEqual(len(entries), 7)
+        self.assertEqual(len(entries), 8)
         expected = {
             "scarp-lang/scarp",
             "scarp-lang/scarp-docs",
@@ -143,7 +143,13 @@ class SiteGeneratorTests(unittest.TestCase):
             "scarp-lang/scarp-lang.github.io",
         }
         self.assertEqual({entry["repository"] for entry in entries}, expected)
-        self.assertEqual(len({entry["repository"] for entry in entries}), len(entries))
+        self.assertEqual(len({entry["repository"] for entry in entries}), 7)
+        website = [entry for entry in entries
+                   if entry["repository"] == "scarp-lang/scarp-lang.github.io"]
+        self.assertEqual({entry["url"] for entry in website}, {
+            "https://scarp-lang.github.io/",
+            "https://scarp-lang.github.io/downloads/",
+        })
         self.assertEqual(len({entry["title"] for entry in entries}), len(entries))
         studio = next(entry for entry in entries if entry["repository"] == "scarp-lang/scarp-studio")
         self.assertIn("experimental", studio["description"].lower())
