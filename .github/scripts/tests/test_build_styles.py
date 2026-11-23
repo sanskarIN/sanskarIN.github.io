@@ -40,6 +40,12 @@ class StylesheetTests(unittest.TestCase):
         self.assertIn("--color-bg: #111214;", css)
         self.assertIn("--font-sans:", css)
 
+    def test_projects_filters_have_phone_and_desktop_breakpoints(self):
+        css = styles.build_css()
+        self.assertIn("grid-template-columns: minmax(0, 1fr);", css)
+        self.assertIn("@media (min-width: 40em) {\n  .repo-filters {", css)
+        self.assertIn("@media (min-width: 64em) {\n  .repo-filters {", css)
+
     def test_all_partials_are_in_order_once(self):
         css = styles.build_css()
         comments = [
