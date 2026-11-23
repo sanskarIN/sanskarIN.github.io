@@ -100,7 +100,7 @@ query($login: String!, $after: String) {
       pageInfo { hasNextPage endCursor }
       nodes {
         name
-        languages(first: 25, orderBy: {field: SIZE, direction: DESC}) {
+        languages(first: 100, orderBy: {field: SIZE, direction: DESC}) {
           edges { size node { name color } }
         }
       }
@@ -397,6 +397,27 @@ def attach_featured_languages(records, sizes, colors, featured):
                 record["languages"] = summary
 
 
+def attach_language_names(records, sizes):
+    """Keep all reported positive-size languages for exact project filtering.
+
+    Compact percentage bars deliberately collapse small languages into 'Other'.
+    That display bucket must not be used as the search/filter vocabulary.
+    """
+    available = set()
+    for record in records:
+        sizes_for_repo = sizes.get(record["full_name"].lower(), {})
+        names = sorted(
+            (name for name, byte_count in sizes_for_repo.items() if byte_count > 0),
+            key=lambda name: (name.casefold(), name),
+        )
+        # Retain basic filtering if GitHub returns no per-language sizes.
+        if not names and record.get("language"):
+            names = [record["language"]]
+        record["language_names"] = names
+        available.update(names)
+    return sorted(available, key=lambda name: (name.casefold(), name))
+
+
 def pinned_names(gh, login):
     data = gh.graphql(PINNED_QUERY, {"login": login})
     if data is None or not data.get("user"):
@@ -473,6 +494,7 @@ def build(gh, settings):
     sizes, colors = language_sizes(gh, login, shown)
     records = [repository_record(repo, colors, sum(sizes.get(repo["full_name"].lower(), {}).values()), login)
                for repo in shown]
+    language_names = attach_language_names(records, sizes)
     languages, language_count, language_bytes = language_summary(shown, sizes, colors)
     featured = featured_names(records, settings, pinned_names(gh, login))
     attach_featured_languages(records, sizes, colors, featured)
@@ -487,6 +509,7 @@ def build(gh, settings):
             "language_bytes": language_bytes,
         },
         "languages": languages,
+        "language_names": language_names,
         "featured": featured,
         "repositories": records,
         "activity": activity(gh, login),
