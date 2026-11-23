@@ -28,8 +28,29 @@ class ScarpEcosystemTests(unittest.TestCase):
 
     def test_manifest_links_are_canonical_and_publicly_auditable(self):
         entries = audit.load_entries()
-        self.assertEqual(len(entries), 7)
+        self.assertEqual(len(entries), 8)
         self.assertIn("scarp-lang/scarp-studio", {entry["repository"] for entry in entries})
+
+    def test_official_downloads_can_share_the_website_repository(self):
+        entries = audit.load_entries()
+        website = [entry for entry in entries
+                   if entry["repository"] == "scarp-lang/scarp-lang.github.io"]
+        self.assertEqual(
+            {entry["url"] for entry in website},
+            {"https://scarp-lang.github.io/", "https://scarp-lang.github.io/downloads/"},
+        )
+
+        # Only the official website repository can have a second page.
+        duplicate = self.example()
+        duplicate[1]["repository"] = duplicate[0]["repository"]
+        duplicate[1]["url"] = "https://github.com/scarp-lang/scarp-studio"
+        with self.assertRaisesRegex(ValueError, "duplicate repository"):
+            audit.validate_entries(duplicate)
+
+        bad = [dict(entry) for entry in website]
+        bad[1]["url"] = "https://scarp-lang.github.io/downloads/old-version/"
+        with self.assertRaisesRegex(ValueError, "URL does not match"):
+            audit.validate_entries(bad)
 
     def test_duplicate_repositories_and_titles_are_case_insensitive(self):
         for field in ("repository", "title"):
