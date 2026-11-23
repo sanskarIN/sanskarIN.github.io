@@ -1,6 +1,6 @@
 "use strict";
 /*
- * The Projects page: search repositories, filter by language and ownership,
+ * The Projects page: search repositories, filter by any reported code language and ownership,
  * and sort by recency, stars, classified code bytes, or name. The list works without this file — it only hides items and
  * changes their order. The choices are kept in the page address
  * (?q=…&language=…&scope=…&sort=…), so a filtered list can be bookmarked or shared.
@@ -42,6 +42,16 @@
         }
         return copy;
     };
+    // Exact membership avoids treating C as C++, or 'Other' as a language.
+    // Older published snapshots still have the primary-language attribute.
+    const matchesLanguage = (item, chosen) => {
+        if (!chosen)
+            return true;
+        const names = item.getAttribute("data-languages");
+        return names !== null
+            ? names.split("|").includes(chosen)
+            : item.getAttribute("data-language") === chosen;
+    };
     const hasOption = (select, value) => Array.from(select.options).some((option) => option.value === value);
     const saveToAddress = () => {
         const params = new URLSearchParams(window.location.search);
@@ -67,7 +77,7 @@
         let shown = 0;
         for (const item of sorted(sort.value)) {
             const text = searchText.get(item) || "";
-            const match = (!chosen || item.getAttribute("data-language") === chosen) &&
+            const match = matchesLanguage(item, chosen) &&
                 (!selectedScope || item.getAttribute("data-scope") === selectedScope) &&
                 terms.every((term) => text.includes(term));
             item.hidden = !match;
