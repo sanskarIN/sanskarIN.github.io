@@ -73,14 +73,23 @@ function setup(search = '') {
     }
   };
   let address = '';
+  const windowEvents = {};
   const window = {
     location: { search, pathname: '/projects/', hash: '#list' },
     history: { replaceState(_state, _title, value) { address = value; } },
     setTimeout(callback) { callback(); return 1; },
     clearTimeout() {},
+    addEventListener(type, listener) { windowEvents[type] = listener; },
   };
   vm.runInNewContext(source, { document, window, URLSearchParams }, { timeout: 1500 });
-  return { items, controls, list, form, address: () => address };
+  return {
+    items, controls, list, form, address: () => address,
+    navigateTo(nextSearch) {
+      window.location.search = nextSearch;
+      assert.ok(windowEvents.popstate, 'missing history navigation handler');
+      windowEvents.popstate();
+    },
+  };
 }
 
 test('ownership query and code-size sort are restored from the address', () => {
@@ -149,4 +158,47 @@ test('language filters include secondary code languages without substring matche
   dom.controls.language.value = 'TypeScript';
   dom.controls.language.trigger('change');
   assert.deepEqual(dom.items.filter((entry) => !entry.hidden).map((entry) => entry.name), ['LineLoom']);
+});
+
+test('free-text search finds secondary languages while exact filters stay independent', () => {
+  const dom = setup();
+  dom.controls.search.value = 'python';
+  dom.controls.search.trigger('input');
+  assert.deepEqual(dom.items.filter((item) => !item.hidden).map((item) => item.name), ['Scarp']);
+
+  dom.controls.search.value = 'C++';
+  dom.controls.search.trigger('input');
+  assert.deepEqual(dom.items.filter((item) => !item.hidden).map((item) => item.name), ['Scarp', 'RepoDNA']);
+
+  dom.controls.search.value = 'typescript';
+  dom.controls.search.trigger('input');
+  assert.deepEqual(dom.items.filter((item) => !item.hidden).map((item) => item.name), ['LineLoom']);
+
+  dom.controls.search.value = '';
+  dom.controls.search.trigger('input');
+  assert.equal(dom.items.filter((item) => !item.hidden).length, 3);
+});
+
+test('back-forward navigation restores all filters and drops stale URL choices', () => {
+  const dom = setup('?q=repodna&language=Rust&scope=personal&sort=stars');
+  assert.equal(dom.controls.search.value, 'repodna');
+  assert.equal(dom.controls.language.value, 'Rust');
+  assert.equal(dom.controls.scope.value, 'personal');
+  assert.equal(dom.controls.sort.value, 'stars');
+  assert.deepEqual(dom.items.filter((item) => !item.hidden).map((item) => item.name), ['RepoDNA']);
+
+  dom.navigateTo('?q=python&language=Python&scope=organization&sort=code');
+  assert.equal(dom.controls.search.value, 'python');
+  assert.equal(dom.controls.language.value, 'Python');
+  assert.equal(dom.controls.scope.value, 'organization');
+  assert.equal(dom.controls.sort.value, 'code');
+  assert.deepEqual(dom.items.filter((item) => !item.hidden).map((item) => item.name), ['Scarp']);
+
+  dom.navigateTo('?sort=invalid&language=NotReal&scope=unknown');
+  assert.equal(dom.controls.search.value, '');
+  assert.equal(dom.controls.language.value, '');
+  assert.equal(dom.controls.scope.value, '');
+  assert.equal(dom.controls.sort.value, 'updated');
+  assert.equal(dom.items.filter((item) => !item.hidden).length, 3);
+  assert.equal(dom.address(), '', 'history navigation should not create another entry');
 });

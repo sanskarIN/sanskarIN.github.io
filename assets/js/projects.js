@@ -1,6 +1,6 @@
 "use strict";
 /*
- * The Projects page: search repositories, filter by any reported code language and ownership,
+ * The Projects page: search repo details and all code languages, filter by language and ownership,
  * and sort by recency, stars, classified code bytes, or name. The list works without this file — it only hides items and
  * changes their order. The choices are kept in the page address
  * (?q=…&language=…&scope=…&sort=…), so a filtered list can be bookmarked or shared.
@@ -25,8 +25,13 @@
     const searchText = new Map();
     let statusTimer;
     const normalize = (text) => String(text || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
-    for (const item of items)
-        searchText.set(item, normalize(item.getAttribute("data-text")));
+    // Include secondary languages in the free-text search as well as the exact
+    // language selector. Older snapshots without data-languages still work.
+    for (const item of items) {
+        const languages = (item.getAttribute("data-languages") || "")
+            .split("|").filter(Boolean).join(" ");
+        searchText.set(item, normalize(`${item.getAttribute("data-text") || ""} ${languages}`));
+    }
     const sorted = (by) => {
         const copy = items.slice();
         if (by === "stars") {
@@ -97,14 +102,22 @@
         if (save)
             saveToAddress();
     };
-    const params = new URLSearchParams(window.location.search);
-    search.value = (params.get("q") || "").slice(0, 100);
-    if (hasOption(language, params.get("language") || ""))
-        language.value = params.get("language") || "";
-    if (hasOption(scope, params.get("scope") || ""))
-        scope.value = params.get("scope") || "";
-    if (hasOption(sort, params.get("sort") || ""))
-        sort.value = params.get("sort") || "";
+    const readFromAddress = () => {
+        const params = new URLSearchParams(window.location.search);
+        search.value = (params.get("q") || "").slice(0, 100);
+        const requestedLanguage = params.get("language") || "";
+        const requestedScope = params.get("scope") || "";
+        const requestedSort = params.get("sort") || "updated";
+        language.value = hasOption(language, requestedLanguage) ? requestedLanguage : "";
+        scope.value = hasOption(scope, requestedScope) ? requestedScope : "";
+        sort.value = hasOption(sort, requestedSort) ? requestedSort : "updated";
+    };
+    // Restore bookmarked filter states when the browser changes history.
+    // Do not rewrite the URL while navigating back/forward.
+    window.addEventListener("popstate", () => {
+        readFromAddress();
+        update(false);
+    });
     form.addEventListener("submit", (event) => event.preventDefault());
     search.addEventListener("input", () => update(true));
     language.addEventListener("change", () => update(true));
@@ -117,6 +130,7 @@
         update(true);
         search.focus();
     });
+    readFromAddress();
     form.hidden = false;
     update(false);
 })();
