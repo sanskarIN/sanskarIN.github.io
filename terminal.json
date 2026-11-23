@@ -202,8 +202,8 @@
     }
   ],
   "projects": {
-    "total": 71,
-    "stars": 34,
+    "total": 72,
+    "stars": 35,
     "featured": [
       {
         "name": "scarp",
@@ -224,7 +224,7 @@
         "url": "https://github.com/sanskarIN/frametrellis",
         "description": "Open-source video editor.",
         "language": "C++",
-        "stars": 4
+        "stars": 5
       },
       {
         "name": "RepoDNA",
