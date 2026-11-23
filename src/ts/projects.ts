@@ -22,6 +22,9 @@
   // Most recently updated first, as the page lists them.
   const items = Array.from(list.children) as HTMLElement[];
   const searchText = new Map<HTMLElement, string>();
+  const sortedOrders = new Map<string, HTMLElement[]>();
+  // The server renders newest-first; do not move every card when simply typing.
+  let appliedSort = "updated";
   let statusTimer: number | undefined;
 
   const normalize = (text: string | null): string =>
@@ -36,6 +39,8 @@
   }
 
   const sorted = (by: string): HTMLElement[] => {
+    const cached = sortedOrders.get(by);
+    if (cached) return cached;
     const copy = items.slice();
     if (by === "stars") {
       copy.sort((a, b) =>
@@ -48,6 +53,7 @@
     } else if (by === "name") {
       copy.sort((a, b) => (a.getAttribute("data-name") || "").localeCompare(b.getAttribute("data-name") || ""));
     }
+    sortedOrders.set(by, copy);
     return copy;
   };
 
@@ -80,30 +86,50 @@
     window.history.replaceState(null, "", window.location.pathname + (query ? "?" + query : "") + window.location.hash);
   };
 
-  const update = (save: boolean): void => {
+  const sortLabels: Record<string, string> = {
+    stars: "most stars",
+    code: "largest classified codebase",
+    name: "name",
+  };
+
+  const update = (save: boolean, typing = false): void => {
     const terms = normalize(search.value).split(/\s+/).filter(Boolean);
     const chosen = language.value;
     const selectedScope = scope.value;
     let shown = 0;
-    for (const item of sorted(sort.value)) {
+    const order = sorted(sort.value);
+    for (const item of order) {
       const text = searchText.get(item) || "";
       const match = matchesLanguage(item, chosen) &&
         (!selectedScope || item.getAttribute("data-scope") === selectedScope) &&
         terms.every((term) => text.includes(term));
-      item.hidden = !match;
+      const shouldHide = !match;
+      if (item.hidden !== shouldHide) item.hidden = shouldHide;
       if (match) shown += 1;
-      list.appendChild(item);
+    }
+
+    // Filtering only changes visibility. Reorder DOM nodes on actual sort
+    // changes, so typing and mobile select changes avoid unnecessary layout work.
+    if (appliedSort !== sort.value) {
+      for (const item of order) list.appendChild(item);
+      appliedSort = sort.value;
     }
     empty.hidden = shown !== 0;
 
-    // Announced after typing pauses, not on every key.
+    // role=status announces result counts; a sort-only change must also
+    // produce feedback. Only text input announcements are briefly debounced.
     window.clearTimeout(statusTimer);
     const filtered = terms.length > 0 || chosen !== "" || selectedScope !== "";
+    const noun = items.length === 1 ? "repository" : "repositories";
+    const resultMessage = filtered
+      ? `Showing ${shown} of ${items.length} ${noun}.`
+      : `Showing all ${items.length} ${noun}.`;
+    const sortMessage = sort.value === "updated" ? "" : ` Sorted by ${sortLabels[sort.value] || "last updated"}.`;
     statusTimer = window.setTimeout(() => {
-      status.textContent = filtered
-        ? `Showing ${shown} of ${items.length}${items.length === 1 ? " repository." : " repositories."}`
+      status.textContent = filtered || save || sort.value !== "updated"
+        ? resultMessage + sortMessage
         : "";
-    }, 400);
+    }, typing ? 300 : 0);
     if (save) saveToAddress();
   };
 
@@ -126,7 +152,7 @@
   });
 
   form.addEventListener("submit", (event) => event.preventDefault());
-  search.addEventListener("input", () => update(true));
+  search.addEventListener("input", () => update(true, true));
   language.addEventListener("change", () => update(true));
   scope.addEventListener("change", () => update(true));
   sort.addEventListener("change", () => update(true));
