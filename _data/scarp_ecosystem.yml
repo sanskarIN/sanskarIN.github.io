@@ -6,6 +6,11 @@
   url: https://scarp-lang.github.io/
   description: Overview, news, and entry points for the programming language.
 
+- title: Download Scarp
+  repository: scarp-lang/scarp-lang.github.io
+  url: https://scarp-lang.github.io/downloads/
+  description: Official compiler archives, supported platforms, checksums, and permanent latest-version links.
+
 - title: Compiler and CLI
   repository: scarp-lang/scarp
   url: https://github.com/scarp-lang/scarp
