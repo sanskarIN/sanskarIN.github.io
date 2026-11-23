@@ -91,6 +91,30 @@ class MaintainedProjectTests(unittest.TestCase):
         self.assertEqual(summary[0]["percent"], 90.0)
         self.assertEqual(summary[1]["percent"], 10.0)
 
+    def test_secondary_language_names_are_complete_and_exact(self):
+        scarp = repo("scarp-lang", "scarp")
+        scarp["language"] = "Rust"
+        repodna = repo("sanskarIN", "RepoDNA")
+        repodna["language"] = "C++"
+        fallback = repo("sanskarIN", "Empty")
+        fallback["language"] = "TypeScript"
+        records = [
+            project_data.repository_record(item, {}, 0, "sanskarIN")
+            for item in (scarp, repodna, fallback)
+        ]
+        sizes = {
+            "scarp-lang/scarp": {"Rust": 800, "Python": 100, "C++": 10, "C": 1, "TOML": 0},
+            "sanskarin/repodna": {"C++": 200, "HTML": 50},
+            "sanskarin/empty": {},
+        }
+        names = project_data.attach_language_names(records, sizes)
+        self.assertEqual(records[0]["language_names"], ["C", "C++", "Python", "Rust"])
+        self.assertEqual(records[1]["language_names"], ["C++", "HTML"])
+        self.assertEqual(records[2]["language_names"], ["TypeScript"])
+        self.assertEqual(names, ["C", "C++", "HTML", "Python", "Rust", "TypeScript"])
+        self.assertNotIn("Other", names)
+        self.assertNotIn("TOML", names)
+
     def test_featured_breakdown_uses_repository_language_bytes(self):
         scarp = repo("scarp-lang", "scarp")
         other = repo("sanskarIN", "RepoDNA")
