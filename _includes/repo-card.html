@@ -35,6 +35,26 @@
     {%- endfor %}
   </ul>
   {%- endif %}
+  {%- comment -%}
+    Secondary languages belong to the published GitHub snapshot. Showing
+    them on standard cards explains why a repository appears under a
+    supporting-language filter even when its primary language differs.
+    Featured cards already have the richer language-composition chart.
+  {%- endcomment -%}
+  {%- if include.show_languages != true and repo.language_names.size > 1 %}
+    {%- capture supporting_languages -%}
+      {%- assign separator = "" -%}
+      {%- for language_name in repo.language_names -%}
+        {%- unless language_name == repo.language -%}
+          {{- separator -}}{{- language_name | escape -}}
+          {%- assign separator = ", " -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- if supporting_languages != "" %}
+  <p class="repo-card__description"><strong>Other code languages:</strong> {{ supporting_languages }}</p>
+    {%- endif %}
+  {%- endif %}
   {%- if include.show_languages and repo.languages.size > 0 %}
   <div class="repo-card__language-breakdown">
     <p class="repo-card__language-heading">Code composition <span>(GitHub language bytes)</span></p>

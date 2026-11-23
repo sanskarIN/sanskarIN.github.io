@@ -109,6 +109,7 @@ scripts: [projects]
 
 <section class="page-section" aria-labelledby="all-title">
   <h2 id="all-title">All repositories <span class="post-year__count">· {{ gh.repositories.size }}</span></h2>
+  <p class="glance__note">Filter by any GitHub-classified code language, including supporting languages shown on repository cards. Language data measures bytes, not lines of code.</p>
   {%- assign repo_languages = gh.language_names -%}
   {%- if repo_languages == nil or repo_languages.size == 0 -%}
     {%- assign repo_languages = gh.repositories | map: "language" | compact | uniq | sort -%}
