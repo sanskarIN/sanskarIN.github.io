@@ -826,45 +826,24 @@
   },
   {
     "type": "Project",
-    "title": "frametrellis",
-    "url": "https://github.com/sanskarIN/frametrellis",
-    "tags": [
-      "cmake",
-      "cpp",
-      "cpp20",
-      "desktop-application",
-      "docker",
-      "ffmpeg"
-    ],
-    "text": "Open-source video editor. C++"
-  },
-  {
-    "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "title": "noticebridge-ai",
+    "url": "https://github.com/sanskarIN/noticebridge-ai",
     "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+    "text": "Understand what changed. Know what to do. Verify the evidence. Python"
   },
   {
     "type": "Project",
-    "title": "scarp",
-    "url": "https://github.com/scarp-lang/scarp",
-    "tags": [
-      "cli",
-      "compiler",
-      "compiler-design",
-      "developer-tools",
-      "interpreter",
-      "language-design"
-    ],
-    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
-  },
-  {
-    "type": "Project",
-    "title": "SpeedPulse",
-    "url": "https://github.com/sanskarIN/SpeedPulse",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
     "tags": [],
-    "text": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of… HTML"
+    "text": "Latebrake — Race Beyond Limits. C++"
+  },
+  {
+    "type": "Project",
+    "title": "healthmetric",
+    "url": "https://github.com/sanskarIN/healthmetric",
+    "tags": [],
+    "text": "Kotlin"
   },
   {
     "type": "Project",
@@ -882,24 +861,24 @@
   },
   {
     "type": "Project",
-    "title": "EyeZen",
-    "url": "https://github.com/sanskarIN/EyeZen",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
     "tags": [],
-    "text": "Your screen. Your comfort. Your environment. TypeScript"
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
   },
   {
     "type": "Project",
-    "title": "latebrake",
-    "url": "https://github.com/sanskarIN/latebrake",
-    "tags": [],
-    "text": "Latebrake — Race Beyond Limits. C++"
-  },
-  {
-    "type": "Project",
-    "title": "noticebridge-ai",
-    "url": "https://github.com/sanskarIN/noticebridge-ai",
-    "tags": [],
-    "text": "Understand what changed. Know what to do. Verify the evidence."
+    "title": "scarp",
+    "url": "https://github.com/scarp-lang/scarp",
+    "tags": [
+      "cli",
+      "compiler",
+      "compiler-design",
+      "developer-tools",
+      "interpreter",
+      "language-design"
+    ],
+    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
   },
   {
     "type": "Project",
@@ -921,6 +900,41 @@
       "code-visualization"
     ],
     "text": "Understand any GitHub repository before you clone it. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "SpeedPulse",
+    "url": "https://github.com/sanskarIN/SpeedPulse",
+    "tags": [],
+    "text": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of… HTML"
+  },
+  {
+    "type": "Project",
+    "title": "frametrellis",
+    "url": "https://github.com/sanskarIN/frametrellis",
+    "tags": [
+      "cmake",
+      "cpp",
+      "cpp20",
+      "desktop-application",
+      "docker",
+      "ffmpeg"
+    ],
+    "text": "Open-source video editor. C++"
+  },
+  {
+    "type": "Project",
+    "title": "EyeZen",
+    "url": "https://github.com/sanskarIN/EyeZen",
+    "tags": [],
+    "text": "Your screen. Your comfort. Your environment. TypeScript"
   },
   {
     "type": "Project",
@@ -1004,13 +1018,6 @@
   },
   {
     "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
-    "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "MeTodo",
     "url": "https://github.com/sanskarIN/MeTodo",
     "tags": [
@@ -1043,13 +1050,6 @@
     "url": "https://github.com/sanskarIN/tempotrack",
     "tags": [],
     "text": "Kotlin"
-  },
-  {
-    "type": "Project",
-    "title": "thermoshift",
-    "url": "https://github.com/sanskarIN/thermoshift",
-    "tags": [],
-    "text": "TypeScript"
   },
   {
     "type": "Project",
@@ -1119,13 +1119,6 @@
     "url": "https://github.com/sanskarIN/contactcore",
     "tags": [],
     "text": "ContactCore, a production-quality Basic Contact Book project that is much more complete than a classroom demo. C#"
-  },
-  {
-    "type": "Project",
-    "title": "healthmetric",
-    "url": "https://github.com/sanskarIN/healthmetric",
-    "tags": [],
-    "text": "Kotlin"
   },
   {
     "type": "Project",
