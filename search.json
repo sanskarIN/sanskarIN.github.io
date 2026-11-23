@@ -826,24 +826,24 @@
   },
   {
     "type": "Project",
-    "title": "latebrake",
-    "url": "https://github.com/sanskarIN/latebrake",
-    "tags": [],
-    "text": "Latebrake — Race Beyond Limits. C++"
+    "title": "frametrellis",
+    "url": "https://github.com/sanskarIN/frametrellis",
+    "tags": [
+      "cmake",
+      "cpp",
+      "cpp20",
+      "desktop-application",
+      "docker",
+      "ffmpeg"
+    ],
+    "text": "Open-source video editor. C++"
   },
   {
     "type": "Project",
-    "title": "sonumio",
-    "url": "https://github.com/sanskarIN/sonumio",
-    "tags": [
-      "ai-audio",
-      "artificial-intelligence",
-      "audio-ai",
-      "audio-generation",
-      "audio-processing",
-      "audio-synthesis"
-    ],
-    "text": "Open-source AI platform for speech, music, and sound generation. Python"
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
   },
   {
     "type": "Project",
@@ -861,17 +861,45 @@
   },
   {
     "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
+    "title": "SpeedPulse",
+    "url": "https://github.com/sanskarIN/SpeedPulse",
     "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+    "text": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of… HTML"
   },
   {
     "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "title": "sonumio",
+    "url": "https://github.com/sanskarIN/sonumio",
+    "tags": [
+      "ai-audio",
+      "artificial-intelligence",
+      "audio-ai",
+      "audio-generation",
+      "audio-processing",
+      "audio-synthesis"
+    ],
+    "text": "Open-source AI platform for speech, music, and sound generation. Python"
+  },
+  {
+    "type": "Project",
+    "title": "EyeZen",
+    "url": "https://github.com/sanskarIN/EyeZen",
     "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
+    "text": "Your screen. Your comfort. Your environment. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
+    "tags": [],
+    "text": "Latebrake — Race Beyond Limits. C++"
+  },
+  {
+    "type": "Project",
+    "title": "noticebridge-ai",
+    "url": "https://github.com/sanskarIN/noticebridge-ai",
+    "tags": [],
+    "text": "Understand what changed. Know what to do. Verify the evidence."
   },
   {
     "type": "Project",
@@ -896,17 +924,22 @@
   },
   {
     "type": "Project",
-    "title": "frametrellis",
-    "url": "https://github.com/sanskarIN/frametrellis",
+    "title": "libracore",
+    "url": "https://github.com/sanskarIN/libracore",
+    "tags": [],
+    "text": "LibraCore, a production-quality Library Management System project that is much more complete than a classroom demo. Java"
+  },
+  {
+    "type": "Project",
+    "title": "nodejs-mastery",
+    "url": "https://github.com/sanskarIN/nodejs-mastery",
     "tags": [
-      "cmake",
-      "cpp",
-      "cpp20",
-      "desktop-application",
-      "docker",
-      "ffmpeg"
+      "node",
+      "node-js",
+      "nodejs",
+      "nodejs-server"
     ],
-    "text": "Open-source video editor. C++"
+    "text": "Companion code, practical projects, examples, exercises, and production-ready Node.js learning resources for the Node.js Full Mastery eBook by Ram Sandesh. JavaScript"
   },
   {
     "type": "Project",
@@ -921,6 +954,60 @@
       "programming"
     ],
     "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
+  },
+  {
+    "type": "Project",
+    "title": "2048",
+    "url": "https://github.com/sanskarIN/2048",
+    "tags": [
+      "2040",
+      "2048",
+      "2048-clone",
+      "2048-game",
+      "2048-game-online",
+      "2048-redesigned"
+    ],
+    "text": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar. Dart"
+  },
+  {
+    "type": "Project",
+    "title": "chronoage",
+    "url": "https://github.com/sanskarIN/chronoage",
+    "tags": [],
+    "text": "TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "stockpilot",
+    "url": "https://github.com/sanskarIN/stockpilot",
+    "tags": [
+      "go",
+      "golang",
+      "stcokpilot",
+      "typescript"
+    ],
+    "text": "StockPilot, a production-quality Inventory Management System project that is much more complete than a classroom demo. Go"
+  },
+  {
+    "type": "Project",
+    "title": "foliolane",
+    "url": "https://github.com/sanskarIN/foliolane",
+    "tags": [
+      "docmerge",
+      "pdf-merge",
+      "pdf-merger",
+      "pdf-merger-python",
+      "pdf-merger-tool",
+      "pdf-merger-windows-desktop"
+    ],
+    "text": "A modern, reliable, local-first document-merging application for very large multi-part books and document series. Python"
+  },
+  {
+    "type": "Project",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
+    "tags": [],
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
   },
   {
     "type": "Project",
@@ -952,13 +1039,6 @@
   },
   {
     "type": "Project",
-    "title": "EyeZen",
-    "url": "https://github.com/sanskarIN/EyeZen",
-    "tags": [],
-    "text": "Your screen. Your comfort. Your environment. TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "tempotrack",
     "url": "https://github.com/sanskarIN/tempotrack",
     "tags": [],
@@ -980,38 +1060,10 @@
   },
   {
     "type": "Project",
-    "title": "2048",
-    "url": "https://github.com/sanskarIN/2048",
-    "tags": [
-      "2040",
-      "2048",
-      "2048-clone",
-      "2048-game",
-      "2048-game-online",
-      "2048-redesigned"
-    ],
-    "text": "A modern, open-source 2048 game with beautiful UI/UX, multiple game modes, themes, achievements, statistics, accessibility features, smooth animations, and cross-platform support. Made by Sanskar. Dart"
-  },
-  {
-    "type": "Project",
     "title": "chronodesk",
     "url": "https://github.com/sanskarIN/chronodesk",
     "tags": [],
     "text": "C#"
-  },
-  {
-    "type": "Project",
-    "title": "foliolane",
-    "url": "https://github.com/sanskarIN/foliolane",
-    "tags": [
-      "docmerge",
-      "pdf-merge",
-      "pdf-merger",
-      "pdf-merger-python",
-      "pdf-merger-tool",
-      "pdf-merger-windows-desktop"
-    ],
-    "text": "A modern, reliable, local-first document-merging application for very large multi-part books and document series. Python"
   },
   {
     "type": "Project",
@@ -1049,13 +1101,6 @@
   },
   {
     "type": "Project",
-    "title": "SpeedPulse",
-    "url": "https://github.com/sanskarIN/SpeedPulse",
-    "tags": [],
-    "text": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of… HTML"
-  },
-  {
-    "type": "Project",
     "title": "Rewind64",
     "url": "https://github.com/sanskarIN/Rewind64",
     "tags": [],
@@ -1081,18 +1126,6 @@
     "url": "https://github.com/sanskarIN/healthmetric",
     "tags": [],
     "text": "Kotlin"
-  },
-  {
-    "type": "Project",
-    "title": "stockpilot",
-    "url": "https://github.com/sanskarIN/stockpilot",
-    "tags": [
-      "go",
-      "golang",
-      "stcokpilot",
-      "typescript"
-    ],
-    "text": "StockPilot, a production-quality Inventory Management System project that is much more complete than a classroom demo. Go"
   },
   {
     "type": "Project",
@@ -1145,24 +1178,10 @@
   },
   {
     "type": "Project",
-    "title": "chronoage",
-    "url": "https://github.com/sanskarIN/chronoage",
-    "tags": [],
-    "text": "TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "unknown-mystery-ai",
     "url": "https://github.com/sanskarIN/unknown-mystery-ai",
     "tags": [],
     "text": "Official companion repository for The Unknown Mystery of the AI by Ram Sandesh — AI code examples, projects, exercises, notebooks, reproducibility resources, and practical learning materials covering ML, Deep Learning, LLMs, RAG, Agents, MLOps, Responsible AI, deployment, and… Python"
-  },
-  {
-    "type": "Project",
-    "title": "libracore",
-    "url": "https://github.com/sanskarIN/libracore",
-    "tags": [],
-    "text": "LibraCore, a production-quality Library Management System project that is much more complete than a classroom demo. Java"
   },
   {
     "type": "Project",
@@ -1397,18 +1416,6 @@
     "url": "https://github.com/sanskarIN/dart-flutter-master",
     "tags": [],
     "text": "Companion source code, exercises, solutions, master projects, examples, and update notes for Dart & Flutter Full Mastery — the complete 120-part learning series by Ram Sandesh. Dart"
-  },
-  {
-    "type": "Project",
-    "title": "nodejs-mastery",
-    "url": "https://github.com/sanskarIN/nodejs-mastery",
-    "tags": [
-      "node",
-      "node-js",
-      "nodejs",
-      "nodejs-server"
-    ],
-    "text": "Companion code, practical projects, examples, exercises, and production-ready Node.js learning resources for the Node.js Full Mastery eBook by Ram Sandesh. JavaScript"
   },
   {
     "type": "Project",
