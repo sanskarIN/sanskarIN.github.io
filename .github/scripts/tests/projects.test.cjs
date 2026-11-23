@@ -57,7 +57,9 @@ function setup(search = '') {
   };
   const list = {
     children: items.slice(),
+    moves: 0,
     appendChild(item) {
+      this.moves += 1;
       const current = this.children.indexOf(item);
       if (current >= 0) this.children.splice(current, 1);
       this.children.push(item);
@@ -201,4 +203,56 @@ test('back-forward navigation restores all filters and drops stale URL choices',
   assert.equal(dom.controls.sort.value, 'updated');
   assert.equal(dom.items.filter((item) => !item.hidden).length, 3);
   assert.equal(dom.address(), '', 'history navigation should not create another entry');
+});
+
+test('filter changes do not reorder repository DOM; actual sorting does', () => {
+  const dom = setup();
+  assert.equal(dom.list.moves, 0, 'default server order should remain intact');
+  dom.controls.search.value = 'rust';
+  dom.controls.search.trigger('input');
+  dom.controls.language.value = 'Rust';
+  dom.controls.language.trigger('change');
+  assert.equal(dom.list.moves, 0, 'typing and filtering should only toggle visibility');
+
+  dom.controls.sort.value = 'name';
+  dom.controls.sort.trigger('change');
+  assert.equal(dom.list.moves, dom.items.length);
+  assert.deepEqual(dom.list.children.map((entry) => entry.name), ['LineLoom', 'RepoDNA', 'Scarp']);
+
+  dom.controls.search.value = '';
+  dom.controls.search.trigger('input');
+  assert.equal(dom.list.moves, dom.items.length, 'typing after sorting must not reorder again');
+  dom.controls.sort.value = 'updated';
+  dom.controls.sort.trigger('change');
+  assert.equal(dom.list.moves, dom.items.length * 2);
+  assert.deepEqual(dom.list.children.map((entry) => entry.name), ['Scarp', 'RepoDNA', 'LineLoom']);
+});
+
+test('result status explains sorting, zero results and clearing filters', () => {
+  const dom = setup();
+  assert.equal(dom.controls.status.textContent, '', 'initial unfiltered load stays quiet');
+  dom.controls.sort.value = 'stars';
+  dom.controls.sort.trigger('change');
+  assert.match(dom.controls.status.textContent, /Showing all 3 repositories/);
+  assert.match(dom.controls.status.textContent, /Sorted by most stars/);
+
+  dom.controls.search.value = 'no-such-repository';
+  dom.controls.search.trigger('input');
+  assert.equal(dom.controls.empty.hidden, false);
+  assert.match(dom.controls.status.textContent, /Showing 0 of 3 repositories/);
+  dom.controls.reset.trigger('click');
+  assert.equal(dom.controls.empty.hidden, true);
+  assert.match(dom.controls.status.textContent, /Showing all 3 repositories/);
+});
+
+test('project filters have accessible target and help text in the rendered template', () => {
+  const markup = fs.readFileSync(path.resolve(__dirname, '../../../projects/index.html'), 'utf8');
+  assert.match(markup, /id="repo-filter-note"/);
+  assert.match(markup, /aria-describedby="repo-filter-note"/);
+  assert.match(markup, /id="repo-results" aria-labelledby="all-title"/);
+  for (const attr of ['data-repo-search', 'data-repo-language', 'data-repo-scope', 'data-repo-sort']) {
+    const input = markup.match(new RegExp('<(?:input|select)[^>]*' + attr + '[^>]*>'));
+    assert.ok(input, attr + ' must exist');
+    assert.match(input[0], /aria-controls="repo-results"/);
+  }
 });
