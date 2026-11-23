@@ -7,11 +7,12 @@ const vm = require('node:vm');
 
 const source = fs.readFileSync(path.resolve(__dirname, '../../../assets/js/projects.js'), 'utf8');
 
-function project(name, owner, language, stars, bytes, search) {
+function project(name, owner, language, stars, bytes, search, languages = [language]) {
   const values = {
     'data-name': name.toLowerCase(),
     'data-scope': owner,
     'data-language': language,
+    'data-languages': "|" + languages.join("|") + "|",
     'data-stars': String(stars),
     'data-code-bytes': String(bytes),
     'data-text': search || name.toLowerCase(),
@@ -25,9 +26,9 @@ function project(name, owner, language, stars, bytes, search) {
 
 function setup(search = '') {
   const items = [
-    project('Scarp', 'organization', 'Rust', 2, 1500, 'scarp-lang/scarp rust compiler'),
-    project('RepoDNA', 'personal', 'Rust', 8, 4000, 'sanskarin/repodna rust cli'),
-    project('LineLoom', 'personal', 'TypeScript', 2, 1500, 'sanskarin/lineloom editor'),
+    project('Scarp', 'organization', 'Rust', 2, 1500, 'scarp-lang/scarp rust compiler', ['Rust', 'Python', 'C++']),
+    project('RepoDNA', 'personal', 'Rust', 8, 4000, 'sanskarin/repodna rust cli', ['Rust', 'C++']),
+    project('LineLoom', 'personal', 'TypeScript', 2, 1500, 'sanskarin/lineloom editor', ['TypeScript', 'C']),
   ];
   const controls = {};
   function control(name, value = '', options = []) {
@@ -42,7 +43,7 @@ function setup(search = '') {
     return element;
   }
   control('search');
-  control('language', '', ['', 'Rust', 'TypeScript']);
+  control('language', '', ['', 'Rust', 'TypeScript', 'Python', 'C', 'C++']);
   control('scope', '', ['', 'personal', 'organization']);
   control('sort', 'updated', ['updated', 'stars', 'code', 'name']);
   control('status');
@@ -129,4 +130,23 @@ test('invalid URL choices are ignored and sorting ties remain stable', () => {
   dom.controls.sort.value = 'stars';
   dom.controls.sort.trigger('change');
   assert.deepEqual(dom.list.children.map((entry) => entry.name), ['RepoDNA', 'Scarp', 'LineLoom']);
+});
+
+test('language filters include secondary code languages without substring matches', () => {
+  const dom = setup('?language=Python');
+  assert.equal(dom.controls.language.value, 'Python');
+  assert.deepEqual(dom.items.filter((entry) => !entry.hidden).map((entry) => entry.name), ['Scarp']);
+
+  dom.controls.language.value = 'C';
+  dom.controls.language.trigger('change');
+  assert.deepEqual(dom.items.filter((entry) => !entry.hidden).map((entry) => entry.name), ['LineLoom']);
+  assert.match(dom.address(), /language=C(?:&|#|$)/);
+
+  dom.controls.language.value = 'C++';
+  dom.controls.language.trigger('change');
+  assert.deepEqual(dom.items.filter((entry) => !entry.hidden).map((entry) => entry.name), ['Scarp', 'RepoDNA']);
+
+  dom.controls.language.value = 'TypeScript';
+  dom.controls.language.trigger('change');
+  assert.deepEqual(dom.items.filter((entry) => !entry.hidden).map((entry) => entry.name), ['LineLoom']);
 });
