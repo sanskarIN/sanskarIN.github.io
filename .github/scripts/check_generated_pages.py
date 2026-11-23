@@ -55,6 +55,7 @@ def check(output):
     a = scan(output / "about" / "index.html")
     d = scan(output / "developer" / "index.html")
     h = scan(output / "index.html")
+    projects = scan(output / "projects" / "index.html")
     home = json.loads((ROOT / "_data/home_content.json").read_text(encoding="utf-8"))
     contact_data = json.loads((ROOT / "_data/contact_page.json").read_text(encoding="utf-8"))
     not_found_data = json.loads((ROOT / "_data/not_found_page.json").read_text(encoding="utf-8"))
@@ -105,6 +106,10 @@ def check(output):
     for advice in contact_data["advice"]:
         if advice["label"] not in contact_body or advice["description"] not in contact_body:
             raise AssertionError(f"Missing Contact advice: {advice['label']}")
+    if "https://scarp-lang.github.io/downloads/" not in projects.links:
+        raise AssertionError("Projects page must link to the official Scarp downloads")
+    if projects.headings.count("Scarp ecosystem") != 1:
+        raise AssertionError("Scarp ecosystem section missing or duplicated")
     if "/contact/" not in h.links:
         raise AssertionError("Homepage no longer links to Contact")
     if not any(link.endswith("/security/policy") for link in contact.links):
