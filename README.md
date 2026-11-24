@@ -658,6 +658,15 @@ You can also add a Markdown file to `_posts/`, named like `2026-10-01-my-post.md
 - Removing a post takes it off the website, but earlier versions stay in the repository's Git history.
 - Changing the limits in `_data/blog.yml` doesn't change the text of the issue form: update `.github/ISSUE_TEMPLATE/blog-post.yml` too.
 
+### Document attachments and the Assets library
+
+Signed-in authors can select **Attach a file** in the website post editor. The first version supports PDF and PPTX, strictly under 10,000,000 bytes each, at most five per post and 20 staged files per account. Files are public immediately in the Supabase `blog-attachments` staging bucket; the editor warns before upload. Upload only public documents you own or have permission to publish. Original files retain their metadata.
+
+After review and merge, the publisher copies validated documents into `assets/files/blog/<post-slug>/` with content-derived filenames. The article includes an anchored resource card, share link, direct file link and download button. The [Assets library](https://sanskarin.github.io/resources/) lists the resources. PDF opens in a compatible browser; PPTX has a bounded text-only preview and the original file download. For full visual slide preview, attach a PDF export alongside the PPTX. There is no external document viewer and no Google Drive API key.
+
+The existing Set up accounts workflow must apply the updated `supabase/schema.sql` and deploy the blog Edge Function before testing uploads. Verify both deployment steps succeeded. Run the attachment unit tests using `python -m unittest discover -s .github/scripts/tests -p test_blog_attachments.py`. The publisher validates basic formats and bounds archive expansion, but is not an antivirus service. Review files before publication. Removing an attachment from the article removes its current published copy after merge; staged copies may remain until deleted, and historical Git commits remain public.
+
+
 ## Accounts
 
 Visitors can create an account on the website with only their email address — they get a **6-digit code by email**, with no password — then set up an **author profile** and write posts in an **editor on the site**, with image uploads. Posts written this way go through exactly the same checks, review, and publishing as posts written on GitHub, and the GitHub form stays available.
