@@ -1037,11 +1037,80 @@
         addImage.addEventListener("click", () => bodyInput.click());
         const attachmentInput = $('[data-file="attachment"]');
         const addAttachment = $('[data-action="add-attachment"]');
+        const listAttachments = $('[data-action="list-attachments"]');
+        const stagedAttachments = $("[data-staged-attachments]");
+        async function refreshAttachments() {
+            if (isBusy(listAttachments) || isBusy(submitButton))
+                return;
+            setBusy(listAttachments, true);
+            stagedAttachments.textContent = "";
+            try {
+                const session = await requireSession();
+                const files = await request("/storage/v1/object/list/blog-attachments", {
+                    method: "POST",
+                    token: session.access_token,
+                    json: { prefix: session.user.id, limit: 100, offset: 0 },
+                });
+                const names = files.map((item) => item.name).filter((name) => /^[0-9a-f-]{36}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx)$/.test(name));
+                if (!names.length)
+                    stagedAttachments.appendChild(element("li", "", "No staged documents."));
+                for (const name of names) {
+                    const item = element("li");
+                    const remove = element("button", "button button--ghost", "Delete staged copy");
+                    remove.type = "button";
+                    const label = name.slice(37);
+                    remove.setAttribute("aria-label", "Delete staged copy of " + label);
+                    item.appendChild(element("span", "", label + " "));
+                    item.appendChild(remove);
+                    stagedAttachments.appendChild(item);
+                    remove.addEventListener("click", async () => {
+                        if (isBusy(remove) || isBusy(listAttachments) || isBusy(submitButton))
+                            return;
+                        if (!window.confirm("Delete this public staged copy? This may break pending posts and future edits. Published copies are not removed."))
+                            return;
+                        setBusy(remove, true);
+                        setBusy(listAttachments, true);
+                        try {
+                            const current = await requireSession();
+                            if (current.user.id !== session.user.id)
+                                throw new Error("Your account changed. Refresh the list.");
+                            await request("/storage/v1/object/blog-attachments", {
+                                method: "DELETE",
+                                token: current.access_token,
+                                json: { prefixes: [current.user.id + "/" + name] },
+                            });
+                            const url = config.url + "/storage/v1/object/public/blog-attachments/" + current.user.id + "/" + name;
+                            body.value = body.value.split("\n").filter((line) => !line.trim().endsWith("](" + url + ")")).join("\n");
+                            saveDraft();
+                            item.remove();
+                            setStatus(status, "Staged document deleted. Remove any remaining references before sending your post.", "success");
+                        }
+                        catch (error) {
+                            setStatus(status, error instanceof Error ? error.message : "Could not delete the staged document.", "error");
+                        }
+                        finally {
+                            setBusy(remove, false);
+                            setBusy(listAttachments, false);
+                        }
+                    });
+                }
+            }
+            catch (error) {
+                setStatus(status, error instanceof Error ? error.message : "Could not list your staged documents.", "error");
+            }
+            finally {
+                setBusy(listAttachments, false);
+            }
+        }
+        listAttachments.addEventListener("click", () => {
+            void refreshAttachments();
+        });
+
         addAttachment.addEventListener("click", () => attachmentInput.click());
         attachmentInput.addEventListener("change", async () => {
             const file = attachmentInput.files?.[0];
             attachmentInput.value = "";
-            if (!file || isBusy(addAttachment))
+            if (!file || isBusy(addAttachment) || isBusy(listAttachments) || isBusy(submitButton))
                 return;
             const extension = file.name.split(".").pop()?.toLowerCase();
             if (extension !== "pdf" && extension !== "pptx") {
@@ -1121,8 +1190,8 @@
             event.preventDefault();
             if (isBusy(submitButton))
                 return;
-            if (isBusy(addAttachment)) {
-                setStatus(status, "Wait for the attachment upload to finish.", "error");
+            if (isBusy(addAttachment) || isBusy(listAttachments)) {
+                setStatus(status, "Wait for the attachment operation to finish.", "error");
                 return;
             }
             const post = values();
