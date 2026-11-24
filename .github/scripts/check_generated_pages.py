@@ -110,6 +110,16 @@ def check(output):
     h = scan(output / "index.html")
     projects = scan(output / "projects" / "index.html")
     check_scarp(output, h, projects)
+    resources = scan(output / "resources" / "index.html")
+    blog = scan(output / "blog" / "index.html")
+    if resources.h1 != ["Assets & Resources"] or "/resources/" not in blog.links or "/resources/" not in h.links:
+        raise AssertionError("The resource library is not discoverable")
+    search = json.loads((output / "search.json").read_text(encoding="utf-8"))
+    terminal = json.loads((output / "terminal.json").read_text(encoding="utf-8"))
+    if sum(item["url"] == "/resources/" for item in search) != 1:
+        raise AssertionError("Assets search entry missing or duplicated")
+    if {"title": "Assets", "url": "/resources/"} not in terminal["pages"]:
+        raise AssertionError("Assets terminal navigation missing")
     home = json.loads((ROOT / "_data/home_content.json").read_text(encoding="utf-8"))
     contact_data = json.loads((ROOT / "_data/contact_page.json").read_text(encoding="utf-8"))
     not_found_data = json.loads((ROOT / "_data/not_found_page.json").read_text(encoding="utf-8"))
