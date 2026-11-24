@@ -24,6 +24,9 @@
         {%- if card.last_modified_at %}, updated <time datetime="{{ card.last_modified_at | date_to_xmlschema }}">{{ card.last_modified_at | date: "%-d %b %Y" }}</time>{% endif -%}
       </span>
       <span>by {{ card_author | escape }}</span>
+      {%- if card.tags contains "research" %}
+      <span><a href="{{ '/research/' | relative_url }}">Research</a></span>
+      {%- endif %}
       <span>{{ card_minutes }} min read</span>
     </p>
     {%- if include.documents and card.attachments and card.attachments.size > 0 %}

@@ -236,18 +236,18 @@ async function verifyAttachments(post: Post, user: User): Promise<void> {
   for (const url of urls) {
     const name = url.slice(own.length);
     const file = byName.get(name);
-    const label = name.slice(37);
+    const label = name.slice(37).replace(/\.html\.txt$/, ".html");
     if (!file) {
       problems.push(`Upload ${label} again or remove its link from your article.`);
       continue;
     }
     const expected = name.endsWith(".pdf")
       ? "application/pdf"
-      : "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+      : name.endsWith(".md") ? "text/markdown" : name.endsWith(".html.txt") ? "text/plain" : name.endsWith(".docx") ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/vnd.openxmlformats-officedocument.presentationml.presentation";
     const size = file.metadata?.size;
     if (typeof size !== "number" || !Number.isInteger(size) || size <= 0 || size >= 10_000_000 ||
       file.metadata?.mimetype !== expected) {
-      problems.push(`${label} is not a supported nonempty PDF or PPTX smaller than 10 MB.`);
+      problems.push(`${label} is not a supported nonempty PDF, PPTX, Markdown, HTML or DOCX smaller than 10 MB.`);
     }
   }
   if (problems.length) throw new HttpError(400, "Check the attached documents before submitting.", problems);
@@ -293,8 +293,8 @@ function checkPost(input: Json, userId: string): Post {
   const documents = attachmentUrls(body);
   if (documents.length > 5) problems.push("Use at most five attachments per post.");
   if (documents.some((url) => !url.startsWith(own) ||
-    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx)$/.test(url.slice(own.length)))) {
-    problems.push("Use only PDF or PPTX attachments you uploaded yourself.");
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx|md|docx|html\.txt)$/.test(url.slice(own.length)))) {
+    problems.push("Use only PDF, PPTX, Markdown, HTML or DOCX attachments you uploaded yourself.");
   }
 
 

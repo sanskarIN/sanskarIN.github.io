@@ -6,11 +6,12 @@ import sys
 from html.parser import HTMLParser
 from pathlib import Path
 
+from blog_attachments import preview_markdown, preview_html, preview_word
 from terminal_data import parse_front_matter, read_yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 MAX_BYTES = 10_000_000
-FILE_NAME = re.compile(r"([a-z0-9][a-z0-9-]{0,59})-([0-9a-f]{20})\.(pdf|pptx)")
+FILE_NAME = re.compile(r"([a-z0-9][a-z0-9-]{0,59})-([0-9a-f]{20})\.(pdf|pptx|md|html|docx)")
 SLUG = re.compile(r"[a-z0-9][a-z0-9-]*")
 DIGEST = re.compile(r"[0-9a-f]{64}")
 
@@ -86,9 +87,9 @@ def check_resources(output, root=ROOT, baseurl=""):
             demand(attachment.get("format") == extension.upper(), f"Incorrect document format: {name}")
             size = attachment.get("bytes")
             demand(type(size) is int and 0 < size < MAX_BYTES, f"Invalid document size: {name}")
-            key = f"{slug}/{name}"
+            key = f"{slug}/{name}" + (".txt" if extension == "html" else "")
             path = "/assets/files/blog/" + key
-            anchor = f"asset-{stem}-{short_hash}"
+            anchor = f"asset-{stem}-{short_hash}" + (f"-{extension}" if extension in ("md", "html", "docx") else "")
             demand(attachment.get("path") == path and attachment.get("id") == anchor,
                    f"Invalid document path or anchor: {name}")
             demand(key not in expected, f"Duplicate attachment: {key}")
@@ -106,6 +107,22 @@ def check_resources(output, root=ROOT, baseurl=""):
             demand(page_url + "#" + anchor in library.links, f"Library detail link missing: {name}")
             if extension == "pdf":
                 demand(url in page.read_links, f"PDF reading link missing: {name}")
+            if extension == "md":
+                preview, truncated = preview_markdown((source_dir / key).read_bytes())
+                demand(attachment.get("markdown_preview") == preview and attachment.get("markdown_truncated") is truncated,
+                       f"Markdown preview metadata mismatch: {name}")
+                demand(page.ids.count(anchor + "-preview") == 1, f"Markdown preview missing: {name}")
+                demand(page_url + "#" + anchor + "-preview" in library.links, f"Library Markdown preview link missing: {name}")
+            if extension in ("html", "docx"):
+                raw = (source_dir / key).read_bytes()
+                preview, truncated = preview_html(raw) if extension == "html" else preview_word(raw)
+                demand(attachment.get("document_preview") == preview and attachment.get("document_truncated") is truncated,
+                       f"Document preview metadata mismatch: {name}")
+                demand(page.ids.count(anchor + "-preview") == 1, f"Document preview missing: {name}")
+                demand(page_url + "#" + anchor + "-preview" in library.links, f"Library document preview link missing: {name}")
+                if extension == "html":
+                    demand(url not in page.read_links and url not in library.read_links,
+                           f"HTML must be offered as a download only: {name}")
     for folder in (source_dir, built_dir):
         actual = files_under(folder)
         demand(actual == expected, f"Document inventory mismatch in {folder}: "

@@ -21,7 +21,7 @@ MAX_BYTES = 10_000_000  # strictly less than 10 decimal MB
 MAX_FILES = 5
 MAX_EXPANDED = 64 * 1024 * 1024
 MAX_PREVIEW = 20_000
-NAME = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-([a-z0-9][a-z0-9-]{0,59})\.(pdf|pptx)")
+NAME = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-([a-z0-9][a-z0-9-]{0,59})\.(pdf|pptx|md|docx|html\.txt)")
 SLIDE = re.compile(r"ppt/slides/slide([1-9][0-9]*)\.xml")
 TEXT = "{http://schemas.openxmlformats.org/drawingml/2006/main}t"
 PRESENTATION = "{http://schemas.openxmlformats.org/presentationml/2006/main}"
@@ -56,7 +56,7 @@ def fetch_document(url):
         raise ValueError("Attachment URL must use HTTPS")
     try:
         opener = urllib.request.build_opener(NoRedirect())
-        with opener.open(urllib.request.Request(url, headers={"Accept": "application/pdf, application/vnd.openxmlformats-officedocument.presentationml.presentation"}), timeout=30) as response:
+        with opener.open(urllib.request.Request(url, headers={"Accept": "application/pdf, application/vnd.openxmlformats-officedocument.presentationml.presentation, text/markdown, text/plain, application/vnd.openxmlformats-officedocument.wordprocessingml.document"}), timeout=30) as response:
             data = response.read(MAX_BYTES)
     except (OSError, urllib.error.URLError) as exc:
         raise ValueError("Attachment could not be downloaded; upload it again") from exc
@@ -160,25 +160,127 @@ def preview_presentation(data):
         raise ValueError("Invalid or unsupported PPTX file") from exc
 
 
+def preview_source(data, label):
+    """Validate plain UTF-8 and keep a bounded, inert source preview."""
+    try:
+        text = data.decode("utf-8-sig")
+    except UnicodeDecodeError as exc:
+        raise ValueError(f"{label} attachments must use UTF-8") from exc
+    if not text.strip() or any(ord(char) < 32 and char not in "\t\r\n" for char in text):
+        raise ValueError(f"{label} attachments must contain nonempty text without binary control characters")
+    # Jekyll interprets a leading delimiter as page front matter, even in assets.
+    if re.match(r"\A---[ \t]*(?:\r?\n|\r|$)", text):
+        raise ValueError(f"{label} attachments must not begin with a front matter delimiter (---)")
+    return text[:MAX_PREVIEW], len(text) > MAX_PREVIEW
+
+
+def preview_markdown(data):
+    return preview_source(data, "Markdown")
+
+
+def preview_html(data):
+    return preview_source(data, "HTML")
+
+
+WORD = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+DOCX_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
+
+
+def preview_word(data):
+    """Extract main document text only; never execute fields or load relationships."""
+    try:
+        with zipfile.ZipFile(io.BytesIO(data)) as archive:
+            entries = archive.infolist()
+            names = [entry.filename for entry in entries]
+            if (len(entries) > 2000 or len({name.casefold() for name in names}) != len(names)
+                    or sum(entry.file_size for entry in entries) > MAX_EXPANDED
+                    or any(entry.flag_bits & 1 or stat.S_ISLNK(entry.external_attr >> 16)
+                           for entry in entries)
+                    or any(not safe_archive_name(name) for name in names)):
+                raise ValueError("Word archive exceeds safety limits")
+            if not {"[Content_Types].xml", "_rels/.rels", "word/document.xml"}.issubset(names):
+                raise ValueError("Not a valid DOCX document")
+            if any("vbaproject" in name.lower() or "/embeddings/" in name.lower()
+                   or "/activex/" in name.lower() or "/oleobjects/" in name.lower()
+                   for name in names):
+                raise ValueError("Word documents with macros or embedded objects are not supported")
+            if archive.testzip() is not None:
+                raise ValueError("Word archive contains a damaged member")
+            types = read_xml(archive, "[Content_Types].xml")
+            if not any(node.get("PartName") == "/word/document.xml"
+                       and node.get("ContentType") == DOCX_CONTENT_TYPE
+                       for node in types.findall(CONTENT_TYPE + "Override")):
+                raise ValueError("Not a non-macro DOCX document")
+            if any("macroenabled" in (node.get("ContentType") or "").lower()
+                   for node in types):
+                raise ValueError("Macro-enabled Word documents are not supported")
+            for name in names:
+                if name.endswith(".rels"):
+                    relationships = read_xml(archive, name)
+                    for rel in relationships.findall(PACKAGE_REL + "Relationship"):
+                        kind = (rel.get("Type") or "").rsplit("/", 1)[-1].lower()
+                        if kind in {"oleobject", "package", "afchunk", "vbaproject", "attachedtemplate"}:
+                            raise ValueError("Unsupported Word relationship")
+                        if rel.get("TargetMode") == "External" and kind != "hyperlink":
+                            raise ValueError("External Word objects are not supported")
+            root = read_xml(archive, "word/document.xml")
+            body = root.find(WORD + "body")
+            if root.tag != WORD + "document" or body is None:
+                raise ValueError("Invalid Word document root")
+            if any(node.tag in {WORD + "altChunk", WORD + "object", WORD + "subDoc"}
+                   for node in body.iter()):
+                raise ValueError("Embedded Word content is not supported")
+            paragraphs = []
+            for paragraph in body.iter(WORD + "p"):
+                parts = []
+                for node in paragraph.iter():
+                    if node.tag == WORD + "t":
+                        parts.append(node.text or "")
+                    elif node.tag == WORD + "tab":
+                        parts.append("\t")
+                    elif node.tag in {WORD + "br", WORD + "cr"}:
+                        parts.append("\n")
+                paragraphs.append("".join(parts))
+            text = "\n".join(paragraphs)
+            return text[:MAX_PREVIEW], len(text) > MAX_PREVIEW
+    except (zipfile.BadZipFile, ET.ParseError, RuntimeError, NotImplementedError, KeyError,
+            OSError, EOFError, zlib.error) as exc:
+        raise ValueError("Invalid or unsupported DOCX file") from exc
+
+
 def prepare_document(data, stem, extension):
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,59}", stem):
         raise ValueError("Invalid document filename")
     if not data or len(data) >= MAX_BYTES:
         raise ValueError("Attachments must be nonempty and smaller than 10 MB")
+    extra = {}
+    # HTML uploads use a neutral .txt suffix on both public hosts.
+    if extension == "html.txt":
+        extension = "html"
     if extension == "pdf":
         if not data.startswith(b"%PDF-") or b"%%EOF" not in data[-4096:]:
             raise ValueError("Not a valid PDF file")
         preview = []
     elif extension == "pptx":
         preview = preview_presentation(data)
+    elif extension == "md":
+        source, truncated = preview_markdown(data)
+        preview = []
+        extra = {"markdown_preview": source, "markdown_truncated": truncated}
+    elif extension in ("html", "docx"):
+        source, truncated = preview_html(data) if extension == "html" else preview_word(data)
+        preview = []
+        extra = {"document_preview": source, "document_truncated": truncated}
     else:
-        raise ValueError("Only PDF and PPTX are supported")
+        raise ValueError("Only PDF, PPTX, Markdown, HTML and DOCX are supported")
     digest = hashlib.sha256(data).hexdigest()
     name = f"{stem}-{digest[:20]}.{extension}"
-    return name, {"id": f"asset-{stem}-{digest[:20]}",
+    anchor = f"asset-{stem}-{digest[:20]}" + (f"-{extension}" if extension in ("md", "html", "docx") else "")
+    storage_name = name + ".txt" if extension == "html" else name
+    return storage_name, {"id": anchor,
                   "name": name, "title": stem.replace("-", " "),
                   "format": extension.upper(), "bytes": len(data),
-                  "sha256": digest, "slides": preview}
+                  "sha256": digest, "slides": preview, **extra}
 
 
 def collect(markup, prefix, account, slug, token_pattern, attributes):

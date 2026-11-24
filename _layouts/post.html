@@ -104,7 +104,7 @@ layout: default
 <article class="post">
   <header class="page-header">
     <div class="container">
-      <p class="eyebrow"><a class="eyebrow__link" href="{{ '/blog/' | relative_url }}">Blog</a></p>
+      <p class="eyebrow">{% if page.tags contains "research" %}<a class="eyebrow__link" href="{{ '/research/' | relative_url }}">Research</a>{% else %}<a class="eyebrow__link" href="{{ '/blog/' | relative_url }}">Blog</a>{% endif %}</p>
       <h1 class="page-header__title post__title">{{ page.title | escape }}</h1>
       {%- if page.description %}
       <p class="page-header__lead">{{ page.description | escape }}</p>
@@ -142,6 +142,9 @@ layout: default
         {%- endif %}
       </dl>
       <ul class="post-details__actions">
+        {%- if page.tags contains "research" %}
+        <li>{% include link.html url="/research/" label="Browse research" icon="list" %}</li>
+        {%- endif %}
         <li>{% include link.html url="/articles/" label="Browse all articles" icon="list" %}</li>
         <li>{% include link.html url=discussion_url label="Discuss on GitHub" icon="message" %}</li>
         <li>{% include link.html url=history_url label="View history" icon="history" %}</li>

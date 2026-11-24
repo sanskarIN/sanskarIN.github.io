@@ -139,6 +139,7 @@
   };
   const SESSION_KEY = "blog-session";
   const DRAFT_KEY = "blog-draft";
+  const RESEARCH_DRAFT_KEY = "research-draft";
   const IMAGE_TYPES: Record<string, string> = { "image/png": "png", "image/jpeg": "jpg", "image/gif": "gif", "image/webp": "webp" };
   const USERNAME = /^[a-z0-9][a-z0-9-]{1,28}[a-z0-9]$/;
   const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
@@ -1012,6 +1013,7 @@
         .then((): boolean => {
           writeStore(SESSION_KEY, null);
           writeStore(DRAFT_KEY, null);
+          writeStore(RESEARCH_DRAFT_KEY, null);
           setStatus(status, "Your account was deleted.", "success");
           window.location.assign(deleteForm.getAttribute("data-thanks") || "/");
           return true;
@@ -1065,7 +1067,11 @@
     const removeCover = $<HTMLButtonElement>('[data-action="remove-cover"]');
     const addImage = $<HTMLButtonElement>('[data-action="add-image"]');
     const body = field<HTMLTextAreaElement>(form, "body");
-    let editingId = new URLSearchParams(window.location.search).get("id");
+    const params = new URLSearchParams(window.location.search);
+    let editingId = params.get("id");
+    const researchMode = params.get("type") === "research" && !editingId;
+    const draftKey = researchMode ? RESEARCH_DRAFT_KEY : DRAFT_KEY;
+    const research = field(form, "research");
     let coverUrl = "";
     let draftTimer: number | undefined;
 
@@ -1089,10 +1095,12 @@
     }
 
     function values(): Draft {
+      const tags = field(form, "tags").value.split(",").map((tag) => tag.trim()).filter(Boolean).filter((tag) => tag.toLowerCase().replace(/^#+/, "") !== "research");
+      if (research.checked) tags.unshift("research");
       return {
         title: field(form, "title").value.replace(/\s+/g, " ").trim(),
         summary: field<HTMLTextAreaElement>(form, "summary").value.replace(/\s+/g, " ").trim(),
-        tags: field(form, "tags").value.split(",").map((tag) => tag.trim()).filter(Boolean),
+        tags,
         coverUrl,
         coverAlt: field(form, "coverAlt").value.replace(/\s+/g, " ").trim(),
         body: body.value,
@@ -1102,7 +1110,8 @@
     function fill(post: StoredPost): void {
       field(form, "title").value = post.title || "";
       field<HTMLTextAreaElement>(form, "summary").value = post.summary || "";
-      field(form, "tags").value = (post.tags || []).join(", ");
+      research.checked = (post.tags || []).some((tag) => tag.toLowerCase().replace(/^#+/, "") === "research");
+      field(form, "tags").value = (post.tags || []).filter((tag) => tag.toLowerCase().replace(/^#+/, "") !== "research").join(", ");
       field(form, "coverAlt").value = post.coverAlt || post.cover_alt || "";
       body.value = post.body || "";
       setCover(post.coverUrl || post.cover_url || "");
@@ -1114,7 +1123,7 @@
       draftTimer = window.setTimeout(() => {
         const draft = values();
         draft.body = body.value;
-        writeStore(DRAFT_KEY, draft);
+        writeStore(draftKey, draft);
       }, 600);
     }
 
@@ -1144,13 +1153,13 @@
           token: session.access_token,
           json: { prefix: session.user.id, limit: 100, offset: 0 },
         });
-        const names = files.map((item) => item.name).filter((name) => /^[0-9a-f-]{36}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx)$/.test(name));
+        const names = files.map((item) => item.name).filter((name) => /^[0-9a-f-]{36}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx|md|docx|html\.txt)$/.test(name));
         if (!names.length) stagedAttachments.appendChild(element("li", "", "No staged documents."));
         for (const name of names) {
           const item = element("li");
           const remove = element("button", "button button--ghost", "Delete staged copy");
           remove.type = "button";
-          const label = name.slice(37);
+          const label = name.slice(37).replace(/\.html\.txt$/, ".html");
           remove.setAttribute("aria-label", "Delete staged copy of " + label);
           item.appendChild(element("span", "", label + " "));
           item.appendChild(remove);
@@ -1194,8 +1203,8 @@
       attachmentInput.value = "";
       if (!file || isBusy(addAttachment) || isBusy(listAttachments) || isBusy(submitButton)) return;
       const extension = file.name.split(".").pop()?.toLowerCase();
-      if (extension !== "pdf" && extension !== "pptx") {
-        setStatus(status, "Choose a PDF or PPTX file.", "error");
+      if (extension !== "pdf" && extension !== "pptx" && extension !== "md" && extension !== "html" && extension !== "docx") {
+        setStatus(status, "Choose a PDF, PPTX, Markdown (.md), HTML or DOCX file.", "error");
         return;
       }
       if (file.size === 0 || file.size >= 10000000) {
@@ -1208,13 +1217,13 @@
       }
       if (!window.confirm("This file will be public immediately, even before review. It may contain document metadata. Only upload files you have permission to publish. Continue?")) return;
       const stem = file.name.slice(0, -(extension.length + 1)).normalize("NFKD").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60).replace(/-+$/g, "") || "document";
-      const type = extension === "pdf" ? "application/pdf" : "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+      const type = extension === "pdf" ? "application/pdf" : extension === "md" ? "text/markdown" : extension === "html" ? "text/plain" : extension === "docx" ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/vnd.openxmlformats-officedocument.presentationml.presentation";
       setBusy(addAttachment, true);
       setStatus(status, "Uploading your attachment…", "pending");
       try {
         const session = await requireSession();
         const id = randomId().replace(/^([a-f0-9]{8})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{12})$/, "$1-$2-$3-$4-$5");
-        const path = session.user.id + "/" + id + "-" + stem + "." + extension;
+        const path = session.user.id + "/" + id + "-" + stem + "." + (extension === "html" ? "html.txt" : extension);
         await request("/storage/v1/object/blog-attachments/" + path, {
           method: "POST",
           token: session.access_token,
@@ -1277,6 +1286,7 @@
       const post = values();
       const problems: string[] = [];
       if (!post.title) problems.push("Add a title.");
+      if (post.tags.length > 5) problems.push("Use at most five tags, including the research tag.");
       if (!post.body.trim()) problems.push("Write the post.");
       if (post.coverUrl && !post.coverAlt) problems.push("Describe the cover image for people who can't see it.");
       if (!field(form, "confirm").checked) problems.push("Tick the confirmation box.");
@@ -1290,7 +1300,7 @@
       setStatus(status, "Sending your post…", "pending");
       callFunction({ action: "submit", id: editingId || undefined, post })
         .then((): boolean => {
-          if (!editingId) writeStore(DRAFT_KEY, null);
+          if (!editingId) writeStore(draftKey, null);
           setStatus(status, "Your post has been sent.", "success");
           window.location.assign(form.getAttribute("data-thanks") || "/");
           return true;
@@ -1326,7 +1336,11 @@
                 show("editor");
               });
           }
-          const draft = readStore<StoredPost>(DRAFT_KEY);
+          const draft = readStore<StoredPost>(draftKey);
+          if (researchMode) {
+            research.checked = true;
+            $("[data-editor-title]").textContent = "New research post";
+          }
           if (draft && (draft.title || draft.body)) {
             fill(draft);
             setStatus(status, "Your unsent draft is back where you left it.", "success");

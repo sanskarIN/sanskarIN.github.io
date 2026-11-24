@@ -27,7 +27,7 @@
     "type": "Page",
     "title": "Assets & Resources",
     "url": "/resources/",
-    "text": "Browse and download presentations and PDF resources from the blog."
+    "text": "Browse and download PDF, PowerPoint, Markdown, HTML and Word resources from the blog."
   },
   {
     "type": "Page",
@@ -112,6 +112,12 @@
     "title": "Regex Tester",
     "url": "/lab/regex/",
     "text": "Browser-based regular expression tester with flags, capture groups, match positions, and a runtime limit. No data upload required."
+  },
+  {
+    "type": "Page",
+    "title": "Research",
+    "url": "/research/",
+    "text": "Explore published research notes, experiments, technical investigations, reports and supporting documents."
   },
   {
     "type": "Page",

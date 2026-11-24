@@ -127,6 +127,7 @@ account_app: account
       <p>Every post is reviewed before it appears on the blog, and changes are reviewed again. This list shows where each post is.</p>
       <div class="button-row">
         <a class="button button--primary" href="{{ '/account/write/' | relative_url }}">{% include icon.html name="pencil" %}Write a post</a>
+        <a class="button button--secondary" href="{{ '/account/write/' | relative_url }}?type=research">Write a research post</a>
       </div>
       <div class="form-status" role="status" data-posts-status tabindex="-1"></div>
       <ul class="account-posts" data-posts></ul>

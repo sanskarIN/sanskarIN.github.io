@@ -3,7 +3,7 @@ layout: page
 title: Assets & Resources
 eyebrow: Library
 lead: Explore public presentations and documents published with articles.
-description: Browse and download presentations and PDF resources from the blog.
+description: Browse and download PDF, PowerPoint, Markdown, HTML and Word resources from the blog.
 permalink: /resources/
 schema_type: CollectionPage
 ---
@@ -16,12 +16,21 @@ schema_type: CollectionPage
 {%- endif %}
 {%- assign pdf_count = 0 -%}
 {%- assign pptx_count = 0 -%}
+{%- assign md_count = 0 -%}
+{%- assign html_count = 0 -%}
+{%- assign docx_count = 0 -%}
 {%- for post in site.posts -%}
   {%- for attachment in post.attachments -%}
     {%- if attachment.format == "PDF" -%}
       {%- assign pdf_count = pdf_count | plus: 1 -%}
     {%- elsif attachment.format == "PPTX" -%}
       {%- assign pptx_count = pptx_count | plus: 1 -%}
+    {%- elsif attachment.format == "MD" -%}
+      {%- assign md_count = md_count | plus: 1 -%}
+    {%- elsif attachment.format == "HTML" -%}
+      {%- assign html_count = html_count | plus: 1 -%}
+    {%- elsif attachment.format == "DOCX" -%}
+      {%- assign docx_count = docx_count | plus: 1 -%}
     {%- endif -%}
   {%- endfor -%}
 {%- endfor %}
@@ -29,7 +38,7 @@ schema_type: CollectionPage
   <a class="button button--secondary" href="{{ '/articles/' | relative_url }}">Browse articles</a>
   {% include link.html url=write_url label="Write a post" class="button button--ghost" %}
 </div>
-<p>{{ pdf_count | plus: pptx_count }} published documents &middot; {{ pdf_count }} PDF &middot; {{ pptx_count }} PowerPoint.</p>
+<p>{{ pdf_count | plus: pptx_count | plus: md_count | plus: html_count | plus: docx_count }} published documents &middot; {{ pdf_count }} PDF &middot; {{ pptx_count }} PowerPoint &middot; {{ md_count }} Markdown &middot; {{ html_count }} HTML &middot; {{ docx_count }} Word.</p>
 {%- assign count = 0 -%}
 {%- for post in site.posts -%}
   {%- if post.attachments and post.attachments.size > 0 %}
@@ -46,7 +55,11 @@ schema_type: CollectionPage
           <div class="button-row">
             <a class="button button--secondary" href="{{ post.url | relative_url }}#{{ attachment.id | escape }}">View resource</a>
             <a class="button button--ghost" href="{{ attachment.path | relative_url | escape }}" download="{{ attachment.name | escape }}">Download</a>
-            {%- if attachment.format == "PDF" %}
+            {%- if attachment.format == "MD" %}
+            <a class="button button--ghost" href="{{ post.url | relative_url }}#{{ attachment.id | escape }}-preview">Read Markdown source</a>
+            {%- elsif attachment.format == "HTML" or attachment.format == "DOCX" %}
+            <a class="button button--ghost" href="{{ post.url | relative_url }}#{{ attachment.id | escape }}-preview">Read {% if attachment.format == "HTML" %}HTML source{% else %}Word text{% endif %}</a>
+            {%- elsif attachment.format == "PDF" %}
             <a class="button button--ghost" href="{{ attachment.path | relative_url | escape }}">Read PDF online</a>
             {%- endif %}
           </div>

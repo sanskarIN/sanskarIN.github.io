@@ -41,6 +41,75 @@ def pptx(extra=None, order=(1, 2), external=False):
 
 
 class AttachmentTests(unittest.TestCase):
+    def test_html_inert_storage_and_original_download_name(self):
+        raw = b"<script>alert(1)</script>\r\n{{ site.title }}"
+        storage, item = documents.prepare_document(raw, "example", "html.txt")
+        self.assertTrue(storage.endswith(".html.txt"))
+        self.assertEqual(storage, item["name"] + ".txt")
+        self.assertEqual(item["format"], "HTML")
+        self.assertEqual(item["document_preview"], raw.decode())
+        self.assertTrue(item["id"].endswith("-html"))
+        url = URL.replace(".pptx", ".html.txt")
+        self.assertEqual(documents.own_source(url, PREFIX, ACCOUNT).groups(), ("my-slides", "html.txt"))
+        self.assertIsNone(documents.own_source(url[:-4], PREFIX, ACCOUNT))
+        for invalid in (b"\xff", b"\x00", b"---\nlayout: page\n---\n"):
+            with self.assertRaises(ValueError):
+                documents.prepare_document(invalid, "example", "html")
+
+    def test_word_text_and_archive_safety(self):
+        def word(extra=None, macro=False):
+            data = io.BytesIO()
+            with zipfile.ZipFile(data, "w") as archive:
+                kind = "application/vnd.ms-word.document.macroEnabled.main+xml" if macro else documents.DOCX_CONTENT_TYPE
+                archive.writestr("[Content_Types].xml", '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Override PartName="/word/document.xml" ContentType="' + kind + '"/></Types>')
+                archive.writestr("_rels/.rels", '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>')
+                archive.writestr("word/document.xml", '<w:document xmlns:w="' + documents.WORD[1:-1] + '"><w:body><w:p><w:r><w:t>Hello &amp; नमस्ते</w:t><w:tab/><w:t>World</w:t></w:r></w:p><w:p><w:r><w:t>Second</w:t></w:r></w:p></w:body></w:document>')
+                if extra:
+                    archive.writestr(*extra)
+            return data.getvalue()
+        name, item = documents.prepare_document(word(), "guide", "docx")
+        self.assertTrue(name.endswith(".docx"))
+        self.assertEqual(item["document_preview"], "Hello & नमस्ते\tWorld\nSecond")
+        self.assertFalse(item["document_truncated"])
+        for raw in (b"not a zip", word(macro=True), word(("word/embeddings/object.bin", b"x")),
+                    word(("../bad", b"x")), word(("word/_rels/document.xml.rels",
+                        '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Type="http://example/attachedTemplate" TargetMode="External" Target="https://example.invalid/"/></Relationships>'))):
+            with self.assertRaises(ValueError):
+                documents.prepare_document(raw, "guide", "docx")
+
+    def test_markdown_preserves_bytes_and_inert_source(self):
+        raw = "\ufeff# नमस्ते\r\n<script>alert(1)</script>\n{{ site.title }}".encode("utf-8")
+        name, item = documents.prepare_document(raw, "guide", "md")
+        self.assertTrue(name.endswith(".md"))
+        self.assertEqual(item["format"], "MD")
+        self.assertEqual(item["bytes"], len(raw))
+        self.assertEqual(item["sha256"], __import__("hashlib").sha256(raw).hexdigest())
+        self.assertEqual(item["markdown_preview"], raw.decode("utf-8-sig"))
+        self.assertFalse(item["markdown_truncated"])
+        self.assertTrue(item["id"].endswith("-md"))
+
+    def test_markdown_preview_limit_and_invalid_text(self):
+        with patch.object(documents, "MAX_PREVIEW", 4):
+            _, item = documents.prepare_document(b"# A long document", "guide", "md")
+            self.assertEqual(item["markdown_preview"], "# A ")
+            self.assertTrue(item["markdown_truncated"])
+        for raw in (b"\xff", b"\x00abc", b" \n", b"---\nlayout: page\n---\n", b"\xef\xbb\xbf---\r\n"):
+            with self.subTest(raw=raw), self.assertRaises(ValueError):
+                documents.prepare_document(raw, "guide", "md")
+
+    def test_markdown_collect_preserves_file(self):
+        url = URL.replace(".pptx", ".md")
+        raw = b"# Guide\r\n"
+        with patch.object(documents, "fetch_document", return_value=raw):
+            markup, assets, files = documents.collect(
+                f'<a href="{url}">Guide</a>', PREFIX, ACCOUNT, "article",
+                re.compile(r"<a[^>]*>"),
+                lambda token: {"href": url})
+        self.assertEqual(len(assets), 1)
+        self.assertEqual(files[assets[0]["name"]], raw)
+        self.assertIn("#" + assets[0]["id"], markup)
+        self.assertNotIn(PREFIX, markup)
+
     def test_source_prefix_and_ownership(self):
         self.assertEqual(documents.source_prefix(PREFIX.replace("blog-attachments", "blog-images")), PREFIX)
         self.assertEqual(documents.own_source(URL, PREFIX, ACCOUNT).groups(), ("my-slides", "pptx"))

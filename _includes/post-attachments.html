@@ -8,7 +8,11 @@
     <p><strong>{{ attachment.format | escape }}</strong> · {{ attachment.bytes | divided_by: 1000 }} KB</p>
     <div class="button-row">
       <a class="button button--primary" href="{{ attachment.path | relative_url | escape }}" download="{{ attachment.name | escape }}">Download {{ attachment.format | escape }}</a>
-      {%- if attachment.format == "PDF" %}
+      {%- if attachment.format == "MD" %}
+      <a class="button button--secondary" href="#{{ attachment.id | escape }}-preview">Read Markdown source</a>
+      {%- elsif attachment.format == "HTML" or attachment.format == "DOCX" %}
+      <a class="button button--secondary" href="#{{ attachment.id | escape }}-preview">Read {% if attachment.format == "HTML" %}HTML source{% else %}Word text{% endif %}</a>
+      {%- elsif attachment.format == "PDF" %}
       <a class="button button--secondary" href="{{ attachment.path | relative_url | escape }}">Read PDF online</a>
       {%- elsif attachment.format == "PPTX" %}
         {%- for companion in page.attachments %}
@@ -19,9 +23,33 @@
         {%- endfor %}
       {%- endif %}
       <button class="copy-button" type="button" data-copy="{{ page.url | absolute_url }}#{{ attachment.id | escape }}"><span data-copy-label>Copy share link</span></button>
-      <button class="copy-button" type="button" data-copy="{{ attachment.path | absolute_url | escape }}"><span data-copy-label>Copy file link</span></button>
+      <button class="copy-button" type="button" data-copy="{{ attachment.path | absolute_url | escape }}"><span data-copy-label>{% if attachment.format == "HTML" %}Copy plain-text file link{% else %}Copy file link{% endif %}</span></button>
     </div>
-    {%- if attachment.format == "PPTX" %}
+    {%- if attachment.format == "MD" %}
+      <details id="{{ attachment.id | escape }}-preview" open>
+        <summary>Markdown source preview</summary>
+        <p>Source text only; embedded HTML, images and links are not executed.</p>
+        <pre><code>{{ attachment.markdown_preview | escape }}</code></pre>
+        {%- if attachment.markdown_truncated %}
+        <p>Preview shortened. Download the original file to read the complete document.</p>
+        {%- endif %}
+      </details>
+    {%- elsif attachment.format == "HTML" or attachment.format == "DOCX" %}
+      <details id="{{ attachment.id | escape }}-preview" open>
+        {% if attachment.format == "HTML" %}
+        <summary>HTML source preview</summary>
+        <p>HTML is served as plain text and never rendered as an active website page. Download the original HTML only if you trust the author.</p>
+        <pre><code>{{ attachment.document_preview | escape }}</code></pre>
+        {% else %}
+        <summary>Word document text preview</summary>
+        <p>Text only; layout, images and formatting are not included.</p>
+        <pre>{{ attachment.document_preview | escape }}</pre>
+        {% endif %}
+        {%- if attachment.document_truncated %}
+        <p>Preview shortened. Download the original file to read the complete document.</p>
+        {%- endif %}
+      </details>
+    {%- elsif attachment.format == "PPTX" %}
       {%- if attachment.slides.size > 0 %}
       <details>
         <summary>Read slide text online</summary>
