@@ -52,7 +52,8 @@ schema_type: CollectionPage
   {%- assign topics = site.tags | sort %}
   <ul class="tag-list" aria-label="Browse by topic">
     {%- for topic in topics %}
-    <li><a class="tag tag--link" href="{{ '/blog/tags/' | relative_url }}#tag-{% include tag-id.html tag=topic.first %}">{{ topic.first | escape }} ({{ topic.last.size }})</a></li>
+      {%- assign topic_name = topic[0] %}
+    <li><a class="tag tag--link" href="{{ '/blog/tags/' | relative_url }}#tag-{% include tag-id.html tag=topic_name %}">{{ topic_name | escape }} ({{ topic[1].size }})</a></li>
     {%- endfor %}
   </ul>
   {%- endif %}
