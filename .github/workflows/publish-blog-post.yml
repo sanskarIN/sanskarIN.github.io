@@ -24,6 +24,7 @@ on:
       - .github/workflows/publish-blog-post.yml
       - .github/scripts/publish_post.py
       - .github/scripts/pr_updates.py
+      - .github/scripts/blog_attachments.py
   workflow_dispatch:
 
 permissions: {}

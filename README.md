@@ -609,6 +609,8 @@ Authors may enter a URL slug in the website editor or GitHub issue form. For exa
 
 ## Research
 
+Valid research submissions now automatically create or update a publication pull request, including visitor submissions; the maintainer's merge is the review gate. Ordinary blog submissions retain the existing approval policy. PPTX files support up to 250 slides and strictly validated non-macro chart-data workbooks. Arbitrary embedded objects, macros, ActiveX, external data, and workbook formulas remain rejected. Original attachment downloads remain unmodified.
+
 Optional research publication details include publication type, category, version, chapters, technical lessons and research references. Text fields are bounded (100 characters, or 40 for version); counts are whole numbers from 0 to 1,000,000, and blank values are omitted. The author provides counts; the site does not verify them against attachments. Access is Free for public research, not a configurable paywall. Metadata is persisted in drafts, Supabase and post front matter, shown in article details, with type/category/version in listings and search. Existing posts and canonical URLs are unchanged.
 
 The optional Subtitle field adds a short secondary heading (up to 200 characters), separate from the title and summary. It is stored in drafts, Supabase and post front matter, displayed on article pages and listings, and included in search text. Changing it does not change the post URL. Older posts do not need a subtitle.
@@ -630,7 +632,7 @@ The blog at `/blog/` has no server of its own: posts are written in **GitHub iss
 1. A visitor (or you) selects **Write a post** on the blog page. It opens the "Write a blog post" issue form (`.github/ISSUE_TEMPLATE/blog-post.yml`), with fields for the title, summary, tags, a cover image and its description, the post in Markdown, and a confirmation box.
 2. Submitting the form opens an issue with the `blog-post` label. The workflow `.github/workflows/publish-blog-post.yml` runs `.github/scripts/publish_post.py`, which:
    - checks the form and, if something needs fixing, says what in a comment on the issue (`needs-changes` label);
-   - for your own posts (and collaborators'), prepares the post immediately; for anyone else's, adds the `awaiting-review` label and waits for approval;
+   - for your own posts (and collaborators'), prepares the post immediately; for ordinary visitor blog posts, adds the `awaiting-review` label and waits for approval; valid research posts go straight to a reviewable pull request;
    - downloads the images attached to the issue, checks that each is a real PNG, JPEG, GIF, or WebP image of at most 10 MB, turns photos the right way up, scales images larger than 2,000 px down, and saves them without metadata (location, camera details, comments) in `assets/images/blog/<post>/`;
    - converts the Markdown to HTML the same way GitHub previews it, then removes anything unsafe (scripts, styles, forms, embeds, event handlers, `javascript:` links) with an allowlist, and turns images from other websites into links;
    - writes `_posts/<date>-<post>.md` using the **original issue submission date**, even when review and merging take place later (after Python converts sanitized HTML into Markdown), commits it as `sanskarIN <sanskarin@outlook.in>` on an issue-specific automation branch, and creates or updates a pull request against protected `main`;

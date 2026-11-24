@@ -1155,6 +1155,9 @@ def handle_issue_event(gh, settings, event, proposal):
     allowed = trusted or "approved" in labels or not settings["review"]
     try:
         form = read_form(issue, settings, is_image)
+        # Research uses the pull request itself as the moderation gate.
+        # No post reaches main until a maintainer merges the proposal.
+        allowed = allowed or "research" in form["tags"]
         if allowed:
             post = build_post(issue, form, settings, existing, trusted, account, is_image)
         else:
@@ -1300,7 +1303,7 @@ def main(argv):
         f"automation/blog-post-{int(event['issue']['number'])}",
         f"Publish website blog issue #{int(event['issue']['number'])}",
         f"Blog content generated from issue #{int(event['issue']['number'])}. "
-        "Review the article and its images, then merge to publish through GitHub Pages.",
+        "Review the article, attachments, and generated files before merging to publish through GitHub Pages.",
     )
     settings = load_settings()
     try:
