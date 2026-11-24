@@ -195,6 +195,11 @@ alter table public.submissions drop constraint if exists submissions_content_lan
 alter table public.submissions add constraint submissions_content_language_valid
   check (content_language in ('en', 'hi', 'bn', 'ta', 'te', 'mr', 'gu', 'kn', 'ml', 'pa', 'ur', 'sa', 'fr', 'de', 'es', 'ja', 'zh', 'ar', 'ru', 'pt', 'mul', 'und'));
 
+alter table public.submissions add column if not exists subtitle text not null default '';
+alter table public.submissions drop constraint if exists submissions_subtitle_length;
+alter table public.submissions add constraint submissions_subtitle_length
+  check (char_length(subtitle) <= 200);
+
 create index if not exists submissions_user_created
   on public.submissions (user_id, created_at desc);
 

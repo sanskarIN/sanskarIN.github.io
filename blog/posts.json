@@ -21,6 +21,7 @@ sitemap: false
   {%- endif %}
   {
     "title": {{ post.title | jsonify }},
+    "subtitle": {{ post.subtitle | default: "" | jsonify }},
     "url": {{ post.url | relative_url | jsonify }},
     "date": {{ post.date | date_to_xmlschema | jsonify }},
     "updated": {% if post.last_modified_at %}{{ post.last_modified_at | date_to_xmlschema | jsonify }}{% else %}null{% endif %},

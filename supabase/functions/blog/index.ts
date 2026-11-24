@@ -67,7 +67,7 @@ class HttpError extends Error {
 
 type Profile = { id: string; username: string; display_name: string };
 type User = { id: string; token: string; profile: Profile | null };
-type Post = { title: string; requestedSlug: string; contentLanguage: string; summary: string; tags: string[]; coverUrl: string; coverAlt: string; body: string };
+type Post = { title: string; subtitle: string; requestedSlug: string; contentLanguage: string; summary: string; tags: string[]; coverUrl: string; coverAlt: string; body: string };
 // deno-lint-ignore no-explicit-any
 type Json = any;
 
@@ -259,6 +259,9 @@ function checkPost(input: Json, userId: string): Post {
   if (!title) problems.push("Add a title.");
   else if (title.length > LIMITS.title) problems.push(`Shorten the title to ${LIMITS.title} characters or fewer.`);
 
+  const subtitle = cleanLine(input?.subtitle);
+  if (Array.from(subtitle).length > 200) problems.push("Shorten the subtitle to 200 characters or fewer.");
+
   const requestedSlug = typeof input?.requestedSlug === "string" ? input.requestedSlug.trim() : "";
   if (requestedSlug && (requestedSlug.length > 60 || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(requestedSlug) ||
     ["tags", "feed", "index", "page", "authors", "posts"].includes(requestedSlug))) {
@@ -311,7 +314,7 @@ function checkPost(input: Json, userId: string): Post {
     problems.push("Confirm that you wrote the post and have the right to publish its text, images and attachments.");
   }
   if (problems.length) throw new HttpError(400, "Please fix the following and send the post again.", problems);
-  return { title, requestedSlug, contentLanguage, summary, tags, coverUrl, coverAlt, body };
+  return { title, subtitle, requestedSlug, contentLanguage, summary, tags, coverUrl, coverAlt, body };
 }
 
 function base64Url(text: string): string {
@@ -326,6 +329,10 @@ function issueBody(post: Post, profile: Profile): string {
   const value = (text: string) => text || "_No response_";
   return [
     `<!-- blog-account: ${marker} -->`,
+    "### Subtitle",
+    "",
+    value(post.subtitle),
+    "",
     "### URL slug",
     "",
     value(post.requestedSlug),
@@ -393,6 +400,7 @@ async function submit(user: User, input: Json) {
   const title = `[Post]: ${post.title}`;
   if (row && input?.post?.requestedSlug === undefined) post.requestedSlug = row.requested_slug ?? "";
   if (row && input?.post?.contentLanguage === undefined) post.contentLanguage = row.content_language ?? "und";
+  if (row && input?.post?.subtitle === undefined) post.subtitle = row.subtitle ?? "";
   let issueNumber: number | null = row?.issue_number ?? null;
   if (issueNumber) {
     const issue = await github(issuePath(issueNumber));
@@ -417,6 +425,7 @@ async function submit(user: User, input: Json) {
 
   const fields = {
     title: post.title,
+    subtitle: post.subtitle,
     requested_slug: post.requestedSlug,
     content_language: post.contentLanguage,
     summary: post.summary,

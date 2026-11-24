@@ -122,6 +122,8 @@ CHECK_SQL = """select
           and table_name = 'submissions' and column_name = 'requested_slug') as slug_column,
   exists (select 1 from information_schema.columns where table_schema = 'public'
           and table_name = 'submissions' and column_name = 'content_language') as language_column,
+  exists (select 1 from information_schema.columns where table_schema = 'public'
+          and table_name = 'submissions' and column_name = 'subtitle') as subtitle_column,
   exists (select 1 from storage.buckets where id = '%s' and public) as bucket,
   exists (select 1 from storage.buckets where id = 'blog-attachments' and public
             and file_size_limit = 9999999
@@ -454,6 +456,7 @@ def set_up_database(api, bucket):
     missing = [label for key, label in (("profiles", "the profiles table"), ("submissions", "the submissions table"),
                                         ("slug_column", "the requested URL slug column"),
                                         ("language_column", "the post language column"),
+                                        ("subtitle_column", "the subtitle column"),
                                         ("bucket", f"the public {bucket} bucket"),
                                         ("attachment_bucket", "the limited document attachment bucket"),
                                         ("attachment_policy", "the document upload policy"),

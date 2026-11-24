@@ -106,6 +106,9 @@ layout: default
     <div class="container">
       <p class="eyebrow">{% if page.tags contains "research" %}<a class="eyebrow__link" href="{{ '/research/' | relative_url }}">Research</a>{% else %}<a class="eyebrow__link" href="{{ '/blog/' | relative_url }}">Blog</a>{% endif %}</p>
       <h1 class="page-header__title post__title"{% if page.content_language and page.content_language != "und" and page.content_language != "mul" %} lang="{{ page.content_language | escape }}" dir="auto"{% endif %}>{{ page.title | escape }}</h1>
+      {%- if page.subtitle %}
+      <p class="page-header__lead"{% if page.content_language and page.content_language != "und" and page.content_language != "mul" %} lang="{{ page.content_language | escape }}" dir="auto"{% endif %}><strong>{{ page.subtitle | escape }}</strong></p>
+      {%- endif %}
       {%- if page.description %}
       <p class="page-header__lead"{% if page.content_language and page.content_language != "und" and page.content_language != "mul" %} lang="{{ page.content_language | escape }}" dir="auto"{% endif %}>{{ page.description | escape }}</p>
       {%- endif %}

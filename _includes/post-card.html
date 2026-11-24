@@ -16,6 +16,9 @@
   {%- endif %}
   <div class="post-card__body">
     <h{{ card_heading }} class="post-card__title"><a href="{{ card.url | relative_url }}">{{ card.title | escape }}</a></h{{ card_heading }}>
+    {%- if card.subtitle %}
+    <p class="post-card__summary"><strong>{{ card.subtitle | escape }}</strong></p>
+    {%- endif %}
     {%- if card.description %}
     <p class="post-card__summary">{{ card.description | escape }}</p>
     {%- endif %}

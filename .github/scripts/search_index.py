@@ -101,13 +101,14 @@ def search_index(root=ROOT):
         filename = root / "_posts" / post["_source"]
         body = post_excerpt(filename)
         description = strip_html(post["description"])
+        subtitle = strip_html(post["subtitle"])
         entries.append({
             "type": "Post",
             "title": post["title"],
             "url": site_url(post["url"], baseurl),
             "date": post["date"],
             "tags": post["tags"],
-            "text": (description + " " + body).strip(),
+            "text": " ".join(part for part in (subtitle, description, body) if part).strip(),
         })
     github = json.loads((root / "_data/github.json").read_text(encoding="utf-8"))
     for repo in github.get("repositories") or []:

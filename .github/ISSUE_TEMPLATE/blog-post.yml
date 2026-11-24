@@ -18,6 +18,11 @@ body:
         - **Review:** posts from anyone other than the site owner are published after the owner approves them. You can keep editing this issue until then.
         - **Public:** this issue, your post, and your GitHub username (shown as the author) are public.
   - type: input
+    id: subtitle
+    attributes:
+      label: Subtitle
+      description: Optional secondary title, up to 200 characters. It appears under the main title.
+  - type: input
     id: slug
     attributes:
       label: URL slug

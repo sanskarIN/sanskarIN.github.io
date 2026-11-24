@@ -1028,6 +1028,7 @@
                 tags.unshift("research");
             return {
                 title: field(form, "title").value.replace(/\s+/g, " ").trim(),
+                subtitle: field(form, "subtitle").value.replace(/\s+/g, " ").trim(),
                 requestedSlug: slugInput.value.trim(),
                 contentLanguage: languageInput.value || "und",
                 summary: field(form, "summary").value.replace(/\s+/g, " ").trim(),
@@ -1039,6 +1040,7 @@
         }
         function fill(post) {
             field(form, "title").value = post.title || "";
+            field(form, "subtitle").value = post.subtitle || "";
             slugInput.value = post.requestedSlug || post.requested_slug || "";
             languageInput.value = post.contentLanguage || post.content_language || "und";
             updateSlugPreview();
@@ -1227,6 +1229,8 @@
             const problems = [];
             if (!post.title)
                 problems.push("Add a title.");
+            if (Array.from(post.subtitle).length > 200)
+                problems.push("Shorten the subtitle to 200 characters or fewer.");
             if (post.requestedSlug && !validSlug(post.requestedSlug))
                 problems.push("Choose a valid URL slug or leave it blank.");
             if (post.tags.length > 5)
@@ -1274,7 +1278,7 @@
                     return;
                 }
                 if (editingId) {
-                    return request(`/rest/v1/submissions?id=eq.${editingId}&select=title,requested_slug,content_language,summary,tags,cover_url,cover_alt,body`, { token: session.access_token })
+                    return request(`/rest/v1/submissions?id=eq.${editingId}&select=title,subtitle,requested_slug,content_language,summary,tags,cover_url,cover_alt,body`, { token: session.access_token })
                         .then((rows) => {
                         if (!rows || !rows[0])
                             throw new Error("That post couldn't be found.");
@@ -1320,6 +1324,8 @@
         link.href = post.url;
         title.appendChild(link);
         body.appendChild(title);
+        if (post.subtitle)
+            body.appendChild(element("p", "post-card__summary", post.subtitle));
         if (post.description)
             body.appendChild(element("p", "post-card__summary", post.description));
         const meta = element("p", "post-card__meta");

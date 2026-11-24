@@ -42,7 +42,7 @@ class PublicationTests(unittest.TestCase):
                  "created_at": "2026-01-01T00:00:00Z"}
         settings = {"account_images": prefix.replace("blog-attachments", "blog-images"),
                     "owner_username": "owner", "owner_name": "Owner", "images_per_post": 20}
-        form = {"title": "Guide", "requested_slug": "custom-guide", "summary": "A guide", "tags": [],
+        form = {"title": "Guide", "subtitle": "A study of नमस्ते & computing", "requested_slug": "custom-guide", "summary": "A guide", "tags": [],
                 "content_language": "hi", "cover_url": None, "cover_alt": "", "notes": [],
                 "markdown": f"Read the [guide]({url})."}
         payload = b"%PDF-1.7\nsample\n%%EOF\n"
@@ -55,6 +55,7 @@ class PublicationTests(unittest.TestCase):
                 post = publish_post.build_post(issue, form, settings, None, False, account=account)
                 self.assertEqual(post["slug"], "custom-guide")
                 self.assertEqual(post["fields"]["content_language"], "hi")
+                self.assertEqual(post["fields"]["subtitle"], "A study of नमस्ते & computing")
                 self.assertEqual(len(post["fields"]["attachments"]), 1)
                 asset = post["fields"]["attachments"][0]
                 self.assertIn("#" + asset["id"], post["markup"])
@@ -83,8 +84,10 @@ class PublicationTests(unittest.TestCase):
                 form["markdown"] = "The file was removed."
                 form["requested_slug"] = "changed-slug"
                 form["title"] = "Renamed guide"
+                form["subtitle"] = "Updated subtitle"
                 revised = publish_post.build_post(issue, form, settings, existing, False, account=account)
                 self.assertEqual(revised["slug"], "custom-guide")
+                self.assertEqual(revised["fields"]["subtitle"], "Updated subtitle")
                 self.assertEqual(publish_post.save_post(revised, existing), "updated")
                 self.assertFalse(public_file.exists())
                 self.assertNotIn("attachments:", saved.read_text(encoding="utf-8"))

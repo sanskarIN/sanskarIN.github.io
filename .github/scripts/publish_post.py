@@ -93,7 +93,7 @@ LABELS = {
 STATUS_LABELS = ("awaiting-review", "needs-changes", "published", "pending-merge")
 
 # Headings of the issue form fields (.github/ISSUE_TEMPLATE/blog-post.yml).
-FIELDS_BEFORE_POST = ("URL slug", "Language", "Summary", "Tags", "Cover image", "Cover image description")
+FIELDS_BEFORE_POST = ("Subtitle", "URL slug", "Language", "Summary", "Tags", "Cover image", "Cover image description")
 POST_FIELD = "Post"
 CONFIRMATION_FIELD = "Confirmation"
 NO_RESPONSE = "_No response_"
@@ -430,6 +430,10 @@ def read_form(issue, settings, is_image=None):
             f"from the form, or write the post with the [blog post form]({form_url})."
         ])
 
+    subtitle = clean_line(sections.get("Subtitle", ""))
+    if len(subtitle) > 200:
+        problems.append("Shorten the subtitle to 200 characters or fewer.")
+
     requested_slug = sections.get("URL slug", "").strip()
     if requested_slug and not valid_custom_slug(requested_slug):
         problems.append("Use a URL slug of 1–60 lowercase letters, digits and single hyphens; reserved routes are not allowed.")
@@ -474,6 +478,7 @@ def read_form(issue, settings, is_image=None):
     return {
         "title": title,
         "requested_slug": requested_slug,
+        "subtitle": subtitle,
         "content_language": language,
         "summary": summary,
         "tags": tags,
@@ -866,8 +871,12 @@ def build_post(issue, form, settings, existing, trusted, account=None, is_image=
     language = form.get("content_language", "und")
     if language not in POST_LANGUAGES:
         raise PostProblem(["Select a supported post language from the form."])
+    subtitle = clean_line(form.get("subtitle", ""))
+    if len(subtitle) > 200:
+        raise PostProblem(["Shorten the subtitle to 200 characters or fewer."])
     fields = {
         "title": form["title"],
+        "subtitle": subtitle,
         "content_language": language,
         "description": form["summary"] or shorten(clean_line(text), 160),
         "date": "{date}",
