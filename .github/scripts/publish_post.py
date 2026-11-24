@@ -64,7 +64,7 @@ from pr_updates import Proposal, git
 from post_markdown import convert_article
 from blog_attachments import collect as collect_attachments, source_prefix
 from post_dates import issue_creation_timestamp
-from terminal_data import write_terminal_json
+from terminal_data import write_terminal_json, canonical_post_path
 from search_index import write_search_json
 import yaml
 from markdown_it import MarkdownIt
@@ -784,8 +784,17 @@ def new_slug(title, number, requested=""):
     return slug
 
 
-def post_url(settings, slug):
-    return f"{settings['site_url']}/blog/{slug}/"
+def publication_route(slug, tags, existing=None):
+    if existing:
+        data = existing.get("data")
+        if data is None:
+            data = yaml.safe_load(existing["text"].split("---\n", 2)[1])
+        return canonical_post_path(slug, data)
+    return f"/{'research' if 'research' in tags else 'blog'}/{slug}/"
+
+
+def post_url(settings, slug, fields=None):
+    return settings["site_url"] + canonical_post_path(slug, fields or {})
 
 
 def front_matter(fields):
@@ -910,8 +919,11 @@ def build_post(issue, form, settings, existing, trusted, account=None, is_image=
     details = research_metadata(form.get("research_details", {}), detail_problems)
     if detail_problems:
         raise PostProblem(detail_problems)
+    route = publication_route(slug, form["tags"], existing)
     fields = {
         "title": form["title"],
+        "permalink": route if route.startswith("/research/") else None,
+        "redirect_from": [f"/blog/{slug}/"] if route.startswith("/research/") else None,
         "subtitle": subtitle,
         "research_details": details or None,
         "content_language": language,
@@ -1106,7 +1118,7 @@ def handle_issue_event(gh, settings, event, proposal):
     where = "it from your account on the website" if account else "this issue"
     is_open = issue.get("state") == "open"
     existing = find_post(number)
-    live_url = post_url(settings, existing["slug"]) if existing else None
+    live_url = post_url(settings, existing["slug"], existing["data"]) if existing else None
 
     if not is_open and not existing and action == "edited":
         print("Closed issue without a published post: edits are ignored.")
@@ -1187,7 +1199,7 @@ def handle_issue_event(gh, settings, event, proposal):
         return
 
     result = save_post(post, existing)
-    url = post_url(settings, post["slug"])
+    url = post_url(settings, post["slug"], post["fields"])
     pr_url = proposal.url
     if result != "unchanged":
         verb = "Publish" if result == "created" else "Update"
@@ -1274,9 +1286,9 @@ def finalize_merged_proposal(gh, event):
                       "The site owner should investigate the merged changes.")
         return
     gh.add_labels(number, {"published"} - labels)
-    url = post_url(load_settings(), post["slug"])
+    url = post_url(load_settings(), post["slug"], post["data"])
     gh.set_status(number, "published",
-                  f"**Published!** The pull request was merged. Blog post: {url}")
+                  f"**Published!** The pull request was merged. Publication: {url}")
     if issue.get("state") == "open":
         gh.set_state(number, "closed", "completed")
 

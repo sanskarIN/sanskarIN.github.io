@@ -115,6 +115,8 @@ defaults:
 # Build settings — compatible with the GitHub Pages build (Jekyll 3.10)
 # -----------------------------------------------------------------------------
 permalink: pretty
+plugins:
+  - jekyll-redirect-from
 markdown: kramdown
 # Uploaded Markdown is an inert static download, not a generated page.
 # Every authored Markdown page already declares its own front matter.

@@ -5,6 +5,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from terminal_data import parse_front_matter, canonical_post_path
 
 ROOT = Path(__file__).resolve().parents[2]
 FRONT_MATTER = re.compile(r"\A---\r?\n([\s\S]*?)\r?\n---\r?\n")
@@ -53,10 +54,15 @@ def check_build(output):
             source_issues.add(issue.group(1))
         if not content[front.end():].strip():
             raise AssertionError(f"Blog body empty: {source.name}")
-        url = f"/blog/{slug}/"
+        fields = parse_front_matter(source)
+        url = canonical_post_path(slug, fields)
         if url not in urls:
             raise AssertionError(f"Post missing from search index: {url}")
-        html = output / "blog" / slug / "index.html"
+        html = output / url.strip("/") / "index.html"
+        if url.startswith("/research/"):
+            legacy = output / "blog" / slug / "index.html"
+            if not legacy.is_file() or url not in legacy.read_text(encoding="utf-8"):
+                raise AssertionError(f"Legacy blog redirect missing: {slug}")
         if not html.is_file():
             raise AssertionError(f"Published page missing: {html}")
         markup = html.read_text(encoding="utf-8")

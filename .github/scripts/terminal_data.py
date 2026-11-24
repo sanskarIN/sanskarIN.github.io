@@ -53,6 +53,14 @@ def parse_front_matter(path):
     return fields
 
 
+def canonical_post_path(slug, fields):
+    """Explicit research permalinks override the legacy blog default."""
+    path = fields.get("permalink") or f"/blog/{slug}/"
+    if path not in (f"/blog/{slug}/", f"/research/{slug}/"):
+        raise ValueError(f"Invalid canonical post path: {path}")
+    return path
+
+
 def published_posts(root):
     posts_dir = root / "_posts"
     posts = []
@@ -81,7 +89,7 @@ def published_posts(root):
         title = nonempty(fields.get("title"), path.name + ".title")
         posts.append({
             "title": title,
-            "url": f"/blog/{slug}/",
+            "url": canonical_post_path(slug, fields),
             "date": f"{dt.day} {dt.strftime('%b %Y')}",
             "tags": fields.get("tags") or [],
             "description": fields.get("description") or "",

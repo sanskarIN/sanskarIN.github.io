@@ -116,6 +116,17 @@ class PublicationTests(unittest.TestCase):
                 publish_post.remove_post(existing)
                 self.assertFalse(saved.exists())
 
+    def test_research_route_and_legacy_alias_are_stable(self):
+        from terminal_data import canonical_post_path
+        slug = "sample"
+        self.assertEqual(publish_post.publication_route(slug, ["research"]), "/research/sample/")
+        self.assertEqual(publish_post.publication_route(slug, []), "/blog/sample/")
+        self.assertEqual(publish_post.publication_route(slug, [], {"data": {"permalink": "/research/sample/"}}), "/research/sample/")
+        self.assertEqual(publish_post.publication_route(slug, ["research"], {"data": {}}), "/blog/sample/")
+        self.assertEqual(canonical_post_path(slug, {"permalink": "/research/sample/"}), "/research/sample/")
+        with self.assertRaises(ValueError):
+            canonical_post_path(slug, {"permalink": "/other/"})
+
     def test_asset_repair_does_not_follow_file_symlink(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
