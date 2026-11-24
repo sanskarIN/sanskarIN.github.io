@@ -9,6 +9,7 @@ import html
 import io
 import posixpath
 import re
+import stat
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -77,6 +78,14 @@ def read_xml(archive, name):
     return ET.fromstring(text)
 
 
+def safe_archive_name(name):
+    """Reject ambiguous ZIP paths even though we never extract the archive."""
+    parts = name.rstrip("/").split("/")
+    return bool(name and "\\" not in name and not name.startswith("/")
+                and all(part not in ("", ".", "..") and ":" not in part
+                        and not any(ord(char) < 32 for char in part) for part in parts))
+
+
 def ordered_slides(archive):
     """Read the authoritative presentation order, not ZIP filename order."""
     types = read_xml(archive, "[Content_Types].xml")
@@ -118,13 +127,18 @@ def preview_presentation(data):
             names = [entry.filename for entry in entries]
             if (len(entries) > 2000 or len(set(names)) != len(names)
                     or sum(entry.file_size for entry in entries) > MAX_EXPANDED
-                    or any(entry.flag_bits & 1 for entry in entries)):
+                    or any(entry.flag_bits & 1 for entry in entries)
+                    or any(not safe_archive_name(name) for name in names)
+                    or any(stat.S_ISLNK(entry.external_attr >> 16) for entry in entries)
+                    or len({name.casefold() for name in names}) != len(names)):
                 raise ValueError("Presentation archive exceeds safety limits")
             if not {"[Content_Types].xml", "ppt/presentation.xml", "ppt/_rels/presentation.xml.rels"}.issubset(names):
                 raise ValueError("Not a valid PPTX presentation")
             if any("vbaproject" in name.lower() or "/embeddings/" in name.lower()
-                   or "/activex/" in name.lower() for name in names):
+                   or "/activex/" in name.lower() or "/oleobjects/" in name.lower() for name in names):
                 raise ValueError("Presentations with macros or embedded objects are not supported")
+            if archive.testzip() is not None:
+                raise ValueError("Presentation archive contains a damaged member")
             slides = ordered_slides(archive)
             preview = []
             remaining = MAX_PREVIEW
@@ -132,21 +146,21 @@ def preview_presentation(data):
                 root = read_xml(archive, name)
                 if root.tag != PRESENTATION + "sld":
                     raise ValueError("Invalid slide root")
-                if root.get("show") == "0":
+                if remaining <= 0 or root.get("show") in ("0", "false"):
                     continue
                 text = " ".join(" ".join(node.itertext()) for node in root.iter(TEXT))
                 text = " ".join(text.split())[:remaining]
                 if text:
                     preview.append({"number": number, "text": text})
                     remaining -= len(text)
-                if remaining <= 0:
-                    break
             return preview
     except (zipfile.BadZipFile, ET.ParseError, RuntimeError, NotImplementedError, KeyError) as exc:
         raise ValueError("Invalid or unsupported PPTX file") from exc
 
 
 def prepare_document(data, stem, extension):
+    if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,59}", stem):
+        raise ValueError("Invalid document filename")
     if not data or len(data) >= MAX_BYTES:
         raise ValueError("Attachments must be nonempty and smaller than 10 MB")
     if extension == "pdf":
