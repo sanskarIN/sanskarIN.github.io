@@ -854,8 +854,28 @@ def now_iso():
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
 
+def asset_matches(path, expected):
+    """A matching filename is insufficient: verify the existing file's bytes."""
+    if path.is_symlink() or not path.is_file():
+        return False
+    if path.stat().st_size != len(expected):
+        return False
+    return path.read_bytes() == expected
+
+
+def write_asset(path, data):
+    """Restore damaged copies without following a symlink."""
+    if asset_matches(path, data):
+        return
+    if path.is_symlink():
+        path.unlink()
+    if path.exists() and not path.is_file():
+        raise PostProblem([f"Unexpected entry at published asset path: {path.name}"])
+    path.write_bytes(data)
+
+
 def save_post(post, existing):
-    """Writes the post and its images. Returns "created", "updated" or "unchanged"."""
+    """Writes the post and its assets. Returns "created", "updated" or "unchanged"."""
     slug, fields = post["slug"], dict(post["fields"])
     if existing:
         match = re.search(r"^date: (.+)$", existing["text"], re.M)
@@ -876,7 +896,9 @@ def save_post(post, existing):
     attachment_wanted = set(attachment_files)
     attachment_current = {entry.name for entry in attachment_dir.iterdir()} if attachment_dir.is_dir() else set()
     if (existing and without_modified_date(existing["text"]) == content and current == wanted
-            and attachment_current == attachment_wanted):
+            and attachment_current == attachment_wanted
+            and all(asset_matches(image_dir / name, data) for name, data in post["files"].items())
+            and all(asset_matches(attachment_dir / name, data) for name, data in attachment_files.items())):
         return "unchanged"
 
     if existing:
@@ -888,8 +910,7 @@ def save_post(post, existing):
         image_dir.mkdir(parents=True, exist_ok=True)
     for name, data in post["files"].items():
         target = image_dir / name
-        if not target.exists():
-            target.write_bytes(data)
+        write_asset(target, data)
     for name in current - wanted:
         (image_dir / name).unlink()
     if image_dir.is_dir() and not any(image_dir.iterdir()):
@@ -898,8 +919,7 @@ def save_post(post, existing):
         attachment_dir.mkdir(parents=True, exist_ok=True)
     for name, data in attachment_files.items():
         target = attachment_dir / name
-        if not target.exists():
-            target.write_bytes(data)
+        write_asset(target, data)
     for name in attachment_current - attachment_wanted:
         (attachment_dir / name).unlink()
     if attachment_dir.is_dir() and not any(attachment_dir.iterdir()):

@@ -46,6 +46,19 @@ class PublicationTests(unittest.TestCase):
                 self.assertEqual(front_matter["attachments"][0]["sha256"], asset["sha256"])
                 existing = {"slug": post["slug"], "path": saved, "text": saved.read_text(encoding="utf-8")}
                 self.assertEqual(publish_post.save_post(post, existing), "unchanged")
+                # Same filename and size do not prove document integrity.
+                public_file.write_bytes(b"X" * len(payload))
+                self.assertEqual(publish_post.save_post(post, existing), "updated")
+                self.assertEqual(public_file.read_bytes(), payload)
+                repaired = yaml.safe_load(saved.read_text(encoding="utf-8").split("---\n", 2)[1])
+                self.assertEqual(repaired["date"], front_matter["date"])
+                existing["text"] = saved.read_text(encoding="utf-8")
+                self.assertEqual(publish_post.save_post(post, existing), "unchanged")
+                # A missing file can be restored at the same public URL.
+                public_file.unlink()
+                self.assertEqual(publish_post.save_post(post, existing), "updated")
+                self.assertEqual(public_file.read_bytes(), payload)
+                existing["text"] = saved.read_text(encoding="utf-8")
                 form["markdown"] = "The file was removed."
                 revised = publish_post.build_post(issue, form, settings, existing, False, account=account)
                 self.assertEqual(publish_post.save_post(revised, existing), "updated")
@@ -53,6 +66,29 @@ class PublicationTests(unittest.TestCase):
                 self.assertNotIn("attachments:", saved.read_text(encoding="utf-8"))
                 publish_post.remove_post(existing)
                 self.assertFalse(saved.exists())
+
+    def test_asset_repair_does_not_follow_file_symlink(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            other = root / "other.pdf"
+            other.write_bytes(b"unchanged")
+            target = root / "published.pdf"
+            try:
+                target.symlink_to(other)
+            except (OSError, NotImplementedError):
+                self.skipTest("File symlinks are unavailable")
+            publish_post.write_asset(target, b"restored")
+            self.assertFalse(target.is_symlink())
+            self.assertEqual(target.read_bytes(), b"restored")
+            self.assertEqual(other.read_bytes(), b"unchanged")
+
+    def test_asset_repair_rejects_directory(self):
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder) / "published.pdf"
+            target.mkdir()
+            with self.assertRaises(publish_post.PostProblem):
+                publish_post.write_asset(target, b"restored")
+            self.assertTrue(target.is_dir())
 
     def test_foreign_document_is_rejected(self):
         account = {"id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
