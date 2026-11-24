@@ -1303,7 +1303,7 @@
                 const draft = readStore(draftKey);
                 if (researchMode) {
                     research.checked = true;
-                        updateSlugPreview();
+                    updateSlugPreview();
                     $("[data-editor-title]").textContent = "New research post";
                 }
                 if (draft && (draft.title || draft.body)) {
