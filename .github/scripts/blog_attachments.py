@@ -21,6 +21,8 @@ MAX_BYTES = 10_000_000  # strictly less than 10 decimal MB
 MAX_FILES = 5
 MAX_EXPANDED = 64 * 1024 * 1024
 MAX_PREVIEW = 20_000
+MAX_SLIDES = 250
+MAX_CHART_EXPANDED = 16 * 1024 * 1024
 NAME = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-([a-z0-9][a-z0-9-]{0,59})\.(pdf|pptx|md|docx|bib|html\.txt)")
 SLIDE = re.compile(r"ppt/slides/slide([1-9][0-9]*)\.xml")
 TEXT = "{http://schemas.openxmlformats.org/drawingml/2006/main}t"
@@ -115,9 +117,98 @@ def ordered_slides(archive):
         if not target or target in order:
             raise ValueError("Invalid or duplicate slide reference")
         order.append(target)
-    if not order or len(order) > 100:
-        raise ValueError("Presentations must contain 1–100 slides")
+    if not order or len(order) > MAX_SLIDES:
+        raise ValueError(f"Presentations must contain 1–{MAX_SLIDES} slides")
     return order
+
+
+CHART_BOOK = re.compile(r"ppt/embeddings/[A-Za-z0-9_.-]+\.xlsx", re.I)
+CHART_REL = re.compile(r"ppt/charts/_rels/chart[0-9]+\.xml\.rels")
+WORKBOOK_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"
+SHEET = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
+# Only ordinary chart-data workbooks, not arbitrary embedded Office files.
+WORKBOOK_PART = re.compile(
+    r"(?:\[Content_Types\]\.xml|_rels/\.rels|docProps/(?:app|core)\.xml|"
+    r"xl/(?:workbook|styles|sharedStrings)\.xml|xl/_rels/workbook\.xml\.rels|"
+    r"xl/worksheets/sheet[0-9]+\.xml|xl/theme/theme[0-9]+\.xml)"
+)
+
+
+def validate_chart_workbook(data):
+    with zipfile.ZipFile(io.BytesIO(data)) as book:
+        members = book.infolist()
+        names = [member.filename for member in members]
+        size = sum(member.file_size for member in members)
+        if (len(members) > 128 or size > MAX_CHART_EXPANDED
+                or len(set(name.casefold() for name in names)) != len(names)
+                or any(not safe_archive_name(member.filename) or member.flag_bits & 1
+                       or stat.S_ISLNK(member.external_attr >> 16)
+                       or not WORKBOOK_PART.fullmatch(member.filename) for member in members)):
+            raise ValueError("Unsupported embedded chart workbook")
+        if not {"[Content_Types].xml", "xl/workbook.xml", "_rels/.rels"}.issubset(names):
+            raise ValueError("Invalid embedded chart workbook")
+        if book.testzip() is not None:
+            raise ValueError("Damaged embedded chart workbook")
+        types = read_xml(book, "[Content_Types].xml")
+        if not any(node.get("PartName") == "/xl/workbook.xml"
+                   and node.get("ContentType") == WORKBOOK_TYPE for node in types):
+            raise ValueError("Only non-macro Excel chart data is supported")
+        if any("macro" in (node.get("ContentType") or "").lower() for node in types):
+            raise ValueError("Macros in chart workbooks are not supported")
+        for name in names:
+            root = read_xml(book, name)
+            if name.endswith(".rels"):
+                for rel in root.findall(PACKAGE_REL + "Relationship"):
+                    kind = (rel.get("Type") or "").rsplit("/", 1)[-1]
+                    if rel.get("TargetMode") == "External" or kind not in {
+                        "officeDocument", "core-properties", "extended-properties",
+                        "worksheet", "styles", "sharedStrings", "theme"
+                    }:
+                        raise ValueError("Unsupported chart workbook relationship")
+            elif any(node.tag in {SHEET + "f", SHEET + "definedName", SHEET + "externalReference",
+                                  SHEET + "oleObject", SHEET + "ddeLink"} for node in root.iter()):
+                raise ValueError("Active formulas or external chart workbook data are not supported")
+        return size
+
+
+def validate_presentation_objects(archive, names):
+    embedded = set()
+    for name in names:
+        lower = name.lower()
+        if "vbaproject" in lower or "/activex/" in lower or "/oleobjects/" in lower:
+            raise ValueError("Presentations with macros or active objects are not supported")
+        if "/embeddings/" in lower:
+            if not CHART_BOOK.fullmatch(name):
+                raise ValueError("Only ordinary embedded Excel chart data is supported")
+            embedded.add(name)
+    types = read_xml(archive, "[Content_Types].xml")
+    if any(any(word in (node.get("ContentType") or "").lower()
+               for word in ("macroenabled", "vbaproject", "activex", "oleobject")) for node in types):
+        raise ValueError("Macro-enabled or active presentations are not supported")
+    referenced = set()
+    for name in names:
+        if not name.endswith(".rels"):
+            continue
+        for rel in read_xml(archive, name).findall(PACKAGE_REL + "Relationship"):
+            kind = (rel.get("Type") or "").rsplit("/", 1)[-1].lower()
+            if rel.get("TargetMode") == "External" and kind != "hyperlink":
+                raise ValueError("External presentation objects are not supported")
+            if kind in {"oleobject", "vbaproject", "control", "activexcontrol"}:
+                raise ValueError("Active presentation objects are not supported")
+            if kind == "package":
+                target = rel.get("Target") or ""
+                path = posixpath.normpath(target.lstrip("/") if target.startswith("/") else
+                                          posixpath.join(posixpath.dirname(posixpath.dirname(name)), target))
+                if not CHART_REL.fullmatch(name) or path not in embedded:
+                    raise ValueError("Only chart-linked Excel data can be embedded")
+                referenced.add(path)
+    if embedded != referenced:
+        raise ValueError("Unreferenced embedded workbook is not supported")
+    expanded = 0
+    for name in sorted(embedded):
+        expanded += validate_chart_workbook(archive.read(name))
+        if expanded > MAX_CHART_EXPANDED:
+            raise ValueError("Combined chart workbooks exceed the safety limit")
 
 
 def preview_presentation(data):
@@ -126,7 +217,7 @@ def preview_presentation(data):
         with zipfile.ZipFile(io.BytesIO(data)) as archive:
             entries = archive.infolist()
             names = [entry.filename for entry in entries]
-            if (len(entries) > 2000 or len(set(names)) != len(names)
+            if (len(entries) > 4000 or len(set(names)) != len(names)
                     or sum(entry.file_size for entry in entries) > MAX_EXPANDED
                     or any(entry.flag_bits & 1 for entry in entries)
                     or any(not safe_archive_name(name) for name in names)
@@ -135,11 +226,9 @@ def preview_presentation(data):
                 raise ValueError("Presentation archive exceeds safety limits")
             if not {"[Content_Types].xml", "ppt/presentation.xml", "ppt/_rels/presentation.xml.rels"}.issubset(names):
                 raise ValueError("Not a valid PPTX presentation")
-            if any("vbaproject" in name.lower() or "/embeddings/" in name.lower()
-                   or "/activex/" in name.lower() or "/oleobjects/" in name.lower() for name in names):
-                raise ValueError("Presentations with macros or embedded objects are not supported")
             if archive.testzip() is not None:
                 raise ValueError("Presentation archive contains a damaged member")
+            validate_presentation_objects(archive, names)
             slides = ordered_slides(archive)
             preview = []
             remaining = MAX_PREVIEW

@@ -182,6 +182,41 @@ class AttachmentTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     documents.read_xml(archive, name)
 
+    def test_chart_workbook_is_allowed_only_as_chart_data(self):
+        workbook = io.BytesIO()
+        with zipfile.ZipFile(workbook, "w") as book:
+            book.writestr("[Content_Types].xml",
+                '<Types xmlns="' + documents.CONTENT_TYPE[1:-1] + '"><Override PartName="/xl/workbook.xml" ContentType="' + documents.WORKBOOK_TYPE + '"/></Types>')
+            book.writestr("_rels/.rels", '<Relationships xmlns="' + documents.PACKAGE_REL[1:-1] + '"/>')
+            book.writestr("xl/workbook.xml", '<workbook xmlns="' + documents.SHEET[1:-1] + '"/>')
+            book.writestr("xl/worksheets/sheet1.xml", '<worksheet xmlns="' + documents.SHEET[1:-1] + '"><sheetData/></worksheet>')
+        payload = io.BytesIO(pptx())
+        with zipfile.ZipFile(payload, "a") as archive:
+            archive.writestr("ppt/embeddings/Chart.xlsx", workbook.getvalue())
+            archive.writestr("ppt/charts/_rels/chart1.xml.rels",
+                '<Relationships xmlns="' + documents.PACKAGE_REL[1:-1] + '"><Relationship Id="rId1" Type="' + documents.OFFICE_REL[1:-1] + '/package" Target="../embeddings/Chart.xlsx"/></Relationships>')
+        self.assertEqual(len(documents.preview_presentation(payload.getvalue())), 2)
+        with self.assertRaises(ValueError):
+            documents.preview_presentation(pptx(("ppt/embeddings/Chart.xlsx", workbook.getvalue())))
+        with zipfile.ZipFile(workbook, "a") as book:
+            book.writestr("xl/vbaProject.bin", b"unsafe")
+        with self.assertRaises(ValueError):
+            documents.validate_chart_workbook(workbook.getvalue())
+
+    def test_large_slide_deck_keeps_order(self):
+        buffer = io.BytesIO()
+        order = tuple(range(1, 133))
+        with zipfile.ZipFile(buffer, "w") as archive:
+            with zipfile.ZipFile(io.BytesIO(pptx())) as original:
+                archive.writestr("[Content_Types].xml", original.read("[Content_Types].xml"))
+            archive.writestr("ppt/presentation.xml", '<p:presentation xmlns:p="' + documents.PRESENTATION[1:-1] + '" xmlns:r="' + documents.OFFICE_REL[1:-1] + '"><p:sldIdLst>' +
+                "".join(f'<p:sldId id="{256+n}" r:id="rId{n}"/>' for n in order) + '</p:sldIdLst></p:presentation>')
+            archive.writestr("ppt/_rels/presentation.xml.rels", '<Relationships xmlns="' + documents.PACKAGE_REL[1:-1] + '">' +
+                "".join(f'<Relationship Id="rId{n}" Type="{documents.OFFICE_REL[1:-1]}/slide" Target="slides/slide{n}.xml"/>' for n in order) + '</Relationships>')
+            for n in order:
+                archive.writestr(f"ppt/slides/slide{n}.xml", '<p:sld xmlns:p="' + documents.PRESENTATION[1:-1] + '" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:t>Slide ' + str(n) + '</a:t></p:sld>')
+        self.assertEqual(len(documents.preview_presentation(buffer.getvalue())), 132)
+
     def test_invalid_or_embedded_presentation(self):
         for data in (b"not a zip", pptx(("ppt/vbaProject.bin", b"macro")),
                      pptx(("ppt/embeddings/object.bin", b"embedded"))):
