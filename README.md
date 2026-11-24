@@ -603,6 +603,10 @@ After a local Jekyll build, run `python .github/scripts/check_resources.py _site
 
 Keep the existing GitHub Pages address until a custom domain is registered and verified. On migration, configure GitHub Pages and HTTPS, update `_config.yml` (`url` and `display_url`), audit authentication email URLs, Supabase site URL and allowed redirect origins, Edge Function origin checks and external integrations. Verify canonical URLs, sitemap, sign-in and public downloads before announcing the new address. Do not change storage credentials or domain settings before obtaining the domain.
 
+## Research
+
+The public research archive at `/research/` lists posts carrying the normalized `research` tag. Authors can use **Write a research post** to open the account editor in research mode with a separate local draft, or select **Publish in Research** on an ordinary post. The tag is counted within the existing five-tag limit. GitHub issue-form authors can include `research` in the Tags field. Published research uses the existing canonical `/blog/<slug>/` URL, author attribution, moderation, revision history, search, and document attachments, and remains discoverable in Blog and Articles. No extra database table or duplicate publication is required. Research posts are not automatically peer reviewed; authors should distinguish findings from hypotheses and include methods, limitations and references. Removing the tag through an approved edit removes the entry from the research archive without changing its canonical URL.
+
 ## Articles
 
 The public reading room at `/articles/` lists existing published posts, highlights the latest article and articles with downloadable attachments, and groups the full archive by year. It shares the blog publishing workflow, canonical `/blog/<slug>/` article URLs, topic pages and Atom feed; authors do not need to publish twice. The `/resources/` library provides document-specific discovery. Regenerate search and terminal feeds with `python .github/scripts/generate_site_content.py` after changing navigation or page metadata.

@@ -115,6 +115,12 @@
   },
   {
     "type": "Page",
+    "title": "Research",
+    "url": "/research/",
+    "text": "Explore published research notes, experiments, technical investigations, reports and supporting documents."
+  },
+  {
+    "type": "Page",
     "title": "Scarp Lang",
     "url": "/ScarpLang/",
     "text": "Explore Scarp Lang, an open-source programming language in active pre-release development: compiler, downloads, documentation, playground, examples, editor tools, and GitHub organization."

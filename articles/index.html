@@ -23,6 +23,7 @@ schema_type: CollectionPage
 {%- endfor %}
 <div class="button-row">
   {% include link.html url=write_url label="Write an article" icon="pencil" class="button button--primary" %}
+  <a class="button button--secondary" href="{{ '/research/' | relative_url }}">Browse research</a>
   <a class="button button--secondary" href="{{ '/resources/' | relative_url }}">Assets &amp; resources</a>
   {%- if site.tags.size > 0 %}
   {% include link.html url="/blog/tags/" label="Browse topics" icon="tag" class="button button--secondary" %}
@@ -66,7 +67,7 @@ schema_type: CollectionPage
 {%- if resource_count > 0 %}
 <section class="page-section" aria-labelledby="articles-with-resources">
   <h2 id="articles-with-resources">Articles with downloadable resources</h2>
-  <p>Read the article and access its published PDF documents or PowerPoint presentations.</p>
+  <p>Read the article and access its published documents, presentations and source files.</p>
   <ul class="post-list">
   {%- for post in site.posts %}
     {%- if post.attachments and post.attachments.size > 0 %}

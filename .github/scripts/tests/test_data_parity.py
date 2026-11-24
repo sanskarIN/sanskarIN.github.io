@@ -33,6 +33,7 @@ class DataParityTests(unittest.TestCase):
             self.assertEqual(result["projects"]["total"], github["totals"]["repositories"])
             self.assertEqual(result["projects"]["stars"], github["totals"]["stars"])
         self.assertEqual(result["pages"][0]["url"], "/")
+        self.assertIn({"title": "Research", "url": "/research/"}, result["pages"])
         self.assertTrue(any(p["key"] == "github" for p in result["profiles"]))
         self.assertEqual({e["label"] for e in result["emails"]}, {"Business", "Support"})
 

@@ -1,0 +1,70 @@
+---
+layout: page
+title: Research
+eyebrow: Research archive
+lead: Research notes, experiments, technical investigations and reproducible findings.
+description: Explore published research notes, experiments, technical investigations, reports and supporting documents.
+permalink: /research/
+schema_type: CollectionPage
+---
+{%- include accounts-config.html -%}
+{%- capture form_url -%}{{ site.repository_url }}/issues/new?template={{ site.data.blog.form }}{%- endcapture -%}
+{%- assign research_posts = site.tags.research -%}
+{%- assign research_count = research_posts | size -%}
+{%- assign documents = 0 -%}
+{%- for post in research_posts -%}
+  {%- if post.attachments -%}
+    {%- assign documents = documents | plus: post.attachments.size -%}
+  {%- endif -%}
+{%- endfor -%}
+<div class="button-row">
+  {% if accounts_on %}
+  <a class="button button--primary" href="{{ '/account/write/' | relative_url }}?type=research">{% include icon.html name="pencil" %}Write a research post</a>
+  {% else %}
+  {% include link.html url=form_url label="Submit research with GitHub" class="button button--primary" %}
+  {% endif %}
+  <a class="button button--secondary" href="{{ '/resources/' | relative_url }}">Assets &amp; resources</a>
+  <a class="button button--ghost" href="{{ '/articles/' | relative_url }}">All articles</a>
+  <button class="button button--ghost" type="button" aria-haspopup="dialog" {% include search-attributes.html %} hidden>{% include icon.html name="search" %}Search</button>
+</div>
+<p class="note">{{ research_count }} published research post{% if research_count != 1 %}s{% endif %} &middot; {{ documents }} downloadable resource{% if documents != 1 %}s{% endif %}.</p>
+{%- if research_count > 0 %}
+  {%- assign years = research_posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+<section class="page-section" aria-labelledby="latest-research">
+  <h2 id="latest-research">Latest research</h2>
+  {% include post-card.html post=research_posts.first documents=true %}
+</section>
+<section class="page-section" aria-labelledby="research-archive">
+  <h2 id="research-archive">Research archive</h2>
+  <ul class="tag-list" aria-label="Browse research by year">
+    {%- for year in years %}
+    <li><a class="tag tag--link" href="#research-{{ year.name }}">{{ year.name }} ({{ year.items.size }})</a></li>
+    {%- endfor %}
+  </ul>
+  {%- for year in years %}
+  <section class="post-year" aria-labelledby="research-{{ year.name }}">
+    <h3 id="research-{{ year.name }}">{{ year.name }} <span class="post-year__count">&middot; {{ year.items.size }} post{% if year.items.size != 1 %}s{% endif %}</span></h3>
+    <ul class="post-list">
+      {%- for post in year.items %}
+      <li>{% include post-card.html post=post heading=4 documents=true %}</li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endfor %}
+</section>
+{%- else %}
+<section class="page-section">
+  <h2>No published research yet</h2>
+  <p>Research posts appear here after publication. Start with a question, explain the evidence, and share your findings and limitations.</p>
+</section>
+{%- endif %}
+<section class="page-section" aria-labelledby="research-guidelines">
+  <h2 id="research-guidelines">Publishing research</h2>
+  <p>Share original technical research, experiments, surveys, or reproducible investigations. The website's publication review is not academic peer review.</p>
+  <ol class="principles">
+    <li><div><h3>Define the question</h3><p>Provide a clear title and abstract, background, research question and scope.</p></div></li>
+    <li><div><h3>Document the evidence</h3><p>Explain methods, sources, experimental conditions and results. Distinguish observations from interpretations and include limitations.</p></div></li>
+    <li><div><h3>Attach supporting material</h3><p>Use PDF, PPTX, DOCX, Markdown or HTML files for reports and reproducibility notes. Files are public; remove private information and respect licenses. Each file must be smaller than 10 MB, with up to five per post.</p></div></li>
+    <li><div><h3>Submit and revise</h3><p>Select Publish in Research in the account editor, or include the research tag in the GitHub issue form. The existing review process applies, and approved edits retain the original article URL.</p></div></li>
+  </ol>
+</section>

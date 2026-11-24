@@ -48,7 +48,7 @@ class SearchIndexTests(unittest.TestCase):
     def test_pages_include_public_routes_not_private_pages(self):
         pages = searchable_pages()
         urls = {entry["url"] for entry in pages}
-        for expected in ("/", "/about/", "/developer/", "/contact/", "/projects/", "/blog/", "/Kahani/", "/ScarpLang/", "/lab/contrast/", "/resources/", "/articles/"):
+        for expected in ("/", "/about/", "/developer/", "/contact/", "/projects/", "/blog/", "/Kahani/", "/ScarpLang/", "/lab/contrast/", "/resources/", "/articles/", "/research/"):
             self.assertIn(expected, urls)
         for excluded in ("/404.html", "/account/", "/account/write/", "/contact/sent/", "/ScarpLang/GitHub/"):
             self.assertNotIn(excluded, urls)

@@ -50,10 +50,15 @@ account_app: write
       <input class="form-field__input" id="post-summary" name="summary" type="text" maxlength="{{ limits.summary_length }}" aria-describedby="post-summary-hint">
       <p class="form-field__hint" id="post-summary-hint">Optional. One or two sentences for the blog page and search results, up to {{ limits.summary_length }} characters.</p>
     </div>
+    <div class="form-check form-field--wide">
+      <input id="post-research" name="research" type="checkbox" aria-describedby="post-research-hint">
+      <label for="post-research">Publish in Research</label>
+    </div>
+    <p class="form-field__hint form-field--wide" id="post-research-hint">Research posts appear in the <a href="{{ '/research/' | relative_url }}">Research archive</a> after the usual review. Suggested structure: abstract, question, methodology, evidence, findings, limitations and references. The research tag counts toward the five-tag limit.</p>
     <div class="form-field form-field--wide">
       <label class="form-field__label" for="post-tags">Tags</label>
       <input class="form-field__input" id="post-tags" name="tags" type="text" maxlength="200" placeholder="open source, android, web" aria-describedby="post-tags-hint">
-      <p class="form-field__hint" id="post-tags-hint">Up to {{ limits.tags }} topics, separated by commas.</p>
+      <p class="form-field__hint" id="post-tags-hint">Up to {{ limits.tags }} topics, separated by commas; up to four additional topics when Research is selected.</p>
     </div>
 
     <fieldset class="form-group form-field--wide">
