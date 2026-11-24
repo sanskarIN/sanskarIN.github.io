@@ -41,6 +41,7 @@ const SUPABASE_URL = setting("SUPABASE_URL", "").replace(/\/$/, "");
 const OWNER_USERNAME = setting("OWNER_USERNAME", "").trim().toLowerCase();
 const OWNER_LOGIN = REPOSITORY.split("/")[0].toLowerCase();
 const BUCKET = "blog-images";
+const ATTACHMENT_BUCKET = "blog-attachments";
 
 // Keep these in line with _data/blog.yml and the checks in publish_post.py.
 const LIMITS = {
@@ -248,9 +249,18 @@ function checkPost(input: Json, userId: string): Post {
   else if (body.length > LIMITS.body) problems.push(`Shorten the post to ${LIMITS.body.toLocaleString("en")} characters or fewer.`);
   const storageImages: string[] = body.match(new RegExp(`${escapeRegExp(imagePrefix())}[^\\s)"'<>]*`, "g")) ?? [];
   if (storageImages.some((url) => !ownImage(url, userId))) problems.push("Use only images you uploaded yourself.");
+  const attachmentPrefix = `${SUPABASE_URL}/storage/v1/object/public/${ATTACHMENT_BUCKET}/`;
+  const own = attachmentPrefix + userId + "/";
+  const documents = [...new Set<string>(body.match(new RegExp(escapeRegExp(attachmentPrefix) + "[^\\s)\"'<>]*", "g")) ?? [])];
+  if (documents.length > 5) problems.push("Use at most five attachments per post.");
+  if (documents.some((url) => !url.startsWith(own) ||
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx)$/.test(url.slice(own.length)))) {
+    problems.push("Use only PDF or PPTX attachments you uploaded yourself.");
+  }
+
 
   if (input?.confirm !== true) {
-    problems.push("Confirm that you wrote the post and have the right to publish its text and images.");
+    problems.push("Confirm that you wrote the post and have the right to publish its text, images and attachments.");
   }
   if (problems.length) throw new HttpError(400, "Please fix the following and send the post again.", problems);
   return { title, summary, tags, coverUrl, coverAlt, body };
@@ -290,7 +300,7 @@ function issueBody(post: Post, profile: Profile): string {
     "",
     "### Confirmation",
     "",
-    `- [X] I wrote this post, I have the right to publish its text and images, and I agree to the website's [Terms](${SITE_ORIGIN}/terms/).`,
+    `- [X] I wrote this post, I have the right to publish its text, images and attachments, and I agree to the website's [Terms](${SITE_ORIGIN}/terms/).`,
     "",
     `<sub>Sent from the website by the account "${profile.username}", not a GitHub user. ` +
     "Add the `approved` label to publish it, or close the issue to decline it.</sub>",
@@ -500,21 +510,23 @@ async function deleteAccount(user: User, input: Json) {
     }
   }
 
-  // The images: every file in the person's folder.
-  for (;;) {
-    const files: Json[] = await supabase(`/storage/v1/object/list/${BUCKET}`, {
-      method: "POST",
-      admin: true,
-      body: { prefix: user.id, limit: 1000, offset: 0 },
-    });
-    const names = files.map((file) => file.name).filter((name) => typeof name === "string" && name);
-    if (!names.length) break;
-    await supabase(`/storage/v1/object/${BUCKET}`, {
-      method: "DELETE",
-      admin: true,
-      body: { prefixes: names.map((name) => `${user.id}/${name}`) },
-    });
-    if (names.length < 1000) break;
+  // Delete both kinds of staging files when the account is removed.
+  for (const bucket of [BUCKET, ATTACHMENT_BUCKET]) {
+    for (;;) {
+      const files: Json[] = await supabase(`/storage/v1/object/list/${bucket}`, {
+        method: "POST",
+        admin: true,
+        body: { prefix: user.id, limit: 1000, offset: 0 },
+      });
+      const names = files.map((file) => file.name).filter((name) => typeof name === "string" && name);
+      if (!names.length) break;
+      await supabase(`/storage/v1/object/${bucket}`, {
+        method: "DELETE",
+        admin: true,
+        body: { prefixes: names.map((name) => `${user.id}/${name}`) },
+      });
+      if (names.length < 1000) break;
+    }
   }
 
   // Deleting the account also deletes its profile and submissions.
