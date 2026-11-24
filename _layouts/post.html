@@ -142,6 +142,7 @@ layout: default
         {%- endif %}
       </dl>
       <ul class="post-details__actions">
+        <li>{% include link.html url="/articles/" label="Browse all articles" icon="list" %}</li>
         <li>{% include link.html url=discussion_url label="Discuss on GitHub" icon="message" %}</li>
         <li>{% include link.html url=history_url label="View history" icon="history" %}</li>
         <li><button class="copy-button" type="button" data-copy="{{ page.url | absolute_url }}">{% include icon.html name="link" %}<span data-copy-label>Copy link</span></button></li>
