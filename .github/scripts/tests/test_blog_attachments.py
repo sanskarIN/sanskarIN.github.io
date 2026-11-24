@@ -87,6 +87,37 @@ class AttachmentTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 documents.prepare_document(data, "slides", "pptx")
 
+    def test_ambiguous_zip_names_are_rejected(self):
+        for name in ("../outside.xml", "/absolute.xml", "ppt/../outside.xml",
+                     "ppt//empty.xml", "ppt/slide:1.xml", "ppt/SLIDES/SLIDE1.XML"):
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                documents.prepare_document(pptx((name, b"x")), "slides", "pptx")
+
+    def test_symlink_members_are_rejected(self):
+        import stat
+        info = zipfile.ZipInfo("ppt/link")
+        info.create_system = 3
+        info.external_attr = (stat.S_IFLNK | 0o777) << 16
+        with self.assertRaises(ValueError):
+            documents.prepare_document(pptx((info, b"elsewhere")), "slides", "pptx")
+
+    def test_invalid_filename_stem_is_rejected(self):
+        for stem in ("../outside", "", "a/b", "a" * 61, "UPPER"):
+            with self.subTest(stem=stem), self.assertRaises(ValueError):
+                documents.prepare_document(PDF, stem, "pdf")
+
+    def test_preview_budget_does_not_skip_invalid_slide(self):
+        source = io.BytesIO(pptx())
+        target = io.BytesIO()
+        with zipfile.ZipFile(source) as original, zipfile.ZipFile(target, "w") as modified:
+            for name in original.namelist():
+                data = original.read(name)
+                if name == "ppt/slides/slide2.xml":
+                    data = b"<broken"
+                modified.writestr(name, data)
+        with patch.object(documents, "MAX_PREVIEW", 1), self.assertRaises(ValueError):
+            documents.prepare_document(target.getvalue(), "slides", "pptx")
+
     def test_collect_rewrites_links_and_deduplicates(self):
         pattern = re.compile(r'<a\b[^>]*>|</a>')
         def attrs(token):

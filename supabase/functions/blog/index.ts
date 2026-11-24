@@ -213,6 +213,46 @@ function ownImage(url: string, userId: string): boolean {
   return url.startsWith(prefix) && /^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$/.test(url.slice(prefix.length));
 }
 
+const attachmentPrefix = () => `${SUPABASE_URL}/storage/v1/object/public/${ATTACHMENT_BUCKET}/`;
+
+function attachmentUrls(body: string): string[] {
+  return [...new Set<string>(body.match(new RegExp(escapeRegExp(attachmentPrefix()) + "[^\\s)\"'<>]*", "g")) ?? [])];
+}
+
+/** Catch deleted or incomplete uploads before creating a public review issue.
+ * List via the author's own token and RLS, never fetch arbitrary URLs.
+ */
+async function verifyAttachments(post: Post, user: User): Promise<void> {
+  const urls = attachmentUrls(post.body);
+  if (!urls.length) return;
+  const own = attachmentPrefix() + user.id + "/";
+  const files: Json[] = await supabase(`/storage/v1/object/list/${ATTACHMENT_BUCKET}`, {
+    method: "POST",
+    token: user.token,
+    body: { prefix: user.id, limit: 100, offset: 0 },
+  });
+  const byName = new Map<string, Json>(files.map((file) => [file.name, file]));
+  const problems: string[] = [];
+  for (const url of urls) {
+    const name = url.slice(own.length);
+    const file = byName.get(name);
+    const label = name.slice(37);
+    if (!file) {
+      problems.push(`Upload ${label} again or remove its link from your article.`);
+      continue;
+    }
+    const expected = name.endsWith(".pdf")
+      ? "application/pdf"
+      : "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+    const size = file.metadata?.size;
+    if (typeof size !== "number" || !Number.isInteger(size) || size <= 0 || size >= 10_000_000 ||
+      file.metadata?.mimetype !== expected) {
+      problems.push(`${label} is not a supported nonempty PDF or PPTX smaller than 10 MB.`);
+    }
+  }
+  if (problems.length) throw new HttpError(400, "Check the attached documents before submitting.", problems);
+}
+
 function checkPost(input: Json, userId: string): Post {
   const problems: string[] = [];
   const title = cleanLine(input?.title);
@@ -249,9 +289,8 @@ function checkPost(input: Json, userId: string): Post {
   else if (body.length > LIMITS.body) problems.push(`Shorten the post to ${LIMITS.body.toLocaleString("en")} characters or fewer.`);
   const storageImages: string[] = body.match(new RegExp(`${escapeRegExp(imagePrefix())}[^\\s)"'<>]*`, "g")) ?? [];
   if (storageImages.some((url) => !ownImage(url, userId))) problems.push("Use only images you uploaded yourself.");
-  const attachmentPrefix = `${SUPABASE_URL}/storage/v1/object/public/${ATTACHMENT_BUCKET}/`;
-  const own = attachmentPrefix + userId + "/";
-  const documents = [...new Set<string>(body.match(new RegExp(escapeRegExp(attachmentPrefix) + "[^\\s)\"'<>]*", "g")) ?? [])];
+  const own = attachmentPrefix() + userId + "/";
+  const documents = attachmentUrls(body);
   if (documents.length > 5) problems.push("Use at most five attachments per post.");
   if (documents.some((url) => !url.startsWith(own) ||
     !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx)$/.test(url.slice(own.length)))) {
@@ -331,6 +370,8 @@ async function submit(user: User, input: Json) {
       throw new HttpError(429, `You can send up to ${LIMITS.newPostsPerDay} new posts a day. Please try again tomorrow.`);
     }
   }
+
+  await verifyAttachments(post, user);
 
   const title = `[Post]: ${post.title}`;
   const body = issueBody(post, profile);

@@ -597,6 +597,12 @@ When someone finishes something on the website, a thank-you page opens: it confi
 - **Adding a page:** copy one in `thank-you/`, change its `permalink` and text, keep `noindex: true` and `sitemap: false`, and send people to its address.
 - **Old address:** `/contact/sent/`, the contact form's earlier confirmation page, forwards to `/thank-you/message/` (`redirect_to` in its front matter).
 
+## Publishing validation and future domain
+
+After a local Jekyll build, run `python .github/scripts/check_resources.py _site` to verify that each document exists in the source tree and built site, has the declared byte length and SHA-256 checksum, and can be reached through its article and the public library. The site-build workflow runs this check automatically. This integrity check is not a malware scan; public submissions still require review.
+
+Keep the existing GitHub Pages address until a custom domain is registered and verified. On migration, configure GitHub Pages and HTTPS, update `_config.yml` (`url` and `display_url`), audit authentication email URLs, Supabase site URL and allowed redirect origins, Edge Function origin checks and external integrations. Verify canonical URLs, sitemap, sign-in and public downloads before announcing the new address. Do not change storage credentials or domain settings before obtaining the domain.
+
 ## Articles
 
 The public reading room at `/articles/` lists existing published posts, highlights the latest article and articles with downloadable attachments, and groups the full archive by year. It shares the blog publishing workflow, canonical `/blog/<slug>/` article URLs, topic pages and Atom feed; authors do not need to publish twice. The `/resources/` library provides document-specific discovery. Regenerate search and terminal feeds with `python .github/scripts/generate_site_content.py` after changing navigation or page metadata.

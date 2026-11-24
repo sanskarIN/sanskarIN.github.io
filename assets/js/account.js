@@ -1102,7 +1102,6 @@
         listAttachments.addEventListener("click", () => {
             void refreshAttachments();
         });
-
         addAttachment.addEventListener("click", () => attachmentInput.click());
         attachmentInput.addEventListener("change", async () => {
             const file = attachmentInput.files?.[0];
@@ -1150,7 +1149,6 @@
                 setBusy(addAttachment, false);
             }
         });
-
         function upload(input, button, done) {
             const file = input.files ? input.files[0] : undefined;
             input.value = "";

@@ -54,6 +54,7 @@ def check_scarp(output, home, projects):
     import xml.etree.ElementTree as ET
     import yaml
 
+    site_origin = yaml.safe_load((ROOT / "_config.yml").read_text(encoding="utf-8"))["url"].rstrip("/")
     route = "/ScarpLang/"
     shortcut = route + "GitHub/"
     target = "https://github.com/scarp-lang"
@@ -69,7 +70,7 @@ def check_scarp(output, home, projects):
         raise AssertionError("Scarp showcase must preserve the site CSP")
     if '{% ' in markup or '{{ ' in markup:
         raise AssertionError("Unprocessed template on the Scarp showcase")
-    if 'href="https://sanskarin.github.io/ScarpLang/"' not in markup:
+    if f'href="{site_origin}{route}"' not in markup:
         raise AssertionError("Scarp showcase canonical URL missing")
     for heading in ("Start exploring", "The Scarp ecosystem", "Engineering direction", "Build in the open"):
         if feature.headings.count(heading) != 1:
@@ -97,7 +98,7 @@ def check_scarp(output, home, projects):
         raise AssertionError("Scarp showcase missing in terminal navigation")
     sitemap = ET.parse(output / "sitemap.xml")
     urls = [node.text for node in sitemap.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
-    if urls.count("https://sanskarin.github.io" + route) != 1 or "https://sanskarin.github.io" + shortcut in urls:
+    if urls.count(site_origin + route) != 1 or site_origin + shortcut in urls:
         raise AssertionError("Scarp sitemap visibility is incorrect")
     print("Scarp: built routes, official destinations, navigation, redirect, search and sitemap passed.")
 
@@ -130,12 +131,14 @@ def check(output):
     if {"title": "Articles", "url": "/articles/"} not in terminal["pages"]:
         raise AssertionError("Articles terminal navigation missing")
     import xml.etree.ElementTree as ET
+    import yaml
+    site_origin = yaml.safe_load((ROOT / "_config.yml").read_text(encoding="utf-8"))["url"].rstrip("/")
     article_markup = (output / "articles" / "index.html").read_text(encoding="utf-8")
-    if 'href="https://sanskarin.github.io/articles/"' not in article_markup or "Content-Security-Policy" not in article_markup:
+    if f'href="{site_origin}/articles/"' not in article_markup or "Content-Security-Policy" not in article_markup:
         raise AssertionError("Articles canonical URL or site security policy missing")
     sitemap = ET.parse(output / "sitemap.xml")
     urls = [node.text for node in sitemap.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
-    if urls.count("https://sanskarin.github.io/articles/") != 1:
+    if urls.count(site_origin + "/articles/") != 1:
         raise AssertionError("Articles sitemap entry missing or duplicated")
     published = [entry for entry in search if entry["type"] == "Post"]
     if published:
