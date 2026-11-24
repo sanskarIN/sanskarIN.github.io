@@ -14,6 +14,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
+import zlib
 import xml.etree.ElementTree as ET
 
 MAX_BYTES = 10_000_000  # strictly less than 10 decimal MB
@@ -154,7 +155,8 @@ def preview_presentation(data):
                     preview.append({"number": number, "text": text})
                     remaining -= len(text)
             return preview
-    except (zipfile.BadZipFile, ET.ParseError, RuntimeError, NotImplementedError, KeyError) as exc:
+    except (zipfile.BadZipFile, ET.ParseError, RuntimeError, NotImplementedError, KeyError,
+            OSError, EOFError, zlib.error) as exc:
         raise ValueError("Invalid or unsupported PPTX file") from exc
 
 
