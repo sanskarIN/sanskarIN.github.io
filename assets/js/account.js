@@ -1076,9 +1076,11 @@
                 body.value = body.value.trimEnd() + "\n\n" + link + "\n";
                 saveDraft();
                 setStatus(status, "Attachment added. The public download link is created when the post is published.", "success");
-            } catch (error) {
+            }
+            catch (error) {
                 setStatus(status, error instanceof Error ? error.message : "Attachment upload failed. Please try again.", "error");
-            } finally {
+            }
+            finally {
                 setBusy(addAttachment, false);
             }
         });
