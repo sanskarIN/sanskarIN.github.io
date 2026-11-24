@@ -263,3 +263,41 @@ create policy "People delete their own blog images"
     bucket_id = 'blog-images'
     and (storage.foldername(name))[1] = (select auth.uid())::text
   );
+
+
+-- Public staging for documents submitted through the existing review process.
+-- The editor explicitly warns that these uploads are public before publication.
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('blog-attachments', 'blog-attachments', true, 9999999,
+  array['application/pdf', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'])
+on conflict (id) do update set public = excluded.public,
+  file_size_limit = excluded.file_size_limit, allowed_mime_types = excluded.allowed_mime_types;
+
+create or replace function public.my_blog_attachment_count()
+returns bigint language sql stable security definer set search_path = '' as $$
+  select count(*) from storage.objects where bucket_id = 'blog-attachments'
+    and name like (select auth.uid())::text || '/%';
+$$;
+revoke all on function public.my_blog_attachment_count() from public, anon;
+grant execute on function public.my_blog_attachment_count() to authenticated;
+
+drop policy if exists "Authors upload their own documents" on storage.objects;
+create policy "Authors upload their own documents" on storage.objects for insert
+  to authenticated with check (
+    bucket_id = 'blog-attachments'
+    and (storage.foldername(name))[1] = (select auth.uid())::text
+    and array_length(storage.foldername(name), 1) = 1
+    and storage.filename(name) ~ '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx)$'
+    and exists (select 1 from public.profiles where id = (select auth.uid()))
+    and public.my_blog_attachment_count() < 20
+  );
+
+drop policy if exists "Authors list their own documents" on storage.objects;
+create policy "Authors list their own documents" on storage.objects for select
+  to authenticated using (bucket_id = 'blog-attachments'
+    and (storage.foldername(name))[1] = (select auth.uid())::text);
+
+drop policy if exists "Authors delete their own documents" on storage.objects;
+create policy "Authors delete their own documents" on storage.objects for delete
+  to authenticated using (bucket_id = 'blog-attachments'
+    and (storage.foldername(name))[1] = (select auth.uid())::text);
