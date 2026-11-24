@@ -1129,6 +1129,52 @@
     });
 
     addImage.addEventListener("click", () => bodyInput.click());
+    const attachmentInput = $<HTMLInputElement>('[data-file="attachment"]');
+    const addAttachment = $<HTMLButtonElement>('[data-action="add-attachment"]');
+    addAttachment.addEventListener("click", () => attachmentInput.click());
+    attachmentInput.addEventListener("change", async () => {
+      const file = attachmentInput.files?.[0];
+      attachmentInput.value = "";
+      if (!file || isBusy(addAttachment)) return;
+      const extension = file.name.split(".").pop()?.toLowerCase();
+      if (extension !== "pdf" && extension !== "pptx") {
+        setStatus(status, "Choose a PDF or PPTX file.", "error");
+        return;
+      }
+      if (file.size === 0 || file.size >= 10000000) {
+        setStatus(status, "Choose a nonempty file smaller than 10 MB.", "error");
+        return;
+      }
+      if ((body.value.match(/\/blog-attachments\//g) || []).length >= 5) {
+        setStatus(status, "Use at most five attachments per post.", "error");
+        return;
+      }
+      if (!window.confirm("This file will be public immediately, even before review. It may contain document metadata. Only upload files you have permission to publish. Continue?")) return;
+      const stem = file.name.slice(0, -(extension.length + 1)).normalize("NFKD").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60).replace(/-+$/g, "") || "document";
+      const type = extension === "pdf" ? "application/pdf" : "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+      setBusy(addAttachment, true);
+      setStatus(status, "Uploading your attachment…", "pending");
+      try {
+        const session = await requireSession();
+        const id = randomId().replace(/^([a-f0-9]{8})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{12})$/, "$1-$2-$3-$4-$5");
+        const path = session.user.id + "/" + id + "-" + stem + "." + extension;
+        await request("/storage/v1/object/blog-attachments/" + path, {
+          method: "POST",
+          token: session.access_token,
+          body: file,
+          headers: { "Content-Type": type, "x-upsert": "false" },
+        });
+        const link = "[" + stem.replace(/-/g, " ") + " (" + extension.toUpperCase() + ")](" + config.url + "/storage/v1/object/public/blog-attachments/" + path + ")";
+        body.value = body.value.trimEnd() + "\n\n" + link + "\n";
+        saveDraft();
+        setStatus(status, "Attachment added. The public download link is created when the post is published.", "success");
+      } catch (error) {
+        setStatus(status, error instanceof Error ? error.message : "Attachment upload failed. Please try again.", "error");
+      } finally {
+        setBusy(addAttachment, false);
+      }
+    });
+
 
     function upload(input: HTMLInputElement, button: HTMLElement, done: (url: string) => void): void {
       const file = input.files ? input.files[0] : undefined;
@@ -1167,6 +1213,10 @@
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       if (isBusy(submitButton)) return;
+      if (isBusy(addAttachment)) {
+        setStatus(status, "Wait for the attachment upload to finish.", "error");
+        return;
+      }
       const post = values();
       const problems: string[] = [];
       if (!post.title) problems.push("Add a title.");
