@@ -41,6 +41,38 @@ def pptx(extra=None, order=(1, 2), external=False):
 
 
 class AttachmentTests(unittest.TestCase):
+    def test_bibtex_unicode_and_literal_source(self):
+        raw = "\ufeff@string{journal = {Example}}\r\n@article{key, title={नमस्ते & <script>}, year={2026}}\r\n".encode("utf-8")
+        name, item = documents.prepare_document(raw, "references", "bib")
+        self.assertTrue(name.endswith(".bib"))
+        self.assertEqual(name, item["name"])
+        self.assertEqual(item["format"], "BIB")
+        self.assertEqual(item["document_preview"], raw.decode("utf-8-sig"))
+        self.assertEqual(item["bytes"], len(raw))
+        self.assertTrue(item["id"].endswith("-bib"))
+        self.assertFalse(item["document_truncated"])
+        with patch.object(documents, "MAX_PREVIEW", 8):
+            _, truncated = documents.prepare_document(raw, "references", "bib")
+            self.assertEqual(truncated["document_preview"], "@string{")
+            self.assertTrue(truncated["document_truncated"])
+        for data in (b"", b"   ", b"\xff", b"a\x00b", b"---\nlayout: page\n---\n"):
+            with self.subTest(data=data), self.assertRaises(ValueError):
+                documents.prepare_document(data, "references", "bib")
+
+    def test_bibtex_collect_preserves_original(self):
+        url = URL.replace(".pptx", ".bib")
+        self.assertEqual(documents.own_source(url, PREFIX, ACCOUNT).groups(), ("my-slides", "bib"))
+        raw = b"@book{example, title={Example}}\r\n"
+        with patch.object(documents, "fetch_document", return_value=raw):
+            markup, assets, files = documents.collect(
+                f'<a href="{url}">References</a>', PREFIX, ACCOUNT, "article",
+                re.compile(r'<a\b[^>]*>|</a>'),
+                lambda token: {"href": url} if token.startswith("<a") else {})
+            self.assertEqual(len(assets), 1)
+            self.assertEqual(files[assets[0]["name"]], raw)
+            self.assertIn("#" + assets[0]["id"], markup)
+            self.assertNotIn(PREFIX, markup)
+
     def test_html_inert_storage_and_original_download_name(self):
         raw = b"<script>alert(1)</script>\r\n{{ site.title }}"
         storage, item = documents.prepare_document(raw, "example", "html.txt")

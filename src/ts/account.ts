@@ -68,6 +68,7 @@
 
   interface Draft {
     title: string;
+    requestedSlug: string;
     summary: string;
     tags: string[];
     coverUrl: string;
@@ -79,6 +80,8 @@
   // A saved post as the database or the draft store returns it.
   interface StoredPost {
     title?: string;
+    requestedSlug?: string;
+    requested_slug?: string;
     summary?: string;
     tags?: string[];
     coverUrl?: string;
@@ -1072,6 +1075,9 @@
     const researchMode = params.get("type") === "research" && !editingId;
     const draftKey = researchMode ? RESEARCH_DRAFT_KEY : DRAFT_KEY;
     const research = field(form, "research");
+    const slugInput = field(form, "requestedSlug");
+    const slugPreview = $("[data-slug-preview]", form);
+    const reservedSlugs = ["tags", "feed", "index", "page", "authors", "posts"];
     let coverUrl = "";
     let draftTimer: number | undefined;
 
@@ -1094,11 +1100,25 @@
       chooseCover.textContent = coverUrl ? "Choose another cover image" : "Choose a cover image";
     }
 
+    function validSlug(value: string): boolean {
+      return value.length <= 60 && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) && !reservedSlugs.includes(value);
+    }
+    function updateSlugPreview(): void {
+      const requested = slugInput.value.trim();
+      const generated = field(form, "title").value.normalize("NFKD").replace(/[^\x00-\x7f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+      const auto = (generated.length > 60 ? generated.slice(0, 61).includes("-") ? generated.slice(0, 61).split("-").slice(0, -1).join("-") : generated.slice(0, 60) : generated).replace(/-+$/g, "");
+      if (requested && !validSlug(requested)) {
+        slugPreview.textContent = "Invalid slug: use lowercase letters, numbers and single hyphens (maximum 60).";
+        return;
+      }
+      slugPreview.textContent = (editingId ? "Requested URL (published URLs are unchanged): " : "Estimated URL: ") + (slugPreview.getAttribute("data-slug-base") || "/blog/") + (requested || auto || "[generated-slug]") + "/";
+    }
     function values(): Draft {
       const tags = field(form, "tags").value.split(",").map((tag) => tag.trim()).filter(Boolean).filter((tag) => tag.toLowerCase().replace(/^#+/, "") !== "research");
       if (research.checked) tags.unshift("research");
       return {
         title: field(form, "title").value.replace(/\s+/g, " ").trim(),
+        requestedSlug: slugInput.value.trim(),
         summary: field<HTMLTextAreaElement>(form, "summary").value.replace(/\s+/g, " ").trim(),
         tags,
         coverUrl,
@@ -1109,6 +1129,8 @@
 
     function fill(post: StoredPost): void {
       field(form, "title").value = post.title || "";
+      slugInput.value = post.requestedSlug || post.requested_slug || "";
+      updateSlugPreview();
       field<HTMLTextAreaElement>(form, "summary").value = post.summary || "";
       research.checked = (post.tags || []).some((tag) => tag.toLowerCase().replace(/^#+/, "") === "research");
       field(form, "tags").value = (post.tags || []).filter((tag) => tag.toLowerCase().replace(/^#+/, "") !== "research").join(", ");
@@ -1128,6 +1150,8 @@
     }
 
     form.addEventListener("input", saveDraft);
+    form.addEventListener("input", updateSlugPreview);
+    updateSlugPreview();
 
     chooseCover.addEventListener("click", () => coverInput.click());
 
@@ -1153,7 +1177,7 @@
           token: session.access_token,
           json: { prefix: session.user.id, limit: 100, offset: 0 },
         });
-        const names = files.map((item) => item.name).filter((name) => /^[0-9a-f-]{36}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx|md|docx|html\.txt)$/.test(name));
+        const names = files.map((item) => item.name).filter((name) => /^[0-9a-f-]{36}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx|md|docx|bib|html\.txt)$/.test(name));
         if (!names.length) stagedAttachments.appendChild(element("li", "", "No staged documents."));
         for (const name of names) {
           const item = element("li");
@@ -1203,8 +1227,8 @@
       attachmentInput.value = "";
       if (!file || isBusy(addAttachment) || isBusy(listAttachments) || isBusy(submitButton)) return;
       const extension = file.name.split(".").pop()?.toLowerCase();
-      if (extension !== "pdf" && extension !== "pptx" && extension !== "md" && extension !== "html" && extension !== "docx") {
-        setStatus(status, "Choose a PDF, PPTX, Markdown (.md), HTML or DOCX file.", "error");
+      if (extension !== "pdf" && extension !== "pptx" && extension !== "md" && extension !== "html" && extension !== "docx" && extension !== "bib") {
+        setStatus(status, "Choose a PDF, PPTX, Markdown (.md), HTML, DOCX or BibTeX (.bib) file.", "error");
         return;
       }
       if (file.size === 0 || file.size >= 10000000) {
@@ -1217,7 +1241,7 @@
       }
       if (!window.confirm("This file will be public immediately, even before review. It may contain document metadata. Only upload files you have permission to publish. Continue?")) return;
       const stem = file.name.slice(0, -(extension.length + 1)).normalize("NFKD").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60).replace(/-+$/g, "") || "document";
-      const type = extension === "pdf" ? "application/pdf" : extension === "md" ? "text/markdown" : extension === "html" ? "text/plain" : extension === "docx" ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+      const type = extension === "pdf" ? "application/pdf" : extension === "md" ? "text/markdown" : extension === "html" || extension === "bib" ? "text/plain" : extension === "docx" ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/vnd.openxmlformats-officedocument.presentationml.presentation";
       setBusy(addAttachment, true);
       setStatus(status, "Uploading your attachment…", "pending");
       try {
@@ -1286,6 +1310,7 @@
       const post = values();
       const problems: string[] = [];
       if (!post.title) problems.push("Add a title.");
+      if (post.requestedSlug && !validSlug(post.requestedSlug)) problems.push("Choose a valid URL slug or leave it blank.");
       if (post.tags.length > 5) problems.push("Use at most five tags, including the research tag.");
       if (!post.body.trim()) problems.push("Write the post.");
       if (post.coverUrl && !post.coverAlt) problems.push("Describe the cover image for people who can't see it.");
@@ -1326,7 +1351,7 @@
             return;
           }
           if (editingId) {
-            return request<StoredPost[]>(`/rest/v1/submissions?id=eq.${editingId}&select=title,summary,tags,cover_url,cover_alt,body`,
+            return request<StoredPost[]>(`/rest/v1/submissions?id=eq.${editingId}&select=title,requested_slug,summary,tags,cover_url,cover_alt,body`,
               { token: session.access_token })
               .then((rows) => {
                 if (!rows || !rows[0]) throw new Error("That post couldn't be found.");

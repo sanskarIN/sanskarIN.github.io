@@ -11,3 +11,4 @@ search.json linguist-generated
 assets/files/blog/**/*.md -text
 assets/files/blog/**/*.html.txt -text
 assets/files/blog/**/*.docx -text
+assets/files/blog/**/*.bib -text

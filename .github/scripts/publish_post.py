@@ -93,7 +93,7 @@ LABELS = {
 STATUS_LABELS = ("awaiting-review", "needs-changes", "published", "pending-merge")
 
 # Headings of the issue form fields (.github/ISSUE_TEMPLATE/blog-post.yml).
-FIELDS_BEFORE_POST = ("Summary", "Tags", "Cover image", "Cover image description")
+FIELDS_BEFORE_POST = ("URL slug", "Summary", "Tags", "Cover image", "Cover image description")
 POST_FIELD = "Post"
 CONFIRMATION_FIELD = "Confirmation"
 NO_RESPONSE = "_No response_"
@@ -108,7 +108,8 @@ UUID = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}
 ACCOUNT_IMAGE_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,99}")
 
 # Addresses already used by blog pages: /blog/tags/ and /blog/feed.xml.
-RESERVED_SLUGS = {"tags", "feed", "index", "page"}
+RESERVED_SLUGS = {"tags", "feed", "index", "page", "authors", "posts"}
+CUSTOM_SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 
 # The comment the workflow keeps up to date on each post's issue.
 STATUS_MARKER = "<!-- blog-post-status: {state} -->"
@@ -427,6 +428,10 @@ def read_form(issue, settings, is_image=None):
             f"from the form, or write the post with the [blog post form]({form_url})."
         ])
 
+    requested_slug = sections.get("URL slug", "").strip()
+    if requested_slug and not valid_custom_slug(requested_slug):
+        problems.append("Use a URL slug of 1–60 lowercase letters, digits and single hyphens; reserved routes are not allowed.")
+
     summary = clean_line(sections.get("Summary", ""))
     if len(summary) > settings["summary_length"]:
         problems.append(f"Shorten the summary to {settings['summary_length']} characters or fewer "
@@ -461,6 +466,7 @@ def read_form(issue, settings, is_image=None):
         raise PostProblem(problems)
     return {
         "title": title,
+        "requested_slug": requested_slug,
         "summary": summary,
         "tags": tags,
         "cover_url": cover_url,
@@ -697,15 +703,39 @@ def find_post(number):
     return None
 
 
-def new_slug(title, number):
+def valid_custom_slug(value):
+    return (isinstance(value, str) and 1 <= len(value) <= 60
+            and CUSTOM_SLUG.fullmatch(value) is not None and value not in RESERVED_SLUGS)
+
+
+def slug_taken(slug, taken):
+    return (slug in RESERVED_SLUGS or slug in taken
+            or (IMAGES_DIR / slug).exists() or (ATTACHMENTS_DIR / slug).exists()
+            or (IMAGES_DIR / slug).is_symlink() or (ATTACHMENTS_DIR / slug).is_symlink())
+
+
+def new_slug(title, number, requested=""):
+    taken = {post_slug(path) for path in all_posts()}
+    if requested:
+        if not valid_custom_slug(requested):
+            raise PostProblem(["Choose a valid URL slug (lowercase letters, numbers and single hyphens, up to 60 characters)."])
+        if slug_taken(requested, taken):
+            raise PostProblem(["That URL slug is already in use. Choose a different slug or leave it blank."])
+        return requested
     text = unicodedata.normalize("NFKD", title).encode("ascii", "ignore").decode("ascii")
     slug = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
     if len(slug) > 60:
         slug = slug[:61].rsplit("-", 1)[0] if "-" in slug[:61] else slug[:60]
     slug = slug.strip("-") or f"post-{number}"
-    taken = {post_slug(path) for path in all_posts()}
-    if slug in RESERVED_SLUGS or slug in taken or (IMAGES_DIR / slug).exists():
-        slug = f"{slug}-{number}"
+    if slug_taken(slug, taken):
+        suffix = f"-{number}"
+        base = slug[:60 - len(suffix)].rstrip("-") + suffix
+        slug = base
+        attempt = 2
+        while slug_taken(slug, taken):
+            tail = f"-{attempt}"
+            slug = base[:60 - len(tail)].rstrip("-") + tail
+            attempt += 1
     return slug
 
 
@@ -744,8 +774,11 @@ def build_post(issue, form, settings, existing, trusted, account=None, is_image=
     by_owner = account is None or owners_account(account, settings)
     is_owner = by_owner and login.lower() == os.environ["GITHUB_REPOSITORY"].split("/")[0].lower()
     link_rel = "noopener noreferrer" if trusted else "noopener noreferrer nofollow ugc"
-    slug = existing["slug"] if existing else new_slug(form["title"], number)
+    requested = form.get("requested_slug", "")
+    slug = existing["slug"] if existing else new_slug(form["title"], number, requested)
     notes = list(form["notes"])
+    if existing and requested and requested != slug:
+        notes.append("The published URL is permanent; the requested slug change was ignored.")
 
     markup = render_markdown(form["markdown"], link_rel)
     sources = [src for src in image_sources(markup) if is_image(src)]

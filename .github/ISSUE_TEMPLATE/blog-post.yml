@@ -18,6 +18,12 @@ body:
         - **Review:** posts from anyone other than the site owner are published after the owner approves them. You can keep editing this issue until then.
         - **Public:** this issue, your post, and your GitHub username (shown as the author) are public.
   - type: input
+    id: slug
+    attributes:
+      label: URL slug
+      description: Optional. Use 1–60 lowercase letters, numbers and single hyphens. Leave blank to generate from your title. The slug cannot change after publication.
+      placeholder: my-research-paper
+  - type: input
     id: summary
     attributes:
       label: Summary
