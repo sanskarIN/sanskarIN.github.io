@@ -82,6 +82,33 @@ class ResourceBuildTests(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, "download only"):
             check_resources(self.out, self.root)
 
+    def test_bibtex_inventory_and_preview(self):
+        for folder in (self.root, self.out):
+            (folder / self.path.lstrip("/")).unlink()
+        self.data = b"@article{example, title={Research}}\r\n"
+        digest = hashlib.sha256(self.data).hexdigest()
+        self.name = f"guide-{digest[:20]}.bib"
+        self.anchor = f"asset-guide-{digest[:20]}-bib"
+        self.path = f"/assets/files/blog/{self.slug}/{self.name}"
+        self.metadata.update(name=self.name, id=self.anchor, format="BIB",
+                             bytes=len(self.data), sha256=digest, path=self.path,
+                             document_preview=self.data.decode(), document_truncated=False)
+        self.write_source()
+        for folder in (self.root, self.out):
+            (folder / self.path.lstrip("/")).write_bytes(self.data)
+        self.write_pages()
+        article = self.out / f"blog/{self.slug}/index.html"
+        article.write_text(article.read_text(encoding="utf-8").replace(
+            f'<a href="{self.path}">Read PDF</a>', f'<details id="{self.anchor}-preview"></details>'), encoding="utf-8")
+        library = self.out / "resources/index.html"
+        library.write_text(library.read_text(encoding="utf-8") +
+                           f'<a href="{self.article_url}#{self.anchor}-preview">Preview</a>', encoding="utf-8")
+        check_resources(self.out, self.root)
+        self.metadata["document_preview"] = "wrong"
+        self.write_source()
+        with self.assertRaisesRegex(AssertionError, "Document preview metadata mismatch"):
+            check_resources(self.out, self.root)
+
     def test_markdown_inventory_and_preview(self):
         for folder in (self.root, self.out):
             (folder / self.path.lstrip("/")).unlink()

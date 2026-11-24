@@ -243,11 +243,11 @@ async function verifyAttachments(post: Post, user: User): Promise<void> {
     }
     const expected = name.endsWith(".pdf")
       ? "application/pdf"
-      : name.endsWith(".md") ? "text/markdown" : name.endsWith(".html.txt") ? "text/plain" : name.endsWith(".docx") ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+      : name.endsWith(".md") ? "text/markdown" : (name.endsWith(".html.txt") || name.endsWith(".bib")) ? "text/plain" : name.endsWith(".docx") ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/vnd.openxmlformats-officedocument.presentationml.presentation";
     const size = file.metadata?.size;
     if (typeof size !== "number" || !Number.isInteger(size) || size <= 0 || size >= 10_000_000 ||
       file.metadata?.mimetype !== expected) {
-      problems.push(`${label} is not a supported nonempty PDF, PPTX, Markdown, HTML or DOCX smaller than 10 MB.`);
+      problems.push(`${label} is not a supported nonempty PDF, PPTX, Markdown, HTML, DOCX or BibTeX smaller than 10 MB.`);
     }
   }
   if (problems.length) throw new HttpError(400, "Check the attached documents before submitting.", problems);
@@ -293,8 +293,8 @@ function checkPost(input: Json, userId: string): Post {
   const documents = attachmentUrls(body);
   if (documents.length > 5) problems.push("Use at most five attachments per post.");
   if (documents.some((url) => !url.startsWith(own) ||
-    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx|md|docx|html\.txt)$/.test(url.slice(own.length)))) {
-    problems.push("Use only PDF, PPTX, Markdown, HTML or DOCX attachments you uploaded yourself.");
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx|md|docx|bib|html\.txt)$/.test(url.slice(own.length)))) {
+    problems.push("Use only PDF, PPTX, Markdown, HTML, DOCX or BibTeX attachments you uploaded yourself.");
   }
 
 

@@ -287,7 +287,7 @@ create policy "Authors upload their own documents" on storage.objects for insert
     bucket_id = 'blog-attachments'
     and (storage.foldername(name))[1] = (select auth.uid())::text
     and array_length(storage.foldername(name), 1) = 1
-    and storage.filename(name) ~ '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx|md|docx|html\.txt)$'
+    and storage.filename(name) ~ '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx|md|docx|bib|html\.txt)$'
     and exists (select 1 from public.profiles where id = (select auth.uid()))
     and public.my_blog_attachment_count() < 20
   );

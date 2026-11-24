@@ -21,7 +21,7 @@ MAX_BYTES = 10_000_000  # strictly less than 10 decimal MB
 MAX_FILES = 5
 MAX_EXPANDED = 64 * 1024 * 1024
 MAX_PREVIEW = 20_000
-NAME = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-([a-z0-9][a-z0-9-]{0,59})\.(pdf|pptx|md|docx|html\.txt)")
+NAME = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-([a-z0-9][a-z0-9-]{0,59})\.(pdf|pptx|md|docx|bib|html\.txt)")
 SLIDE = re.compile(r"ppt/slides/slide([1-9][0-9]*)\.xml")
 TEXT = "{http://schemas.openxmlformats.org/drawingml/2006/main}t"
 PRESENTATION = "{http://schemas.openxmlformats.org/presentationml/2006/main}"
@@ -174,6 +174,11 @@ def preview_source(data, label):
     return text[:MAX_PREVIEW], len(text) > MAX_PREVIEW
 
 
+def preview_bibtex(data):
+    """Keep BibTeX/BibLaTeX source inert; do not interpret TeX or fetch references."""
+    return preview_source(data, "BibTeX")
+
+
 def preview_markdown(data):
     return preview_source(data, "Markdown")
 
@@ -267,15 +272,16 @@ def prepare_document(data, stem, extension):
         source, truncated = preview_markdown(data)
         preview = []
         extra = {"markdown_preview": source, "markdown_truncated": truncated}
-    elif extension in ("html", "docx"):
-        source, truncated = preview_html(data) if extension == "html" else preview_word(data)
+    elif extension in ("html", "docx", "bib"):
+        parser = {"html": preview_html, "docx": preview_word, "bib": preview_bibtex}[extension]
+        source, truncated = parser(data)
         preview = []
         extra = {"document_preview": source, "document_truncated": truncated}
     else:
-        raise ValueError("Only PDF, PPTX, Markdown, HTML and DOCX are supported")
+        raise ValueError("Only PDF, PPTX, Markdown, HTML, DOCX and BibTeX are supported")
     digest = hashlib.sha256(data).hexdigest()
     name = f"{stem}-{digest[:20]}.{extension}"
-    anchor = f"asset-{stem}-{digest[:20]}" + (f"-{extension}" if extension in ("md", "html", "docx") else "")
+    anchor = f"asset-{stem}-{digest[:20]}" + (f"-{extension}" if extension in ("md", "html", "docx", "bib") else "")
     storage_name = name + ".txt" if extension == "html" else name
     return storage_name, {"id": anchor,
                   "name": name, "title": stem.replace("-", " "),

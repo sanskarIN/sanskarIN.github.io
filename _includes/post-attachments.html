@@ -10,8 +10,8 @@
       <a class="button button--primary" href="{{ attachment.path | relative_url | escape }}" download="{{ attachment.name | escape }}">Download {{ attachment.format | escape }}</a>
       {%- if attachment.format == "MD" %}
       <a class="button button--secondary" href="#{{ attachment.id | escape }}-preview">Read Markdown source</a>
-      {%- elsif attachment.format == "HTML" or attachment.format == "DOCX" %}
-      <a class="button button--secondary" href="#{{ attachment.id | escape }}-preview">Read {% if attachment.format == "HTML" %}HTML source{% else %}Word text{% endif %}</a>
+      {%- elsif attachment.format == "HTML" or attachment.format == "DOCX" or attachment.format == "BIB" %}
+      <a class="button button--secondary" href="#{{ attachment.id | escape }}-preview">Read {% if attachment.format == "HTML" %}HTML source{% elsif attachment.format == "BIB" %}BibTeX source{% else %}Word text{% endif %}</a>
       {%- elsif attachment.format == "PDF" %}
       <a class="button button--secondary" href="{{ attachment.path | relative_url | escape }}">Read PDF online</a>
       {%- elsif attachment.format == "PPTX" %}
@@ -34,11 +34,15 @@
         <p>Preview shortened. Download the original file to read the complete document.</p>
         {%- endif %}
       </details>
-    {%- elsif attachment.format == "HTML" or attachment.format == "DOCX" %}
+    {%- elsif attachment.format == "HTML" or attachment.format == "DOCX" or attachment.format == "BIB" %}
       <details id="{{ attachment.id | escape }}-preview" open>
         {% if attachment.format == "HTML" %}
         <summary>HTML source preview</summary>
         <p>HTML is served as plain text and never rendered as an active website page. Download the original HTML only if you trust the author.</p>
+        <pre><code>{{ attachment.document_preview | escape }}</code></pre>
+        {% elsif attachment.format == "BIB" %}
+        <summary>BibTeX bibliography source preview</summary>
+        <p>Original citation source, not a formatted bibliography. Download to import into a reference manager or use in a LaTeX project. References are not fetched or verified automatically.</p>
         <pre><code>{{ attachment.document_preview | escape }}</code></pre>
         {% else %}
         <summary>Word document text preview</summary>
