@@ -1,0 +1,42 @@
+---
+layout: page
+title: Assets & Resources
+eyebrow: Library
+lead: Explore public presentations and documents published with articles.
+description: Browse and download presentations and PDF resources from the blog.
+permalink: /resources/
+schema_type: CollectionPage
+---
+<div class="button-row">
+  <a class="button button--secondary" href="{{ '/blog/' | relative_url }}">Browse articles</a>
+  <a class="button button--ghost" href="{{ '/account/write/' | relative_url }}">Write a post</a>
+</div>
+{%- assign count = 0 -%}
+{%- for post in site.posts -%}
+  {%- if post.attachments and post.attachments.size > 0 %}
+  <section class="page-section" aria-labelledby="resource-post-{{ forloop.index }}">
+    <h2 id="resource-post-{{ forloop.index }}"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>
+    <ul class="post-list">
+      {%- for attachment in post.attachments %}
+      {%- assign count = count | plus: 1 %}
+      <li>
+        <article class="post-card">
+          <h3><a href="{{ post.url | relative_url }}#{{ attachment.id | escape }}">{{ attachment.title | escape }}</a></h3>
+          <p>{{ attachment.format | escape }} · {{ attachment.bytes | divided_by: 1000 }} KB</p>
+          <div class="button-row">
+            <a class="button button--secondary" href="{{ post.url | relative_url }}#{{ attachment.id | escape }}">View resource</a>
+            <a class="button button--ghost" href="{{ attachment.path | relative_url | escape }}" download="{{ attachment.name | escape }}">Download</a>
+          </div>
+        </article>
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endif %}
+{%- endfor %}
+{%- if count == 0 %}
+<section class="page-section">
+  <h2>No published resources yet</h2>
+  <p>Presentations and documents will appear here when their articles are published.</p>
+</section>
+{%- endif %}
