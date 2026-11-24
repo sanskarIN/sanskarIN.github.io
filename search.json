@@ -864,10 +864,17 @@
   },
   {
     "type": "Project",
-    "title": "noticebridge-ai",
-    "url": "https://github.com/sanskarIN/noticebridge-ai",
-    "tags": [],
-    "text": "Understand what changed. Know what to do. Verify the evidence. Python"
+    "title": "awesome-tech-atlas",
+    "url": "https://github.com/sanskarIN/awesome-tech-atlas",
+    "tags": [
+      "awesome-list",
+      "computer-science",
+      "developer-resources",
+      "machine-learning",
+      "open-source",
+      "programming"
+    ],
+    "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
   },
   {
     "type": "Project",
@@ -878,31 +885,17 @@
   },
   {
     "type": "Project",
-    "title": "healthmetric",
-    "url": "https://github.com/sanskarIN/healthmetric",
+    "title": "noticebridge-ai",
+    "url": "https://github.com/sanskarIN/noticebridge-ai",
     "tags": [],
-    "text": "Kotlin"
+    "text": "Understand what changed. Know what to do. Verify the evidence. Python"
   },
   {
     "type": "Project",
-    "title": "sonumio",
-    "url": "https://github.com/sanskarIN/sonumio",
-    "tags": [
-      "ai-audio",
-      "artificial-intelligence",
-      "audio-ai",
-      "audio-generation",
-      "audio-processing",
-      "audio-synthesis"
-    ],
-    "text": "Open-source AI platform for speech, music, and sound generation. Python"
-  },
-  {
-    "type": "Project",
-    "title": "LineLoom",
-    "url": "https://github.com/sanskarIN/LineLoom",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
     "tags": [],
-    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. HTML"
   },
   {
     "type": "Project",
@@ -920,13 +913,6 @@
   },
   {
     "type": "Project",
-    "title": "KathaSvara",
-    "url": "https://github.com/sanskarIN/KathaSvara",
-    "tags": [],
-    "text": "Give Every Story a Voice. TypeScript"
-  },
-  {
-    "type": "Project",
     "title": "RepoDNA",
     "url": "https://github.com/sanskarIN/RepoDNA",
     "tags": [
@@ -941,20 +927,6 @@
   },
   {
     "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "SpeedPulse",
-    "url": "https://github.com/sanskarIN/SpeedPulse",
-    "tags": [],
-    "text": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of… HTML"
-  },
-  {
-    "type": "Project",
     "title": "frametrellis",
     "url": "https://github.com/sanskarIN/frametrellis",
     "tags": [
@@ -966,6 +938,48 @@
       "ffmpeg"
     ],
     "text": "Open-source video editor. C++"
+  },
+  {
+    "type": "Project",
+    "title": "sonumio",
+    "url": "https://github.com/sanskarIN/sonumio",
+    "tags": [
+      "ai-audio",
+      "artificial-intelligence",
+      "audio-ai",
+      "audio-generation",
+      "audio-processing",
+      "audio-synthesis"
+    ],
+    "text": "Open-source AI platform for speech, music, and sound generation. Python"
+  },
+  {
+    "type": "Project",
+    "title": "KathaSvara",
+    "url": "https://github.com/sanskarIN/KathaSvara",
+    "tags": [],
+    "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "LineLoom",
+    "url": "https://github.com/sanskarIN/LineLoom",
+    "tags": [],
+    "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "healthmetric",
+    "url": "https://github.com/sanskarIN/healthmetric",
+    "tags": [],
+    "text": "Kotlin"
+  },
+  {
+    "type": "Project",
+    "title": "SpeedPulse",
+    "url": "https://github.com/sanskarIN/SpeedPulse",
+    "tags": [],
+    "text": "SpeedPulse is an advanced, ultra-performant internet speed testing suite and developer diagnostics laboratory. Built on a hybrid architecture combining a high-throughput ASP.NET Core backend with a TypeScript and Chart.js powered frontend, it pushes the boundaries of… HTML"
   },
   {
     "type": "Project",
@@ -992,20 +1006,6 @@
       "nodejs-server"
     ],
     "text": "Companion code, practical projects, examples, exercises, and production-ready Node.js learning resources for the Node.js Full Mastery eBook by Ram Sandesh. JavaScript"
-  },
-  {
-    "type": "Project",
-    "title": "awesome-tech-atlas",
-    "url": "https://github.com/sanskarIN/awesome-tech-atlas",
-    "tags": [
-      "awesome-list",
-      "computer-science",
-      "developer-resources",
-      "machine-learning",
-      "open-source",
-      "programming"
-    ],
-    "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
   },
   {
     "type": "Project",
