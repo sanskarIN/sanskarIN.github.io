@@ -19,6 +19,12 @@
   },
   {
     "type": "Page",
+    "title": "Assets & Resources",
+    "url": "/resources/",
+    "text": "Browse and download presentations and PDF resources from the blog."
+  },
+  {
+    "type": "Page",
     "title": "Blog",
     "url": "/blog/",
     "text": "The blog on sanskarIN.github.io: posts and images from Sanskar and visitors, with the date each post was published and last updated."
