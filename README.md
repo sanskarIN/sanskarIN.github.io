@@ -597,6 +597,10 @@ When someone finishes something on the website, a thank-you page opens: it confi
 - **Adding a page:** copy one in `thank-you/`, change its `permalink` and text, keep `noindex: true` and `sitemap: false`, and send people to its address.
 - **Old address:** `/contact/sent/`, the contact form's earlier confirmation page, forwards to `/thank-you/message/` (`redirect_to` in its front matter).
 
+## Articles
+
+The public reading room at `/articles/` lists existing published posts, highlights the latest article and articles with downloadable attachments, and groups the full archive by year. It shares the blog publishing workflow, canonical `/blog/<slug>/` article URLs, topic pages and Atom feed; authors do not need to publish twice. The `/resources/` library provides document-specific discovery. Regenerate search and terminal feeds with `python .github/scripts/generate_site_content.py` after changing navigation or page metadata.
+
 ## Blog
 
 The blog at `/blog/` has no server of its own: posts are written in **GitHub issues**, stored in this repository, and published by a **GitHub Actions** workflow. Anyone with a GitHub account can write one — or, once [accounts](#accounts) are turned on, anyone with an email address, in an editor on the site. Posts from anyone other than you wait for your approval.
