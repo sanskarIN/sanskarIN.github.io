@@ -1,0 +1,42 @@
+{%- if page.attachments and page.attachments.size > 0 %}
+<section class="page-section prose" aria-labelledby="post-attachments-title">
+  <h2 id="post-attachments-title">Attachments &amp; resources</h2>
+  <p>Read or download the original documents. Only open files from authors you trust.</p>
+  {%- for attachment in page.attachments %}
+  <article class="page-section" id="{{ attachment.id | escape }}">
+    <h3>{{ attachment.title | escape }}</h3>
+    <p><strong>{{ attachment.format | escape }}</strong> · {{ attachment.bytes | divided_by: 1000 }} KB</p>
+    <div class="button-row">
+      <a class="button button--primary" href="{{ attachment.path | relative_url | escape }}" download="{{ attachment.name | escape }}">Download {{ attachment.format | escape }}</a>
+      {%- if attachment.format == "PDF" %}
+      <a class="button button--secondary" href="{{ attachment.path | relative_url | escape }}">Read PDF online</a>
+      {%- elsif attachment.format == "PPTX" %}
+        {%- for companion in page.attachments %}
+          {%- if companion.format == "PDF" and companion.title == attachment.title %}
+      <a class="button button--secondary" href="{{ companion.path | relative_url | escape }}">Read visual PDF version</a>
+            {%- break %}
+          {%- endif %}
+        {%- endfor %}
+      {%- endif %}
+      <button class="copy-button" type="button" data-copy="{{ page.url | absolute_url }}#{{ attachment.id | escape }}"><span data-copy-label>Copy share link</span></button>
+      <button class="copy-button" type="button" data-copy="{{ attachment.path | absolute_url | escape }}"><span data-copy-label>Copy file link</span></button>
+    </div>
+    {%- if attachment.format == "PPTX" %}
+      {%- if attachment.slides.size > 0 %}
+      <details>
+        <summary>Read slide text online</summary>
+        <p>This is a text-only preview, not the original slide design. Images, charts and animations are not included. Download the presentation for the full experience.</p>
+        <ol>
+          {%- for slide in attachment.slides %}
+          <li><strong>Slide {{ slide.number }}</strong><p>{{ slide.text | escape }}</p></li>
+          {%- endfor %}
+        </ol>
+      </details>
+      {%- else %}
+      <p>No readable slide text was found. Download the presentation to open it in a presentation app.</p>
+      {%- endif %}
+    {%- endif %}
+  </article>
+  {%- endfor %}
+</section>
+{%- endif %}

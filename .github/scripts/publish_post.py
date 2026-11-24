@@ -62,6 +62,7 @@ import nh3
 
 from pr_updates import Proposal, git
 from post_markdown import convert_article
+from blog_attachments import collect as collect_attachments, source_prefix
 from post_dates import issue_creation_timestamp
 from terminal_data import write_terminal_json
 from search_index import write_search_json
@@ -73,6 +74,7 @@ ROOT = Path(__file__).resolve().parents[2]
 POSTS_DIR = ROOT / "_posts"
 IMAGES_DIR = ROOT / "assets" / "images" / "blog"
 IMAGES_URL = "/assets/images/blog"
+ATTACHMENTS_DIR = ROOT / "assets" / "files" / "blog"
 
 API_URL = os.environ.get("GITHUB_API_URL", "https://api.github.com").rstrip("/")
 USER_AGENT = "sanskarIN.github.io blog publisher"
@@ -790,6 +792,14 @@ def build_post(issue, form, settings, existing, trusted, account=None, is_image=
         return f'<a href="{html.escape(src)}" rel="{link_rel}">{label}</a>'
 
     markup = rewrite_images(markup, replace_image)
+    try:
+        markup, attachments, attachment_files = collect_attachments(
+            markup, source_prefix(settings.get("account_images")), account,
+            slug, HTML_TOKEN, tag_attributes)
+    except ValueError as error:
+        raise PostProblem([str(error)]) from error
+    if attachments:
+        notes.append(f"{len(attachments)} document attachment(s) copied to the website.")
     text = plain_text(markup)
     if not text and "<img" not in markup:
         raise PostProblem(["Write the post: there is no text or image in the Post box."])
@@ -827,6 +837,7 @@ def build_post(issue, form, settings, existing, trusted, account=None, is_image=
         "image_height": cover["height"] if cover else None,
         "tags": form["tags"],
         "source_issue": number,
+        "attachments": attachments or None,
     }
     return {
         "slug": slug,
@@ -834,6 +845,7 @@ def build_post(issue, form, settings, existing, trusted, account=None, is_image=
         "source_created_at": issue_creation_timestamp(issue),
         "markup": finish_markup(markup),
         "files": files,
+        "attachment_files": attachment_files,
         "notes": list(dict.fromkeys(notes)),
     }
 
@@ -859,7 +871,12 @@ def save_post(post, existing):
     image_dir = IMAGES_DIR / slug
     wanted = set(post["files"])
     current = {entry.name for entry in image_dir.iterdir()} if image_dir.is_dir() else set()
-    if existing and without_modified_date(existing["text"]) == content and current == wanted:
+    attachment_dir = ATTACHMENTS_DIR / slug
+    attachment_files = post.get("attachment_files", {})
+    attachment_wanted = set(attachment_files)
+    attachment_current = {entry.name for entry in attachment_dir.iterdir()} if attachment_dir.is_dir() else set()
+    if (existing and without_modified_date(existing["text"]) == content and current == wanted
+            and attachment_current == attachment_wanted):
         return "unchanged"
 
     if existing:
@@ -877,6 +894,16 @@ def save_post(post, existing):
         (image_dir / name).unlink()
     if image_dir.is_dir() and not any(image_dir.iterdir()):
         image_dir.rmdir()
+    if attachment_wanted:
+        attachment_dir.mkdir(parents=True, exist_ok=True)
+    for name, data in attachment_files.items():
+        target = attachment_dir / name
+        if not target.exists():
+            target.write_bytes(data)
+    for name in attachment_current - attachment_wanted:
+        (attachment_dir / name).unlink()
+    if attachment_dir.is_dir() and not any(attachment_dir.iterdir()):
+        attachment_dir.rmdir()
     return "updated" if existing else "created"
 
 
@@ -887,6 +914,11 @@ def remove_post(existing):
         for entry in image_dir.iterdir():
             entry.unlink()
         image_dir.rmdir()
+    attachment_dir = ATTACHMENTS_DIR / existing["slug"]
+    if attachment_dir.is_dir():
+        for entry in attachment_dir.iterdir():
+            entry.unlink()
+        attachment_dir.rmdir()
 
 
 # -----------------------------------------------------------------------------
@@ -897,7 +929,7 @@ def commit_and_propose(message, proposal):
     # Blog changes affect the five recent posts in the public terminal feed.
     write_terminal_json(ROOT)
     write_search_json(ROOT)
-    paths = [path for path in ("_posts", "assets/images/blog", "terminal.json", "search.json")
+    paths = [path for path in ("_posts", "assets/images/blog", "assets/files/blog", "terminal.json", "search.json")
              if (ROOT / path).exists() or git("ls-files", "--", path).stdout.strip()]
     if paths:
         git("add", "--all", "--", *paths)

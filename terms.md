@@ -59,7 +59,7 @@ You can create a free account with your email address to write for the blog. If 
 
 - **Your email address:** use an address that you control, and keep access to it to yourself. Anyone who can read your email can sign in to your account.
 - **Your profile:** your username, display name, bio, and website are public. They must follow the rules for posts in [Blog posts](#blog-posts), and must not impersonate anyone or mislead people about who you are. A username can't be changed once it's chosen, and some names are reserved.
-- **Limits:** each account can send up to 5 new posts a day, and upload up to 200 images of up to {{ blog.limits.image_size_mb }} MB each.
+- **Limits:** each account can send up to 5 new posts a day, and upload up to 200 images of up to {{ blog.limits.image_size_mb }} MB each. You may also upload up to 20 PDF or PPTX documents per account, each strictly under 10 MB, with at most five per post.
 - **Ending your account:** you can delete your account at any time on [your account page]({{ '/account/' | relative_url }}). I may suspend or delete an account, or change or remove a profile, that breaks these Terms.
 - **Availability:** accounts are provided by Supabase, a third-party service, so they may sometimes be unavailable. You can still write a post with GitHub.
 {% endif %}
@@ -67,8 +67,8 @@ You can create a free account with your email address to write for the blog. If 
 
 {% if accounts_on %}Anyone can write a post for the blog, with an account on this website or with the {% include link.html url=blog_form_url label="blog post form" %} on GitHub.{% else %}Anyone with a GitHub account can write a post for the blog using the {% include link.html url=blog_form_url label="blog post form" %} on GitHub.{% endif %} These terms apply to every post you submit:
 
-- **Your post, your rights:** you confirm that you wrote the post and that you have the right to publish its text and images. You keep ownership of your post.
-- **Permission to publish:** by submitting a post, you give me a free, non-exclusive, worldwide permission to publish, display, and store it — including its images — on this website, in the blog's feed, and in the website's public repository on GitHub, and to make the changes needed to publish it, such as converting its formatting and resizing or re-encoding its images.
+- **Your post, your rights:** you confirm that you wrote the post and that you have the right to publish its text, images and attachments. By uploading attachments, you agree that they are public immediately, even before review, and may be downloaded by visitors. Do not upload private material or unsafe files. You keep ownership of your post.
+- **Permission to publish:** by submitting a post, you give me a free, non-exclusive, worldwide permission to publish, display, and store it — including its images and attachments — on this website, in the blog's feed, and in the website's public repository on GitHub, and to make the changes needed to publish it, such as converting its formatting resizing or re-encoding its images, renaming attachments and extracting slide text for previews.
 - **Review:** {% if blog.review_visitor_posts %}posts from visitors are published only after I review them, and edits to a published post are reviewed again. {% endif %}I may decline, remove, or stop showing any post at any time, without giving a reason.
 - **What's not allowed:** posts must not contain unlawful content; material that infringes someone else's copyright, trademark, or other rights; spam or advertising; malicious code or links; hateful, harassing, or sexually explicit content; or another person's personal information without their permission.
 - **Views:** posts by visitors express their authors' own views, not mine, and I am not responsible for them.

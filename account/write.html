@@ -2,7 +2,7 @@
 layout: page
 title: Write a post
 eyebrow: Account
-lead: Write in Markdown, add images, and send your post for review.
+lead: Write in Markdown, add images and documents, and send your post for review.
 description: "Write a post for the blog on sanskarIN.github.io, add images, and send it for review."
 permalink: /account/write/
 noindex: true
@@ -78,13 +78,22 @@ account_app: write
       <textarea class="form-field__input form-field__input--tall" id="post-body" name="body" rows="18" maxlength="50000" aria-describedby="post-body-hint" required></textarea>
       <div class="button-row">
         <button class="button button--secondary" type="button" data-action="add-image">Add an image</button>
+        <button class="button button--secondary" type="button" data-action="add-attachment" aria-describedby="post-attachment-hint">Attach a file</button>
       </div>
       <input type="file" accept="image/png,image/jpeg,image/gif,image/webp" data-file="body" hidden>
+      <input type="file" accept=".pdf,.pptx,application/pdf,application/vnd.openxmlformats-officedocument.presentationml.presentation" data-file="attachment" hidden>
+      <details>
+        <summary>Manage uploaded documents</summary>
+        <p class="form-field__hint">Staged documents are public. Deleting a staged copy does not remove a published copy, but it can break an article waiting for review or a future edit. Remove only files you no longer use.</p>
+        <button class="button button--secondary" type="button" data-action="list-attachments">List my uploaded documents</button>
+        <ul data-staged-attachments></ul>
+      </details>
+      <p class="form-field__hint" id="post-attachment-hint">PDF or PPTX, strictly under 10 MB each; up to five per post. Uploads are public immediately, even before review. Do not include private information or files you cannot share. Remove the inserted Markdown link to exclude a file from the published post. To offer a visual PowerPoint preview, attach a PDF export with the same base filename.</p>
     </div>
 
     <div class="form-check form-field--wide">
       <input id="post-confirm" name="confirm" type="checkbox" required>
-      <label for="post-confirm">I wrote this post, I have the right to publish its text and images, and I agree to the <a href="{{ '/terms/#blog-posts' | relative_url }}">Terms</a>.</label>
+      <label for="post-confirm">I wrote this post, I have the right to publish its text, images and attachments, and I agree to the <a href="{{ '/terms/#blog-posts' | relative_url }}">Terms</a>.</label>
     </div>
     <div class="form-panel__actions">
       <button class="button button--primary" type="submit">Send for review</button>

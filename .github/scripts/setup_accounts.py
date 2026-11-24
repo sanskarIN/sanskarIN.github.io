@@ -119,6 +119,11 @@ CHECK_SQL = """select
   to_regclass('public.profiles') is not null as profiles,
   to_regclass('public.submissions') is not null as submissions,
   exists (select 1 from storage.buckets where id = '%s' and public) as bucket,
+  exists (select 1 from storage.buckets where id = 'blog-attachments' and public
+            and file_size_limit = 9999999
+            and allowed_mime_types @> array['application/pdf', 'application/vnd.openxmlformats-officedocument.presentationml.presentation']) as attachment_bucket,
+  exists (select 1 from pg_policies where schemaname = 'storage' and tablename = 'objects'
+            and policyname = 'Authors upload their own documents') as attachment_policy,
   coalesce((select bool_and(relrowsecurity) from pg_class
             where oid in (to_regclass('public.profiles'), to_regclass('public.submissions'))), false)
     as row_security;"""
@@ -444,12 +449,14 @@ def set_up_database(api, bucket):
     row = rows[0] if isinstance(rows, list) and rows and isinstance(rows[0], dict) else {}
     missing = [label for key, label in (("profiles", "the profiles table"), ("submissions", "the submissions table"),
                                         ("bucket", f"the public {bucket} bucket"),
+                                        ("attachment_bucket", "the limited document attachment bucket"),
+                                        ("attachment_policy", "the document upload policy"),
                                         ("row_security", "row-level security on both tables"))
                if row.get(key) is not True]
     if missing:
         raise SetupError(f"supabase/schema.sql ran, but {and_list(missing)} {'is' if len(missing) == 1 else 'are'} "
                          "missing. Run it in the SQL Editor to see what went wrong.")
-    print("Database: the tables, the image bucket, and their security rules are in place.")
+    print("Database: the tables, the image and document buckets, and their security rules are in place.")
 
 
 def save_admin(api, email):
@@ -773,7 +780,7 @@ def set_up(commit, manual):
         "## Accounts",
         "",
         f"- **Project:** {project_url}, running",
-        "- **Database:** the tables, the image bucket, and their security rules are in place",
+        "- **Database:** the tables, the image and document buckets, and their security rules are in place",
         f"- **Sign-in:** {CODE_LENGTH}-digit codes that work for {CODE_MINUTES} minutes, sent by {service}",
         f"- **Edge Function:** \"{function_name}\" deployed{f' (version {version})' if version else ''}, "
         "with the GitHub token",
