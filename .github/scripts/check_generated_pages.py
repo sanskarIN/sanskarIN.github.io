@@ -120,6 +120,18 @@ def check(output):
         raise AssertionError("Assets search entry missing or duplicated")
     if {"title": "Assets", "url": "/resources/"} not in terminal["pages"]:
         raise AssertionError("Assets terminal navigation missing")
+    articles = scan(output / "articles" / "index.html")
+    if articles.h1 != ["Articles"] or "/articles/" not in blog.links or "/articles/" not in resources.links or "/articles/" not in h.links:
+        raise AssertionError("Articles page is not discoverable")
+    if "/resources/" not in articles.links or "/blog/" not in articles.links:
+        raise AssertionError("Article navigation is incomplete")
+    if sum(item["url"] == "/articles/" for item in search) != 1:
+        raise AssertionError("Articles search entry missing or duplicated")
+    if {"title": "Articles", "url": "/articles/"} not in terminal["pages"]:
+        raise AssertionError("Articles terminal navigation missing")
+    for entry in search:
+        if entry["type"] == "Post" and entry["url"] not in articles.links:
+            raise AssertionError("Published article missing from reading room: " + entry["url"])
     home = json.loads((ROOT / "_data/home_content.json").read_text(encoding="utf-8"))
     contact_data = json.loads((ROOT / "_data/contact_page.json").read_text(encoding="utf-8"))
     not_found_data = json.loads((ROOT / "_data/not_found_page.json").read_text(encoding="utf-8"))
