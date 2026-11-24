@@ -7,6 +7,7 @@ content-derived names without account identifiers.
 import hashlib
 import html
 import io
+import posixpath
 import re
 import urllib.error
 import urllib.parse
@@ -21,6 +22,11 @@ MAX_PREVIEW = 20_000
 NAME = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-([a-z0-9][a-z0-9-]{0,59})\.(pdf|pptx)")
 SLIDE = re.compile(r"ppt/slides/slide([1-9][0-9]*)\.xml")
 TEXT = "{http://schemas.openxmlformats.org/drawingml/2006/main}t"
+PRESENTATION = "{http://schemas.openxmlformats.org/presentationml/2006/main}"
+OFFICE_REL = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"
+PACKAGE_REL = "{http://schemas.openxmlformats.org/package/2006/relationships}"
+CONTENT_TYPE = "{http://schemas.openxmlformats.org/package/2006/content-types}"
+PPTX_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"
 
 
 def source_prefix(image_prefix):
@@ -57,6 +63,53 @@ def fetch_document(url):
     return data
 
 
+def read_xml(archive, name):
+    """Allow bounded UTF-8 XML only; reject entity declarations before parsing."""
+    if archive.getinfo(name).file_size > 1_000_000:
+        raise ValueError("Presentation XML exceeds the safety limit")
+    raw = archive.read(name)
+    try:
+        text = raw.decode("utf-8-sig")
+    except UnicodeDecodeError as exc:
+        raise ValueError("Unsupported presentation XML encoding") from exc
+    if "\x00" in text or "<!DOCTYPE" in text.upper() or "<!ENTITY" in text.upper():
+        raise ValueError("Unsupported XML declaration")
+    return ET.fromstring(text)
+
+
+def ordered_slides(archive):
+    """Read the authoritative presentation order, not ZIP filename order."""
+    types = read_xml(archive, "[Content_Types].xml")
+    if not any(node.get("PartName") == "/ppt/presentation.xml"
+               and node.get("ContentType") == PPTX_CONTENT_TYPE
+               for node in types.findall(CONTENT_TYPE + "Override")):
+        raise ValueError("Not a non-macro PPTX presentation")
+    presentation = read_xml(archive, "ppt/presentation.xml")
+    if presentation.tag != PRESENTATION + "presentation":
+        raise ValueError("Invalid presentation root")
+    relations = read_xml(archive, "ppt/_rels/presentation.xml.rels")
+    targets = {}
+    for rel in relations.findall(PACKAGE_REL + "Relationship"):
+        if not (rel.get("Type") or "").endswith("/slide"):
+            continue
+        if rel.get("TargetMode") == "External":
+            raise ValueError("External slide references are not supported")
+        target = rel.get("Target") or ""
+        path = posixpath.normpath(target.lstrip("/") if target.startswith("/") else "ppt/" + target)
+        if not SLIDE.fullmatch(path) or path not in archive.namelist() or rel.get("Id") in targets:
+            raise ValueError("Invalid slide reference")
+        targets[rel.get("Id")] = path
+    order = []
+    for slide in presentation.findall(PRESENTATION + "sldIdLst/" + PRESENTATION + "sldId"):
+        target = targets.get(slide.get(OFFICE_REL + "id"))
+        if not target or target in order:
+            raise ValueError("Invalid or duplicate slide reference")
+        order.append(target)
+    if not order or len(order) > 100:
+        raise ValueError("Presentations must contain 1–100 slides")
+    return order
+
+
 def preview_presentation(data):
     """Bounded text-only preview; does not execute macros or render objects."""
     try:
@@ -67,24 +120,18 @@ def preview_presentation(data):
                     or sum(entry.file_size for entry in entries) > MAX_EXPANDED
                     or any(entry.flag_bits & 1 for entry in entries)):
                 raise ValueError("Presentation archive exceeds safety limits")
-            if not {"[Content_Types].xml", "ppt/presentation.xml"}.issubset(names):
+            if not {"[Content_Types].xml", "ppt/presentation.xml", "ppt/_rels/presentation.xml.rels"}.issubset(names):
                 raise ValueError("Not a valid PPTX presentation")
             if any("vbaproject" in name.lower() or "/embeddings/" in name.lower()
                    or "/activex/" in name.lower() for name in names):
                 raise ValueError("Presentations with macros or embedded objects are not supported")
-            slides = sorted((int(match.group(1)), name) for name in names
-                            if (match := SLIDE.fullmatch(name)))
-            if not slides or len(slides) > 100:
-                raise ValueError("Presentations must contain 1–100 slides")
+            slides = ordered_slides(archive)
             preview = []
             remaining = MAX_PREVIEW
-            for number, name in slides:
-                if archive.getinfo(name).file_size > 1_000_000:
-                    raise ValueError("Slide XML exceeds the safety limit")
-                raw = archive.read(name)
-                if b"<!DOCTYPE" in raw.upper() or b"<!ENTITY" in raw.upper():
-                    raise ValueError("Unsupported XML declaration")
-                root = ET.fromstring(raw)
+            for number, name in enumerate(slides, 1):
+                root = read_xml(archive, name)
+                if root.tag != PRESENTATION + "sld":
+                    raise ValueError("Invalid slide root")
                 if root.get("show") == "0":
                     continue
                 text = " ".join(" ".join(node.itertext()) for node in root.iter(TEXT))
@@ -95,7 +142,7 @@ def preview_presentation(data):
                 if remaining <= 0:
                     break
             return preview
-    except (zipfile.BadZipFile, ET.ParseError, RuntimeError, NotImplementedError) as exc:
+    except (zipfile.BadZipFile, ET.ParseError, RuntimeError, NotImplementedError, KeyError) as exc:
         raise ValueError("Invalid or unsupported PPTX file") from exc
 
 
@@ -143,6 +190,6 @@ def collect(markup, prefix, account, slug, token_pattern, attributes):
                 files[name] = data
             seen[url] = asset["id"]
         # The public article never links to the staging folder.
-        return '<a href="#' + html.escape(seen[url], quote=True) + '">'
+        return '<a href="#' + html.escape(seen[url], quote=True) + '" rel="noopener noreferrer">'
 
     return token_pattern.sub(replace, markup), assets, files
