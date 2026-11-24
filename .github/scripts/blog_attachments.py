@@ -174,6 +174,12 @@ def validate_chart_workbook(data):
 def validate_presentation_objects(archive, names):
     embedded = set()
     for name in names:
+        # ZIP producers can include explicit empty directory records. These
+        # are not embedded objects; actual member files are still checked.
+        if archive.getinfo(name).is_dir():
+            if archive.getinfo(name).file_size != 0:
+                raise ValueError("Invalid ZIP directory record")
+            continue
         lower = name.lower()
         if "vbaproject" in lower or "/activex/" in lower or "/oleobjects/" in lower:
             raise ValueError("Presentations with macros or active objects are not supported")

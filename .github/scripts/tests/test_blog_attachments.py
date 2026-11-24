@@ -217,6 +217,13 @@ class AttachmentTests(unittest.TestCase):
                 archive.writestr(f"ppt/slides/slide{n}.xml", '<p:sld xmlns:p="' + documents.PRESENTATION[1:-1] + '" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:t>Slide ' + str(n) + '</a:t></p:sld>')
         self.assertEqual(len(documents.preview_presentation(buffer.getvalue())), 132)
 
+    def test_empty_embedding_directory_is_not_an_object(self):
+        self.assertEqual(len(documents.preview_presentation(pptx(("ppt/embeddings/", b"")))), 2)
+        with self.assertRaises(ValueError):
+            documents.preview_presentation(pptx(("ppt/embeddings/", b"not empty")))
+        with self.assertRaises(ValueError):
+            documents.preview_presentation(pptx(("ppt/embeddings/object.bin", b"unsafe")))
+
     def test_invalid_or_embedded_presentation(self):
         for data in (b"not a zip", pptx(("ppt/vbaProject.bin", b"macro")),
                      pptx(("ppt/embeddings/object.bin", b"embedded"))):
