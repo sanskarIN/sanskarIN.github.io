@@ -6,6 +6,7 @@ lead: Research notes, experiments, technical investigations and reproducible fin
 description: Explore published research notes, experiments, technical investigations, reports and supporting documents.
 permalink: /research/
 schema_type: CollectionPage
+scripts: [research]
 ---
 {%- include accounts-config.html -%}
 {%- capture form_url -%}{{ site.repository_url }}/issues/new?template={{ site.data.blog.form }}{%- endcapture -%}
@@ -30,23 +31,34 @@ schema_type: CollectionPage
 <p class="note">{{ research_count }} published research post{% if research_count != 1 %}s{% endif %} &middot; {{ documents }} downloadable resource{% if documents != 1 %}s{% endif %}.</p>
 {%- if research_count > 0 %}
   {%- assign years = research_posts | group_by_exp: "post", "post.date | date: '%Y'" %}
-<section class="page-section" aria-labelledby="latest-research">
+<section class="page-section" aria-labelledby="latest-research" data-research-latest>
   <h2 id="latest-research">Latest research</h2>
   {% include post-card.html post=research_posts.first documents=true %}
 </section>
 <section class="page-section" aria-labelledby="research-archive">
   <h2 id="research-archive">Research archive</h2>
-  <ul class="tag-list" aria-label="Browse research by year">
+  <div class="form-field" data-research-filter hidden>
+    <label class="form-field__label" for="research-language">Filter by language</label>
+    <select class="form-field__input" id="research-language">
+      <option value="all">All languages</option>
+      {% for language in site.data.post_languages %}
+      <option value="{{ language[0] | escape }}">{{ language[1] | escape }}</option>
+      {% endfor %}
+    </select>
+    <p class="note" data-research-results role="status"></p>
+  </div>
+  <p data-research-empty hidden>No research posts match this language.</p>
+  <ul class="tag-list" aria-label="Browse research by year" data-research-years>
     {%- for year in years %}
     <li><a class="tag tag--link" href="#research-{{ year.name }}">{{ year.name }} ({{ year.items.size }})</a></li>
     {%- endfor %}
   </ul>
   {%- for year in years %}
-  <section class="post-year" aria-labelledby="research-{{ year.name }}">
+  <section class="post-year" aria-labelledby="research-{{ year.name }}" data-research-year>
     <h3 id="research-{{ year.name }}">{{ year.name }} <span class="post-year__count">&middot; {{ year.items.size }} post{% if year.items.size != 1 %}s{% endif %}</span></h3>
     <ul class="post-list">
       {%- for post in year.items %}
-      <li>{% include post-card.html post=post heading=4 documents=true %}</li>
+      <li data-research-language="{{ post.content_language | default: 'und' | escape }}">{% include post-card.html post=post heading=4 documents=true %}</li>
       {%- endfor %}
     </ul>
   </section>
@@ -65,6 +77,6 @@ schema_type: CollectionPage
     <li><div><h3>Define the question</h3><p>Provide a clear title and abstract, background, research question and scope.</p></div></li>
     <li><div><h3>Document the evidence</h3><p>Explain methods, sources, experimental conditions and results. Distinguish observations from interpretations and include limitations.</p></div></li>
     <li><div><h3>Attach supporting material</h3><p>Use PDF, PPTX, DOCX, Markdown or HTML files for reports and reproducibility notes, and BibTeX (.bib) files for citations and bibliographies. Files are public; remove private information and respect licenses. Each file must be smaller than 10 MB, with up to five per post.</p></div></li>
-    <li><div><h3>Submit and revise</h3><p>Select Publish in Research in the account editor, or include the research tag in the GitHub issue form. The existing review process applies. Optionally choose a custom URL slug before publication; approved edits retain the original article URL.</p></div></li>
+    <li><div><h3>Submit and revise</h3><p>Select Publish in Research in the account editor, or include the research tag in the GitHub issue form. The existing review process applies. Choose the article language, optional subtitle, publication details (type, category, version and counts) and custom URL slug before publication; approved edits retain the original article URL.</p></div></li>
   </ol>
 </section>

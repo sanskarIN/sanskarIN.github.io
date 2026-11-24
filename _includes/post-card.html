@@ -16,6 +16,9 @@
   {%- endif %}
   <div class="post-card__body">
     <h{{ card_heading }} class="post-card__title"><a href="{{ card.url | relative_url }}">{{ card.title | escape }}</a></h{{ card_heading }}>
+    {%- if card.subtitle %}
+    <p class="post-card__summary"><strong>{{ card.subtitle | escape }}</strong></p>
+    {%- endif %}
     {%- if card.description %}
     <p class="post-card__summary">{{ card.description | escape }}</p>
     {%- endif %}
@@ -26,6 +29,17 @@
       <span>by {{ card_author | escape }}</span>
       {%- if card.tags contains "research" %}
       <span><a href="{{ '/research/' | relative_url }}">Research</a></span>
+      {%- assign language_code = card.content_language | default: "und" %}
+      <span>{{ site.data.post_languages[language_code] | default: "Other / unspecified" | escape }}</span>
+      {%- endif %}
+      {%- if card.research_details.publication_type %}
+      <span>{{ card.research_details.publication_type | escape }}</span>
+      {%- endif %}
+      {%- if card.research_details.category %}
+      <span>{{ card.research_details.category | escape }}</span>
+      {%- endif %}
+      {%- if card.research_details.version %}
+      <span>{{ card.research_details.version | escape }}</span>
       {%- endif %}
       <span>{{ card_minutes }} min read</span>
     </p>

@@ -46,6 +46,11 @@ account_app: write
       <input class="form-field__input" id="post-title" name="title" type="text" maxlength="{{ limits.title_length }}" required>
     </div>
     <div class="form-field form-field--wide">
+      <label class="form-field__label" for="post-subtitle">Subtitle (optional)</label>
+      <input class="form-field__input" id="post-subtitle" name="subtitle" type="text" maxlength="200" aria-describedby="post-subtitle-hint" placeholder="A closer look at the methods, findings and implications">
+      <p class="form-field__hint" id="post-subtitle-hint">A short secondary title, shown beneath the main title. Up to 200 characters. This is separate from the summary.</p>
+    </div>
+    <div class="form-field form-field--wide">
       <label class="form-field__label" for="post-slug">URL slug (optional)</label>
       <input class="form-field__input" id="post-slug" name="requestedSlug" type="text" maxlength="60" autocapitalize="none" spellcheck="false" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" placeholder="my-research-paper" aria-describedby="post-slug-hint post-slug-preview">
       <p class="form-field__hint" id="post-slug-hint">Use lowercase letters, numbers and single hyphens. Leave blank to generate a slug from the title. Availability is checked at publication; a published URL never changes, including for research posts.</p>
@@ -62,10 +67,52 @@ account_app: write
     </div>
     <p class="form-field__hint form-field--wide" id="post-research-hint">Research posts appear in the <a href="{{ '/research/' | relative_url }}">Research archive</a> after the usual review. Suggested structure: abstract, question, methodology, evidence, findings, limitations and references. The research tag counts toward the five-tag limit.</p>
     <div class="form-field form-field--wide">
+      <label class="form-field__label" for="post-language">Post language</label>
+      <select class="form-field__input" id="post-language" name="contentLanguage" aria-describedby="post-language-hint">
+        <option value="und" selected>Other / unspecified</option>
+        {% for language in site.data.post_languages %}
+          {% unless language[0] == "und" %}
+          <option value="{{ language[0] | escape }}">{{ language[1] | escape }}</option>
+          {% endunless %}
+        {% endfor %}
+      </select>
+      <p class="form-field__hint" id="post-language-hint">Choose the primary language of the article or Multilingual. This controls archive discovery and language metadata, not translation.</p>
+    </div>
+    <div class="form-field form-field--wide">
       <label class="form-field__label" for="post-tags">Tags</label>
       <input class="form-field__input" id="post-tags" name="tags" type="text" maxlength="200" placeholder="open source, android, web" aria-describedby="post-tags-hint">
       <p class="form-field__hint" id="post-tags-hint">Up to {{ limits.tags }} topics, separated by commas; up to four additional topics when Research is selected.</p>
     </div>
+
+    <fieldset class="form-group form-field--wide">
+      <legend class="form-field__label">Research publication details (optional)</legend>
+      <p class="form-field__hint">Add the details that apply to your work. Leave unknown values blank. Counts describe the uploaded publication and are supplied by the author, not calculated by the website. Published research is freely accessible.</p>
+      <div class="form-field">
+        <label class="form-field__label" for="detail-publication_type">Publication type</label>
+        <input class="form-field__input" id="detail-publication_type" name="detail_publication_type" type="text" maxlength="100" placeholder="Technical Research Article">
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="detail-category">Category</label>
+        <input class="form-field__input" id="detail-category" name="detail_category" type="text" maxlength="100" placeholder="Computer Science">
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="detail-version">Version</label>
+        <input class="form-field__input" id="detail-version" name="detail_version" type="text" maxlength="40" placeholder="v1.0.0">
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="detail-chapters">Chapters</label>
+        <input class="form-field__input" id="detail-chapters" name="detail_chapters" type="text" inputmode="numeric" pattern="[0-9]{1,7}" maxlength="7" placeholder="27">
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="detail-technical_lessons">Technical lessons</label>
+        <input class="form-field__input" id="detail-technical_lessons" name="detail_technical_lessons" type="text" inputmode="numeric" pattern="[0-9]{1,7}" maxlength="7" placeholder="108">
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="detail-research_references">Research references</label>
+        <input class="form-field__input" id="detail-research_references" name="detail_research_references" type="text" inputmode="numeric" pattern="[0-9]{1,7}" maxlength="7" placeholder="44">
+      </div>
+      <p class="form-field__hint">Access: Free (public website).</p>
+    </fieldset>
 
     <fieldset class="form-group form-field--wide">
       <legend class="form-field__label">Cover image</legend>

@@ -609,6 +609,12 @@ Authors may enter a URL slug in the website editor or GitHub issue form. For exa
 
 ## Research
 
+Optional research publication details include publication type, category, version, chapters, technical lessons and research references. Text fields are bounded (100 characters, or 40 for version); counts are whole numbers from 0 to 1,000,000, and blank values are omitted. The author provides counts; the site does not verify them against attachments. Access is Free for public research, not a configurable paywall. Metadata is persisted in drafts, Supabase and post front matter, shown in article details, with type/category/version in listings and search. Existing posts and canonical URLs are unchanged.
+
+The optional Subtitle field adds a short secondary heading (up to 200 characters), separate from the title and summary. It is stored in drafts, Supabase and post front matter, displayed on article pages and listings, and included in search text. Changing it does not change the post URL. Older posts do not need a subtitle.
+
+The editor includes a post language selector (English, Hindi, other Indian and international languages, Multilingual and Other / unspecified). The selected language is saved as `content_language`, shown in research listings and article details, and used for the archive filter and article text language attributes. Existing posts without metadata stay visible as unspecified; selecting a language does not translate content.
+
 The public research archive at `/research/` lists posts carrying the normalized `research` tag. Authors can use **Write a research post** to open the account editor in research mode with a separate local draft, or select **Publish in Research** on an ordinary post. The tag is counted within the existing five-tag limit. GitHub issue-form authors can include `research` in the Tags field. Published research uses the existing canonical `/blog/<slug>/` URL, author attribution, moderation, revision history, search, and document attachments, and remains discoverable in Blog and Articles. No extra database table or duplicate publication is required. Research posts are not automatically peer reviewed; authors should distinguish findings from hypotheses and include methods, limitations and references. Removing the tag through an approved edit removes the entry from the research archive without changing its canonical URL.
 
 ## Articles

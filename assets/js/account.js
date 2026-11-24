@@ -986,6 +986,8 @@
         const draftKey = researchMode ? RESEARCH_DRAFT_KEY : DRAFT_KEY;
         const research = field(form, "research");
         const slugInput = field(form, "requestedSlug");
+        const languageInput = field(form, "contentLanguage");
+        const researchKeys = ["publication_type", "category", "version", "chapters", "technical_lessons", "research_references"];
         const slugPreview = $("[data-slug-preview]", form);
         const reservedSlugs = ["tags", "feed", "index", "page", "authors", "posts"];
         let coverUrl = "";
@@ -1022,12 +1024,21 @@
             slugPreview.textContent = (editingId ? "Requested URL (published URLs are unchanged): " : "Estimated URL: ") + (slugPreview.getAttribute("data-slug-base") || "/blog/") + (requested || auto || "[generated-slug]") + "/";
         }
         function values() {
+            const researchDetails = {};
+            for (const key of researchKeys) {
+                const value = field(form, "detail_" + key).value.replace(/\s+/g, " ").trim();
+                if (value)
+                    researchDetails[key] = value;
+            }
             const tags = field(form, "tags").value.split(",").map((tag) => tag.trim()).filter(Boolean).filter((tag) => tag.toLowerCase().replace(/^#+/, "") !== "research");
             if (research.checked)
                 tags.unshift("research");
             return {
                 title: field(form, "title").value.replace(/\s+/g, " ").trim(),
+                subtitle: field(form, "subtitle").value.replace(/\s+/g, " ").trim(),
+                researchDetails,
                 requestedSlug: slugInput.value.trim(),
+                contentLanguage: languageInput.value || "und",
                 summary: field(form, "summary").value.replace(/\s+/g, " ").trim(),
                 tags,
                 coverUrl,
@@ -1037,7 +1048,12 @@
         }
         function fill(post) {
             field(form, "title").value = post.title || "";
+            field(form, "subtitle").value = post.subtitle || "";
+            const details = post.researchDetails || post.research_details || {};
+            for (const key of researchKeys)
+                field(form, "detail_" + key).value = details[key] || "";
             slugInput.value = post.requestedSlug || post.requested_slug || "";
+            languageInput.value = post.contentLanguage || post.content_language || "und";
             updateSlugPreview();
             field(form, "summary").value = post.summary || "";
             research.checked = (post.tags || []).some((tag) => tag.toLowerCase().replace(/^#+/, "") === "research");
@@ -1224,6 +1240,8 @@
             const problems = [];
             if (!post.title)
                 problems.push("Add a title.");
+            if (Array.from(post.subtitle).length > 200)
+                problems.push("Shorten the subtitle to 200 characters or fewer.");
             if (post.requestedSlug && !validSlug(post.requestedSlug))
                 problems.push("Choose a valid URL slug or leave it blank.");
             if (post.tags.length > 5)
@@ -1271,7 +1289,7 @@
                     return;
                 }
                 if (editingId) {
-                    return request(`/rest/v1/submissions?id=eq.${editingId}&select=title,requested_slug,summary,tags,cover_url,cover_alt,body`, { token: session.access_token })
+                    return request(`/rest/v1/submissions?id=eq.${editingId}&select=title,subtitle,research_details,requested_slug,content_language,summary,tags,cover_url,cover_alt,body`, { token: session.access_token })
                         .then((rows) => {
                         if (!rows || !rows[0])
                             throw new Error("That post couldn't be found.");
@@ -1317,6 +1335,8 @@
         link.href = post.url;
         title.appendChild(link);
         body.appendChild(title);
+        if (post.subtitle)
+            body.appendChild(element("p", "post-card__summary", post.subtitle));
         if (post.description)
             body.appendChild(element("p", "post-card__summary", post.description));
         const meta = element("p", "post-card__meta");

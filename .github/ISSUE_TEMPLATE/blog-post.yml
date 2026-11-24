@@ -18,11 +18,45 @@ body:
         - **Review:** posts from anyone other than the site owner are published after the owner approves them. You can keep editing this issue until then.
         - **Public:** this issue, your post, and your GitHub username (shown as the author) are public.
   - type: input
+    id: subtitle
+    attributes:
+      label: Subtitle
+      description: Optional secondary title, up to 200 characters. It appears under the main title.
+  - type: input
     id: slug
     attributes:
       label: URL slug
       description: Optional. Use 1–60 lowercase letters, numbers and single hyphens. Leave blank to generate from your title. The slug cannot change after publication.
       placeholder: my-research-paper
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      description: Select the primary language of your post.
+      options:
+        - "Other / unspecified"
+        - "English"
+        - "Hindi (हिन्दी)"
+        - "Bengali (বাংলা)"
+        - "Tamil (தமிழ்)"
+        - "Telugu (తెలుగు)"
+        - "Marathi (मराठी)"
+        - "Gujarati (ગુજરાતી)"
+        - "Kannada (ಕನ್ನಡ)"
+        - "Malayalam (മലയാളം)"
+        - "Punjabi (ਪੰਜਾਬੀ)"
+        - "Urdu (اردو)"
+        - "Sanskrit (संस्कृतम्)"
+        - "French"
+        - "German"
+        - "Spanish"
+        - "Japanese"
+        - "Chinese"
+        - "Arabic"
+        - "Russian"
+        - "Portuguese"
+        - "Multilingual"
+      default: 0
   - type: input
     id: summary
     attributes:
@@ -34,6 +68,42 @@ body:
       label: Tags
       description: Up to 5 topics, separated by commas. Include the research tag to list your post in the Research archive.
       placeholder: open source, android, web
+  - type: input
+    id: research-publication-type
+    attributes:
+      label: Publication type
+      description: Optional. Up to 100 characters.
+      placeholder: "Technical Research Article"
+  - type: input
+    id: research-category
+    attributes:
+      label: Category
+      description: Optional. Up to 100 characters.
+      placeholder: "Computer Science"
+  - type: input
+    id: research-version
+    attributes:
+      label: Version
+      description: Optional. Up to 40 characters.
+      placeholder: "v1.0.0"
+  - type: input
+    id: research-chapters
+    attributes:
+      label: Chapters
+      description: Optional. Whole number from 0 to 1,000,000.
+      placeholder: "27"
+  - type: input
+    id: research-technical-lessons
+    attributes:
+      label: Technical lessons
+      description: Optional. Whole number from 0 to 1,000,000.
+      placeholder: "108"
+  - type: input
+    id: research-research-references
+    attributes:
+      label: Research references
+      description: Optional. Whole number from 0 to 1,000,000.
+      placeholder: "44"
   - type: upload
     id: cover
     attributes:

@@ -182,132 +182,30 @@ create table if not exists public.submissions (
   updated_at timestamptz not null default now()
 );
 
--- Idempotent migration: existing posts keep their published URL.
+-- Idempotent migrations for optional publication metadata.
 alter table public.submissions add column if not exists requested_slug text not null default '';
 alter table public.submissions drop constraint if exists submissions_requested_slug_format;
 alter table public.submissions add constraint submissions_requested_slug_format
   check (requested_slug = '' or (char_length(requested_slug) between 1 and 60
-    and requested_slug ~ '^[a-z0-9]+(-[a-z0-9]+)*
-  on public.submissions (user_id, created_at desc);
-
-drop trigger if exists submissions_touch_updated_at on public.submissions;
-create trigger submissions_touch_updated_at
-  before update on public.submissions
-  for each row execute function public.touch_updated_at();
-
-alter table public.submissions enable row level security;
-
-drop policy if exists "People read their own submissions" on public.submissions;
-create policy "People read their own submissions"
-  on public.submissions for select
-  to authenticated
-  using ((select auth.uid()) = user_id);
-
-revoke all on table public.submissions from anon, authenticated;
-grant select on table public.submissions to authenticated;
-grant select, insert, update, delete on table public.submissions to service_role;
-
-
--- -----------------------------------------------------------------------------
--- Images: a public bucket, so the publishing workflow can copy the images of
--- approved posts to the website. Files get random names; each person can
--- upload only to their own folder (named after their account id).
--- -----------------------------------------------------------------------------
-
-insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
-values (
-  'blog-images', 'blog-images', true, 10485760,
-  array['image/png', 'image/jpeg', 'image/gif', 'image/webp']
-)
-on conflict (id) do update
-  set public = excluded.public,
-      file_size_limit = excluded.file_size_limit,
-      allowed_mime_types = excluded.allowed_mime_types;
-
--- How many images the signed-in person has uploaded (for the limit below).
-create or replace function public.my_blog_image_count()
-returns bigint
-language sql
-stable
-security definer
-set search_path = ''
-as $$
-  select count(*)
-  from storage.objects
-  where bucket_id = 'blog-images'
-    and name like (select auth.uid())::text || '/%';
-$$;
-
-revoke all on function public.my_blog_image_count() from public, anon;
-grant execute on function public.my_blog_image_count() to authenticated;
-
-drop policy if exists "People upload blog images to their own folder" on storage.objects;
-create policy "People upload blog images to their own folder"
-  on storage.objects for insert
-  to authenticated
-  with check (
-    bucket_id = 'blog-images'
-    and (storage.foldername(name))[1] = (select auth.uid())::text
-    and public.my_blog_image_count() < 200
-  );
-
-drop policy if exists "People see their own blog images" on storage.objects;
-create policy "People see their own blog images"
-  on storage.objects for select
-  to authenticated
-  using (
-    bucket_id = 'blog-images'
-    and (storage.foldername(name))[1] = (select auth.uid())::text
-  );
-
-drop policy if exists "People delete their own blog images" on storage.objects;
-create policy "People delete their own blog images"
-  on storage.objects for delete
-  to authenticated
-  using (
-    bucket_id = 'blog-images'
-    and (storage.foldername(name))[1] = (select auth.uid())::text
-  );
-
-
--- Public staging for documents submitted through the existing review process.
--- The editor explicitly warns that these uploads are public before publication.
-insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
-values ('blog-attachments', 'blog-attachments', true, 9999999,
-  array['application/pdf', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'text/markdown', 'text/plain', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
-on conflict (id) do update set public = excluded.public,
-  file_size_limit = excluded.file_size_limit, allowed_mime_types = excluded.allowed_mime_types;
-
-create or replace function public.my_blog_attachment_count()
-returns bigint language sql stable security definer set search_path = '' as $$
-  select count(*) from storage.objects where bucket_id = 'blog-attachments'
-    and name like (select auth.uid())::text || '/%';
-$$;
-revoke all on function public.my_blog_attachment_count() from public, anon;
-grant execute on function public.my_blog_attachment_count() to authenticated;
-
-drop policy if exists "Authors upload their own documents" on storage.objects;
-create policy "Authors upload their own documents" on storage.objects for insert
-  to authenticated with check (
-    bucket_id = 'blog-attachments'
-    and (storage.foldername(name))[1] = (select auth.uid())::text
-    and array_length(storage.foldername(name), 1) = 1
-    and storage.filename(name) ~ '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx|md|docx|bib|html\.txt)$'
-    and exists (select 1 from public.profiles where id = (select auth.uid()))
-    and public.my_blog_attachment_count() < 20
-  );
-
-drop policy if exists "Authors list their own documents" on storage.objects;
-create policy "Authors list their own documents" on storage.objects for select
-  to authenticated using (bucket_id = 'blog-attachments'
-    and (storage.foldername(name))[1] = (select auth.uid())::text);
-
-drop policy if exists "Authors delete their own documents" on storage.objects;
-create policy "Authors delete their own documents" on storage.objects for delete
-  to authenticated using (bucket_id = 'blog-attachments'
-    and (storage.foldername(name))[1] = (select auth.uid())::text);
-
+    and requested_slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'
     and requested_slug not in ('tags', 'feed', 'index', 'page', 'authors', 'posts')));
+
+alter table public.submissions add column if not exists content_language text not null default 'und';
+alter table public.submissions drop constraint if exists submissions_content_language_valid;
+alter table public.submissions add constraint submissions_content_language_valid
+  check (content_language in ('en', 'hi', 'bn', 'ta', 'te', 'mr', 'gu', 'kn', 'ml', 'pa', 'ur', 'sa', 'fr', 'de', 'es', 'ja', 'zh', 'ar', 'ru', 'pt', 'mul', 'und'));
+
+alter table public.submissions add column if not exists subtitle text not null default '';
+alter table public.submissions drop constraint if exists submissions_subtitle_length;
+alter table public.submissions add constraint submissions_subtitle_length
+  check (char_length(subtitle) <= 200);
+
+alter table public.submissions add column if not exists research_details jsonb not null default '{}'::jsonb;
+alter table public.submissions drop constraint if exists submissions_research_details_valid;
+alter table public.submissions add constraint submissions_research_details_valid
+  check (jsonb_typeof(research_details) = 'object'
+    and research_details - array['publication_type', 'category', 'version', 'chapters', 'technical_lessons', 'research_references'] = '{}'::jsonb
+    and octet_length(research_details::text) <= 3000);
 
 create index if not exists submissions_user_created
   on public.submissions (user_id, created_at desc);

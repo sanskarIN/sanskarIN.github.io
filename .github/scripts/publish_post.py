@@ -93,7 +93,8 @@ LABELS = {
 STATUS_LABELS = ("awaiting-review", "needs-changes", "published", "pending-merge")
 
 # Headings of the issue form fields (.github/ISSUE_TEMPLATE/blog-post.yml).
-FIELDS_BEFORE_POST = ("URL slug", "Summary", "Tags", "Cover image", "Cover image description")
+RESEARCH_FIELDS = {"publication_type":"Publication type","category":"Category","version":"Version","chapters":"Chapters","technical_lessons":"Technical lessons","research_references":"Research references"}
+FIELDS_BEFORE_POST = ("Subtitle", "URL slug", "Language", "Summary", "Tags", "Cover image", "Cover image description", *RESEARCH_FIELDS.values())
 POST_FIELD = "Post"
 CONFIRMATION_FIELD = "Confirmation"
 NO_RESPONSE = "_No response_"
@@ -110,6 +111,8 @@ ACCOUNT_IMAGE_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,99}")
 # Addresses already used by blog pages: /blog/tags/ and /blog/feed.xml.
 RESERVED_SLUGS = {"tags", "feed", "index", "page", "authors", "posts"}
 CUSTOM_SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
+POST_LANGUAGES = {"en":"English","hi":"Hindi (हिन्दी)","bn":"Bengali (বাংলা)","ta":"Tamil (தமிழ்)","te":"Telugu (తెలుగు)","mr":"Marathi (मराठी)","gu":"Gujarati (ગુજરાતી)","kn":"Kannada (ಕನ್ನಡ)","ml":"Malayalam (മലയാളം)","pa":"Punjabi (ਪੰਜਾਬੀ)","ur":"Urdu (اردو)","sa":"Sanskrit (संस्कृतम्)","fr":"French","de":"German","es":"Spanish","ja":"Japanese","zh":"Chinese","ar":"Arabic","ru":"Russian","pt":"Portuguese","mul":"Multilingual","und":"Other / unspecified"}
+LANGUAGE_LABELS = {label: code for code, label in POST_LANGUAGES.items()}
 
 # The comment the workflow keeps up to date on each post's issue.
 STATUS_MARKER = "<!-- blog-post-status: {state} -->"
@@ -408,6 +411,34 @@ def is_attachment(url):
     return parts.hostname == "user-images.githubusercontent.com"
 
 
+def research_metadata(raw, problems):
+    """Optional author-supplied publication details; counts are not inferred."""
+    details = {}
+    for key, label in RESEARCH_FIELDS.items():
+        value = raw.get(key, "")
+        if value is None or value == "":
+            continue
+        if key in ("chapters", "technical_lessons", "research_references"):
+            value = str(value).strip()
+            if not re.fullmatch(r"[0-9]{1,7}", value) or int(value) > 1000000:
+                problems.append(f"{label} must be a whole number from 0 to 1,000,000.")
+            else:
+                details[key] = int(value)
+        elif isinstance(value, str):
+            value = clean_line(value)
+            if not value:
+                continue
+            if len(value) > (40 if key == "version" else 100):
+                problems.append(f"{label} is too long.")
+            elif key == "version" and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9.+_-]{0,39}", value):
+                problems.append("Use a version such as v1.0.0 or 2026.1.")
+            else:
+                details[key] = value
+        else:
+            problems.append(f"{label} must be text.")
+    return details
+
+
 def read_form(issue, settings, is_image=None):
     """Returns the post's fields, or raises PostProblem with everything to fix."""
     is_image = is_image or is_attachment
@@ -428,9 +459,20 @@ def read_form(issue, settings, is_image=None):
             f"from the form, or write the post with the [blog post form]({form_url})."
         ])
 
+    subtitle = clean_line(sections.get("Subtitle", ""))
+    if len(subtitle) > 200:
+        problems.append("Shorten the subtitle to 200 characters or fewer.")
+
     requested_slug = sections.get("URL slug", "").strip()
     if requested_slug and not valid_custom_slug(requested_slug):
         problems.append("Use a URL slug of 1–60 lowercase letters, digits and single hyphens; reserved routes are not allowed.")
+
+    raw_language = sections.get("Language", "").strip()
+    language = LANGUAGE_LABELS.get(raw_language, raw_language) or "und"
+    if language not in POST_LANGUAGES:
+        problems.append("Select a supported post language from the form.")
+
+    details = research_metadata({key: sections.get(label, "") for key, label in RESEARCH_FIELDS.items()}, problems)
 
     summary = clean_line(sections.get("Summary", ""))
     if len(summary) > settings["summary_length"]:
@@ -467,6 +509,9 @@ def read_form(issue, settings, is_image=None):
     return {
         "title": title,
         "requested_slug": requested_slug,
+        "subtitle": subtitle,
+        "research_details": details,
+        "content_language": language,
         "summary": summary,
         "tags": tags,
         "cover_url": cover_url,
@@ -855,8 +900,21 @@ def build_post(issue, form, settings, existing, trusted, account=None, is_image=
         author, author_url = settings["owner_name"], "/about/"
     else:
         author, author_url = login, f"https://github.com/{login}"
+    language = form.get("content_language", "und")
+    if language not in POST_LANGUAGES:
+        raise PostProblem(["Select a supported post language from the form."])
+    subtitle = clean_line(form.get("subtitle", ""))
+    if len(subtitle) > 200:
+        raise PostProblem(["Shorten the subtitle to 200 characters or fewer."])
+    detail_problems = []
+    details = research_metadata(form.get("research_details", {}), detail_problems)
+    if detail_problems:
+        raise PostProblem(detail_problems)
     fields = {
         "title": form["title"],
+        "subtitle": subtitle,
+        "research_details": details or None,
+        "content_language": language,
         "description": form["summary"] or shorten(clean_line(text), 160),
         "date": "{date}",
         "last_modified_at": None,
