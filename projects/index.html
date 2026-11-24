@@ -17,6 +17,14 @@ scripts: [projects]
 {%- endcomment -%}
 {%- assign gh = site.data.github -%}
 {%- assign github_profile = site.data.social.profiles.github.url -%}
+<div class="callout">
+  {% include icon.html name="repo" class="callout__icon" %}
+  <div>
+    <h2 class="callout__title">Scarp Lang</h2>
+    <p class="callout__text">Explore the featured programming language, its development direction, downloads and official tools.</p>
+  </div>
+  {% include link.html url="/ScarpLang/" label="Featured Scarp page" class="button button--primary" arrow=true %}
+</div>
 {%- if gh and gh.repositories.size > 0 %}
 <dl class="stats">
   <div class="stats__item">

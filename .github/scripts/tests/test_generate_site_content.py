@@ -174,6 +174,27 @@ class SiteGeneratorTests(unittest.TestCase):
         self.assertIn("{{ entry.url | escape }}", page)
         self.assertIn('url="/projects/#scarp-ecosystem"', render_sections(self.home))
 
+    def test_scarp_feature_and_redirect_contract(self):
+        root = sitegen.ROOT
+        from terminal_data import parse_front_matter
+        feature = root / "ScarpLang/index.html"
+        redirect = root / "ScarpLang/GitHub/index.html"
+        self.assertEqual(parse_front_matter(feature)["permalink"], "/ScarpLang/")
+        meta = parse_front_matter(redirect)
+        self.assertEqual(meta["permalink"], "/ScarpLang/GitHub/")
+        self.assertTrue(meta["noindex"])
+        self.assertFalse(meta["sitemap"])
+        source = redirect.read_text(encoding="utf-8")
+        self.assertIn('content="0; url=https://github.com/scarp-lang"', source)
+        self.assertIn('href="https://github.com/scarp-lang"', source)
+        self.assertNotIn("<script", source)
+        self.assertIn("site.data.scarp_ecosystem", feature.read_text(encoding="utf-8"))
+        self.assertIn('url="/ScarpLang/GitHub/"', feature.read_text(encoding="utf-8"))
+        self.assertIn("scarp-feature.html", (root / "index.html").read_text(encoding="utf-8"))
+        self.assertIn('url="/ScarpLang/"', (root / "_includes/scarp-feature.html").read_text(encoding="utf-8"))
+        self.assertIn('url="/ScarpLang/"', (root / "projects/index.html").read_text(encoding="utf-8"))
+        self.assertIn({"title": "Scarp Lang", "url": "/ScarpLang/"}, read_yaml(root, "_data/navigation.yml")["main"])
+
     def test_home_intro_and_hero_preserve_dynamic_terminal(self):
         hero = render_hero(self.home)
         sections = render_sections(self.home)

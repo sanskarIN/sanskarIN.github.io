@@ -1,0 +1,124 @@
+---
+layout: default
+title: Scarp Lang
+seo_title: "Scarp Lang · Featured programming language project"
+description: "Explore Scarp Lang, an open-source programming language in active pre-release development: compiler, downloads, documentation, playground, examples, editor tools, and GitHub organization."
+permalink: /ScarpLang/
+body_class: page-scarp
+schema_type: WebPage
+---
+<section class="hero" aria-labelledby="scarp-title">
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <p class="eyebrow">Featured project · Open source</p>
+      <h1 class="hero__title" id="scarp-title">Scarp Lang</h1>
+      <p class="hero__tagline">Build Beyond Boundaries.</p>
+      <p class="hero__intro">Scarp is an open-source programming language project exploring expressive language design, practical developer tools, numerical computing and a path toward systems programming.</p>
+      <div class="button-row">
+        {% include link.html url="https://scarp-lang.github.io/" label="Official website" class="button button--primary" arrow=true %}
+        {% include link.html url="https://scarp-lang.github.io/downloads/" label="Download Scarp" class="button button--secondary" arrow=true %}
+        {% include link.html url="/ScarpLang/GitHub/" label="GitHub organization" class="button button--secondary" icon="github" %}
+      </div>
+    </div>
+    <aside class="hero__aside" aria-label="Scarp at a glance">
+      <div class="spec-card">
+        <p class="spec-card__header"><span>Project profile</span><span>Scarp</span></p>
+        <dl class="spec-card__list">
+          <div class="spec-card__row"><dt>Stage</dt><dd>Active pre-release development</dd></div>
+          <div class="spec-card__row"><dt>Source files</dt><dd><code>.srp</code></dd></div>
+          <div class="spec-card__row"><dt>Implementation</dt><dd>Rust</dd></div>
+          <div class="spec-card__row"><dt>Organization</dt><dd>scarp-lang</dd></div>
+          <div class="spec-card__row"><dt>Focus</dt><dd>Language, compiler and tooling</dd></div>
+        </dl>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section section--surface" aria-labelledby="start-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="start-title">Start exploring</h2>
+      <p class="section-header__lead">Choose a path based on what you want to do.</p>
+    </div>
+    <ul class="feature-grid" role="list">
+      <li class="feature">
+        <h3 class="feature__title">Try in your browser</h3>
+        <p class="feature__text">Experiment with the online playground before installing local tools.</p>
+        <p>{% include link.html url="https://scarp-lang.github.io/scarp-playground/" label="Open playground" class="text-link" arrow=true %}</p>
+      </li>
+      <li class="feature">
+        <h3 class="feature__title">Learn the language</h3>
+        <p class="feature__text">Read the language guides and work through practical examples.</p>
+        <p>{% include link.html url="https://scarp-lang.github.io/scarp-docs/" label="Read documentation" class="text-link" arrow=true %}</p>
+      </li>
+      <li class="feature">
+        <h3 class="feature__title">Build locally</h3>
+        <p class="feature__text">Find available compiler packages, platform information and checksums on the official downloads page.</p>
+        <p>{% include link.html url="https://scarp-lang.github.io/downloads/" label="Get compiler packages" class="text-link" arrow=true %}</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="ecosystem" aria-labelledby="ecosystem-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="ecosystem-title">The Scarp ecosystem</h2>
+      <p class="section-header__lead">Official entry points for the language, learning resources and development tools.</p>
+    </div>
+    <ul class="link-grid" role="list">
+      {%- for entry in site.data.scarp_ecosystem %}
+      <li>
+        <a class="link-card" href="{{ entry.url | escape }}" target="_blank" rel="noopener noreferrer">
+          {% include icon.html name="repo" class="link-card__icon" %}
+          <span class="link-card__body">
+            <span class="link-card__name">{{ entry.title | escape }}</span>
+            <span class="link-card__handle">{{ entry.repository | escape }}</span>
+            <span class="link-card__note">{{ entry.description | escape }}</span>
+          </span>
+          <span class="visually-hidden"> (opens in a new tab)</span>
+          {% include icon.html name="arrow-up-right" class="link-card__arrow" %}
+        </a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section section--surface" aria-labelledby="direction-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="direction-title">Engineering direction</h2>
+      <p class="section-header__lead">The project is being developed incrementally, with documented behavior and release verification.</p>
+    </div>
+    <ul class="feature-grid" role="list">
+      <li class="feature"><h3 class="feature__title">Language foundations</h3><p class="feature__text">Types, functions, control flow, collections and diagnostics are evolving through published pre-releases.</p></li>
+      <li class="feature"><h3 class="feature__title">Numerical and AI-oriented computing</h3><p class="feature__text">Numerical primitives are part of the broader goal of making computational programming approachable.</p></li>
+      <li class="feature"><h3 class="feature__title">Systems and native execution</h3><p class="feature__text">Native code generation and low-level programming are ongoing engineering directions. Experimental support is not a promise of a stable ABI or general native compilation.</p></li>
+    </ul>
+    <div class="callout">
+      {% include icon.html name="repo" class="callout__icon" %}
+      <div>
+        <h3 class="callout__title">Pre-release software</h3>
+        <p class="callout__text">Language syntax, tooling, platform support and behavior may change. Check the published release notes and version-specific documentation before using Scarp for important work.</p>
+      </div>
+      {% include link.html url="https://github.com/scarp-lang/scarp/releases" label="Release history" class="button button--secondary" arrow=true %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="contribute-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="contribute-title">Build in the open</h2>
+      <p class="section-header__lead">Explore the source, report reproducible issues, discuss language design and contribute through the appropriate repository.</p>
+    </div>
+    <div class="button-row">
+      {% include link.html url="/ScarpLang/GitHub/" label="Explore Scarp on GitHub" class="button button--primary" icon="github" %}
+      {% include link.html url="https://github.com/scarp-lang/scarp/issues" label="Compiler issues" class="button button--secondary" arrow=true %}
+      {% include link.html url="/projects/" label="All my projects" class="button button--ghost" arrow=true %}
+    </div>
+    <p class="section-footer">This is the featured project page on my personal website. The official Scarp website and repository documentation remain authoritative for language specifications and releases.</p>
+  </div>
+</section>
