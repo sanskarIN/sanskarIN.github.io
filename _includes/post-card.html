@@ -1,6 +1,6 @@
 {%- comment -%}
   A post in the list on the blog page. Parameters: post (required),
-  heading (heading level for the title, default 3).
+  heading (heading level for the title, default 3), documents (show attachment link).
 {%- endcomment -%}
 {%- assign card = include.post -%}
 {%- assign card_heading = include.heading | default: 3 -%}
@@ -26,6 +26,9 @@
       <span>by {{ card_author | escape }}</span>
       <span>{{ card_minutes }} min read</span>
     </p>
+    {%- if include.documents and card.attachments and card.attachments.size > 0 %}
+    <p class="post-card__meta"><a href="{{ card.url | relative_url }}#post-attachments-title">{{ card.attachments.size }} downloadable resource{% if card.attachments.size != 1 %}s{% endif %}</a></p>
+    {%- endif %}
     {%- if card.tags.size > 0 %}
     {% include post-tags.html tags=card.tags %}
     {%- endif %}
