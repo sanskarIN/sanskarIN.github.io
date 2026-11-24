@@ -3,6 +3,7 @@ name: Kahani pages
 on:
   pull_request:
     paths:
+      - 'ScarpLang/**'
       - 'Kahani.html'
       - 'terminal.json'
       - 'search.json'
@@ -56,6 +57,7 @@ on:
       - '_data/not_found_page.json'
       - '.github/scripts/utility_pages.py'
       - '.github/scripts/check_generated_pages.py'
+      - 'ScarpLang/**'
       - 'Kahani.html'
       - 'terminal.json'
       - 'search.json'

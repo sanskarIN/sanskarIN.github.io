@@ -433,6 +433,10 @@ The current logo is a simple "S" mark designed for this site. To use your own ar
 
 The policy in `_config.yml` lists each directive on its own line and only allows files from the site itself. When the [contact form](#contact-form) is turned on, its service is added to `connect-src` and `form-action` automatically, and when [accounts](#accounts) are turned on, the Supabase address is added to `connect-src` and `img-src`. If you embed any other third-party content — a video player, analytics, or external images — add that service's origin to the matching directive (for example `frame-src` for embeds, `script-src` for scripts, `img-src` for images), or the browser will block it. Also update the Privacy and Cookie policies ([see below](#legal-pages)).
 
+## Scarp Lang featured page
+
+The personal showcase is at `/ScarpLang/`; `/ScarpLang/GitHub/` redirects to the official [Scarp organization](https://github.com/scarp-lang) without JavaScript. GitHub Pages directory URLs also accept the slashless entry paths via the host's directory routing. The shortcut is intentionally excluded from search and sitemap. Keep official destinations in `_data/scarp_ecosystem.yml` and use the official project for release information. After changing the page or navigation, run `python .github/scripts/generate_site_content.py`, build with `bundle exec jekyll build --strict_front_matter`, then run `python .github/scripts/check_generated_pages.py _site` to verify the generated routes.
+
 ## Projects
 
 The Projects page at `/projects/` shows public GitHub repositories of [sanskarIN](https://github.com/sanskarIN) and explicitly maintained organization repositories, including the Scarp compiler. The Home page's "Open source" section features three projects. Repository statistics, cards, language composition, and activity come from GitHub's daily refresh; curated ecosystem links are maintained separately in `_data/scarp_ecosystem.yml`.
