@@ -7,7 +7,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 from blog_attachments import preview_markdown, preview_html, preview_word, preview_bibtex
-from terminal_data import parse_front_matter, read_yaml
+from terminal_data import parse_front_matter, read_yaml, canonical_post_path
 
 ROOT = Path(__file__).resolve().parents[2]
 MAX_BYTES = 10_000_000
@@ -61,7 +61,8 @@ def check_resources(output, root=ROOT, baseurl=""):
     expected = set()
     article_count = 0
     for post in sorted((root / "_posts").glob("*.md")):
-        attachments = parse_front_matter(post).get("attachments", [])
+        fields = parse_front_matter(post)
+        attachments = fields.get("attachments", [])
         demand(isinstance(attachments, list), f"Invalid attachments list: {post.name}")
         if not attachments:
             continue
@@ -69,8 +70,9 @@ def check_resources(output, root=ROOT, baseurl=""):
         demand(len(attachments) <= 5, f"Too many attachments: {post.name}")
         slug = post.stem[11:]
         demand(SLUG.fullmatch(slug), f"Invalid attachment article slug: {slug}")
-        page_url = baseurl + f"/blog/{slug}/"
-        page = DocumentLinks(output / "blog" / slug / "index.html")
+        route = canonical_post_path(slug, fields)
+        page_url = baseurl + route
+        page = DocumentLinks(output / route.strip("/") / "index.html")
         demand(page.ids.count("post-attachments-title") == 1,
                f"Attachment section missing or duplicated: {post.name}")
         demand(page_url + "#post-attachments-title" in articles.links,

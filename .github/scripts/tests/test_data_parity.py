@@ -24,7 +24,7 @@ class DataParityTests(unittest.TestCase):
         self.assertTrue(value["pages"])
         self.assertEqual(len(value["posts"]), min(len(published_posts(ROOT)), 5))
         self.assertEqual(value["links"]["blog"], "/blog/")
-        self.assertTrue(all(p["url"].startswith("/blog/") for p in value["posts"]))
+        self.assertTrue(all(p["url"].startswith(("/blog/", "/research/")) for p in value["posts"]))
 
     def test_terminal_values_use_real_site_data(self):
         result = terminal_data()
@@ -99,7 +99,9 @@ class DataParityTests(unittest.TestCase):
         self.assertGreaterEqual(len(posts), 1)
         self.assertEqual(len({p["url"] for p in posts}), len(posts))
         for p in posts:
-            self.assertEqual(p["url"], "/blog/" + p["_source"][11:].rsplit(".", 1)[0] + "/")
+            from terminal_data import canonical_post_path
+            source = ROOT / "_posts" / p["_source"]
+            self.assertEqual(p["url"], canonical_post_path(source.stem[11:], parse_front_matter(source)))
             self.assertRegex(p["date"], r"^\d{1,2} [A-Z][a-z]{2} \d{4}$")
 
     def test_published_terminal_feed_is_current_and_plain_json(self):

@@ -1,4 +1,6 @@
 ---
+permalink: "/research/how-computers-really-work/"
+redirect_from: ["/blog/how-computers-really-work/"]
 title: "How Computers Really Work"
 subtitle: "From Transistors to Artificial Intelligence: An In-Depth Exploration of Modern Computing"
 research_details: {"publication_type": "Technical Research Article", "category": "Computer Science", "version": "v1.0.0", "chapters": 27, "technical_lessons": 108, "research_references": 44}

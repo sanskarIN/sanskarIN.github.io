@@ -58,7 +58,7 @@ class SearchIndexTests(unittest.TestCase):
     def test_post_entries_match_markdown_metadata(self):
         entries = [e for e in search_index() if e["type"] == "Post"]
         self.assertTrue(entries)
-        self.assertTrue(all(e["url"].startswith("/blog/") for e in entries))
+        self.assertTrue(all(e["url"].startswith(("/blog/", "/research/")) for e in entries))
         self.assertTrue(all(isinstance(e["tags"], list) for e in entries))
         self.assertTrue(all(isinstance(e["date"], str) for e in entries))
         self.assertTrue(all(e["text"] for e in entries))
