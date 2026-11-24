@@ -25,6 +25,7 @@ schema_type: CollectionPage
 {%- endif -%}
 {%- assign post_count = site.posts | size %}
 <div class="button-row">
+  <a class="button button--secondary" href="{{ '/articles/' | relative_url }}">Browse articles</a>
   <a class="button button--secondary" href="{{ '/resources/' | relative_url }}">Assets &amp; resources</a>
   {% include link.html url=write_url label="Write a post" icon="pencil" class="button button--primary" %}
   {%- if site.tags.size > 0 %}
