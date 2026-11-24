@@ -1016,8 +1016,8 @@
             const generated = field(form, "title").value.normalize("NFKD").replace(/[^\x00-\x7f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
             const auto = (generated.length > 60 ? generated.slice(0, 61).includes("-") ? generated.slice(0, 61).split("-").slice(0, -1).join("-") : generated.slice(0, 60) : generated).replace(/-+$/g, "");
             if (requested && !validSlug(requested)) {
-              slugPreview.textContent = "Invalid slug: use lowercase letters, numbers and single hyphens (maximum 60).";
-              return;
+                slugPreview.textContent = "Invalid slug: use lowercase letters, numbers and single hyphens (maximum 60).";
+                return;
             }
             slugPreview.textContent = (editingId ? "Requested URL (published URLs are unchanged): " : "Estimated URL: ") + (slugPreview.getAttribute("data-slug-base") || "/blog/") + (requested || auto || "[generated-slug]") + "/";
         }
