@@ -21,6 +21,8 @@ main:
     url: /lab/
   - title: Blog
     url: /blog/
+  - title: Assets
+    url: /resources/
   - title: Kahani
     url: /Kahani/
   - title: Contact
