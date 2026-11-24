@@ -267,6 +267,11 @@
   },
   "posts": [
     {
+      "title": "How Computers Really Work",
+      "url": "/blog/how-computers-really-work/",
+      "date": "24 Nov 2026"
+    },
+    {
       "title": "frametrellis-v1-5-1-stable-release",
       "url": "/blog/frametrellis-v1-5-1-stable-release/",
       "date": "20 Nov 2026"
@@ -285,11 +290,6 @@
       "title": "repodna-v1-5-0-release",
       "url": "/blog/repodna-v1-5-0-release/",
       "date": "6 Nov 2026"
-    },
-    {
-      "title": "frametrellis-v1-4-0-release",
-      "url": "/blog/frametrellis-v1-4-0-release/",
-      "date": "2 Nov 2026"
     }
   ],
   "links": {

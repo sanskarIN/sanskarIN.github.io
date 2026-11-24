@@ -151,6 +151,20 @@
   },
   {
     "type": "Post",
+    "title": "How Computers Really Work",
+    "url": "/blog/how-computers-really-work/",
+    "date": "24 Nov 2026",
+    "tags": [
+      "research",
+      "computer-science",
+      "computer-architecture",
+      "systems-programming",
+      "artificial-intelligence"
+    ],
+    "text": "From Transistors to Artificial Intelligence: An In-Depth Exploration of Modern Computing An in-depth technical study of how computers work, covering transistors, digital logic, processors, memory, operating systems, networking, artificial intelligence and quantum computing. Technical Research Article Computer Science v1.0.0 Abstract Computers are among the most transformative technological inventions in human history. From microscopic semiconductor transistors to complex artificial intelligence systems, modern computing depends on multiple interconnected layers of hardware, software, mathematics and engineering. This technical research article provides an extensive exploration of how computers work, beginning with the physical principles of electronics and progressing through digital logic, processor architecture, memory systems, operating systems, programming languages, networking and advanced computing technologies. The research is organized into 27 chapters and 108"
+  },
+  {
+    "type": "Post",
     "title": "frametrellis-v1-5-1-stable-release",
     "url": "/blog/frametrellis-v1-5-1-stable-release/",
     "date": "20 Nov 2026",
