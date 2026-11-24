@@ -23,6 +23,35 @@ body:
       label: URL slug
       description: Optional. Use 1–60 lowercase letters, numbers and single hyphens. Leave blank to generate from your title. The slug cannot change after publication.
       placeholder: my-research-paper
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language
+      description: Select the primary language of your post.
+      options:
+        - "Other / unspecified"
+        - "English"
+        - "Hindi (हिन्दी)"
+        - "Bengali (বাংলা)"
+        - "Tamil (தமிழ்)"
+        - "Telugu (తెలుగు)"
+        - "Marathi (मराठी)"
+        - "Gujarati (ગુજરાતી)"
+        - "Kannada (ಕನ್ನಡ)"
+        - "Malayalam (മലയാളം)"
+        - "Punjabi (ਪੰਜਾਬੀ)"
+        - "Urdu (اردو)"
+        - "Sanskrit (संस्कृतम्)"
+        - "French"
+        - "German"
+        - "Spanish"
+        - "Japanese"
+        - "Chinese"
+        - "Arabic"
+        - "Russian"
+        - "Portuguese"
+        - "Multilingual"
+      default: 0
   - type: input
     id: summary
     attributes:

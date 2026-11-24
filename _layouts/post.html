@@ -105,9 +105,9 @@ layout: default
   <header class="page-header">
     <div class="container">
       <p class="eyebrow">{% if page.tags contains "research" %}<a class="eyebrow__link" href="{{ '/research/' | relative_url }}">Research</a>{% else %}<a class="eyebrow__link" href="{{ '/blog/' | relative_url }}">Blog</a>{% endif %}</p>
-      <h1 class="page-header__title post__title">{{ page.title | escape }}</h1>
+      <h1 class="page-header__title post__title"{% if page.content_language and page.content_language != "und" and page.content_language != "mul" %} lang="{{ page.content_language | escape }}" dir="auto"{% endif %}>{{ page.title | escape }}</h1>
       {%- if page.description %}
-      <p class="page-header__lead">{{ page.description | escape }}</p>
+      <p class="page-header__lead"{% if page.content_language and page.content_language != "und" and page.content_language != "mul" %} lang="{{ page.content_language | escape }}" dir="auto"{% endif %}>{{ page.description | escape }}</p>
       {%- endif %}
     </div>
   </header>
@@ -130,6 +130,13 @@ layout: default
           <dt>Author</dt>
           <dd>{% include link.html url=author_url label=author_label %}</dd>
         </div>
+        {%- if page.tags contains "research" or page.content_language %}
+        {%- assign language_code = page.content_language | default: "und" %}
+        <div class="post-details__row">
+          <dt>Language</dt>
+          <dd>{{ site.data.post_languages[language_code] | default: "Other / unspecified" | escape }}</dd>
+        </div>
+        {%- endif %}
         <div class="post-details__row">
           <dt>Reading time</dt>
           <dd>{{ reading_minutes }} min read</dd>
@@ -171,7 +178,7 @@ layout: default
           {%- if page.image_width and page.image_height %} width="{{ page.image_width }}" height="{{ page.image_height }}"{% endif %}>
       </figure>
       {%- endif %}
-      <div class="prose post__content">
+      <div class="prose post__content"{% if page.content_language and page.content_language != "und" and page.content_language != "mul" %} lang="{{ page.content_language | escape }}" dir="auto"{% endif %}>
 {{ post_html }}
       </div>
       {% include post-attachments.html %}

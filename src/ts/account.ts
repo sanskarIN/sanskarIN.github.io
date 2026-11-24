@@ -69,6 +69,7 @@
   interface Draft {
     title: string;
     requestedSlug: string;
+    contentLanguage: string;
     summary: string;
     tags: string[];
     coverUrl: string;
@@ -82,6 +83,8 @@
     title?: string;
     requestedSlug?: string;
     requested_slug?: string;
+    contentLanguage?: string;
+    content_language?: string;
     summary?: string;
     tags?: string[];
     coverUrl?: string;
@@ -1076,6 +1079,7 @@
     const draftKey = researchMode ? RESEARCH_DRAFT_KEY : DRAFT_KEY;
     const research = field(form, "research");
     const slugInput = field(form, "requestedSlug");
+    const languageInput = field<HTMLSelectElement>(form, "contentLanguage");
     const slugPreview = $("[data-slug-preview]", form);
     const reservedSlugs = ["tags", "feed", "index", "page", "authors", "posts"];
     let coverUrl = "";
@@ -1119,6 +1123,7 @@
       return {
         title: field(form, "title").value.replace(/\s+/g, " ").trim(),
         requestedSlug: slugInput.value.trim(),
+        contentLanguage: languageInput.value || "und",
         summary: field<HTMLTextAreaElement>(form, "summary").value.replace(/\s+/g, " ").trim(),
         tags,
         coverUrl,
@@ -1130,6 +1135,7 @@
     function fill(post: StoredPost): void {
       field(form, "title").value = post.title || "";
       slugInput.value = post.requestedSlug || post.requested_slug || "";
+      languageInput.value = post.contentLanguage || post.content_language || "und";
       updateSlugPreview();
       field<HTMLTextAreaElement>(form, "summary").value = post.summary || "";
       research.checked = (post.tags || []).some((tag) => tag.toLowerCase().replace(/^#+/, "") === "research");
@@ -1351,7 +1357,7 @@
             return;
           }
           if (editingId) {
-            return request<StoredPost[]>(`/rest/v1/submissions?id=eq.${editingId}&select=title,requested_slug,summary,tags,cover_url,cover_alt,body`,
+            return request<StoredPost[]>(`/rest/v1/submissions?id=eq.${editingId}&select=title,requested_slug,content_language,summary,tags,cover_url,cover_alt,body`,
               { token: session.access_token })
               .then((rows) => {
                 if (!rows || !rows[0]) throw new Error("That post couldn't be found.");

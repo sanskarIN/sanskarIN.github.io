@@ -43,7 +43,7 @@ class PublicationTests(unittest.TestCase):
         settings = {"account_images": prefix.replace("blog-attachments", "blog-images"),
                     "owner_username": "owner", "owner_name": "Owner", "images_per_post": 20}
         form = {"title": "Guide", "requested_slug": "custom-guide", "summary": "A guide", "tags": [],
-                "cover_url": None, "cover_alt": "", "notes": [],
+                "content_language": "hi", "cover_url": None, "cover_alt": "", "notes": [],
                 "markdown": f"Read the [guide]({url})."}
         payload = b"%PDF-1.7\nsample\n%%EOF\n"
         with tempfile.TemporaryDirectory() as folder:
@@ -54,6 +54,7 @@ class PublicationTests(unittest.TestCase):
                     patch.object(blog_attachments, "fetch_document", return_value=payload):
                 post = publish_post.build_post(issue, form, settings, None, False, account=account)
                 self.assertEqual(post["slug"], "custom-guide")
+                self.assertEqual(post["fields"]["content_language"], "hi")
                 self.assertEqual(len(post["fields"]["attachments"]), 1)
                 asset = post["fields"]["attachments"][0]
                 self.assertIn("#" + asset["id"], post["markup"])

@@ -26,6 +26,8 @@
       <span>by {{ card_author | escape }}</span>
       {%- if card.tags contains "research" %}
       <span><a href="{{ '/research/' | relative_url }}">Research</a></span>
+      {%- assign language_code = card.content_language | default: "und" %}
+      <span>{{ site.data.post_languages[language_code] | default: "Other / unspecified" | escape }}</span>
       {%- endif %}
       <span>{{ card_minutes }} min read</span>
     </p>

@@ -67,7 +67,7 @@ class HttpError extends Error {
 
 type Profile = { id: string; username: string; display_name: string };
 type User = { id: string; token: string; profile: Profile | null };
-type Post = { title: string; requestedSlug: string; summary: string; tags: string[]; coverUrl: string; coverAlt: string; body: string };
+type Post = { title: string; requestedSlug: string; contentLanguage: string; summary: string; tags: string[]; coverUrl: string; coverAlt: string; body: string };
 // deno-lint-ignore no-explicit-any
 type Json = any;
 
@@ -265,6 +265,9 @@ function checkPost(input: Json, userId: string): Post {
     problems.push("Use a URL slug of 1–60 lowercase letters, digits and single hyphens; reserved routes are not allowed.");
   }
 
+  const contentLanguage = typeof input?.contentLanguage === "string" ? input.contentLanguage : "und";
+  if (!["en","hi","bn","ta","te","mr","gu","kn","ml","pa","ur","sa","fr","de","es","ja","zh","ar","ru","pt","mul","und"].includes(contentLanguage)) problems.push("Select a supported post language.");
+
   const summary = cleanLine(input?.summary);
   if (summary.length > LIMITS.summary) {
     problems.push(`Shorten the summary to ${LIMITS.summary} characters or fewer.`);
@@ -308,7 +311,7 @@ function checkPost(input: Json, userId: string): Post {
     problems.push("Confirm that you wrote the post and have the right to publish its text, images and attachments.");
   }
   if (problems.length) throw new HttpError(400, "Please fix the following and send the post again.", problems);
-  return { title, requestedSlug, summary, tags, coverUrl, coverAlt, body };
+  return { title, requestedSlug, contentLanguage, summary, tags, coverUrl, coverAlt, body };
 }
 
 function base64Url(text: string): string {
@@ -326,6 +329,10 @@ function issueBody(post: Post, profile: Profile): string {
     "### URL slug",
     "",
     value(post.requestedSlug),
+    "",
+    "### Language",
+    "",
+    post.contentLanguage,
     "",
     "### Summary",
     "",
@@ -385,6 +392,7 @@ async function submit(user: User, input: Json) {
 
   const title = `[Post]: ${post.title}`;
   if (row && input?.post?.requestedSlug === undefined) post.requestedSlug = row.requested_slug ?? "";
+  if (row && input?.post?.contentLanguage === undefined) post.contentLanguage = row.content_language ?? "und";
   let issueNumber: number | null = row?.issue_number ?? null;
   if (issueNumber) {
     const issue = await github(issuePath(issueNumber));
@@ -410,6 +418,7 @@ async function submit(user: User, input: Json) {
   const fields = {
     title: post.title,
     requested_slug: post.requestedSlug,
+    content_language: post.contentLanguage,
     summary: post.summary,
     tags: post.tags,
     cover_url: post.coverUrl,

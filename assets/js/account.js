@@ -986,6 +986,7 @@
         const draftKey = researchMode ? RESEARCH_DRAFT_KEY : DRAFT_KEY;
         const research = field(form, "research");
         const slugInput = field(form, "requestedSlug");
+        const languageInput = field(form, "contentLanguage");
         const slugPreview = $("[data-slug-preview]", form);
         const reservedSlugs = ["tags", "feed", "index", "page", "authors", "posts"];
         let coverUrl = "";
@@ -1028,6 +1029,7 @@
             return {
                 title: field(form, "title").value.replace(/\s+/g, " ").trim(),
                 requestedSlug: slugInput.value.trim(),
+                contentLanguage: languageInput.value || "und",
                 summary: field(form, "summary").value.replace(/\s+/g, " ").trim(),
                 tags,
                 coverUrl,
@@ -1038,6 +1040,7 @@
         function fill(post) {
             field(form, "title").value = post.title || "";
             slugInput.value = post.requestedSlug || post.requested_slug || "";
+            languageInput.value = post.contentLanguage || post.content_language || "und";
             updateSlugPreview();
             field(form, "summary").value = post.summary || "";
             research.checked = (post.tags || []).some((tag) => tag.toLowerCase().replace(/^#+/, "") === "research");
@@ -1271,7 +1274,7 @@
                     return;
                 }
                 if (editingId) {
-                    return request(`/rest/v1/submissions?id=eq.${editingId}&select=title,requested_slug,summary,tags,cover_url,cover_alt,body`, { token: session.access_token })
+                    return request(`/rest/v1/submissions?id=eq.${editingId}&select=title,requested_slug,content_language,summary,tags,cover_url,cover_alt,body`, { token: session.access_token })
                         .then((rows) => {
                         if (!rows || !rows[0])
                             throw new Error("That post couldn't be found.");

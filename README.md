@@ -609,6 +609,8 @@ Authors may enter a URL slug in the website editor or GitHub issue form. For exa
 
 ## Research
 
+The editor includes a post language selector (English, Hindi, other Indian and international languages, Multilingual and Other / unspecified). The selected language is saved as `content_language`, shown in research listings and article details, and used for the archive filter and article text language attributes. Existing posts without metadata stay visible as unspecified; selecting a language does not translate content.
+
 The public research archive at `/research/` lists posts carrying the normalized `research` tag. Authors can use **Write a research post** to open the account editor in research mode with a separate local draft, or select **Publish in Research** on an ordinary post. The tag is counted within the existing five-tag limit. GitHub issue-form authors can include `research` in the Tags field. Published research uses the existing canonical `/blog/<slug>/` URL, author attribution, moderation, revision history, search, and document attachments, and remains discoverable in Blog and Articles. No extra database table or duplicate publication is required. Research posts are not automatically peer reviewed; authors should distinguish findings from hypotheses and include methods, limitations and references. Removing the tag through an approved edit removes the entry from the research archive without changing its canonical URL.
 
 ## Articles

@@ -93,7 +93,7 @@ LABELS = {
 STATUS_LABELS = ("awaiting-review", "needs-changes", "published", "pending-merge")
 
 # Headings of the issue form fields (.github/ISSUE_TEMPLATE/blog-post.yml).
-FIELDS_BEFORE_POST = ("URL slug", "Summary", "Tags", "Cover image", "Cover image description")
+FIELDS_BEFORE_POST = ("URL slug", "Language", "Summary", "Tags", "Cover image", "Cover image description")
 POST_FIELD = "Post"
 CONFIRMATION_FIELD = "Confirmation"
 NO_RESPONSE = "_No response_"
@@ -110,6 +110,8 @@ ACCOUNT_IMAGE_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,99}")
 # Addresses already used by blog pages: /blog/tags/ and /blog/feed.xml.
 RESERVED_SLUGS = {"tags", "feed", "index", "page", "authors", "posts"}
 CUSTOM_SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
+POST_LANGUAGES = {"en":"English","hi":"Hindi (हिन्दी)","bn":"Bengali (বাংলা)","ta":"Tamil (தமிழ்)","te":"Telugu (తెలుగు)","mr":"Marathi (मराठी)","gu":"Gujarati (ગુજરાતી)","kn":"Kannada (ಕನ್ನಡ)","ml":"Malayalam (മലയാളം)","pa":"Punjabi (ਪੰਜਾਬੀ)","ur":"Urdu (اردو)","sa":"Sanskrit (संस्कृतम्)","fr":"French","de":"German","es":"Spanish","ja":"Japanese","zh":"Chinese","ar":"Arabic","ru":"Russian","pt":"Portuguese","mul":"Multilingual","und":"Other / unspecified"}
+LANGUAGE_LABELS = {label: code for code, label in POST_LANGUAGES.items()}
 
 # The comment the workflow keeps up to date on each post's issue.
 STATUS_MARKER = "<!-- blog-post-status: {state} -->"
@@ -432,6 +434,11 @@ def read_form(issue, settings, is_image=None):
     if requested_slug and not valid_custom_slug(requested_slug):
         problems.append("Use a URL slug of 1–60 lowercase letters, digits and single hyphens; reserved routes are not allowed.")
 
+    raw_language = sections.get("Language", "").strip()
+    language = LANGUAGE_LABELS.get(raw_language, raw_language) or "und"
+    if language not in POST_LANGUAGES:
+        problems.append("Select a supported post language from the form.")
+
     summary = clean_line(sections.get("Summary", ""))
     if len(summary) > settings["summary_length"]:
         problems.append(f"Shorten the summary to {settings['summary_length']} characters or fewer "
@@ -467,6 +474,7 @@ def read_form(issue, settings, is_image=None):
     return {
         "title": title,
         "requested_slug": requested_slug,
+        "content_language": language,
         "summary": summary,
         "tags": tags,
         "cover_url": cover_url,
@@ -855,8 +863,12 @@ def build_post(issue, form, settings, existing, trusted, account=None, is_image=
         author, author_url = settings["owner_name"], "/about/"
     else:
         author, author_url = login, f"https://github.com/{login}"
+    language = form.get("content_language", "und")
+    if language not in POST_LANGUAGES:
+        raise PostProblem(["Select a supported post language from the form."])
     fields = {
         "title": form["title"],
+        "content_language": language,
         "description": form["summary"] or shorten(clean_line(text), 160),
         "date": "{date}",
         "last_modified_at": None,
