@@ -1134,7 +1134,7 @@
     const listAttachments = $<HTMLButtonElement>('[data-action="list-attachments"]');
     const stagedAttachments = $<HTMLUListElement>("[data-staged-attachments]");
     async function refreshAttachments(): Promise<void> {
-      if (isBusy(listAttachments) || isBusy(submitButton)) return;
+      if (isBusy(listAttachments) || isBusy(addAttachment) || isBusy(submitButton)) return;
       setBusy(listAttachments, true);
       stagedAttachments.textContent = "";
       try {
@@ -1156,7 +1156,7 @@
           item.appendChild(remove);
           stagedAttachments.appendChild(item);
           remove.addEventListener("click", async () => {
-            if (isBusy(remove) || isBusy(listAttachments) || isBusy(submitButton)) return;
+            if (isBusy(remove) || isBusy(listAttachments) || isBusy(addAttachment) || isBusy(submitButton)) return;
             if (!window.confirm("Delete this public staged copy? This may break pending posts and future edits. Published copies are not removed.")) return;
             setBusy(remove, true);
             setBusy(listAttachments, true);
@@ -1168,9 +1168,6 @@
                 token: current.access_token,
                 json: { prefixes: [current.user.id + "/" + name] },
               });
-              const url = config.url + "/storage/v1/object/public/blog-attachments/" + current.user.id + "/" + name;
-              body.value = body.value.split("\n").filter((line) => !line.trim().endsWith("](" + url + ")")).join("\n");
-              saveDraft();
               item.remove();
               setStatus(status, "Staged document deleted. Remove any remaining references before sending your post.", "success");
             } catch (error) {
