@@ -67,7 +67,7 @@ class HttpError extends Error {
 
 type Profile = { id: string; username: string; display_name: string };
 type User = { id: string; token: string; profile: Profile | null };
-type Post = { title: string; summary: string; tags: string[]; coverUrl: string; coverAlt: string; body: string };
+type Post = { title: string; requestedSlug: string; summary: string; tags: string[]; coverUrl: string; coverAlt: string; body: string };
 // deno-lint-ignore no-explicit-any
 type Json = any;
 
@@ -259,6 +259,12 @@ function checkPost(input: Json, userId: string): Post {
   if (!title) problems.push("Add a title.");
   else if (title.length > LIMITS.title) problems.push(`Shorten the title to ${LIMITS.title} characters or fewer.`);
 
+  const requestedSlug = typeof input?.requestedSlug === "string" ? input.requestedSlug.trim() : "";
+  if (requestedSlug && (requestedSlug.length > 60 || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(requestedSlug) ||
+    ["tags", "feed", "index", "page", "authors", "posts"].includes(requestedSlug))) {
+    problems.push("Use a URL slug of 1–60 lowercase letters, digits and single hyphens; reserved routes are not allowed.");
+  }
+
   const summary = cleanLine(input?.summary);
   if (summary.length > LIMITS.summary) {
     problems.push(`Shorten the summary to ${LIMITS.summary} characters or fewer.`);
@@ -302,7 +308,7 @@ function checkPost(input: Json, userId: string): Post {
     problems.push("Confirm that you wrote the post and have the right to publish its text, images and attachments.");
   }
   if (problems.length) throw new HttpError(400, "Please fix the following and send the post again.", problems);
-  return { title, summary, tags, coverUrl, coverAlt, body };
+  return { title, requestedSlug, summary, tags, coverUrl, coverAlt, body };
 }
 
 function base64Url(text: string): string {
@@ -317,6 +323,10 @@ function issueBody(post: Post, profile: Profile): string {
   const value = (text: string) => text || "_No response_";
   return [
     `<!-- blog-account: ${marker} -->`,
+    "### URL slug",
+    "",
+    value(post.requestedSlug),
+    "",
     "### Summary",
     "",
     value(post.summary),
@@ -374,7 +384,7 @@ async function submit(user: User, input: Json) {
   await verifyAttachments(post, user);
 
   const title = `[Post]: ${post.title}`;
-  const body = issueBody(post, profile);
+  if (row && input?.post?.requestedSlug === undefined) post.requestedSlug = row.requested_slug ?? "";
   let issueNumber: number | null = row?.issue_number ?? null;
   if (issueNumber) {
     const issue = await github(issuePath(issueNumber));
@@ -385,19 +395,21 @@ async function submit(user: User, input: Json) {
     if (issue.state === "closed" && !labels.has("published")) {
       throw new HttpError(409, "This post was declined, so it can't be changed. You can write a new post.");
     }
+    if (labels.has("published")) post.requestedSlug = row?.requested_slug ?? "";
     // Changes are reviewed again: take back the approval before editing.
     if (labels.has("approved")) await github(`${issuePath(issueNumber)}/labels/approved`, { method: "DELETE" }, [200, 404]);
-    await github(issuePath(issueNumber), { method: "PATCH", body: { title, body } });
+    await github(issuePath(issueNumber), { method: "PATCH", body: { title, body: issueBody(post, profile) } });
   } else {
     const issue = await github(issuePath(), {
       method: "POST",
-      body: { title, body, labels: ["blog-post", "from-website"] },
+      body: { title, body: issueBody(post, profile), labels: ["blog-post", "from-website"] },
     });
     issueNumber = issue.number;
   }
 
   const fields = {
     title: post.title,
+    requested_slug: post.requestedSlug,
     summary: post.summary,
     tags: post.tags,
     cover_url: post.coverUrl,

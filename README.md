@@ -603,6 +603,10 @@ After a local Jekyll build, run `python .github/scripts/check_resources.py _site
 
 Keep the existing GitHub Pages address until a custom domain is registered and verified. On migration, configure GitHub Pages and HTTPS, update `_config.yml` (`url` and `display_url`), audit authentication email URLs, Supabase site URL and allowed redirect origins, Edge Function origin checks and external integrations. Verify canonical URLs, sitemap, sign-in and public downloads before announcing the new address. Do not change storage credentials or domain settings before obtaining the domain.
 
+## Custom post URLs
+
+Authors may enter a URL slug in the website editor or GitHub issue form. For example `compiler-benchmarks` produces `/blog/compiler-benchmarks/`. Leave it blank for automatic title-based generation. Custom slugs must be 1–60 lowercase ASCII letters, digits and single hyphens, cannot be reserved or already used, and are checked by the publisher before a new post is created. The preview is an estimate, not a reservation. Existing posts keep their original canonical URL on edits, even if the title or requested slug changes. Research posts use the same canonical URL and remain listed at `/research/`.
+
 ## Research
 
 The public research archive at `/research/` lists posts carrying the normalized `research` tag. Authors can use **Write a research post** to open the account editor in research mode with a separate local draft, or select **Publish in Research** on an ordinary post. The tag is counted within the existing five-tag limit. GitHub issue-form authors can include `research` in the Tags field. Published research uses the existing canonical `/blog/<slug>/` URL, author attribution, moderation, revision history, search, and document attachments, and remains discoverable in Blog and Articles. No extra database table or duplicate publication is required. Research posts are not automatically peer reviewed; authors should distinguish findings from hypotheses and include methods, limitations and references. Removing the tag through an approved edit removes the entry from the research archive without changing its canonical URL.

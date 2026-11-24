@@ -14,6 +14,25 @@ import publish_post
 
 
 class PublicationTests(unittest.TestCase):
+    def test_custom_and_automatic_slug_collisions(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            with patch.multiple(publish_post, POSTS_DIR=root / "_posts",
+                                IMAGES_DIR=root / "images", ATTACHMENTS_DIR=root / "files"):
+                (root / "_posts").mkdir()
+                (root / "_posts/2026-01-01-existing.md").touch()
+                (root / "_posts/2026-01-01-existing-42.md").touch()
+                (root / "files/orphan").mkdir(parents=True)
+                self.assertEqual(publish_post.new_slug("Any title", 42, "my-research"), "my-research")
+                self.assertEqual(publish_post.new_slug("Existing", 42), "existing-42-2")
+                self.assertEqual(publish_post.new_slug("नमस्ते", 42), "post-42")
+                self.assertEqual(publish_post.new_slug("Authors", 42), "authors-42")
+                for invalid in ("existing", "orphan", "authors", "posts", "a--b", "../bad",
+                                "UPPER", "a/b", "a" * 61, "a-", "-a", "a b"):
+                    with self.subTest(slug=invalid), self.assertRaises(publish_post.PostProblem):
+                        publish_post.new_slug("Title", 42, invalid)
+                self.assertTrue(publish_post.valid_custom_slug("a" * 60))
+
     def test_create_update_remove_document(self):
         account = {"id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
                    "username": "reader", "name": "Reader"}
@@ -23,7 +42,7 @@ class PublicationTests(unittest.TestCase):
                  "created_at": "2026-01-01T00:00:00Z"}
         settings = {"account_images": prefix.replace("blog-attachments", "blog-images"),
                     "owner_username": "owner", "owner_name": "Owner", "images_per_post": 20}
-        form = {"title": "Guide", "summary": "A guide", "tags": [],
+        form = {"title": "Guide", "requested_slug": "custom-guide", "summary": "A guide", "tags": [],
                 "cover_url": None, "cover_alt": "", "notes": [],
                 "markdown": f"Read the [guide]({url})."}
         payload = b"%PDF-1.7\nsample\n%%EOF\n"
@@ -34,6 +53,7 @@ class PublicationTests(unittest.TestCase):
                     patch.dict(os.environ, {"GITHUB_REPOSITORY": "owner/site"}), \
                     patch.object(blog_attachments, "fetch_document", return_value=payload):
                 post = publish_post.build_post(issue, form, settings, None, False, account=account)
+                self.assertEqual(post["slug"], "custom-guide")
                 self.assertEqual(len(post["fields"]["attachments"]), 1)
                 asset = post["fields"]["attachments"][0]
                 self.assertIn("#" + asset["id"], post["markup"])
@@ -60,7 +80,10 @@ class PublicationTests(unittest.TestCase):
                 self.assertEqual(public_file.read_bytes(), payload)
                 existing["text"] = saved.read_text(encoding="utf-8")
                 form["markdown"] = "The file was removed."
+                form["requested_slug"] = "changed-slug"
+                form["title"] = "Renamed guide"
                 revised = publish_post.build_post(issue, form, settings, existing, False, account=account)
+                self.assertEqual(revised["slug"], "custom-guide")
                 self.assertEqual(publish_post.save_post(revised, existing), "updated")
                 self.assertFalse(public_file.exists())
                 self.assertNotIn("attachments:", saved.read_text(encoding="utf-8"))
