@@ -17,13 +17,24 @@ URL = PREFIX + ACCOUNT["id"] + "/" + FILENAME
 PDF = b"%PDF-1.7\nsample\n%%EOF\n"
 
 
-def pptx(extra=None):
+def pptx(extra=None, order=(1, 2), external=False):
     data = io.BytesIO()
     with zipfile.ZipFile(data, "w") as archive:
-        archive.writestr("[Content_Types].xml", "<Types/>")
-        archive.writestr("ppt/presentation.xml", "<presentation/>")
-        archive.writestr("ppt/slides/slide2.xml", '<p:sld xmlns:p="p" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:t>Second</a:t></p:sld>')
-        archive.writestr("ppt/slides/slide1.xml", '<p:sld xmlns:p="p" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:t>First &amp; safe</a:t></p:sld>')
+        archive.writestr("[Content_Types].xml",
+            '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+            '<Override PartName="/ppt/presentation.xml" ContentType="' + documents.PPTX_CONTENT_TYPE + '"/></Types>')
+        archive.writestr("ppt/presentation.xml",
+            '<p:presentation xmlns:p="' + documents.PRESENTATION[1:-1] + '" xmlns:r="' + documents.OFFICE_REL[1:-1] + '">'
+            '<p:sldIdLst>' + "".join(f'<p:sldId id="{256+n}" r:id="rId{n}"/>' for n in order) +
+            '</p:sldIdLst></p:presentation>')
+        archive.writestr("ppt/_rels/presentation.xml.rels",
+            '<Relationships xmlns="' + documents.PACKAGE_REL[1:-1] + '">' +
+            "".join(f'<Relationship Id="rId{n}" Type="{documents.OFFICE_REL[1:-1]}/slide" Target="slides/slide{n}.xml"'
+                    + (' TargetMode="External"' if external else '') + '/>' for n in (1, 2)) +
+            '</Relationships>')
+        for n, text in ((1, "First &amp; safe"), (2, "Second")):
+            archive.writestr(f"ppt/slides/slide{n}.xml",
+                '<p:sld xmlns:p="' + documents.PRESENTATION[1:-1] + '" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:t>' + text + '</a:t></p:sld>')
         if extra:
             archive.writestr(*extra)
     return data.getvalue()
@@ -52,6 +63,23 @@ class AttachmentTests(unittest.TestCase):
         name, item = documents.prepare_document(pptx(), "my-slides", "pptx")
         self.assertTrue(name.endswith(".pptx"))
         self.assertEqual(item["slides"], [{"number": 1, "text": "First & safe"}, {"number": 2, "text": "Second"}])
+
+    def test_relationship_order_is_authoritative(self):
+        _, item = documents.prepare_document(pptx(order=(2, 1)), "slides", "pptx")
+        self.assertEqual(item["slides"], [{"number": 1, "text": "Second"}, {"number": 2, "text": "First & safe"}])
+        for data in (pptx(order=(1, 1)), pptx(order=(3,)), pptx(external=True)):
+            with self.assertRaises(ValueError):
+                documents.prepare_document(data, "slides", "pptx")
+
+    def test_xml_entity_declarations_rejected(self):
+        data = io.BytesIO()
+        with zipfile.ZipFile(data, "w") as archive:
+            archive.writestr("bad.xml", '<?xml version="1.0"?><!DOCTYPE x [<!ENTITY y "secret">]><x>&y;</x>')
+            archive.writestr("utf16.xml", '<x>unsafe encoding</x>'.encode("utf-16"))
+        with zipfile.ZipFile(data) as archive:
+            for name in ("bad.xml", "utf16.xml"):
+                with self.assertRaises(ValueError):
+                    documents.read_xml(archive, name)
 
     def test_invalid_or_embedded_presentation(self):
         for data in (b"not a zip", pptx(("ppt/vbaProject.bin", b"macro")),
