@@ -609,6 +609,8 @@ Authors may enter a URL slug in the website editor or GitHub issue form. For exa
 
 ## Research
 
+Optional research publication details include publication type, category, version, chapters, technical lessons and research references. Text fields are bounded (100 characters, or 40 for version); counts are whole numbers from 0 to 1,000,000, and blank values are omitted. The author provides counts; the site does not verify them against attachments. Access is Free for public research, not a configurable paywall. Metadata is persisted in drafts, Supabase and post front matter, shown in article details, with type/category/version in listings and search. Existing posts and canonical URLs are unchanged.
+
 The optional Subtitle field adds a short secondary heading (up to 200 characters), separate from the title and summary. It is stored in drafts, Supabase and post front matter, displayed on article pages and listings, and included in search text. Changing it does not change the post URL. Older posts do not need a subtitle.
 
 The editor includes a post language selector (English, Hindi, other Indian and international languages, Multilingual and Other / unspecified). The selected language is saved as `content_language`, shown in research listings and article details, and used for the archive filter and article text language attributes. Existing posts without metadata stay visible as unspecified; selecting a language does not translate content.

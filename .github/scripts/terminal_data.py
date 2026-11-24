@@ -86,6 +86,7 @@ def published_posts(root):
             "tags": fields.get("tags") or [],
             "description": fields.get("description") or "",
             "subtitle": fields.get("subtitle") or "",
+            "research_details": fields.get("research_details") or {},
             "_datetime": dt,
             "_source": path.name,
         })

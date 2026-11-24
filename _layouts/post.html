@@ -140,6 +140,21 @@ layout: default
           <dd>{{ site.data.post_languages[language_code] | default: "Other / unspecified" | escape }}</dd>
         </div>
         {%- endif %}
+        {%- if page.tags contains "research" or page.research_details %}
+        {%- for field in site.data.research_fields %}
+          {%- assign detail = page.research_details[field[0]] %}
+          {%- if detail != nil and detail != "" %}
+        <div class="post-details__row">
+          <dt>{{ field[1] | escape }}</dt>
+          <dd>{{ detail | escape }}</dd>
+        </div>
+          {%- endif %}
+        {%- endfor %}
+        <div class="post-details__row">
+          <dt>Access</dt>
+          <dd>Free</dd>
+        </div>
+        {%- endif %}
         <div class="post-details__row">
           <dt>Reading time</dt>
           <dd>{{ reading_minutes }} min read</dd>

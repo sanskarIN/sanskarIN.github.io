@@ -33,6 +33,24 @@ class PublicationTests(unittest.TestCase):
                         publish_post.new_slug("Title", 42, invalid)
                 self.assertTrue(publish_post.valid_custom_slug("a" * 60))
 
+    def test_research_metadata_validates_counts_and_text(self):
+        problems = []
+        raw = {"publication_type": "Technical Research Article", "category": "Computer Science",
+               "version": "v1.0.0", "chapters": "27", "technical_lessons": "108",
+               "research_references": "0"}
+        details = publish_post.research_metadata(raw, problems)
+        self.assertEqual(problems, [])
+        self.assertEqual(details["chapters"], 27)
+        self.assertEqual(details["research_references"], 0)
+        self.assertEqual(details["version"], "v1.0.0")
+        self.assertEqual(publish_post.research_metadata({}, problems), {})
+        for key, value in (("chapters", "-1"), ("chapters", "1000001"),
+                           ("technical_lessons", "2.5"), ("version", "../bad"),
+                           ("category", "x" * 101)):
+            errors = []
+            self.assertEqual(publish_post.research_metadata({key: value}, errors), {})
+            self.assertTrue(errors)
+
     def test_create_update_remove_document(self):
         account = {"id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
                    "username": "reader", "name": "Reader"}
@@ -43,7 +61,7 @@ class PublicationTests(unittest.TestCase):
         settings = {"account_images": prefix.replace("blog-attachments", "blog-images"),
                     "owner_username": "owner", "owner_name": "Owner", "images_per_post": 20}
         form = {"title": "Guide", "subtitle": "A study of नमस्ते & computing", "requested_slug": "custom-guide", "summary": "A guide", "tags": [],
-                "content_language": "hi", "cover_url": None, "cover_alt": "", "notes": [],
+                "content_language": "hi", "research_details": {"category": "Computer Science", "chapters": 27}, "cover_url": None, "cover_alt": "", "notes": [],
                 "markdown": f"Read the [guide]({url})."}
         payload = b"%PDF-1.7\nsample\n%%EOF\n"
         with tempfile.TemporaryDirectory() as folder:
@@ -55,6 +73,7 @@ class PublicationTests(unittest.TestCase):
                 post = publish_post.build_post(issue, form, settings, None, False, account=account)
                 self.assertEqual(post["slug"], "custom-guide")
                 self.assertEqual(post["fields"]["content_language"], "hi")
+                self.assertEqual(post["fields"]["research_details"], {"category": "Computer Science", "chapters": 27})
                 self.assertEqual(post["fields"]["subtitle"], "A study of नमस्ते & computing")
                 self.assertEqual(len(post["fields"]["attachments"]), 1)
                 asset = post["fields"]["attachments"][0]
@@ -66,6 +85,7 @@ class PublicationTests(unittest.TestCase):
                 self.assertEqual(public_file.read_bytes(), payload)
                 front_matter = yaml.safe_load(saved.read_text(encoding="utf-8").split("---\n", 2)[1])
                 self.assertEqual(front_matter["attachments"][0]["sha256"], asset["sha256"])
+                self.assertEqual(front_matter["research_details"]["chapters"], 27)
                 existing = {"slug": post["slug"], "path": saved, "text": saved.read_text(encoding="utf-8")}
                 self.assertEqual(publish_post.save_post(post, existing), "unchanged")
                 # Same filename and size do not prove document integrity.
@@ -85,9 +105,11 @@ class PublicationTests(unittest.TestCase):
                 form["requested_slug"] = "changed-slug"
                 form["title"] = "Renamed guide"
                 form["subtitle"] = "Updated subtitle"
+                form["research_details"] = {}
                 revised = publish_post.build_post(issue, form, settings, existing, False, account=account)
                 self.assertEqual(revised["slug"], "custom-guide")
                 self.assertEqual(revised["fields"]["subtitle"], "Updated subtitle")
+                self.assertIsNone(revised["fields"]["research_details"])
                 self.assertEqual(publish_post.save_post(revised, existing), "updated")
                 self.assertFalse(public_file.exists())
                 self.assertNotIn("attachments:", saved.read_text(encoding="utf-8"))

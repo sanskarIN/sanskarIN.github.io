@@ -32,6 +32,15 @@
       {%- assign language_code = card.content_language | default: "und" %}
       <span>{{ site.data.post_languages[language_code] | default: "Other / unspecified" | escape }}</span>
       {%- endif %}
+      {%- if card.research_details.publication_type %}
+      <span>{{ card.research_details.publication_type | escape }}</span>
+      {%- endif %}
+      {%- if card.research_details.category %}
+      <span>{{ card.research_details.category | escape }}</span>
+      {%- endif %}
+      {%- if card.research_details.version %}
+      <span>{{ card.research_details.version | escape }}</span>
+      {%- endif %}
       <span>{{ card_minutes }} min read</span>
     </p>
     {%- if include.documents and card.attachments and card.attachments.size > 0 %}

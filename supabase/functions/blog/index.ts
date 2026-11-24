@@ -67,7 +67,7 @@ class HttpError extends Error {
 
 type Profile = { id: string; username: string; display_name: string };
 type User = { id: string; token: string; profile: Profile | null };
-type Post = { title: string; subtitle: string; requestedSlug: string; contentLanguage: string; summary: string; tags: string[]; coverUrl: string; coverAlt: string; body: string };
+type Post = { title: string; subtitle: string; researchDetails: Record<string, string>; requestedSlug: string; contentLanguage: string; summary: string; tags: string[]; coverUrl: string; coverAlt: string; body: string };
 // deno-lint-ignore no-explicit-any
 type Json = any;
 
@@ -253,12 +253,48 @@ async function verifyAttachments(post: Post, user: User): Promise<void> {
   if (problems.length) throw new HttpError(400, "Check the attached documents before submitting.", problems);
 }
 
+const RESEARCH_FIELDS: Record<string, string> = {"publication_type":"Publication type","category":"Category","version":"Version","chapters":"Chapters","technical_lessons":"Technical lessons","research_references":"Research references"};
+
+function checkResearchDetails(raw: unknown, problems: string[]): Record<string, string> {
+  const result: Record<string, string> = {};
+  if (raw === undefined || raw === null) return result;
+  if (typeof raw !== "object" || Array.isArray(raw)) {
+    problems.push("Research details must be an object.");
+    return result;
+  }
+  for (const [key, label] of Object.entries(RESEARCH_FIELDS)) {
+    const value = (raw as Record<string, unknown>)[key];
+    if (value === undefined || value === null || value === "") continue;
+    if (typeof value !== "string") {
+      problems.push(label + " must be text.");
+      continue;
+    }
+    const text = cleanLine(value);
+    if (!text) continue;
+    if (["chapters", "technical_lessons", "research_references"].includes(key)) {
+      if (!/^[0-9]{1,7}$/.test(text) || Number(text) > 1000000) {
+        problems.push(label + " must be a whole number from 0 to 1,000,000.");
+        continue;
+      }
+      result[key] = String(Number(text));
+    } else if (Array.from(text).length > (key === "version" ? 40 : 100)) {
+      problems.push(label + " is too long.");
+    } else if (key === "version" && !/^[A-Za-z0-9][A-Za-z0-9.+_-]{0,39}$/.test(text)) {
+      problems.push("Use a version such as v1.0.0 or 2026.1.");
+    } else {
+      result[key] = text;
+    }
+  }
+  return result;
+}
+
 function checkPost(input: Json, userId: string): Post {
   const problems: string[] = [];
   const title = cleanLine(input?.title);
   if (!title) problems.push("Add a title.");
   else if (title.length > LIMITS.title) problems.push(`Shorten the title to ${LIMITS.title} characters or fewer.`);
 
+  const researchDetails = checkResearchDetails(input?.researchDetails, problems);
   const subtitle = cleanLine(input?.subtitle);
   if (Array.from(subtitle).length > 200) problems.push("Shorten the subtitle to 200 characters or fewer.");
 
@@ -314,7 +350,7 @@ function checkPost(input: Json, userId: string): Post {
     problems.push("Confirm that you wrote the post and have the right to publish its text, images and attachments.");
   }
   if (problems.length) throw new HttpError(400, "Please fix the following and send the post again.", problems);
-  return { title, subtitle, requestedSlug, contentLanguage, summary, tags, coverUrl, coverAlt, body };
+  return { title, subtitle, researchDetails, requestedSlug, contentLanguage, summary, tags, coverUrl, coverAlt, body };
 }
 
 function base64Url(text: string): string {
@@ -349,6 +385,7 @@ function issueBody(post: Post, profile: Profile): string {
     "",
     value(post.tags.join(", ")),
     "",
+    ...Object.entries(RESEARCH_FIELDS).flatMap(([key, label]) => ["### " + label, "", value(post.researchDetails[key] || ""), ""]),
     "### Cover image",
     "",
     post.coverUrl ? `![Cover image](${post.coverUrl})` : "_No response_",
@@ -401,6 +438,7 @@ async function submit(user: User, input: Json) {
   if (row && input?.post?.requestedSlug === undefined) post.requestedSlug = row.requested_slug ?? "";
   if (row && input?.post?.contentLanguage === undefined) post.contentLanguage = row.content_language ?? "und";
   if (row && input?.post?.subtitle === undefined) post.subtitle = row.subtitle ?? "";
+  if (row && input?.post?.researchDetails === undefined) post.researchDetails = row.research_details ?? {};
   let issueNumber: number | null = row?.issue_number ?? null;
   if (issueNumber) {
     const issue = await github(issuePath(issueNumber));
@@ -426,6 +464,7 @@ async function submit(user: User, input: Json) {
   const fields = {
     title: post.title,
     subtitle: post.subtitle,
+    research_details: post.researchDetails,
     requested_slug: post.requestedSlug,
     content_language: post.contentLanguage,
     summary: post.summary,

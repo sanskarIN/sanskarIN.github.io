@@ -93,7 +93,8 @@ LABELS = {
 STATUS_LABELS = ("awaiting-review", "needs-changes", "published", "pending-merge")
 
 # Headings of the issue form fields (.github/ISSUE_TEMPLATE/blog-post.yml).
-FIELDS_BEFORE_POST = ("Subtitle", "URL slug", "Language", "Summary", "Tags", "Cover image", "Cover image description")
+RESEARCH_FIELDS = {"publication_type":"Publication type","category":"Category","version":"Version","chapters":"Chapters","technical_lessons":"Technical lessons","research_references":"Research references"}
+FIELDS_BEFORE_POST = ("Subtitle", "URL slug", "Language", "Summary", "Tags", "Cover image", "Cover image description", *RESEARCH_FIELDS.values())
 POST_FIELD = "Post"
 CONFIRMATION_FIELD = "Confirmation"
 NO_RESPONSE = "_No response_"
@@ -410,6 +411,34 @@ def is_attachment(url):
     return parts.hostname == "user-images.githubusercontent.com"
 
 
+def research_metadata(raw, problems):
+    """Optional author-supplied publication details; counts are not inferred."""
+    details = {}
+    for key, label in RESEARCH_FIELDS.items():
+        value = raw.get(key, "")
+        if value is None or value == "":
+            continue
+        if key in ("chapters", "technical_lessons", "research_references"):
+            value = str(value).strip()
+            if not re.fullmatch(r"[0-9]{1,7}", value) or int(value) > 1000000:
+                problems.append(f"{label} must be a whole number from 0 to 1,000,000.")
+            else:
+                details[key] = int(value)
+        elif isinstance(value, str):
+            value = clean_line(value)
+            if not value:
+                continue
+            if len(value) > (40 if key == "version" else 100):
+                problems.append(f"{label} is too long.")
+            elif key == "version" and not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9.+_-]{0,39}", value):
+                problems.append("Use a version such as v1.0.0 or 2026.1.")
+            else:
+                details[key] = value
+        else:
+            problems.append(f"{label} must be text.")
+    return details
+
+
 def read_form(issue, settings, is_image=None):
     """Returns the post's fields, or raises PostProblem with everything to fix."""
     is_image = is_image or is_attachment
@@ -442,6 +471,8 @@ def read_form(issue, settings, is_image=None):
     language = LANGUAGE_LABELS.get(raw_language, raw_language) or "und"
     if language not in POST_LANGUAGES:
         problems.append("Select a supported post language from the form.")
+
+    details = research_metadata({key: sections.get(label, "") for key, label in RESEARCH_FIELDS.items()}, problems)
 
     summary = clean_line(sections.get("Summary", ""))
     if len(summary) > settings["summary_length"]:
@@ -479,6 +510,7 @@ def read_form(issue, settings, is_image=None):
         "title": title,
         "requested_slug": requested_slug,
         "subtitle": subtitle,
+        "research_details": details,
         "content_language": language,
         "summary": summary,
         "tags": tags,
@@ -874,9 +906,14 @@ def build_post(issue, form, settings, existing, trusted, account=None, is_image=
     subtitle = clean_line(form.get("subtitle", ""))
     if len(subtitle) > 200:
         raise PostProblem(["Shorten the subtitle to 200 characters or fewer."])
+    detail_problems = []
+    details = research_metadata(form.get("research_details", {}), detail_problems)
+    if detail_problems:
+        raise PostProblem(detail_problems)
     fields = {
         "title": form["title"],
         "subtitle": subtitle,
+        "research_details": details or None,
         "content_language": language,
         "description": form["summary"] or shorten(clean_line(text), 160),
         "date": "{date}",

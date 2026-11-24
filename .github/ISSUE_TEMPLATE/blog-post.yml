@@ -68,6 +68,42 @@ body:
       label: Tags
       description: Up to 5 topics, separated by commas. Include the research tag to list your post in the Research archive.
       placeholder: open source, android, web
+  - type: input
+    id: research-publication-type
+    attributes:
+      label: Publication type
+      description: Optional. Up to 100 characters.
+      placeholder: "Technical Research Article"
+  - type: input
+    id: research-category
+    attributes:
+      label: Category
+      description: Optional. Up to 100 characters.
+      placeholder: "Computer Science"
+  - type: input
+    id: research-version
+    attributes:
+      label: Version
+      description: Optional. Up to 40 characters.
+      placeholder: "v1.0.0"
+  - type: input
+    id: research-chapters
+    attributes:
+      label: Chapters
+      description: Optional. Whole number from 0 to 1,000,000.
+      placeholder: "27"
+  - type: input
+    id: research-technical-lessons
+    attributes:
+      label: Technical lessons
+      description: Optional. Whole number from 0 to 1,000,000.
+      placeholder: "108"
+  - type: input
+    id: research-research-references
+    attributes:
+      label: Research references
+      description: Optional. Whole number from 0 to 1,000,000.
+      placeholder: "44"
   - type: upload
     id: cover
     attributes:

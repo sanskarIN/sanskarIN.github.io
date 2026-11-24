@@ -200,6 +200,13 @@ alter table public.submissions drop constraint if exists submissions_subtitle_le
 alter table public.submissions add constraint submissions_subtitle_length
   check (char_length(subtitle) <= 200);
 
+alter table public.submissions add column if not exists research_details jsonb not null default '{}'::jsonb;
+alter table public.submissions drop constraint if exists submissions_research_details_valid;
+alter table public.submissions add constraint submissions_research_details_valid
+  check (jsonb_typeof(research_details) = 'object'
+    and research_details - array['publication_type', 'category', 'version', 'chapters', 'technical_lessons', 'research_references'] = '{}'::jsonb
+    and octet_length(research_details::text) <= 3000);
+
 create index if not exists submissions_user_created
   on public.submissions (user_id, created_at desc);
 

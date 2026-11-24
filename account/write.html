@@ -85,6 +85,36 @@ account_app: write
     </div>
 
     <fieldset class="form-group form-field--wide">
+      <legend class="form-field__label">Research publication details (optional)</legend>
+      <p class="form-field__hint">Add the details that apply to your work. Leave unknown values blank. Counts describe the uploaded publication and are supplied by the author, not calculated by the website. Published research is freely accessible.</p>
+      <div class="form-field">
+        <label class="form-field__label" for="detail-publication_type">Publication type</label>
+        <input class="form-field__input" id="detail-publication_type" name="detail_publication_type" type="text" maxlength="100" placeholder="Technical Research Article">
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="detail-category">Category</label>
+        <input class="form-field__input" id="detail-category" name="detail_category" type="text" maxlength="100" placeholder="Computer Science">
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="detail-version">Version</label>
+        <input class="form-field__input" id="detail-version" name="detail_version" type="text" maxlength="40" placeholder="v1.0.0">
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="detail-chapters">Chapters</label>
+        <input class="form-field__input" id="detail-chapters" name="detail_chapters" type="text" inputmode="numeric" pattern="[0-9]{1,7}" maxlength="7" placeholder="27">
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="detail-technical_lessons">Technical lessons</label>
+        <input class="form-field__input" id="detail-technical_lessons" name="detail_technical_lessons" type="text" inputmode="numeric" pattern="[0-9]{1,7}" maxlength="7" placeholder="108">
+      </div>
+      <div class="form-field">
+        <label class="form-field__label" for="detail-research_references">Research references</label>
+        <input class="form-field__input" id="detail-research_references" name="detail_research_references" type="text" inputmode="numeric" pattern="[0-9]{1,7}" maxlength="7" placeholder="44">
+      </div>
+      <p class="form-field__hint">Access: Free (public website).</p>
+    </fieldset>
+
+    <fieldset class="form-group form-field--wide">
       <legend class="form-field__label">Cover image</legend>
       <p class="form-field__hint">Optional. Shown at the top of your post and on the blog page. PNG, JPEG, GIF, or WebP, up to {{ limits.image_size_mb }} MB.</p>
       <div class="cover-preview" data-cover-preview hidden></div>
