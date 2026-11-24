@@ -10,6 +10,13 @@
       <a class="button button--primary" href="{{ attachment.path | relative_url | escape }}" download="{{ attachment.name | escape }}">Download {{ attachment.format | escape }}</a>
       {%- if attachment.format == "PDF" %}
       <a class="button button--secondary" href="{{ attachment.path | relative_url | escape }}">Read PDF online</a>
+      {%- elsif attachment.format == "PPTX" %}
+        {%- for companion in page.attachments %}
+          {%- if companion.format == "PDF" and companion.title == attachment.title %}
+      <a class="button button--secondary" href="{{ companion.path | relative_url | escape }}">Read visual PDF version</a>
+            {%- break %}
+          {%- endif %}
+        {%- endfor %}
       {%- endif %}
       <button class="copy-button" type="button" data-copy="{{ page.url | absolute_url }}#{{ attachment.id | escape }}"><span data-copy-label>Copy share link</span></button>
       <button class="copy-button" type="button" data-copy="{{ attachment.path | absolute_url | escape }}"><span data-copy-label>Copy file link</span></button>
