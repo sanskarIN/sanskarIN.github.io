@@ -6,7 +6,7 @@ import sys
 from html.parser import HTMLParser
 from pathlib import Path
 
-from terminal_data import parse_front_matter
+from terminal_data import parse_front_matter, read_yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 MAX_BYTES = 10_000_000
@@ -21,6 +21,7 @@ class DocumentLinks(HTMLParser):
         self.ids = []
         self.links = []
         self.downloads = []
+        self.read_links = []
         self.feed(path.read_text(encoding="utf-8"))
 
     def handle_starttag(self, tag, attrs):
@@ -31,6 +32,8 @@ class DocumentLinks(HTMLParser):
             self.links.append(values["href"])
             if "download" in values:
                 self.downloads.append((values["href"], values["download"]))
+            else:
+                self.read_links.append(values["href"])
 
 
 def demand(condition, message):
@@ -102,7 +105,7 @@ def check_resources(output, root=ROOT, baseurl=""):
             demand((url, name) in library.downloads, f"Library download missing: {name}")
             demand(page_url + "#" + anchor in library.links, f"Library detail link missing: {name}")
             if extension == "pdf":
-                demand(url in page.links, f"PDF reading link missing: {name}")
+                demand(url in page.read_links, f"PDF reading link missing: {name}")
     for folder in (source_dir, built_dir):
         actual = files_under(folder)
         demand(actual == expected, f"Document inventory mismatch in {folder}: "
@@ -111,4 +114,5 @@ def check_resources(output, root=ROOT, baseurl=""):
 
 
 if __name__ == "__main__":
-    check_resources(Path(sys.argv[1] if len(sys.argv) > 1 else "_site").resolve())
+    check_resources(Path(sys.argv[1] if len(sys.argv) > 1 else "_site").resolve(),
+                    baseurl=read_yaml(ROOT, "_config.yml").get("baseurl", "").rstrip("/"))
