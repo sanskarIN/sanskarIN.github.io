@@ -1,0 +1,100 @@
+---
+layout: page
+title: Articles
+eyebrow: Reading room
+lead: Explore published articles, tutorials, explanations and learning resources.
+description: Browse all published articles, tutorials, explanations and learning resources on sanskarIN.github.io.
+permalink: /articles/
+schema_type: CollectionPage
+---
+{%- include accounts-config.html -%}
+{%- capture form_url -%}{{ site.repository_url }}/issues/new?template={{ site.data.blog.form }}{%- endcapture -%}
+{%- if accounts_on -%}
+  {%- assign write_url = "/account/write/" -%}
+{%- else -%}
+  {%- assign write_url = form_url -%}
+{%- endif -%}
+{%- assign article_count = site.posts | size -%}
+{%- assign resource_count = 0 -%}
+{%- for post in site.posts -%}
+  {%- if post.attachments and post.attachments.size > 0 -%}
+    {%- assign resource_count = resource_count | plus: 1 -%}
+  {%- endif -%}
+{%- endfor %}
+<div class="button-row">
+  {% include link.html url=write_url label="Write an article" icon="pencil" class="button button--primary" %}
+  <a class="button button--secondary" href="{{ '/resources/' | relative_url }}">Assets &amp; resources</a>
+  {%- if site.tags.size > 0 %}
+  {% include link.html url="/blog/tags/" label="Browse topics" icon="tag" class="button button--secondary" %}
+  {%- endif %}
+  <a class="button button--ghost" href="{{ '/blog/' | relative_url }}">Blog</a>
+  <a class="button button--ghost" href="{{ '/blog/feed.xml' | relative_url }}" type="application/atom+xml">{% include icon.html name="rss" %}Atom feed</a>
+</div>
+{%- if article_count > 0 %}
+{%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+<nav class="page-section" aria-label="Article archive navigation">
+  <h2>Explore articles</h2>
+  <div class="button-row">
+    <a class="button button--secondary" href="#latest-article">Latest</a>
+    {%- if resource_count > 0 %}
+    <a class="button button--secondary" href="#articles-with-resources">With resources</a>
+    {%- endif %}
+    <a class="button button--secondary" href="#all-articles">All articles</a>
+    <button class="button button--ghost" type="button" aria-haspopup="dialog" {% include search-attributes.html %} hidden>{% include icon.html name="search" %}Search articles and site</button>
+  </div>
+  <ul class="tag-list" aria-label="Browse by year">
+    {%- for year in years %}
+    <li><a class="tag tag--link" href="#articles-{{ year.name }}">{{ year.name }} ({{ year.items.size }})</a></li>
+    {%- endfor %}
+  </ul>
+  {%- if site.tags.size > 0 %}
+  <h3>Topics</h3>
+  {%- assign topics = site.tags | sort %}
+  <ul class="tag-list" aria-label="Browse by topic">
+    {%- for topic in topics %}
+      {%- assign topic_name = topic[0] %}
+    <li><a class="tag tag--link" href="{{ '/blog/tags/' | relative_url }}#tag-{% include tag-id.html tag=topic_name %}">{{ topic_name | escape }} ({{ topic[1].size }})</a></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</nav>
+<section class="page-section" aria-labelledby="latest-article">
+  <h2 id="latest-article">Latest article</h2>
+  {% include post-card.html post=site.posts.first documents=true %}
+  <p class="note">{{ article_count }} published article{% if article_count != 1 %}s{% endif %} &middot; {{ resource_count }} with downloadable documents.</p>
+</section>
+{%- if resource_count > 0 %}
+<section class="page-section" aria-labelledby="articles-with-resources">
+  <h2 id="articles-with-resources">Articles with downloadable resources</h2>
+  <p>Read the article and access its published PDF documents or PowerPoint presentations.</p>
+  <ul class="post-list">
+  {%- for post in site.posts %}
+    {%- if post.attachments and post.attachments.size > 0 %}
+    <li>
+      {% include post-card.html post=post documents=true %}
+    </li>
+    {%- endif %}
+  {%- endfor %}
+  </ul>
+</section>
+{%- endif %}
+<section class="page-section" aria-labelledby="all-articles">
+  <h2 id="all-articles">All articles</h2>
+  {%- for year in years %}
+  <section class="post-year" aria-labelledby="articles-{{ year.name }}">
+    <h3 id="articles-{{ year.name }}">{{ year.name }} <span class="post-year__count">&middot; {{ year.items.size }} article{% if year.items.size != 1 %}s{% endif %}</span></h3>
+    <ul class="post-list">
+    {%- for post in year.items %}
+      <li>{% include post-card.html post=post heading=4 documents=true %}</li>
+    {%- endfor %}
+    </ul>
+  </section>
+  {%- endfor %}
+</section>
+{%- else %}
+<section class="page-section">
+  <h2>No published articles yet</h2>
+  <p>New articles will appear here after publication through the existing blog workflow.</p>
+  {% include link.html url=write_url label="Write the first article" class="button button--secondary" %}
+</section>
+{%- endif %}

@@ -19,6 +19,12 @@
   },
   {
     "type": "Page",
+    "title": "Articles",
+    "url": "/articles/",
+    "text": "Browse all published articles, tutorials, explanations and learning resources on sanskarIN.github.io."
+  },
+  {
+    "type": "Page",
     "title": "Assets & Resources",
     "url": "/resources/",
     "text": "Browse and download presentations and PDF resources from the blog."
