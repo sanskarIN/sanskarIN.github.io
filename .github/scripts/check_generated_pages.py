@@ -49,6 +49,59 @@ def scan(path):
     return parsed
 
 
+def check_scarp(output, home, projects):
+    """Verify actual Jekyll output, not just the page source."""
+    import xml.etree.ElementTree as ET
+    import yaml
+
+    route = "/ScarpLang/"
+    shortcut = route + "GitHub/"
+    target = "https://github.com/scarp-lang"
+    feature_path = output / "ScarpLang" / "index.html"
+    redirect_path = output / "ScarpLang" / "GitHub" / "index.html"
+    feature = scan(feature_path)
+    redirect = scan(redirect_path)
+    markup = feature_path.read_text(encoding="utf-8")
+    redirect_markup = redirect_path.read_text(encoding="utf-8")
+    if feature.h1 != ["Scarp Lang"]:
+        raise AssertionError("Scarp showcase must have one primary heading")
+    if "Content-Security-Policy" not in markup:
+        raise AssertionError("Scarp showcase must preserve the site CSP")
+    if '{% ' in markup or '{{ ' in markup:
+        raise AssertionError("Unprocessed template on the Scarp showcase")
+    if 'href="https://sanskarin.github.io/ScarpLang/"' not in markup:
+        raise AssertionError("Scarp showcase canonical URL missing")
+    for heading in ("Start exploring", "The Scarp ecosystem", "Engineering direction", "Build in the open"):
+        if feature.headings.count(heading) != 1:
+            raise AssertionError(f"Scarp heading missing or duplicated: {heading}")
+    ecosystem = yaml.safe_load((ROOT / "_data/scarp_ecosystem.yml").read_text(encoding="utf-8"))
+    for entry in ecosystem:
+        if entry["url"] not in feature.links:
+            raise AssertionError(f"Scarp showcase destination missing: {entry['url']}")
+    for page, name in ((home, "Homepage"), (projects, "Projects")):
+        if route not in page.links:
+            raise AssertionError(f"{name} does not link to the Scarp showcase")
+    if shortcut not in feature.links or shortcut not in home.links:
+        raise AssertionError("Scarp GitHub shortcut is not discoverable")
+    if target not in redirect.links or route not in redirect.links:
+        raise AssertionError("Scarp redirect fallback links missing")
+    if not re.search(r'<meta http-equiv="refresh" content="0; url=https://github\.com/scarp-lang">', redirect_markup):
+        raise AssertionError("Scarp shortcut does not immediately redirect to the official organization")
+    if '<meta name="robots" content="noindex, follow">' not in redirect_markup or '<script' in redirect_markup:
+        raise AssertionError("Scarp shortcut must be noindex and work without JavaScript")
+    search = json.loads((output / "search.json").read_text(encoding="utf-8"))
+    terminal = json.loads((output / "terminal.json").read_text(encoding="utf-8"))
+    if [e["url"] for e in search].count(route) != 1 or any(e["url"] == shortcut for e in search):
+        raise AssertionError("Scarp search visibility is incorrect")
+    if {"title": "Scarp Lang", "url": route} not in terminal["pages"]:
+        raise AssertionError("Scarp showcase missing in terminal navigation")
+    sitemap = ET.parse(output / "sitemap.xml")
+    urls = [node.text for node in sitemap.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
+    if urls.count("https://sanskarin.github.io" + route) != 1 or "https://sanskarin.github.io" + shortcut in urls:
+        raise AssertionError("Scarp sitemap visibility is incorrect")
+    print("Scarp: built routes, official destinations, navigation, redirect, search and sitemap passed.")
+
+
 def check(output):
     about = json.loads((ROOT / "_data/about_content.json").read_text(encoding="utf-8"))
     details = json.loads((ROOT / "_data/developer_details.json").read_text(encoding="utf-8"))
@@ -56,6 +109,7 @@ def check(output):
     d = scan(output / "developer" / "index.html")
     h = scan(output / "index.html")
     projects = scan(output / "projects" / "index.html")
+    check_scarp(output, h, projects)
     home = json.loads((ROOT / "_data/home_content.json").read_text(encoding="utf-8"))
     contact_data = json.loads((ROOT / "_data/contact_page.json").read_text(encoding="utf-8"))
     not_found_data = json.loads((ROOT / "_data/not_found_page.json").read_text(encoding="utf-8"))
