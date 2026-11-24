@@ -31,9 +31,35 @@ schema_type: CollectionPage
   <a class="button button--ghost" href="{{ '/blog/feed.xml' | relative_url }}" type="application/atom+xml">{% include icon.html name="rss" %}Atom feed</a>
 </div>
 {%- if article_count > 0 %}
+{%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+<nav class="page-section" aria-label="Article archive navigation">
+  <h2>Explore articles</h2>
+  <div class="button-row">
+    <a class="button button--secondary" href="#latest-article">Latest</a>
+    {%- if resource_count > 0 %}
+    <a class="button button--secondary" href="#articles-with-resources">With resources</a>
+    {%- endif %}
+    <a class="button button--secondary" href="#all-articles">All articles</a>
+    <button class="button button--ghost" type="button" aria-haspopup="dialog" {% include search-attributes.html %} hidden>{% include icon.html name="search" %}Search articles and site</button>
+  </div>
+  <ul class="tag-list" aria-label="Browse by year">
+    {%- for year in years %}
+    <li><a class="tag tag--link" href="#articles-{{ year.name }}">{{ year.name }} ({{ year.items.size }})</a></li>
+    {%- endfor %}
+  </ul>
+  {%- if site.tags.size > 0 %}
+  <h3>Topics</h3>
+  {%- assign topics = site.tags | sort %}
+  <ul class="tag-list" aria-label="Browse by topic">
+    {%- for topic in topics %}
+    <li><a class="tag tag--link" href="{{ '/blog/tags/' | relative_url }}#tag-{% include tag-id.html tag=topic.first %}">{{ topic.first | escape }} ({{ topic.last.size }})</a></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</nav>
 <section class="page-section" aria-labelledby="latest-article">
   <h2 id="latest-article">Latest article</h2>
-  {% include post-card.html post=site.posts.first %}
+  {% include post-card.html post=site.posts.first documents=true %}
   <p class="note">{{ article_count }} published article{% if article_count != 1 %}s{% endif %} &middot; {{ resource_count }} with downloadable documents.</p>
 </section>
 {%- if resource_count > 0 %}
@@ -44,8 +70,7 @@ schema_type: CollectionPage
   {%- for post in site.posts %}
     {%- if post.attachments and post.attachments.size > 0 %}
     <li>
-      {% include post-card.html post=post %}
-      <p><a href="{{ post.url | relative_url }}#{{ post.attachments.first.id | escape }}">View {{ post.attachments.size }} attachment{% if post.attachments.size != 1 %}s{% endif %}</a></p>
+      {% include post-card.html post=post documents=true %}
     </li>
     {%- endif %}
   {%- endfor %}
@@ -54,13 +79,12 @@ schema_type: CollectionPage
 {%- endif %}
 <section class="page-section" aria-labelledby="all-articles">
   <h2 id="all-articles">All articles</h2>
-  {%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
   {%- for year in years %}
   <section class="post-year" aria-labelledby="articles-{{ year.name }}">
     <h3 id="articles-{{ year.name }}">{{ year.name }} <span class="post-year__count">&middot; {{ year.items.size }} article{% if year.items.size != 1 %}s{% endif %}</span></h3>
     <ul class="post-list">
     {%- for post in year.items %}
-      <li>{% include post-card.html post=post heading=4 %}</li>
+      <li>{% include post-card.html post=post heading=4 documents=true %}</li>
     {%- endfor %}
     </ul>
   </section>
