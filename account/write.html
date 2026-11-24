@@ -54,7 +54,7 @@ account_app: write
       <label class="form-field__label" for="post-slug">URL slug (optional)</label>
       <input class="form-field__input" id="post-slug" name="requestedSlug" type="text" maxlength="60" autocapitalize="none" spellcheck="false" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" placeholder="my-research-paper" aria-describedby="post-slug-hint post-slug-preview">
       <p class="form-field__hint" id="post-slug-hint">Use lowercase letters, numbers and single hyphens. Leave blank to generate a slug from the title. Availability is checked at publication; a published URL never changes, including for research posts.</p>
-      <p class="form-field__hint" id="post-slug-preview" data-slug-preview data-slug-base="{{ '/blog/' | absolute_url }}" aria-live="polite"></p>
+      <p class="form-field__hint" id="post-slug-preview" data-slug-preview data-slug-base="{{ '/blog/' | absolute_url }}" data-research-base="{{ '/research/' | absolute_url }}" aria-live="polite"></p>
     </div>
     <div class="form-field form-field--wide">
       <label class="form-field__label" for="post-summary">Summary</label>

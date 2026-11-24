@@ -1122,7 +1122,7 @@
         slugPreview.textContent = "Invalid slug: use lowercase letters, numbers and single hyphens (maximum 60).";
         return;
       }
-      slugPreview.textContent = (editingId ? "Requested URL (published URLs are unchanged): " : "Estimated URL: ") + (slugPreview.getAttribute("data-slug-base") || "/blog/") + (requested || auto || "[generated-slug]") + "/";
+      slugPreview.textContent = (editingId ? "Requested URL (published URLs are unchanged): " : "Estimated URL: ") + (research.checked ? (slugPreview.getAttribute("data-research-base") || "/research/") : (slugPreview.getAttribute("data-slug-base") || "/blog/")) + (requested || auto || "[generated-slug]") + "/";
     }
     function values(): Draft {
       const researchDetails: Record<string, string> = {};
@@ -1156,6 +1156,7 @@
       updateSlugPreview();
       field<HTMLTextAreaElement>(form, "summary").value = post.summary || "";
       research.checked = (post.tags || []).some((tag) => tag.toLowerCase().replace(/^#+/, "") === "research");
+      updateSlugPreview();
       field(form, "tags").value = (post.tags || []).filter((tag) => tag.toLowerCase().replace(/^#+/, "") !== "research").join(", ");
       field(form, "coverAlt").value = post.coverAlt || post.cover_alt || "";
       body.value = post.body || "";
@@ -1388,6 +1389,7 @@
           const draft = readStore<StoredPost>(draftKey);
           if (researchMode) {
             research.checked = true;
+            updateSlugPreview();
             $("[data-editor-title]").textContent = "New research post";
           }
           if (draft && (draft.title || draft.body)) {
