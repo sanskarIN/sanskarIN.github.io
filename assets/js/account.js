@@ -987,7 +987,7 @@
         const research = field(form, "research");
         const slugInput = field(form, "requestedSlug");
         const languageInput = field(form, "contentLanguage");
-        const researchKeys = ["publication_type","category","version","chapters","technical_lessons","research_references"];
+        const researchKeys = ["publication_type", "category", "version", "chapters", "technical_lessons", "research_references"];
         const slugPreview = $("[data-slug-preview]", form);
         const reservedSlugs = ["tags", "feed", "index", "page", "authors", "posts"];
         let coverUrl = "";
