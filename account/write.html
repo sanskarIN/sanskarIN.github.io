@@ -81,14 +81,14 @@ account_app: write
         <button class="button button--secondary" type="button" data-action="add-attachment" aria-describedby="post-attachment-hint">Attach a file</button>
       </div>
       <input type="file" accept="image/png,image/jpeg,image/gif,image/webp" data-file="body" hidden>
-      <input type="file" accept=".pdf,.pptx,.md,text/markdown,application/pdf,application/vnd.openxmlformats-officedocument.presentationml.presentation" data-file="attachment" hidden>
+      <input type="file" accept=".pdf,.pptx,.md,.html,.docx,text/markdown,text/html,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/pdf,application/vnd.openxmlformats-officedocument.presentationml.presentation" data-file="attachment" hidden>
       <details>
         <summary>Manage uploaded documents</summary>
         <p class="form-field__hint">Staged documents are public. Deleting a staged copy does not remove a published copy, but it can break an article waiting for review or a future edit. Remove only files you no longer use.</p>
         <button class="button button--secondary" type="button" data-action="list-attachments">List my uploaded documents</button>
         <ul data-staged-attachments></ul>
       </details>
-      <p class="form-field__hint" id="post-attachment-hint">PDF, PPTX or UTF-8 Markdown (.md), strictly under 10 MB each; up to five per post. Uploads are public immediately, even before review. Do not include private information or files you cannot share. Remove the inserted Markdown link to exclude a file from the published post. Markdown files must not start with a front matter delimiter (---). To offer a visual PowerPoint preview, attach a PDF export with the same base filename.</p>
+      <p class="form-field__hint" id="post-attachment-hint">PDF, PPTX, DOCX, or UTF-8 Markdown (.md) and HTML (.html), strictly under 10 MB each; up to five per post. Uploads are public immediately, even before review. Do not include private information or files you cannot share. Remove the inserted Markdown link to exclude a file from the published post. Markdown and HTML files must not start with a front matter delimiter (---). HTML is published as inert text with an HTML download; DOCX has a text-only preview. To offer a visual PowerPoint preview, attach a PDF export with the same base filename.</p>
     </div>
 
     <div class="form-check form-field--wide">

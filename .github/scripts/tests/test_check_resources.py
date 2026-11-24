@@ -54,6 +54,34 @@ class ResourceBuildTests(unittest.TestCase):
                    f'<section id="post-attachments-title"><article id="{self.anchor}">' +
                    download + f'<a href="{base}{self.path}">Read PDF</a></article></section>')
 
+    def test_html_download_uses_plain_text_path(self):
+        for folder in (self.root, self.out):
+            (folder / self.path.lstrip("/")).unlink()
+        self.data = b"<script>alert(1)</script>"
+        digest = hashlib.sha256(self.data).hexdigest()
+        self.name = f"guide-{digest[:20]}.html"
+        self.anchor = f"asset-guide-{digest[:20]}-html"
+        self.path = f"/assets/files/blog/{self.slug}/{self.name}.txt"
+        self.metadata.update(name=self.name, id=self.anchor, format="HTML",
+                             bytes=len(self.data), sha256=digest, path=self.path,
+                             document_preview=self.data.decode(), document_truncated=False)
+        self.write_source()
+        for folder in (self.root, self.out):
+            file = folder / self.path.lstrip("/")
+            file.write_bytes(self.data)
+        self.write_pages()
+        article = self.out / f"blog/{self.slug}/index.html"
+        article.write_text(article.read_text(encoding="utf-8").replace(
+            f'<a href="{self.path}">Read PDF</a>', f'<details id="{self.anchor}-preview"></details>'), encoding="utf-8")
+        library = self.out / "resources/index.html"
+        library.write_text(library.read_text(encoding="utf-8") +
+                           f'<a href="{self.article_url}#{self.anchor}-preview">Preview</a>', encoding="utf-8")
+        check_resources(self.out, self.root)
+        article.write_text(article.read_text(encoding="utf-8") +
+                           f'<a href="{self.path}">Open</a>', encoding="utf-8")
+        with self.assertRaisesRegex(AssertionError, "download only"):
+            check_resources(self.out, self.root)
+
     def test_markdown_inventory_and_preview(self):
         for folder in (self.root, self.out):
             (folder / self.path.lstrip("/")).unlink()

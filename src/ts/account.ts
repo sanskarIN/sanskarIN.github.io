@@ -1144,13 +1144,13 @@
           token: session.access_token,
           json: { prefix: session.user.id, limit: 100, offset: 0 },
         });
-        const names = files.map((item) => item.name).filter((name) => /^[0-9a-f-]{36}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx|md)$/.test(name));
+        const names = files.map((item) => item.name).filter((name) => /^[0-9a-f-]{36}-[a-z0-9][a-z0-9-]{0,59}\.(pdf|pptx|md|docx|html\.txt)$/.test(name));
         if (!names.length) stagedAttachments.appendChild(element("li", "", "No staged documents."));
         for (const name of names) {
           const item = element("li");
           const remove = element("button", "button button--ghost", "Delete staged copy");
           remove.type = "button";
-          const label = name.slice(37);
+          const label = name.slice(37).replace(/\.html\.txt$/, ".html");
           remove.setAttribute("aria-label", "Delete staged copy of " + label);
           item.appendChild(element("span", "", label + " "));
           item.appendChild(remove);
@@ -1194,8 +1194,8 @@
       attachmentInput.value = "";
       if (!file || isBusy(addAttachment) || isBusy(listAttachments) || isBusy(submitButton)) return;
       const extension = file.name.split(".").pop()?.toLowerCase();
-      if (extension !== "pdf" && extension !== "pptx" && extension !== "md") {
-        setStatus(status, "Choose a PDF, PPTX or Markdown (.md) file.", "error");
+      if (extension !== "pdf" && extension !== "pptx" && extension !== "md" && extension !== "html" && extension !== "docx") {
+        setStatus(status, "Choose a PDF, PPTX, Markdown (.md), HTML or DOCX file.", "error");
         return;
       }
       if (file.size === 0 || file.size >= 10000000) {
@@ -1208,13 +1208,13 @@
       }
       if (!window.confirm("This file will be public immediately, even before review. It may contain document metadata. Only upload files you have permission to publish. Continue?")) return;
       const stem = file.name.slice(0, -(extension.length + 1)).normalize("NFKD").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60).replace(/-+$/g, "") || "document";
-      const type = extension === "pdf" ? "application/pdf" : extension === "md" ? "text/markdown" : "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+      const type = extension === "pdf" ? "application/pdf" : extension === "md" ? "text/markdown" : extension === "html" ? "text/plain" : extension === "docx" ? "application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/vnd.openxmlformats-officedocument.presentationml.presentation";
       setBusy(addAttachment, true);
       setStatus(status, "Uploading your attachment…", "pending");
       try {
         const session = await requireSession();
         const id = randomId().replace(/^([a-f0-9]{8})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{4})([a-f0-9]{12})$/, "$1-$2-$3-$4-$5");
-        const path = session.user.id + "/" + id + "-" + stem + "." + extension;
+        const path = session.user.id + "/" + id + "-" + stem + "." + (extension === "html" ? "html.txt" : extension);
         await request("/storage/v1/object/blog-attachments/" + path, {
           method: "POST",
           token: session.access_token,
