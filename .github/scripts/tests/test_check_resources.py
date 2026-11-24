@@ -54,6 +54,34 @@ class ResourceBuildTests(unittest.TestCase):
                    f'<section id="post-attachments-title"><article id="{self.anchor}">' +
                    download + f'<a href="{base}{self.path}">Read PDF</a></article></section>')
 
+    def test_markdown_inventory_and_preview(self):
+        for folder in (self.root, self.out):
+            (folder / self.path.lstrip("/")).unlink()
+        self.data = b"# Guide\r\n"
+        digest = hashlib.sha256(self.data).hexdigest()
+        self.name = f"guide-{digest[:20]}.md"
+        self.anchor = f"asset-guide-{digest[:20]}-md"
+        self.path = f"/assets/files/blog/{self.slug}/{self.name}"
+        self.metadata.update(name=self.name, id=self.anchor, format="MD",
+                             bytes=len(self.data), sha256=digest, path=self.path,
+                             markdown_preview=self.data.decode(), markdown_truncated=False)
+        self.write_source()
+        for folder in (self.root, self.out):
+            file = folder / self.path.lstrip("/")
+            file.write_bytes(self.data)
+        self.write_pages()
+        for page, fragment in (
+            ("resources/index.html", f'<a href="{self.article_url}#{self.anchor}-preview">Preview</a>'),
+            (f"blog/{self.slug}/index.html", f'<details id="{self.anchor}-preview"></details>'),
+        ):
+            file = self.out / page
+            file.write_text(file.read_text(encoding="utf-8") + fragment, encoding="utf-8")
+        check_resources(self.out, self.root)
+        self.metadata["markdown_preview"] = "incorrect"
+        self.write_source()
+        with self.assertRaisesRegex(AssertionError, "Markdown preview metadata mismatch"):
+            check_resources(self.out, self.root)
+
     def test_complete_build_and_baseurl(self):
         check_resources(self.out, self.root)
         self.write_pages("/portfolio")

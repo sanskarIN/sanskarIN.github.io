@@ -121,7 +121,7 @@ CHECK_SQL = """select
   exists (select 1 from storage.buckets where id = '%s' and public) as bucket,
   exists (select 1 from storage.buckets where id = 'blog-attachments' and public
             and file_size_limit = 9999999
-            and allowed_mime_types @> array['application/pdf', 'application/vnd.openxmlformats-officedocument.presentationml.presentation']) as attachment_bucket,
+            and allowed_mime_types @> array['application/pdf', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'text/markdown']) as attachment_bucket,
   exists (select 1 from pg_policies where schemaname = 'storage' and tablename = 'objects'
             and policyname = 'Authors upload their own documents') as attachment_policy,
   coalesce((select bool_and(relrowsecurity) from pg_class

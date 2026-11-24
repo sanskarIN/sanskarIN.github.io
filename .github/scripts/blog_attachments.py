@@ -21,7 +21,7 @@ MAX_BYTES = 10_000_000  # strictly less than 10 decimal MB
 MAX_FILES = 5
 MAX_EXPANDED = 64 * 1024 * 1024
 MAX_PREVIEW = 20_000
-NAME = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-([a-z0-9][a-z0-9-]{0,59})\.(pdf|pptx)")
+NAME = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-([a-z0-9][a-z0-9-]{0,59})\.(pdf|pptx|md)")
 SLIDE = re.compile(r"ppt/slides/slide([1-9][0-9]*)\.xml")
 TEXT = "{http://schemas.openxmlformats.org/drawingml/2006/main}t"
 PRESENTATION = "{http://schemas.openxmlformats.org/presentationml/2006/main}"
@@ -56,7 +56,7 @@ def fetch_document(url):
         raise ValueError("Attachment URL must use HTTPS")
     try:
         opener = urllib.request.build_opener(NoRedirect())
-        with opener.open(urllib.request.Request(url, headers={"Accept": "application/pdf, application/vnd.openxmlformats-officedocument.presentationml.presentation"}), timeout=30) as response:
+        with opener.open(urllib.request.Request(url, headers={"Accept": "application/pdf, application/vnd.openxmlformats-officedocument.presentationml.presentation, text/markdown"}), timeout=30) as response:
             data = response.read(MAX_BYTES)
     except (OSError, urllib.error.URLError) as exc:
         raise ValueError("Attachment could not be downloaded; upload it again") from exc
@@ -160,25 +160,45 @@ def preview_presentation(data):
         raise ValueError("Invalid or unsupported PPTX file") from exc
 
 
+def preview_markdown(data):
+    """Validate plain UTF-8 and keep a bounded, inert source preview."""
+    try:
+        text = data.decode("utf-8-sig")
+    except UnicodeDecodeError as exc:
+        raise ValueError("Markdown attachments must use UTF-8") from exc
+    if not text.strip() or any(ord(char) < 32 and char not in "\t\r\n" for char in text):
+        raise ValueError("Markdown attachments must contain nonempty text without binary control characters")
+    # Jekyll interprets a leading delimiter as page front matter, even in assets.
+    if re.match(r"\A---[ \t]*(?:\r?\n|\r|$)", text):
+        raise ValueError("Markdown attachments must not begin with a front matter delimiter (---)")
+    return text[:MAX_PREVIEW], len(text) > MAX_PREVIEW
+
+
 def prepare_document(data, stem, extension):
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,59}", stem):
         raise ValueError("Invalid document filename")
     if not data or len(data) >= MAX_BYTES:
         raise ValueError("Attachments must be nonempty and smaller than 10 MB")
+    markdown = {}
     if extension == "pdf":
         if not data.startswith(b"%PDF-") or b"%%EOF" not in data[-4096:]:
             raise ValueError("Not a valid PDF file")
         preview = []
     elif extension == "pptx":
         preview = preview_presentation(data)
+    elif extension == "md":
+        source, truncated = preview_markdown(data)
+        preview = []
+        markdown = {"markdown_preview": source, "markdown_truncated": truncated}
     else:
-        raise ValueError("Only PDF and PPTX are supported")
+        raise ValueError("Only PDF, PPTX and Markdown are supported")
     digest = hashlib.sha256(data).hexdigest()
     name = f"{stem}-{digest[:20]}.{extension}"
-    return name, {"id": f"asset-{stem}-{digest[:20]}",
+    anchor = f"asset-{stem}-{digest[:20]}" + ("-md" if extension == "md" else "")
+    return name, {"id": anchor,
                   "name": name, "title": stem.replace("-", " "),
                   "format": extension.upper(), "bytes": len(data),
-                  "sha256": digest, "slides": preview}
+                  "sha256": digest, "slides": preview, **markdown}
 
 
 def collect(markup, prefix, account, slug, token_pattern, attributes):

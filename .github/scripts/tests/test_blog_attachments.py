@@ -41,6 +41,39 @@ def pptx(extra=None, order=(1, 2), external=False):
 
 
 class AttachmentTests(unittest.TestCase):
+    def test_markdown_preserves_bytes_and_inert_source(self):
+        raw = "\ufeff# नमस्ते\r\n<script>alert(1)</script>\n{{ site.title }}".encode("utf-8")
+        name, item = documents.prepare_document(raw, "guide", "md")
+        self.assertTrue(name.endswith(".md"))
+        self.assertEqual(item["format"], "MD")
+        self.assertEqual(item["bytes"], len(raw))
+        self.assertEqual(item["sha256"], __import__("hashlib").sha256(raw).hexdigest())
+        self.assertEqual(item["markdown_preview"], raw.decode("utf-8-sig"))
+        self.assertFalse(item["markdown_truncated"])
+        self.assertTrue(item["id"].endswith("-md"))
+
+    def test_markdown_preview_limit_and_invalid_text(self):
+        with patch.object(documents, "MAX_PREVIEW", 4):
+            _, item = documents.prepare_document(b"# A long document", "guide", "md")
+            self.assertEqual(item["markdown_preview"], "# A ")
+            self.assertTrue(item["markdown_truncated"])
+        for raw in (b"\xff", b"\x00abc", b" \n", b"---\nlayout: page\n---\n", b"\xef\xbb\xbf---\r\n"):
+            with self.subTest(raw=raw), self.assertRaises(ValueError):
+                documents.prepare_document(raw, "guide", "md")
+
+    def test_markdown_collect_preserves_file(self):
+        url = URL.replace(".pptx", ".md")
+        raw = b"# Guide\r\n"
+        with patch.object(documents, "fetch_document", return_value=raw):
+            markup, assets, files = documents.collect(
+                f'<a href="{url}">Guide</a>', PREFIX, ACCOUNT, "article",
+                re.compile(r"<a[^>]*>"),
+                lambda token: {"href": url})
+        self.assertEqual(len(assets), 1)
+        self.assertEqual(files[assets[0]["name"]], raw)
+        self.assertIn("#" + assets[0]["id"], markup)
+        self.assertNotIn(PREFIX, markup)
+
     def test_source_prefix_and_ownership(self):
         self.assertEqual(documents.source_prefix(PREFIX.replace("blog-attachments", "blog-images")), PREFIX)
         self.assertEqual(documents.own_source(URL, PREFIX, ACCOUNT).groups(), ("my-slides", "pptx"))

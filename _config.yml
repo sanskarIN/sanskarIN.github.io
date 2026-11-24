@@ -116,6 +116,10 @@ defaults:
 # -----------------------------------------------------------------------------
 permalink: pretty
 markdown: kramdown
+# Uploaded Markdown is an inert static download, not a generated page.
+# Every authored Markdown page already declares its own front matter.
+optional_front_matter:
+  enabled: false
 kramdown:
   input: GFM
   hard_wrap: false
