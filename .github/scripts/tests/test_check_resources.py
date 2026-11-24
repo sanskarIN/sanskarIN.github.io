@@ -52,7 +52,7 @@ class ResourceBuildTests(unittest.TestCase):
                    f'<a href="{base}{self.article_url}#post-attachments-title">Resources</a>')
         self.write(f"blog/{self.slug}/index.html",
                    f'<section id="post-attachments-title"><article id="{self.anchor}">' +
-                   download + '</article></section>')
+                   download + f'<a href="{base}{self.path}">Read PDF</a></article></section>')
 
     def test_complete_build_and_baseurl(self):
         check_resources(self.out, self.root)
@@ -83,6 +83,13 @@ class ResourceBuildTests(unittest.TestCase):
     def test_missing_download_link(self):
         self.write("resources/index.html", "<p>Missing resource</p>")
         with self.assertRaisesRegex(AssertionError, "Library download missing"):
+            check_resources(self.out, self.root)
+
+    def test_missing_pdf_reader(self):
+        file = self.out / f"blog/{self.slug}/index.html"
+        file.write_text(file.read_text(encoding="utf-8").replace(
+            f'<a href="{self.path}">Read PDF</a>', ""), encoding="utf-8")
+        with self.assertRaisesRegex(AssertionError, "PDF reading link missing"):
             check_resources(self.out, self.root)
 
     def test_duplicate_article_anchor(self):
