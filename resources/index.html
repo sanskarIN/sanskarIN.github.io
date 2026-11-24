@@ -7,10 +7,29 @@ description: Browse and download presentations and PDF resources from the blog.
 permalink: /resources/
 schema_type: CollectionPage
 ---
+{%- include accounts-config.html -%}
+{%- capture form_url -%}{{ site.repository_url }}/issues/new?template={{ site.data.blog.form }}{%- endcapture -%}
+{%- if accounts_on -%}
+  {%- assign write_url = "/account/write/" -%}
+{%- else -%}
+  {%- assign write_url = form_url -%}
+{%- endif %}
+{%- assign pdf_count = 0 -%}
+{%- assign pptx_count = 0 -%}
+{%- for post in site.posts -%}
+  {%- for attachment in post.attachments -%}
+    {%- if attachment.format == "PDF" -%}
+      {%- assign pdf_count = pdf_count | plus: 1 -%}
+    {%- elsif attachment.format == "PPTX" -%}
+      {%- assign pptx_count = pptx_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor %}
 <div class="button-row">
   <a class="button button--secondary" href="{{ '/articles/' | relative_url }}">Browse articles</a>
-  <a class="button button--ghost" href="{{ '/account/write/' | relative_url }}">Write a post</a>
+  {% include link.html url=write_url label="Write a post" class="button button--ghost" %}
 </div>
+<p>{{ pdf_count | plus: pptx_count }} published documents &middot; {{ pdf_count }} PDF &middot; {{ pptx_count }} PowerPoint.</p>
 {%- assign count = 0 -%}
 {%- for post in site.posts -%}
   {%- if post.attachments and post.attachments.size > 0 %}
@@ -22,10 +41,14 @@ schema_type: CollectionPage
       <li>
         <article class="post-card">
           <h3><a href="{{ post.url | relative_url }}#{{ attachment.id | escape }}">{{ attachment.title | escape }}</a></h3>
-          <p>{{ attachment.format | escape }} · {{ attachment.bytes | divided_by: 1000 }} KB</p>
+          <p>{{ attachment.format | escape }} · {{ attachment.bytes | divided_by: 1000 }} KB · <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time></p>
+          <p>Published by {{ post.author | default: site.author.name | escape }}</p>
           <div class="button-row">
             <a class="button button--secondary" href="{{ post.url | relative_url }}#{{ attachment.id | escape }}">View resource</a>
             <a class="button button--ghost" href="{{ attachment.path | relative_url | escape }}" download="{{ attachment.name | escape }}">Download</a>
+            {%- if attachment.format == "PDF" %}
+            <a class="button button--ghost" href="{{ attachment.path | relative_url | escape }}">Read PDF online</a>
+            {%- endif %}
           </div>
         </article>
       </li>
