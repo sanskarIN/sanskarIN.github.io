@@ -7,21 +7,29 @@ permalink: /sanskar/
 body_class: page-profile
 schema_type: ProfilePage
 ---
-<section class="hero" aria-labelledby="profile-title">
+{%- assign gh = site.data.github -%}
+<section class="hero portfolio-hero" aria-labelledby="profile-title">
   <div class="container hero__grid">
     <div class="hero__content">
-      <p class="eyebrow">Featured profile · Software development</p>
+      <p class="eyebrow">Independent software development · Open source</p>
       <h1 class="hero__title" id="profile-title">{{ site.author.name | escape }}</h1>
-      <p class="hero__tagline">Building software, developer tools and ideas in the open.</p>
-      <p class="hero__intro">Explore my work across programming languages, systems software, developer tools, applications, games and AI research. This page is a starting point for discovering my projects and technical writing.</p>
+      <p class="hero__tagline">From programming languages to practical software.</p>
+      <p class="hero__intro">I build and explore software across the stack — from compilers and developer tools to creative applications, games and intelligent computing. I share the code, technical decisions and research behind my work.</p>
       <div class="button-row">
         {% include link.html url=site.data.social.profiles.github.url label="Explore GitHub" class="button button--primary" icon="github" %}
-        {% include link.html url="/projects/" label="View projects" class="button button--secondary" arrow=true %}
+        <a href="#work-title" class="button button--secondary">Explore featured work {% include icon.html name="arrow-right" %}</a>
         {% include link.html url="/about/" label="About me" class="button button--ghost" arrow=true %}
       </div>
     </div>
-    <aside class="hero__aside" aria-label="Developer profile at a glance">
+    <aside class="hero__aside portfolio-identity" aria-label="Developer profile at a glance">
       <div class="spec-card">
+        <div class="portfolio-identity__brand">
+          {% include brand-mark.html class="portfolio-identity__mark" %}
+          <div>
+            <p class="portfolio-identity__name">{{ site.author.name | escape }}</p>
+            <p class="portfolio-identity__handle">@{{ site.author.username | escape }}</p>
+          </div>
+        </div>
         <p class="spec-card__header"><span>Developer profile</span><span>{{ site.author.username | escape }}</span></p>
         <dl class="spec-card__list">
           <div class="spec-card__row"><dt>Focus</dt><dd>Software and developer tools</dd></div>
@@ -34,15 +42,64 @@ schema_type: ProfilePage
   </div>
 </section>
 
-<section class="section section--surface" aria-labelledby="work-title">
+{%- if gh and gh.totals.repositories %}
+<section class="portfolio-summary" aria-labelledby="summary-title">
+  <div class="container">
+    <div class="portfolio-summary__header">
+      <h2 id="summary-title">Open-source activity at a glance</h2>
+      {%- if gh.generated_at %}
+      <p>Repository snapshot · <time datetime="{{ gh.generated_at | date_to_xmlschema }}">{{ gh.generated_at | date: "%-d %b %Y" }}</time></p>
+      {%- endif %}
+    </div>
+    <dl class="portfolio-metrics">
+      <div><dt>Public project repositories</dt><dd>{% include number.html value=gh.totals.repositories %}</dd></div>
+      {%- if gh.totals.languages %}
+      <div><dt>Code languages represented</dt><dd>{% include number.html value=gh.totals.languages %}</dd></div>
+      {%- endif %}
+      {%- if gh.totals.stars %}
+      <div><dt>Repository stars</dt><dd>{% include number.html value=gh.totals.stars %}</dd></div>
+      {%- endif %}
+      {%- if gh.totals.forks %}
+      <div><dt>Repository forks</dt><dd>{% include number.html value=gh.totals.forks %}</dd></div>
+      {%- endif %}
+    </dl>
+    <p class="portfolio-summary__note">Totals reflect the site's published repository snapshot, including explicitly maintained organization projects; they are not individual authorship or live counters.</p>
+  </div>
+</section>
+{%- endif %}
+
+<nav class="portfolio-nav" aria-label="Explore this portfolio">
+  <div class="container">
+    <ul class="tag-list" role="list">
+      <li><a class="tag tag--link" href="#work-title">Featured projects</a></li>
+      <li><a class="tag tag--link" href="#focus-title">Engineering interests</a></li>
+      <li><a class="tag tag--link" href="#stack-title">Technology stack</a></li>
+      <li><a class="tag tag--link" href="#research-title">Research publications</a></li>
+      <li><a class="tag tag--link" href="#principles-title">Engineering principles</a></li>
+      <li><a class="tag tag--link" href="#writing-title">Writing and tools</a></li>
+      <li><a class="tag tag--link" href="#profiles-title">Developer profiles</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="section" aria-labelledby="work-title">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title" id="work-title">Featured work</h2>
       <p class="section-header__lead">Selected projects from the maintained public repository snapshot. See individual repositories for current development status and releases.</p>
     </div>
-    {%- assign gh = site.data.github %}
+    <div class="callout portfolio-spotlight">
+      <div class="portfolio-spotlight__symbol" aria-hidden="true">{% include icon.html name="code" %}</div>
+      <div>
+        <p class="eyebrow">Language and compiler engineering</p>
+        <h3 class="callout__title">Scarp Lang</h3>
+        <p class="callout__text">A programming language and compiler ecosystem exploring software, systems and numerical computing. Follow the official documentation for current capabilities; the language remains in pre-release development.</p>
+      </div>
+      {% include link.html url="/ScarpLang/" label="Explore Scarp" class="button button--primary" arrow=true %}
+    </div>
+    <h3 class="subsection-title">Selected repositories</h3>
     {%- if gh and gh.featured.size > 0 and gh.repositories.size > 0 %}
-    <ul class="repo-grid repo-grid--featured" role="list">
+    <ul class="repo-grid repo-grid--featured portfolio-projects" role="list">
       {%- for name in gh.featured %}
         {%- assign repo = gh.repositories | where: "name", name | first %}
         {%- if repo %}
@@ -53,14 +110,14 @@ schema_type: ProfilePage
     {%- else %}
     <p>The repository snapshot is not available. Browse the public repositories directly on GitHub.</p>
     {%- endif %}
-    <div class="button-row">
-      {% include link.html url="/ScarpLang/" label="Discover Scarp Lang" class="button button--primary" arrow=true %}
+    <div class="button-row section-footer">
       {% include link.html url="/projects/" label="All projects" class="button button--secondary" arrow=true %}
+      {% include link.html url=site.data.social.profiles.github.url label="GitHub repositories" class="button button--ghost" icon="github" %}
     </div>
   </div>
 </section>
 
-<section class="section" aria-labelledby="focus-title">
+<section class="section section--surface" aria-labelledby="focus-title">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title" id="focus-title">Engineering interests</h2>
@@ -75,7 +132,59 @@ schema_type: ProfilePage
       </li>
       {%- endfor %}
     </ul>
-    <p>{% include link.html url="/developer/" label="Full developer profile" class="text-link" arrow=true %}</p>
+    <p class="section-footer">{% include link.html url="/developer/" label="Full developer profile" class="text-link" arrow=true %}</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="stack-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="stack-title">Technology stack</h2>
+      <p class="section-header__lead">Languages, frameworks and tools used or explored across my work. The list describes areas of interest rather than proficiency ratings.</p>
+    </div>
+    {% include tech-list.html %}
+  </div>
+</section>
+
+<section class="section section--surface" aria-labelledby="research-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="research-title">Research publications</h2>
+      <p class="section-header__lead">Recent technical publications from my GitHub author account, including supporting materials where available.</p>
+    </div>
+    {%- assign research_posts = site.tags.research | where: "author_login", site.author.username %}
+    {%- if research_posts.size > 0 %}
+    <ul class="post-list" role="list">
+      {%- for publication in research_posts limit:3 %}
+      <li>{% include post-card.html post=publication documents=true %}</li>
+      {%- endfor %}
+    </ul>
+    {%- else %}
+    <p>No research publications from this author account are listed yet. Explore the research archive for published work.</p>
+    {%- endif %}
+    <div class="button-row section-footer">
+      {% include link.html url="/research/" label="Research archive" class="button button--primary" arrow=true %}
+      {% include link.html url="/resources/" label="Downloadable resources" class="button button--secondary" arrow=true %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="principles-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="principles-title">Engineering principles</h2>
+      <p class="section-header__lead">How I approach software design, iteration and long-term maintainability.</p>
+    </div>
+    <ol class="principles portfolio-principles">
+      {%- for principle in site.data.developer_details.principles %}
+      <li>
+        <div>
+          <h3>{{ principle.title | escape }}</h3>
+          <p>{{ principle.description | escape }}</p>
+        </div>
+      </li>
+      {%- endfor %}
+    </ol>
   </div>
 </section>
 
@@ -118,6 +227,15 @@ schema_type: ProfilePage
     </div>
     {%- assign profile_ids = "github,devto" | split: "," %}
     {% include profile-list.html items=profile_ids variant="card" class="link-grid" %}
-    <p class="section-footer">This is the featured portfolio on my personal website. Individual project repositories remain the source of truth for code, licenses and release information.</p>
+    <div class="portfolio-end section-footer">
+      <div>
+        <h3>Keep exploring</h3>
+        <p>Find background on the About page, detailed engineering interests on the Developer page, and source code in the individual project repositories.</p>
+      </div>
+      <div class="button-row">
+        {% include link.html url="/about/" label="About the developer" class="button button--secondary" arrow=true %}
+        <a class="button button--ghost" href="#profile-title">Back to top</a>
+      </div>
+    </div>
   </div>
 </section>

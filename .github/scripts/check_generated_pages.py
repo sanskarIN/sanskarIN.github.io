@@ -103,6 +103,88 @@ def check_scarp(output, home, projects):
     print("Scarp: built routes, official destinations, navigation, redirect, search and sitemap passed.")
 
 
+def check_portfolio(output, home):
+    """Verify canonical portfolio and all aliases against the rendered site."""
+    import xml.etree.ElementTree as ET
+    import yaml
+
+    config = yaml.safe_load((ROOT / "_config.yml").read_text(encoding="utf-8"))
+    origin = config["url"].rstrip("/")
+    route = "/sanskar/"
+    aliases = ("/Sanskar/", "/SanskarYadav/", "/sanskaryadav/")
+    path = output / "sanskar" / "index.html"
+    profile = scan(path)
+    markup = path.read_text(encoding="utf-8")
+    if profile.h1 != [config["author"]["name"]]:
+        raise AssertionError("Featured profile must have exactly one primary heading")
+    if f'href="{origin}{route}"' not in markup or "Content-Security-Policy" not in markup:
+        raise AssertionError("Portfolio canonical URL or security policy missing")
+    if route not in home.links:
+        raise AssertionError("Portfolio is not discoverable from the homepage")
+    sections = {
+        "work-title": "Featured work",
+        "focus-title": "Engineering interests",
+        "stack-title": "Technology stack",
+        "research-title": "Research publications",
+        "principles-title": "Engineering principles",
+        "writing-title": "Research, writing and tools",
+        "profiles-title": "Developer profiles",
+    }
+    for anchor, heading in sections.items():
+        if profile.headings.count(heading) != 1:
+            raise AssertionError(f"Portfolio heading missing or duplicated: {heading}")
+        if markup.count(f'id="{anchor}"') != 1 or "#" + anchor not in profile.links:
+            raise AssertionError(f"Portfolio anchor missing or duplicated: {anchor}")
+    for target in ("/ScarpLang/", "/projects/", "/developer/", "/research/", "/articles/", "/lab/", "/resources/"):
+        if target not in profile.links:
+            raise AssertionError(f"Portfolio destination missing: {target}")
+
+    github = json.loads((ROOT / "_data/github.json").read_text(encoding="utf-8"))
+    if github.get("totals", {}).get("repositories") is not None:
+        if profile.headings.count("Open-source activity at a glance") != 1:
+            raise AssertionError("Portfolio snapshot summary missing")
+        if 'class="portfolio-metrics"' not in markup:
+            raise AssertionError("Portfolio metrics missing")
+        if github.get("generated_at") and "Repository snapshot" not in markup:
+            raise AssertionError("Portfolio snapshot freshness label missing")
+    if "#profile-title" not in profile.links:
+        raise AssertionError("Portfolio back-to-top link missing")
+    from terminal_data import parse_front_matter, published_posts
+    authored_research = [
+        entry for entry in published_posts(ROOT)
+        if "research" in entry["tags"]
+        and parse_front_matter(ROOT / "_posts" / entry["_source"]).get("author_login") == config["author"]["username"]
+    ]
+    for entry in authored_research[:3]:
+        if entry["url"] not in profile.links:
+            raise AssertionError(f"Recent authored research missing: {entry['url']}")
+    featured = set(github.get("featured") or [])
+    for repo in github.get("repositories") or []:
+        if repo["name"] in featured and repo["url"] not in profile.links:
+            raise AssertionError(f"Featured repository link missing: {repo['name']}")
+
+    for alias in aliases:
+        alias_path = output / alias.strip("/") / "index.html"
+        redirect = scan(alias_path)
+        source = alias_path.read_text(encoding="utf-8")
+        if f'href="{origin}{route}"' not in source:
+            raise AssertionError(f"Alias canonical URL incorrect: {alias}")
+        if f'content="0; url={route}"' not in source or route not in redirect.links:
+            raise AssertionError(f"Alias redirect or fallback missing: {alias}")
+        if '<meta name="robots" content="noindex, follow">' not in source or "<script" in source:
+            raise AssertionError(f"Alias must be noindex and require no JavaScript: {alias}")
+
+    search = json.loads((output / "search.json").read_text(encoding="utf-8"))
+    sitemap = ET.parse(output / "sitemap.xml")
+    urls = [node.text for node in sitemap.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
+    search_urls = [entry["url"] for entry in search]
+    if search_urls.count(route) != 1 or any(alias in search_urls for alias in aliases):
+        raise AssertionError("Portfolio search visibility is incorrect")
+    if urls.count(origin + route) != 1 or any(origin + alias in urls for alias in aliases):
+        raise AssertionError("Portfolio sitemap visibility is incorrect")
+    print("Portfolio: canonical page, section anchors, featured projects, redirects, search and sitemap passed.")
+
+
 def check(output):
     about = json.loads((ROOT / "_data/about_content.json").read_text(encoding="utf-8"))
     details = json.loads((ROOT / "_data/developer_details.json").read_text(encoding="utf-8"))
@@ -111,6 +193,7 @@ def check(output):
     h = scan(output / "index.html")
     projects = scan(output / "projects" / "index.html")
     check_scarp(output, h, projects)
+    check_portfolio(output, h)
     resources = scan(output / "resources" / "index.html")
     blog = scan(output / "blog" / "index.html")
     if resources.h1 != ["Assets & Resources"] or "/resources/" not in blog.links or "/resources/" not in h.links:
