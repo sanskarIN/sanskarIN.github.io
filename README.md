@@ -31,6 +31,8 @@ The website is a static site built with [Jekyll](https://jekyllrb.com/) and publ
 | URL | Source file | Page |
 |---|---|---|
 | `/` | `index.html` | Home |
+| `/sanskar/` | `sanskar.html` | Featured developer portfolio |
+| `/Sanskar/`, `/SanskarYadav/`, `/sanskaryadav/` | `redirects/profile-*.html` | Non-indexed aliases for `/sanskar/` |
 | `/about/` | `about.html` | About |
 | `/developer/` | `developer.html` | Developer profile |
 | `/contact/` | `contact.html` | Contact |

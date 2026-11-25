@@ -1,0 +1,123 @@
+---
+layout: default
+title: Sanskar
+seo_title: "Sanskar · Developer portfolio and featured work"
+description: "Explore Sanskar's developer portfolio, featured open-source projects, engineering interests, research and public developer profiles."
+permalink: /sanskar/
+body_class: page-profile
+schema_type: ProfilePage
+---
+<section class="hero" aria-labelledby="profile-title">
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <p class="eyebrow">Featured profile · Software development</p>
+      <h1 class="hero__title" id="profile-title">{{ site.author.name | escape }}</h1>
+      <p class="hero__tagline">Building software, developer tools and ideas in the open.</p>
+      <p class="hero__intro">Explore my work across programming languages, systems software, developer tools, applications, games and AI research. This page is a starting point for discovering my projects and technical writing.</p>
+      <div class="button-row">
+        {% include link.html url=site.data.social.profiles.github.url label="Explore GitHub" class="button button--primary" icon="github" %}
+        {% include link.html url="/projects/" label="View projects" class="button button--secondary" arrow=true %}
+        {% include link.html url="/about/" label="About me" class="button button--ghost" arrow=true %}
+      </div>
+    </div>
+    <aside class="hero__aside" aria-label="Developer profile at a glance">
+      <div class="spec-card">
+        <p class="spec-card__header"><span>Developer profile</span><span>{{ site.author.username | escape }}</span></p>
+        <dl class="spec-card__list">
+          <div class="spec-card__row"><dt>Focus</dt><dd>Software and developer tools</dd></div>
+          <div class="spec-card__row"><dt>Approach</dt><dd>Open source and practical engineering</dd></div>
+          <div class="spec-card__row"><dt>Interests</dt><dd>Languages, systems, web, games, AI</dd></div>
+          <div class="spec-card__row"><dt>Featured project</dt><dd><a href="{{ '/ScarpLang/' | relative_url }}">Scarp Lang</a></dd></div>
+        </dl>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section section--surface" aria-labelledby="work-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="work-title">Featured work</h2>
+      <p class="section-header__lead">Selected projects from the maintained public repository snapshot. See individual repositories for current development status and releases.</p>
+    </div>
+    {%- assign gh = site.data.github %}
+    {%- if gh and gh.featured.size > 0 and gh.repositories.size > 0 %}
+    <ul class="repo-grid repo-grid--featured" role="list">
+      {%- for name in gh.featured %}
+        {%- assign repo = gh.repositories | where: "name", name | first %}
+        {%- if repo %}
+      <li>{% include repo-card.html repo=repo show_languages=true %}</li>
+        {%- endif %}
+      {%- endfor %}
+    </ul>
+    {%- else %}
+    <p>The repository snapshot is not available. Browse the public repositories directly on GitHub.</p>
+    {%- endif %}
+    <div class="button-row">
+      {% include link.html url="/ScarpLang/" label="Discover Scarp Lang" class="button button--primary" arrow=true %}
+      {% include link.html url="/projects/" label="All projects" class="button button--secondary" arrow=true %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="focus-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="focus-title">Engineering interests</h2>
+      <p class="section-header__lead">Areas I explore through learning, experimentation and software development.</p>
+    </div>
+    <ul class="feature-grid" role="list">
+      {%- for area in site.data.focus %}
+      <li class="feature">
+        {% include icon.html name=area.icon class="feature__icon" %}
+        <h3 class="feature__title">{{ area.title | escape }}</h3>
+        <p class="feature__text">{{ area.summary | escape }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+    <p>{% include link.html url="/developer/" label="Full developer profile" class="text-link" arrow=true %}</p>
+  </div>
+</section>
+
+<section class="section section--surface" aria-labelledby="writing-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="writing-title">Research, writing and tools</h2>
+      <p class="section-header__lead">Explore technical investigations, explanations and practical resources.</p>
+    </div>
+    <ul class="feature-grid" role="list">
+      <li class="feature">
+        <h3 class="feature__title">Research</h3>
+        <p class="feature__text">Technical investigations, reports and supporting research materials.</p>
+        <p>{% include link.html url="/research/" label="Browse research" class="text-link" arrow=true %}</p>
+      </li>
+      <li class="feature">
+        <h3 class="feature__title">Articles</h3>
+        <p class="feature__text">Technical explanations, tutorials and learning resources.</p>
+        <p>{% include link.html url="/articles/" label="Read articles" class="text-link" arrow=true %}</p>
+      </li>
+      <li class="feature">
+        <h3 class="feature__title">Developer Lab</h3>
+        <p class="feature__text">Privacy-conscious utilities that run in the browser.</p>
+        <p>{% include link.html url="/lab/" label="Explore the lab" class="text-link" arrow=true %}</p>
+      </li>
+      <li class="feature">
+        <h3 class="feature__title">Resources</h3>
+        <p class="feature__text">Published documents, presentations and other downloadable materials.</p>
+        <p>{% include link.html url="/resources/" label="Find resources" class="text-link" arrow=true %}</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="profiles-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="profiles-title">Developer profiles</h2>
+      <p class="section-header__lead">Follow public project development and technical writing through these developer platforms.</p>
+    </div>
+    {%- assign profile_ids = "github,devto" | split: "," %}
+    {% include profile-list.html items=profile_ids variant="card" class="link-grid" %}
+    <p class="section-footer">This is the featured portfolio on my personal website. Individual project repositories remain the source of truth for code, licenses and release information.</p>
+  </div>
+</section>

@@ -9,6 +9,20 @@ scripts: [terminal]
 ---
 {% include generated/home-hero.html %}
 
+<section class="section section--surface" aria-labelledby="featured-profile-title">
+  <div class="container">
+    <div class="callout">
+      {% include icon.html name="code" class="callout__icon" %}
+      <div>
+        <p class="eyebrow">Featured developer profile</p>
+        <h2 class="callout__title" id="featured-profile-title">Explore Sanskar</h2>
+        <p class="callout__text">A single starting point for my open-source projects, engineering interests, research and technical writing.</p>
+      </div>
+      {% include link.html url="/sanskar/" label="View featured profile" class="button button--primary" arrow=true %}
+    </div>
+  </div>
+</section>
+
 {% include scarp-feature.html %}
 
 {% include generated/home-sections.html %}

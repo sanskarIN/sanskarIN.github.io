@@ -121,6 +121,12 @@
   },
   {
     "type": "Page",
+    "title": "Sanskar",
+    "url": "/sanskar/",
+    "text": "Explore Sanskar's developer portfolio, featured open-source projects, engineering interests, research and public developer profiles."
+  },
+  {
+    "type": "Page",
     "title": "Scarp Lang",
     "url": "/ScarpLang/",
     "text": "Explore Scarp Lang, an open-source programming language in active pre-release development: compiler, downloads, documentation, playground, examples, editor tools, and GitHub organization."
