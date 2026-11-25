@@ -34,12 +34,35 @@ schema_type: ProfilePage
   </div>
 </section>
 
-<section class="section section--surface" aria-labelledby="work-title">
+<nav class="section section--surface" aria-label="Explore this portfolio">
+  <div class="container">
+    <ul class="tag-list" role="list">
+      <li><a class="tag tag--link" href="#work-title">Featured projects</a></li>
+      <li><a class="tag tag--link" href="#focus-title">Engineering interests</a></li>
+      <li><a class="tag tag--link" href="#stack-title">Technology stack</a></li>
+      <li><a class="tag tag--link" href="#research-title">Research publications</a></li>
+      <li><a class="tag tag--link" href="#principles-title">Engineering principles</a></li>
+      <li><a class="tag tag--link" href="#writing-title">Writing and tools</a></li>
+      <li><a class="tag tag--link" href="#profiles-title">Developer profiles</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="section" aria-labelledby="work-title">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title" id="work-title">Featured work</h2>
       <p class="section-header__lead">Selected projects from the maintained public repository snapshot. See individual repositories for current development status and releases.</p>
     </div>
+    <div class="callout">
+      {% include icon.html name="repo" class="callout__icon" %}
+      <div>
+        <h3 class="callout__title">Scarp Lang</h3>
+        <p class="callout__text">A programming language and compiler ecosystem exploring software, systems and numerical computing. Follow the official documentation for current capabilities; the language remains in pre-release development.</p>
+      </div>
+      {% include link.html url="/ScarpLang/" label="Explore Scarp" class="button button--primary" arrow=true %}
+    </div>
+    <h3 class="subsection-title">Selected repositories</h3>
     {%- assign gh = site.data.github %}
     {%- if gh and gh.featured.size > 0 and gh.repositories.size > 0 %}
     <ul class="repo-grid repo-grid--featured" role="list">
@@ -53,14 +76,14 @@ schema_type: ProfilePage
     {%- else %}
     <p>The repository snapshot is not available. Browse the public repositories directly on GitHub.</p>
     {%- endif %}
-    <div class="button-row">
-      {% include link.html url="/ScarpLang/" label="Discover Scarp Lang" class="button button--primary" arrow=true %}
+    <div class="button-row section-footer">
       {% include link.html url="/projects/" label="All projects" class="button button--secondary" arrow=true %}
+      {% include link.html url=site.data.social.profiles.github.url label="GitHub repositories" class="button button--ghost" icon="github" %}
     </div>
   </div>
 </section>
 
-<section class="section" aria-labelledby="focus-title">
+<section class="section section--surface" aria-labelledby="focus-title">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title" id="focus-title">Engineering interests</h2>
@@ -76,6 +99,58 @@ schema_type: ProfilePage
       {%- endfor %}
     </ul>
     <p>{% include link.html url="/developer/" label="Full developer profile" class="text-link" arrow=true %}</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="stack-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="stack-title">Technology stack</h2>
+      <p class="section-header__lead">Languages, frameworks and tools used or explored across my work. The list describes areas of interest rather than proficiency ratings.</p>
+    </div>
+    {% include tech-list.html %}
+  </div>
+</section>
+
+<section class="section section--surface" aria-labelledby="research-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="research-title">Research publications</h2>
+      <p class="section-header__lead">Recent technical publications from my GitHub author account, including supporting materials where available.</p>
+    </div>
+    {%- assign research_posts = site.tags.research | where: "author_login", site.author.username %}
+    {%- if research_posts.size > 0 %}
+    <ul class="post-list" role="list">
+      {%- for publication in research_posts limit:3 %}
+      <li>{% include post-card.html post=publication documents=true %}</li>
+      {%- endfor %}
+    </ul>
+    {%- else %}
+    <p>No research publications from this author account are listed yet. Explore the research archive for published work.</p>
+    {%- endif %}
+    <div class="button-row section-footer">
+      {% include link.html url="/research/" label="Research archive" class="button button--primary" arrow=true %}
+      {% include link.html url="/resources/" label="Downloadable resources" class="button button--secondary" arrow=true %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="principles-title">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="principles-title">Engineering principles</h2>
+      <p class="section-header__lead">How I approach software design, iteration and long-term maintainability.</p>
+    </div>
+    <ol class="principles">
+      {%- for principle in site.data.developer_details.principles %}
+      <li>
+        <div>
+          <h3>{{ principle.title | escape }}</h3>
+          <p>{{ principle.description | escape }}</p>
+        </div>
+      </li>
+      {%- endfor %}
+    </ol>
   </div>
 </section>
 
