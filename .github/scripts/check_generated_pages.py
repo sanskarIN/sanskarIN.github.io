@@ -140,6 +140,24 @@ def check_portfolio(output, home):
             raise AssertionError(f"Portfolio destination missing: {target}")
 
     github = json.loads((ROOT / "_data/github.json").read_text(encoding="utf-8"))
+    if github.get("totals", {}).get("repositories") is not None:
+        if profile.headings.count("Open-source activity at a glance") != 1:
+            raise AssertionError("Portfolio snapshot summary missing")
+        if 'class="portfolio-metrics"' not in markup:
+            raise AssertionError("Portfolio metrics missing")
+        if github.get("generated_at") and "Repository snapshot" not in markup:
+            raise AssertionError("Portfolio snapshot freshness label missing")
+    if "#profile-title" not in profile.links:
+        raise AssertionError("Portfolio back-to-top link missing")
+    from terminal_data import parse_front_matter, published_posts
+    authored_research = [
+        entry for entry in published_posts(ROOT)
+        if "research" in entry["tags"]
+        and parse_front_matter(ROOT / "_posts" / entry["_source"]).get("author_login") == config["author"]["username"]
+    ]
+    for entry in authored_research[:3]:
+        if entry["url"] not in profile.links:
+            raise AssertionError(f"Recent authored research missing: {entry['url']}")
     featured = set(github.get("featured") or [])
     for repo in github.get("repositories") or []:
         if repo["name"] in featured and repo["url"] not in profile.links:
