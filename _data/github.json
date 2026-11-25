@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T14:58:08Z",
+  "generated_at": "2026-11-25T14:33:40Z",
   "user": {
     "login": "sanskarIN",
     "url": "https://github.com/sanskarIN"
@@ -9,23 +9,23 @@
     "stars": 35,
     "forks": 6,
     "languages": 29,
-    "language_bytes": 56626481
+    "language_bytes": 57035605
   },
   "languages": [
     {
       "name": "C++",
       "color": "#f34b7d",
-      "percent": 16.0
+      "percent": 15.8
     },
     {
       "name": "Python",
       "color": "#3572A5",
-      "percent": 15.3
+      "percent": 15.6
     },
     {
       "name": "Rust",
       "color": "#dea584",
-      "percent": 13.8
+      "percent": 13.9
     },
     {
       "name": "TypeScript",
@@ -40,12 +40,12 @@
     {
       "name": "C#",
       "color": "#7355dd",
-      "percent": 9.0
+      "percent": 8.9
     },
     {
       "name": "Other",
       "color": "#8b949e",
-      "percent": 24.9,
+      "percent": 24.8,
       "other": true
     }
   ],
@@ -90,36 +90,62 @@
   ],
   "repositories": [
     {
-      "name": "awesome-tech-atlas",
-      "full_name": "sanskarIN/awesome-tech-atlas",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 235087,
-      "url": "https://github.com/sanskarIN/awesome-tech-atlas",
-      "description": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references.",
-      "homepage": "https://sanskarin.github.io/awesome-tech-atlas/",
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 1,
-      "forks": 0,
+      "name": "scarp",
+      "full_name": "scarp-lang/scarp",
+      "owner": "scarp-lang",
+      "external": true,
+      "language_bytes": 3476786,
+      "url": "https://github.com/scarp-lang/scarp",
+      "description": "A next-generation programming language for software, systems, and intelligent computing.",
+      "homepage": "https://scarp-lang.github.io/",
+      "language": "Rust",
+      "language_color": "#dea584",
+      "stars": 2,
+      "forks": 1,
       "topics": [
-        "awesome-list",
-        "computer-science",
-        "developer-resources",
-        "machine-learning",
-        "open-source",
-        "programming"
+        "cli",
+        "compiler",
+        "compiler-design",
+        "developer-tools",
+        "interpreter",
+        "language-design"
       ],
-      "license": "CC0-1.0",
+      "license": "Apache-2.0",
       "fork": false,
       "archived": false,
-      "created": "2026-11-08",
-      "pushed": "2026-11-24",
+      "created": "2026-10-25",
+      "pushed": "2026-11-25",
       "language_names": [
-        "CSS",
-        "HTML",
-        "JavaScript",
-        "Python"
+        "Assembly",
+        "C",
+        "Linker Script",
+        "PowerShell",
+        "Python",
+        "Rust",
+        "Shell"
+      ],
+      "languages": [
+        {
+          "name": "Rust",
+          "color": "#dea584",
+          "percent": 90.0
+        },
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 7.5
+        },
+        {
+          "name": "PowerShell",
+          "color": "#012456",
+          "percent": 1.9
+        },
+        {
+          "name": "Other",
+          "color": "#8b949e",
+          "percent": 0.6,
+          "other": true
+        }
       ]
     },
     {
@@ -127,7 +153,7 @@
       "full_name": "sanskarIN/latebrake",
       "owner": "sanskarIN",
       "external": false,
-      "language_bytes": 8268285,
+      "language_bytes": 8269013,
       "url": "https://github.com/sanskarIN/latebrake",
       "description": "Latebrake — Race Beyond Limits.",
       "homepage": "https://sanskarin.github.io/latebrake/",
@@ -140,7 +166,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-19",
-      "pushed": "2026-11-24",
+      "pushed": "2026-11-25",
       "language_names": [
         "Batchfile",
         "C#",
@@ -175,124 +201,11 @@
       ]
     },
     {
-      "name": "noticebridge-ai",
-      "full_name": "sanskarIN/noticebridge-ai",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 843735,
-      "url": "https://github.com/sanskarIN/noticebridge-ai",
-      "description": "Understand what changed. Know what to do. Verify the evidence.",
-      "homepage": null,
-      "language": "Python",
-      "language_color": "#3572A5",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-11-22",
-      "pushed": "2026-11-24",
-      "language_names": [
-        "CSS",
-        "HTML",
-        "JavaScript",
-        "Python",
-        "TypeScript"
-      ]
-    },
-    {
-      "name": "sanskarIN.github.io",
-      "full_name": "sanskarIN/sanskarIN.github.io",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 530839,
-      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
-      "homepage": "https://sanskarin.github.io/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 0,
-      "forks": 0,
-      "topics": [],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-09-26",
-      "pushed": "2026-11-24",
-      "language_names": [
-        "CSS",
-        "HTML",
-        "PLpgSQL",
-        "Ruby",
-        "TypeScript"
-      ]
-    },
-    {
-      "name": "scarp",
-      "full_name": "scarp-lang/scarp",
-      "owner": "scarp-lang",
-      "external": true,
-      "language_bytes": 3401597,
-      "url": "https://github.com/scarp-lang/scarp",
-      "description": "A next-generation programming language for software, systems, and intelligent computing.",
-      "homepage": "https://scarp-lang.github.io/",
-      "language": "Rust",
-      "language_color": "#dea584",
-      "stars": 2,
-      "forks": 1,
-      "topics": [
-        "cli",
-        "compiler",
-        "compiler-design",
-        "developer-tools",
-        "interpreter",
-        "language-design"
-      ],
-      "license": "Apache-2.0",
-      "fork": false,
-      "archived": false,
-      "created": "2026-10-25",
-      "pushed": "2026-11-24",
-      "language_names": [
-        "Assembly",
-        "C",
-        "Linker Script",
-        "PowerShell",
-        "Python",
-        "Rust",
-        "Shell"
-      ],
-      "languages": [
-        {
-          "name": "Rust",
-          "color": "#dea584",
-          "percent": 89.8
-        },
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 7.6
-        },
-        {
-          "name": "PowerShell",
-          "color": "#012456",
-          "percent": 1.9
-        },
-        {
-          "name": "Other",
-          "color": "#8b949e",
-          "percent": 0.6,
-          "other": true
-        }
-      ]
-    },
-    {
       "name": "RepoDNA",
       "full_name": "sanskarIN/RepoDNA",
       "owner": "sanskarIN",
       "external": false,
-      "language_bytes": 4180771,
+      "language_bytes": 4264292,
       "url": "https://github.com/sanskarIN/RepoDNA",
       "description": "Understand any GitHub repository before you clone it.",
       "homepage": "https://sanskarin.github.io/RepoDNA/",
@@ -312,7 +225,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-09-24",
-      "pushed": "2026-11-24",
+      "pushed": "2026-11-25",
       "language_names": [
         "CSS",
         "Dockerfile",
@@ -329,23 +242,78 @@
         {
           "name": "Rust",
           "color": "#dea584",
-          "percent": 78.4
+          "percent": 78.8
         },
         {
           "name": "TypeScript",
           "color": "#3178c6",
-          "percent": 15.0
+          "percent": 14.7
         },
         {
           "name": "JavaScript",
           "color": "#f1e05a",
-          "percent": 4.9
+          "percent": 4.8
         },
         {
           "name": "Other",
           "color": "#8b949e",
-          "percent": 1.7,
+          "percent": 1.6,
           "other": true
+        }
+      ]
+    },
+    {
+      "name": "sonumio",
+      "full_name": "sanskarIN/sonumio",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 2971958,
+      "url": "https://github.com/sanskarIN/sonumio",
+      "description": "Open-source AI platform for speech, music, and sound generation.",
+      "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "ai-audio",
+        "artificial-intelligence",
+        "audio-ai",
+        "audio-generation",
+        "audio-processing",
+        "audio-synthesis"
+      ],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-11-14",
+      "pushed": "2026-11-25",
+      "language_names": [
+        "CSS",
+        "HTML",
+        "Python",
+        "TypeScript"
+      ],
+      "languages": [
+        {
+          "name": "Python",
+          "color": "#3572A5",
+          "percent": 97.3
+        },
+        {
+          "name": "TypeScript",
+          "color": "#3178c6",
+          "percent": 2.4
+        },
+        {
+          "name": "CSS",
+          "color": "#663399",
+          "percent": 0.3
+        },
+        {
+          "name": "HTML",
+          "color": "#e34c26",
+          "percent": 0.0
         }
       ]
     },
@@ -354,7 +322,7 @@
       "full_name": "sanskarIN/frametrellis",
       "owner": "sanskarIN",
       "external": false,
-      "language_bytes": 2633537,
+      "language_bytes": 2635703,
       "url": "https://github.com/sanskarIN/frametrellis",
       "description": "Open-source video editor.",
       "homepage": "https://sanskarin.github.io/frametrellis/",
@@ -374,7 +342,7 @@
       "fork": false,
       "archived": false,
       "created": "2026-10-11",
-      "pushed": "2026-11-24",
+      "pushed": "2026-11-25",
       "language_names": [
         "C",
         "C++",
@@ -398,7 +366,7 @@
         {
           "name": "QML",
           "color": "#44a51c",
-          "percent": 11.3
+          "percent": 11.2
         },
         {
           "name": "Python",
@@ -414,58 +382,127 @@
       ]
     },
     {
-      "name": "sonumio",
-      "full_name": "sanskarIN/sonumio",
+      "name": "noticebridge-ai",
+      "full_name": "sanskarIN/noticebridge-ai",
       "owner": "sanskarIN",
       "external": false,
-      "language_bytes": 2751016,
-      "url": "https://github.com/sanskarIN/sonumio",
-      "description": "Open-source AI platform for speech, music, and sound generation.",
+      "language_bytes": 843735,
+      "url": "https://github.com/sanskarIN/noticebridge-ai",
+      "description": "Understand what changed. Know what to do. Verify the evidence.",
       "homepage": null,
+      "language": "Python",
+      "language_color": "#3572A5",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": "Apache-2.0",
+      "fork": false,
+      "archived": false,
+      "created": "2026-11-22",
+      "pushed": "2026-11-25",
+      "language_names": [
+        "CSS",
+        "HTML",
+        "JavaScript",
+        "Python",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "sanskarIN.github.io",
+      "full_name": "sanskarIN/sanskarIN.github.io",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 552422,
+      "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+      "description": "Personal developer portfolio, projects, open-source work, technical writing, and contact information.",
+      "homepage": "https://sanskarin.github.io/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 0,
+      "forks": 0,
+      "topics": [],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-09-26",
+      "pushed": "2026-11-25",
+      "language_names": [
+        "CSS",
+        "HTML",
+        "PLpgSQL",
+        "Ruby",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "LangSteps",
+      "full_name": "sanskarIN/LangSteps",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 4747145,
+      "url": "https://github.com/sanskarIN/LangSteps",
+      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
+      "homepage": "https://sanskarin.github.io/LangSteps/",
+      "language": "HTML",
+      "language_color": "#e34c26",
+      "stars": 1,
+      "forks": 0,
+      "topics": [
+        "beginner-to-advanced",
+        "coding-challenges",
+        "coding-exercises",
+        "csharp",
+        "css",
+        "golang"
+      ],
+      "license": null,
+      "fork": false,
+      "archived": false,
+      "created": "2026-05-16",
+      "pushed": "2026-11-24",
+      "language_names": [
+        "C#",
+        "CSS",
+        "HTML",
+        "JavaScript",
+        "PowerShell",
+        "Python",
+        "Shell",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "awesome-tech-atlas",
+      "full_name": "sanskarIN/awesome-tech-atlas",
+      "owner": "sanskarIN",
+      "external": false,
+      "language_bytes": 235931,
+      "url": "https://github.com/sanskarIN/awesome-tech-atlas",
+      "description": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references.",
+      "homepage": "https://sanskarin.github.io/awesome-tech-atlas/",
       "language": "Python",
       "language_color": "#3572A5",
       "stars": 1,
       "forks": 0,
       "topics": [
-        "ai-audio",
-        "artificial-intelligence",
-        "audio-ai",
-        "audio-generation",
-        "audio-processing",
-        "audio-synthesis"
+        "awesome-list",
+        "computer-science",
+        "developer-resources",
+        "machine-learning",
+        "open-source",
+        "programming"
       ],
-      "license": "Apache-2.0",
+      "license": "CC0-1.0",
       "fork": false,
       "archived": false,
-      "created": "2026-11-14",
+      "created": "2026-11-08",
       "pushed": "2026-11-24",
       "language_names": [
         "CSS",
         "HTML",
-        "Python",
-        "TypeScript"
-      ],
-      "languages": [
-        {
-          "name": "Python",
-          "color": "#3572A5",
-          "percent": 97.1
-        },
-        {
-          "name": "TypeScript",
-          "color": "#3178c6",
-          "percent": 2.6
-        },
-        {
-          "name": "CSS",
-          "color": "#663399",
-          "percent": 0.3
-        },
-        {
-          "name": "HTML",
-          "color": "#e34c26",
-          "percent": 0.0
-        }
+        "JavaScript",
+        "Python"
       ]
     },
     {
@@ -1016,43 +1053,6 @@
         "PowerShell",
         "Python",
         "Shell"
-      ]
-    },
-    {
-      "name": "LangSteps",
-      "full_name": "sanskarIN/LangSteps",
-      "owner": "sanskarIN",
-      "external": false,
-      "language_bytes": 4742994,
-      "url": "https://github.com/sanskarIN/LangSteps",
-      "description": "LangSteps — Every Language. Every Level. One Step at a Time.",
-      "homepage": "https://sanskarin.github.io/LangSteps/",
-      "language": "HTML",
-      "language_color": "#e34c26",
-      "stars": 1,
-      "forks": 0,
-      "topics": [
-        "beginner-to-advanced",
-        "coding-challenges",
-        "coding-exercises",
-        "csharp",
-        "css",
-        "golang"
-      ],
-      "license": null,
-      "fork": false,
-      "archived": false,
-      "created": "2026-05-16",
-      "pushed": "2026-11-12",
-      "language_names": [
-        "C#",
-        "CSS",
-        "HTML",
-        "JavaScript",
-        "PowerShell",
-        "Python",
-        "Shell",
-        "TypeScript"
       ]
     },
     {
@@ -2249,9 +2249,9 @@
     }
   ],
   "activity": {
-    "total": 39722,
+    "total": 39859,
     "start": "2025-11-23",
-    "end": "2026-11-24",
+    "end": "2026-11-25",
     "first_weekday": 0,
     "weeks": 53,
     "counts": [
@@ -2621,7 +2621,8 @@
       232,
       84,
       365,
-      488
+      533,
+      92
     ],
     "levels": [
       0,
@@ -2990,7 +2991,8 @@
       1,
       1,
       1,
-      2
+      2,
+      1
     ],
     "months": [
       {
@@ -3042,8 +3044,8 @@
         "label": "Nov"
       }
     ],
-    "active_days": 131,
-    "longest_streak": 69,
+    "active_days": 132,
+    "longest_streak": 70,
     "busiest": {
       "date": "2026-08-19",
       "count": 7037
