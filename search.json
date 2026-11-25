@@ -870,41 +870,6 @@
   },
   {
     "type": "Project",
-    "title": "awesome-tech-atlas",
-    "url": "https://github.com/sanskarIN/awesome-tech-atlas",
-    "tags": [
-      "awesome-list",
-      "computer-science",
-      "developer-resources",
-      "machine-learning",
-      "open-source",
-      "programming"
-    ],
-    "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
-  },
-  {
-    "type": "Project",
-    "title": "latebrake",
-    "url": "https://github.com/sanskarIN/latebrake",
-    "tags": [],
-    "text": "Latebrake — Race Beyond Limits. C++"
-  },
-  {
-    "type": "Project",
-    "title": "noticebridge-ai",
-    "url": "https://github.com/sanskarIN/noticebridge-ai",
-    "tags": [],
-    "text": "Understand what changed. Know what to do. Verify the evidence. Python"
-  },
-  {
-    "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
-    "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. HTML"
-  },
-  {
-    "type": "Project",
     "title": "scarp",
     "url": "https://github.com/scarp-lang/scarp",
     "tags": [
@@ -916,6 +881,13 @@
       "language-design"
     ],
     "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
+    "tags": [],
+    "text": "Latebrake — Race Beyond Limits. C++"
   },
   {
     "type": "Project",
@@ -933,6 +905,20 @@
   },
   {
     "type": "Project",
+    "title": "sonumio",
+    "url": "https://github.com/sanskarIN/sonumio",
+    "tags": [
+      "ai-audio",
+      "artificial-intelligence",
+      "audio-ai",
+      "audio-generation",
+      "audio-processing",
+      "audio-synthesis"
+    ],
+    "text": "Open-source AI platform for speech, music, and sound generation. Python"
+  },
+  {
+    "type": "Project",
     "title": "frametrellis",
     "url": "https://github.com/sanskarIN/frametrellis",
     "tags": [
@@ -947,17 +933,45 @@
   },
   {
     "type": "Project",
-    "title": "sonumio",
-    "url": "https://github.com/sanskarIN/sonumio",
+    "title": "noticebridge-ai",
+    "url": "https://github.com/sanskarIN/noticebridge-ai",
+    "tags": [],
+    "text": "Understand what changed. Know what to do. Verify the evidence. Python"
+  },
+  {
+    "type": "Project",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "tags": [],
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. HTML"
+  },
+  {
+    "type": "Project",
+    "title": "LangSteps",
+    "url": "https://github.com/sanskarIN/LangSteps",
     "tags": [
-      "ai-audio",
-      "artificial-intelligence",
-      "audio-ai",
-      "audio-generation",
-      "audio-processing",
-      "audio-synthesis"
+      "beginner-to-advanced",
+      "coding-challenges",
+      "coding-exercises",
+      "csharp",
+      "css",
+      "golang"
     ],
-    "text": "Open-source AI platform for speech, music, and sound generation. Python"
+    "text": "LangSteps — Every Language. Every Level. One Step at a Time. HTML"
+  },
+  {
+    "type": "Project",
+    "title": "awesome-tech-atlas",
+    "url": "https://github.com/sanskarIN/awesome-tech-atlas",
+    "tags": [
+      "awesome-list",
+      "computer-science",
+      "developer-resources",
+      "machine-learning",
+      "open-source",
+      "programming"
+    ],
+    "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
   },
   {
     "type": "Project",
@@ -1128,20 +1142,6 @@
     "url": "https://github.com/sanskarIN/CareNest",
     "tags": [],
     "text": "CareNest is a local-first medicine reminder, appointment organizer, health-document organizer, and family care-planning application. It does not diagnose conditions, recommend treatments, replace clinicians, or provide emergency medical services. All records stay on the user’s… C#"
-  },
-  {
-    "type": "Project",
-    "title": "LangSteps",
-    "url": "https://github.com/sanskarIN/LangSteps",
-    "tags": [
-      "beginner-to-advanced",
-      "coding-challenges",
-      "coding-exercises",
-      "csharp",
-      "css",
-      "golang"
-    ],
-    "text": "LangSteps — Every Language. Every Level. One Step at a Time. HTML"
   },
   {
     "type": "Project",
