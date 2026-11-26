@@ -160,6 +160,14 @@
         return response.json() as Promise<Array<Omit<Entry, "position" | "titleN" | "tagsN" | "textN">>>;
       })
       .then((data) => {
+        if (!Array.isArray(data) || data.some((entry) =>
+          !entry || !Object.prototype.hasOwnProperty.call(TYPE_ORDER, entry.type) ||
+          typeof entry.title !== "string" || typeof entry.url !== "string" ||
+          (entry.text !== undefined && typeof entry.text !== "string") ||
+          (entry.date !== undefined && typeof entry.date !== "string") ||
+          (entry.tags !== undefined && (!Array.isArray(entry.tags) || entry.tags.some((tag) => typeof tag !== "string"))))) {
+          throw new Error("Invalid search index");
+        }
         entries = data.map((entry, position) => ({
           ...entry,
           position,
@@ -168,9 +176,11 @@
           textN: normalize(entry.text),
         }));
         render();
-      }, () => {
+      })
+      .catch(() => {
+        entries = null;
         loading = null;
-        setStatus("Search couldn't be loaded. Check your connection and try again.", true);
+        setStatus("Search couldn't be loaded. Close and reopen search to try again.", true);
       });
     return loading;
   }
