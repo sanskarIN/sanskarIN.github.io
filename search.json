@@ -133,6 +133,12 @@
   },
   {
     "type": "Page",
+    "title": "Support",
+    "url": "/support/",
+    "text": "Find technical support, report bugs, contribute to open-source projects, and discover ways to support Sanskar's work."
+  },
+  {
+    "type": "Page",
     "title": "Terms and Conditions",
     "url": "/terms/",
     "text": "Terms and conditions for using sanskarIN.github.io, the personal website of Sanskar."
