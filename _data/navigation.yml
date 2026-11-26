@@ -31,6 +31,8 @@ main:
     url: /Kahani/
   - title: Contact
     url: /contact/
+  - title: Support
+    url: /support/
 
 legal:
   - title: Terms
