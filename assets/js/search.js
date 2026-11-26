@@ -140,8 +140,7 @@
             return response.json();
         })
             .then((data) => {
-            if (!Array.isArray(data) || data.some((entry) =>
-                !entry || !Object.prototype.hasOwnProperty.call(TYPE_ORDER, entry.type) ||
+            if (!Array.isArray(data) || data.some((entry) => !entry || !Object.prototype.hasOwnProperty.call(TYPE_ORDER, entry.type) ||
                 typeof entry.title !== "string" || typeof entry.url !== "string" ||
                 (entry.text !== undefined && typeof entry.text !== "string") ||
                 (entry.date !== undefined && typeof entry.date !== "string") ||
