@@ -51,6 +51,10 @@
     {
       "title": "Contact",
       "url": "/contact/"
+    },
+    {
+      "title": "Support",
+      "url": "/support/"
     }
   ],
   "profiles": [
