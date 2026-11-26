@@ -1,13 +1,62 @@
 ---
 layout: page
 title: Support
-heading: Support has moved
+heading: Support and open-source contributions
 eyebrow: Support
-lead: Support questions are now handled through the contact page.
-description: "For help with Sanskar's projects or website, visit the contact page."
+lead: Get help with my projects, report problems, contribute improvements, or support the work behind them.
+description: "Find technical support, report bugs, contribute to open-source projects, and discover ways to support Sanskar's work."
 permalink: /support/
-redirect_to: /contact/
-noindex: true
-sitemap: false
 ---
-<p>Looking for help? Please visit the <a href="{{ '/contact/' | relative_url }}">contact page</a>.</p>
+
+<section aria-labelledby="support-help">
+  <div class="section-header">
+    <h2 class="section-title" id="support-help">Get technical help</h2>
+    <p class="section-header__lead">Choose the right channel for your question.</p>
+  </div>
+  <div class="contact-grid">
+    {% include contact-card.html group="support" purposes=true %}
+    <div class="contact-card">
+      <h3 class="contact-card__title">{% include icon.html name="github" %}Project issues</h3>
+      <p class="contact-card__summary">For bugs and feature requests, open the relevant repository and read its issue guidelines before submitting a report.</p>
+      <ul class="check-list" role="list">
+        <li>{% include icon.html name="check" %}Include the project and version.</li>
+        <li>{% include icon.html name="check" %}Describe expected and actual behavior.</li>
+        <li>{% include icon.html name="check" %}Include reproducible steps and relevant error messages, without passwords or private data.</li>
+      </ul>
+      <p>{% include link.html url="/github/" label="Browse GitHub repositories" class="text-link" arrow=true %}</p>
+      <p>{% include link.html url="/contact/" label="All contact options" class="text-link" arrow=true %}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="support-contribute">
+  <div class="section-header">
+    <h2 class="section-title" id="support-contribute">Contribute to open source</h2>
+    <p class="section-header__lead">Support does not have to involve money. Every useful contribution matters.</p>
+  </div>
+  <ul class="feature-grid" role="list">
+    <li class="feature">
+      <h3 class="feature__title">Test and report</h3>
+      <p class="feature__text">Try releases and report reproducible bugs or compatibility problems.</p>
+    </li>
+    <li class="feature">
+      <h3 class="feature__title">Improve code and docs</h3>
+      <p class="feature__text">Read project contribution guidelines and propose focused fixes, tests, examples, or documentation improvements.</p>
+    </li>
+    <li class="feature">
+      <h3 class="feature__title">Share and follow</h3>
+      <p class="feature__text">Star useful repositories, share projects with interested developers, and offer constructive feedback.</p>
+    </li>
+  </ul>
+  <p class="section-footer">{% include link.html url="/github/" label="Explore my GitHub profile" class="button button--primary" arrow=true %}</p>
+</section>
+
+<section class="section" aria-labelledby="support-work">
+  <div class="section-header">
+    <h2 class="section-title" id="support-work">Support my work</h2>
+    <p class="section-header__lead">Optional financial support can help with development, testing, infrastructure, and documentation. It is never required to use open-source projects or submit feedback.</p>
+  </div>
+  {% assign support_profiles = "buymeacoffee,github_sponsors,razorpay,paypal" | split: "," %}
+  {% include profile-list.html items=support_profiles variant="card" class="link-grid" %}
+  <p>These are external services with their own eligibility requirements and terms. No payments are collected on this website.</p>
+</section>
