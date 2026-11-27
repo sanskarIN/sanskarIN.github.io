@@ -2,59 +2,34 @@
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">01</span>About this site</h2>
-      <p class="section-header__lead">A personal space for my work, since 2026.</p>
-    </div>
-    <div class="split">
-      <p>I started planning this website in April 2026 and created its current repository in September. It is where I keep a record of my work and share what I learn along the way.</p>
-      <p>My projects range from developer tools and programming languages to desktop software, Android applications and games. The project pages link to the repositories, where you can follow their development.</p>
-    </div>
-    <p class="section-footer">{% include link.html url="/about/" label="More about me" class="text-link" arrow=true %}</p>
-  </div>
-</section>
-
-<section class="section section--surface">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">02</span>What I work on</h2>
-      <p class="section-header__lead">From compilers to the applications people use.</p>
-    </div>
-    <ul class="feature-grid feature-grid--4" role="list">
-      {%- for area in site.data.focus %}
-      <li class="feature">
-        {% include icon.html name=area.icon class="feature__icon" %}
-        <h3 class="feature__title">{{ area.title }}</h3>
-        <p class="feature__text">{{ area.summary }}</p>
-      </li>
-      {%- endfor %}
-    </ul>
-    <p class="section-footer">{% include link.html url="/developer/" label="View the developer profile" class="text-link" arrow=true %}</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">03</span>Tools and languages</h2>
-      <p class="section-header__lead">The technology behind my projects.</p>
-    </div>
-    {% include tech-list.html %}
-  </div>
-</section>
-
-<section class="section section--surface">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">04</span>Selected projects</h2>
-      <p class="section-header__lead">Browse the source, releases and ongoing work.</p>
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">01</span>Selected projects</h2>
+      <p class="section-header__lead">A selection of my work, with links to source code and project websites.</p>
     </div>
     {%- assign gh = site.data.github %}
     {%- if gh and gh.featured.size > 0 %}
-    <ul class="repo-grid">
-      {%- for name in gh.featured limit: 3 %}
+    <ul class="home-project-list" role="list">
+      {%- for name in gh.featured limit: 6 %}
         {%- assign repo = gh.repositories | where: "name", name | first %}
         {%- if repo %}
-      <li>{% include repo-card.html repo=repo show_languages=true %}</li>
+      <li>
+        <article class="home-project">
+          <div class="home-project__body">
+            <h3 class="home-project__title">{% include link.html url=repo.url label=repo.name class="home-project__name" %}</h3>
+            {%- if repo.description and repo.description != "" %}
+            <p>{{ repo.description | escape }}</p>
+            {%- endif %}
+          </div>
+          <div class="home-project__links">
+            {%- if repo.language %}
+            <span class="home-project__language">{{ repo.language | escape }}</span>
+            {%- endif %}
+            {% include link.html url=repo.url label="Source" class="text-link" %}
+            {%- if repo.homepage and repo.homepage != "" %}
+            {% include link.html url=repo.homepage label="Website" class="text-link" %}
+            {%- endif %}
+          </div>
+        </article>
+      </li>
         {%- endif %}
       {%- endfor %}
     </ul>
@@ -78,22 +53,69 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section section--surface">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">05</span>Blog</h2>
-      <p class="section-header__lead">Notes, tutorials and contributions from readers.</p>
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">02</span>Latest writing</h2>
+      <p class="section-header__lead">Recent articles, research and notes from the blog.</p>
     </div>
     {%- if site.posts.size > 0 %}
     <ul class="post-list">
       {%- for post in site.posts limit: 3 %}
-      <li>{% include post-card.html post=post %}</li>
+      <li>{% include post-card.html post=post documents=true %}</li>
       {%- endfor %}
     </ul>
     {%- else %}
     <p>The blog is ready for its first post.</p>
     {%- endif %}
-    <p class="section-footer">{% include link.html url="/blog/" label="Read the blog" class="text-link" arrow=true %}</p>
+    <p class="section-footer link-row">
+      {% include link.html url="/articles/" label="All articles" class="text-link" arrow=true %}
+      {% include link.html url="/research/" label="Research archive" class="text-link" arrow=true %}
+      {% include link.html url="/blog/" label="Read the blog" class="text-link" arrow=true %}
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">03</span>About this site</h2>
+      <p class="section-header__lead">A personal space for my work, since 2026.</p>
+    </div>
+    <div class="split">
+      <p>I started planning this website in April 2026 and created its current repository in September. It is where I keep a record of my work and share what I learn along the way.</p>
+      <p>My projects range from developer tools and programming languages to desktop software, Android applications and games. The project pages link to the repositories, where you can follow their development.</p>
+    </div>
+    <p class="section-footer">{% include link.html url="/about/" label="More about me" class="text-link" arrow=true %}</p>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">04</span>What I work on</h2>
+      <p class="section-header__lead">From compilers to the applications people use.</p>
+    </div>
+    <ul class="feature-grid feature-grid--4" role="list">
+      {%- for area in site.data.focus %}
+      <li class="feature">
+        {% include icon.html name=area.icon class="feature__icon" %}
+        <h3 class="feature__title">{{ area.title }}</h3>
+        <p class="feature__text">{{ area.summary }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+    <p class="section-footer">{% include link.html url="/developer/" label="View the developer profile" class="text-link" arrow=true %}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">05</span>Tools and languages</h2>
+      <p class="section-header__lead">The technology behind my projects.</p>
+    </div>
+    {% include tech-list.html %}
   </div>
 </section>
 
