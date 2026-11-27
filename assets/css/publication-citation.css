@@ -1,0 +1,63 @@
+/* A restrained citation panel for published articles and research. */
+.publication-citation {
+  max-width: var(--width-prose);
+  margin-block-start: var(--space-8);
+  padding-block: var(--space-6);
+  border-block-start: var(--border);
+}
+.publication-citation > h2 {
+  font-size: var(--text-xl);
+  letter-spacing: -0.025em;
+}
+.publication-citation__help {
+  margin-block-start: var(--space-3);
+  max-width: 65ch;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+.publication-citation__reference {
+  margin-block-start: var(--space-4);
+  border-inline-start: 2px solid var(--color-accent);
+  padding-inline-start: var(--space-4);
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
+.publication-citation__reference cite {
+  font-style: normal;
+}
+.publication-citation__controls {
+  margin-block-start: var(--space-5);
+}
+.publication-citation__controls .form-field {
+  margin-block-end: var(--space-4);
+}
+.publication-citation__controls select {
+  width: min(100%, 24rem);
+  min-height: 44px;
+}
+.publication-citation__output {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 10rem;
+  resize: vertical;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.publication-citation__status {
+  margin-block-start: var(--space-2);
+  min-height: 1.5em;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+@media print {
+  .publication-citation {
+    break-inside: avoid;
+  }
+  .publication-citation__controls {
+    display: none !important;
+  }
+}
