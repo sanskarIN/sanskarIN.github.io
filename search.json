@@ -876,52 +876,24 @@
   },
   {
     "type": "Project",
-    "title": "frametrellis",
-    "url": "https://github.com/sanskarIN/frametrellis",
-    "tags": [
-      "cmake",
-      "cpp",
-      "cpp20",
-      "desktop-application",
-      "docker",
-      "ffmpeg"
-    ],
-    "text": "Open-source video editor. C++"
-  },
-  {
-    "type": "Project",
-    "title": "RepoDNA",
-    "url": "https://github.com/sanskarIN/RepoDNA",
-    "tags": [
-      "cli",
-      "code-analysis",
-      "code-archaeology",
-      "code-metrics",
-      "code-quality",
-      "code-visualization"
-    ],
-    "text": "Understand any GitHub repository before you clone it. Rust"
-  },
-  {
-    "type": "Project",
-    "title": "sanskarIN.github.io",
-    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
+    "title": "latebrake",
+    "url": "https://github.com/sanskarIN/latebrake",
     "tags": [],
-    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. HTML"
+    "text": "Latebrake — Race Beyond Limits. C++"
   },
   {
     "type": "Project",
-    "title": "scarp",
-    "url": "https://github.com/scarp-lang/scarp",
+    "title": "awesome-tech-atlas",
+    "url": "https://github.com/sanskarIN/awesome-tech-atlas",
     "tags": [
-      "cli",
-      "compiler",
-      "compiler-design",
-      "developer-tools",
-      "interpreter",
-      "language-design"
+      "awesome-list",
+      "computer-science",
+      "developer-resources",
+      "machine-learning",
+      "open-source",
+      "programming"
     ],
-    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
+    "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
   },
   {
     "type": "Project",
@@ -946,17 +918,31 @@
   },
   {
     "type": "Project",
-    "title": "latebrake",
-    "url": "https://github.com/sanskarIN/latebrake",
-    "tags": [],
-    "text": "Latebrake — Race Beyond Limits. C++"
+    "title": "scarp",
+    "url": "https://github.com/scarp-lang/scarp",
+    "tags": [
+      "cli",
+      "compiler",
+      "compiler-design",
+      "developer-tools",
+      "interpreter",
+      "language-design"
+    ],
+    "text": "A next-generation programming language for software, systems, and intelligent computing. Rust"
   },
   {
     "type": "Project",
-    "title": "tempotrack",
-    "url": "https://github.com/sanskarIN/tempotrack",
+    "title": "sanskarIN.github.io",
+    "url": "https://github.com/sanskarIN/sanskarIN.github.io",
     "tags": [],
-    "text": "Kotlin"
+    "text": "Personal developer portfolio, projects, open-source work, technical writing, and contact information. HTML"
+  },
+  {
+    "type": "Project",
+    "title": "EyeZen",
+    "url": "https://github.com/sanskarIN/EyeZen",
+    "tags": [],
+    "text": "Your screen. Your comfort. Your environment. TypeScript"
   },
   {
     "type": "Project",
@@ -964,6 +950,48 @@
     "url": "https://github.com/sanskarIN/LineLoom",
     "tags": [],
     "text": "LineLoom — Code Smarter. Build Faster. Stay Private. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "KathaSvara",
+    "url": "https://github.com/sanskarIN/KathaSvara",
+    "tags": [],
+    "text": "Give Every Story a Voice. TypeScript"
+  },
+  {
+    "type": "Project",
+    "title": "RepoDNA",
+    "url": "https://github.com/sanskarIN/RepoDNA",
+    "tags": [
+      "cli",
+      "code-analysis",
+      "code-archaeology",
+      "code-metrics",
+      "code-quality",
+      "code-visualization"
+    ],
+    "text": "Understand any GitHub repository before you clone it. Rust"
+  },
+  {
+    "type": "Project",
+    "title": "frametrellis",
+    "url": "https://github.com/sanskarIN/frametrellis",
+    "tags": [
+      "cmake",
+      "cpp",
+      "cpp20",
+      "desktop-application",
+      "docker",
+      "ffmpeg"
+    ],
+    "text": "Open-source video editor. C++"
+  },
+  {
+    "type": "Project",
+    "title": "tempotrack",
+    "url": "https://github.com/sanskarIN/tempotrack",
+    "tags": [],
+    "text": "Kotlin"
   },
   {
     "type": "Project",
@@ -985,34 +1013,6 @@
       "golang"
     ],
     "text": "LangSteps — Every Language. Every Level. One Step at a Time. HTML"
-  },
-  {
-    "type": "Project",
-    "title": "EyeZen",
-    "url": "https://github.com/sanskarIN/EyeZen",
-    "tags": [],
-    "text": "Your screen. Your comfort. Your environment. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "KathaSvara",
-    "url": "https://github.com/sanskarIN/KathaSvara",
-    "tags": [],
-    "text": "Give Every Story a Voice. TypeScript"
-  },
-  {
-    "type": "Project",
-    "title": "awesome-tech-atlas",
-    "url": "https://github.com/sanskarIN/awesome-tech-atlas",
-    "tags": [
-      "awesome-list",
-      "computer-science",
-      "developer-resources",
-      "machine-learning",
-      "open-source",
-      "programming"
-    ],
-    "text": "A curated collection of technology resources, tools, libraries, guides, tutorials, examples, and references. Python"
   },
   {
     "type": "Project",
