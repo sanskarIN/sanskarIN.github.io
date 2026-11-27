@@ -2,12 +2,12 @@
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">01</span>About</h2>
-      <p class="section-header__lead">Software developer, open-source builder, and part of the developer community.</p>
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">01</span>About this site</h2>
+      <p class="section-header__lead">A personal space for my work, since 2026.</p>
     </div>
     <div class="split">
-      <p>I&#x27;m Sanskar, a software developer. My interests cover a wide range of software: systems languages such as Rust, C, and C++; Android development with Kotlin and Java; web development with JavaScript, TypeScript, and React; C#, .NET, and Python; game development; and AI and machine learning.</p>
-      <p>I build in the open on GitHub, take part in the developer community, and create digital products along the way. This website brings all of that together in one place.</p>
+      <p>I started planning this website in April 2026 and created its current repository in September. It is where I keep a record of my work and share what I learn along the way.</p>
+      <p>My projects range from developer tools and programming languages to desktop software, Android applications and games. The project pages link to the repositories, where you can follow their development.</p>
     </div>
     <p class="section-footer">{% include link.html url="/about/" label="More about me" class="text-link" arrow=true %}</p>
   </div>
@@ -16,8 +16,8 @@
 <section class="section section--surface">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">02</span>Developer focus</h2>
-      <p class="section-header__lead">The areas I build in and keep exploring.</p>
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">02</span>What I work on</h2>
+      <p class="section-header__lead">From compilers to the applications people use.</p>
     </div>
     <ul class="feature-grid feature-grid--4" role="list">
       {%- for area in site.data.focus %}
@@ -35,8 +35,8 @@
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">03</span>Technologies</h2>
-      <p class="section-header__lead">Languages, frameworks, and tools across my work and interests.</p>
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">03</span>Tools and languages</h2>
+      <p class="section-header__lead">The technology behind my projects.</p>
     </div>
     {% include tech-list.html %}
   </div>
@@ -45,8 +45,8 @@
 <section class="section section--surface">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">04</span>Open source</h2>
-      <p class="section-header__lead">I publish code on GitHub, where it can be read, discussed, and improved in the open.</p>
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">04</span>Selected projects</h2>
+      <p class="section-header__lead">Browse the source, releases and ongoing work.</p>
     </div>
     {%- assign gh = site.data.github %}
     {%- if gh and gh.featured.size > 0 %}
@@ -82,7 +82,7 @@
   <div class="container">
     <div class="section-header">
       <h2 class="section-title"><span class="section-title__index" aria-hidden="true">05</span>Blog</h2>
-      <p class="section-header__lead">Posts and images from me and from visitors. Anyone can write one.</p>
+      <p class="section-header__lead">Notes, tutorials and contributions from readers.</p>
     </div>
     {%- if site.posts.size > 0 %}
     <ul class="post-list">
@@ -100,8 +100,8 @@
 <section class="section section--surface">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">06</span>Developer community</h2>
-      <p class="section-header__lead">Places to follow along, read, and talk about software.</p>
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">06</span>Elsewhere on the web</h2>
+      <p class="section-header__lead">Find my other profiles and technical discussions.</p>
     </div>
     {% include profile-list.html items=site.data.social.community variant="card" class="link-grid" %}
   </div>
@@ -110,8 +110,8 @@
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">07</span>Support &amp; digital products</h2>
-      <p class="section-header__lead">If my work is useful to you, you can support it directly or browse my digital products.</p>
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">07</span>Support and products</h2>
+      <p class="section-header__lead">Ways to support my work or explore my digital products.</p>
     </div>
     {% include profile-list.html group="products" variant="card" class="link-grid" %}
   </div>
@@ -120,8 +120,8 @@
 <section class="section section--surface">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">08</span>Contact</h2>
-      <p class="section-header__lead">Email is the best way to reach me: business addresses for professional inquiries, and the support address for help.</p>
+      <h2 class="section-title"><span class="section-title__index" aria-hidden="true">08</span>Get in touch</h2>
+      <p class="section-header__lead">For project questions, professional inquiries or support.</p>
     </div>
     <div class="contact-grid">
       {% include contact-card.html group="business" %}
