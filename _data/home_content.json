@@ -1,54 +1,54 @@
 {
   "hero": {
-    "eyebrow": "Software developer · Open source",
+    "eyebrow": "Independent software development",
     "title": "Sanskar",
-    "tagline": "Building software, developer tools, and digital products in the open.",
-    "intro": "My work and interests span Rust and C++, Android, the web, game development, and AI/machine learning — built in public on GitHub and shared with the developer community."
+    "tagline": "I build software and explore how it works.",
+    "intro": "This is my personal website: a home for my open-source projects, programming experiments, research and writing. Start with the projects below, or browse the source on GitHub."
   },
   "about_paragraphs": [
-    "I'm Sanskar, a software developer. My interests cover a wide range of software: systems languages such as Rust, C, and C++; Android development with Kotlin and Java; web development with JavaScript, TypeScript, and React; C#, .NET, and Python; game development; and AI and machine learning.",
-    "I build in the open on GitHub, take part in the developer community, and create digital products along the way. This website brings all of that together in one place."
+    "I started planning this website in April 2026 and created its current repository in September. It is where I keep a record of my work and share what I learn along the way.",
+    "My projects range from developer tools and programming languages to desktop software, Android applications and games. The project pages link to the repositories, where you can follow their development."
   ],
   "sections": [
     {
       "id": "about",
-      "title": "About",
-      "lead": "Software developer, open-source builder, and part of the developer community."
+      "title": "About this site",
+      "lead": "A personal space for my work, since 2026."
     },
     {
       "id": "focus",
-      "title": "Developer focus",
-      "lead": "The areas I build in and keep exploring."
+      "title": "What I work on",
+      "lead": "From compilers to the applications people use."
     },
     {
       "id": "technologies",
-      "title": "Technologies",
-      "lead": "Languages, frameworks, and tools across my work and interests."
+      "title": "Tools and languages",
+      "lead": "The technology behind my projects."
     },
     {
       "id": "repos",
-      "title": "Open source",
-      "lead": "I publish code on GitHub, where it can be read, discussed, and improved in the open."
+      "title": "Selected projects",
+      "lead": "Browse the source, releases and ongoing work."
     },
     {
       "id": "blog",
       "title": "Blog",
-      "lead": "Posts and images from me and from visitors. Anyone can write one."
+      "lead": "Notes, tutorials and contributions from readers."
     },
     {
       "id": "community",
-      "title": "Developer community",
-      "lead": "Places to follow along, read, and talk about software."
+      "title": "Elsewhere on the web",
+      "lead": "Find my other profiles and technical discussions."
     },
     {
       "id": "products",
-      "title": "Support & digital products",
-      "lead": "If my work is useful to you, you can support it directly or browse my digital products."
+      "title": "Support and products",
+      "lead": "Ways to support my work or explore my digital products."
     },
     {
       "id": "contact",
-      "title": "Contact",
-      "lead": "Email is the best way to reach me: business addresses for professional inquiries, and the support address for help."
+      "title": "Get in touch",
+      "lead": "For project questions, professional inquiries or support."
     }
   ]
 }
