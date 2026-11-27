@@ -1,0 +1,170 @@
+/* Editorial treatments for the personal homepage and About page.
+   Keep the global theme, shared components and interactive terminal intact. */
+.page-home .hero {
+  padding-block: clamp(3rem, 8vw, 7rem) clamp(2.5rem, 5vw, 4.5rem);
+}
+.page-home .hero::before,
+.page-about .page-header::before {
+  background-image: none;
+}
+.page-home .hero__title {
+  font-size: clamp(3.5rem, 9vw, 7rem);
+  letter-spacing: -0.065em;
+  line-height: 0.98;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+.page-home .hero__tagline {
+  font-weight: 450;
+  font-size: clamp(1.4rem, 2.8vw, 2.15rem);
+  max-width: 26ch;
+  text-wrap: pretty;
+}
+.page-home .hero__intro {
+  max-width: 50ch;
+  line-height: 1.7;
+}
+.page-home .hero__content,
+.page-home .hero__aside {
+  min-width: 0;
+}
+.page-home .hero .eyebrow,
+.page-about .page-header .eyebrow {
+  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-weight: 550;
+}
+.page-home .spec-card::before,
+.page-home .spec-card::after {
+  content: none;
+}
+.page-home .spec-card {
+  border-radius: var(--radius-sm);
+}
+.page-home .section {
+  padding-block: clamp(2rem, 4.5vw, 4rem);
+}
+.page-home .section--surface {
+  background: transparent;
+  border-block: 0;
+}
+.page-home .section > .container {
+  position: relative;
+}
+.page-home .section + .section > .container::before {
+  content: "";
+  position: absolute;
+  top: calc(-1 * clamp(2rem, 4.5vw, 4rem));
+  inset-inline: var(--gutter);
+  border-top: var(--border);
+}
+.page-home .section-header {
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+.page-home .section-title {
+  font-size: clamp(1.65rem, 3vw, 2.3rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+.page-home .section-title__index {
+  display: none;
+}
+.page-home .section-header__lead {
+  font-size: var(--text-base);
+  max-width: 54ch;
+}
+.page-home .split > p {
+  max-width: 52ch;
+}
+.page-home .callout {
+  border: 0;
+  border-inline-start: 3px solid var(--color-accent);
+  border-radius: 0;
+  background-color: var(--color-surface);
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+.page-home .callout__title {
+  letter-spacing: -0.035em;
+}
+.page-home .callout__icon {
+  align-self: start;
+}
+.home-directory {
+  padding-block: var(--space-4);
+}
+.home-directory__label {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 550;
+  margin-bottom: var(--space-2);
+}
+.home-directory ul {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-6);
+  row-gap: var(--space-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.home-directory li {
+  min-width: 0;
+}
+.home-directory a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.page-about .page-header {
+  padding-block: clamp(2.75rem, 6vw, 5rem) var(--space-6);
+}
+.page-about .page-header__title {
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  letter-spacing: -0.045em;
+}
+.page-about .intro-grid__text {
+  max-width: 60ch;
+}
+.page-about .intro-grid__text p:first-child {
+  font-size: var(--text-xl);
+  line-height: 1.4;
+}
+.page-about .page-section > h2 {
+  letter-spacing: -0.025em;
+}
+.page-about .page-section > p {
+  max-width: 68ch;
+}
+@media (min-width: 64em) {
+  .page-home .hero__grid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: center;
+  }
+  .page-home .section-header {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--space-6);
+    align-items: baseline;
+  }
+}
+@media (max-width: 30em) {
+  .home-directory ul {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .page-home .hero__title {
+    font-size: clamp(2.75rem, 14vw, 4rem);
+  }
+}
+@media print {
+  .page-home .section,
+  .page-about .page-header {
+    padding-block: 1rem;
+  }
+  .page-home .callout {
+    background: transparent;
+  }
+}
