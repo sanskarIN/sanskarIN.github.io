@@ -25,6 +25,7 @@ on:
       - '.github/scripts/post_markdown.py'
       - '.github/scripts/check_blog_posts.py'
       - '.github/scripts/check_resources.py'
+      - '.github/scripts/check_resource_catalog.py'
       - '.github/scripts/tests/test_check_resources.py'
       - 'about.html'
       - 'developer.html'
@@ -89,6 +90,7 @@ on:
       - '.github/scripts/post_markdown.py'
       - '.github/scripts/check_blog_posts.py'
       - '.github/scripts/check_resources.py'
+      - '.github/scripts/check_resource_catalog.py'
       - '.github/scripts/tests/test_check_resources.py'
       - 'About-Kahani-Videos.html'
       - '_data/kahani.yml'
@@ -142,5 +144,7 @@ jobs:
         run: python .github/scripts/check_blog_posts.py _site
       - name: Verify published document integrity and download links
         run: python .github/scripts/check_resources.py _site
+      - name: Check rendered resource catalog
+        run: python .github/scripts/check_resource_catalog.py _site
       - name: Compare Python terminal and search index to Jekyll
         run: python .github/scripts/check_data_parity.py _site

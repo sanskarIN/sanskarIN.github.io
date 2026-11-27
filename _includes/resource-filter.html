@@ -1,0 +1,59 @@
+<form class="resource-filter" role="search" aria-label="Filter downloadable documents" data-resource-filter hidden>
+  <p class="resource-filter__help" id="resource-filter-help">Find documents by title, file name, format, language or publication. Filters and sorting can be shared using the page address.</p>
+  <div class="resource-filter__fields">
+    <div class="form-field resource-filter__search">
+      <label for="resource-query" class="form-field__label">Search documents</label>
+      <input id="resource-query" class="form-field__input" type="search" maxlength="160" autocomplete="off" placeholder="Title, source publication or file name" data-resource-filter-q aria-describedby="resource-filter-help" aria-controls="resource-results">
+    </div>
+    <div class="form-field">
+      <label for="resource-format" class="form-field__label">File format</label>
+      <select id="resource-format" class="form-field__input" data-resource-filter-format aria-controls="resource-results">
+        <option value="">All formats</option>
+        <option value="PDF">PDF document</option>
+        <option value="PPTX">PowerPoint presentation</option>
+        <option value="MD">Markdown source</option>
+        <option value="HTML">HTML source</option>
+        <option value="DOCX">Word document</option>
+        <option value="BIB">BibTeX bibliography</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="resource-language" class="form-field__label">Publication language</label>
+      <select id="resource-language" class="form-field__input" data-resource-filter-language aria-controls="resource-results">
+        <option value="">All languages</option>
+        {%- for language in site.data.post_languages %}
+        <option value="{{ language[0] | escape }}">{{ language[1] | escape }}</option>
+        {%- endfor %}
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="resource-year" class="form-field__label">Publication year</label>
+      <select id="resource-year" class="form-field__input" data-resource-filter-year aria-controls="resource-results">
+        <option value="">All years</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="resource-size" class="form-field__label">File size</label>
+      <select id="resource-size" class="form-field__input" data-resource-filter-size aria-controls="resource-results">
+        <option value="">All file sizes</option>
+        <option value="small">Under 1 MB</option>
+        <option value="medium">1 MB to under 5 MB</option>
+        <option value="large">5 MB or larger</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="resource-sort" class="form-field__label">Sort by</label>
+      <select id="resource-sort" class="form-field__input" data-resource-filter-sort aria-controls="resource-results">
+        <option value="newest">Newest publications</option>
+        <option value="oldest">Oldest publications</option>
+        <option value="title">Title A–Z</option>
+        <option value="largest">Largest files</option>
+        <option value="smallest">Smallest files</option>
+      </select>
+    </div>
+  </div>
+  <div class="resource-filter__footer">
+    <p class="resource-filter__status" role="status" data-resource-status></p>
+    <button class="button button--secondary" type="button" data-resource-reset disabled>Clear filters and sorting</button>
+  </div>
+</form>
