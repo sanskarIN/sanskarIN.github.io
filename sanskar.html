@@ -13,8 +13,8 @@ schema_type: ProfilePage
     <div class="hero__content">
       <p class="eyebrow">Independent software development · Open source</p>
       <h1 class="hero__title" id="profile-title">{{ site.author.name | escape }}</h1>
-      <p class="hero__tagline">From programming languages to practical software.</p>
-      <p class="hero__intro">I build and explore software across the stack — from compilers and developer tools to creative applications, games and intelligent computing. I share the code, technical decisions and research behind my work.</p>
+      <p class="hero__tagline">A closer look at the software I build.</p>
+      <p class="hero__intro">My projects include Scarp, a programming language and compiler, developer tools, video editing software and games. Here you can find their repositories alongside my research and technical writing.</p>
       <div class="button-row">
         {% include link.html url=site.data.social.profiles.github.url label="Explore GitHub" class="button button--primary" icon="github" %}
         <a href="#work-title" class="button button--secondary">Explore featured work {% include icon.html name="arrow-right" %}</a>
@@ -42,31 +42,7 @@ schema_type: ProfilePage
   </div>
 </section>
 
-{%- if gh and gh.totals.repositories %}
-<section class="portfolio-summary" aria-labelledby="summary-title">
-  <div class="container">
-    <div class="portfolio-summary__header">
-      <h2 id="summary-title">Open-source activity at a glance</h2>
-      {%- if gh.generated_at %}
-      <p>Repository snapshot · <time datetime="{{ gh.generated_at | date_to_xmlschema }}">{{ gh.generated_at | date: "%-d %b %Y" }}</time></p>
-      {%- endif %}
-    </div>
-    <dl class="portfolio-metrics">
-      <div><dt>Public project repositories</dt><dd>{% include number.html value=gh.totals.repositories %}</dd></div>
-      {%- if gh.totals.languages %}
-      <div><dt>Code languages represented</dt><dd>{% include number.html value=gh.totals.languages %}</dd></div>
-      {%- endif %}
-      {%- if gh.totals.stars %}
-      <div><dt>Repository stars</dt><dd>{% include number.html value=gh.totals.stars %}</dd></div>
-      {%- endif %}
-      {%- if gh.totals.forks %}
-      <div><dt>Repository forks</dt><dd>{% include number.html value=gh.totals.forks %}</dd></div>
-      {%- endif %}
-    </dl>
-    <p class="portfolio-summary__note">Totals reflect the site's published repository snapshot, including explicitly maintained organization projects; they are not individual authorship or live counters.</p>
-  </div>
-</section>
-{%- endif %}
+
 
 <nav class="portfolio-nav" aria-label="Explore this portfolio">
   <div class="container">
@@ -86,7 +62,7 @@ schema_type: ProfilePage
   <div class="container">
     <div class="section-header">
       <h2 class="section-title" id="work-title">Featured work</h2>
-      <p class="section-header__lead">Selected projects from the maintained public repository snapshot. See individual repositories for current development status and releases.</p>
+      <p class="section-header__lead">Start with Scarp, or browse the selected repositories for source code and releases.</p>
     </div>
     <div class="callout portfolio-spotlight">
       <div class="portfolio-spotlight__symbol" aria-hidden="true">{% include icon.html name="code" %}</div>
@@ -116,6 +92,32 @@ schema_type: ProfilePage
     </div>
   </div>
 </section>
+
+{%- if gh and gh.totals.repositories %}
+<section class="portfolio-summary" aria-labelledby="summary-title">
+  <div class="container">
+    <div class="portfolio-summary__header">
+      <h2 id="summary-title">Open-source activity at a glance</h2>
+      {%- if gh.generated_at %}
+      <p>Repository snapshot · <time datetime="{{ gh.generated_at | date_to_xmlschema }}">{{ gh.generated_at | date: "%-d %b %Y" }}</time></p>
+      {%- endif %}
+    </div>
+    <dl class="portfolio-metrics">
+      <div><dt>Public project repositories</dt><dd>{% include number.html value=gh.totals.repositories %}</dd></div>
+      {%- if gh.totals.languages %}
+      <div><dt>Code languages represented</dt><dd>{% include number.html value=gh.totals.languages %}</dd></div>
+      {%- endif %}
+      {%- if gh.totals.stars %}
+      <div><dt>Repository stars</dt><dd>{% include number.html value=gh.totals.stars %}</dd></div>
+      {%- endif %}
+      {%- if gh.totals.forks %}
+      <div><dt>Repository forks</dt><dd>{% include number.html value=gh.totals.forks %}</dd></div>
+      {%- endif %}
+    </dl>
+    <p class="portfolio-summary__note">Totals reflect the site's published repository snapshot, including explicitly maintained organization projects; they are not individual authorship or live counters.</p>
+  </div>
+</section>
+{%- endif %}
 
 <section class="section section--surface" aria-labelledby="focus-title">
   <div class="container">
