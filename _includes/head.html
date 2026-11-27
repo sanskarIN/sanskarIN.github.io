@@ -45,7 +45,8 @@
 <script src="{{ '/assets/js/theme-init.js' | relative_url }}?v={{ asset_version }}"></script>
 <link rel="preload" href="{{ '/assets/fonts/ibm-plex-sans-latin-variable.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ asset_version }}">
-{%- if page.body_class == "page-home" or page.body_class == "page-about" %}
+{%- assign editorial_pages = "page-home,page-about,page-profile,page-developer,page-projects,page-articles,page-research,page-contact" | split: "," %}
+{%- if editorial_pages contains page.body_class %}
 <link rel="stylesheet" href="{{ '/assets/css/editorial.css' | relative_url }}?v={{ asset_version }}">
 {%- endif %}
 <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ asset_version }}" defer></script>

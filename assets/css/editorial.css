@@ -168,3 +168,117 @@
     background: transparent;
   }
 }
+
+/* Portfolio and reading pages share the same editorial rhythm, without
+   changing component behavior or the appearance of account and utility pages. */
+:is(.page-developer, .page-projects, .page-articles, .page-research, .page-contact) .page-header {
+  padding-block: clamp(2.75rem, 6vw, 5rem) var(--space-6);
+}
+:is(.page-developer, .page-projects, .page-articles, .page-research, .page-contact) .page-header::before,
+.page-profile .hero::before {
+  background-image: none;
+}
+:is(.page-developer, .page-projects, .page-articles, .page-research, .page-contact) .page-header__title {
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
+  letter-spacing: -0.045em;
+  overflow-wrap: anywhere;
+}
+:is(.page-developer, .page-projects, .page-articles, .page-research, .page-contact) .page-header__lead {
+  max-width: 58ch;
+  line-height: 1.55;
+}
+:is(.page-developer, .page-projects, .page-articles, .page-research, .page-contact) .page-header .eyebrow,
+.page-profile .hero .eyebrow {
+  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+.page-profile .hero {
+  padding-block: clamp(3rem, 7vw, 6rem);
+}
+.page-profile .hero__title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.055em;
+  overflow-wrap: anywhere;
+}
+.page-profile .hero__tagline {
+  max-width: 28ch;
+  font-weight: 450;
+}
+.page-profile .hero__intro {
+  max-width: 54ch;
+}
+.page-profile .hero__aside,
+.page-profile .hero__content {
+  min-width: 0;
+}
+.page-profile .spec-card::before,
+.page-profile .spec-card::after {
+  content: none;
+}
+.page-profile .section {
+  padding-block: clamp(2rem, 4.5vw, 4rem);
+}
+.page-profile .section--surface {
+  background: transparent;
+  border-block: 0;
+}
+.page-profile .section-header {
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+.page-profile .section-title {
+  font-size: clamp(1.65rem, 3vw, 2.3rem);
+  letter-spacing: -0.035em;
+}
+.page-profile .section-header__lead {
+  font-size: var(--text-base);
+  max-width: 56ch;
+  line-height: 1.55;
+}
+:is(.page-profile, .page-projects) .callout {
+  border: 0;
+  border-inline-start: 3px solid var(--color-accent);
+  border-radius: 0;
+  background-color: var(--color-surface);
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+:is(.page-profile, .page-projects) .repo-grid--featured .repo-card {
+  box-shadow: none;
+  border-top: 2px solid var(--color-accent);
+}
+:is(.page-profile, .page-projects) .repo-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.page-projects .stats {
+  margin-block: var(--space-6);
+}
+.page-projects .page-section > h2,
+.page-developer .page-section > h2 {
+  letter-spacing: -0.025em;
+}
+:is(.page-developer, .page-projects, .page-articles, .page-research, .page-contact) .page-section > p {
+  max-width: 68ch;
+}
+@media (min-width: 64em) {
+  .page-profile .section-header {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: baseline;
+  }
+}
+@media (max-width: 30em) {
+  .page-profile .hero__title {
+    font-size: clamp(2.75rem, 14vw, 4rem);
+  }
+}
+@media print {
+  .page-profile .section,
+  :is(.page-developer, .page-projects, .page-articles, .page-research, .page-contact) .page-header {
+    padding-block: 1rem;
+  }
+  :is(.page-profile, .page-projects) .callout {
+    background: transparent;
+  }
+}
