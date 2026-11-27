@@ -5,7 +5,7 @@
   {%- for attachment in page.attachments %}
   <article class="page-section" id="{{ attachment.id | escape }}">
     <h3>{{ attachment.title | escape }}</h3>
-    <p><strong>{{ attachment.format | escape }}</strong> · {{ attachment.bytes | divided_by: 1000 }} KB</p>
+    <p><strong>{{ attachment.format | escape }}</strong> · {% include file-size.html bytes=attachment.bytes %}</p>
     <div class="button-row">
       <a class="button button--primary" href="{{ attachment.path | relative_url | escape }}" download="{{ attachment.name | escape }}">Download {{ attachment.format | escape }}</a>
       {%- if attachment.format == "MD" %}
