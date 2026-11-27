@@ -9,8 +9,6 @@ scripts: [terminal]
 ---
 {% include generated/home-hero.html %}
 
-{% include scarp-feature.html %}
-
 <nav class="home-directory container" aria-label="Explore this website">
   <p class="home-directory__label">Explore the site</p>
   <ul role="list">
@@ -20,5 +18,7 @@ scripts: [terminal]
     <li>{% include link.html url="/about/" label="About me" class="text-link" arrow=true %}</li>
   </ul>
 </nav>
+
+{% include scarp-feature.html %}
 
 {% include generated/home-sections.html %}
