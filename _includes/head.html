@@ -49,7 +49,13 @@
 {%- if editorial_pages contains page.body_class %}
 <link rel="stylesheet" href="{{ '/assets/css/editorial.css' | relative_url }}?v={{ asset_version }}">
 {%- endif %}
+{%- if page.layout == "post" %}
+<link rel="stylesheet" href="{{ '/assets/css/publication-citation.css' | relative_url }}?v={{ asset_version }}">
+{%- endif %}
 <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ asset_version }}" defer></script>
+{%- if page.layout == "post" %}
+<script src="{{ '/assets/js/publication-citation.js' | relative_url }}?v={{ asset_version }}" defer></script>
+{%- endif %}
 {%- if page.account_app and accounts_on %}
 <script src="{{ '/assets/js/account.js' | relative_url }}?v={{ asset_version }}" defer></script>
 {%- endif %}
