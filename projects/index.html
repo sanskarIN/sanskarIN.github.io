@@ -2,7 +2,8 @@
 layout: page
 title: Projects
 eyebrow: Open source
-lead: Software I build and maintain in the open, including the Scarp programming language and my GitHub projects.
+body_class: page-projects
+lead: Explore my public software projects, their source code and development history.
 description: "Sanskar's open-source projects on GitHub: featured repositories, languages, recent activity, and public repositories from a reviewed GitHub snapshot."
 permalink: /projects/
 schema_type: CollectionPage
@@ -21,11 +22,30 @@ scripts: [projects]
   {% include icon.html name="repo" class="callout__icon" %}
   <div>
     <h2 class="callout__title">Scarp Lang</h2>
-    <p class="callout__text">Explore the featured programming language, its development direction, downloads and official tools.</p>
+    <p class="callout__text">My programming language project. Find compiler releases, documentation and tools.</p>
   </div>
-  {% include link.html url="/ScarpLang/" label="Featured Scarp page" class="button button--primary" arrow=true %}
+  {% include link.html url="/ScarpLang/" label="Explore Scarp" class="button button--primary" arrow=true %}
 </div>
 {%- if gh and gh.repositories.size > 0 %}
+
+
+  {%- if gh.featured.size > 0 %}
+
+<section class="page-section" aria-labelledby="featured-title">
+  <h2 id="featured-title">Featured</h2>
+  <ul class="repo-grid repo-grid--featured">
+    {%- for name in gh.featured %}
+      {%- assign repo = gh.repositories | where: "name", name | first %}
+      {%- if repo %}
+    <li>{% include repo-card.html repo=repo show_languages=true %}</li>
+      {%- endif %}
+    {%- endfor %}
+  </ul>
+</section>
+  {%- endif %}
+
+
+
 <dl class="stats">
   <div class="stats__item">
     <dt class="stats__label">Public project repositories</dt>
@@ -52,22 +72,6 @@ scripts: [projects]
   </div>
   {%- endif %}
 </dl>
-
-  {%- if gh.featured.size > 0 %}
-
-<section class="page-section" aria-labelledby="featured-title">
-  <h2 id="featured-title">Featured</h2>
-  <ul class="repo-grid repo-grid--featured">
-    {%- for name in gh.featured %}
-      {%- assign repo = gh.repositories | where: "name", name | first %}
-      {%- if repo %}
-    <li>{% include repo-card.html repo=repo show_languages=true %}</li>
-      {%- endif %}
-    {%- endfor %}
-  </ul>
-</section>
-  {%- endif %}
-
   {%- assign ecosystem = site.data.scarp_ecosystem -%}
   {%- if ecosystem and ecosystem.size > 0 %}
 <section id="scarp-ecosystem" class="page-section" aria-labelledby="scarp-ecosystem-title">
