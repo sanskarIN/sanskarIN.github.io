@@ -45,6 +45,7 @@
 <script src="{{ '/assets/js/theme-init.js' | relative_url }}?v={{ asset_version }}"></script>
 <link rel="preload" href="{{ '/assets/fonts/ibm-plex-sans-latin-variable.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ asset_version }}">
+<link rel="stylesheet" href="{{ '/assets/css/navigation-groups.css' | relative_url }}?v={{ asset_version }}">
 {%- assign editorial_pages = "page-home,page-about,page-profile,page-developer,page-projects,page-articles,page-research,page-contact,page-resources" | split: "," %}
 {%- if editorial_pages contains page.body_class %}
 <link rel="stylesheet" href="{{ '/assets/css/editorial.css' | relative_url }}?v={{ asset_version }}">
@@ -53,6 +54,7 @@
 <link rel="stylesheet" href="{{ '/assets/css/publication-citation.css' | relative_url }}?v={{ asset_version }}">
 {%- endif %}
 <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ asset_version }}" defer></script>
+<script src="{{ '/assets/js/navigation-groups.js' | relative_url }}?v={{ asset_version }}" defer></script>
 {%- if page.layout == "post" %}
 <script src="{{ '/assets/js/publication-citation.js' | relative_url }}?v={{ asset_version }}" defer></script>
 {%- endif %}

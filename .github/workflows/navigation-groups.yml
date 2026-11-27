@@ -1,0 +1,47 @@
+name: Navigation groups
+
+on:
+  pull_request:
+    paths:
+      - '_data/navigation.yml'
+      - '_includes/header*.html'
+      - '_includes/head.html'
+      - 'assets/js/navigation-groups.js'
+      - 'assets/css/navigation-groups.css'
+      - '.github/scripts/check_navigation.py'
+      - '.github/scripts/check_reading_archive.py'
+      - '.github/scripts/terminal_data.py'
+      - '.github/scripts/tests/navigation-groups.test.cjs'
+      - '.github/scripts/tests/test_navigation.py'
+      - '.github/workflows/navigation-groups.yml'
+  push:
+    branches: [main]
+    paths:
+      - '_data/navigation.yml'
+      - '_includes/header*.html'
+      - '_includes/head.html'
+      - 'assets/js/navigation-groups.js'
+      - 'assets/css/navigation-groups.css'
+      - '.github/scripts/check_navigation.py'
+      - '.github/scripts/check_reading_archive.py'
+      - '.github/scripts/terminal_data.py'
+      - '.github/scripts/tests/navigation-groups.test.cjs'
+      - '.github/scripts/tests/test_navigation.py'
+      - '.github/workflows/navigation-groups.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Test keyboard and responsive behavior
+        run: node --test .github/scripts/tests/navigation-groups.test.cjs
+      - name: Install YAML parser
+        run: python -m pip install --disable-pip-version-check PyYAML==6.0.3
+      - name: Test configuration and rendered markup
+        run: python -m unittest discover -s .github/scripts/tests -p test_navigation.py

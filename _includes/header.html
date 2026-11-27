@@ -15,13 +15,7 @@
       {% include icon.html name="close" class="nav-toggle__close" %}
       <span class="nav-toggle__label">Menu</span>
     </button>
-    <nav class="site-nav" id="site-nav" aria-label="Main">
-      <ul class="site-nav__list">
-        {%- for item in site.data.navigation.main %}
-        <li>{% include link.html url=item.url label=item.title class="site-nav__link" hint=true %}</li>
-        {%- endfor %}
-      </ul>
-    </nav>
+    {% include header-navigation.html %}
     <button class="header-button search-toggle" type="button" aria-haspopup="dialog" aria-keyshortcuts="Control+K Meta+K /" {% include search-attributes.html %} hidden>
       {% include icon.html name="search" %}
       <span class="search-toggle__label">Search</span>

@@ -1,0 +1,42 @@
+{%- comment -%}
+  The flat navigation list remains the source of truth for destinations,
+  labels, footer links and terminal navigation. Header groups reference its
+  URLs; CI checks that every destination appears exactly once.
+{%- endcomment -%}
+<nav class="site-nav" id="site-nav" aria-label="Main" data-grouped-navigation>
+  <ul class="site-nav__list" role="list">
+    {%- assign nav_entries = site.data.navigation.main %}
+    {%- assign nav_page = page.url | default: '/' %}
+    {%- for slot in site.data.navigation.header %}
+      {%- if slot.urls %}
+        {%- assign slot_current = false %}
+        {%- for destination in slot.urls %}
+          {%- assign route_length = destination | size %}
+          {%- assign route_prefix = nav_page | slice: 0, route_length %}
+          {%- if nav_page == destination or route_prefix == destination %}
+            {%- assign slot_current = true %}
+          {%- endif %}
+        {%- endfor %}
+    <li class="site-nav__item">
+      <details class="site-nav__group" data-nav-group="{{ slot.group | escape }}"{% if slot_current %} data-nav-current{% endif %}>
+        <summary class="site-nav__summary">
+          <span>{{ slot.title | escape }}</span>
+          <span class="site-nav__chevron" aria-hidden="true"></span>
+        </summary>
+        <ul class="site-nav__dropdown" role="list" data-nav-panel aria-label="{{ slot.title | escape }}">
+          {%- for destination in slot.urls %}
+            {%- assign nav_item = nav_entries | where: "url", destination | first %}
+            {%- assign nav_label = nav_item.title | escape %}
+          <li>{% include link.html url=nav_item.url label=nav_label class="site-nav__link site-nav__dropdown-link" hint=true %}</li>
+          {%- endfor %}
+        </ul>
+      </details>
+    </li>
+      {%- else %}
+        {%- assign nav_item = nav_entries | where: "url", slot.url | first %}
+        {%- assign nav_label = nav_item.title | escape %}
+    <li class="site-nav__item">{% include link.html url=nav_item.url label=nav_label class="site-nav__link" hint=true %}</li>
+      {%- endif %}
+    {%- endfor %}
+  </ul>
+</nav>

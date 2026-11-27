@@ -4,7 +4,7 @@
 #  email groups from _data/contact.yml.
 # =============================================================================
 
-# Header navigation, in display order (also the footer "Navigation" group).
+# Canonical destinations shared by footer, terminal and grouped header.
 main:
   - title: Home
     url: /
@@ -33,6 +33,31 @@ main:
     url: /contact/
   - title: Support
     url: /support/
+
+# Each destination appears once in the header, either directly or in a group.
+header:
+  - url: /
+  - url: /about/
+  - group: work
+    title: Work
+    urls:
+      - /projects/
+      - /ScarpLang/
+      - /developer/
+      - /lab/
+  - group: writing
+    title: Writing
+    urls:
+      - /articles/
+      - /research/
+      - /blog/
+      - /resources/
+  - group: more
+    title: More
+    urls:
+      - /Kahani/
+      - /support/
+  - url: /contact/
 
 legal:
   - title: Terms
