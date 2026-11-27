@@ -11,6 +11,16 @@
   ],
   "sections": [
     {
+      "id": "repos",
+      "title": "Selected projects",
+      "lead": "A selection of my work, with links to source code and project websites."
+    },
+    {
+      "id": "blog",
+      "title": "Latest writing",
+      "lead": "Recent articles, research and notes from the blog."
+    },
+    {
       "id": "about",
       "title": "About this site",
       "lead": "A personal space for my work, since 2026."
@@ -24,16 +34,6 @@
       "id": "technologies",
       "title": "Tools and languages",
       "lead": "The technology behind my projects."
-    },
-    {
-      "id": "repos",
-      "title": "Selected projects",
-      "lead": "Browse the source, releases and ongoing work."
-    },
-    {
-      "id": "blog",
-      "title": "Blog",
-      "lead": "Notes, tutorials and contributions from readers."
     },
     {
       "id": "community",
