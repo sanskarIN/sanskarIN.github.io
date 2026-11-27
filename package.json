@@ -9,7 +9,8 @@
     "check": "tsc --project tsconfig.json --noEmit",
     "test:lab": "node --test .github/scripts/tests/lab-json.test.cjs .github/scripts/tests/lab-next.test.cjs .github/scripts/tests/lab-convert.test.cjs .github/scripts/tests/lab-contrast.test.cjs .github/scripts/tests/lab-themes.test.cjs",
     "test:projects": "node --test .github/scripts/tests/projects.test.cjs",
-    "test:search": "node --test .github/scripts/tests/search.test.cjs"
+    "test:search": "node --test .github/scripts/tests/search.test.cjs",
+    "test:archive": "node --test .github/scripts/tests/reading-archive.test.cjs"
   },
   "devDependencies": {
     "typescript": "7.0.2"
