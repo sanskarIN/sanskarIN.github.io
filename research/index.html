@@ -7,7 +7,7 @@ lead: Technical investigations, research notes and their supporting documents.
 description: Explore published research notes, experiments, technical investigations, reports and supporting documents.
 permalink: /research/
 schema_type: CollectionPage
-scripts: [research]
+scripts: [reading-archive]
 ---
 {%- include accounts-config.html -%}
 {%- capture form_url -%}{{ site.repository_url }}/issues/new?template={{ site.data.blog.form }}{%- endcapture -%}
@@ -32,34 +32,25 @@ scripts: [research]
 <p class="note">{{ research_count }} published research post{% if research_count != 1 %}s{% endif %} &middot; {{ documents }} downloadable resource{% if documents != 1 %}s{% endif %}.</p>
 {%- if research_count > 0 %}
   {%- assign years = research_posts | group_by_exp: "post", "post.date | date: '%Y'" %}
-<section class="page-section" aria-labelledby="latest-research" data-research-latest>
+{% include archive-filter.html noun="research post" %}
+<section class="page-section" aria-labelledby="latest-research" data-research-latest data-archive-supplement>
   <h2 id="latest-research">Latest research</h2>
   {% include post-card.html post=research_posts.first documents=true %}
 </section>
-<section class="page-section" aria-labelledby="research-archive">
+<section class="page-section" id="archive-results" aria-labelledby="research-archive" data-archive-results>
   <h2 id="research-archive">Research archive</h2>
-  <div class="form-field" data-research-filter hidden>
-    <label class="form-field__label" for="research-language">Filter by language</label>
-    <select class="form-field__input" id="research-language">
-      <option value="all">All languages</option>
-      {% for language in site.data.post_languages %}
-      <option value="{{ language[0] | escape }}">{{ language[1] | escape }}</option>
-      {% endfor %}
-    </select>
-    <p class="note" data-research-results role="status"></p>
-  </div>
-  <p data-research-empty hidden>No research posts match this language.</p>
-  <ul class="tag-list" aria-label="Browse research by year" data-research-years>
+  <p class="note" data-archive-empty hidden>No research posts match these filters. Clear filters to browse the complete archive.</p>
+  <ul class="tag-list" aria-label="Browse research by year" data-research-years data-archive-supplement>
     {%- for year in years %}
     <li><a class="tag tag--link" href="#research-{{ year.name }}">{{ year.name }} ({{ year.items.size }})</a></li>
     {%- endfor %}
   </ul>
   {%- for year in years %}
-  <section class="post-year" aria-labelledby="research-{{ year.name }}" data-research-year>
-    <h3 id="research-{{ year.name }}">{{ year.name }} <span class="post-year__count">&middot; {{ year.items.size }} post{% if year.items.size != 1 %}s{% endif %}</span></h3>
+  <section class="post-year" aria-labelledby="research-{{ year.name }}" data-research-year data-archive-year-group="{{ year.name | escape }}">
+    <h3 id="research-{{ year.name }}">{{ year.name }} <span class="post-year__count" data-archive-year-count>&middot; {{ year.items.size }} post{% if year.items.size != 1 %}s{% endif %}</span></h3>
     <ul class="post-list">
       {%- for post in year.items %}
-      <li data-research-language="{{ post.content_language | default: 'und' | escape }}">{% include post-card.html post=post heading=4 documents=true %}</li>
+      <li data-research-language="{{ post.content_language | default: 'und' | escape }}" {% include archive-item-attributes.html post=post %}>{% include post-card.html post=post heading=4 documents=true %}</li>
       {%- endfor %}
     </ul>
   </section>
