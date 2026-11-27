@@ -14,7 +14,8 @@
       <li>
         <article class="home-project">
           <div class="home-project__body">
-            <h3 class="home-project__title">{% include link.html url=repo.url label=repo.name class="home-project__name" %}</h3>
+            {%- assign repo_label = repo.name | escape %}
+            <h3 class="home-project__title">{% include link.html url=repo.url label=repo_label class="home-project__name" %}</h3>
             {%- if repo.description and repo.description != "" %}
             <p>{{ repo.description | escape }}</p>
             {%- endif %}
