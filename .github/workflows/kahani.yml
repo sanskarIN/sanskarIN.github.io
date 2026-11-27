@@ -35,6 +35,8 @@ on:
       - '_data/not_found_page.json'
       - '.github/scripts/utility_pages.py'
       - '.github/scripts/check_generated_pages.py'
+      - '.github/scripts/check_navigation.py'
+      - '.github/scripts/tests/test_navigation.py'
       - '.github/scripts/check_reading_archive.py'
       - '.github/scripts/tests/test_reading_archive.py'
       - 'index.html'
@@ -66,6 +68,8 @@ on:
       - '_data/not_found_page.json'
       - '.github/scripts/utility_pages.py'
       - '.github/scripts/check_generated_pages.py'
+      - '.github/scripts/check_navigation.py'
+      - '.github/scripts/tests/test_navigation.py'
       - '.github/scripts/check_reading_archive.py'
       - '.github/scripts/tests/test_reading_archive.py'
       - 'ScarpLang/**'
@@ -146,5 +150,7 @@ jobs:
         run: python .github/scripts/check_resources.py _site
       - name: Check rendered resource catalog
         run: python .github/scripts/check_resource_catalog.py _site
+      - name: Check grouped navigation across rendered pages
+        run: python .github/scripts/check_navigation.py _site
       - name: Compare Python terminal and search index to Jekyll
         run: python .github/scripts/check_data_parity.py _site
