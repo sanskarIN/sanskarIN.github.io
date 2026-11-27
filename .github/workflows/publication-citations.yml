@@ -1,0 +1,41 @@
+name: Publication citation tools
+
+on:
+  pull_request:
+    paths:
+      - 'assets/js/publication-citation.js'
+      - 'assets/css/publication-citation.css'
+      - '_includes/publication-citation.html'
+      - '_includes/head.html'
+      - '_layouts/post.html'
+      - '.github/scripts/citation_audit.py'
+      - '.github/scripts/check_blog_posts.py'
+      - '.github/scripts/tests/publication-citation.test.cjs'
+      - '.github/scripts/tests/test_citation_audit.py'
+      - '.github/workflows/publication-citations.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'assets/js/publication-citation.js'
+      - 'assets/css/publication-citation.css'
+      - '_includes/publication-citation.html'
+      - '_layouts/post.html'
+      - '.github/scripts/citation_audit.py'
+      - '.github/scripts/tests/publication-citation.test.cjs'
+      - '.github/scripts/tests/test_citation_audit.py'
+      - '.github/workflows/publication-citations.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Verify citation formats and browser controls
+        run: node --test .github/scripts/tests/publication-citation.test.cjs
+      - name: Verify rendered citation audit fixtures
+        run: python -m unittest discover -s .github/scripts/tests -p test_citation_audit.py

@@ -1,0 +1,48 @@
+{%- comment -%}
+  Citation metadata is taken exclusively from the public post front matter.
+  The static reference remains available when JavaScript is disabled.
+{%- endcomment -%}
+{%- assign citation_author = page.author | default: site.author.name -%}
+{%- assign citation_url = page.url | absolute_url -%}
+<section class="publication-citation" aria-labelledby="publication-citation-title"
+  data-citation-panel
+  data-citation-title="{{ page.title | escape }}"
+  data-citation-subtitle="{{ page.subtitle | default: '' | escape }}"
+  data-citation-author="{{ citation_author | escape }}"
+  data-citation-site="{{ site.title | escape }}"
+  data-citation-date="{{ page.date | date: '%Y-%m-%d' }}"
+  data-citation-updated="{% if page.last_modified_at %}{{ page.last_modified_at | date: '%Y-%m-%d' }}{% endif %}"
+  data-citation-url="{{ citation_url | escape }}"
+  data-citation-language="{{ page.content_language | default: 'und' | escape }}"
+  data-citation-version="{{ page.research_details.version | default: '' | escape }}">
+  <h2 id="publication-citation-title">Cite this publication</h2>
+  <p class="publication-citation__help">Use the public publication details below when referring to this work. Check your institution’s preferred citation style before submitting academic work.</p>
+  <p class="publication-citation__reference">
+    {{ citation_author | escape }}. ({{ page.date | date: '%Y-%m-%d' }}).
+    <cite>{{ page.title | escape }}{% if page.subtitle and page.subtitle != page.title %}: {{ page.subtitle | escape }}{% endif %}</cite>.
+    {% if site.title != citation_author %}{{ site.title | escape }}. {% endif %}
+    {% if page.research_details.version %}Version {{ page.research_details.version | escape }}. {% endif %}
+    <a href="{{ citation_url | escape }}">{{ citation_url | escape }}</a>
+  </p>
+  <div class="publication-citation__controls" data-citation-controls hidden>
+    <div class="form-field">
+      <label for="publication-citation-format" class="form-field__label">Reference format</label>
+      <select id="publication-citation-format" class="form-field__input" data-citation-format aria-controls="publication-citation-output">
+        <option value="text">Plain reference</option>
+        <option value="markdown">Markdown</option>
+        <option value="bibtex">BibTeX</option>
+        <option value="ris">RIS</option>
+        <option value="csl">CSL JSON</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="publication-citation-output" class="form-field__label">Formatted reference</label>
+      <textarea id="publication-citation-output" class="form-field__input publication-citation__output" rows="7" readonly spellcheck="false" data-citation-output></textarea>
+    </div>
+    <div class="button-row">
+      <button class="button button--secondary" type="button" data-citation-copy>Copy reference</button>
+      <button class="button button--ghost" type="button" data-citation-download>Download reference</button>
+    </div>
+    <p class="publication-citation__status" role="status" data-citation-status></p>
+  </div>
+</section>
