@@ -123,7 +123,20 @@ class SiteGeneratorTests(unittest.TestCase):
         self.assertEqual(result.count('<section class="section'), len(SECTION_IDS))
         for index, section in enumerate(home["sections"], start=1):
             self.assertIn(f'>{index:02d}</span>{section["title"] if "&" not in section["title"] else "Support &amp; digital products"}', result)
-        self.assertIn('{%- for name in gh.featured limit: 3 %}', result)
+        self.assertEqual(tuple(section["id"] for section in home["sections"]),
+                         ("repos", "blog", "about", "focus", "technologies",
+                          "community", "products", "contact"))
+        self.assertIn('{%- for name in gh.featured limit: 6 %}', result)
+        self.assertIn('class="home-project-list"', result)
+        self.assertIn('assign repo_label = repo.name | escape', result)
+        self.assertIn('repo.description | escape', result)
+        self.assertIn('include link.html url=repo.url', result)
+        self.assertIn('include link.html url=repo.homepage', result)
+        self.assertIn('post=post documents=true', result)
+        self.assertLess(result.index('class="home-project-list"'),
+                        result.index('class="post-list"'))
+        self.assertLess(result.index('class="post-list"'),
+                        result.index('class="split"'))
         self.assertIn('{%- for post in site.posts limit: 3 %}', result)
         self.assertIn('include contact-card.html group="business"', result)
         self.assertIn('include profile-list.html group="products"', result)
