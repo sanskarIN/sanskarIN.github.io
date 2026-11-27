@@ -5,7 +5,9 @@ import json
 import re
 import sys
 from pathlib import Path
-from terminal_data import parse_front_matter, canonical_post_path
+from datetime import date, datetime, timezone
+from terminal_data import parse_front_matter, canonical_post_path, published_posts, read_yaml
+from citation_audit import citation_errors
 
 ROOT = Path(__file__).resolve().parents[2]
 FRONT_MATTER = re.compile(r"\A---\r?\n([\s\S]*?)\r?\n---\r?\n")
@@ -13,7 +15,24 @@ DATE_NAME = re.compile(r"^\d{4}-\d{2}-\d{2}-(.+)\.md$")
 SOURCE_ISSUE = re.compile(r"^source_issue:\s*(\d+)\s*$", re.M)
 
 
+def iso_day(value):
+    if not value:
+        return ""
+    if isinstance(value, str):
+        value = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    if isinstance(value, datetime):
+        if value.tzinfo is not None:
+            value = value.astimezone(timezone.utc)
+        return value.date().isoformat()
+    if isinstance(value, date):
+        return value.isoformat()
+    raise ValueError("Invalid publication date")
+
+
 def check_build(output):
+    config = read_yaml(ROOT, "_config.yml")
+    public_posts = {post["_source"]: post for post in published_posts(ROOT)}
+    origin = config["url"].rstrip("/") + config.get("baseurl", "").rstrip("/")
     posts = ROOT / "_posts"
     legacy = sorted(posts.glob("*.html"))
     if legacy:
@@ -72,6 +91,22 @@ def check_build(output):
             raise AssertionError(f"Published post lost headings: {slug}")
         if "{{" in markup or "{% " in markup:
             raise AssertionError(f"Unresolved template in published post: {slug}")
+        public = public_posts[source.name]
+        details = fields.get("research_details") or {}
+        expected_citation = {
+            "title": public["title"],
+            "subtitle": str(fields.get("subtitle") or ""),
+            "author": str(fields.get("author") or config["author"]["name"]),
+            "site": str(config["title"]),
+            "date": iso_day(public["_datetime"]),
+            "updated": iso_day(fields.get("last_modified_at")),
+            "url": origin + url,
+            "language": str(fields.get("content_language") or "und"),
+            "version": str(details.get("version") or ""),
+        }
+        problems = citation_errors(markup, expected_citation)
+        if problems:
+            raise AssertionError(f"{slug}: citation panel: " + "; ".join(problems))
 
     if len(sources) != len(listed):
         raise AssertionError(f"Blog search count {len(listed)} != source count {len(sources)}")
