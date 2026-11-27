@@ -1,0 +1,2 @@
+{%- comment -%} Metadata for the archive filter. Text is escaped in attribute context. {%- endcomment -%}
+data-archive-item data-archive-language="{{ include.post.content_language | default: 'und' | escape }}" data-archive-topics="{{ include.post.tags | jsonify | escape }}" data-archive-kind="{% if include.post.tags contains 'research' %}research{% else %}article{% endif %}" data-archive-files="{{ include.post.attachments.size | default: 0 }}"

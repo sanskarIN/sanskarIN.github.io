@@ -1,0 +1,56 @@
+{%- comment -%}
+  Shared progressive-enhancement controls. All publications remain server-rendered.
+  Parameters: noun (singular result label), kinds (show article/research selector).
+{%- endcomment -%}
+<form class="archive-filter" role="search" aria-label="Filter publications" data-archive-filter data-archive-noun="{{ include.noun | escape }}" hidden>
+  <p id="archive-filter-help" class="archive-filter__help">Search titles, descriptions, authors and topics, or combine the filters. The address preserves your selection so it can be bookmarked.</p>
+  <div class="archive-filter__fields">
+    <div class="archive-filter__search form-field">
+      <label for="archive-query" class="form-field__label">Search publications</label>
+      <input id="archive-query" type="search" class="form-field__input" maxlength="160" autocomplete="off" placeholder="Title, author or topic" aria-describedby="archive-filter-help" aria-controls="archive-results" data-archive-q>
+    </div>
+    <div class="form-field">
+      <label for="archive-language" class="form-field__label">Language</label>
+      <select id="archive-language" class="form-field__input" aria-controls="archive-results" data-archive-language>
+        <option value="">All languages</option>
+        {%- for language in site.data.post_languages %}
+        <option value="{{ language[0] | escape }}">{{ language[1] | escape }}</option>
+        {%- endfor %}
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="archive-year" class="form-field__label">Year</label>
+      <select id="archive-year" class="form-field__input" aria-controls="archive-results" data-archive-year>
+        <option value="">All years</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="archive-topic" class="form-field__label">Topic</label>
+      <select id="archive-topic" class="form-field__input" aria-controls="archive-results" data-archive-topic>
+        <option value="">All topics</option>
+      </select>
+    </div>
+    {%- if include.kinds %}
+    <div class="form-field">
+      <label for="archive-kind" class="form-field__label">Publication type</label>
+      <select id="archive-kind" class="form-field__input" aria-controls="archive-results" data-archive-kind>
+        <option value="">All publications</option>
+        <option value="article">Articles</option>
+        <option value="research">Research</option>
+      </select>
+    </div>
+    {%- endif %}
+    <div class="form-field">
+      <label for="archive-files" class="form-field__label">Downloadable resources</label>
+      <select id="archive-files" class="form-field__input" aria-controls="archive-results" data-archive-files>
+        <option value="">All publications</option>
+        <option value="yes">With resources</option>
+        <option value="no">Without resources</option>
+      </select>
+    </div>
+  </div>
+  <div class="archive-filter__footer">
+    <p class="archive-filter__status" role="status" data-archive-status></p>
+    <button type="button" class="button button--secondary" data-archive-reset disabled>Clear filters</button>
+  </div>
+</form>

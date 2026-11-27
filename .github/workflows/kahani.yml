@@ -5,6 +5,7 @@ on:
     paths:
       - 'ScarpLang/**'
       - 'articles/**'
+      - 'research/**'
       - 'blog/**'
       - 'resources/**'
       - 'Kahani.html'
@@ -33,6 +34,8 @@ on:
       - '_data/not_found_page.json'
       - '.github/scripts/utility_pages.py'
       - '.github/scripts/check_generated_pages.py'
+      - '.github/scripts/check_reading_archive.py'
+      - '.github/scripts/tests/test_reading_archive.py'
       - 'index.html'
       - '_data/home_content.json'
       - '.github/scripts/home_render.py'
@@ -62,8 +65,11 @@ on:
       - '_data/not_found_page.json'
       - '.github/scripts/utility_pages.py'
       - '.github/scripts/check_generated_pages.py'
+      - '.github/scripts/check_reading_archive.py'
+      - '.github/scripts/tests/test_reading_archive.py'
       - 'ScarpLang/**'
       - 'articles/**'
+      - 'research/**'
       - 'blog/**'
       - 'resources/**'
       - 'Kahani.html'
@@ -128,6 +134,10 @@ jobs:
         run: python .github/scripts/check_kahani.py _site
       - name: Check Python-generated pages
         run: python .github/scripts/check_generated_pages.py _site
+      - name: Test archive HTML audit
+        run: python -m unittest discover -s .github/scripts/tests -p test_reading_archive.py
+      - name: Check rendered publication archives
+        run: python .github/scripts/check_reading_archive.py _site
       - name: Check Markdown blog posts and published URLs
         run: python .github/scripts/check_blog_posts.py _site
       - name: Verify published document integrity and download links

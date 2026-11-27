@@ -7,6 +7,7 @@ lead: Articles, tutorials and notes for learning about software and technology.
 description: Browse all published articles, tutorials, explanations and learning resources on sanskarIN.github.io.
 permalink: /articles/
 schema_type: CollectionPage
+scripts: [reading-archive]
 ---
 {%- include accounts-config.html -%}
 {%- capture form_url -%}{{ site.repository_url }}/issues/new?template={{ site.data.blog.form }}{%- endcapture -%}
@@ -34,7 +35,8 @@ schema_type: CollectionPage
 </div>
 {%- if article_count > 0 %}
 {%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
-<nav class="page-section" aria-label="Article archive navigation">
+{% include archive-filter.html noun="publication" kinds=true %}
+<nav class="page-section" aria-label="Article archive navigation" data-archive-supplement>
   <h2>Explore articles</h2>
   <div class="button-row">
     <a class="button button--secondary" href="#latest-article">Latest</a>
@@ -60,13 +62,13 @@ schema_type: CollectionPage
   </ul>
   {%- endif %}
 </nav>
-<section class="page-section" aria-labelledby="latest-article">
+<section class="page-section" aria-labelledby="latest-article" data-archive-supplement>
   <h2 id="latest-article">Latest article</h2>
   {% include post-card.html post=site.posts.first documents=true %}
   <p class="note">{{ article_count }} published article{% if article_count != 1 %}s{% endif %} &middot; {{ resource_count }} with downloadable documents.</p>
 </section>
 {%- if resource_count > 0 %}
-<section class="page-section" aria-labelledby="articles-with-resources">
+<section class="page-section" aria-labelledby="articles-with-resources" data-archive-supplement>
   <h2 id="articles-with-resources">Articles with downloadable resources</h2>
   <p>Read the article and access its published documents, presentations and source files.</p>
   <ul class="post-list">
@@ -80,14 +82,15 @@ schema_type: CollectionPage
   </ul>
 </section>
 {%- endif %}
-<section class="page-section" aria-labelledby="all-articles">
+<section class="page-section" id="archive-results" aria-labelledby="all-articles" data-archive-results>
   <h2 id="all-articles">All articles</h2>
+  <p class="note" data-archive-empty hidden>No publications match these filters. Clear filters to browse the complete archive.</p>
   {%- for year in years %}
-  <section class="post-year" aria-labelledby="articles-{{ year.name }}">
-    <h3 id="articles-{{ year.name }}">{{ year.name }} <span class="post-year__count">&middot; {{ year.items.size }} article{% if year.items.size != 1 %}s{% endif %}</span></h3>
+  <section class="post-year" aria-labelledby="articles-{{ year.name }}" data-archive-year-group="{{ year.name | escape }}">
+    <h3 id="articles-{{ year.name }}">{{ year.name }} <span class="post-year__count" data-archive-year-count>&middot; {{ year.items.size }} article{% if year.items.size != 1 %}s{% endif %}</span></h3>
     <ul class="post-list">
     {%- for post in year.items %}
-      <li>{% include post-card.html post=post heading=4 documents=true %}</li>
+      <li {% include archive-item-attributes.html post=post %}>{% include post-card.html post=post heading=4 documents=true %}</li>
     {%- endfor %}
     </ul>
   </section>

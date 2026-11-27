@@ -24,6 +24,7 @@ on:
       - .github/scripts/tests/lab-themes.test.cjs
       - .github/scripts/tests/projects.test.cjs
       - .github/scripts/tests/search.test.cjs
+      - .github/scripts/tests/reading-archive.test.cjs
   pull_request:
     paths:
       - src/ts/**
@@ -39,6 +40,7 @@ on:
       - .github/scripts/tests/lab-themes.test.cjs
       - .github/scripts/tests/projects.test.cjs
       - .github/scripts/tests/search.test.cjs
+      - .github/scripts/tests/reading-archive.test.cjs
   workflow_dispatch:
 
 permissions:
@@ -62,6 +64,8 @@ jobs:
         run: npm run test:projects
       - name: Test site search recovery
         run: npm run test:search
+      - name: Test publication archive filters
+        run: npm run test:archive
       - name: Check that assets/js/ matches src/ts/
         run: |
           npm run build
